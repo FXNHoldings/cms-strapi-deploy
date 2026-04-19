@@ -9,3 +9,7 @@ build
 backups/*.sql
 backups/*.tar.gz
 !backups/.gitkeep
+
+# Force-include these despite root .gitignore rules
+!.env.example
+!env.example
