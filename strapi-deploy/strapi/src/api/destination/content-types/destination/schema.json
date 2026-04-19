@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "destinations",
+  "info": {
+    "singularName": "destination",
+    "pluralName": "destinations",
+    "displayName": "Destination",
+    "description": "Geographic destinations (country / city / region)"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "type": {
+      "type": "enumeration",
+      "enum": ["country", "region", "city"],
+      "default": "city"
+    },
+    "countryCode": { "type": "string", "maxLength": 3 },
+    "description": { "type": "text" },
+    "heroImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "articles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::article.article",
+      "mappedBy": "destinations"
+    }
+  }
+}

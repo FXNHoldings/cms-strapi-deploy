@@ -1,0 +1,111 @@
+name: fxnstudio-cms
+
+services:
+  strapi:
+    build:
+      context: ./strapi
+      dockerfile: Dockerfile
+    container_name: fxn-strapi
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1337
+      # Database
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_SSL: "false"
+      # Strapi secrets
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
+      JWT_SECRET: ${JWT_SECRET}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      # Public URL behind Caddy
+      PUBLIC_URL: https://cms.fxnstudio.com
+      URL: https://cms.fxnstudio.com
+      # AI Writer plugin
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      CLAUDE_MODEL: claude-sonnet-4-5-20250929
+    volumes:
+      - strapi-uploads:/opt/app/public/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - fxn-net
+    expose:
+      - "1337"
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: fxn-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./backups:/backups
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME} -d ${DATABASE_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - fxn-net
+    expose:
+      - "5432"
+
+  autopost-worker:
+    build:
+      context: ./autopost-worker
+      dockerfile: Dockerfile
+    container_name: fxn-autopost
+    restart: unless-stopped
+    environment:
+      STRAPI_URL: http://strapi:1337
+      STRAPI_API_TOKEN: ${AUTOPOST_STRAPI_TOKEN}
+      SCHEDULER_INTERVAL_SECONDS: "60"
+      TIMEZONE: UTC
+      LOG_LEVEL: INFO
+    depends_on:
+      - strapi
+    networks:
+      - fxn-net
+    expose:
+      - "8001"
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: fxn-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - strapi
+      - autopost-worker
+    networks:
+      - fxn-net
+
+volumes:
+  postgres-data:
+  strapi-uploads:
+  caddy-data:
+  caddy-config:
+
+networks:
+  fxn-net:
+    driver: bridge

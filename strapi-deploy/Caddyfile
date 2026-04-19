@@ -1,0 +1,42 @@
+# Caddy config — auto TLS via Let's Encrypt
+# Primary CMS admin + API
+cms.fxnstudio.com {
+	encode zstd gzip
+
+	# Strapi admin + REST + GraphQL
+	reverse_proxy strapi:1337 {
+		header_up Host {host}
+		header_up X-Real-IP {remote}
+		header_up X-Forwarded-For {remote}
+		header_up X-Forwarded-Proto {scheme}
+	}
+
+	# Autopost worker health / admin (optional, same host under /autopost)
+	handle_path /autopost/* {
+		reverse_proxy autopost-worker:8001
+	}
+
+	log {
+		output file /data/access-cms.log {
+			roll_size 50mb
+			roll_keep 5
+		}
+	}
+}
+
+# Public travel blog frontend (placeholder — point to Vercel or future container)
+# Once the Next.js frontend is deployed (e.g., on Vercel), set your DNS for
+# www.fxnstudio.com and fxnstudio.com to the frontend provider instead.
+# This block gives a temporary landing page while the frontend is being built.
+www.fxnstudio.com, fxnstudio.com {
+	encode zstd gzip
+
+	respond "FXN Studio travel blog — coming soon. CMS is live at cms.fxnstudio.com" 200
+
+	log {
+		output file /data/access-www.log {
+			roll_size 50mb
+			roll_keep 5
+		}
+	}
+}

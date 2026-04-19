@@ -1,0 +1,1 @@
+export default 'ai-writer';

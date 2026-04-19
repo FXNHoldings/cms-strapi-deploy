@@ -1,0 +1,10 @@
+# Build context slim-down — keep .env out of image (we pass it via compose env)
+node_modules
+.strapi
+.cache
+.tmp
+dist
+build
+*.log
+.git
+.gitignore

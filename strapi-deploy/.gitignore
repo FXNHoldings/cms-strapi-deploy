@@ -1,0 +1,11 @@
+.env
+node_modules
+dist
+build
+.strapi
+.cache
+.tmp
+*.log
+backups/*.sql
+backups/*.tar.gz
+!backups/.gitkeep

@@ -1,0 +1,44 @@
+{
+  "name": "fxn-cms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FXN Studio travel CMS (Strapi 5) with AI Writer and Bulk Import plugins",
+  "scripts": {
+    "build": "strapi build",
+    "console": "strapi console",
+    "deploy": "strapi deploy",
+    "develop": "strapi develop",
+    "seed:example": "node ./scripts/seed.js",
+    "start": "strapi start",
+    "strapi": "strapi",
+    "upgrade": "npx @strapi/upgrade latest",
+    "upgrade:dry": "npx @strapi/upgrade latest --dry"
+  },
+  "dependencies": {
+    "@strapi/strapi": "^5.26.0",
+    "@strapi/plugin-users-permissions": "^5.26.0",
+    "@strapi/plugin-cloud": "^5.26.0",
+    "@anthropic-ai/sdk": "^0.32.1",
+    "pg": "^8.13.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0",
+    "gray-matter": "^4.0.3",
+    "marked": "^15.0.3",
+    "csv-parse": "^5.6.0",
+    "slugify": "^1.6.6",
+    "axios": "^1.7.9"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=20.0.0 <=22.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}

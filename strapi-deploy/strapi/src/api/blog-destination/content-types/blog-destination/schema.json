@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blog_destinations",
+  "info": {
+    "singularName": "blog-destination",
+    "pluralName": "blog-destinations",
+    "displayName": "Blog Destination",
+    "description": "External blog/site where articles are syndicated (webhook + schedule)"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "baseUrl": { "type": "string", "required": true },
+    "webhookUrl": { "type": "string", "required": true },
+    "webhookSecret": { "type": "password" },
+    "authHeader": { "type": "string" },
+    "active": { "type": "boolean", "default": true },
+    "autoPostOnPublish": { "type": "boolean", "default": true },
+    "schedule": {
+      "type": "enumeration",
+      "enum": ["immediate", "hourly", "daily-0900", "daily-1800", "manual"],
+      "default": "immediate"
+    },
+    "topicFilter": { "type": "json" },
+    "lastPostAt": { "type": "datetime" },
+    "articles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::article.article",
+      "mappedBy": "blogDestinations"
+    }
+  }
+}
