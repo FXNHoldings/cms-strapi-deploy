@@ -62,5 +62,5 @@ compatible travel blog (flights, hotels, travel info).
 - **P2** — Products content type (if monetisation via affiliate deals)
 
 ## File locations
-- Deployment package: `/app/strapi-deploy/` (93 files)
+- Deployment package: `/app/backend/strapi-deploy/` (93 files, moved from `/app/strapi-deploy/` so Emergent's Save to GitHub sync includes it)
 - Blog frontend: *not yet created — pending CMS being live*
