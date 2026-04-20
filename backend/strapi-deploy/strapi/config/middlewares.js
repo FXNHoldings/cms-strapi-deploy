@@ -18,7 +18,6 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      enabled: true,
       origin: [
         'https://cms.fxnstudio.com',
         'https://www.fxnstudio.com',
@@ -44,5 +43,6 @@ module.exports = [
     },
   },
   'strapi::session',
+  'strapi::favicon',
   'strapi::public',
 ];

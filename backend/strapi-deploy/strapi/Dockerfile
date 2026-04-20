@@ -26,6 +26,7 @@ RUN if [ -f yarn.lock ]; then \
 COPY src ./src
 COPY config ./config
 COPY public ./public
+COPY favicon.png ./
 
 ENV NODE_ENV=production
 RUN npm run build && \
