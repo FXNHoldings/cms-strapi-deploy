@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background: theme('colors.paper');
+    color: theme('colors.ink');
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  ::selection {
+    background: theme('colors.forest.800');
+    color: theme('colors.sand.100');
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+}
+
+@layer components {
+  .editorial-h {
+    @apply font-display tracking-tightest;
+  }
+  .grain {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(0,0,0,0.025) 0 1px, transparent 1px),
+      radial-gradient(circle at 70% 60%, rgba(0,0,0,0.02) 0 1px, transparent 1px);
+    background-size: 3px 3px, 5px 5px;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full border border-forest-800/20 bg-forest-800/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-forest-900;
+  }
+}
+
+/* Article typography tweaks */
+.prose-article {
+  @apply prose prose-stone max-w-prose prose-headings:font-display prose-headings:tracking-tightest prose-headings:text-forest-900 prose-a:text-terracotta-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-ink prose-blockquote:border-l-sand-500 prose-blockquote:font-display prose-blockquote:text-forest-900 prose-blockquote:not-italic;
+}
