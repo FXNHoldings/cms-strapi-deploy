@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { listCategories, type StrapiCategory } from '@/lib/strapi';
 import { SECTIONS } from '@/lib/sections';
 
-type TreeNode = StrapiCategory & { children: TreeNode[] };
+type TreeNode = Omit<StrapiCategory, 'children'> & { children: TreeNode[] };
 
 /** Build a nested tree from Strapi's flat category list using `parent.id` refs. */
 function buildTree(cats: StrapiCategory[]): TreeNode[] {

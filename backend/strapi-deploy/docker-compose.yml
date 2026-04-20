@@ -32,6 +32,9 @@ services:
       # AI Writer plugin
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
       CLAUDE_MODEL: claude-sonnet-4-5-20250929
+      # Fal.ai for AI image generation (per-article lifecycle hook)
+      FAL_KEY: ${FAL_KEY}
+      FAL_IMAGE_MODEL: ${FAL_IMAGE_MODEL:-fal-ai/flux/schnell}
     volumes:
       - strapi-uploads:/opt/app/public/uploads
     depends_on:

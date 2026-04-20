@@ -79,6 +79,14 @@
       "enum": ["manual", "ai", "markdown-import", "csv-import"],
       "default": "manual"
     },
+    "aiImageStatus": {
+      "type": "enumeration",
+      "enum": ["idle", "requested", "generating", "done", "failed"],
+      "default": "idle"
+    },
+    "aiImageStatusMessage": {
+      "type": "text"
+    },
     "category": {
       "type": "relation",
       "relation": "manyToOne",

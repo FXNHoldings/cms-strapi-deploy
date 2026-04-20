@@ -19,6 +19,7 @@
     "@strapi/plugin-users-permissions": "^5.26.0",
     "@strapi/plugin-cloud": "^5.26.0",
     "@anthropic-ai/sdk": "^0.32.1",
+    "@fal-ai/client": "^1.4.0",
     "pg": "^8.13.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
