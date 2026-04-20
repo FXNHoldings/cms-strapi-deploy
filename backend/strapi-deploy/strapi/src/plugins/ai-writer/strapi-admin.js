@@ -1,9 +1,7 @@
-'use strict';
-
 const PLUGIN_ID = 'ai-writer';
 const PLUGIN_NAME = 'AI Writer';
 
-module.exports = {
+export default {
   register(app) {
     app.addMenuLink({
       to: `plugins/${PLUGIN_ID}`,

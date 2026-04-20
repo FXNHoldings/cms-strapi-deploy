@@ -1,9 +1,7 @@
-'use strict';
-
 const PLUGIN_ID = 'bulk-import';
 const PLUGIN_NAME = 'Bulk Import';
 
-module.exports = {
+export default {
   register(app) {
     app.addMenuLink({
       to: `plugins/${PLUGIN_ID}`,
