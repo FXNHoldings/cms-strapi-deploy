@@ -26,7 +26,22 @@ nano .env
 npm install    # or: yarn install / pnpm install
 ```
 
-## Generate one article
+## Quickest way — let Claude invent the titles AND write them
+
+Just pick a category and how many articles you want. Claude brainstorms unique titles first, then writes each one in full:
+
+```bash
+# 5 fresh Flights articles, saved as drafts
+node generate.js --category flights --count 5
+
+# 10 Hotels articles, published immediately
+node generate.js -c hotels -n 10 --publish
+
+# Or, no flags at all — arrow-key menu asks you for category + count:
+node generate.js
+```
+
+## Generate one specific article (you supply the title)
 
 ```bash
 node generate.js "Best cheap flights from London to Bangkok in 2026"
@@ -63,9 +78,12 @@ Flags:
 | `--tone` | `friendly` | `friendly · professional · adventurous · witty · luxury` |
 | `--length` / `-l` | `medium` | `short` (~500), `medium` (~1000), `long` (~1800) words |
 | `--destination` / `-d` | — | any place name |
-| `--category` / `-c` | — | any category name |
+| `--category` / `-c` | — | any category slug (e.g. `flights`, `hotels`) |
+| `--count` / `-n` | — | integer — triggers Claude to auto-brainstorm that many titles for `--category` |
 | `--keywords` / `-k` | — | comma-separated SEO keywords |
 | `--language` | `English` | any language |
+| `--publish` | `false` | publish immediately (default: save as draft) |
+| `--interactive` / `-i` | `false` | force the arrow-key menu |
 | `--dry-run` | `false` | print JSON, don't hit Strapi |
 
 ## Batch mode — generate 50 articles overnight

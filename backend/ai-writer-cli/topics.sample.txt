@@ -1,8 +1,24 @@
-# One topic per line. Lines starting with # are ignored.
+# One "category | topic" per line. Lines starting with # are ignored.
 # Save this as topics.txt and run:  node generate.js --topics topics.txt
+#
+# The CLI will look up each category in Strapi (by slug or name), auto-create
+# it if it doesn't exist, and attach the article to it.
 
-Best cheap flights from London to Bangkok in 2026
-7 boutique hotels in Kyoto under $150
-How to get around Istanbul without getting ripped off
-Why October is the secret best month to visit Japan
-The 5 cheapest European cities for a long weekend in winter
+flights           | 7 proven hacks for cheap London-Bangkok flights in 2026
+flights           | How to find error fares (and actually book them)
+flights           | Business class for economy prices: the points guide
+
+hotels            | 5 boutique hotels in Kyoto under $150 a night
+hotels            | How to get free hotel upgrades (without being annoying)
+
+destinations      | A 10-day Vietnam itinerary for under $800
+destinations      | Iceland in winter: ring road in 7 days
+
+travel-tips       | How to avoid jet lag on long-haul flights
+travel-tips       | 7 mistakes first-time Europe travellers make
+
+travel-resources  | The travel insurance we actually buy (and why)
+travel-resources  | 10 essential travel apps we use every trip
+
+car-rental        | Car rental in Europe: the complete 2026 guide
+car-rental        | How to avoid getting scammed at the rental counter

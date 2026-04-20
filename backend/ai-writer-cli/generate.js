@@ -1,15 +1,20 @@
 #!/usr/bin/env node
 // FXN AI Writer CLI
-// Generates a travel article with Claude Sonnet 4.5 and posts it as a draft Article to Strapi.
+// Generates travel articles with Claude Sonnet 4.5 and posts them as drafts (or published) to Strapi,
+// optionally assigning each article to the right category.
 //
-// Usage:
-//   node generate.js "Best cheap flights from London to Bangkok in 2026"
-//   node generate.js --topic "..." --tone luxury --length long --destination Kyoto --category Hotels
-//   node generate.js --topics topics.txt                   (batch mode, one topic per line)
-//   node generate.js --topic "..." --dry-run               (print JSON only, don't hit Strapi)
+// Three ways to use it:
+//   1) Fully automatic — pick a category + count, Claude invents the titles AND writes them:
+//        node generate.js --category flights --count 5
+//        node generate.js -c hotels -n 10 --publish
 //
-// Each generated article is created as an UNPUBLISHED draft in Strapi.
-// Review in the admin (Content Manager → Article), attach a cover image, then publish.
+//   2) Interactive (no args) — prompts you for category + count:
+//        node generate.js
+//
+//   3) Manual topic(s) — you supply the title(s) yourself:
+//        node generate.js "Cheap flights London to Bangkok" --category flights
+//        node generate.js --topics topics.txt
+//        node generate.js --auto-fill            (6 categories × 6 preset topics)
 
 import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
@@ -18,23 +23,26 @@ import path from 'node:path';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import slugify from 'slugify';
+import { select, input, confirm } from '@inquirer/prompts';
 
 const argv = yargs(hideBin(process.argv))
   .usage('Usage: $0 [topic] [options]')
-  .option('topic', { alias: 't', type: 'string', describe: 'Article topic' })
-  .option('topics', { type: 'string', describe: 'Path to a file with one topic per line' })
+  .option('topic', { alias: 't', type: 'string' })
+  .option('topics', { type: 'string', describe: 'File with "category | topic" per line' })
+  .option('auto-fill', { type: 'boolean', default: false, describe: 'Auto-generate across the 6 preset categories' })
+  .option('count', { alias: 'n', type: 'number', describe: 'How many articles to generate (Claude will brainstorm the titles)' })
   .option('tone', { type: 'string', default: 'friendly', choices: ['friendly', 'professional', 'adventurous', 'witty', 'luxury'] })
   .option('length', { alias: 'l', type: 'string', default: 'medium', choices: ['short', 'medium', 'long'] })
-  .option('destination', { alias: 'd', type: 'string', describe: 'Geographic destination (e.g. "Bangkok")' })
-  .option('category', { alias: 'c', type: 'string', describe: 'Category name (e.g. "Flights")' })
-  .option('keywords', { alias: 'k', type: 'string', describe: 'Comma-separated SEO keywords' })
+  .option('destination', { alias: 'd', type: 'string' })
+  .option('category', { alias: 'c', type: 'string', describe: 'Category slug or name (e.g. flights, hotels, travel-tips)' })
+  .option('keywords', { alias: 'k', type: 'string' })
   .option('language', { type: 'string', default: 'English' })
-  .option('dry-run', { type: 'boolean', default: false, describe: "Don't POST to Strapi, just print the draft JSON" })
-  .positional('topic-positional', { type: 'string' })
+  .option('publish', { type: 'boolean', default: false, describe: 'Publish immediately (default: save as draft)' })
+  .option('interactive', { alias: 'i', type: 'boolean', default: false, describe: 'Force interactive prompt even if flags are set' })
+  .option('dry-run', { type: 'boolean', default: false })
   .help()
   .parseSync();
 
-// Allow positional topic: `node generate.js "Topic here"`
 const positionalTopic = argv._[0];
 if (!argv.topic && positionalTopic) argv.topic = String(positionalTopic);
 
@@ -46,7 +54,7 @@ const {
   STRAPI_API_TOKEN,
 } = process.env;
 
-if (!ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set. Copy .env.example to .env and fill it in.');
+if (!ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set.');
 if (!argv['dry-run']) {
   if (!STRAPI_URL) fatal('STRAPI_URL is not set in .env');
   if (!STRAPI_API_TOKEN) fatal('STRAPI_API_TOKEN is not set in .env');
@@ -54,8 +62,74 @@ if (!argv['dry-run']) {
 
 const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 
-/** Build the JSON instructions for Claude. */
-function systemPrompt(lengthLabel) {
+/** The 6 main site categories — used for the interactive picker and as fallbacks. */
+const CATEGORY_CHOICES = [
+  { name: 'Destinations',      value: 'destinations' },
+  { name: 'Flights',           value: 'flights' },
+  { name: 'Hotels',            value: 'hotels' },
+  { name: 'Travel Resources',  value: 'travel-resources' },
+  { name: 'Travel Tips',       value: 'travel-tips' },
+  { name: 'Car Rental',        value: 'car-rental' },
+];
+
+/** In-memory cache so we only hit /api/categories once per run */
+const categoryCache = new Map();
+
+async function resolveCategoryId(slugOrName) {
+  if (!slugOrName) return null;
+  const key = String(slugOrName).trim().toLowerCase();
+  if (categoryCache.has(key)) return categoryCache.get(key);
+
+  // Try slug first, then name
+  const bySlug = await strapi(
+    `/api/categories?filters[slug][$eq]=${encodeURIComponent(key)}&pagination[pageSize]=1`,
+  );
+  let cat = bySlug?.data?.[0];
+  if (!cat) {
+    const byName = await strapi(
+      `/api/categories?filters[name][$eqi]=${encodeURIComponent(slugOrName)}&pagination[pageSize]=1`,
+    );
+    cat = byName?.data?.[0];
+  }
+  if (!cat) {
+    // Auto-create if missing
+    console.log(`  · Category "${slugOrName}" not found in Strapi — creating it`);
+    const created = await strapi('/api/categories', {
+      method: 'POST',
+      body: JSON.stringify({ data: { name: capitalize(slugOrName), slug: slugifyCategory(slugOrName) } }),
+    });
+    cat = created.data;
+  }
+  categoryCache.set(key, cat.id);
+  return cat.id;
+}
+
+function slugifyCategory(s) {
+  return slugify(String(s), { lower: true, strict: true }).slice(0, 60);
+}
+function capitalize(s) {
+  return String(s).replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+async function strapi(pathname, init = {}) {
+  const res = await fetch(`${STRAPI_URL}${pathname}`, {
+    ...init,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
+      ...(init.headers || {}),
+    },
+  });
+  if (!res.ok) {
+    const body = await res.text().catch(() => '');
+    throw new Error(`Strapi ${res.status} on ${pathname}: ${body.slice(0, 300)}`);
+  }
+  return res.json();
+}
+
+/* ---------- Claude prompts ---------- */
+
+function systemPromptArticle(lengthLabel) {
   return `You are a senior travel journalist writing for a travel blog (flights, hotels, destinations, tips).
 Output MUST be strict JSON matching this TypeScript type:
 {
@@ -69,69 +143,113 @@ Output MUST be strict JSON matching this TypeScript type:
   "tags": string[],         // 4-8 lowercase tags
   "readingTimeMinutes": number
 }
-Do not include any text outside the JSON. Do not wrap it in markdown fences. Use honest, specific, actionable advice — avoid generic tourist prose.`;
+Do not include any text outside the JSON. Do not wrap it in markdown fences. Use honest, specific, actionable advice.`;
 }
 
-function userPrompt(params) {
-  const wordsMap = { short: '400-600', medium: '800-1200', long: '1500-2200' };
-  const words = wordsMap[params.length];
+function userPromptArticle(p) {
+  const words = ({ short: '400-600', medium: '800-1200', long: '1500-2200' })[p.length];
   return [
-    `Topic: ${params.topic}`,
-    params.destination ? `Destination: ${params.destination}` : '',
-    params.category ? `Category: ${params.category}` : '',
-    params.tone ? `Tone: ${params.tone}` : '',
-    params.keywords ? `Keywords to weave in: ${params.keywords}` : '',
-    params.language ? `Language: ${params.language}` : '',
+    `Topic: ${p.topic}`,
+    p.destination ? `Destination: ${p.destination}` : '',
+    p.category ? `Category: ${p.category}` : '',
+    p.tone ? `Tone: ${p.tone}` : '',
+    p.keywords ? `Keywords to weave in: ${p.keywords}` : '',
+    p.language ? `Language: ${p.language}` : '',
     `Target length: ${words} words`,
   ].filter(Boolean).join('\n');
 }
 
-async function generate(params) {
-  const lengthLabel = ({ short: '400-600', medium: '800-1200', long: '1500-2200' })[params.length];
+function systemPromptTitles() {
+  return `You are a senior travel editor. You produce fresh, SEO-optimised article title ideas for a travel blog.
+Output MUST be strict JSON of the form: { "titles": string[] }.
+Each title: 50-70 chars, specific, actionable, and clickable (numbers, years, concrete places allowed).
+Titles must be DISTINCT from each other — no near-duplicates, no same angle twice.
+Do not include any text outside the JSON. Do not wrap it in markdown fences.`;
+}
+
+function userPromptTitles({ category, count, tone, language, keywords, destination }) {
+  return [
+    `Category: ${category}`,
+    `Number of titles: ${count}`,
+    `Tone: ${tone}`,
+    `Language: ${language}`,
+    destination ? `Destination focus: ${destination}` : '',
+    keywords ? `Keywords to consider: ${keywords}` : '',
+    `Year context: 2026.`,
+    `Return exactly ${count} titles, no fewer, no more.`,
+  ].filter(Boolean).join('\n');
+}
+
+/* ---------- Claude calls ---------- */
+
+async function generateTitles({ category, count, tone, language, keywords, destination }) {
+  const msg = await client.messages.create({
+    model: CLAUDE_MODEL,
+    max_tokens: 1024,
+    system: systemPromptTitles(),
+    messages: [{
+      role: 'user',
+      content: userPromptTitles({ category, count, tone, language, keywords, destination }),
+    }],
+  });
+  const text = msg.content.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
+  const json = safeParse(text);
+  if (!json || !Array.isArray(json.titles)) {
+    throw new Error(`Claude did not return a titles array:\n${text.slice(0, 400)}`);
+  }
+  // De-dupe & trim
+  const seen = new Set();
+  const titles = json.titles
+    .map((t) => String(t).trim())
+    .filter((t) => {
+      const key = t.toLowerCase();
+      if (!t || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, count);
+
+  if (!titles.length) throw new Error('Claude returned zero usable titles.');
+  return titles;
+}
+
+async function generateArticle(p) {
+  const lengthLabel = ({ short: '400-600', medium: '800-1200', long: '1500-2200' })[p.length];
   const msg = await client.messages.create({
     model: CLAUDE_MODEL,
     max_tokens: parseInt(CLAUDE_MAX_TOKENS, 10),
-    system: systemPrompt(lengthLabel),
-    messages: [{ role: 'user', content: userPrompt(params) }],
+    system: systemPromptArticle(lengthLabel),
+    messages: [{ role: 'user', content: userPromptArticle(p) }],
   });
-
   const text = msg.content.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
   const json = safeParse(text);
-  if (!json) throw new Error(`Claude returned non-JSON output:\n${text.slice(0, 400)}`);
-
-  if (!json.slug) json.slug = slugify(json.title || params.topic, { lower: true, strict: true }).slice(0, 60);
+  if (!json) throw new Error(`Claude returned non-JSON:\n${text.slice(0, 400)}`);
+  if (!json.slug) json.slug = slugify(json.title || p.topic, { lower: true, strict: true }).slice(0, 60);
   return json;
 }
 
-async function postToStrapi(draft) {
-  const res = await fetch(`${STRAPI_URL}/api/articles`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
-    },
-    body: JSON.stringify({
-      data: {
-        title: draft.title,
-        slug: draft.slug,
-        excerpt: draft.excerpt,
-        content: draft.content,
-        seoTitle: draft.seoTitle,
-        seoDescription: draft.seoDescription,
-        seoKeywords: draft.seoKeywords,
-        readingTimeMinutes: draft.readingTimeMinutes,
-        source: 'ai',
-        // publishedAt omitted on purpose → stays as DRAFT
-      },
-    }),
-  });
+/* ---------- Strapi ---------- */
 
-  if (!res.ok) {
-    const body = await res.text().catch(() => '');
-    throw new Error(`Strapi ${res.status}: ${body.slice(0, 300)}`);
-  }
-  return res.json();
+async function postToStrapi(draft, opts) {
+  const data = {
+    title: draft.title,
+    slug: draft.slug,
+    excerpt: draft.excerpt,
+    content: draft.content,
+    seoTitle: draft.seoTitle,
+    seoDescription: draft.seoDescription,
+    seoKeywords: draft.seoKeywords,
+    readingTimeMinutes: draft.readingTimeMinutes,
+    source: 'ai',
+  };
+  if (opts.categoryId) data.category = opts.categoryId;
+  if (opts.publish) data.publishedAt = new Date().toISOString();
+
+  const res = await strapi('/api/articles', { method: 'POST', body: JSON.stringify({ data }) });
+  return res;
 }
+
+/* ---------- Helpers ---------- */
 
 function safeParse(s) {
   try { return JSON.parse(s); }
@@ -141,65 +259,235 @@ function safeParse(s) {
     try { return JSON.parse(m[0]); } catch { return null; }
   }
 }
+function fatal(msg) { console.error('✖', msg); process.exit(1); }
 
-function fatal(msg) {
-  console.error('✖', msg);
-  process.exit(1);
-}
+/** Auto-fill preset — 6 topics across the 6 main home-page sections */
+const AUTO_TOPICS = {
+  destinations: [
+    '7 under-the-radar cities in Portugal for 2026',
+    'The complete first-timer guide to Kyoto',
+    'A 10-day Vietnam itinerary for under $800',
+    'Why Oaxaca is the best food destination in Mexico',
+    'Iceland in winter: ring road in 7 days',
+    'Seoul neighbourhoods ranked for first-time visitors',
+  ],
+  flights: [
+    '7 proven hacks for cheap London-Bangkok flights in 2026',
+    'How to find error fares (and actually book them)',
+    'Business class for economy prices: the points guide',
+    'The best day and time to book international flights',
+    'Why flying on Tuesday saves you up to 40%',
+    'Flight comparison sites ranked: Google Flights vs Skyscanner vs Kiwi',
+  ],
+  hotels: [
+    '5 boutique hotels in Kyoto under $150 a night',
+    'The 10 best-value all-inclusives in Mexico for 2026',
+    'Hostels that don\'t feel like hostels: our 2026 picks',
+    'How to get free hotel upgrades (without being annoying)',
+    'Why you should book direct instead of Booking.com',
+    'The best hotel loyalty programme in 2026, explained',
+  ],
+  'travel-resources': [
+    'The travel insurance we actually buy (and why)',
+    '10 essential travel apps we use every trip',
+    'How to pack a carry-on for 3 weeks: our exact list',
+    'Best travel credit cards for UK residents in 2026',
+    'The eSIM providers we trust (and which to avoid)',
+    'Travel adapters, power banks, and the gear we swear by',
+  ],
+  'travel-tips': [
+    'How to avoid jet lag on long-haul flights',
+    '7 mistakes first-time Europe travellers make',
+    'The solo female traveller safety guide',
+    'How to eat well on the road without blowing the budget',
+    'Language apps ranked: Duolingo vs Pimsleur vs ChatGPT',
+    'Why you should always book the first flight of the day',
+  ],
+  'car-rental': [
+    'Car rental in Europe: the complete 2026 guide',
+    'How to avoid getting scammed at the rental counter',
+    'Automatic vs manual: renting abroad as a UK/US driver',
+    'The cheapest countries to rent a car (and the worst)',
+    'What travel insurance actually covers for rentals',
+    'Road trip routes: 5 drives worth flying for',
+  ],
+};
 
-async function runOne(topic) {
+/* ---------- Runners ---------- */
+
+async function runOne({ topic, category }) {
   const params = {
     topic,
     tone: argv.tone,
     length: argv.length,
     destination: argv.destination,
-    category: argv.category,
+    category: category || argv.category,
     keywords: argv.keywords,
     language: argv.language,
   };
 
-  process.stdout.write(`→ Generating: "${topic}" … `);
+  const label = (category || argv.category || 'uncategorised').padEnd(18);
+  const short = topic.slice(0, 60) + (topic.length > 60 ? '…' : '');
+  process.stdout.write(`→ [${label}] "${short}" … `);
   const t0 = Date.now();
-  const draft = await generate(params);
-  console.log(`done in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
-  console.log(`  title: ${draft.title}`);
-  console.log(`  slug:  ${draft.slug}`);
-  console.log(`  words: ${(draft.content || '').split(/\s+/).length}`);
+  const draft = await generateArticle(params);
+  process.stdout.write(`${((Date.now() - t0) / 1000).toFixed(1)}s · `);
 
   if (argv['dry-run']) {
-    console.log('\n— draft JSON (dry-run) —');
+    console.log('(dry-run)');
     console.log(JSON.stringify(draft, null, 2));
     return;
   }
 
-  process.stdout.write('  posting draft to Strapi … ');
-  const created = await postToStrapi(draft);
-  const id = created?.data?.id || created?.data?.documentId || '?';
-  console.log(`saved (id=${id}, draft)`);
-  console.log(`  review: ${STRAPI_URL}/admin/content-manager/collection-types/api::article.article/${id}`);
+  const categoryId = await resolveCategoryId(category || argv.category);
+  const created = await postToStrapi(draft, { categoryId, publish: argv.publish });
+  const id = created?.data?.id ?? '?';
+  console.log(`${argv.publish ? 'PUBLISHED' : 'draft'} id=${id}`);
 }
 
-async function main() {
-  if (argv.topics) {
-    const file = path.resolve(argv.topics);
-    if (!fs.existsSync(file)) fatal(`Topics file not found: ${file}`);
-    const topics = fs.readFileSync(file, 'utf8').split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));
-    if (!topics.length) fatal('No topics found in file');
-    console.log(`Batch mode: ${topics.length} topics\n`);
-    let ok = 0, fail = 0;
-    for (const t of topics) {
-      try { await runOne(t); ok++; } catch (e) { console.error(`  ✖ ${e.message}`); fail++; }
-      console.log('');
-    }
-    console.log(`\nDone — ${ok} created, ${fail} failed.`);
-    return;
+async function runCategoryAuto({ category, count }) {
+  console.log(`\nBrainstorming ${count} title${count === 1 ? '' : 's'} for "${category}" with ${CLAUDE_MODEL}…`);
+  const titles = await generateTitles({
+    category,
+    count,
+    tone: argv.tone,
+    language: argv.language,
+    keywords: argv.keywords,
+    destination: argv.destination,
+  });
+
+  console.log(`\nGot ${titles.length} title${titles.length === 1 ? '' : 's'}:`);
+  titles.forEach((t, i) => console.log(`  ${String(i + 1).padStart(2)}. ${t}`));
+  console.log('');
+
+  let ok = 0, fail = 0;
+  for (const topic of titles) {
+    try { await runOne({ topic, category }); ok++; }
+    catch (e) { console.error(`  ✖ ${e.message}`); fail++; }
+  }
+  console.log(`\nDone — ${ok} created, ${fail} failed.`);
+}
+
+async function runBatch(file) {
+  const raw = fs.readFileSync(path.resolve(file), 'utf8')
+    .split('\n')
+    .map((l) => l.trim())
+    .filter((l) => l && !l.startsWith('#'));
+
+  const jobs = raw.map((line) => {
+    // Format: "category | topic"
+    const m = line.match(/^([^|]+)\|(.+)$/);
+    if (m) return { category: m[1].trim(), topic: m[2].trim() };
+    // Fallback: treat whole line as topic, use --category flag
+    return { category: null, topic: line };
+  });
+
+  console.log(`Batch: ${jobs.length} articles\n`);
+  let ok = 0, fail = 0;
+  for (const j of jobs) {
+    try { await runOne(j); ok++; } catch (e) { console.error(`  ✖ ${e.message}`); fail++; }
+  }
+  console.log(`\nDone — ${ok} created, ${fail} failed.`);
+}
+
+async function runAutoFill() {
+  const all = [];
+  for (const [slug, topics] of Object.entries(AUTO_TOPICS)) {
+    for (const topic of topics) all.push({ category: slug, topic });
+  }
+  console.log(`Auto-fill: ${all.length} articles (6 categories × 6 topics)\n`);
+  let ok = 0, fail = 0;
+  for (const j of all) {
+    try { await runOne(j); ok++; } catch (e) { console.error(`  ✖ ${e.message}`); fail++; }
+  }
+  console.log(`\nDone — ${ok} created, ${fail} failed.`);
+}
+
+/* ---------- Interactive prompt ---------- */
+
+async function runInteractive() {
+  console.log('\nFXN AI Writer — interactive mode\n');
+
+  const category = await select({
+    message: 'Which category should the articles go into?',
+    choices: [
+      ...CATEGORY_CHOICES,
+      { name: 'Other (type a custom slug)', value: '__custom__' },
+    ],
+  });
+
+  let finalCategory = category;
+  if (category === '__custom__') {
+    finalCategory = await input({
+      message: 'Category slug (e.g. city-breaks):',
+      validate: (v) => v.trim().length > 0 || 'Please enter a slug',
+    });
   }
 
-  if (!argv.topic) fatal('No topic provided. Usage: node generate.js "Your topic here"  (or use --topics file)');
-  await runOne(argv.topic);
+  const countStr = await input({
+    message: 'How many articles should I generate?',
+    default: '3',
+    validate: (v) => {
+      const n = Number(v);
+      return (Number.isInteger(n) && n > 0 && n <= 50) || 'Enter a whole number between 1 and 50';
+    },
+  });
+  const count = Number(countStr);
+
+  const length = await select({
+    message: 'Length per article?',
+    default: argv.length || 'medium',
+    choices: [
+      { name: 'Short (~500 words)',  value: 'short' },
+      { name: 'Medium (~1000 words)', value: 'medium' },
+      { name: 'Long (~1800 words)',  value: 'long' },
+    ],
+  });
+
+  const tone = await select({
+    message: 'Tone?',
+    default: argv.tone || 'friendly',
+    choices: [
+      { name: 'Friendly',      value: 'friendly' },
+      { name: 'Professional',  value: 'professional' },
+      { name: 'Adventurous',   value: 'adventurous' },
+      { name: 'Witty',         value: 'witty' },
+      { name: 'Luxury',        value: 'luxury' },
+    ],
+  });
+
+  const publish = await confirm({
+    message: 'Publish immediately? (No = save as drafts in Strapi)',
+    default: false,
+  });
+
+  // Apply choices to argv so runOne/resolveCategoryId pick them up
+  argv.category = finalCategory;
+  argv.length = length;
+  argv.tone = tone;
+  argv.publish = publish;
+
+  await runCategoryAuto({ category: finalCategory, count });
 }
 
-main().catch((e) => {
-  console.error('\n✖', e.message);
-  process.exit(1);
-});
+/* ---------- Entry ---------- */
+
+async function main() {
+  if (argv['auto-fill']) return runAutoFill();
+  if (argv.topics) return runBatch(argv.topics);
+
+  // New: category + count = auto brainstorm + write
+  if (argv.category && argv.count && !argv.topic) {
+    return runCategoryAuto({ category: argv.category, count: argv.count });
+  }
+
+  // Manual single topic
+  if (argv.topic) return runOne({ topic: argv.topic, category: argv.category });
+
+  // No inputs → interactive picker
+  if (argv.interactive || process.stdin.isTTY) return runInteractive();
+
+  fatal('No topic provided. Use --category + --count, a "topic" arg, --topics file, or --auto-fill.');
+}
+
+main().catch((e) => { console.error('\n✖', e.message); process.exit(1); });
