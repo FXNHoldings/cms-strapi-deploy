@@ -23,6 +23,7 @@ RUN if [ -f yarn.lock ]; then \
       npm install --legacy-peer-deps; \
     fi
 
+COPY tsconfig.json ./
 COPY src ./src
 COPY config ./config
 COPY public ./public

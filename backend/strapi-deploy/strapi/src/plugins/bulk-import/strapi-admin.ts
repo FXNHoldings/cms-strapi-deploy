@@ -1,2 +1,2 @@
-import register from './src/index';
+import register from './admin/src/index';
 export default register;
