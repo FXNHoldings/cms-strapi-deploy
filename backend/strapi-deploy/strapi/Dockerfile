@@ -29,15 +29,17 @@ COPY config ./config
 COPY public ./public
 
 ENV NODE_ENV=production
-RUN npm run build
+RUN npm run build && \
+    rm -rf dist/src dist/config && \
+    cp -r src dist/src && \
+    cp -r config dist/config
 
 # ---------- runtime ----------
 FROM node:20-alpine
 RUN apk add --no-cache vips tini tzdata
 WORKDIR /opt/app
 
-COPY --from=builder /opt/app ./
-RUN chown -R node:node /opt/app
+COPY --from=builder --chown=node:node /opt/app ./
 
 USER node
 ENV NODE_ENV=production \
