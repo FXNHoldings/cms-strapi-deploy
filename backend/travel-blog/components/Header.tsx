@@ -9,10 +9,10 @@ export default async function Header() {
     <header className="border-b border-forest-900/10 bg-paper/80 backdrop-blur" data-testid="site-header">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <Link href="/" className="flex items-baseline gap-2" data-testid="logo-link">
-          <span className="editorial-h text-2xl font-black text-forest-900">FXN</span>
-          <span className="editorial-h text-xl font-light italic text-forest-800">Studio</span>
+          <span className="font-urbanist text-2xl font-black text-forest-900">FXN</span>
+          <span className="font-urbanist text-xl font-light text-forest-800">Studio</span>
         </Link>
-        <nav className="hidden gap-7 text-sm font-medium md:flex" data-testid="primary-nav">
+        <nav className="hidden gap-7 text-sm font-light md:flex" data-testid="primary-nav">
           {cats.slice(0, 5).map((c) => (
             <Link
               key={c.id}
