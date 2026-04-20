@@ -1,4 +1,4 @@
-export default ({ env }) => ({
+module.exports = ({ env }) => ({
   // Local plugins
   'ai-writer': {
     enabled: true,
