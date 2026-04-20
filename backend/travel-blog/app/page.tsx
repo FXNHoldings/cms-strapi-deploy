@@ -1,18 +1,9 @@
 import Link from 'next/link';
 import { listArticles, listCategories, mediaUrl, type StrapiArticle } from '@/lib/strapi';
+import { SECTIONS } from '@/lib/sections';
 import { format } from 'date-fns';
 
 export const revalidate = 60;
-
-// Six main sections, each with its own slug and layout variant
-const SECTIONS = [
-  { slug: 'destinations', title: 'Destinations', tagline: 'Places that change you', layout: 'atlas' as const },
-  { slug: 'flights', title: 'Flights', tagline: 'Pay less, fly more', layout: 'departure' as const },
-  { slug: 'hotels', title: 'Hotels', tagline: 'Beds worth booking twice', layout: 'editorial' as const },
-  { slug: 'travel-resources', title: 'Travel Resources', tagline: 'The tools we actually use', layout: 'directory' as const },
-  { slug: 'travel-tips', title: 'Travel Tips', tagline: 'Shortcuts from the road', layout: 'masonry' as const },
-  { slug: 'car-rental', title: 'Car Rental', tagline: 'Wheels on the ground', layout: 'billboard' as const },
-];
 
 export default async function HomePage() {
   const [categories, ...perSection] = await Promise.all([
