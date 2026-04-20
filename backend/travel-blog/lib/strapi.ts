@@ -33,6 +33,10 @@ export type StrapiCategory = {
   description?: string;
   icon?: string;
   color?: string;
+  order?: number;
+  site?: string;
+  parent?: { id: number; name: string; slug: string } | null;
+  children?: { id: number; name: string; slug: string }[];
 };
 
 export type StrapiDestination = {
@@ -91,10 +95,16 @@ export async function getArticle(slug: string) {
   return res.data?.[0] ?? null;
 }
 
-export async function listCategories() {
+export async function listCategories(opts: { site?: string; topLevelOnly?: boolean } = {}) {
+  const filters: Record<string, unknown> = {};
+  if (opts.site) filters.site = { $in: ['all', opts.site] };
+  if (opts.topLevelOnly) filters.parent = { id: { $null: true } };
+
   const res = await strapiFetch<ListResponse<StrapiCategory>>('categories', {
-    sort: ['name:asc'],
-    pagination: { pageSize: 50 },
+    sort: ['order:asc', 'name:asc'],
+    populate: ['parent', 'children'],
+    pagination: { pageSize: 100 },
+    filters,
   });
   return res.data;
 }
@@ -102,6 +112,7 @@ export async function listCategories() {
 export async function getCategory(slug: string) {
   const res = await strapiFetch<ListResponse<StrapiCategory>>('categories', {
     filters: { slug: { $eq: slug } },
+    populate: ['parent', 'children'],
     pagination: { pageSize: 1 },
   });
   return res.data?.[0] ?? null;
