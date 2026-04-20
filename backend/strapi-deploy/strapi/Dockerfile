@@ -29,9 +29,6 @@ COPY public ./public
 
 ENV NODE_ENV=production
 RUN npm run build && \
-    rm -rf dist/src dist/config && \
-    cp -r src dist/src && \
-    cp -r config dist/config && \
     mkdir -p database/migrations public/uploads .tmp
 
 # ---------- runtime ----------
