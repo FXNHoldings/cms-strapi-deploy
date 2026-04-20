@@ -1,0 +1,22 @@
+{
+  "name": "fxn-ai-writer-cli",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generate travel articles with Claude Sonnet 4.5 and post them to Strapi as drafts",
+  "bin": {
+    "fxn-ai": "./generate.js"
+  },
+  "scripts": {
+    "generate": "node generate.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "dotenv": "^16.4.7",
+    "yargs": "^17.7.2",
+    "slugify": "^1.6.6"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,8 @@
+# One topic per line. Lines starting with # are ignored.
+# Save this as topics.txt and run:  node generate.js --topics topics.txt
+
+Best cheap flights from London to Bangkok in 2026
+7 boutique hotels in Kyoto under $150
+How to get around Istanbul without getting ripped off
+Why October is the secret best month to visit Japan
+The 5 cheapest European cities for a long weekend in winter
