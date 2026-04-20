@@ -52,7 +52,7 @@ export const SECTIONS: Section[] = [
     layout: 'masonry',
   },
   {
-    slug: 'car-rental',
+    slug: 'car-rentals',
     title: 'Car Rental',
     tagline: 'Wheels on the ground',
     description: 'Rental guides, scam-avoidance tips, and road-trip routes worth flying for.',

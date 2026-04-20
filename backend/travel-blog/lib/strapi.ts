@@ -74,8 +74,8 @@ export function mediaUrl(img: StrapiImage): string | null {
 
 export async function listArticles(opts: { page?: number; pageSize?: number; category?: string; destination?: string } = {}) {
   const filters: Record<string, unknown> = {};
-  if (opts.category) filters.category = { slug: { $eq: opts.category } };
-  if (opts.destination) filters.destinations = { slug: { $eq: opts.destination } };
+  if (opts.category) filters.category = { slug: { $eqi: opts.category } };
+  if (opts.destination) filters.destinations = { slug: { $eqi: opts.destination } };
 
   const res = await strapiFetch<ListResponse<StrapiArticle>>('articles', {
     sort: ['publishedAt:desc'],
@@ -111,7 +111,7 @@ export async function listCategories(opts: { site?: string; topLevelOnly?: boole
 
 export async function getCategory(slug: string) {
   const res = await strapiFetch<ListResponse<StrapiCategory>>('categories', {
-    filters: { slug: { $eq: slug } },
+    filters: { slug: { $eqi: slug } },
     populate: ['parent', 'children'],
     pagination: { pageSize: 1 },
   });

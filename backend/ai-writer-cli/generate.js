@@ -83,7 +83,7 @@ const CATEGORY_CHOICES = [
   { name: 'Hotels',            value: 'hotels' },
   { name: 'Travel Resources',  value: 'travel-resources' },
   { name: 'Travel Tips',       value: 'travel-tips' },
-  { name: 'Car Rental',        value: 'car-rental' },
+  { name: 'Car Rental',        value: 'car-rentals' },
 ];
 
 /** In-memory cache so we only hit /api/categories once per run */
@@ -399,7 +399,7 @@ const AUTO_TOPICS = {
     'Language apps ranked: Duolingo vs Pimsleur vs ChatGPT',
     'Why you should always book the first flight of the day',
   ],
-  'car-rental': [
+  'car-rentals': [
     'Car rental in Europe: the complete 2026 guide',
     'How to avoid getting scammed at the rental counter',
     'Automatic vs manual: renting abroad as a UK/US driver',
