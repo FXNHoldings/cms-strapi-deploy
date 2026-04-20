@@ -18,6 +18,7 @@
 
 import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
+import { fal } from '@fal-ai/client';
 import fs from 'node:fs';
 import path from 'node:path';
 import yargs from 'yargs';
@@ -39,6 +40,8 @@ const argv = yargs(hideBin(process.argv))
   .option('language', { type: 'string', default: 'English' })
   .option('publish', { type: 'boolean', default: false, describe: 'Publish immediately (default: save as draft)' })
   .option('interactive', { alias: 'i', type: 'boolean', default: false, describe: 'Force interactive prompt even if flags are set' })
+  .option('images', { type: 'boolean', default: true, describe: 'Generate 1 cover + 2 gallery images with Fal.ai (use --no-images to disable)' })
+  .option('image-model', { type: 'string', default: 'schnell', choices: ['schnell', 'dev', 'pro'], describe: 'Fal.ai FLUX variant' })
   .option('dry-run', { type: 'boolean', default: false })
   .help()
   .parseSync();
@@ -52,6 +55,7 @@ const {
   CLAUDE_MAX_TOKENS = '4096',
   STRAPI_URL,
   STRAPI_API_TOKEN,
+  FAL_KEY,
 } = process.env;
 
 if (!ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set.');
@@ -59,8 +63,18 @@ if (!argv['dry-run']) {
   if (!STRAPI_URL) fatal('STRAPI_URL is not set in .env');
   if (!STRAPI_API_TOKEN) fatal('STRAPI_API_TOKEN is not set in .env');
 }
+if (argv.images && !argv['dry-run'] && !FAL_KEY) {
+  fatal('FAL_KEY is not set in .env. Get one at https://fal.ai/dashboard/keys — or pass --no-images to skip image generation.');
+}
 
 const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
+if (FAL_KEY) fal.config({ credentials: FAL_KEY });
+
+const FAL_MODEL_IDS = {
+  schnell: 'fal-ai/flux/schnell',
+  dev: 'fal-ai/flux/dev',
+  pro: 'fal-ai/flux-pro',
+};
 
 /** The 6 main site categories — used for the interactive picker and as fallbacks. */
 const CATEGORY_CHOICES = [
@@ -141,9 +155,13 @@ Output MUST be strict JSON matching this TypeScript type:
   "seoDescription": string, // <= 158 chars
   "seoKeywords": string,    // comma-separated, 5-10 terms
   "tags": string[],         // 4-8 lowercase tags
-  "readingTimeMinutes": number
+  "readingTimeMinutes": number,
+  "imagePrompts": {
+    "cover": string,        // Detailed photographic prompt for the HERO/featured image. 16:9 landscape. Photorealistic travel photo, specific location/subject, time of day, lighting, camera lens hint. No people's faces unless stock-photo vibe. 30-60 words.
+    "gallery": string[]     // EXACTLY 2 additional photographic prompts that visually support different sections of the article. Same style guidance as cover. Each 30-60 words.
+  }
 }
-Do not include any text outside the JSON. Do not wrap it in markdown fences. Use honest, specific, actionable advice.`;
+Do not include any text outside the JSON. Do not wrap it in markdown fences. Use honest, specific, actionable advice. Image prompts must be vivid, concrete, and free of logos, brand names, or copyrighted characters.`;
 }
 
 function userPromptArticle(p) {
@@ -228,6 +246,82 @@ async function generateArticle(p) {
   return json;
 }
 
+/* ---------- Fal.ai images ---------- */
+
+async function generateImage(prompt, { aspect = 'landscape_16_9' } = {}) {
+  const modelId = FAL_MODEL_IDS[argv['image-model']] || FAL_MODEL_IDS.schnell;
+  const result = await fal.subscribe(modelId, {
+    input: {
+      prompt,
+      image_size: aspect,
+      num_images: 1,
+      enable_safety_checker: true,
+    },
+    logs: false,
+  });
+  const url = result?.data?.images?.[0]?.url;
+  if (!url) throw new Error(`Fal.ai returned no image URL for prompt: ${prompt.slice(0, 80)}…`);
+  return url;
+}
+
+async function uploadImageToStrapi(imageUrl, filename) {
+  const res = await fetch(imageUrl);
+  if (!res.ok) throw new Error(`Failed to download image ${imageUrl}: ${res.status}`);
+  const ab = await res.arrayBuffer();
+  const contentType = res.headers.get('content-type') || 'image/jpeg';
+  const ext = contentType.includes('png') ? 'png' : contentType.includes('webp') ? 'webp' : 'jpg';
+  const name = `${filename}.${ext}`.slice(0, 120);
+
+  const form = new FormData();
+  form.append('files', new Blob([ab], { type: contentType }), name);
+
+  const uploadRes = await fetch(`${STRAPI_URL}/api/upload`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${STRAPI_API_TOKEN}` },
+    body: form,
+  });
+  if (!uploadRes.ok) {
+    const body = await uploadRes.text().catch(() => '');
+    throw new Error(`Strapi upload ${uploadRes.status}: ${body.slice(0, 300)}`);
+  }
+  const uploaded = await uploadRes.json();
+  const first = Array.isArray(uploaded) ? uploaded[0] : uploaded;
+  if (!first?.id) throw new Error('Strapi upload returned no id');
+  return first.id;
+}
+
+async function generateAndUploadImages(draft) {
+  const prompts = draft?.imagePrompts;
+  if (!prompts?.cover || !Array.isArray(prompts.gallery) || prompts.gallery.length < 1) {
+    console.log('  (no image prompts returned by Claude — skipping images)');
+    return { coverId: null, galleryIds: [] };
+  }
+
+  const baseName = slugify(draft.title || 'article', { lower: true, strict: true }).slice(0, 50);
+  process.stdout.write(`  generating ${1 + prompts.gallery.length} images with Fal.ai FLUX [${argv['image-model']}]… `);
+  const t0 = Date.now();
+
+  const allPrompts = [
+    { kind: 'cover', prompt: prompts.cover, aspect: 'landscape_16_9' },
+    ...prompts.gallery.slice(0, 2).map((p, i) => ({ kind: `gallery-${i + 1}`, prompt: p, aspect: 'landscape_4_3' })),
+  ];
+
+  // Run in parallel — fal.ai handles concurrency fine for small batches
+  const results = await Promise.all(
+    allPrompts.map(async ({ kind, prompt, aspect }) => {
+      const url = await generateImage(prompt, { aspect });
+      const id = await uploadImageToStrapi(url, `${baseName}-${kind}`);
+      return { kind, id };
+    }),
+  );
+
+  process.stdout.write(`${((Date.now() - t0) / 1000).toFixed(1)}s · `);
+
+  const coverId = results.find((r) => r.kind === 'cover')?.id ?? null;
+  const galleryIds = results.filter((r) => r.kind !== 'cover').map((r) => r.id);
+  return { coverId, galleryIds };
+}
+
 /* ---------- Strapi ---------- */
 
 async function postToStrapi(draft, opts) {
@@ -243,6 +337,8 @@ async function postToStrapi(draft, opts) {
     source: 'ai',
   };
   if (opts.categoryId) data.category = opts.categoryId;
+  if (opts.coverId) data.coverImage = opts.coverId;
+  if (opts.galleryIds?.length) data.gallery = opts.galleryIds;
   if (opts.publish) data.publishedAt = new Date().toISOString();
 
   const res = await strapi('/api/articles', { method: 'POST', body: JSON.stringify({ data }) });
@@ -339,10 +435,19 @@ async function runOne({ topic, category }) {
     return;
   }
 
+  let coverId = null, galleryIds = [];
+  if (argv.images) {
+    try {
+      ({ coverId, galleryIds } = await generateAndUploadImages(draft));
+    } catch (e) {
+      console.log(`\n  ⚠ image step failed (${e.message.slice(0, 140)}) — saving article without images`);
+    }
+  }
+
   const categoryId = await resolveCategoryId(category || argv.category);
-  const created = await postToStrapi(draft, { categoryId, publish: argv.publish });
+  const created = await postToStrapi(draft, { categoryId, coverId, galleryIds, publish: argv.publish });
   const id = created?.data?.id ?? '?';
-  console.log(`${argv.publish ? 'PUBLISHED' : 'draft'} id=${id}`);
+  console.log(`${argv.publish ? 'PUBLISHED' : 'draft'} id=${id}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}`);
 }
 
 async function runCategoryAuto({ category, count }) {

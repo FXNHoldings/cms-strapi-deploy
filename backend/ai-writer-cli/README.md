@@ -8,12 +8,15 @@ Drafts appear in Strapi → you review, attach a cover image and destinations �
 
 - Node.js 20+ on whatever machine you run this from (your laptop is fine)
 - An Anthropic API key — get one at https://console.anthropic.com/settings/keys
-- A Strapi **API Token** with write permission for Articles
+- A Strapi **API Token** with write permission for Articles **and** Upload
   - In Strapi admin → **Settings → API Tokens → Create new API Token**
   - Name: `ai-writer-cli`
-  - Type: **Full access** (or Custom with `article: create`)
+  - Type: **Full access** (or Custom with `article: create` + `upload: create`)
   - Duration: Unlimited (or as you prefer)
   - Copy the token value immediately (shown once)
+- (Optional but recommended) A **Fal.ai** API key for automatic featured + gallery images
+  - Get one at https://fal.ai/dashboard/keys
+  - Skip with `--no-images` if you prefer text-only drafts
 
 ## Install
 
@@ -83,8 +86,37 @@ Flags:
 | `--keywords` / `-k` | — | comma-separated SEO keywords |
 | `--language` | `English` | any language |
 | `--publish` | `false` | publish immediately (default: save as draft) |
+| `--images` / `--no-images` | `true` | generate 1 cover + 2 gallery images via Fal.ai FLUX (requires `FAL_KEY`) |
+| `--image-model` | `schnell` | `schnell` (fastest/cheapest), `dev` (higher quality), `pro` (best) |
 | `--interactive` / `-i` | `false` | force the arrow-key menu |
 | `--dry-run` | `false` | print JSON, don't hit Strapi |
+
+## AI images per article (Fal.ai FLUX)
+
+Every generated article automatically gets:
+
+- **1 cover image** (16:9) → attached to `coverImage`
+- **2 gallery images** (4:3) → attached to `gallery`
+
+Claude writes 3 tailored photographic prompts for each article (in the JSON response), then the CLI calls **Fal.ai FLUX** to generate the images, downloads them, uploads to Strapi's Media Library, and links them to the draft.
+
+**Costs** (as of 2026):
+- FLUX `schnell` (default): **~$0.003/image → ~$0.009 per article** (3 images)
+- FLUX `dev`: ~$0.025/image → ~$0.075 per article
+- FLUX `pro`: ~$0.05/image → ~$0.15 per article
+
+Add `--no-images` to any command to skip image generation entirely.
+
+```bash
+# Fastest & cheapest (default)
+node generate.js -c flights -n 5
+
+# Higher-quality dev model
+node generate.js -c hotels -n 3 --image-model dev
+
+# Text-only drafts, no images
+node generate.js -c destinations -n 10 --no-images
+```
 
 ## Batch mode — generate 50 articles overnight
 
