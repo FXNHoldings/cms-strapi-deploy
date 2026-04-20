@@ -5,7 +5,7 @@
  *
  * Keep slugs in sync with the Strapi Category collection.
  */
-export type SectionLayout = 'atlas' | 'departure' | 'editorial' | 'directory' | 'masonry' | 'billboard';
+export type SectionLayout = 'atlas' | 'departure' | 'wirecutter' | 'directory' | 'masonry' | 'grid';
 
 export type Section = {
   slug: string;
@@ -35,7 +35,7 @@ export const SECTIONS: Section[] = [
     title: 'Hotels',
     tagline: 'Beds worth booking twice',
     description: 'Boutique stays, loyalty hacks, and honest reviews of hotels we actually slept in.',
-    layout: 'editorial',
+    layout: 'wirecutter',
   },
   {
     slug: 'travel-resources',
@@ -56,7 +56,7 @@ export const SECTIONS: Section[] = [
     title: 'Car Rental',
     tagline: 'Wheels on the ground',
     description: 'Rental guides, scam-avoidance tips, and road-trip routes worth flying for.',
-    layout: 'billboard',
+    layout: 'grid',
   },
 ];
 

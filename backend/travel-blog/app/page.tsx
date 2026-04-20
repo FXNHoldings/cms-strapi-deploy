@@ -1,14 +1,13 @@
 import Link from 'next/link';
 import { listArticles, listCategories, mediaUrl, type StrapiArticle } from '@/lib/strapi';
 import { SECTIONS } from '@/lib/sections';
-import { format } from 'date-fns';
 
 export const revalidate = 60;
 
 export default async function HomePage() {
   const [categories, ...perSection] = await Promise.all([
     listCategories().catch(() => []),
-    ...SECTIONS.map((s) => listArticles({ category: s.slug, pageSize: 6 }).then((r) => r.data).catch(() => [])),
+    ...SECTIONS.map((s) => listArticles({ category: s.slug, pageSize: 10 }).then((r) => r.data).catch(() => [])),
   ]);
 
   const bySection = Object.fromEntries(SECTIONS.map((s, i) => [s.slug, perSection[i] as StrapiArticle[]]));
@@ -95,10 +94,10 @@ function Section({ section, posts }: { section: Section; posts: StrapiArticle[] 
   switch (section.layout) {
     case 'atlas': return <AtlasLayout section={section} posts={posts} />;
     case 'departure': return <DepartureLayout section={section} posts={posts} />;
-    case 'editorial': return <EditorialLayout section={section} posts={posts} />;
+    case 'wirecutter': return <WirecutterLayout section={section} posts={posts} />;
     case 'directory': return <DirectoryLayout section={section} posts={posts} />;
     case 'masonry': return <MasonryLayout section={section} posts={posts} />;
-    case 'billboard': return <BillboardLayout section={section} posts={posts} />;
+    case 'grid': return <GridLayout section={section} posts={posts} />;
     default: return null;
   }
 }
@@ -137,25 +136,14 @@ function SectionHeader({ section, light = false }: { section: Section; light?: b
   );
 }
 
-/* ---------- LAYOUT 1 · DESTINATIONS — Atlas (asymmetric editorial grid) ---------- */
+/* ---------- LAYOUT 1 · DESTINATIONS — Atlas (compact grid of small cards) ---------- */
 
 function AtlasLayout({ section, posts }: { section: Section; posts: StrapiArticle[] }) {
-  const [feat, ...rest] = posts;
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24" data-testid={`section-${section.slug}`}>
+    <section className="mx-auto max-w-7xl px-6 py-20" data-testid={`section-${section.slug}`}>
       <SectionHeader section={section} />
-      <div className="mt-12 grid gap-6 lg:grid-cols-12 lg:grid-rows-2">
-        <FeatureCard post={feat} className="lg:col-span-7 lg:row-span-2" heightClass="h-full min-h-[480px]" />
-        {rest.slice(0, 5).map((p, i) => (
-          <CompactCard
-            key={p.id}
-            post={p}
-            className={
-              i < 2 ? 'lg:col-span-5 lg:row-span-1' : 'lg:col-span-4 lg:row-span-1'
-            }
-            heightClass="h-full min-h-[220px]"
-          />
-        ))}
+      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {posts.slice(0, 8).map((p) => <SmallCard key={p.id} post={p} />)}
       </div>
     </section>
   );
@@ -203,50 +191,51 @@ function DepartureLayout({ section, posts }: { section: Section; posts: StrapiAr
   );
 }
 
-/* ---------- LAYOUT 3 · HOTELS — Editorial alternating rows ---------- */
+/* ---------- LAYOUT 3 · HOTELS — Wirecutter (numbered picks with thumbnails) ---------- */
 
-function EditorialLayout({ section, posts }: { section: Section; posts: StrapiArticle[] }) {
+function WirecutterLayout({ section, posts }: { section: Section; posts: StrapiArticle[] }) {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24" data-testid={`section-${section.slug}`}>
-      <SectionHeader section={section} />
-      <div className="mt-14 space-y-20">
-        {posts.slice(0, 6).map((p, i) => {
-          const reverse = i % 2 === 1;
-          const img = mediaUrl(p.coverImage ?? null);
-          const date = p.publishedAt ? format(new Date(p.publishedAt), 'MMM yyyy') : '';
-          return (
-            <article key={p.id} className="grid items-center gap-10 lg:grid-cols-12">
-              <Link
-                href={`/articles/${p.slug}`}
-                className={`block overflow-hidden rounded-3xl lg:col-span-7 ${reverse ? 'lg:order-2' : ''}`}
-              >
-                {img ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={img} alt={p.title} className="aspect-[16/10] w-full object-cover transition duration-500 hover:scale-105" />
-                ) : (
-                  <div className="aspect-[16/10] w-full bg-gradient-to-br from-forest-900 to-forest-950" />
-                )}
-              </Link>
-              <div className={`lg:col-span-5 ${reverse ? 'lg:order-1' : ''}`}>
-                <div className="font-urbanist text-xs uppercase tracking-[0.25em] text-forest-800/70">
-                  №&nbsp;{String(i + 1).padStart(2, '0')} · {date}
-                </div>
-                <Link href={`/articles/${p.slug}`}>
-                  <h3 className="font-urbanist mt-3 text-3xl font-bold leading-[1.05] text-forest-900 hover:text-terracotta-700 lg:text-5xl">
-                    {p.title}
-                  </h3>
-                </Link>
-                {p.excerpt && <p className="mt-4 text-base font-light text-ink/75 lg:text-lg">{p.excerpt}</p>}
+    <section className="bg-paper py-20" data-testid={`section-${section.slug}`}>
+      <div className="mx-auto max-w-5xl px-6">
+        <SectionHeader section={section} />
+        <ol className="mt-10 divide-y divide-forest-900/10 border-y border-forest-900/10">
+          {posts.slice(0, 8).map((p, i) => {
+            const img = mediaUrl(p.coverImage ?? null);
+            return (
+              <li key={p.id}>
                 <Link
                   href={`/articles/${p.slug}`}
-                  className="font-urbanist mt-6 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-terracotta-700 hover:text-terracotta-600"
+                  className="group grid grid-cols-[auto,88px,1fr] items-center gap-5 py-5 transition hover:bg-sand-50 sm:grid-cols-[auto,120px,1fr,auto] sm:gap-6"
                 >
-                  Read the review →
+                  <span className="font-urbanist text-2xl font-bold tabular-nums text-terracotta-600 sm:text-3xl">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  {img ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={img}
+                      alt={p.title}
+                      className="aspect-[4/3] w-[88px] rounded-lg object-cover sm:w-[120px]"
+                    />
+                  ) : (
+                    <div className="aspect-[4/3] w-[88px] rounded-lg bg-forest-900/10 sm:w-[120px]" />
+                  )}
+                  <div className="min-w-0">
+                    <h3 className="font-urbanist text-base font-bold leading-snug text-forest-900 transition group-hover:text-terracotta-700 sm:text-lg">
+                      {p.title}
+                    </h3>
+                    {p.excerpt && (
+                      <p className="mt-1 line-clamp-2 text-sm font-light text-ink/70">{p.excerpt}</p>
+                    )}
+                  </div>
+                  <div className="font-urbanist hidden text-right text-xs uppercase tracking-widest text-forest-800/60 sm:block">
+                    {p.readingTimeMinutes ?? 5} min
+                  </div>
                 </Link>
-              </div>
-            </article>
-          );
-        })}
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );
@@ -260,7 +249,7 @@ function DirectoryLayout({ section, posts }: { section: Section; posts: StrapiAr
       <div className="mx-auto max-w-5xl px-6">
         <SectionHeader section={section} />
         <ul className="mt-12 divide-y divide-forest-900/10 border-y border-forest-900/10">
-          {posts.slice(0, 6).map((p, i) => (
+          {posts.slice(0, 8).map((p, i) => (
             <li key={p.id}>
               <Link
                 href={`/articles/${p.slug}`}
@@ -295,7 +284,7 @@ function MasonryLayout({ section, posts }: { section: Section; posts: StrapiArti
     <section className="mx-auto max-w-7xl px-6 py-24" data-testid={`section-${section.slug}`}>
       <SectionHeader section={section} />
       <div className="mt-12 columns-1 gap-6 md:columns-2 lg:columns-3 [column-fill:_balance]">
-        {posts.slice(0, 6).map((p, i) => {
+        {posts.slice(0, 8).map((p, i) => {
           const img = mediaUrl(p.coverImage ?? null);
           // Mix of aspect ratios for variety
           const aspect = ['aspect-[4/5]', 'aspect-[3/4]', 'aspect-[1/1]', 'aspect-[4/5]', 'aspect-[16/11]', 'aspect-[3/4]'][i % 6];
@@ -335,95 +324,46 @@ function MasonryLayout({ section, posts }: { section: Section; posts: StrapiArti
   );
 }
 
-/* ---------- LAYOUT 6 · CAR RENTAL — Billboard + strip ---------- */
+/* ---------- LAYOUT 6 · CAR RENTAL — Grid (clean, compact 4-col) ---------- */
 
-function BillboardLayout({ section, posts }: { section: Section; posts: StrapiArticle[] }) {
-  const [top, ...rest] = posts;
-  const img = top ? mediaUrl(top.coverImage ?? null) : null;
+function GridLayout({ section, posts }: { section: Section; posts: StrapiArticle[] }) {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24" data-testid={`section-${section.slug}`}>
+    <section className="mx-auto max-w-7xl px-6 py-20" data-testid={`section-${section.slug}`}>
       <SectionHeader section={section} />
-      {top && (
-        <Link href={`/articles/${top.slug}`} className="group relative mt-12 block overflow-hidden rounded-3xl bg-forest-950">
-          {img && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={img} alt={top.title} className="aspect-[21/9] w-full object-cover opacity-75 transition duration-700 group-hover:scale-105 group-hover:opacity-90" />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-r from-forest-950/95 via-forest-950/40 to-transparent" />
-          <div className="absolute inset-y-0 left-0 flex max-w-2xl flex-col justify-end p-8 text-sand-100 lg:p-14">
-            {top.category && (
-              <span className="font-urbanist w-fit rounded-full border border-sand-100/30 px-3 py-1 text-xs uppercase tracking-widest">
-                {top.category.name}
-              </span>
-            )}
-            <h3 className="font-urbanist mt-5 text-3xl font-bold leading-[1.05] lg:text-6xl">{top.title}</h3>
-            {top.excerpt && <p className="mt-4 max-w-xl text-base font-light opacity-90 lg:text-lg">{top.excerpt}</p>}
-            <span className="font-urbanist mt-6 inline-flex w-fit items-center gap-2 text-sm uppercase tracking-widest">
-              Read on <span className="transition group-hover:translate-x-1">→</span>
-            </span>
-          </div>
-        </Link>
-      )}
-      {rest.length > 0 && (
-        <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-5">
-          {rest.slice(0, 5).map((p) => {
-            const t = mediaUrl(p.coverImage ?? null);
-            return (
-              <Link key={p.id} href={`/articles/${p.slug}`} className="group block">
-                {t ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={t} alt={p.title} className="aspect-[4/5] w-full rounded-xl object-cover transition group-hover:scale-[1.02]" />
-                ) : (
-                  <div className="aspect-[4/5] w-full rounded-xl bg-forest-900/10" />
-                )}
-                <h4 className="font-urbanist mt-3 line-clamp-2 text-sm font-bold leading-tight text-forest-900 group-hover:text-terracotta-700">
-                  {p.title}
-                </h4>
-              </Link>
-            );
-          })}
-        </div>
-      )}
+      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {posts.slice(0, 8).map((p) => <SmallCard key={p.id} post={p} />)}
+      </div>
     </section>
   );
 }
 
-/* ---------- Reusable cards for Atlas ---------- */
+/* ---------- Reusable small card (Atlas + Grid) ---------- */
 
-function FeatureCard({ post, className = '', heightClass = '' }: { post?: StrapiArticle; className?: string; heightClass?: string }) {
-  if (!post) return <div className={`rounded-3xl bg-forest-900/5 ${className} ${heightClass}`} />;
+function SmallCard({ post }: { post: StrapiArticle }) {
   const img = mediaUrl(post.coverImage ?? null);
   return (
-    <Link href={`/articles/${post.slug}`} className={`group relative block overflow-hidden rounded-3xl bg-forest-950 ${className} ${heightClass}`}>
-      {img && (
+    <Link
+      href={`/articles/${post.slug}`}
+      className="group block overflow-hidden rounded-2xl bg-forest-900/5 transition hover:bg-forest-900/10"
+    >
+      {img ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={img} alt={post.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+        <img
+          src={img}
+          alt={post.title}
+          className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div className="aspect-[4/3] w-full bg-gradient-to-br from-forest-900/10 to-forest-900/20" />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-forest-950/95 via-forest-950/30 to-transparent" />
-      <div className="relative flex h-full flex-col justify-end p-8 text-sand-100 lg:p-12">
-        {post.category && (
-          <span className="font-urbanist w-fit rounded-full border border-sand-100/30 px-3 py-1 text-xs uppercase tracking-widest">
-            {post.category.name}
-          </span>
-        )}
-        <h3 className="font-urbanist mt-5 text-4xl font-bold leading-[0.95] lg:text-6xl">{post.title}</h3>
-        {post.excerpt && <p className="mt-3 line-clamp-2 max-w-xl font-light opacity-85">{post.excerpt}</p>}
-      </div>
-    </Link>
-  );
-}
-
-function CompactCard({ post, className = '', heightClass = '' }: { post: StrapiArticle; className?: string; heightClass?: string }) {
-  const img = mediaUrl(post.coverImage ?? null);
-  return (
-    <Link href={`/articles/${post.slug}`} className={`group relative block overflow-hidden rounded-2xl bg-forest-900 ${className} ${heightClass}`}>
-      {img && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={img} alt={post.title} className="absolute inset-0 h-full w-full object-cover opacity-70 transition duration-500 group-hover:scale-105 group-hover:opacity-90" />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/30 to-transparent" />
-      <div className="relative flex h-full flex-col justify-end p-5 text-sand-100">
-        <h4 className="font-urbanist line-clamp-3 text-lg font-bold leading-tight lg:text-xl">{post.title}</h4>
+      <div className="p-4">
+        {post.category && <span className="chip text-[10px]">{post.category.name}</span>}
+        <h3 className="font-urbanist mt-2 line-clamp-2 text-base font-bold leading-snug text-forest-900 transition group-hover:text-terracotta-700">
+          {post.title}
+        </h3>
+        <div className="font-urbanist mt-2 text-xs uppercase tracking-widest text-forest-800/60">
+          {post.readingTimeMinutes ?? 5} min read
+        </div>
       </div>
     </Link>
   );
