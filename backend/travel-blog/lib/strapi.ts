@@ -73,6 +73,36 @@ export type StrapiAirline = {
   website?: string;
 };
 
+export type StrapiAirport = {
+  id: number;
+  documentId?: string;
+  iata: string;
+  icao?: string;
+  name: string;
+  city?: string;
+  country?: string;
+  countryCode?: string;
+  region?: AirlineRegion;
+  latitude?: number;
+  longitude?: number;
+  timezone?: string;
+  about?: string;
+  heroImage?: StrapiImage;
+};
+
+export type StrapiRoute = {
+  id: number;
+  documentId?: string;
+  slug: string;
+  origin?: StrapiAirport;
+  destination?: StrapiAirport;
+  carriers?: StrapiAirline[];
+  distanceKm?: number;
+  durationMinutes?: number;
+  popularity?: number;
+  about?: string;
+};
+
 type ListResponse<T> = { data: T[]; meta: { pagination: { page: number; pageSize: number; pageCount: number; total: number } } };
 
 async function strapiFetch<T>(path: string, params?: Record<string, unknown>, revalidate = 60): Promise<T> {
@@ -176,4 +206,49 @@ export async function getAirline(slug: string) {
     pagination: { pageSize: 1 },
   });
   return res.data?.[0] ?? null;
+}
+
+export async function listAirports() {
+  const res = await strapiFetch<ListResponse<StrapiAirport>>('airports', {
+    sort: ['name:asc'],
+    populate: ['heroImage'],
+    pagination: { pageSize: 1000 },
+  });
+  return res.data;
+}
+
+export async function getAirport(iata: string) {
+  const res = await strapiFetch<ListResponse<StrapiAirport>>('airports', {
+    filters: { iata: { $eqi: iata } },
+    populate: ['heroImage'],
+    pagination: { pageSize: 1 },
+  });
+  return res.data?.[0] ?? null;
+}
+
+export async function getRoute(slug: string) {
+  const res = await strapiFetch<ListResponse<StrapiRoute>>('routes', {
+    filters: { slug: { $eq: slug } },
+    populate: {
+      origin: { populate: ['heroImage'] },
+      destination: { populate: ['heroImage'] },
+      carriers: { populate: ['logo'] },
+    },
+    pagination: { pageSize: 1 },
+  });
+  return res.data?.[0] ?? null;
+}
+
+export async function listRoutesFromAirport(iata: string, limit = 20) {
+  const res = await strapiFetch<ListResponse<StrapiRoute>>('routes', {
+    filters: { origin: { iata: { $eqi: iata } } },
+    populate: {
+      origin: true,
+      destination: true,
+      carriers: { populate: ['logo'] },
+    },
+    sort: ['popularity:desc'],
+    pagination: { pageSize: limit },
+  });
+  return res.data;
 }

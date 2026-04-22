@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "airports",
+  "info": {
+    "singularName": "airport",
+    "pluralName": "airports",
+    "displayName": "Airport",
+    "description": "Commercial airports — IATA/ICAO codes, city, country, coordinates"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "iata": { "type": "string", "required": true, "unique": true, "maxLength": 3 },
+    "icao": { "type": "string", "maxLength": 4 },
+    "name": { "type": "string", "required": true, "maxLength": 160 },
+    "city": { "type": "string", "maxLength": 80 },
+    "country": { "type": "string", "maxLength": 80 },
+    "countryCode": { "type": "string", "maxLength": 3 },
+    "region": {
+      "type": "enumeration",
+      "enum": ["Oceania", "Asia-Pacific", "Europe", "Americas", "Middle East", "Africa"]
+    },
+    "latitude": { "type": "decimal" },
+    "longitude": { "type": "decimal" },
+    "timezone": { "type": "string", "maxLength": 50 },
+    "about": { "type": "text" },
+    "heroImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] }
+  }
+}

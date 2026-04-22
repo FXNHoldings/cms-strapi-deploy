@@ -69,6 +69,15 @@ export default async function Header() {
                 Airlines
               </Link>
             </li>
+            <li data-testid="nav-item-airports">
+              <Link
+                href="/airports"
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-forest-800 transition-colors hover:text-terracotta-700"
+                data-testid="nav-airports"
+              >
+                Airports
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

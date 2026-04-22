@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "routes",
+  "info": {
+    "singularName": "route",
+    "pluralName": "routes",
+    "displayName": "Route",
+    "description": "Flight routes between airport pairs — origin, destination, carriers, distance"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "slug": { "type": "string", "required": true, "unique": true, "maxLength": 20 },
+    "origin": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::airport.airport"
+    },
+    "destination": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::airport.airport"
+    },
+    "carriers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::airline.airline"
+    },
+    "distanceKm": { "type": "integer" },
+    "durationMinutes": { "type": "integer" },
+    "popularity": { "type": "integer", "default": 0 },
+    "about": { "type": "text" }
+  }
+}
