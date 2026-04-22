@@ -58,7 +58,7 @@ export default async function ArticlePage({ params }: Props) {
           {date && <time dateTime={article.publishedAt}>{date}</time>}
           {article.readingTimeMinutes ? <span>· {article.readingTimeMinutes} min read</span> : null}
         </div>
-        <h1 className="editorial-h mt-6 text-5xl font-black leading-[0.98] text-forest-900 lg:text-7xl" data-testid="article-title">
+        <h1 className="editorial-h mt-6 text-5xl font-black leading-[0.98] text-forest-900 lg:text-7xl lg:font-semibold" data-testid="article-title">
           {article.title}
         </h1>
         {article.excerpt && (

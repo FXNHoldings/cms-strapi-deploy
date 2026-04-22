@@ -33,7 +33,7 @@ const argv = yargs(hideBin(process.argv))
   .option('auto-fill', { type: 'boolean', default: false, describe: 'Auto-generate across the 6 preset categories' })
   .option('count', { alias: 'n', type: 'number', describe: 'How many articles to generate (Claude will brainstorm the titles)' })
   .option('tone', { type: 'string', default: 'friendly', choices: ['friendly', 'professional', 'adventurous', 'witty', 'luxury'] })
-  .option('length', { alias: 'l', type: 'string', default: 'medium', choices: ['short', 'medium', 'long'] })
+  .option('length', { alias: 'l', type: 'string', default: 'long', choices: ['short', 'medium', 'long'] })
   .option('destination', { alias: 'd', type: 'string' })
   .option('category', { alias: 'c', type: 'string', describe: 'Category slug or name (e.g. flights, hotels, travel-tips)' })
   .option('keywords', { alias: 'k', type: 'string' })
@@ -76,9 +76,8 @@ const FAL_MODEL_IDS = {
   pro: 'fal-ai/flux-pro',
 };
 
-/** The 6 main site categories — used for the interactive picker and as fallbacks. */
+/** The main site categories — used for the interactive picker and as fallbacks. */
 const CATEGORY_CHOICES = [
-  { name: 'Destinations',      value: 'destinations' },
   { name: 'Flights',           value: 'flights' },
   { name: 'Hotels',            value: 'hotels' },
   { name: 'Travel Resources',  value: 'travel-resources' },
@@ -145,6 +144,8 @@ async function strapi(pathname, init = {}) {
 
 function systemPromptArticle(lengthLabel) {
   return `You are a senior travel journalist writing for a travel blog (flights, hotels, destinations, tips).
+
+# Output format
 Output MUST be strict JSON matching this TypeScript type:
 {
   "title": string,          // 50-70 chars, SEO-optimised
@@ -157,11 +158,52 @@ Output MUST be strict JSON matching this TypeScript type:
   "tags": string[],         // 4-8 lowercase tags
   "readingTimeMinutes": number,
   "imagePrompts": {
-    "cover": string,        // Detailed photographic prompt for the HERO/featured image. 16:9 landscape. Photorealistic travel photo, specific location/subject, time of day, lighting, camera lens hint. No people's faces unless stock-photo vibe. 30-60 words.
-    "gallery": string[]     // EXACTLY 2 additional photographic prompts that visually support different sections of the article. Same style guidance as cover. Each 30-60 words.
+    "cover": string,        // Photographic prompt for the HERO image. 16:9 landscape, photorealistic, specific location/subject, time of day, lighting, camera lens hint. No close-up faces, no logos, no brand names. 30-60 words.
+    "gallery": string[]     // EXACTLY 2 supporting photographic prompts covering different subjects/angles from the article. Same style rules. Each 30-60 words.
   }
 }
-Do not include any text outside the JSON. Do not wrap it in markdown fences. Use honest, specific, actionable advice. Image prompts must be vivid, concrete, and free of logos, brand names, or copyrighted characters.`;
+Do not include any text outside the JSON. Do not wrap it in markdown fences.
+
+# Voice
+Write like Wirecutter, The Points Guy, or a sharp blog post — not a brochure.
+- First-person where it helps ("I booked…", "we found…"). Contractions OK.
+- Opinions stated plainly; say what's worth it and what isn't.
+- Concrete over abstract. Evidence over vibes. One vivid specific beats three adjectives.
+
+# Banned phrases (never use ANY of these — they are AI tells and brochure clichés)
+nestled · hidden gem · bustling · a stone's throw (from) · picture-perfect · must-see · must-visit · world-class · charming · quaint · vibrant · breathtaking · stunning · magical · unique · diverse · plethora · myriad · a variety of · truly · simply · whether you're · rest assured · look no further · immerse yourself · embark on · a journey · gateway to · tapestry · cornucopia · haven · jewel · treasure · oasis
+
+# Banned opening patterns (never start a paragraph or article with these)
+- "Picture this…" / "Imagine…" / "Welcome to…"
+- "In a world where…" / "When it comes to…"
+- "Whether you're a seasoned traveler or…"
+- "Have you ever wondered…"
+
+# Banned closing patterns
+- "In conclusion…" / "To sum up…" / "At the end of the day…"
+- "Whether you're [X] or [Y], [place] has something for everyone."
+- Any sentence starting with "So,".
+- Generic "book your trip today" CTAs — give a concrete next step instead (e.g. "Set a Google Flights price alert for LAX→HND, flexible ±3 days, for the last week of September.").
+
+# Concreteness rules
+Every H2 section must include AT LEAST ONE of these:
+- An exact price in USD (e.g. "$185/night", "$412 round-trip from JFK").
+- A named neighborhood, street, station, or terminal (e.g. "Shibuya's Dogenzaka slope", "Terminal 3 at Heathrow").
+- A brand, chain, operator, or airline name (e.g. "Marriott Bonvoy", "Scoot", "Klook").
+- A specific month or date range when something applies (e.g. "mid-October through early November", "before March 15 for Golden Week rates").
+- A measured distance or time (e.g. "a 12-minute walk from Shinjuku station", "under 6 hours door-to-door from SFO").
+
+Prefer specific nouns to generic ones: "the limestone cliffs of Phi Phi Leh" beats "scenic beaches"; "the Hakone Ropeway" beats "public transit".
+
+# Structure
+- Lead with a 1-2 sentence hook that makes one concrete promise (e.g. "How to get business-class Tokyo flights for under $2,000, reliably, from both coasts.").
+- H2s that are scannable and search-friendly. H3s for sub-points.
+- Bullet lists for anything comparative, numeric, or sequential.
+- One honest caveat or tradeoff per 400-500 words. Readers trust writers who admit tradeoffs.
+- End with a concrete, actionable next step — not a wrap-up paragraph.
+
+# Image prompts
+Vivid, concrete, free of logos/brand names/copyrighted characters. Specific place + time of day + lighting + lens hint.`;
 }
 
 function userPromptArticle(p) {
@@ -203,7 +245,9 @@ function userPromptTitles({ category, count, tone, language, keywords, destinati
 async function generateTitles({ category, count, tone, language, keywords, destination }) {
   const msg = await client.messages.create({
     model: CLAUDE_MODEL,
-    max_tokens: 1024,
+    max_tokens: 2048,
+    thinking: { type: 'adaptive' },
+    output_config: { effort: 'high' },
     system: systemPromptTitles(),
     messages: [{
       role: 'user',
@@ -236,6 +280,8 @@ async function generateArticle(p) {
   const msg = await client.messages.create({
     model: CLAUDE_MODEL,
     max_tokens: parseInt(CLAUDE_MAX_TOKENS, 10),
+    thinking: { type: 'adaptive' },
+    output_config: { effort: 'high' },
     system: systemPromptArticle(lengthLabel),
     messages: [{ role: 'user', content: userPromptArticle(p) }],
   });
@@ -359,14 +405,6 @@ function fatal(msg) { console.error('✖', msg); process.exit(1); }
 
 /** Auto-fill preset — 6 topics across the 6 main home-page sections */
 const AUTO_TOPICS = {
-  destinations: [
-    '7 under-the-radar cities in Portugal for 2026',
-    'The complete first-timer guide to Kyoto',
-    'A 10-day Vietnam itinerary for under $800',
-    'Why Oaxaca is the best food destination in Mexico',
-    'Iceland in winter: ring road in 7 days',
-    'Seoul neighbourhoods ranked for first-time visitors',
-  ],
   flights: [
     '7 proven hacks for cheap London-Bangkok flights in 2026',
     'How to find error fares (and actually book them)',
@@ -500,7 +538,8 @@ async function runAutoFill() {
   for (const [slug, topics] of Object.entries(AUTO_TOPICS)) {
     for (const topic of topics) all.push({ category: slug, topic });
   }
-  console.log(`Auto-fill: ${all.length} articles (6 categories × 6 topics)\n`);
+  const catCount = Object.keys(AUTO_TOPICS).length;
+  console.log(`Auto-fill: ${all.length} articles (${catCount} categories × ~6 topics)\n`);
   let ok = 0, fail = 0;
   for (const j of all) {
     try { await runOne(j); ok++; } catch (e) { console.error(`  ✖ ${e.message}`); fail++; }
@@ -541,7 +580,7 @@ async function runInteractive() {
 
   const length = await select({
     message: 'Length per article?',
-    default: argv.length || 'medium',
+    default: argv.length || 'long',
     choices: [
       { name: 'Short (~500 words)',  value: 'short' },
       { name: 'Medium (~1000 words)', value: 'medium' },
@@ -561,6 +600,17 @@ async function runInteractive() {
     ],
   });
 
+  const keywordsRaw = await input({
+    message: 'Keywords to weave in (comma-separated, leave blank for none) — e.g. "error fares, shoulder season, Tuesday booking":',
+    default: argv.keywords || '',
+  });
+  const keywords = keywordsRaw.trim() || null;
+
+  const destination = await input({
+    message: 'Destination focus (optional, e.g. "Tokyo", "Southeast Asia") — leave blank for general:',
+    default: argv.destination || '',
+  });
+
   const publish = await confirm({
     message: 'Publish immediately? (No = save as drafts in Strapi)',
     default: false,
@@ -570,6 +620,8 @@ async function runInteractive() {
   argv.category = finalCategory;
   argv.length = length;
   argv.tone = tone;
+  argv.keywords = keywords || undefined;
+  argv.destination = destination.trim() || undefined;
   argv.publish = publish;
 
   await runCategoryAuto({ category: finalCategory, count });

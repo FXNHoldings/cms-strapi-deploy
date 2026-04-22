@@ -1,12 +1,13 @@
 import Link from 'next/link';
-import { listArticles, listCategories, mediaUrl, type StrapiArticle } from '@/lib/strapi';
+import { listArticles, listCategories, listDestinations, mediaUrl, type StrapiArticle, type StrapiDestination } from '@/lib/strapi';
 import { SECTIONS } from '@/lib/sections';
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const [categories, ...perSection] = await Promise.all([
+  const [categories, destinations, ...perSection] = await Promise.all([
     listCategories().catch(() => []),
+    listDestinations().catch(() => [] as StrapiDestination[]),
     ...SECTIONS.map((s) => listArticles({ category: s.slug, pageSize: 10 }).then((r) => r.data).catch(() => [])),
   ]);
 
@@ -23,8 +24,9 @@ export default async function HomePage() {
 
       {SECTIONS.map((s) => {
         const posts = bySection[s.slug] ?? [];
-        if (posts.length === 0) return <EmptySection key={s.slug} section={s} />;
-        return <Section key={s.slug} section={s} posts={posts} />;
+        const places = s.slug === 'destinations' ? destinations : [];
+        if (posts.length === 0 && places.length === 0) return <EmptySection key={s.slug} section={s} />;
+        return <Section key={s.slug} section={s} posts={posts} places={places} />;
       })}
     </div>
   );
@@ -43,7 +45,7 @@ function Hero({ hero, categories }: { hero?: StrapiArticle; categories: Awaited<
       <div className="absolute inset-0 bg-gradient-to-br from-forest-950/85 via-forest-900/60 to-forest-950/95" />
       <div className="relative mx-auto flex min-h-[72vh] max-w-7xl flex-col justify-end px-6 pb-16 pt-24 text-sand-100">
         <p className="font-urbanist text-xs uppercase tracking-[0.3em] text-sand-200" data-testid="hero-eyebrow">
-          FXN Studio · Since 2026
+          Originfacts · Since 2026
         </p>
         <h1 className="font-urbanist mt-6 text-5xl font-bold leading-[0.95] lg:text-8xl" data-testid="hero-title">
           Go further.<br />
@@ -90,9 +92,9 @@ function Hero({ hero, categories }: { hero?: StrapiArticle; categories: Awaited<
 
 type Section = (typeof SECTIONS)[number];
 
-function Section({ section, posts }: { section: Section; posts: StrapiArticle[] }) {
+function Section({ section, posts, places = [] }: { section: Section; posts: StrapiArticle[]; places?: StrapiDestination[] }) {
   switch (section.layout) {
-    case 'atlas': return <AtlasLayout section={section} posts={posts} />;
+    case 'atlas': return <AtlasLayout section={section} posts={posts} places={places} />;
     case 'departure': return <DepartureLayout section={section} posts={posts} />;
     case 'wirecutter': return <WirecutterLayout section={section} posts={posts} />;
     case 'directory': return <DirectoryLayout section={section} posts={posts} />;
@@ -138,14 +140,62 @@ function SectionHeader({ section, light = false }: { section: Section; light?: b
 
 /* ---------- LAYOUT 1 · DESTINATIONS — Atlas (compact grid of small cards) ---------- */
 
-function AtlasLayout({ section, posts }: { section: Section; posts: StrapiArticle[] }) {
+function AtlasLayout({ section, posts, places }: { section: Section; posts: StrapiArticle[]; places: StrapiDestination[] }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-20" data-testid={`section-${section.slug}`}>
       <SectionHeader section={section} />
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {posts.slice(0, 8).map((p) => <SmallCard key={p.id} post={p} />)}
-      </div>
+
+      {places.length > 0 && (
+        <div className="mt-10" data-testid={`section-${section.slug}-places`}>
+          <p className="section-eyebrow mb-5">
+            <span className="inline-block h-px w-8 bg-forest-800/60" />
+            Places
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {places.slice(0, 8).map((d) => <PlaceCard key={d.id} place={d} />)}
+          </div>
+        </div>
+      )}
+
+      {posts.length > 0 && (
+        <div className={places.length > 0 ? 'mt-14' : 'mt-10'}>
+          {places.length > 0 && (
+            <p className="section-eyebrow mb-5">
+              <span className="inline-block h-px w-8 bg-forest-800/60" />
+              Stories
+            </p>
+          )}
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {posts.slice(0, 8).map((p) => <SmallCard key={p.id} post={p} />)}
+          </div>
+        </div>
+      )}
     </section>
+  );
+}
+
+function PlaceCard({ place }: { place: StrapiDestination }) {
+  const img = mediaUrl(place.heroImage ?? null);
+  return (
+    <Link
+      href={`/destinations/${place.slug}`}
+      className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-2xl bg-forest-900"
+      data-testid={`place-card-${place.slug}`}
+    >
+      {img ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={img} alt={place.name} className="absolute inset-0 h-full w-full object-cover opacity-75 transition duration-500 group-hover:scale-105 group-hover:opacity-90" />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-forest-800 to-forest-950" />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-forest-950/85 via-forest-950/25 to-transparent" />
+      <div className="relative p-5 text-sand-100">
+        {place.type && (
+          <p className="font-urbanist text-[10px] uppercase tracking-[0.25em] text-sand-200/70">{place.type}</p>
+        )}
+        <p className="font-urbanist mt-1 text-xl font-bold leading-tight">{place.name}</p>
+      </div>
+    </Link>
   );
 }
 

@@ -29,6 +29,13 @@ export default {
       },
       letterSpacing: { tightest: '-0.04em' },
       maxWidth: { prose: '68ch' },
+      fontSize: {
+        '6xl': ['2.5rem', { lineHeight: '1' }],
+        '7xl': ['3rem', { lineHeight: '1' }],
+      },
+      borderRadius: {
+        '3xl': '0.3rem',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],

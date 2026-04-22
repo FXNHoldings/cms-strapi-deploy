@@ -43,8 +43,7 @@ export default async function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <Link href="/" className="flex items-baseline gap-2" data-testid="logo-link">
-          <span className="font-urbanist text-2xl font-black text-forest-900">FXN</span>
-          <span className="font-urbanist text-xl font-light text-forest-800">Studio</span>
+          <span className="font-urbanist text-2xl font-black text-forest-900">Originfacts</span>
         </Link>
 
         <nav className="hidden md:block" data-testid="primary-nav">
@@ -61,6 +60,15 @@ export default async function Header() {
                 />
               );
             })}
+            <li data-testid="nav-item-airlines">
+              <Link
+                href="/airlines"
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-forest-800 transition-colors hover:text-terracotta-700"
+                data-testid="nav-airlines"
+              >
+                Airlines
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

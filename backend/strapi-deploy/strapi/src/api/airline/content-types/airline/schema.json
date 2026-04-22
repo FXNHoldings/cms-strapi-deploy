@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "airlines",
+  "info": {
+    "singularName": "airline",
+    "pluralName": "airlines",
+    "displayName": "Airline",
+    "description": "Airline directory entries — identifiers, base of operations, contact info"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "about": { "type": "text" },
+    "iataCode": { "type": "string", "maxLength": 4 },
+    "icaoCode": { "type": "string", "maxLength": 4 },
+    "legalName": { "type": "string", "maxLength": 200 },
+    "type": {
+      "type": "enumeration",
+      "enum": ["Scheduled", "Charter", "Cargo", "Low-cost", "Regional"],
+      "default": "Scheduled"
+    },
+    "country": { "type": "string", "maxLength": 80 },
+    "airport": { "type": "string", "maxLength": 120 },
+    "city": { "type": "string", "maxLength": 80 },
+    "region": {
+      "type": "enumeration",
+      "enum": ["Oceania", "Asia-Pacific", "Europe", "Americas", "Middle East", "Africa"],
+      "default": "Asia-Pacific"
+    },
+    "founded": { "type": "integer", "min": 1900, "max": 2100 },
+    "logo": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "address": { "type": "text" },
+    "phone": { "type": "string", "maxLength": 40 },
+    "website": { "type": "string", "maxLength": 200 }
+  }
+}

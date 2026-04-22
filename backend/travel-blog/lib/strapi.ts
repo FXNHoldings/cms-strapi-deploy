@@ -49,6 +49,30 @@ export type StrapiDestination = {
   heroImage?: StrapiImage;
 };
 
+export type AirlineType = 'Scheduled' | 'Charter' | 'Cargo' | 'Low-cost' | 'Regional';
+export type AirlineRegion = 'Oceania' | 'Asia-Pacific' | 'Europe' | 'Americas' | 'Middle East' | 'Africa';
+
+export type StrapiAirline = {
+  id: number;
+  documentId?: string;
+  name: string;
+  slug: string;
+  about?: string;
+  iataCode?: string;
+  icaoCode?: string;
+  legalName?: string;
+  type?: AirlineType;
+  country?: string;
+  airport?: string;
+  city?: string;
+  region?: AirlineRegion;
+  founded?: number;
+  logo?: StrapiImage;
+  address?: string;
+  phone?: string;
+  website?: string;
+};
+
 type ListResponse<T> = { data: T[]; meta: { pagination: { page: number; pageSize: number; pageCount: number; total: number } } };
 
 async function strapiFetch<T>(path: string, params?: Record<string, unknown>, revalidate = 60): Promise<T> {
@@ -131,6 +155,24 @@ export async function getDestination(slug: string) {
   const res = await strapiFetch<ListResponse<StrapiDestination>>('destinations', {
     filters: { slug: { $eq: slug } },
     populate: ['heroImage'],
+    pagination: { pageSize: 1 },
+  });
+  return res.data?.[0] ?? null;
+}
+
+export async function listAirlines() {
+  const res = await strapiFetch<ListResponse<StrapiAirline>>('airlines', {
+    sort: ['name:asc'],
+    populate: ['logo'],
+    pagination: { pageSize: 500 },
+  });
+  return res.data;
+}
+
+export async function getAirline(slug: string) {
+  const res = await strapiFetch<ListResponse<StrapiAirline>>('airlines', {
+    filters: { slug: { $eq: slug } },
+    populate: ['logo'],
     pagination: { pageSize: 1 },
   });
   return res.data?.[0] ?? null;

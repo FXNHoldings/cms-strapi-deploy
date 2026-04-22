@@ -26,6 +26,7 @@
     color: theme('colors.sand.100');
   }
   a { text-underline-offset: 3px; }
+  img { border-radius: 0.3rem; }
 }
 
 @layer components {

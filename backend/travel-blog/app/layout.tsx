@@ -21,12 +21,12 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fxnstudio.com'),
   title: {
-    default: 'FXN Studio — Travel stories, cheap flights, smart stays',
-    template: '%s · FXN Studio',
+    default: 'Originfacts — Travel stories, cheap flights, smart stays',
+    template: '%s · Originfacts',
   },
   description:
     'Hand-picked travel guides, cheap flight hacks, hotel reviews and destination deep-dives from writers who actually go places.',
-  openGraph: { type: 'website', siteName: 'FXN Studio', locale: 'en_US' },
+  openGraph: { type: 'website', siteName: 'Originfacts', locale: 'en_US' },
   twitter: { card: 'summary_large_image' },
 };
 
