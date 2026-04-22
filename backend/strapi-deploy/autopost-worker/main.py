@@ -60,21 +60,8 @@ def _schedule_matches_now(schedule: str, now: datetime) -> bool:
 
 async def _fetch_pending_articles(client: httpx.AsyncClient) -> list[dict[str, Any]]:
     """Fetch articles that are published and have pending autopost."""
-    params = {
-        "filters[publishedAt][$notNull]": "true",
-        "filters[autopostStatus][$in][0]": "pending",
-        "filters[autopostStatus][$in][1]": "none",
-        "populate[blogDestinations]": "*",
-        "populate[category]": "*",
-        "populate[tags]": "*",
-        "populate[destinations]": "*",
-        "populate[author]": "*",
-        "populate[coverImage]": "*",
-        "pagination[pageSize]": "50",
-    }
     r = await client.get(
-        f"{settings.strapi_url}/api/articles",
-        params=params,
+        f"{settings.strapi_url}/api/articles/pending-autopost",
         headers=_auth_headers(),
         timeout=20.0,
     )
@@ -114,7 +101,7 @@ async def _post_to_destination(
     }
     body = json.dumps(payload).encode()
     headers = {"Content-Type": "application/json"}
-    secret = dest.get("webhookSecret")
+    secret = dest.get("webhookSecret") or dest.get("webhookSecretValue")
     if secret:
         headers["X-FXN-Signature"] = hmac.new(
             secret.encode(), body, hashlib.sha256

@@ -1,0 +1,15 @@
+{
+  "name": "article-preview",
+  "version": "1.0.0",
+  "description": "Adds a preview button for article documents in Strapi",
+  "strapi": {
+    "name": "article-preview",
+    "displayName": "Article Preview",
+    "description": "Open article previews from the content manager",
+    "kind": "plugin"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^5.0.0"
+  },
+  "main": "./server/index.js"
+}

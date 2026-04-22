@@ -1,3 +1,14 @@
 'use strict';
-const { factories } = require('@strapi/strapi');
-module.exports = factories.createCoreRouter('api::article.article');
+
+module.exports = {
+  routes: [
+    {
+      method: 'GET',
+      path: '/articles/pending-autopost',
+      handler: 'article.pendingAutopost',
+      config: {
+        policies: [],
+      },
+    },
+  ],
+};
