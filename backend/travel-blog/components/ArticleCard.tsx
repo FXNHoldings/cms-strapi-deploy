@@ -38,7 +38,7 @@ export default function ArticleCard({ article, size = 'md' }: { article: StrapiA
           {article.readingTimeMinutes ? <span>· {article.readingTimeMinutes} min read</span> : null}
         </div>
         <Link href={`/articles/${article.slug}`}>
-          <h3 className={`editorial-h font-bold leading-[1.05] text-forest-900 transition-colors group-hover:text-terracotta-700 ${sizeClasses.title}`}>
+          <h3 className={`editorial-h font-bold leading-[1.05] text-forest-900 transition-colors group-hover:text-forest-700 ${sizeClasses.title}`}>
             {article.title}
           </h3>
         </Link>

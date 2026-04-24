@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "countries",
+  "info": {
+    "singularName": "country",
+    "pluralName": "countries",
+    "displayName": "Country",
+    "description": "Countries — ISO code, name, currency, region"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "code": { "type": "string", "required": true, "unique": true, "maxLength": 2 },
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "currency": { "type": "string", "maxLength": 3 },
+    "region": {
+      "type": "enumeration",
+      "enum": ["Oceania", "Asia-Pacific", "Europe", "Americas", "Middle East", "Africa"]
+    },
+    "about": { "type": "text" },
+    "heroImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] }
+  }
+}

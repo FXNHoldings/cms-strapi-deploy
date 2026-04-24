@@ -6,17 +6,26 @@ import { mediaUrl, type StrapiAirline, type AirlineRegion, type AirlineType } fr
 
 const REGION_ORDER: AirlineRegion[] = ['Oceania', 'Asia-Pacific', 'Europe', 'Americas', 'Middle East', 'Africa'];
 const TYPE_OPTIONS: AirlineType[] = ['Scheduled', 'Low-cost', 'Regional', 'Charter', 'Cargo'];
+const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const PER_REGION_LIMIT = 15;
+
+function firstLetterBucket(name: string): string {
+  const first = (name ?? '').trim().charAt(0).toUpperCase();
+  return /[A-Z]/.test(first) ? first : '#';
+}
 
 export default function AirlineDirectory({ airlines }: { airlines: StrapiAirline[] }) {
   const [query, setQuery] = useState('');
   const [activeType, setActiveType] = useState<AirlineType | null>(null);
   const [activeRegion, setActiveRegion] = useState<AirlineRegion | null>(null);
+  const [activeLetter, setActiveLetter] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return airlines.filter((a) => {
       if (activeType && a.type !== activeType) return false;
       if (activeRegion && a.region !== activeRegion) return false;
+      if (activeLetter && firstLetterBucket(a.name) !== activeLetter) return false;
       if (!q) return true;
       const hay = [a.name, a.iataCode, a.icaoCode, a.country, a.city, a.legalName]
         .filter(Boolean)
@@ -24,7 +33,14 @@ export default function AirlineDirectory({ airlines }: { airlines: StrapiAirline
         .toLowerCase();
       return hay.includes(q);
     });
-  }, [airlines, query, activeType, activeRegion]);
+  }, [airlines, query, activeType, activeRegion, activeLetter]);
+
+  // Which letters actually have airlines in the (base) dataset — used to grey out unused ones.
+  const availableLetters = useMemo(() => {
+    const set = new Set<string>();
+    for (const a of airlines) set.add(firstLetterBucket(a.name));
+    return set;
+  }, [airlines]);
 
   const byRegion = useMemo(() => {
     const map = new Map<AirlineRegion, StrapiAirline[]>();
@@ -63,7 +79,7 @@ export default function AirlineDirectory({ airlines }: { airlines: StrapiAirline
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by name, IATA code (e.g. SQ), country…"
-          className="w-full rounded-[0.3rem] border border-forest-900/15 bg-paper px-4 py-3 font-sans text-base text-ink placeholder:text-forest-900/40 focus:border-forest-800 focus:outline-none focus:ring-2 focus:ring-forest-800/20"
+          className="w-full rounded-[0.3rem] border border-forest-900/15 bg-paper px-4 py-3 font-sans text-base text-ink placeholder:text-forest-900/40 focus:border-terracotta-800 focus:outline-none focus:ring-2 focus:ring-forest-800/20"
           data-testid="airline-search"
         />
         <div className="flex flex-wrap items-center gap-2">
@@ -100,6 +116,32 @@ export default function AirlineDirectory({ airlines }: { airlines: StrapiAirline
         ))}
       </div>
 
+      {/* A-Z letter filter */}
+      <div className="mt-4 flex flex-wrap items-center gap-1">
+        <span className="mr-2 text-xs uppercase tracking-widest text-forest-900/50">Letter:</span>
+        <LetterChip
+          label="All"
+          active={activeLetter === null}
+          onClick={() => setActiveLetter(null)}
+        />
+        {LETTERS.map((L) => (
+          <LetterChip
+            key={L}
+            label={L}
+            active={activeLetter === L}
+            disabled={!availableLetters.has(L)}
+            onClick={() => setActiveLetter(activeLetter === L ? null : L)}
+          />
+        ))}
+        {availableLetters.has('#') && (
+          <LetterChip
+            label="#"
+            active={activeLetter === '#'}
+            onClick={() => setActiveLetter(activeLetter === '#' ? null : '#')}
+          />
+        )}
+      </div>
+
       {/* Results */}
       <div className="mt-10 grid gap-12 lg:grid-cols-[180px,1fr]">
         {/* Sticky region nav (desktop) */}
@@ -125,24 +167,35 @@ export default function AirlineDirectory({ airlines }: { airlines: StrapiAirline
               No airlines match that search. Try clearing a filter.
             </p>
           ) : (
-            orderedRegions.map((r) => (
-              <section
-                key={r}
-                id={`region-${r.replace(/\s+/g, '-').toLowerCase()}`}
-                className="mb-16 scroll-mt-24"
-                data-testid={`region-${r.replace(/\s+/g, '-').toLowerCase()}`}
-              >
-                <header className="flex items-baseline justify-between border-b border-forest-900/10 pb-3">
-                  <h2 className="editorial-h text-2xl font-bold text-forest-900 lg:text-3xl">{r}</h2>
-                  <span className="text-sm font-light text-forest-900/50">
-                    {byRegion.get(r)!.length} airline{byRegion.get(r)!.length === 1 ? '' : 's'}
-                  </span>
-                </header>
-                <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                  {byRegion.get(r)!.map((a) => <AirlineCard key={a.id} airline={a} />)}
-                </div>
-              </section>
-            ))
+            orderedRegions.map((r) => {
+              const regionList = byRegion.get(r)!;
+              const displayed = regionList.slice(0, PER_REGION_LIMIT);
+              const overflow = regionList.length - displayed.length;
+              return (
+                <section
+                  key={r}
+                  id={`region-${r.replace(/\s+/g, '-').toLowerCase()}`}
+                  className="mb-16 scroll-mt-24"
+                  data-testid={`region-${r.replace(/\s+/g, '-').toLowerCase()}`}
+                >
+                  <header className="flex items-baseline justify-between border-b border-forest-900/10 pb-3">
+                    <h2 className="editorial-h text-2xl font-bold text-forest-900 lg:text-3xl">{r}</h2>
+                    <span className="text-sm font-light text-forest-900/50">
+                      {regionList.length} airline{regionList.length === 1 ? '' : 's'}
+                      {overflow > 0 && <span className="ml-2 text-forest-900/40">· showing {PER_REGION_LIMIT}</span>}
+                    </span>
+                  </header>
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                    {displayed.map((a) => <AirlineCard key={a.id} airline={a} />)}
+                  </div>
+                  {overflow > 0 && (
+                    <p className="mt-4 text-xs text-forest-900/50">
+                      + {overflow.toLocaleString()} more in {r} — narrow with search, letter, or type filter.
+                    </p>
+                  )}
+                </section>
+              );
+            })
           )}
         </div>
       </div>
@@ -176,6 +229,37 @@ function FilterChip({ label, active, onClick }: { label: string; active: boolean
   );
 }
 
+function LetterChip({
+  label,
+  active,
+  disabled = false,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  disabled?: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={disabled ? undefined : onClick}
+      disabled={disabled}
+      className={
+        'inline-flex h-8 min-w-[2rem] items-center justify-center rounded-[0.3rem] border px-2 font-mono text-xs font-bold tracking-wider transition ' +
+        (active
+          ? 'border-forest-900 bg-forest-900 text-sand-100'
+          : disabled
+            ? 'cursor-not-allowed border-forest-900/10 text-forest-900/20'
+            : 'border-forest-900/20 text-forest-900/80 hover:border-forest-900/40 hover:bg-forest-900/5')
+      }
+      data-testid={`letter-${label}`}
+    >
+      {label}
+    </button>
+  );
+}
+
 function AirlineCard({ airline }: { airline: StrapiAirline }) {
   const logo = mediaUrl(airline.logo ?? null);
   return (
@@ -196,7 +280,7 @@ function AirlineCard({ airline }: { airline: StrapiAirline }) {
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <div className="truncate font-urbanist text-base font-bold text-forest-900 group-hover:text-terracotta-700">
+          <div className="truncate font-urbanist text-base font-bold text-forest-900 group-hover:text-forest-700">
             {airline.name}
           </div>
           {airline.iataCode && (

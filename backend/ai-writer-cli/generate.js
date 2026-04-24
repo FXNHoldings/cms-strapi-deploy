@@ -34,7 +34,8 @@ const argv = yargs(hideBin(process.argv))
   .option('count', { alias: 'n', type: 'number', describe: 'How many articles to generate (Claude will brainstorm the titles)' })
   .option('tone', { type: 'string', default: 'friendly', choices: ['friendly', 'professional', 'adventurous', 'witty', 'luxury'] })
   .option('length', { alias: 'l', type: 'string', default: 'long', choices: ['short', 'medium', 'long'] })
-  .option('destination', { alias: 'd', type: 'string' })
+  .option('destination', { alias: 'd', type: 'string', describe: 'Destination name(s), comma-separated — attached to the article in Strapi' })
+  .option('auto-destinations', { type: 'boolean', default: true, describe: 'Auto-detect destinations from the title (matches against Strapi destinations by name). Use --no-auto-destinations to disable.' })
   .option('category', { alias: 'c', type: 'string', describe: 'Category slug or name (e.g. flights, hotels, travel-tips)' })
   .option('keywords', { alias: 'k', type: 'string' })
   .option('language', { type: 'string', default: 'English' })
@@ -115,6 +116,72 @@ async function resolveCategoryId(slugOrName) {
   }
   categoryCache.set(key, cat.id);
   return cat.id;
+}
+
+/* ---------- Destinations (auto-detect from title + explicit --destination) ---------- */
+
+/** Cache: one fetch per run. Entries are [{ id, name, slug, type }] + precomputed lowercase variants. */
+let destinationIndex = null;
+
+async function loadDestinationIndex() {
+  if (destinationIndex) return destinationIndex;
+  const all = [];
+  let page = 1;
+  const pageSize = 100;
+  while (true) {
+    const res = await strapi(`/api/destinations?pagination[page]=${page}&pagination[pageSize]=${pageSize}&sort[0]=name:asc`);
+    all.push(...(res.data || []));
+    if (!res.data || res.data.length < pageSize) break;
+    page++;
+  }
+  // Build match variants per destination: the name itself, plus the slug with dashes as spaces.
+  destinationIndex = all.map((d) => ({
+    id: d.id,
+    name: d.name,
+    slug: d.slug,
+    type: d.type,
+    variants: dedupe([d.name, d.slug.replace(/-/g, ' ')]).map((v) => v.toLowerCase()),
+  }));
+  return destinationIndex;
+}
+
+/** Detect destinations in a string via whole-word, case-insensitive match. */
+async function detectDestinations(text, explicit) {
+  const ids = new Set();
+  const names = new Set();
+  const index = await loadDestinationIndex();
+
+  // Explicit first (comma-separated names or slugs from --destination or topics line)
+  for (const raw of (explicit || '').split(',').map((s) => s.trim()).filter(Boolean)) {
+    const needle = raw.toLowerCase();
+    const hit = index.find(
+      (d) => d.name.toLowerCase() === needle || d.slug.toLowerCase() === needle,
+    );
+    if (hit) { ids.add(hit.id); names.add(hit.name); }
+  }
+
+  // Auto-detect from title
+  if (argv['auto-destinations'] && text) {
+    const hay = ` ${text.toLowerCase()} `;
+    for (const d of index) {
+      if (ids.has(d.id)) continue;
+      for (const v of d.variants) {
+        if (!v || v.length < 3) continue; // skip noise like "uk"
+        // Word-boundary match; handles punctuation via \b
+        const re = new RegExp(`\\b${escapeRegex(v)}\\b`, 'i');
+        if (re.test(hay)) { ids.add(d.id); names.add(d.name); break; }
+      }
+    }
+  }
+
+  return { ids: [...ids], names: [...names] };
+}
+
+function escapeRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+function dedupe(arr) {
+  return [...new Set(arr.filter(Boolean))];
 }
 
 function slugifyCategory(s) {
@@ -216,6 +283,8 @@ function userPromptArticle(p) {
     p.keywords ? `Keywords to weave in: ${p.keywords}` : '',
     p.language ? `Language: ${p.language}` : '',
     `Target length: ${words} words`,
+    `Facts: Content must be grounded in real, verifiable facts about the topic — named places, operators, airlines, concrete prices, distances, dates, and widely-known figures. Do not invent or fabricate specifics. If you are unsure of a precise number or detail, omit it rather than make one up; generalise ("typically under $100/night" instead of inventing "$83.40") when exact figures aren't reliably known.`,
+    `Bullet points: At least 1-2 sections of the article MUST include bullet lists (e.g. comparisons, step-by-step instructions, pros/cons, options, or checklists). Do not rely on prose alone.`,
   ].filter(Boolean).join('\n');
 }
 
@@ -383,6 +452,7 @@ async function postToStrapi(draft, opts) {
     source: 'ai',
   };
   if (opts.categoryId) data.category = opts.categoryId;
+  if (opts.destinationIds?.length) data.destinations = opts.destinationIds;
   if (opts.coverId) data.coverImage = opts.coverId;
   if (opts.galleryIds?.length) data.gallery = opts.galleryIds;
   if (opts.publish) data.publishedAt = new Date().toISOString();
@@ -483,9 +553,11 @@ async function runOne({ topic, category }) {
   }
 
   const categoryId = await resolveCategoryId(category || argv.category);
-  const created = await postToStrapi(draft, { categoryId, coverId, galleryIds, publish: argv.publish });
+  const { ids: destinationIds, names: destinationNames } = await detectDestinations(topic, argv.destination);
+  const created = await postToStrapi(draft, { categoryId, destinationIds, coverId, galleryIds, publish: argv.publish });
   const id = created?.data?.id ?? '?';
-  console.log(`${argv.publish ? 'PUBLISHED' : 'draft'} id=${id}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}`);
+  const destPart = destinationNames.length ? ` · dest=[${destinationNames.join(', ')}]` : '';
+  console.log(`${argv.publish ? 'PUBLISHED' : 'draft'} id=${id}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}${destPart}`);
 }
 
 async function runCategoryAuto({ category, count }) {
@@ -517,15 +589,23 @@ async function runBatch(file) {
     .map((l) => l.trim())
     .filter((l) => l && !l.startsWith('#'));
 
-  const jobs = raw.map((line) => {
+  const allJobs = raw.map((line) => {
     // Format: "category | topic"
     const m = line.match(/^([^|]+)\|(.+)$/);
-    if (m) return { category: m[1].trim(), topic: m[2].trim() };
+    if (m) {
+      const category = m[1].trim();
+      const topic = m[2].trim();
+      if (!topic) return null; // skip "category |" with empty topic
+      return { category, topic };
+    }
     // Fallback: treat whole line as topic, use --category flag
     return { category: null, topic: line };
-  });
+  }).filter(Boolean);
 
-  console.log(`Batch: ${jobs.length} articles\n`);
+  const jobs = argv.count > 0 ? allJobs.slice(0, argv.count) : allJobs;
+
+  const capNote = argv.count > 0 && allJobs.length > argv.count ? ` (of ${allJobs.length} total, capped by --count)` : '';
+  console.log(`Batch: ${jobs.length} articles${capNote}\n`);
   let ok = 0, fail = 0;
   for (const j of jobs) {
     try { await runOne(j); ok++; } catch (e) { console.error(`  ✖ ${e.message}`); fail++; }

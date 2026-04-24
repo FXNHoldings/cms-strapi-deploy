@@ -1,26 +1,33 @@
 import Link from 'next/link';
-import { listArticles, listCategories, listDestinations, mediaUrl, type StrapiArticle, type StrapiDestination } from '@/lib/strapi';
+import { listArticles, listDestinations, mediaUrl, type StrapiArticle, type StrapiDestination } from '@/lib/strapi';
 import { SECTIONS } from '@/lib/sections';
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const [categories, destinations, ...perSection] = await Promise.all([
-    listCategories().catch(() => []),
+  const [destinations, ...perSection] = await Promise.all([
     listDestinations().catch(() => [] as StrapiDestination[]),
     ...SECTIONS.map((s) => listArticles({ category: s.slug, pageSize: 10 }).then((r) => r.data).catch(() => [])),
   ]);
 
   const bySection = Object.fromEntries(SECTIONS.map((s, i) => [s.slug, perSection[i] as StrapiArticle[]]));
 
-  // Hero: latest across all categories (falls back if first section is empty)
-  const hero: StrapiArticle | undefined = perSection.flat().sort(
+  // Latest across all categories, de-duped (same article can live in multiple sections)
+  const latest: StrapiArticle[] = [];
+  const seenIds = new Set<number>();
+  for (const a of perSection.flat().sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-  )[0];
+  )) {
+    if (seenIds.has(a.id)) continue;
+    seenIds.add(a.id);
+    latest.push(a);
+  }
+  const hero = latest[0];
+  const side = latest.slice(1, 5);
 
   return (
     <div data-testid="home-page">
-      <Hero hero={hero} categories={categories} />
+      <Hero hero={hero} side={side} />
 
       {SECTIONS.map((s) => {
         const posts = bySection[s.slug] ?? [];
@@ -34,57 +41,143 @@ export default async function HomePage() {
 
 /* ---------- HERO ---------- */
 
-function Hero({ hero, categories }: { hero?: StrapiArticle; categories: Awaited<ReturnType<typeof listCategories>> }) {
-  const img = hero ? mediaUrl(hero.coverImage ?? null) : null;
+function Hero({ hero, side }: { hero?: StrapiArticle; side: StrapiArticle[] }) {
   return (
-    <section className="relative overflow-hidden border-b border-forest-900/10 bg-forest-950" data-testid="home-hero">
-      {img && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={img} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-30" />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-br from-forest-950/85 via-forest-900/60 to-forest-950/95" />
-      <div className="relative mx-auto flex min-h-[72vh] max-w-7xl flex-col justify-end px-6 pb-16 pt-24 text-sand-100">
-        <p className="font-urbanist text-xs uppercase tracking-[0.3em] text-sand-200" data-testid="hero-eyebrow">
-          Originfacts · Since 2026
-        </p>
-        <h1 className="font-urbanist mt-6 text-5xl font-bold leading-[0.95] lg:text-8xl" data-testid="hero-title">
-          Go further.<br />
-          <span className="font-light italic text-sand-200">Pay less.</span> Stay longer.
-        </h1>
-        <p className="mt-6 max-w-xl text-lg font-light text-sand-100/80 lg:text-xl">
-          Hand-picked travel writing for people who'd rather spend on the trip than on the booking.
-        </p>
-        {hero && (
-          <Link
-            href={`/articles/${hero.slug}`}
-            className="group mt-10 flex max-w-2xl items-center gap-6 border-t border-sand-100/20 pt-6 text-left"
-            data-testid="hero-link"
-          >
-            <div className="font-urbanist text-xs uppercase tracking-[0.25em] text-sand-200/70">Reading now</div>
-            <div className="flex-1">
-              <div className="font-urbanist text-xl font-bold leading-tight transition group-hover:text-sand-200 lg:text-2xl">
-                {hero.title}
-              </div>
-              {hero.excerpt && <div className="mt-1 line-clamp-1 text-sm font-light opacity-80">{hero.excerpt}</div>}
-            </div>
-            <span className="font-urbanist text-2xl transition group-hover:translate-x-1">→</span>
-          </Link>
-        )}
-        {categories.length > 0 && (
-          <div className="mt-10 flex flex-wrap gap-2" data-testid="hero-categories">
-            {categories.slice(0, 8).map((c) => (
-              <Link
-                key={c.id}
-                href={`/category/${c.slug}`}
-                className="rounded-full border border-sand-100/25 px-4 py-1.5 text-sm font-light text-sand-100 transition hover:bg-sand-100 hover:text-forest-950"
-              >
-                {c.name}
-              </Link>
-            ))}
-          </div>
-        )}
+    <section className="mx-auto max-w-7xl px-6 py-12" data-testid="home-hero">
+      <div className="grid gap-6 lg:grid-cols-2">
+        {hero ? <HeroLargeCard article={hero} /> : <div />}
+        <div className="grid gap-6 sm:grid-cols-2">
+          {side.slice(0, 4).map((p) => (
+            <HeroSideCard key={p.id} article={p} />
+          ))}
+        </div>
       </div>
+
+      <form
+        action="/articles"
+        className="mt-8 flex items-center gap-3 rounded-xl border-2 border-forest-600/70 bg-paper px-5 py-3"
+        data-testid="hero-search"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-5 w-5 shrink-0 text-forest-600"
+          aria-hidden
+        >
+          <circle cx="11" cy="11" r="7" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input
+          type="search"
+          name="q"
+          placeholder="Where do you want to go?"
+          className="flex-1 bg-transparent text-base text-forest-900 outline-none placeholder:text-forest-900/50"
+        />
+        <button
+          type="submit"
+          className="font-urbanist shrink-0 text-sm font-bold uppercase tracking-wider text-forest-700 transition hover:text-forest-600"
+        >
+          Find Travel Inspiration
+        </button>
+      </form>
     </section>
+  );
+}
+
+function HeroCategoryChips({ article }: { article: StrapiArticle }) {
+  const chips: string[] = [];
+  if (article.category) chips.push(article.category.name);
+  (article.destinations ?? []).forEach((d) => {
+    if (!chips.includes(d.name)) chips.push(d.name);
+  });
+  if (chips.length === 0) return null;
+  return (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+      {chips.slice(0, 4).map((name) => (
+        <span
+          key={name}
+          className="font-urbanist inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-forest-700"
+        >
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-forest-500" />
+          {name}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function HeroMeta({ article }: { article: StrapiArticle }) {
+  return (
+    <div className="mt-3 flex items-center gap-3 text-sm">
+      {article.author?.name && (
+        <span className="font-semibold text-forest-900">{article.author.name}</span>
+      )}
+      <span className="inline-block h-1.5 w-1.5 rounded-full bg-forest-500" />
+      <span className="text-forest-900/70">{article.readingTimeMinutes ?? 5} min</span>
+    </div>
+  );
+}
+
+function HeroLargeCard({ article }: { article: StrapiArticle }) {
+  const img = mediaUrl(article.coverImage ?? null);
+  return (
+    <Link
+      href={`/articles/${article.slug}`}
+      className="group flex flex-col"
+      data-testid="hero-large"
+    >
+      {img ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={img}
+          alt={article.title}
+          className="aspect-[4/3] w-full rounded-2xl object-cover transition duration-500 group-hover:scale-[1.01]"
+        />
+      ) : (
+        <div className="aspect-[4/3] w-full rounded-2xl bg-forest-900/10" />
+      )}
+      <div className="mt-5">
+        <HeroCategoryChips article={article} />
+        <h1 className="font-urbanist mt-3 text-3xl font-bold leading-tight text-forest-900 transition group-hover:text-forest-700 lg:text-4xl">
+          {article.title}
+        </h1>
+        <HeroMeta article={article} />
+      </div>
+    </Link>
+  );
+}
+
+function HeroSideCard({ article }: { article: StrapiArticle }) {
+  const img = mediaUrl(article.coverImage ?? null);
+  return (
+    <Link
+      href={`/articles/${article.slug}`}
+      className="group flex flex-col"
+      data-testid="hero-side"
+    >
+      {img ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={img}
+          alt={article.title}
+          className="aspect-[4/3] w-full rounded-2xl object-cover transition duration-500 group-hover:scale-[1.01]"
+        />
+      ) : (
+        <div className="aspect-[4/3] w-full rounded-2xl bg-forest-900/10" />
+      )}
+      <div className="mt-4">
+        <HeroCategoryChips article={article} />
+        <h2 className="font-urbanist mt-2 line-clamp-2 text-lg font-bold leading-snug text-forest-900 transition group-hover:text-forest-700">
+          {article.title}
+        </h2>
+        <HeroMeta article={article} />
+      </div>
+    </Link>
   );
 }
 
@@ -257,7 +350,7 @@ function WirecutterLayout({ section, posts }: { section: Section; posts: StrapiA
                   href={`/articles/${p.slug}`}
                   className="group grid grid-cols-[auto,88px,1fr] items-center gap-5 py-5 transition hover:bg-sand-50 sm:grid-cols-[auto,120px,1fr,auto] sm:gap-6"
                 >
-                  <span className="font-urbanist text-2xl font-bold tabular-nums text-terracotta-600 sm:text-3xl">
+                  <span className="font-urbanist text-2xl font-bold tabular-nums text-forest-600 sm:text-3xl">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   {img ? (
@@ -271,7 +364,7 @@ function WirecutterLayout({ section, posts }: { section: Section; posts: StrapiA
                     <div className="aspect-[4/3] w-[88px] rounded-lg bg-forest-900/10 sm:w-[120px]" />
                   )}
                   <div className="min-w-0">
-                    <h3 className="font-urbanist text-base font-bold leading-snug text-forest-900 transition group-hover:text-terracotta-700 sm:text-lg">
+                    <h3 className="font-urbanist text-base font-bold leading-snug text-forest-900 transition group-hover:text-forest-700 sm:text-lg">
                       {p.title}
                     </h3>
                     {p.excerpt && (
@@ -305,11 +398,11 @@ function DirectoryLayout({ section, posts }: { section: Section; posts: StrapiAr
                 href={`/articles/${p.slug}`}
                 className="group grid grid-cols-12 items-baseline gap-6 py-6 transition hover:bg-paper/60"
               >
-                <span className="font-urbanist col-span-2 text-3xl font-bold tabular-nums text-terracotta-600 lg:text-4xl">
+                <span className="font-urbanist col-span-2 text-3xl font-bold tabular-nums text-forest-600 lg:text-4xl">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div className="col-span-10 lg:col-span-7">
-                  <h3 className="font-urbanist text-xl font-bold leading-tight text-forest-900 transition group-hover:text-terracotta-700 lg:text-2xl">
+                  <h3 className="font-urbanist text-xl font-bold leading-tight text-forest-900 transition group-hover:text-forest-700 lg:text-2xl">
                     {p.title}
                   </h3>
                   {p.excerpt && <p className="mt-1 line-clamp-2 text-sm font-light text-ink/70">{p.excerpt}</p>}
@@ -408,7 +501,7 @@ function SmallCard({ post }: { post: StrapiArticle }) {
       )}
       <div className="p-4">
         {post.category && <span className="chip text-[10px]">{post.category.name}</span>}
-        <h3 className="font-urbanist mt-2 line-clamp-2 text-base font-bold leading-snug text-forest-900 transition group-hover:text-terracotta-700">
+        <h3 className="font-urbanist mt-2 line-clamp-2 text-base font-bold leading-snug text-forest-900 transition group-hover:text-forest-700">
           {post.title}
         </h3>
         <div className="font-urbanist mt-2 text-xs uppercase tracking-widest text-forest-800/60">

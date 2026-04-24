@@ -63,7 +63,7 @@ export default async function RoutePage({ params }: Props) {
         <div className="mt-6 grid gap-4 sm:grid-cols-[1fr,auto,1fr] sm:items-center">
           <AirportCard airport={origin} align="left" />
           <div className="flex flex-col items-center justify-center gap-2 text-forest-900/60">
-            <svg width="40" height="24" viewBox="0 0 40 24" fill="none" className="text-terracotta-600 sm:w-16" aria-hidden>
+            <svg width="40" height="24" viewBox="0 0 40 24" fill="none" className="text-forest-600 sm:w-16" aria-hidden>
               <path d="M2 12 L38 12 M30 4 L38 12 L30 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             {route.distanceKm && (
@@ -227,7 +227,7 @@ function CarrierCard({
         <div className="min-w-0 flex-1">
           <Link
             href={`/airlines/${carrier.slug}`}
-            className="block font-urbanist text-base font-bold text-forest-900 hover:text-terracotta-700"
+            className="block font-urbanist text-base font-bold text-forest-900 hover:text-forest-700"
           >
             {carrier.name}
           </Link>
@@ -258,12 +258,12 @@ function AirportLink({ airport }: { airport: { iata: string; name: string; city?
     >
       <div>
         <div className="font-mono text-xs font-bold tracking-wider text-forest-900/60">{airport.iata}</div>
-        <div className="mt-1 font-urbanist text-base font-bold text-forest-900 group-hover:text-terracotta-700">
+        <div className="mt-1 font-urbanist text-base font-bold text-forest-900 group-hover:text-forest-700">
           {airport.city || airport.name}
         </div>
         <div className="mt-1 text-xs text-forest-900/50">Airport guide</div>
       </div>
-      <span className="font-urbanist text-2xl text-forest-900/40 transition group-hover:translate-x-1 group-hover:text-terracotta-600">→</span>
+      <span className="font-urbanist text-2xl text-forest-900/40 transition group-hover:translate-x-1 group-hover:text-forest-600">→</span>
     </Link>
   );
 }

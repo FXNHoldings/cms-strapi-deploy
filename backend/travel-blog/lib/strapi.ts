@@ -39,6 +39,17 @@ export type StrapiCategory = {
   children?: { id: number; name: string; slug: string }[];
 };
 
+export type StrapiCountry = {
+  id: number;
+  documentId?: string;
+  code: string;
+  name: string;
+  currency?: string;
+  region?: AirlineRegion;
+  about?: string;
+  heroImage?: StrapiImage;
+};
+
 export type StrapiDestination = {
   id: number;
   name: string;
@@ -226,6 +237,58 @@ export async function getAirport(iata: string) {
   return res.data?.[0] ?? null;
 }
 
+export async function listCountries() {
+  const res = await strapiFetch<ListResponse<StrapiCountry>>('countries', {
+    sort: ['name:asc'],
+    populate: ['heroImage'],
+    pagination: { pageSize: 500 },
+  });
+  return res.data;
+}
+
+export async function getCountry(code: string) {
+  const res = await strapiFetch<ListResponse<StrapiCountry>>('countries', {
+    filters: { code: { $eqi: code } },
+    populate: ['heroImage'],
+    pagination: { pageSize: 1 },
+  });
+  return res.data?.[0] ?? null;
+}
+
+export async function listAirportsByCountryCode(code: string, limit = 500) {
+  const res = await strapiFetch<ListResponse<StrapiAirport>>('airports', {
+    filters: { countryCode: { $eqi: code } },
+    sort: ['name:asc'],
+    populate: ['heroImage'],
+    pagination: { pageSize: limit },
+  });
+  return res.data;
+}
+
+export async function listAirlinesByCountry(countryName: string, limit = 200) {
+  const res = await strapiFetch<ListResponse<StrapiAirline>>('airlines', {
+    filters: { country: { $eqi: countryName } },
+    sort: ['name:asc'],
+    populate: ['logo'],
+    pagination: { pageSize: limit },
+  });
+  return res.data;
+}
+
+export async function listRoutesByCountryCode(code: string, limit = 20) {
+  const res = await strapiFetch<ListResponse<StrapiRoute>>('routes', {
+    filters: { destination: { countryCode: { $eqi: code } } },
+    populate: {
+      origin: true,
+      destination: true,
+      carriers: { populate: ['logo'] },
+    },
+    sort: ['popularity:desc'],
+    pagination: { pageSize: limit },
+  });
+  return res.data;
+}
+
 export async function getRoute(slug: string) {
   const res = await strapiFetch<ListResponse<StrapiRoute>>('routes', {
     filters: { slug: { $eq: slug } },
@@ -237,6 +300,59 @@ export async function getRoute(slug: string) {
     pagination: { pageSize: 1 },
   });
   return res.data?.[0] ?? null;
+}
+
+export async function listRoutes() {
+  const res = await strapiFetch<ListResponse<StrapiRoute>>('routes', {
+    sort: ['popularity:desc', 'slug:asc'],
+    populate: {
+      origin: true,
+      destination: true,
+      carriers: { populate: ['logo'] },
+    },
+    pagination: { pageSize: 1000 },
+  });
+  return res.data;
+}
+
+export async function listRoutesToDestination(
+  dest: Pick<StrapiDestination, 'name' | 'countryCode' | 'type'>,
+  limit = 12,
+) {
+  // Destinations aren't directly linked to routes in Strapi.
+  // Match on the arrival airport: city for city-type destinations, countryCode otherwise.
+  const filters: Record<string, unknown> =
+    dest.type === 'city'
+      ? { destination: { city: { $eqi: dest.name } } }
+      : dest.countryCode
+        ? { destination: { countryCode: { $eqi: dest.countryCode } } }
+        : { destination: { country: { $eqi: dest.name } } };
+
+  const res = await strapiFetch<ListResponse<StrapiRoute>>('routes', {
+    filters,
+    populate: {
+      origin: true,
+      destination: true,
+      carriers: { populate: ['logo'] },
+    },
+    sort: ['popularity:desc'],
+    pagination: { pageSize: limit },
+  });
+  return res.data;
+}
+
+export async function listRoutesByCarrier(airlineSlug: string, limit = 20) {
+  const res = await strapiFetch<ListResponse<StrapiRoute>>('routes', {
+    filters: { carriers: { slug: { $eq: airlineSlug } } },
+    populate: {
+      origin: true,
+      destination: true,
+      carriers: { populate: ['logo'] },
+    },
+    sort: ['popularity:desc'],
+    pagination: { pageSize: limit },
+  });
+  return res.data;
 }
 
 export async function listRoutesFromAirport(iata: string, limit = 20) {

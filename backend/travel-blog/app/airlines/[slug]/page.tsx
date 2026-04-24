@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getAirline, mediaUrl, type StrapiAirline } from '@/lib/strapi';
+import { getAirline, listRoutesByCarrier, mediaUrl, type StrapiAirline } from '@/lib/strapi';
 import type { Metadata } from 'next';
 
 export const revalidate = 60;
@@ -20,8 +20,8 @@ export default async function AirlinePage({ params }: Props) {
   const airline = await getAirline(slug);
   if (!airline) notFound();
 
+  const routes = await listRoutesByCarrier(slug, 15).catch(() => []);
   const logo = mediaUrl(airline.logo ?? null);
-  const ageYears = airline.founded ? new Date().getFullYear() - airline.founded : null;
 
   return (
     <article data-testid={`airline-page-${slug}`}>
@@ -72,82 +72,112 @@ export default async function AirlinePage({ params }: Props) {
         </div>
       </header>
 
-      {/* First section — About */}
-      {airline.about && (
-        <section className="mx-auto mt-14 max-w-3xl px-6" data-testid="airline-about">
-          <p className="section-eyebrow">
-            <span className="inline-block h-px w-8 bg-forest-800/60" />
-            About {airline.name}
-          </p>
-          <div className="prose-article mt-4">
-            {airline.about.split(/\n{2,}/).map((para, i) => (
-              <p key={i}>{para}</p>
+      {/* About + Details — two columns: details (30%) on the left, about (60%) offset to the right */}
+      <section className="mx-auto mt-14 max-w-6xl px-6 pb-20" data-testid="airline-about">
+        <div className="grid gap-10 lg:grid-cols-[3fr_6fr]">
+          <aside className="rounded-[0.3rem] border border-forest-900/10 bg-forest-900/[0.02] p-6 lg:self-start">
+            <h3 className="editorial-h text-xs font-bold uppercase tracking-[0.2em] text-forest-900/60">
+              Details
+            </h3>
+            <dl className="mt-5 space-y-4">
+              <InfoRow label="IATA Code" value={airline.iataCode} mono />
+              <InfoRow label="ICAO Code" value={airline.icaoCode} mono />
+              <InfoRow label="Legal Name" value={airline.legalName} />
+              <InfoRow label="Country" value={airline.country} />
+              <InfoRow label="Region" value={airline.region} />
+              <InfoRow label="Address" value={airline.address} multiline />
+              <InfoRow label="Phone" value={airline.phone} />
+              <InfoRow
+                label="Website"
+                value={
+                  airline.website ? (
+                    <a
+                      href={airline.website.startsWith('http') ? airline.website : `https://${airline.website}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="break-all text-forest-700 underline-offset-2 hover:underline"
+                    >
+                      {airline.website.replace(/^https?:\/\//, '')}
+                    </a>
+                  ) : undefined
+                }
+              />
+            </dl>
+          </aside>
+
+          <div className="lg:pl-6">
+            <p className="section-eyebrow">
+              <span className="inline-block h-px w-8 bg-forest-800/60" />
+              About {airline.name}
+            </p>
+            {airline.about ? (
+              <div className="prose-article mt-4">
+                {airline.about.split(/\n{2,}/).map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-4 text-forest-900/50">No profile written for {airline.name} yet.</p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Popular routes operated by this airline */}
+      {routes.length > 0 && (
+        <section className="mx-auto max-w-6xl px-6 pb-20" data-testid="airline-routes">
+          <header className="flex items-end justify-between border-b border-forest-900/10 pb-3">
+            <h2 className="editorial-h text-2xl font-bold text-forest-900 lg:text-3xl">
+              Popular routes operated by {airline.name}
+            </h2>
+            <span className="text-sm font-light text-forest-900/50">
+              {routes.length} route{routes.length === 1 ? '' : 's'}
+            </span>
+          </header>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {routes.map((r) => (
+              <Link
+                key={r.id}
+                href={`/flights/${r.slug}`}
+                className="group flex items-center justify-between rounded-[0.3rem] border border-forest-900/10 bg-paper p-5 transition hover:-translate-y-0.5 hover:border-forest-900/30 hover:shadow-sm"
+                data-testid={`airline-route-${r.slug}`}
+              >
+                <div>
+                  <div className="font-mono text-xs font-bold tracking-wider text-forest-900/70">
+                    {r.origin?.iata} → {r.destination?.iata}
+                  </div>
+                  <div className="mt-2 font-urbanist text-base font-bold text-forest-900 group-hover:text-forest-700">
+                    {r.origin?.city || r.origin?.name} → {r.destination?.city || r.destination?.name}
+                  </div>
+                  <div className="mt-1 text-xs text-forest-900/60">
+                    {r.origin?.country && r.destination?.country
+                      ? `${r.origin.country} · ${r.destination.country}`
+                      : r.origin?.country || r.destination?.country || ''}
+                  </div>
+                </div>
+                {r.distanceKm && (
+                  <div className="text-right text-xs text-forest-900/50">
+                    <div className="font-mono font-bold text-forest-900/70">
+                      {r.distanceKm.toLocaleString()} km
+                    </div>
+                    {r.durationMinutes && (
+                      <div className="mt-1">{formatDuration(r.durationMinutes)}</div>
+                    )}
+                  </div>
+                )}
+              </Link>
             ))}
           </div>
         </section>
       )}
-
-      {/* Second section — 3 columns */}
-      <section className="mx-auto mt-16 max-w-6xl px-6 pb-20" data-testid="airline-specs">
-        <div className="grid gap-8 md:grid-cols-3">
-          <InfoColumn title="Identifiers">
-            <InfoRow label="IATA Code" value={airline.iataCode} mono />
-            <InfoRow label="ICAO Code" value={airline.icaoCode} mono />
-            <InfoRow label="Legal Name" value={airline.legalName} />
-            <InfoRow label="Type" value={airline.type} />
-          </InfoColumn>
-
-          <InfoColumn title="Base & Operations">
-            <InfoRow label="Country" value={airline.country} />
-            <InfoRow label="Airport" value={airline.airport} />
-            <InfoRow label="City" value={airline.city} />
-            <InfoRow label="Region" value={airline.region} />
-            <InfoRow
-              label="Founded"
-              value={
-                airline.founded
-                  ? `${airline.founded}${ageYears != null ? ` (${ageYears} yr${ageYears === 1 ? '' : 's'})` : ''}`
-                  : undefined
-              }
-            />
-          </InfoColumn>
-
-          <InfoColumn title="Additional Data">
-            <InfoRow
-              label="Logo"
-              value={logo ? <span className="text-forest-900/80">Available</span> : <span className="text-forest-900/40">—</span>}
-            />
-            <InfoRow label="Address" value={airline.address} multiline />
-            <InfoRow label="Phone" value={airline.phone} />
-            <InfoRow
-              label="Website"
-              value={
-                airline.website ? (
-                  <a
-                    href={airline.website.startsWith('http') ? airline.website : `https://${airline.website}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="break-all text-terracotta-700 underline-offset-2 hover:underline"
-                  >
-                    {airline.website.replace(/^https?:\/\//, '')}
-                  </a>
-                ) : undefined
-              }
-            />
-          </InfoColumn>
-        </div>
-      </section>
     </article>
   );
 }
 
-function InfoColumn({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-[0.3rem] border border-forest-900/10 bg-forest-900/[0.02] p-6">
-      <h3 className="editorial-h text-xs font-bold uppercase tracking-[0.2em] text-forest-900/60">{title}</h3>
-      <dl className="mt-5 space-y-4">{children}</dl>
-    </div>
-  );
+function formatDuration(minutes: number): string {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return m === 0 ? `${h}h` : `${h}h ${m}m`;
 }
 
 function InfoRow({

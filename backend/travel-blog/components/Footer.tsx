@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SECTIONS } from '@/lib/sections';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -12,12 +13,16 @@ export default function Footer() {
           </p>
         </div>
         <div>
-          <h4 className="editorial-h text-sm uppercase tracking-widest text-sand-200">Explore</h4>
-          <ul className="mt-3 space-y-2 text-sand-100/80">
+          <h4 className="editorial-h text-sm uppercase tracking-widest text-sand-200">Categories</h4>
+          <ul className="mt-3 space-y-2 text-sand-100/80" data-testid="footer-categories">
             <li><Link href="/articles" className="hover:text-white">All stories</Link></li>
-            <li><Link href="/destinations" className="hover:text-white">Destinations</Link></li>
-            <li><Link href="/category/flights" className="hover:text-white">Flights</Link></li>
-            <li><Link href="/category/hotels" className="hover:text-white">Hotels</Link></li>
+            {SECTIONS.map((section) => (
+              <li key={section.slug}>
+                <Link href={`/category/${section.slug}`} className="hover:text-white">
+                  {section.title}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div>

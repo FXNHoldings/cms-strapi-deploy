@@ -26,9 +26,10 @@ services:
       TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
       JWT_SECRET: ${JWT_SECRET}
       ENCRYPTION_KEY: ${ENCRYPTION_KEY}
-      # Public URL behind Caddy
+      # Public URL
       PUBLIC_URL: https://cms.fxnstudio.com
       URL: https://cms.fxnstudio.com
+      STRAPI_ADMIN_PREVIEW_BASE_URL: ${STRAPI_ADMIN_PREVIEW_BASE_URL:-https://preview.fxnstudio.com}
       # AI Writer plugin
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
       CLAUDE_MODEL: claude-sonnet-4-5-20250929
@@ -42,8 +43,8 @@ services:
         condition: service_healthy
     networks:
       - fxn-net
-    expose:
-      - "1337"
+    ports:
+      - "127.0.0.1:8888:1337"
 
   postgres:
     image: postgres:16-alpine
@@ -82,32 +83,12 @@ services:
       - strapi
     networks:
       - fxn-net
-    expose:
-      - "8001"
-
-  caddy:
-    image: caddy:2-alpine
-    container_name: fxn-caddy
-    restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy-data:/data
-      - caddy-config:/config
-    depends_on:
-      - strapi
-      - autopost-worker
-    networks:
-      - fxn-net
+      - "127.0.0.1:8001:8001"
 
 volumes:
   postgres-data:
   strapi-uploads:
-  caddy-data:
-  caddy-config:
 
 networks:
   fxn-net:

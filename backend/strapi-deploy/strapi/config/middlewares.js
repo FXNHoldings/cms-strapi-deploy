@@ -20,9 +20,11 @@ module.exports = [
     config: {
       origin: [
         'https://cms.fxnstudio.com',
+        'https://preview.fxnstudio.com',
         'https://www.fxnstudio.com',
         'https://fxnstudio.com',
         'http://localhost:3000',
+        'http://localhost:8888',
         'http://localhost:1337',
       ],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],

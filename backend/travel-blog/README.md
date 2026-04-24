@@ -65,6 +65,6 @@ When an editor publishes in Strapi, trigger a cache bust so the blog updates ins
 Without this, the blog revalidates every 60 s anyway (plenty for a blog).
 
 ## Customising the look
-- Colours: `tailwind.config.ts` (`forest`, `sand`, `terracotta`, `paper`, `ink`)
+- Colours: `tailwind.config.ts` (`forest`, `sand`, `forest`, `paper`, `ink`)
 - Fonts: `app/layout.tsx` — swap Fraunces / Geist for any other pair you like
 - Home hero copy: `app/page.tsx`

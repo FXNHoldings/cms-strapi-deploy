@@ -31,6 +31,7 @@ const argv = yargs(hideBin(process.argv))
   .option('language', { type: 'string', default: 'English' })
   .option('logos', { type: 'boolean', default: true, describe: 'Attempt to fetch logos from TravelPayouts (pics.avs.io) by IATA code. Use --no-logos to disable.' })
   .option('backfill-logos', { type: 'boolean', default: false, describe: 'Iterate existing airlines missing a logo and try to attach one from TravelPayouts' })
+  .option('backfill-countries', { type: 'boolean', default: false, describe: 'Iterate existing airlines with no country and ask Claude for the HQ country based on name/IATA/ICAO' })
   .option('interactive', { alias: 'i', type: 'boolean', default: false })
   .option('dry-run', { type: 'boolean', default: false })
   .help()
@@ -91,7 +92,7 @@ Output MUST be strict JSON matching this TypeScript type:
   "icaoCode": string,         // 3-letter ICAO code (uppercase), when known
   "legalName": string,        // the full registered legal name (e.g. "Singapore Airlines Limited")
   "type": ${typesStr},
-  "country": string,
+  "country": string,          // REQUIRED. Country where the airline is headquartered. Always include this field.
   "airport": string,          // full name of the main hub airport (e.g. "Singapore Changi Airport")
   "city": string,             // city of the main hub
   "region": ${regionsStr},
@@ -101,7 +102,7 @@ Output MUST be strict JSON matching this TypeScript type:
   "website": string,          // official website URL (include https://)
   "about": string             // 200-320 words of neutral, factual prose. Cover: founding year and context, hub and primary routes, fleet family (e.g. Airbus A350, Boeing 787), membership of any alliance (Star Alliance / SkyTeam / Oneworld), notable service or loyalty programme, and a one-line honest note (strength or challenge). Plain prose, no markdown, no bullet lists, no headings.
 }
-All facts must be accurate and current. If you are not sure of an exact value (e.g. phone number, address), omit the field rather than invent. Do not include any text outside the JSON. Do not wrap in markdown fences.`;
+All facts must be accurate and current. "name", "slug", "country", "region", and "about" are REQUIRED — never omit them. For other fields (e.g. phone, address, icaoCode), omit rather than invent if you are not sure of an exact value. Do not include any text outside the JSON. Do not wrap in markdown fences.`;
 }
 
 function userPromptAirline({ name, iataCode, icaoCode, country, language }) {
@@ -165,6 +166,7 @@ async function generateAirline({ name, iataCode, icaoCode, country, language }) 
   if (!json.slug) json.slug = slugify(json.name, { lower: true, strict: true }).slice(0, 60);
   if (!json.iataCode && iataCode) json.iataCode = iataCode;
   if (!json.icaoCode && icaoCode) json.icaoCode = icaoCode;
+  if (!json.country && country) json.country = country;
   return json;
 }
 
@@ -404,6 +406,77 @@ async function runBatch({ names = null } = {}) {
   if (argv.logos) console.log('ℹ Logos fetched from TravelPayouts (pics.avs.io) when available. Missing ones can be uploaded manually in Strapi admin.');
 }
 
+async function resolveCountryFor({ name, iataCode, icaoCode }) {
+  const system = `You are a senior aviation editor. Given an airline, return the country where it is headquartered.
+Output MUST be strict JSON: { "country": string }
+Use the canonical English country name (e.g. "United States", "United Kingdom", "United Arab Emirates").
+If you are not confident, return { "country": "" }. Do not invent. Do not include any text outside the JSON.`;
+  const user = [
+    `Airline: ${name}`,
+    iataCode ? `IATA: ${iataCode}` : '',
+    icaoCode ? `ICAO: ${icaoCode}` : '',
+  ].filter(Boolean).join('\n');
+  const msg = await client.messages.create({
+    model: CLAUDE_MODEL,
+    max_tokens: 256,
+    system,
+    messages: [{ role: 'user', content: user }],
+  });
+  const text = msg.content.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
+  const json = safeParse(text);
+  const country = json?.country ? String(json.country).trim() : '';
+  return country || null;
+}
+
+async function updateAirlineCountry(documentId, country) {
+  return strapi(`/api/airlines/${documentId}`, {
+    method: 'PUT',
+    body: JSON.stringify({ data: { country } }),
+  });
+}
+
+async function runBackfillCountries() {
+  console.log('\nBackfilling missing country on airlines via Claude…\n');
+  let page = 1, total = 0, ok = 0, skip = 0, fail = 0;
+  while (true) {
+    const r = await strapi(
+      `/api/airlines?filters[country][$null]=true&pagination[page]=${page}&pagination[pageSize]=100`,
+    );
+    const items = r?.data ?? [];
+    if (!items.length) break;
+    total += items.length;
+
+    for (const a of items) {
+      const name = a.name || `airline-${a.id}`;
+      const short = name.slice(0, 40).padEnd(40);
+      process.stdout.write(`→ ${short} IATA=${a.iataCode || '--'} · `);
+      if (!a.documentId) {
+        console.log('skipped (no documentId)');
+        skip++;
+        continue;
+      }
+      try {
+        const country = await resolveCountryFor({ name, iataCode: a.iataCode, icaoCode: a.icaoCode });
+        if (!country) {
+          console.log('Claude not confident — skipped');
+          skip++;
+          continue;
+        }
+        await updateAirlineCountry(a.documentId, country);
+        console.log(`set country="${country}"`);
+        ok++;
+      } catch (e) {
+        console.log(`✖ ${e.message.slice(0, 100)}`);
+        fail++;
+      }
+    }
+
+    if (items.length < 100) break;
+    page++;
+  }
+  console.log(`\nBackfill done — ${ok} updated, ${skip} skipped, ${fail} failed (of ${total} missing-country airlines).`);
+}
+
 async function runBackfillLogos() {
   console.log('\nBackfilling logos from TravelPayouts for airlines without one…\n');
   // Fetch in pages of 100, only entries where logo is missing.
@@ -462,6 +535,7 @@ function fatal(msg) { console.error('✖', msg); process.exit(1); }
 /* ---------- Entry ---------- */
 
 async function main() {
+  if (argv['backfill-countries']) return runBackfillCountries();
   if (argv['backfill-logos']) return runBackfillLogos();
   if (argv.names) {
     const names = argv.names.split(',').map((n) => n.trim()).filter(Boolean);

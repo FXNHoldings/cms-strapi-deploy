@@ -51,13 +51,6 @@ export const SECTIONS: Section[] = [
     description: 'How-tos, pitfalls to avoid, and the small moves that make travel dramatically easier.',
     layout: 'masonry',
   },
-  {
-    slug: 'car-rentals',
-    title: 'Car Rental',
-    tagline: 'Wheels on the ground',
-    description: 'Rental guides, scam-avoidance tips, and road-trip routes worth flying for.',
-    layout: 'grid',
-  },
 ];
 
 export function findSection(slug: string): Section | undefined {

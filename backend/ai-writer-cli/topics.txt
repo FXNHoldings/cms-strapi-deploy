@@ -1,0 +1,68 @@
+# One "category | topic" per line. Lines starting with # are ignored.
+# Save this as topics.txt and run:  node generate.js --topics topics.txt
+#
+# The CLI will look up each category in Strapi (by slug or name), auto-create
+# it if it doesn't exist, and attach the article to it.
+
+car-rental            	| Cheap Car Rentals at Airports vs City Locations: Which Is Better?
+flights           	| Cheap Flights for Families: Smart Ways to Save on Group Travel
+travel-tips           | Digital Detox Travel Guide: How to Unplug Without Losing Access to Maps and Tickets
+hotels            	| Best Apps and Websites to Find Cheap Hotels for Any Destination
+travel-resources           |Packing Tips for Carry-On Only: How to Travel Light Without Forgetting Essentials
+
+travel-tips           | Cashless Travel Tips for 2026: How to Pay Safely in Countries Using Less Cash
+travel-tips           | eSIM vs. International Roaming: Which Travel Connectivity Option Saves More Money?
+travel-tips           | How to Avoid Overtourism and Find Non-Viral Destinations Worth Visiting
+travel-tips           | Shoulder Season Travel Benefits: Why the Hidden Season Is the Smartest Time to Travel
+travel-tips           | Zero-Waste Packing Tips for Travelers Who Want to Pack Light and Travel Greener
+travel-tips           | Pet Travel Requirements 2026: What to Know Before Flying With Your Dog or Cat
+travel-tips           | Solo Travel Group Tours: The Best Way to Travel Alone Without Feeling Isolated
+travel-tips           | Mid-Career Sabbatical Planning: How to Take a Micro-Retirement Trip Without Derailing Your Career
+travel-tips           | Best AI Trip Planning Prompts to Build Smarter Travel Itineraries
+
+travel-resources           |Best Travel Insurance for 2026: How to Choose the Right Coverage for Your Trip
+travel-resources           |Top Travel Planning Apps in 2026: Best AI Tools to Organize Your Trip
+travel-resources           |The Ultimate International Travel Checklist for Stress-Free Travel
+travel-resources           |Best Cheap Flight Search Engines to Find Lower Airfares Fast
+travel-resources           |Global Entry vs. TSA PreCheck: Which One Is Better for Frequent Travelers?
+travel-resources           |How to Find Error Fares and Book Cheap Flights Before They Disappear
+travel-resources           |Sustainable Travel Tips for Eco-Conscious Travelers Who Want to Reduce Their Impact
+travel-resources           |Solo Female Travel Safety Tips for Safer and More Confident Trips
+travel-resources           |How to Handle a Canceled Flight: What to Do, What to Claim, and How to Rebook Fast
+
+
+flights           	| How to Find Cheap Flights in 2026 Without Falling for Hidden Fees
+flights           	| Best Time to Book Cheap Flights for Domestic and International Travel
+
+flights           	| Last-Minute Cheap Flights: What Actually Works for Budget Travelers
+flights           	| Cheap Flights vs Budget Airlines: Which Option Saves You More?
+
+
+hotels            	| 5 boutique hotels in Kyoto under $150 a night
+hotels            	| How to Book Cheap Hotels Without Compromising Comfort and Safety
+hotels            	| Cheap Hotels for Families: What to Look for Before You Book
+
+hotels            	| How to Save More on Cheap Hotels During Peak Travel Seasons
+hotels            	| Cheap Hotels vs Vacation Rentals: Which Is Better for Budget Travel?
+hotels            	| Best Areas to Book a Hotel in Sydney for First-Time Visitors
+hotels            	| Best Time to Visit Perth for Good Weather and Lower Travel Costs
+hotels            	| Top Budget Hotels in Perth for Smart Travelers
+hotels            	| Things to Do in Perth: A Complete Guide for First-Time Visitors
+hotels            	| How to Plan a Budget-Friendly Trip to Perth
+
+car-rental            	| How to Find Cheap Car Rentals Without Getting Hit by Hidden Fees
+car-rental            	| Best Time to Book Cheap Car Rentals for Maximum Savings
+car-rental            	| Top Mistakes to Avoid When Booking Cheap Car Rentals Online
+car-rental            	| Cheap Car Rentals for Family Trips: How to Save More and Travel Smarter
+
+flights            	| Best Time to Book Flights to Sydney for the Lowest Fares
+flights            	| Where to Stay in Sydney: Best Hotels for Every Budget
+flights            	| Sydney Travel Guide: Top Attractions, Hotels, and Flight Tips
+flights            	| Cheap Flights to Sydney: How to Save on Your Australia Trip
+
+
+travel-tips            | Thailand Travel Guide: Best Places to Visit for First-Time Travelers
+travel-tips            | Best Time to Visit Thailand for Beaches, Festivals, and Budget Travel
+travel-tips            | Thailand on a Budget: How to Save on Flights, Hotels, and Transport
+travel-tips            | Top Tourist Destinations in Thailand You Should Not Miss
+travel-tips            | Where to Stay in Thailand: Best Areas and Hotel Options for Travelers

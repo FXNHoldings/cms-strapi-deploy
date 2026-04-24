@@ -66,7 +66,41 @@ export default function PriceCalendar({
     script.src = `https://tpscr.com/content?${params.toString()}`;
     container.appendChild(script);
 
+    // Widget renders into a Shadow DOM (<tp-cascoon>…<template shadowrootmode="open">),
+    // so external stylesheets don't apply. Inject our font overrides into the shadow root
+    // as it appears. CSS custom properties (--font-outfit/--font-urbanist) inherit through
+    // the shadow boundary, so we can reference the site's Next/font variables.
+    const FONT_CSS = `
+      :host, :host *:not(svg):not(svg *) {
+        font-family: var(--font-outfit), system-ui, sans-serif !important;
+      }
+      :host h1, :host h2, :host h3, :host h4, :host h5, :host h6,
+      :host .calendar_info_direction,
+      :host .year-cell__label,
+      :host .year-cell__value {
+        font-family: var(--font-urbanist), system-ui, sans-serif !important;
+        letter-spacing: -0.01em;
+      }
+    `;
+
+    const injected = new WeakSet<ShadowRoot>();
+    const inject = () => {
+      container.querySelectorAll<HTMLElement>('tp-cascoon, [id^="tp-cascoon-component"]').forEach((host) => {
+        const root = host.shadowRoot;
+        if (!root || injected.has(root)) return;
+        const style = document.createElement('style');
+        style.setAttribute('data-site-font', '');
+        style.textContent = FONT_CSS;
+        root.appendChild(style);
+        injected.add(root);
+      });
+    };
+    inject();
+    const observer = new MutationObserver(inject);
+    observer.observe(container, { childList: true, subtree: true });
+
     return () => {
+      observer.disconnect();
       container.innerHTML = '';
     };
   }, [origin, destination]);

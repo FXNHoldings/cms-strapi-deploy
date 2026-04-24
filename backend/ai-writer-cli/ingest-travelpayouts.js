@@ -26,6 +26,7 @@ const argv = yargs(hideBin(process.argv))
   .option('airports-only', { type: 'boolean', default: false })
   .option('airlines-only', { type: 'boolean', default: false })
   .option('routes-only', { type: 'boolean', default: false })
+  .option('countries-only', { type: 'boolean', default: false })
   .option('route-limit', { type: 'number', default: 500, describe: 'Cap number of routes to ingest (by popularity). Use 0 for no cap.' })
   .option('airport-limit', { type: 'number', default: 0, describe: 'Cap number of airports (0 = all commercial/flightable ones)' })
   .option('refresh', { type: 'boolean', default: false, describe: 'Force re-download of TP data dumps (ignore local cache)' })
@@ -48,6 +49,7 @@ const DATA_URLS = {
   airports: 'https://api.travelpayouts.com/data/en/airports.json',
   airlines: 'https://api.travelpayouts.com/data/en/airlines.json',
   cities: 'https://api.travelpayouts.com/data/en/cities.json',
+  countries: 'https://api.travelpayouts.com/data/en/countries.json',
   routes: 'https://api.travelpayouts.com/data/routes.json',
 };
 
@@ -441,6 +443,50 @@ async function ingestRoutes({ airportMap, airlineMap }) {
   console.log(`  done — created ${ok}, failed ${fail}`);
 }
 
+/* ---------- Countries ---------- */
+
+async function ingestCountries() {
+  console.log('\n=== Countries ===');
+  const all = await loadDump('countries');
+  // TP countries dump fields: { code (ISO 2), name, currency, name_translations }
+  const filtered = all.filter((c) => c.code && c.code.length === 2 && c.name);
+  console.log(`  source: ${all.length} total, ${filtered.length} with 2-char ISO + name`);
+
+  const existing = await fetchAllAsMap('countries', 'code');
+  console.log(`  existing in Strapi: ${existing.size}`);
+
+  const toCreate = filtered.filter((c) => !existing.has(c.code.toUpperCase()));
+  console.log(`  to create: ${toCreate.length}${argv['dry-run'] ? ' (DRY RUN)' : ''}`);
+
+  if (argv['dry-run']) {
+    toCreate.slice(0, 10).forEach((c) => console.log(`    · ${c.code} ${c.name} (${c.currency || '—'})`));
+    if (toCreate.length > 10) console.log(`    … and ${toCreate.length - 10} more`);
+    return { countryMap: existing };
+  }
+
+  let ok = 0, fail = 0;
+  await runConcurrent(toCreate, async (c, i) => {
+    const data = {
+      code: c.code.toUpperCase(),
+      name: c.name,
+      currency: c.currency || null,
+      region: regionForCountry(c.code),
+    };
+    try {
+      const created = await createRecord('countries', data);
+      existing.set(c.code.toUpperCase(), { id: created.data.id, documentId: created?.data?.documentId });
+      ok++;
+      if ((i + 1) % 25 === 0) console.log(`    … ${i + 1}/${toCreate.length}`);
+    } catch (e) {
+      fail++;
+      if (fail < 5) console.error(`    ✖ ${c.code} ${c.name}: ${e.message.slice(0, 100)}`);
+    }
+  }, argv.concurrency);
+
+  console.log(`  done — created ${ok}, failed ${fail}`);
+  return { countryMap: existing };
+}
+
 async function fetchAirportCoords(airportMap) {
   // Fetch lat/lon for every airport we already know about. One paginated trip.
   const result = new Map();
@@ -478,16 +524,21 @@ async function main() {
   let airportMap = null;
   let airlineMap = null;
 
-  if (!argv['routes-only'] && !argv['airlines-only']) {
+  const only =
+    argv['airports-only'] || argv['airlines-only'] || argv['routes-only'] || argv['countries-only'];
+
+  if (argv['countries-only'] || !only) {
+    await ingestCountries();
+  }
+  if (argv['airports-only'] || (!only && true)) {
     const r = await ingestAirports();
     airportMap = r.airportMap;
   }
-  if (!argv['routes-only'] && !argv['airports-only']) {
+  if (argv['airlines-only'] || (!only && true)) {
     const r = await ingestAirlines();
     airlineMap = r.airlineMap;
   }
-  if (!argv['airports-only'] && !argv['airlines-only']) {
-    // If we skipped one of the above, populate the map from existing Strapi records.
+  if (argv['routes-only'] || (!only && true)) {
     if (!airportMap) airportMap = await fetchAllAsMap('airports', 'iata');
     if (!airlineMap) airlineMap = await fetchAllAsMap('airlines', 'iataCode');
     await ingestRoutes({ airportMap, airlineMap });

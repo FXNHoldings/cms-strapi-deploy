@@ -24,7 +24,7 @@ export default async function AirportPage({ params }: Props) {
   const airport = await getAirport(iata);
   if (!airport) notFound();
 
-  const routes = await listRoutesFromAirport(airport.iata, 12);
+  const routes = await listRoutesFromAirport(airport.iata, 15);
   const hero = mediaUrl(airport.heroImage ?? null);
 
   return (
@@ -113,7 +113,7 @@ export default async function AirportPage({ params }: Props) {
                   <div className="font-mono text-xs font-bold tracking-wider text-forest-900/70">
                     {r.origin?.iata} → {r.destination?.iata}
                   </div>
-                  <div className="mt-2 font-urbanist text-base font-bold text-forest-900 group-hover:text-terracotta-700">
+                  <div className="mt-2 font-urbanist text-base font-bold text-forest-900 group-hover:text-forest-700">
                     {r.destination?.city || r.destination?.name}
                   </div>
                   <div className="mt-1 text-xs text-forest-900/60">

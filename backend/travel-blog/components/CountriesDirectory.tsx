@@ -2,44 +2,55 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import type { StrapiAirport, AirlineRegion } from '@/lib/strapi';
+import type { AirlineRegion } from '@/lib/strapi';
 
 const REGION_ORDER: AirlineRegion[] = ['Oceania', 'Asia-Pacific', 'Europe', 'Americas', 'Middle East', 'Africa'];
+const PER_REGION_LIMIT = 24;
 
-export default function AirportDirectory({ airports }: { airports: StrapiAirport[] }) {
+export type CountryRow = {
+  code: string;
+  name: string;
+  region: AirlineRegion | null;
+  airportCount: number;
+  cityCount: number;
+};
+
+function flagEmoji(code: string): string {
+  if (!code || code.length !== 2) return '🏳️';
+  const cc = code.toUpperCase();
+  return String.fromCodePoint(...[...cc].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
+}
+
+export default function CountriesDirectory({ countries }: { countries: CountryRow[] }) {
   const [query, setQuery] = useState('');
   const [activeRegion, setActiveRegion] = useState<AirlineRegion | null>(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return airports.filter((a) => {
-      if (activeRegion && a.region !== activeRegion) return false;
+    return countries.filter((c) => {
+      if (activeRegion && c.region !== activeRegion) return false;
       if (!q) return true;
-      const hay = [a.name, a.iata, a.icao, a.city, a.country]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase();
-      return hay.includes(q);
+      return (c.name + ' ' + c.code).toLowerCase().includes(q);
     });
-  }, [airports, query, activeRegion]);
+  }, [countries, query, activeRegion]);
 
   const byRegion = useMemo(() => {
-    const map = new Map<AirlineRegion, StrapiAirport[]>();
-    for (const a of filtered) {
-      const r = (a.region || 'Asia-Pacific') as AirlineRegion;
+    const map = new Map<AirlineRegion, CountryRow[]>();
+    for (const c of filtered) {
+      const r = (c.region || 'Asia-Pacific') as AirlineRegion;
       if (!map.has(r)) map.set(r, []);
-      map.get(r)!.push(a);
+      map.get(r)!.push(c);
     }
     return map;
   }, [filtered]);
 
-  const countryCount = useMemo(
-    () => new Set(airports.map((a) => a.country).filter(Boolean)).size,
-    [airports],
+  const totalAirports = useMemo(
+    () => countries.reduce((sum, c) => sum + c.airportCount, 0),
+    [countries],
   );
   const regionCount = useMemo(
-    () => new Set(airports.map((a) => a.region).filter(Boolean)).size,
-    [airports],
+    () => new Set(countries.map((c) => c.region).filter(Boolean)).size,
+    [countries],
   );
 
   const orderedRegions = REGION_ORDER.filter((r) => byRegion.has(r));
@@ -48,8 +59,8 @@ export default function AirportDirectory({ airports }: { airports: StrapiAirport
     <div className="mt-10">
       {/* Stat strip */}
       <div className="grid gap-6 rounded-[0.3rem] border border-forest-900/10 bg-forest-900/[0.02] p-6 sm:grid-cols-3">
-        <Stat label="Airports" value={airports.length.toLocaleString()} />
-        <Stat label="Countries" value={countryCount.toLocaleString()} />
+        <Stat label="Countries" value={countries.length.toLocaleString()} />
+        <Stat label="Airports" value={totalAirports.toLocaleString()} />
         <Stat label="Regions" value={regionCount.toString()} />
       </div>
 
@@ -59,9 +70,9 @@ export default function AirportDirectory({ airports }: { airports: StrapiAirport
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search by name, IATA code (e.g. LHR), city, country…"
+          placeholder="Search by country name or ISO code (e.g. AU, Japan)…"
           className="w-full rounded-[0.3rem] border border-forest-900/15 bg-paper px-4 py-3 font-sans text-base text-ink placeholder:text-forest-900/40 focus:border-terracotta-800 focus:outline-none focus:ring-2 focus:ring-forest-800/20"
-          data-testid="airport-search"
+          data-testid="country-search"
         />
       </div>
 
@@ -103,32 +114,38 @@ export default function AirportDirectory({ airports }: { airports: StrapiAirport
 
         <div className="min-w-0">
           {filtered.length === 0 ? (
-            <p className="mt-10 text-center text-forest-900/60" data-testid="airports-empty">
-              No airports match that search. Try clearing a filter.
+            <p className="mt-10 text-center text-forest-900/60" data-testid="countries-empty">
+              No countries match that search. Try clearing a filter.
             </p>
           ) : (
-            orderedRegions.map((r) => (
-              <section
-                key={r}
-                id={`region-${r.replace(/\s+/g, '-').toLowerCase()}`}
-                className="mb-16 scroll-mt-24"
-              >
-                <header className="flex items-baseline justify-between border-b border-forest-900/10 pb-3">
-                  <h2 className="editorial-h text-2xl font-bold text-forest-900 lg:text-3xl">{r}</h2>
-                  <span className="text-sm font-light text-forest-900/50">
-                    {byRegion.get(r)!.length} airport{byRegion.get(r)!.length === 1 ? '' : 's'}
-                  </span>
-                </header>
-                <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                  {byRegion.get(r)!.slice(0, 120).map((a) => <AirportCard key={a.id} airport={a} />)}
-                </div>
-                {byRegion.get(r)!.length > 120 && (
-                  <p className="mt-4 text-xs text-forest-900/50">
-                    + {byRegion.get(r)!.length - 120} more in {r} — use search to narrow.
-                  </p>
-                )}
-              </section>
-            ))
+            orderedRegions.map((r) => {
+              const regionList = byRegion.get(r)!;
+              const displayed = regionList.slice(0, PER_REGION_LIMIT);
+              const overflow = regionList.length - displayed.length;
+              return (
+                <section
+                  key={r}
+                  id={`region-${r.replace(/\s+/g, '-').toLowerCase()}`}
+                  className="mb-16 scroll-mt-24"
+                >
+                  <header className="flex items-baseline justify-between border-b border-forest-900/10 pb-3">
+                    <h2 className="editorial-h text-2xl font-bold text-forest-900 lg:text-3xl">{r}</h2>
+                    <span className="text-sm font-light text-forest-900/50">
+                      {regionList.length} countr{regionList.length === 1 ? 'y' : 'ies'}
+                      {overflow > 0 && <span className="ml-2 text-forest-900/40">· showing {PER_REGION_LIMIT}</span>}
+                    </span>
+                  </header>
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                    {displayed.map((c) => <CountryCard key={c.code} country={c} />)}
+                  </div>
+                  {overflow > 0 && (
+                    <p className="mt-4 text-xs text-forest-900/50">
+                      + {overflow.toLocaleString()} more in {r} — narrow with search.
+                    </p>
+                  )}
+                </section>
+              );
+            })
           )}
         </div>
       </div>
@@ -162,25 +179,28 @@ function FilterChip({ label, active, onClick }: { label: string; active: boolean
   );
 }
 
-function AirportCard({ airport }: { airport: StrapiAirport }) {
+function CountryCard({ country }: { country: CountryRow }) {
   return (
     <Link
-      href={`/airports/${airport.iata.toLowerCase()}`}
-      className="group flex items-center justify-between gap-3 rounded-[0.3rem] border border-forest-900/10 bg-paper px-4 py-3 transition hover:-translate-y-0.5 hover:border-forest-900/30"
-      data-testid={`airport-card-${airport.iata}`}
+      href={`/countries/${country.code.toLowerCase()}`}
+      className="group flex items-center gap-3 rounded-[0.3rem] border border-forest-900/10 bg-paper px-4 py-3 transition hover:-translate-y-0.5 hover:border-forest-900/30"
+      data-testid={`country-card-${country.code}`}
     >
-      <div className="min-w-0">
+      <span className="flex h-10 w-10 flex-none items-center justify-center text-2xl" aria-hidden>
+        {flagEmoji(country.code)}
+      </span>
+      <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <span className="flex-none rounded-[0.3rem] bg-forest-900 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-sand-100">
-            {airport.iata}
-          </span>
           <div className="truncate font-urbanist text-sm font-bold text-forest-900 group-hover:text-forest-700">
-            {airport.city || airport.name}
+            {country.name}
           </div>
+          <span className="flex-none rounded-[0.3rem] bg-forest-900 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-sand-100">
+            {country.code}
+          </span>
         </div>
         <div className="mt-1 truncate text-xs text-forest-900/60">
-          {airport.name}
-          {airport.country && <span className="ml-2 text-forest-900/40">· {airport.country}</span>}
+          {country.airportCount} airport{country.airportCount === 1 ? '' : 's'}
+          {country.cityCount > 0 && <span className="ml-2 text-forest-900/40">· {country.cityCount} cit{country.cityCount === 1 ? 'y' : 'ies'}</span>}
         </div>
       </div>
     </Link>
