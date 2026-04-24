@@ -2,19 +2,20 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { mediaUrl, type StrapiArticle } from '@/lib/strapi';
 
-export default function ArticleCard({ article, size = 'md' }: { article: StrapiArticle; size?: 'sm' | 'md' | 'lg' }) {
+export default function ArticleCard({ article, size = 'md' }: { article: StrapiArticle; size?: 'compact' | 'sm' | 'md' | 'lg' }) {
   const img = mediaUrl(article.coverImage ?? null);
   const date = article.publishedAt ? format(new Date(article.publishedAt), 'd MMM yyyy') : '';
 
   const sizeClasses = {
-    sm: { img: 'aspect-[4/3]', title: 'text-lg', excerpt: 'line-clamp-2 text-sm' },
-    md: { img: 'aspect-[5/4]', title: 'text-2xl', excerpt: 'line-clamp-3 text-base' },
-    lg: { img: 'aspect-[16/10]', title: 'text-2xl sm:text-3xl', excerpt: 'line-clamp-4 text-base sm:text-lg' },
+    compact: { img: 'aspect-[4/3]', title: 'text-base', excerpt: 'line-clamp-2 text-sm', radius: 'rounded-lg' },
+    sm: { img: 'aspect-[4/3]', title: 'text-lg', excerpt: 'line-clamp-2 text-sm', radius: 'rounded-2xl' },
+    md: { img: 'aspect-[5/4]', title: 'text-2xl', excerpt: 'line-clamp-3 text-base', radius: 'rounded-2xl' },
+    lg: { img: 'aspect-[16/10]', title: 'text-2xl sm:text-3xl', excerpt: 'line-clamp-4 text-base sm:text-lg', radius: 'rounded-2xl' },
   }[size];
 
   return (
     <article className="group flex flex-col" data-testid={`article-card-${article.slug}`}>
-      <Link href={`/articles/${article.slug}`} className="block overflow-hidden rounded-2xl bg-forest-900/5">
+      <Link href={`/articles/${article.slug}`} className={`block overflow-hidden ${sizeClasses.radius} bg-forest-900/5`}>
         {img ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img

@@ -8,6 +8,11 @@
     color: theme('colors.ink');
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  /* Keep h2/h3 clear of the sticky header when jumping to anchors. */
+  .prose-article h2, .prose-article h3 {
+    scroll-margin-top: 6rem;
   }
   /* Default body text — Outfit, weight 300 (set in body className too for specificity) */
   body {
@@ -34,6 +39,22 @@
   .editorial-h {
     @apply font-display font-bold tracking-tightest;
   }
+  /* Auto-sliding marquee for the cities rail (seamless loop via duplicated items). */
+  @keyframes cities-marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+  .cities-marquee {
+    animation: cities-marquee 60s linear infinite;
+    will-change: transform;
+  }
+  .cities-marquee:hover { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) {
+    .cities-marquee { animation: none; }
+  }
+  /* Hide the horizontal scrollbar cleanly across browsers. */
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
   .grain {
     background-image:
       radial-gradient(circle at 20% 30%, rgba(0,0,0,0.025) 0 1px, transparent 1px),

@@ -1,20 +1,30 @@
 import Link from 'next/link';
-import { listArticles, listDestinationArticles, mediaUrl, type StrapiArticle } from '@/lib/strapi';
+import {
+  listArticles,
+  listCountryDestinations,
+  listDestinationArticles,
+  mediaUrl,
+  type StrapiArticle,
+} from '@/lib/strapi';
 import { SECTIONS } from '@/lib/sections';
+import FeaturedCountries from '@/components/FeaturedCountries';
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const perSection = await Promise.all(
-    SECTIONS.map((s) => {
-      const articles =
-        s.slug === 'destinations'
-          ? listDestinationArticles({ pageSize: 5 })
-          : listArticles({ category: s.slug, pageSize: 5 });
+  const [perSection, countries] = await Promise.all([
+    Promise.all(
+      SECTIONS.map((s) => {
+        const articles =
+          s.slug === 'destinations'
+            ? listDestinationArticles({ pageSize: 5 })
+            : listArticles({ category: s.slug, pageSize: 5 });
 
-      return articles.then((r) => r.data).catch(() => []);
-    }),
-  );
+        return articles.then((r) => r.data).catch(() => []);
+      }),
+    ),
+    listCountryDestinations(12).catch(() => []),
+  ]);
 
   const bySection = Object.fromEntries(SECTIONS.map((s, i) => [s.slug, perSection[i] as StrapiArticle[]]));
 
@@ -34,6 +44,8 @@ export default async function HomePage() {
   return (
     <div data-testid="home-page">
       <Hero hero={hero} side={side} />
+
+      <FeaturedCountries countries={countries} />
 
       {SECTIONS.map((s) => {
         const posts = bySection[s.slug] ?? [];
@@ -204,6 +216,21 @@ function EmptySection({ section }: { section: Section }) {
 function EditorialSection({ section, posts }: { section: Section; posts: StrapiArticle[] }) {
   const [feature, ...rest] = posts;
   const list = rest.slice(0, 4);
+  // Hotels section flips the layout: compact list on the LEFT, feature image on the RIGHT.
+  const reverse = section.slug === 'hotels';
+  const gridCols = reverse
+    ? 'lg:grid-cols-[minmax(360px,0.9fr)_minmax(0,1fr)]'
+    : 'lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)]';
+
+  const featureEl = <FeatureArticle article={feature} />;
+  const listEl = (
+    <div className="divide-y divide-forest-900/12 border-y border-forest-900/12">
+      {list.map((post) => (
+        <CompactArticleRow key={post.id} article={post} />
+      ))}
+    </div>
+  );
+
   return (
     <section
       className={section.slug === 'flights' ? 'bg-forest-50 py-20' : 'py-20'}
@@ -211,13 +238,9 @@ function EditorialSection({ section, posts }: { section: Section; posts: StrapiA
     >
       <div className="mx-auto max-w-7xl px-6">
         <EditorialSectionHeader section={section} />
-        <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] lg:gap-10">
-          <FeatureArticle article={feature} />
-          <div className="divide-y divide-forest-900/12 border-y border-forest-900/12">
-            {list.map((post) => (
-              <CompactArticleRow key={post.id} article={post} />
-            ))}
-          </div>
+        <div className={`mt-10 grid gap-8 ${gridCols} lg:gap-10`}>
+          {reverse ? listEl : featureEl}
+          {reverse ? featureEl : listEl}
         </div>
       </div>
     </section>

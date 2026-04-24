@@ -17,7 +17,7 @@ export default function FlyPage() {
   var script = document.createElement("script");
   script.async = 1;
   script.type = "module";
-  script.src = "https://tpscr.com/wl_web/main.js?wl_id=16626";
+  script.src = "https://tpscr.com/wl_web/main.js?wl_id=16677";
   document.head.appendChild(script);
 })();`}
       </Script>

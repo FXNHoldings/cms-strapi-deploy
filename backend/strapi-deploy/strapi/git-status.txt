@@ -1,0 +1,137 @@
+ M ../docker-compose.nginx.yml
+ M ../docker-compose.yml
+D  .dockerignore
+D  .strapi-updater.json
+D  Dockerfile
+D  config/admin.js
+D  config/database.js
+D  config/middlewares.js
+D  config/plugins.js
+D  config/server.js
+D  favicon.png
+D  package-lock.json
+D  package.json
+D  public/favicon.png
+D  public/robots.txt
+D  src/ai-images.js
+D  src/api/airline/content-types/airline/schema.json
+D  src/api/airline/controllers/airline.js
+D  src/api/airline/routes/airline.js
+D  src/api/airline/services/airline.js
+D  src/api/airport/content-types/airport/schema.json
+D  src/api/airport/controllers/airport.js
+D  src/api/airport/routes/airport.js
+D  src/api/airport/services/airport.js
+D  src/api/article/content-types/article/lifecycles.js
+D  src/api/article/content-types/article/schema.json
+D  src/api/article/controllers/article.js
+D  src/api/article/routes/01-custom-article.js
+D  src/api/article/routes/article.js
+D  src/api/article/services/article.js
+D  src/api/author/content-types/author/schema.json
+D  src/api/author/controllers/author.js
+D  src/api/author/routes/author.js
+D  src/api/author/services/author.js
+D  src/api/blog-destination/content-types/blog-destination/schema.json
+D  src/api/blog-destination/controllers/blog-destination.js
+D  src/api/blog-destination/routes/blog-destination.js
+D  src/api/blog-destination/services/blog-destination.js
+D  src/api/category/content-types/category/schema.json
+D  src/api/category/controllers/category.js
+D  src/api/category/routes/category.js
+D  src/api/category/services/category.js
+D  src/api/country/content-types/country/schema.json
+D  src/api/country/controllers/country.js
+D  src/api/country/routes/country.js
+D  src/api/country/services/country.js
+D  src/api/destination/content-types/destination/schema.json
+D  src/api/destination/controllers/destination.js
+D  src/api/destination/routes/destination.js
+D  src/api/destination/services/destination.js
+D  src/api/route/content-types/route/schema.json
+D  src/api/route/controllers/route.js
+D  src/api/route/routes/route.js
+D  src/api/route/services/route.js
+D  src/api/tag/content-types/tag/schema.json
+D  src/api/tag/controllers/tag.js
+D  src/api/tag/routes/tag.js
+D  src/api/tag/services/tag.js
+D  src/index.js
+D  src/plugins/ai-writer/admin/src/components/Initializer.tsx
+D  src/plugins/ai-writer/admin/src/components/PluginIcon.tsx
+D  src/plugins/ai-writer/admin/src/index.tsx
+D  src/plugins/ai-writer/admin/src/pages/App.tsx
+D  src/plugins/ai-writer/admin/src/pluginId.ts
+D  src/plugins/ai-writer/admin/src/translations/en.json
+D  src/plugins/ai-writer/package.json
+D  src/plugins/ai-writer/server/index.js
+D  src/plugins/ai-writer/server/src/bootstrap.js
+D  src/plugins/ai-writer/server/src/config/index.js
+D  src/plugins/ai-writer/server/src/content-types/index.js
+D  src/plugins/ai-writer/server/src/controllers/ai.js
+D  src/plugins/ai-writer/server/src/controllers/index.js
+D  src/plugins/ai-writer/server/src/destroy.js
+D  src/plugins/ai-writer/server/src/middlewares/index.js
+D  src/plugins/ai-writer/server/src/policies/index.js
+D  src/plugins/ai-writer/server/src/register.js
+D  src/plugins/ai-writer/server/src/routes/admin.js
+D  src/plugins/ai-writer/server/src/routes/index.js
+D  src/plugins/ai-writer/server/src/services/claude.js
+D  src/plugins/ai-writer/server/src/services/index.js
+D  src/plugins/ai-writer/strapi-admin.js
+D  src/plugins/ai-writer/strapi-server.js
+D  src/plugins/article-preview/admin/src/components/Initializer.tsx
+D  src/plugins/article-preview/admin/src/components/PreviewAction.tsx
+D  src/plugins/article-preview/admin/src/index.tsx
+D  src/plugins/article-preview/admin/src/pluginId.ts
+D  src/plugins/article-preview/package.json
+D  src/plugins/article-preview/server/index.js
+D  src/plugins/article-preview/strapi-admin.js
+D  src/plugins/article-preview/strapi-server.js
+D  src/plugins/bulk-import/admin/src/index.tsx
+D  src/plugins/bulk-import/admin/src/pages/App.tsx
+D  src/plugins/bulk-import/admin/src/pluginId.ts
+D  src/plugins/bulk-import/admin/src/translations/en.json
+D  src/plugins/bulk-import/package.json
+D  src/plugins/bulk-import/server/index.js
+D  src/plugins/bulk-import/server/src/bootstrap.js
+D  src/plugins/bulk-import/server/src/controllers/import.js
+D  src/plugins/bulk-import/server/src/controllers/index.js
+D  src/plugins/bulk-import/server/src/register.js
+D  src/plugins/bulk-import/server/src/routes/admin.js
+D  src/plugins/bulk-import/server/src/routes/index.js
+D  src/plugins/bulk-import/server/src/services/importer.js
+D  src/plugins/bulk-import/server/src/services/index.js
+D  src/plugins/bulk-import/strapi-admin.js
+D  src/plugins/bulk-import/strapi-server.js
+ M ../../travel-blog/app/airlines/[slug]/page.tsx
+ M ../../travel-blog/app/airlines/page.tsx
+ M ../../travel-blog/app/airports/[iata]/page.tsx
+ M ../../travel-blog/app/airports/page.tsx
+ M ../../travel-blog/app/articles/[slug]/page.tsx
+ M ../../travel-blog/app/articles/page.tsx
+ M ../../travel-blog/app/category/[slug]/page.tsx
+ M ../../travel-blog/app/countries/[code]/page.tsx
+ M ../../travel-blog/app/countries/page.tsx
+ M ../../travel-blog/app/destinations/[slug]/page.tsx
+ M ../../travel-blog/app/destinations/page.tsx
+ M ../../travel-blog/app/flights/[slug]/page.tsx
+ M ../../travel-blog/app/flights/page.tsx
+ M ../../travel-blog/app/fly/page.tsx
+ M ../../travel-blog/app/globals.css
+ M ../../travel-blog/app/not-found.tsx
+ M ../../travel-blog/app/page.tsx
+ M ../../travel-blog/components/AirlineDirectory.tsx
+ M ../../travel-blog/components/AirportDirectory.tsx
+ M ../../travel-blog/components/ArticleCard.tsx
+ M ../../travel-blog/components/CountriesDirectory.tsx
+ M ../../travel-blog/components/DestinationsDirectory.tsx
+ M ../../travel-blog/components/Footer.tsx
+ M ../../travel-blog/components/Header.tsx
+ M ../../travel-blog/components/PriceCalendar.tsx
+ M ../../travel-blog/components/RouteDirectory.tsx
+ M ../../travel-blog/lib/strapi.ts
+ M ../../travel-blog/public/temp/customtravelpayouts.html
+ M ../../travel-blog/tailwind.config.ts
+?? ../../../.codex
+?? ./

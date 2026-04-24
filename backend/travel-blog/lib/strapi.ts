@@ -20,6 +20,7 @@ export type StrapiArticle = {
   updatedAt: string;
   coverImage?: StrapiImage;
   ogImage?: StrapiImage;
+  gallery?: NonNullable<StrapiImage>[];
   category?: { id: number; name: string; slug: string; color?: string } | null;
   tags?: { id: number; name: string; slug: string }[];
   author?: { id: number; name: string; slug: string; avatar?: StrapiImage } | null;
@@ -232,6 +233,25 @@ export async function getDestination(slug: string) {
     pagination: { pageSize: 1 },
   });
   return res.data?.[0] ?? null;
+}
+
+export async function getDestinationByCountryCode(code: string) {
+  const res = await strapiFetch<ListResponse<StrapiDestination>>('destinations', {
+    filters: { countryCode: { $eqi: code }, type: { $eq: 'country' } },
+    populate: ['heroImage'],
+    pagination: { pageSize: 1 },
+  });
+  return res.data?.[0] ?? null;
+}
+
+export async function listCountryDestinations(limit = 12) {
+  const res = await strapiFetch<ListResponse<StrapiDestination>>('destinations', {
+    filters: { type: { $eq: 'country' } },
+    sort: ['name:asc'],
+    populate: ['heroImage'],
+    pagination: { pageSize: limit },
+  });
+  return res.data;
 }
 
 export async function listAirlines() {

@@ -96,6 +96,30 @@ export default async function ArticlePage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: html }}
         />
 
+        {article.gallery && article.gallery.length > 0 && (
+          <div className="mt-12" data-testid="article-gallery">
+            <h3 className="editorial-h text-sm uppercase tracking-widest text-forest-800/70">
+              Gallery
+            </h3>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {article.gallery.map((img, i) => {
+                const url = mediaUrl(img);
+                if (!url) return null;
+                return (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={i}
+                    src={url}
+                    alt={img.alternativeText || `${article.title} — image ${i + 1}`}
+                    className="aspect-[4/3] w-full rounded-lg object-cover"
+                    loading="lazy"
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {article.destinations && article.destinations.length > 0 && (
           <div className="mt-12 border-t border-forest-900/10 pt-8">
             <h3 className="editorial-h text-sm uppercase tracking-widest text-forest-800/70">Places in this story</h3>

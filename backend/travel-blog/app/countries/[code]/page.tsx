@@ -1,7 +1,8 @@
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import Link from 'next/link';
 import {
   getCountry,
+  getDestinationByCountryCode,
   listAirports,
   listAirportsByCountryCode,
   listAirlinesByCountry,
@@ -57,6 +58,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CountryPage({ params }: Props) {
   const { code } = await params;
+
+  // If a CMS Destination exists for this country code, that is now the canonical URL.
+  const merged = await getDestinationByCountryCode(code).catch(() => null);
+  if (merged) permanentRedirect(`/destinations/${merged.slug}`);
+
   const country = await resolveCountry(code);
   if (!country) notFound();
 

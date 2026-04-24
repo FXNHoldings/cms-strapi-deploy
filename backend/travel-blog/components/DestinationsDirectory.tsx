@@ -6,7 +6,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { mediaUrl, type StrapiDestination } from '@/lib/strapi';
 
 type Filter = 'all' | 'region' | 'country' | 'city';
-const SECTION_LIMIT = 8;
+const SECTION_LIMITS: Record<'region' | 'country' | 'city', number> = {
+  region: 4,
+  country: 5,
+  city: 14,
+};
 
 export default function DestinationsDirectory({
   destinations,
@@ -102,28 +106,28 @@ export default function DestinationsDirectory({
             <SectionHeader
               title="Regions"
               count={byType.region.length}
-              onViewAll={byType.region.length > SECTION_LIMIT ? () => setFilter('region') : undefined}
+              onViewAll={byType.region.length > SECTION_LIMITS.region ? () => setFilter('region') : undefined}
             />
           )}
-          {byType.region.length > 0 && <RegionsLayout items={byType.region.slice(0, SECTION_LIMIT)} />}
+          {byType.region.length > 0 && <RegionsLayout items={byType.region.slice(0, SECTION_LIMITS.region)} />}
 
           {byType.country.length > 0 && (
             <SectionHeader
               title="Countries"
               count={byType.country.length}
-              onViewAll={byType.country.length > SECTION_LIMIT ? () => setFilter('country') : undefined}
+              onViewAll={byType.country.length > SECTION_LIMITS.country ? () => setFilter('country') : undefined}
             />
           )}
-          {byType.country.length > 0 && <CountriesLayout items={byType.country.slice(0, SECTION_LIMIT)} />}
+          {byType.country.length > 0 && <CountriesLayout items={byType.country.slice(0, SECTION_LIMITS.country)} />}
 
           {byType.city.length > 0 && (
             <SectionHeader
               title="Cities"
               count={byType.city.length}
-              onViewAll={byType.city.length > SECTION_LIMIT ? () => setFilter('city') : undefined}
+              onViewAll={byType.city.length > SECTION_LIMITS.city ? () => setFilter('city') : undefined}
             />
           )}
-          {byType.city.length > 0 && <CitiesLayout items={byType.city.slice(0, SECTION_LIMIT)} />}
+          {byType.city.length > 0 && <CitiesRail items={byType.city.slice(0, SECTION_LIMITS.city)} />}
         </>
       )}
     </div>
@@ -134,7 +138,7 @@ export default function DestinationsDirectory({
 /* Layouts                                                                    */
 /* -------------------------------------------------------------------------- */
 
-/** Regions — 2-column wide mosaic, 16:9 tiles, larger display typography. */
+/** Regions — 2-column wide mosaic, 16:9 tiles, larger display typography. Up to 4. */
 function RegionsLayout({ items }: { items: StrapiDestination[] }) {
   return (
     <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -145,7 +149,7 @@ function RegionsLayout({ items }: { items: StrapiDestination[] }) {
   );
 }
 
-/** Countries — first is a 2x2 hero, rest fill a 4-col grid; total up to 8 visible. */
+/** Countries — 2x2 hero + 4 tiles in a 4-col, 2-row grid (5 total). Image-only tiles. */
 function CountriesLayout({ items }: { items: StrapiDestination[] }) {
   const [hero, ...rest] = items;
   if (!hero) return null;
@@ -155,19 +159,36 @@ function CountriesLayout({ items }: { items: StrapiDestination[] }) {
         <DestinationTile d={hero} aspect="aspect-[4/5] sm:aspect-auto sm:h-full" size="xl" />
       </div>
       {rest.map((d) => (
-        <DestinationTile key={d.id} d={d} aspect="aspect-[3/4]" size="md" />
+        <DestinationTile key={d.id} d={d} aspect="aspect-[3/2]" size="md" />
       ))}
     </div>
   );
 }
 
-/** Cities — tight 4-col grid with portrait cards. */
-function CitiesLayout({ items }: { items: StrapiDestination[] }) {
+/** Cities — auto-sliding marquee (seamless loop via duplicated items); pauses on hover. */
+function CitiesRail({ items }: { items: StrapiDestination[] }) {
+  // Duplicate the list so translateX(-50%) wraps without a visible jump.
+  const loop = [...items, ...items];
   return (
-    <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
-      {items.map((d) => (
-        <DestinationTile key={d.id} d={d} aspect="aspect-[3/4]" size="sm" />
-      ))}
+    <div
+      className="relative mt-6 -mx-6 overflow-hidden"
+      data-testid="cities-rail"
+      aria-label="Cities marquee"
+    >
+      <div className="cities-marquee flex w-max gap-3 px-6 py-2">
+        {loop.map((d, i) => (
+          <div
+            key={`${d.id}-${i}`}
+            className="w-[168px] flex-none sm:w-[200px]"
+            aria-hidden={i >= items.length ? 'true' : undefined}
+          >
+            <DestinationTile d={d} aspect="aspect-[3/4]" size="sm" />
+          </div>
+        ))}
+      </div>
+      {/* Edge fades to soften the loop seam on both sides. */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-paper to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-paper to-transparent" />
     </div>
   );
 }
@@ -259,7 +280,7 @@ function DestinationTile({
   return (
     <Link
       href={`/destinations/${d.slug}`}
-      className={`group relative block overflow-hidden rounded-2xl bg-forest-800 ${aspect}`}
+      className={`group relative block overflow-hidden rounded-lg bg-forest-800 ${aspect}`}
       data-testid={`destination-${d.slug}`}
     >
       {img && (
