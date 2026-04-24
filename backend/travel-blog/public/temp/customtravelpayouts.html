@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="Search Flights" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <meta property="og:title" content="Search Flight" />
+  <meta property="og:description"
+    content="We search hundreds of travel sites at once to find the cheapest flights for you." />
+  <meta content="en_US" property="og:locale">
+  <meta content="product.item" property="og:type">
+  <meta content="[:og_image:]" property="og:image">
+
+  <meta content="Search Cheap Flights" name="twitter:title">
+  <meta content="We search hundreds of travel sites at once to find the cheapest flights for you."
+    name="twitter:description">
+  <meta content="summary_large_image" name="twitter:card">
+  <title>Search Flights[:route_info:]</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Urbanist:wght@400;600;700;800;900&display=swap">
+
+  <style>
+    /* Base — force Manrope body everywhere to defeat any Inter fallback */
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      color: var(--tpwl-main-text);
+      background-color: var(--tpwl-search-result-background);
+      font-family: 'Manrope', var(--tpwl-font-family), system-ui, sans-serif;
+      font-weight: 300;
+    }
+
+    body a {
+      color: var(--tpwl-links);
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.1s linear;
+    }
+
+    body a:hover,
+    body a:focus {
+      text-decoration: underline;
+    }
+
+    /* ---------- BLOG-STYLE TOP BAR (max-width centered, sticky, paper bg) ---------- */
+    .of-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(251, 248, 242, 0.88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(21, 47, 36, 0.08);
+    }
+
+    .of-topbar__inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .of-topbar__brand {
+      font-family: 'Urbanist', system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 26px;
+      color: #152f24;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .of-topbar__brand:hover {
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .of-nav {
+      display: flex;
+      gap: 4px;
+    }
+
+    .of-nav a {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 4px;
+      font-family: 'Manrope', system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1b4332;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .of-nav a:hover {
+      color: #8b4331;
+      text-decoration: none;
+    }
+
+    /* ---------- TP HERO / SEARCH (structure unchanged, font aligned) ---------- */
+    .tpwl-logo-header {
+      position: relative;
+      color: var(--tpwl-headline-text);
+      font-weight: 600;
+      background-color: var(--tpwl-search-form-background);
+      padding: 32px 100px 16px;
+      margin-bottom: -20px;
+      z-index: 101;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .tpwl-logo-header h1 {
+      font-family: 'Urbanist', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-size: 56px;
+      margin: 0;
+    }
+
+    .tpwl-search-header {
+      padding: 24px 100px;
+      background-color: var(--tpwl-search-form-background);
+      position: sticky;
+      top: 68px;
+      z-index: 100;
+      transition: all 0.3s linear;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .tpwl-logo__wrapper {
+      display: none;
+    }
+
+    .tpwl-search__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tpwl__content {
+      flex: 1 0 auto;
+      max-width: 1240px;
+      min-width: 976px;
+    }
+
+    .tpwl-main {
+      background-color: var(--tpwl-search-result-background);
+    }
+
+    .tpwl-tickets__wrapper #tpwl-tickets:not(:empty) {
+      margin-bottom: 32px;
+    }
+
+    .tpwl-tickets__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0px 100px;
+    }
+
+    .tpwl-widgets__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 100px;
+      margin-bottom: 32px;
+    }
+
+    .tpwl-widgets__wrapper h3 {
+      font-family: 'Urbanist', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-align: center;
+      font-size: 36px;
+      margin: 0 0 32px;
+    }
+
+    .tpwl-widget-weedles {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .tpwl-widget-weedle {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ---------- BLOG-STYLE DARK FOOTER (3 cols: Brand · Categories · Newsletter) ---------- */
+    .tpwl-footer__wrapper {
+      display: block;
+      padding: 64px 24px 24px;
+      background: #152f24;
+      color: #faedcd;
+      text-align: left;
+      font-size: 15px;
+      font-weight: 300;
+      margin-top: 96px;
+      font-family: 'Manrope', system-ui, sans-serif;
+    }
+
+    .of-footer__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      max-width: 1240px;
+      margin: 0 auto 40px;
+    }
+
+    .of-footer__brand {
+      font-family: 'Urbanist', system-ui, sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+      color: #faedcd;
+      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+    }
+
+    .of-footer__tagline {
+      max-width: 32ch;
+      color: rgba(250, 237, 205, 0.7);
+      line-height: 1.5;
+      margin: 0;
+      font-size: 15px;
+      font-weight: 300;
+    }
+
+    .of-footer__heading {
+      font-family: 'Urbanist', system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #f5daa5;
+      margin: 0 0 14px;
+    }
+
+    .of-footer__menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .of-footer__menu li {
+      margin-bottom: 8px;
+    }
+
+    .of-footer__menu a {
+      color: rgba(250, 237, 205, 0.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 300;
+      font-family: 'Manrope', system-ui, sans-serif;
+      transition: color 0.15s ease;
+    }
+
+    .of-footer__menu a:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .of-footer__newsletter-copy {
+      color: rgba(250, 237, 205, 0.7);
+      font-size: 14px;
+      margin: 0 0 16px;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .of-footer__newsletter-form {
+      display: flex;
+      gap: 8px;
+    }
+
+    .of-footer__newsletter-form input {
+      flex: 1;
+      background: transparent;
+      border: 1px solid rgba(250, 237, 205, 0.3);
+      border-radius: 9999px;
+      padding: 8px 16px;
+      color: #faedcd;
+      font-size: 14px;
+      font-family: 'Manrope', system-ui, sans-serif;
+      outline: none;
+    }
+
+    .of-footer__newsletter-form input::placeholder {
+      color: rgba(250, 237, 205, 0.4);
+    }
+
+    .of-footer__newsletter-form input:focus {
+      border-color: #f5daa5;
+    }
+
+    .of-footer__newsletter-form button {
+      background: #f5daa5;
+      color: #152f24;
+      border: none;
+      border-radius: 9999px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'Manrope', system-ui, sans-serif;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .of-footer__newsletter-form button:hover {
+      background: #edbf74;
+    }
+
+    .of-footer__bottom {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(250, 237, 205, 0.1);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(250, 237, 205, 0.5);
+    }
+
+    .of-footer__legal {
+      display: flex;
+      gap: 20px;
+    }
+
+    .of-footer__legal a {
+      color: inherit;
+    }
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 1175px) {
+      .of-topbar {
+        position: static;
+      }
+
+      .of-topbar__inner {
+        padding: 14px 16px;
+      }
+
+      .of-topbar__brand {
+        font-size: 22px;
+      }
+
+      .of-nav {
+        gap: 0;
+      }
+
+      .of-nav a {
+        padding: 6px 8px;
+        font-size: 13px;
+      }
+
+      .tpwl-logo-header {
+        position: static;
+        padding: 24px 16px 6px;
+        margin-bottom: 0px;
+      }
+
+      .tpwl-logo-header h1 {
+        font-size: 34px;
+        max-width: 512px;
+      }
+
+      .tpwl__content {
+        max-width: unset;
+        min-width: unset;
+      }
+
+      .tpwl-search__wrapper {
+        display: block;
+      }
+
+      .tpwl-search-header {
+        padding: 16px;
+        position: static;
+      }
+
+      .tpwl-tickets__wrapper {
+        padding: 0px 16px;
+      }
+
+      .tpwl-widgets__wrapper {
+        padding: 48px 16px;
+      }
+
+      .tpwl-widgets__wrapper h3 {
+        font-size: 28px;
+      }
+
+      .tpwl-widgets__wrapper .tpwl__content {
+        flex: 1 0 100%;
+      }
+
+      .tpwl-widget-weedles {
+        grid-template-columns: 1fr;
+      }
+
+      .tpwl-footer__wrapper {
+        padding: 48px 16px 20px;
+      }
+
+      .of-footer__grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 32px;
+      }
+
+      .of-footer__bottom {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .of-nav {
+        display: none;
+      }
+    }
+    
+  </style>
+
+  [:embed_script:]
+  [:cookie_policy_script:]
+</head>
+
+<body>
+  <nav class="of-topbar" itemscope itemtype="http://schema.org/WPHeader" role="banner">
+    <div class="of-topbar__inner">
+      <a href="https://originfacts.com" class="of-topbar__brand">Originfacts</a>
+      <div class="of-nav">
+        <a href="https://originfacts.com/destinations">Destinations</a>
+        <a href="https://originfacts.com/flights">Flights</a>
+        <a href="https://originfacts.com/airlines">Airlines</a>
+        <a href="https://originfacts.com/airports">Airports</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="tpwl-logo-header">
+    <div class="tpwl-logo__wrapper">
+      <div class="tpwl-logo__logo"></div>
+      Flight tickets
+    </div>
+    <div class="tpwl-search__wrapper">
+      <div class="tpwl__content">
+        <h1>Your journey begins here</h1>
+      </div>
+    </div>
+  </header>
+
+  <header class="tpwl-search-header">
+    <div class="tpwl-search__wrapper">
+      <div class="tpwl__content">
+        <div id="tpwl-search"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="tpwl-main">
+    <div class="tpwl-tickets__wrapper">
+      <div class="tpwl__content">
+        <div id="tpwl-tickets"></div>
+      </div>
+    </div>
+
+    <div class="tpwl-widgets__wrapper">
+      <div class="tpwl__content">
+        <h3>Popular destinations</h3>
+        <div id="tpwl-widget-weedles" class="tpwl-widget-weedles">
+          <div class="tpwl-widget-weedle" data-destination="IST" is="weedle"></div>
+          <div class="tpwl-widget-weedle" data-destination="DXB" is="weedle"></div>
+          <div class="tpwl-widget-weedle" data-destination="MOW" is="weedle"></div>
+          <div class="tpwl-widget-weedle" data-destination="LAS" is="weedle"></div>
+          <div class="tpwl-widget-weedle" data-destination="NYC" is="weedle"></div>
+          <div class="tpwl-widget-weedle" data-destination="LON" is="weedle"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="tpwl-footer__wrapper">
+    <div class="of-footer__grid">
+      <div>
+        <div class="of-footer__brand">Originfacts</div>
+        <p class="of-footer__tagline">Travel writing without the fluff. Real itineraries, cheap flight tactics, hotels
+          we'd actually book twice.</p>
+      </div>
+
+      <div>
+        <h4 class="of-footer__heading">Categories</h4>
+        <ul class="of-footer__menu">
+          <li><a href="https://originfacts.com/articles">All stories</a></li>
+          <li><a href="https://originfacts.com/category/destinations">Destinations</a></li>
+          <li><a href="https://originfacts.com/category/flights">Flights</a></li>
+          <li><a href="https://originfacts.com/category/hotels">Hotels</a></li>
+          <li><a href="https://originfacts.com/category/travel-resources">Travel Resources</a></li>
+          <li><a href="https://originfacts.com/category/travel-tips">Travel Tips</a></li>
+          <li><a href="https://originfacts.com/category/car-rentals">Car Rental</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="of-footer__heading">Newsletter</h4>
+        <p class="of-footer__newsletter-copy">One email a week. Deals, guides, zero spam.</p>
+        <form class="of-footer__newsletter-form" action="https://originfacts.com/subscribe" method="get"
+          target="_blank">
+          <input type="email" name="email" placeholder="you@roam.com" required>
+          <button type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="of-footer__bottom">
+      <div>© [:current_year:] Originfacts · Search powered by Travelpayouts</div>
+      <div class="of-footer__legal">
+        <a href="#" target="_blank">Terms of Service</a>
+        <a href="#" target="_blank">Privacy Policy</a>
+        <a href="#" target="_blank">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="tpwl-cookie-banner" id="tpwl-cookie-banner">
+    <div class="tpwl-cookie-banner__logo"></div>
+    <div class="tpwl-cookie-banner__text">To provide a better experience we use cookies to store your search history and
+      selected filters. By clicking or navigating the site, you agree to allow our collection of information through
+      cookies.</div>
+    <div class="tpwl-cookie-banner__actions">
+      <button class="tpwl-cookie-banner__base-button tpwl-cookie-banner__accept"
+        id="tpwl-accept-cookie-btn">Accept</button>
+      <a class="tpwl-cookie-banner__base-button tpwl-cookie-banner__link" href="#" target="_blank">Cookies Policy</a>
+    </div>
+  </div>
+</body>
+
+<script>
+  (function () {
+    const container = document.getElementById('tpwl-widget-weedles');
+    const weedleElements = container.querySelectorAll('div[is="weedle"]');
+    weedleElements.forEach(element => {
+      if (!TPWL_EXTRA) return;
+      const destination = element.getAttribute('data-destination');
+      const scriptElement = document.createElement('script');
+      scriptElement.async = 1;
+      scriptElement.src = `https://[:widget_domain:]/content?currency=${String(TPWL_EXTRA.currency).toLowerCase()}&trs=${TPWL_EXTRA.trs}&shmarker=${TPWL_EXTRA.marker}&destination=${destination}&target_host=${TPWL_EXTRA.domain}&locale=${TPWL_EXTRA.locale}&limit=6&powered_by=false&primary=%23${TPWL_EXTRA.link_color}&promo_id=4044&campaign_id=100`;
+      element.appendChild(scriptElement);
+    });
+  })();
+</script>
+
+</html>
