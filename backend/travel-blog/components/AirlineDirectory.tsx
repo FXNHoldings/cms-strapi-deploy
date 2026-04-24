@@ -206,7 +206,7 @@ export default function AirlineDirectory({ airlines }: { airlines: StrapiAirline
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="font-urbanist text-3xl font-black text-forest-900 lg:text-4xl">{value}</div>
+      <div className="font-urbanist text-3xl font-bold text-forest-900">{value}</div>
       <div className="mt-1 text-xs uppercase tracking-widest text-forest-900/60">{label}</div>
     </div>
   );

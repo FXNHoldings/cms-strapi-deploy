@@ -9,7 +9,7 @@ export default function ArticleCard({ article, size = 'md' }: { article: StrapiA
   const sizeClasses = {
     sm: { img: 'aspect-[4/3]', title: 'text-lg', excerpt: 'line-clamp-2 text-sm' },
     md: { img: 'aspect-[5/4]', title: 'text-2xl', excerpt: 'line-clamp-3 text-base' },
-    lg: { img: 'aspect-[16/10]', title: 'text-4xl lg:text-5xl', excerpt: 'line-clamp-4 text-lg' },
+    lg: { img: 'aspect-[16/10]', title: 'text-2xl sm:text-3xl', excerpt: 'line-clamp-4 text-base sm:text-lg' },
   }[size];
 
   return (
@@ -30,7 +30,7 @@ export default function ArticleCard({ article, size = 'md' }: { article: StrapiA
       <div className="mt-4 flex flex-col gap-2">
         <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-forest-800/70">
           {article.category && (
-            <Link href={`/category/${article.category.slug}`} className="chip hover:bg-forest-800/10">
+            <Link href={`/category/${article.category.slug}`} className="chip hover:bg-primary-pressed">
               {article.category.name}
             </Link>
           )}
@@ -38,7 +38,7 @@ export default function ArticleCard({ article, size = 'md' }: { article: StrapiA
           {article.readingTimeMinutes ? <span>· {article.readingTimeMinutes} min read</span> : null}
         </div>
         <Link href={`/articles/${article.slug}`}>
-          <h3 className={`editorial-h font-bold leading-[1.05] text-forest-900 transition-colors group-hover:text-forest-700 ${sizeClasses.title}`}>
+          <h3 className={`editorial-h font-bold leading-tight text-forest-900 transition-colors group-hover:text-primary-highlight ${sizeClasses.title}`}>
             {article.title}
           </h3>
         </Link>

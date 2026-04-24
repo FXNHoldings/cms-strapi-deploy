@@ -19,11 +19,11 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-urbanist), system-ui, sans-serif;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
   ::selection {
-    background: theme('colors.forest.800');
-    color: theme('colors.sand.100');
+    background: theme('colors.primary.emphasis');
+    color: theme('colors.secondary.DEFAULT');
   }
   a { text-underline-offset: 3px; }
   img { border-radius: 4px !important; }
@@ -41,10 +41,10 @@
     background-size: 3px 3px, 5px 5px;
   }
   .chip {
-    @apply inline-flex items-center rounded-full border border-forest-800/20 bg-forest-800/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-forest-900;
+    @apply inline-flex items-center rounded-full border border-primary-emphasis/20 bg-primary-hover px-3 py-1 text-xs font-medium uppercase tracking-wider text-primary-emphasis;
   }
   .section-eyebrow {
-    @apply flex items-baseline gap-3 text-xs font-medium uppercase tracking-[0.25em] text-forest-800/70;
+    @apply flex items-baseline gap-3 text-xs font-medium uppercase tracking-wider text-primary-emphasis/70;
   }
 }
 
@@ -54,7 +54,7 @@
          prose-p:font-sans prose-p:font-light
          prose-li:font-sans prose-li:font-light
          prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tightest prose-headings:text-forest-900
-         prose-a:text-terracotta-700 prose-a:no-underline hover:prose-a:underline
+         prose-a:text-primary-emphasis prose-a:no-underline hover:prose-a:text-primary-highlight hover:prose-a:underline
          prose-strong:font-medium prose-strong:text-ink
          prose-blockquote:border-l-sand-500 prose-blockquote:font-display prose-blockquote:font-normal prose-blockquote:text-forest-900 prose-blockquote:not-italic;
 }

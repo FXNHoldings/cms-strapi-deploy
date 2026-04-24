@@ -15,7 +15,7 @@ export default async function AirlinesPage() {
     <div className="mx-auto max-w-7xl px-6 py-16" data-testid="airlines-page">
       <header className="max-w-3xl">
         <p className="chip">Directory</p>
-        <h1 className="editorial-h mt-5 text-5xl font-black text-forest-900 lg:text-6xl">Airlines, indexed</h1>
+        <h1 className="editorial-h mt-5 text-3xl font-bold text-forest-900">Airlines, indexed</h1>
         <p className="mt-4 text-lg font-light text-forest-900/70">
           Every airline we track — searchable by name, IATA code, country, and region. Click through for hub, fleet context, and more.
         </p>

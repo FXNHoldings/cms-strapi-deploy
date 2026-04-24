@@ -25,7 +25,7 @@ export default function FlyPage() {
       <div className="mx-auto max-w-7xl px-6 py-16" data-testid="fly-page">
         <header className="max-w-3xl">
           <p className="chip">Search</p>
-          <h1 className="editorial-h mt-5 text-5xl font-black text-forest-900 lg:text-6xl">
+          <h1 className="editorial-h mt-5 text-3xl font-bold text-forest-900">
             Find a flight
           </h1>
           <p className="mt-4 text-lg font-light text-forest-900/70">

@@ -82,7 +82,7 @@ export default async function CountryPage({ params }: Props) {
       {/* Hero */}
       <header className="mx-auto mt-6 max-w-6xl overflow-hidden rounded-[0.3rem] bg-gradient-to-br from-forest-900 to-forest-700 px-8 py-14 text-sand-100">
         <div className="flex items-center gap-4">
-          <span className="text-6xl leading-none" aria-hidden>{flagEmoji(country.code)}</span>
+          <span className="text-4xl leading-none" aria-hidden>{flagEmoji(country.code)}</span>
           <div>
             <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest opacity-80">
               {country.region && <span>{country.region}</span>}
@@ -95,7 +95,7 @@ export default async function CountryPage({ params }: Props) {
                 </span>
               )}
             </div>
-            <h1 className="editorial-h mt-3 text-4xl font-black leading-[1.05] lg:text-6xl">
+            <h1 className="editorial-h mt-3 text-3xl font-bold leading-tight sm:text-4xl">
               {country.name}
             </h1>
             {country.about && (
@@ -243,7 +243,7 @@ export default async function CountryPage({ params }: Props) {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="font-urbanist text-3xl font-black leading-none lg:text-4xl">{value}</div>
+      <div className="font-urbanist text-3xl font-bold leading-none sm:text-3xl">{value}</div>
       <div className="mt-2 text-xs uppercase tracking-widest opacity-70">{label}</div>
     </div>
   );

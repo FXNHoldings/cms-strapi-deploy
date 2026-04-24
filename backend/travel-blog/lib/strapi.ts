@@ -23,7 +23,7 @@ export type StrapiArticle = {
   category?: { id: number; name: string; slug: string; color?: string } | null;
   tags?: { id: number; name: string; slug: string }[];
   author?: { id: number; name: string; slug: string; avatar?: StrapiImage } | null;
-  destinations?: { id: number; name: string; slug: string }[];
+  destinations?: { id: number; name: string; slug: string; type?: 'country' | 'region' | 'city' }[];
 };
 
 export type StrapiCategory = {
@@ -137,10 +137,20 @@ export function mediaUrl(img: StrapiImage): string | null {
   return img.url.startsWith('http') ? img.url : `${BASE}${img.url}`;
 }
 
-export async function listArticles(opts: { page?: number; pageSize?: number; category?: string; destination?: string } = {}) {
+export async function listArticles(opts: { page?: number; pageSize?: number; category?: string; destination?: string; q?: string } = {}) {
   const filters: Record<string, unknown> = {};
   if (opts.category) filters.category = { slug: { $eqi: opts.category } };
   if (opts.destination) filters.destinations = { slug: { $eqi: opts.destination } };
+  if (opts.q?.trim()) {
+    const q = opts.q.trim();
+    filters.$or = [
+      { title: { $containsi: q } },
+      { excerpt: { $containsi: q } },
+      { content: { $containsi: q } },
+      { category: { name: { $containsi: q } } },
+      { destinations: { name: { $containsi: q } } },
+    ];
+  }
 
   const res = await strapiFetch<ListResponse<StrapiArticle>>('articles', {
     sort: ['publishedAt:desc'],
@@ -149,6 +159,29 @@ export async function listArticles(opts: { page?: number; pageSize?: number; cat
     filters,
   });
   return res;
+}
+
+export async function listDestinationArticles(opts: { page?: number; pageSize?: number } = {}) {
+  const res = await strapiFetch<ListResponse<StrapiArticle>>('articles', {
+    sort: ['publishedAt:desc'],
+    populate: ['coverImage', 'category', 'tags', 'author', 'destinations'],
+    pagination: { page: opts.page ?? 1, pageSize: opts.pageSize ?? 12 },
+    filters: {
+      destinations: {
+        id: { $notNull: true },
+        type: { $in: ['city', 'country', 'region'] },
+      },
+    },
+  });
+
+  return {
+    ...res,
+    data: res.data.filter((article) =>
+      article.destinations?.some((destination) =>
+        ['city', 'country', 'region'].includes(destination.type ?? ''),
+      ),
+    ),
+  };
 }
 
 export async function getArticle(slug: string) {
@@ -311,7 +344,7 @@ export async function listRoutes() {
       carriers: { populate: ['logo'] },
     },
     pagination: { pageSize: 1000 },
-  });
+  }, 0);
   return res.data;
 }
 

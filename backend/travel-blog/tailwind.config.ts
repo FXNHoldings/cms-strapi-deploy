@@ -5,19 +5,38 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: {
+          emphasis: '#014fd3',
+          emphasisHover: '#0072de',
+          emphasisPressed: '#0046be',
+          highlight: '#0072de',
+          highlightHover: '#025ccc',
+          highlightPressed: '#014fd3',
+          hover: '#cfe9fe',
+          pressed: '#9bcffc',
+        },
+        secondary: {
+          DEFAULT: '#fff6d1',
+          emphasis: '#ffe200',
+          hover: '#fff200',
+          pressed: '#ffce00',
+        },
+        success: { emphasis: '#03721e' },
+        attention: { emphasis: '#983e00' },
+        danger: { emphasis: '#b00625' },
         forest: {
-          50: '#f1f7f4', 100: '#d8ebe0', 200: '#b2d7c3', 300: '#81b99c',
-          400: '#5a9b7b', 500: '#3f7e5e', 600: '#2d6249', 700: '#244e3b',
-          800: '#1b4332', 900: '#152f24', 950: '#0a1a14',
+          50: '#f0f4ff', 100: '#e7f4ff', 200: '#cfe9fe', 300: '#9bcffc',
+          400: '#4ea5f0', 500: '#0072de', 600: '#025ccc', 700: '#014fd3',
+          800: '#0046be', 900: '#092d74', 950: '#061b46',
         },
         sand: {
-          50: '#fdfaf2', 100: '#faedcd', 200: '#f5daa5', 300: '#edbf74',
-          400: '#e0a148', 500: '#cd8529', 600: '#ae6821', 700: '#8c4f1e',
-          800: '#6f401e', 900: '#5a361d',
+          50: '#fffdf0', 100: '#fff6d1', 200: '#fff200', 300: '#ffe200',
+          400: '#ffce00', 500: '#d6aa00', 600: '#aa8400', 700: '#7b6000',
+          800: '#554200', 900: '#332800',
         },
-        terracotta: { 500: '#c26a4f', 600: '#a9543c', 700: '#8b4331' },
-        ink: '#1a1a19',
-        paper: '#fbf8f2',
+        terracotta: { 500: '#b85812', 600: '#983e00', 700: '#7a3100' },
+        ink: '#07142b',
+        paper: '#f0f2f4',
       },
       fontFamily: {
         // Body default — Outfit (light 300)
@@ -27,7 +46,7 @@ export default {
         urbanist: ['var(--font-urbanist)', 'system-ui', 'sans-serif'],
         outfit: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
       },
-      letterSpacing: { tightest: '-0.04em' },
+      letterSpacing: { tightest: '0' },
       maxWidth: { prose: '68ch' },
       fontSize: {
         '6xl': ['2.5rem', { lineHeight: '1' }],

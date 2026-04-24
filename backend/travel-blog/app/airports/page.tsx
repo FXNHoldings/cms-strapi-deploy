@@ -15,7 +15,7 @@ export default async function AirportsPage() {
     <div className="mx-auto max-w-7xl px-6 py-16" data-testid="airports-page">
       <header className="max-w-3xl">
         <p className="chip">Directory</p>
-        <h1 className="editorial-h mt-5 text-5xl font-black text-forest-900 lg:text-6xl">Airports, mapped</h1>
+        <h1 className="editorial-h mt-5 text-3xl font-bold text-forest-900">Airports, mapped</h1>
         <p className="mt-4 text-lg font-light text-forest-900/70">
           Commercial airports indexed by IATA code. Search by name, city, country, or code — click through for routes and detail.
         </p>

@@ -65,7 +65,7 @@ export default async function CountriesPage() {
     <div className="mx-auto max-w-7xl px-6 py-16" data-testid="countries-page">
       <header className="max-w-3xl">
         <p className="chip">Directory</p>
-        <h1 className="editorial-h mt-5 text-5xl font-black text-forest-900 lg:text-6xl">Countries, mapped</h1>
+        <h1 className="editorial-h mt-5 text-3xl font-bold text-forest-900">Countries, mapped</h1>
         <p className="mt-4 text-lg font-light text-forest-900/70">
           Every country with commercial air service indexed from TravelPayouts. Search by name or ISO code — click through for the country&apos;s airports, airlines, and top routes.
         </p>

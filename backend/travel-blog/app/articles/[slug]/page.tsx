@@ -58,11 +58,11 @@ export default async function ArticlePage({ params }: Props) {
           {date && <time dateTime={article.publishedAt}>{date}</time>}
           {article.readingTimeMinutes ? <span>· {article.readingTimeMinutes} min read</span> : null}
         </div>
-        <h1 className="editorial-h mt-6 text-5xl font-black leading-[0.98] text-forest-900 lg:text-7xl lg:font-semibold" data-testid="article-title">
+        <h1 className="editorial-h mt-6 text-3xl font-bold leading-tight text-forest-900" data-testid="article-title">
           {article.title}
         </h1>
         {article.excerpt && (
-          <p className="mt-6 max-w-3xl text-xl text-ink/75 lg:text-2xl">{article.excerpt}</p>
+          <p className="mt-6 max-w-3xl text-base text-ink/75 sm:text-lg">{article.excerpt}</p>
         )}
         {article.author && (
           <div className="mt-8 flex items-center gap-3 text-sm text-forest-900/80">
@@ -124,7 +124,7 @@ export default async function ArticlePage({ params }: Props) {
       {related.length > 0 && (
         <section className="border-t border-forest-900/10 bg-forest-900/[0.02]">
           <div className="mx-auto max-w-7xl px-6 py-16" data-testid="related-section">
-            <h2 className="editorial-h text-3xl font-black text-forest-900 lg:text-4xl">Keep reading</h2>
+            <h2 className="editorial-h text-3xl font-bold text-forest-900">Keep reading</h2>
             <div className="mt-10 grid gap-10 md:grid-cols-3">
               {related.map((a) => <ArticleCard key={a.id} article={a} size="sm" />)}
             </div>

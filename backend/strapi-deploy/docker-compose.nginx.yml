@@ -60,25 +60,6 @@ services:
     networks:
       - fxn-net
 
-  autopost-worker:
-    build:
-      context: ./autopost-worker
-      dockerfile: Dockerfile
-    container_name: fxn-autopost
-    restart: unless-stopped
-    environment:
-      STRAPI_URL: http://strapi:1337
-      STRAPI_API_TOKEN: ${AUTOPOST_STRAPI_TOKEN}
-      SCHEDULER_INTERVAL_SECONDS: "60"
-      TIMEZONE: UTC
-      LOG_LEVEL: INFO
-    ports:
-      - "127.0.0.1:8001:8001"
-    depends_on:
-      - strapi
-    networks:
-      - fxn-net
-
 volumes:
   postgres-data:
   strapi-uploads:

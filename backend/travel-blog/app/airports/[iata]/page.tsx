@@ -55,7 +55,7 @@ export default async function AirportPage({ params }: Props) {
             {airport.country && <span>· {airport.country}</span>}
             {airport.timezone && <span>· {airport.timezone}</span>}
           </div>
-          <h1 className="editorial-h mt-3 text-4xl font-black leading-[1.05] lg:text-6xl">
+          <h1 className="editorial-h mt-3 text-3xl font-bold leading-tight sm:text-4xl">
             {airport.name}
           </h1>
           <div className="mt-4 flex flex-wrap items-center gap-3 font-mono text-xs">

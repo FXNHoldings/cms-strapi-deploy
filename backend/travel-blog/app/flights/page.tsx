@@ -15,7 +15,7 @@ export default async function FlightsPage() {
     <div className="mx-auto max-w-7xl px-6 py-16" data-testid="flights-page">
       <header className="max-w-3xl">
         <p className="chip">Directory</p>
-        <h1 className="editorial-h mt-5 text-5xl font-black text-forest-900 lg:text-6xl">Flight routes, charted</h1>
+        <h1 className="editorial-h mt-5 text-3xl font-bold text-forest-900">Flight routes, charted</h1>
         <p className="mt-4 text-lg font-light text-forest-900/70">
           City-pair routes indexed for carriers, flight time, and distance. Search by origin, destination, IATA, or country — click through to book.
         </p>

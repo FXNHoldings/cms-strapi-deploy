@@ -16,7 +16,7 @@ export default async function DestinationsPage() {
     <div className="mx-auto max-w-7xl px-6 py-16" data-testid="destinations-page">
       <header className="max-w-3xl">
         <p className="chip">Places</p>
-        <h1 className="editorial-h mt-5 text-5xl font-black text-forest-900 lg:text-6xl">
+        <h1 className="editorial-h mt-5 text-3xl font-bold text-forest-900">
           Where we've been
         </h1>
         <p className="mt-5 text-xl text-ink/70">

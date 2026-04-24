@@ -54,10 +54,10 @@ export default async function RoutePage({ params }: Props) {
 
       {/* Hero — origin → destination */}
       <header className="mx-auto mt-8 max-w-6xl px-6">
-        <p className="font-urbanist text-xs uppercase tracking-[0.25em] text-forest-800/70">
+        <p className="font-urbanist text-xs uppercase tracking-wider text-forest-800/70">
           Route · {origin.iata} → {destination.iata}
         </p>
-        <h1 className="editorial-h mt-4 text-4xl font-black leading-[1.05] text-forest-900 lg:text-6xl">
+        <h1 className="editorial-h mt-4 text-3xl font-bold leading-tight text-forest-900 sm:text-4xl">
           Flights from {origin.city || origin.name} to {destination.city || destination.name}
         </h1>
         <div className="mt-6 grid gap-4 sm:grid-cols-[1fr,auto,1fr] sm:items-center">
@@ -185,7 +185,7 @@ function AirportCard({
 function Stat({ label, value, mono = false }: { label: string; value: string; mono?: boolean }) {
   return (
     <div>
-      <div className={'font-urbanist text-2xl font-black text-forest-900 lg:text-3xl ' + (mono ? 'font-mono !text-xl lg:!text-2xl' : '')}>
+      <div className={'font-urbanist text-2xl font-bold text-forest-900 lg:text-3xl ' + (mono ? 'font-mono !text-xl lg:!text-2xl' : '')}>
         {value}
       </div>
       <div className="mt-1 text-xs uppercase tracking-widest text-forest-900/60">{label}</div>

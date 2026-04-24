@@ -39,7 +39,7 @@ export default async function DestinationPage({ params }: Props) {
           <div className="text-xs uppercase tracking-widest opacity-80">
             {destination.type ?? 'Destination'}{destination.countryCode ? ` · ${destination.countryCode}` : ''}
           </div>
-          <h1 className="editorial-h mt-3 text-6xl font-black lg:text-8xl">{destination.name}</h1>
+          <h1 className="editorial-h mt-3 text-3xl font-bold sm:text-4xl">{destination.name}</h1>
           {destination.description && (
             <p className="mt-4 max-w-2xl text-lg opacity-90">{destination.description}</p>
           )}
@@ -48,7 +48,7 @@ export default async function DestinationPage({ params }: Props) {
 
       {/* Articles */}
       <div className="mx-auto max-w-7xl px-6 py-16">
-        <h2 className="editorial-h text-3xl font-black text-forest-900">
+        <h2 className="editorial-h text-3xl font-bold text-forest-900">
           {articles.length === 0 ? 'No stories yet' : `${articles.length} stor${articles.length === 1 ? 'y' : 'ies'} from ${destination.name}`}
         </h2>
         {articles.length > 0 && (

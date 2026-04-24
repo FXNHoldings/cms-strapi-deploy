@@ -42,7 +42,7 @@ export default async function AirlinePage({ params }: Props) {
               // eslint-disable-next-line @next/next/no-img-element
               <img src={logo} alt={airline.name} className="h-full w-full object-contain p-2" />
             ) : (
-              <span className="font-urbanist text-2xl font-black text-forest-900/60">
+              <span className="font-urbanist text-2xl font-bold text-forest-900/60">
                 {(airline.iataCode || airline.name).slice(0, 3).toUpperCase()}
               </span>
             )}
@@ -53,7 +53,7 @@ export default async function AirlinePage({ params }: Props) {
               {airline.region && <span>{airline.region}</span>}
               {airline.country && <span>· {airline.country}</span>}
             </div>
-            <h1 className="editorial-h mt-3 text-4xl font-black leading-[1.05] text-forest-900 lg:text-6xl">
+            <h1 className="editorial-h mt-3 text-3xl font-bold leading-tight text-forest-900 sm:text-4xl">
               {airline.name}
             </h1>
             <div className="mt-4 flex flex-wrap items-center gap-3 font-mono text-xs">
@@ -76,7 +76,7 @@ export default async function AirlinePage({ params }: Props) {
       <section className="mx-auto mt-14 max-w-6xl px-6 pb-20" data-testid="airline-about">
         <div className="grid gap-10 lg:grid-cols-[3fr_6fr]">
           <aside className="rounded-[0.3rem] border border-forest-900/10 bg-forest-900/[0.02] p-6 lg:self-start">
-            <h3 className="editorial-h text-xs font-bold uppercase tracking-[0.2em] text-forest-900/60">
+            <h3 className="editorial-h text-xs font-bold uppercase tracking-wider text-forest-900/60">
               Details
             </h3>
             <dl className="mt-5 space-y-4">
