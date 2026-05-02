@@ -71,11 +71,12 @@
 
 /* Article body — Inter normal, keep headings bold */
 .prose-article {
-  @apply prose prose-stone max-w-prose
+  @apply prose prose-stone
          prose-p:font-sans prose-p:font-normal
          prose-li:font-sans prose-li:font-normal
          prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tightest prose-headings:text-forest-900
          prose-a:text-primary-emphasis prose-a:no-underline hover:prose-a:text-primary-highlight hover:prose-a:underline
          prose-strong:font-medium prose-strong:text-ink
          prose-blockquote:border-l-sand-500 prose-blockquote:font-display prose-blockquote:font-normal prose-blockquote:text-forest-900 prose-blockquote:not-italic;
+  max-width: none;
 }

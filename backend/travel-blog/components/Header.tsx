@@ -7,7 +7,7 @@ export default function Header() {
       className="sticky top-0 z-50 border-b border-primary-emphasis/10 bg-paper/90 backdrop-blur"
       data-testid="site-header"
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+      <div className="mx-auto flex max-w-[1500px] items-center gap-6 px-6 py-5">
         <Link href="/" className="block shrink-0" data-testid="logo-link" aria-label="Originfacts home">
           <Image
             src="/brand/logo/logo.svg"
@@ -18,6 +18,38 @@ export default function Header() {
             className="h-12 w-auto sm:h-14"
           />
         </Link>
+
+        <form
+          action="/articles"
+          method="get"
+          role="search"
+          className="hidden md:flex h-10 w-full max-w-md flex-1 items-center gap-2 rounded-full border border-forest-900/15 bg-white px-4 transition focus-within:border-primary-emphasis"
+          data-testid="header-search"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-4 w-4 shrink-0 text-forest-900/50"
+            aria-hidden
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <label htmlFor="header-search-input" className="sr-only">Search stories</label>
+          <input
+            id="header-search-input"
+            type="search"
+            name="q"
+            placeholder="Search stories…"
+            className="h-full w-full bg-transparent text-sm text-forest-900 outline-none placeholder:text-forest-900/45"
+            data-testid="header-search-input"
+          />
+        </form>
 
         <div className="ml-auto flex items-center justify-end gap-2">
           <nav className="hidden md:block" data-testid="primary-nav">
@@ -118,28 +150,6 @@ export default function Header() {
             </ul>
           </nav>
 
-          <Link
-            href="/articles"
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-primary-emphasis transition hover:bg-primary-hover hover:text-primary-highlight"
-            aria-label="Search stories"
-            title="Search stories"
-            data-testid="nav-search"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-5 w-5"
-              aria-hidden
-            >
-              <circle cx="11" cy="11" r="7" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-          </Link>
         </div>
       </div>
     </header>

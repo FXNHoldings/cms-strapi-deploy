@@ -14,6 +14,7 @@ import {
   type StrapiDestination,
 } from '@/lib/strapi';
 import ArticleCard from '@/components/ArticleCard';
+import CountryAbout from '@/components/CountryAbout';
 import CountryDetailSections from '@/components/CountryDetailSections';
 import HotelCTA from '@/components/HotelCTA';
 import type { Metadata } from 'next';
@@ -177,7 +178,7 @@ function CountryDestinationPage({
           <img
             src={hero}
             alt={destination.name}
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.35]"
           />
         )}
         {/* Paper wash — heavier at the bottom so dark text stays crisp */}
@@ -214,20 +215,13 @@ function CountryDestinationPage({
 
       {/* About — only when description has named sections (## Overview / ## Highlights / ## Practical) */}
       {namedSections.length > 0 && (
-        <section className="mx-auto mt-14 max-w-3xl px-6" data-testid="country-about">
+        <section className="mx-auto mt-14 max-w-7xl px-6" data-testid="country-about">
           <p className="section-eyebrow">
             <span className="inline-block h-px w-8 bg-forest-800/60" />
             About {destination.name}
           </p>
-          <div className="prose-article mt-4">
-            {namedSections.map((s, i) => (
-              <div key={i} className={i === 0 ? '' : 'mt-8'}>
-                <h3 className="font-urbanist text-xl font-bold text-forest-900">{s.heading}</h3>
-                {s.paragraphs.map((p, j) => (
-                  <p key={j} className="mt-3">{p}</p>
-                ))}
-              </div>
-            ))}
+          <div className="mt-4">
+            <CountryAbout sections={namedSections} />
           </div>
         </section>
       )}
@@ -385,7 +379,7 @@ function ContinentDestinationPage({
           <img
             src={hero}
             alt={destination.name}
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.35]"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-paper/85 via-paper/20 to-transparent" />
