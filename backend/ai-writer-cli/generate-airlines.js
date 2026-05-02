@@ -7,7 +7,7 @@
 //   node generate-airlines.js
 //
 // With flags:
-//   node generate-airlines.js --region "Asia-Pacific" --count 10
+//   node generate-airlines.js --region Asia --count 10
 //   node generate-airlines.js --region Oceania -n 5
 //   node generate-airlines.js --type "Low-cost" -n 8 --region Europe
 //   node generate-airlines.js --names "Singapore Airlines, Qantas, Emirates" --dry-run
@@ -19,7 +19,7 @@ import { hideBin } from 'yargs/helpers';
 import slugify from 'slugify';
 import { select, input, confirm } from '@inquirer/prompts';
 
-const REGIONS = ['Oceania', 'Asia-Pacific', 'Europe', 'Americas', 'Middle East', 'Africa'];
+const REGIONS = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America'];
 const TYPES = ['Scheduled', 'Charter', 'Cargo', 'Low-cost', 'Regional'];
 
 const argv = yargs(hideBin(process.argv))
@@ -341,7 +341,7 @@ async function runInteractive() {
   } else {
     region = await select({
       message: 'Region?',
-      default: argv.region || 'Asia-Pacific',
+      default: argv.region || 'Asia',
       choices: REGIONS.map((r) => ({ name: r, value: r })),
     });
 

@@ -80,9 +80,18 @@ export default async function AirportPage({ params }: Props) {
             About {airport.iata}
           </p>
           <div className="prose-article mt-4">
-            {airport.about.split(/\n{2,}/).map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
+            {parseAboutSections(airport.about).map((s, i) =>
+              s.heading ? (
+                <div key={i} className={i === 0 ? '' : 'mt-8'}>
+                  <h3 className="font-urbanist text-xl font-bold text-forest-900">{s.heading}</h3>
+                  {s.paragraphs.map((p, j) => (
+                    <p key={j} className={j === 0 ? 'mt-3' : 'mt-3'}>{p}</p>
+                  ))}
+                </div>
+              ) : (
+                s.paragraphs.map((p, j) => <p key={`${i}-${j}`}>{p}</p>)
+              ),
+            )}
           </div>
         </section>
       )}
@@ -143,4 +152,26 @@ function formatDuration(minutes: number): string {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
   return m === 0 ? `${h}h` : `${h}h ${m}m`;
+}
+
+type AboutSection = { heading: string | null; paragraphs: string[] };
+
+function parseAboutSections(about: string): AboutSection[] {
+  const sections: AboutSection[] = [];
+  let current: AboutSection = { heading: null, paragraphs: [] };
+  for (const block of about.split(/\n{2,}/)) {
+    const trimmed = block.trim();
+    if (!trimmed) continue;
+    const headingMatch = trimmed.match(/^##\s+(.+)$/m);
+    if (headingMatch && trimmed.startsWith('##')) {
+      if (current.heading || current.paragraphs.length) sections.push(current);
+      current = { heading: headingMatch[1].trim(), paragraphs: [] };
+      const remainder = trimmed.replace(/^##\s+.+\n?/, '').trim();
+      if (remainder) current.paragraphs.push(remainder);
+    } else {
+      current.paragraphs.push(trimmed);
+    }
+  }
+  if (current.heading || current.paragraphs.length) sections.push(current);
+  return sections;
 }

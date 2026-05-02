@@ -14,7 +14,7 @@
     "currency": { "type": "string", "maxLength": 3 },
     "region": {
       "type": "enumeration",
-      "enum": ["Oceania", "Asia-Pacific", "Europe", "Americas", "Middle East", "Africa"]
+      "enum": ["Africa", "Asia", "Europe", "North America", "Oceania", "South America"]
     },
     "about": { "type": "text" },
     "heroImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] }

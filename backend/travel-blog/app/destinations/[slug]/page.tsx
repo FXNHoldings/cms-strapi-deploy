@@ -5,18 +5,22 @@ import {
   listAirlinesByCountry,
   listAirportsByCountryCode,
   listArticles,
+  listCountriesByRegion,
   listRoutesToDestination,
   mediaUrl,
   type StrapiAirline,
   type StrapiAirport,
+  type StrapiCountry,
   type StrapiDestination,
 } from '@/lib/strapi';
 import ArticleCard from '@/components/ArticleCard';
 import CountryDetailSections from '@/components/CountryDetailSections';
-import HotelSearchCTA from '@/components/HotelSearchCTA';
+import HotelCTA from '@/components/HotelCTA';
 import type { Metadata } from 'next';
 
 export const revalidate = 60;
+
+const CONTINENTS = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America'] as const;
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -33,9 +37,11 @@ export default async function DestinationPage({ params }: Props) {
   if (!destination) notFound();
 
   const isCountry = destination.type === 'country' && !!destination.countryCode;
+  const isContinent =
+    destination.type === 'region' && (CONTINENTS as readonly string[]).includes(destination.name);
   const routeLimit = isCountry ? 4 : 12;
 
-  const [{ data: articles }, routes, airports, airlines] = await Promise.all([
+  const [{ data: articles }, routes, airports, airlines, countries] = await Promise.all([
     listArticles({ destination: slug, pageSize: 24 }),
     listRoutesToDestination(destination, routeLimit).catch(() => []),
     isCountry
@@ -44,6 +50,9 @@ export default async function DestinationPage({ params }: Props) {
     isCountry
       ? listAirlinesByCountry(destination.name).catch(() => [] as StrapiAirline[])
       : Promise.resolve<StrapiAirline[]>([]),
+    isContinent
+      ? listCountriesByRegion(destination.name).catch(() => [] as StrapiCountry[])
+      : Promise.resolve<StrapiCountry[]>([]),
   ]);
 
   const hero = mediaUrl(destination.heroImage ?? null);
@@ -56,6 +65,17 @@ export default async function DestinationPage({ params }: Props) {
         airports={airports}
         airlines={airlines}
         routes={routes}
+        articles={articles}
+      />
+    );
+  }
+
+  if (isContinent) {
+    return (
+      <ContinentDestinationPage
+        destination={destination}
+        hero={hero}
+        countries={countries}
         articles={articles}
       />
     );
@@ -114,7 +134,7 @@ export default async function DestinationPage({ params }: Props) {
       )}
 
       <div className="pb-20">
-        <HotelSearchCTA destination={destination.name} subId={`destination-${slug}`} />
+        <HotelCTA destination={destination.name} subId={`destination-${slug}`} hotelsSlug={slug} />
       </div>
     </div>
   );
@@ -215,7 +235,7 @@ function CountryDestinationPage({
       )}
 
       {/* 4b. Hotels CTA */}
-      <HotelSearchCTA destination={destination.name} subId={`destination-${destination.slug}`} />
+      <HotelCTA destination={destination.name} subId={`destination-${destination.slug}`} hotelsSlug={destination.slug} />
 
       {/* 5. Stories — 4 cards */}
       <section className="mx-auto mt-16 max-w-7xl px-6 pb-20" data-testid="destination-stories">
@@ -286,4 +306,133 @@ function formatDuration(minutes: number): string {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
   return m === 0 ? `${h}h` : `${h}h ${m}m`;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Continent-type destination page                                            */
+/*                                                                            */
+/* Triggered when destination.type='region' AND destination.name is one of    */
+/* the 6 canonical continent values. Pulls all countries with matching        */
+/* `region` from the countries collection and renders a grid.                 */
+/* -------------------------------------------------------------------------- */
+
+function ContinentDestinationPage({
+  destination,
+  hero,
+  countries,
+  articles,
+}: {
+  destination: StrapiDestination;
+  hero: string | null;
+  countries: StrapiCountry[];
+  articles: Awaited<ReturnType<typeof listArticles>>['data'];
+}) {
+  return (
+    <article data-testid={`destination-page-${destination.slug}`}>
+      {/* 1. Hero */}
+      <section className="relative h-[55vh] min-h-[380px] overflow-hidden bg-paper">
+        {hero && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={hero}
+            alt={destination.name}
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-paper/85 via-paper/20 to-transparent" />
+
+        <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-end px-6 pb-14">
+          <div className="grid items-end gap-8 sm:grid-cols-[1fr_auto]">
+            <div>
+              <div className="text-xs uppercase tracking-widest text-forest-900/60">Continent</div>
+              <h1 className="editorial-h mt-3 text-3xl font-bold text-forest-900 sm:text-4xl">
+                {destination.name}
+              </h1>
+              {destination.description && (
+                <p className="mt-4 max-w-2xl text-lg leading-relaxed text-forest-900/75">
+                  {destination.description}
+                </p>
+              )}
+            </div>
+            <div className="grid grid-cols-2 gap-x-10 gap-y-5 sm:min-w-[240px]">
+              <HeroStat label="Countries" value={countries.length} />
+              <HeroStat label="Stories" value={articles.length} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Countries grid */}
+      {countries.length > 0 ? (
+        <section className="mx-auto mt-16 max-w-7xl px-6" data-testid="continent-countries">
+          <header className="flex items-end justify-between border-b border-forest-900/10 pb-3">
+            <h2 className="editorial-h text-2xl font-bold text-forest-900 lg:text-2xl">
+              Countries in {destination.name}
+            </h2>
+            <span className="text-sm font-light text-forest-900/50">
+              {countries.length} {countries.length === 1 ? 'country' : 'countries'}
+            </span>
+          </header>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {countries.map((c) => (
+              <li key={c.id}>
+                <CountryChip country={c} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : (
+        <section className="mx-auto mt-16 max-w-7xl px-6">
+          <div className="rounded-md border border-forest-900/10 bg-forest-50 px-6 py-5 text-sm text-forest-900/75">
+            No countries published in {destination.name} yet.
+          </div>
+        </section>
+      )}
+
+      {/* 3. Stories */}
+      {articles.length > 0 && (
+        <section className="mx-auto mt-16 max-w-7xl px-6 pb-20" data-testid="continent-stories">
+          <header className="flex items-end justify-between border-b border-forest-900/10 pb-3">
+            <h2 className="editorial-h text-2xl font-bold text-forest-900 lg:text-2xl">
+              Stories from {destination.name}
+            </h2>
+          </header>
+          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {articles.slice(0, 8).map((a) => (
+              <ArticleCard key={a.id} article={a} size="compact" />
+            ))}
+          </div>
+        </section>
+      )}
+    </article>
+  );
+}
+
+function flagEmoji(code?: string): string {
+  if (!code || code.length !== 2) return '🌍';
+  const cc = code.toUpperCase();
+  return String.fromCodePoint(...[...cc].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
+}
+
+function CountryChip({ country }: { country: StrapiCountry }) {
+  return (
+    <Link
+      href={`/countries/${country.code}`}
+      className="group flex items-center gap-3 rounded-lg border border-forest-900/10 bg-paper px-4 py-3 transition hover:-translate-y-0.5 hover:border-forest-900/30 hover:shadow-sm"
+      data-testid={`continent-country-${country.code}`}
+    >
+      <span className="text-2xl" aria-hidden>{flagEmoji(country.code)}</span>
+      <div className="min-w-0 flex-1">
+        <div className="font-urbanist text-sm font-bold text-forest-900 transition group-hover:text-forest-700">
+          {country.name}
+        </div>
+        {country.currency && (
+          <div className="mt-0.5 truncate text-xs text-forest-900/60">
+            <span className="font-mono">{country.code}</span>
+            <span className="ml-2">{country.currency}</span>
+          </div>
+        )}
+      </div>
+    </Link>
+  );
 }

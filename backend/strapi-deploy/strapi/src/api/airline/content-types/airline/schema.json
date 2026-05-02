@@ -25,8 +25,8 @@
     "city": { "type": "string", "maxLength": 80 },
     "region": {
       "type": "enumeration",
-      "enum": ["Oceania", "Asia-Pacific", "Europe", "Americas", "Middle East", "Africa"],
-      "default": "Asia-Pacific"
+      "enum": ["Africa", "Asia", "Europe", "North America", "Oceania", "South America"],
+      "default": "Asia"
     },
     "founded": { "type": "integer", "min": 1900, "max": 2100 },
     "logo": { "type": "media", "multiple": false, "allowedTypes": ["images"] },

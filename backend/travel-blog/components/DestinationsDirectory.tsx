@@ -7,9 +7,22 @@ import { mediaUrl, type StrapiDestination } from '@/lib/strapi';
 
 type Filter = 'all' | 'region' | 'country' | 'city';
 const SECTION_LIMITS: Record<'region' | 'country' | 'city', number> = {
-  region: 4,
+  region: 6,
   country: 5,
   city: 14,
+};
+
+// Canonical 6 continents — `type=region` destinations matching these names are
+// rendered as "Continents"; everything else with type=region renders below.
+const CONTINENT_NAMES = new Set(['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America']);
+
+const SECTION_INTROS = {
+  continents:
+    "Six continents, six travel chapters. Each page rolls up the countries we cover in that part of the world plus the stories worth reading first. Start broad, then zoom in by country or city.",
+  countries:
+    "Every country we cover — primary destinations, secondary stops, and the layover countries you only see between flights. Each page rolls up airports, hub airlines, hotels, and the practical detail that makes a place visitable.",
+  cities:
+    "Cities are where most travel actually happens — beds, meals, the next plane out. Each city page collects hotels on a live map, the airports that serve it, and stories worth reading before you go.",
 };
 
 export default function DestinationsDirectory({
@@ -63,6 +76,16 @@ export default function DestinationsDirectory({
     return buckets;
   }, [matches]);
 
+  // Split the region bucket: continents first (canonical 6), travel regions after.
+  const continents = useMemo(
+    () => byType.region.filter((d) => CONTINENT_NAMES.has(d.name)),
+    [byType.region],
+  );
+  const travelRegions = useMemo(
+    () => byType.region.filter((d) => !CONTINENT_NAMES.has(d.name)),
+    [byType.region],
+  );
+
   const flatShown = filter === 'all' ? matches : byType[filter];
   const isFlat = filter !== 'all' || query.trim().length > 0;
 
@@ -71,7 +94,7 @@ export default function DestinationsDirectory({
       {/* Stat strip */}
       <div className="grid gap-6 rounded-[0.3rem] border border-forest-900/10 bg-forest-900/[0.02] p-6 sm:grid-cols-4">
         <Stat label="Total" value={destinations.length.toLocaleString()} />
-        <Stat label="Regions" value={byType.region.length.toLocaleString()} />
+        <Stat label="Continents" value={byType.region.length.toLocaleString()} />
         <Stat label="Countries" value={byType.country.length.toLocaleString()} />
         <Stat label="Cities" value={byType.city.length.toLocaleString()} />
       </div>
@@ -92,7 +115,7 @@ export default function DestinationsDirectory({
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <span className="text-xs uppercase tracking-widest text-forest-900/50">Show:</span>
         <FilterChip label="All" active={filter === 'all'} onClick={() => setFilter('all')} />
-        <FilterChip label="Regions" active={filter === 'region'} onClick={() => setFilter('region')} />
+        <FilterChip label="Continents" active={filter === 'region'} onClick={() => setFilter('region')} />
         <FilterChip label="Countries" active={filter === 'country'} onClick={() => setFilter('country')} />
         <FilterChip label="Cities" active={filter === 'city'} onClick={() => setFilter('city')} />
       </div>
@@ -102,14 +125,24 @@ export default function DestinationsDirectory({
         <FlatResults items={flatShown} query={query} filter={filter} />
       ) : (
         <>
-          {byType.region.length > 0 && (
+          {continents.length > 0 && (
             <SectionHeader
-              title="Regions"
-              count={byType.region.length}
-              onViewAll={byType.region.length > SECTION_LIMITS.region ? () => setFilter('region') : undefined}
+              title="Continents"
+              count={continents.length}
+              onViewAll={continents.length > SECTION_LIMITS.region ? () => setFilter('region') : undefined}
             />
           )}
-          {byType.region.length > 0 && <RegionsLayout items={byType.region.slice(0, SECTION_LIMITS.region)} />}
+          {continents.length > 0 && <SectionIntro>{SECTION_INTROS.continents}</SectionIntro>}
+          {continents.length > 0 && <RegionsLayout items={continents.slice(0, SECTION_LIMITS.region)} />}
+
+          {travelRegions.length > 0 && (
+            <SectionHeader
+              title="Travel regions"
+              count={travelRegions.length}
+              onViewAll={travelRegions.length > SECTION_LIMITS.region ? () => setFilter('region') : undefined}
+            />
+          )}
+          {travelRegions.length > 0 && <RegionsLayout items={travelRegions.slice(0, SECTION_LIMITS.region)} />}
 
           {byType.country.length > 0 && (
             <SectionHeader
@@ -118,6 +151,7 @@ export default function DestinationsDirectory({
               onViewAll={byType.country.length > SECTION_LIMITS.country ? () => setFilter('country') : undefined}
             />
           )}
+          {byType.country.length > 0 && <SectionIntro>{SECTION_INTROS.countries}</SectionIntro>}
           {byType.country.length > 0 && <CountriesLayout items={byType.country.slice(0, SECTION_LIMITS.country)} />}
 
           {byType.city.length > 0 && (
@@ -127,6 +161,7 @@ export default function DestinationsDirectory({
               onViewAll={byType.city.length > SECTION_LIMITS.city ? () => setFilter('city') : undefined}
             />
           )}
+          {byType.city.length > 0 && <SectionIntro>{SECTION_INTROS.cities}</SectionIntro>}
           {byType.city.length > 0 && <CitiesRail items={byType.city.slice(0, SECTION_LIMITS.city)} />}
         </>
       )}
@@ -228,6 +263,14 @@ function FlatResults({
 /* -------------------------------------------------------------------------- */
 /* Pieces                                                                     */
 /* -------------------------------------------------------------------------- */
+
+function SectionIntro({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="mt-4 max-w-3xl text-base leading-relaxed text-forest-900/70">
+      {children}
+    </p>
+  );
+}
 
 function SectionHeader({
   title,

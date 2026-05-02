@@ -6,7 +6,7 @@ export const revalidate = 60;
 
 export const metadata = {
   title: 'Destinations',
-  description: "Every place we've written about — regions, countries, and cities worth your time. Search, filter, and browse.",
+  description: "Every place we've written about — continents, countries, and cities worth your time. Search, filter, and browse.",
 };
 
 export default async function DestinationsPage() {
@@ -20,7 +20,7 @@ export default async function DestinationsPage() {
           Where we've been
         </h1>
         <p className="mt-5 text-xl text-ink/70">
-          {destinations.length} destinations and counting. Browse by region, country, or city — or search for somewhere specific.
+          {destinations.length} destinations and counting. Browse by continent, country, or city — or search for somewhere specific.
         </p>
       </header>
 

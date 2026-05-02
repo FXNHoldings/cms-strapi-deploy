@@ -17,7 +17,7 @@
     "countryCode": { "type": "string", "maxLength": 3 },
     "region": {
       "type": "enumeration",
-      "enum": ["Oceania", "Asia-Pacific", "Europe", "Americas", "Middle East", "Africa"]
+      "enum": ["Africa", "Asia", "Europe", "North America", "Oceania", "South America"]
     },
     "latitude": { "type": "decimal" },
     "longitude": { "type": "decimal" },

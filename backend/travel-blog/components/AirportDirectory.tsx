@@ -2,9 +2,17 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import type { StrapiAirport, AirlineRegion } from '@/lib/strapi';
+import { mediaUrl, type StrapiAirport, type AirlineRegion } from '@/lib/strapi';
+import { HUB_AIRPORT_SET } from '@/lib/hub-airports';
 
-const REGION_ORDER: AirlineRegion[] = ['Oceania', 'Asia-Pacific', 'Europe', 'Americas', 'Middle East', 'Africa'];
+const REGION_ORDER: AirlineRegion[] = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America'];
+const TOP_HUBS_PREVIEW = 12;
+
+function flagEmoji(code?: string): string {
+  if (!code || code.length !== 2) return '✈️';
+  const cc = code.toUpperCase();
+  return String.fromCodePoint(...[...cc].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
+}
 
 export default function AirportDirectory({ airports }: { airports: StrapiAirport[] }) {
   const [query, setQuery] = useState('');
@@ -26,7 +34,7 @@ export default function AirportDirectory({ airports }: { airports: StrapiAirport
   const byRegion = useMemo(() => {
     const map = new Map<AirlineRegion, StrapiAirport[]>();
     for (const a of filtered) {
-      const r = (a.region || 'Asia-Pacific') as AirlineRegion;
+      const r = (a.region || 'Asia') as AirlineRegion;
       if (!map.has(r)) map.set(r, []);
       map.get(r)!.push(a);
     }
@@ -44,6 +52,12 @@ export default function AirportDirectory({ airports }: { airports: StrapiAirport
 
   const orderedRegions = REGION_ORDER.filter((r) => byRegion.has(r));
 
+  const hubs = useMemo(
+    () => airports.filter((a) => a.iata && HUB_AIRPORT_SET.has(a.iata.toUpperCase())),
+    [airports],
+  );
+  const hubsPreview = useMemo(() => hubs.slice(0, TOP_HUBS_PREVIEW), [hubs]);
+
   return (
     <div className="mt-10">
       {/* Stat strip */}
@@ -53,8 +67,35 @@ export default function AirportDirectory({ airports }: { airports: StrapiAirport
         <Stat label="Regions" value={regionCount.toString()} />
       </div>
 
+      {/* Top international hubs callout */}
+      {hubs.length > 0 && (
+        <section className="mt-10" data-testid="airport-hubs-callout">
+          <header className="flex items-end justify-between border-b border-forest-900/10 pb-3">
+            <div>
+              <p className="text-xs uppercase tracking-widest text-forest-900/50">Top international hubs</p>
+              <h2 className="editorial-h mt-2 text-2xl font-bold text-forest-900">
+                The world's busiest gateways
+              </h2>
+            </div>
+            <Link
+              href="/airports/hubs"
+              className="text-sm font-medium text-forest-700 hover:underline"
+            >
+              View all {hubs.length} hubs →
+            </Link>
+          </header>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {hubsPreview.map((a) => (
+              <li key={a.id}>
+                <HubChip airport={a} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {/* Search */}
-      <div className="mt-8">
+      <div className="mt-10">
         <input
           type="search"
           value={query}
@@ -181,6 +222,39 @@ function AirportCard({ airport }: { airport: StrapiAirport }) {
         <div className="mt-1 truncate text-xs text-forest-900/60">
           {airport.name}
           {airport.country && <span className="ml-2 text-forest-900/40">· {airport.country}</span>}
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function HubChip({ airport }: { airport: StrapiAirport }) {
+  const img = mediaUrl(airport.heroImage ?? null);
+  return (
+    <Link
+      href={`/airports/${airport.iata.toLowerCase()}`}
+      className="group flex h-full overflow-hidden rounded-lg border border-forest-900/10 bg-paper transition hover:-translate-y-0.5 hover:border-forest-900/30 hover:shadow-sm"
+      data-testid={`hub-chip-${airport.iata}`}
+    >
+      {img ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={img}
+          alt={airport.name}
+          className="h-20 w-24 shrink-0 object-cover transition duration-500 group-hover:scale-[1.02]"
+        />
+      ) : (
+        <div className="flex h-20 w-24 shrink-0 items-center justify-center bg-forest-900 font-mono text-sm font-bold text-sand-100">
+          {airport.iata}
+        </div>
+      )}
+      <div className="flex flex-1 flex-col justify-center p-3">
+        <div className="font-urbanist text-sm font-bold leading-tight text-forest-900 transition group-hover:text-forest-700">
+          {airport.city || airport.name}
+        </div>
+        <div className="mt-1 flex items-center gap-1.5 text-xs text-forest-900/60">
+          <span aria-hidden>{flagEmoji(airport.countryCode)}</span>
+          <span className="truncate">{airport.country ?? '?'}</span>
         </div>
       </div>
     </Link>

@@ -40,6 +40,15 @@ export default function Header() {
                   Flights
                 </Link>
               </li>
+              <li data-testid="nav-item-hotels">
+                <Link
+                  href="/hotels"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-primary-emphasis transition-colors hover:text-primary-highlight"
+                  data-testid="nav-hotels"
+                >
+                  Hotels
+                </Link>
+              </li>
               <li data-testid="nav-item-airlines">
                 <Link
                   href="/airlines"
@@ -49,14 +58,53 @@ export default function Header() {
                   Airlines
                 </Link>
               </li>
-              <li data-testid="nav-item-airports">
+              <li
+                className="group/airports relative"
+                data-testid="nav-item-airports"
+              >
                 <Link
                   href="/airports"
                   className="inline-flex items-center gap-1.5 px-3 py-2 text-primary-emphasis transition-colors hover:text-primary-highlight"
                   data-testid="nav-airports"
+                  aria-haspopup="true"
                 >
                   Airports
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-3 w-3 opacity-60"
+                    aria-hidden
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
                 </Link>
+                <div
+                  className="invisible absolute left-0 top-full z-10 mt-1 min-w-[220px] rounded-md border border-forest-900/10 bg-paper p-1 opacity-0 shadow-md transition duration-150 group-hover/airports:visible group-hover/airports:opacity-100 group-focus-within/airports:visible group-focus-within/airports:opacity-100"
+                  role="menu"
+                  data-testid="nav-airports-dropdown"
+                >
+                  <Link
+                    href="/airports"
+                    className="block rounded px-3 py-2 text-sm text-primary-emphasis transition-colors hover:bg-forest-900/5 hover:text-primary-highlight"
+                    role="menuitem"
+                    data-testid="nav-airports-all"
+                  >
+                    All airports
+                  </Link>
+                  <Link
+                    href="/airports/hubs"
+                    className="block rounded px-3 py-2 text-sm text-primary-emphasis transition-colors hover:bg-forest-900/5 hover:text-primary-highlight"
+                    role="menuitem"
+                    data-testid="nav-airports-hubs"
+                  >
+                    Top international hubs
+                  </Link>
+                </div>
               </li>
               <li data-testid="nav-item-countries">
                 <Link

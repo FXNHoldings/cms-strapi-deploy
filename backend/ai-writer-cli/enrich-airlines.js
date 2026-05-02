@@ -414,11 +414,14 @@ function buildRegionMap() {
   const map = {};
   const add = (region, names) => names.forEach((n) => (map[n] = region));
   add('Oceania', ['Australia', 'New Zealand', 'Fiji', 'Papua New Guinea', 'Samoa', 'Tonga', 'Vanuatu']);
-  add('Asia-Pacific', [
+  // Asia = former Asia-Pacific + Middle East
+  add('Asia', [
     'Japan', 'China', "People's Republic of China", 'South Korea', 'Korea', 'Taiwan', 'Hong Kong', 'Macau',
     'Singapore', 'Malaysia', 'Indonesia', 'Thailand', 'Vietnam', 'Philippines', 'Cambodia', 'Laos',
     'Myanmar', 'Brunei', 'India', 'Pakistan', 'Bangladesh', 'Sri Lanka', 'Nepal', 'Bhutan', 'Mongolia',
     'Maldives',
+    'United Arab Emirates', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Bahrain', 'Oman', 'Yemen', 'Iraq',
+    'Iran', 'Israel', 'Jordan', 'Lebanon', 'Syria',
   ]);
   add('Europe', [
     'United Kingdom', 'Ireland', 'France', 'Germany', 'Spain', 'Portugal', 'Italy', 'Netherlands',
@@ -428,16 +431,15 @@ function buildRegionMap() {
     'North Macedonia', 'Albania', 'Estonia', 'Latvia', 'Lithuania', 'Ukraine', 'Belarus', 'Russia',
     'Moldova', 'Turkey',
   ]);
-  add('Americas', [
+  // Americas split: Northern + Central + Caribbean → North America; everything else → South America.
+  add('North America', [
     'United States', 'United States of America', 'USA', 'Canada', 'Mexico', 'Guatemala', 'Belize',
     'Honduras', 'El Salvador', 'Nicaragua', 'Costa Rica', 'Panama', 'Cuba', 'Dominican Republic',
-    'Haiti', 'Jamaica', 'Puerto Rico', 'Bahamas', 'Barbados', 'Trinidad and Tobago', 'Brazil', 'Argentina',
-    'Chile', 'Uruguay', 'Paraguay', 'Bolivia', 'Peru', 'Ecuador', 'Colombia', 'Venezuela', 'Guyana',
-    'Suriname',
+    'Haiti', 'Jamaica', 'Puerto Rico', 'Bahamas', 'Barbados', 'Trinidad and Tobago',
   ]);
-  add('Middle East', [
-    'United Arab Emirates', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Bahrain', 'Oman', 'Yemen', 'Iraq',
-    'Iran', 'Israel', 'Jordan', 'Lebanon', 'Syria',
+  add('South America', [
+    'Brazil', 'Argentina', 'Chile', 'Uruguay', 'Paraguay', 'Bolivia', 'Peru', 'Ecuador', 'Colombia',
+    'Venezuela', 'Guyana', 'Suriname',
   ]);
   add('Africa', [
     'South Africa', 'Egypt', 'Morocco', 'Tunisia', 'Algeria', 'Libya', 'Nigeria', 'Kenya', 'Ethiopia',

@@ -62,7 +62,7 @@ export type StrapiDestination = {
 };
 
 export type AirlineType = 'Scheduled' | 'Charter' | 'Cargo' | 'Low-cost' | 'Regional';
-export type AirlineRegion = 'Oceania' | 'Asia-Pacific' | 'Europe' | 'Americas' | 'Middle East' | 'Africa';
+export type AirlineRegion = 'Africa' | 'Asia' | 'Europe' | 'North America' | 'Oceania' | 'South America';
 
 export type StrapiAirline = {
   id: number;
@@ -218,12 +218,10 @@ export async function getCategory(slug: string) {
 }
 
 export async function listDestinations() {
-  const res = await strapiFetch<ListResponse<StrapiDestination>>('destinations', {
+  return fetchAllPages<StrapiDestination>('destinations', {
     sort: ['name:asc'],
     populate: ['heroImage'],
-    pagination: { pageSize: 100 },
   });
-  return res.data;
 }
 
 export async function getDestination(slug: string) {
@@ -254,13 +252,42 @@ export async function listCountryDestinations(limit = 12) {
   return res.data;
 }
 
-export async function listAirlines() {
-  const res = await strapiFetch<ListResponse<StrapiAirline>>('airlines', {
+export async function listCitiesByCountryCode(code: string, limit = 100) {
+  const res = await strapiFetch<ListResponse<StrapiDestination>>('destinations', {
+    filters: { type: { $eq: 'city' }, countryCode: { $eqi: code } },
     sort: ['name:asc'],
-    populate: ['logo'],
-    pagination: { pageSize: 500 },
+    populate: ['heroImage'],
+    pagination: { pageSize: limit },
   });
   return res.data;
+}
+
+async function fetchAllPages<T>(
+  collection: string,
+  query: Record<string, unknown> & { pageSize?: number },
+): Promise<T[]> {
+  const { pageSize: rawPageSize, ...base } = query;
+  const pageSize = (rawPageSize as number | undefined) ?? 100;
+  const all: T[] = [];
+  let page = 1;
+  while (true) {
+    const res = await strapiFetch<ListResponse<T>>(collection, {
+      ...base,
+      pagination: { page, pageSize },
+    });
+    all.push(...res.data);
+    const pageCount = res.meta?.pagination?.pageCount ?? 1;
+    if (page >= pageCount) break;
+    page++;
+  }
+  return all;
+}
+
+export async function listAirlines() {
+  return fetchAllPages<StrapiAirline>('airlines', {
+    sort: ['name:asc'],
+    populate: ['logo'],
+  });
 }
 
 export async function getAirline(slug: string) {
@@ -273,12 +300,10 @@ export async function getAirline(slug: string) {
 }
 
 export async function listAirports() {
-  const res = await strapiFetch<ListResponse<StrapiAirport>>('airports', {
+  return fetchAllPages<StrapiAirport>('airports', {
     sort: ['name:asc'],
     populate: ['heroImage'],
-    pagination: { pageSize: 1000 },
   });
-  return res.data;
 }
 
 export async function getAirport(iata: string) {
@@ -291,12 +316,10 @@ export async function getAirport(iata: string) {
 }
 
 export async function listCountries() {
-  const res = await strapiFetch<ListResponse<StrapiCountry>>('countries', {
+  return fetchAllPages<StrapiCountry>('countries', {
     sort: ['name:asc'],
     populate: ['heroImage'],
-    pagination: { pageSize: 500 },
   });
-  return res.data;
 }
 
 export async function getCountry(code: string) {
@@ -306,6 +329,14 @@ export async function getCountry(code: string) {
     pagination: { pageSize: 1 },
   });
   return res.data?.[0] ?? null;
+}
+
+export async function listCountriesByRegion(region: string) {
+  return fetchAllPages<StrapiCountry>('countries', {
+    filters: { region: { $eq: region } },
+    sort: ['name:asc'],
+    populate: ['heroImage'],
+  });
 }
 
 export async function listAirportsByCountryCode(code: string, limit = 500) {

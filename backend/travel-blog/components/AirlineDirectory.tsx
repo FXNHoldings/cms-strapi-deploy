@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { mediaUrl, type StrapiAirline, type AirlineRegion, type AirlineType } from '@/lib/strapi';
 
-const REGION_ORDER: AirlineRegion[] = ['Oceania', 'Asia-Pacific', 'Europe', 'Americas', 'Middle East', 'Africa'];
+const REGION_ORDER: AirlineRegion[] = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America'];
 const TYPE_OPTIONS: AirlineType[] = ['Scheduled', 'Low-cost', 'Regional', 'Charter', 'Cargo'];
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const PER_REGION_LIMIT = 15;
@@ -45,7 +45,7 @@ export default function AirlineDirectory({ airlines }: { airlines: StrapiAirline
   const byRegion = useMemo(() => {
     const map = new Map<AirlineRegion, StrapiAirline[]>();
     for (const a of filtered) {
-      const r = (a.region || 'Asia-Pacific') as AirlineRegion;
+      const r = (a.region || 'Asia') as AirlineRegion;
       if (!map.has(r)) map.set(r, []);
       map.get(r)!.push(a);
     }

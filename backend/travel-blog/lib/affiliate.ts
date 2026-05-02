@@ -41,35 +41,6 @@ export type FlightSearchOpts = {
   returnDate?: string | null;
 };
 
-/**
- * Hotellook deep-link builder (TP-owned, same marker as flight links).
- *
- * Example:
- *   hotelSearchUrl({ destination: 'Thailand', subId: 'destination-thailand' })
- *   → https://search.hotellook.com/hotels?destination=Thailand&adults=2&marker=...&sub_id=destination-thailand
- */
-export type HotelSearchOpts = {
-  destination: string;          // city or country name, human-readable
-  checkIn?: string;             // YYYY-MM-DD
-  checkOut?: string;            // YYYY-MM-DD
-  adults?: number;              // default 2
-  children?: number;            // default 0
-  subId?: string;               // TP sub_id for per-page conversion tracking
-};
-
-export function hotelSearchUrl(opts: HotelSearchOpts): string {
-  const { destination, checkIn, checkOut, adults = 2, children = 0, subId } = opts;
-  const params = new URLSearchParams();
-  params.set('destination', destination);
-  if (checkIn) params.set('checkIn', checkIn);
-  if (checkOut) params.set('checkOut', checkOut);
-  params.set('adults', String(adults));
-  if (children > 0) params.set('children', String(children));
-  if (MARKER) params.set('marker', MARKER);
-  if (subId) params.set('sub_id', subId);
-  return `https://search.hotellook.com/hotels?${params.toString()}`;
-}
-
 export function flightSearchUrl(opts: FlightSearchOpts): string {
   const {
     origin,

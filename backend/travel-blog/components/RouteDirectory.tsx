@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import type { StrapiRoute, AirlineRegion } from '@/lib/strapi';
 
-const REGION_ORDER: AirlineRegion[] = ['Oceania', 'Asia-Pacific', 'Europe', 'Americas', 'Middle East', 'Africa'];
+const REGION_ORDER: AirlineRegion[] = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America'];
 
 export default function RouteDirectory({ routes }: { routes: StrapiRoute[] }) {
   const [query, setQuery] = useState('');
@@ -37,7 +37,7 @@ export default function RouteDirectory({ routes }: { routes: StrapiRoute[] }) {
   const byRegion = useMemo(() => {
     const map = new Map<AirlineRegion, StrapiRoute[]>();
     for (const r of filtered) {
-      const region = (r.origin?.region || 'Asia-Pacific') as AirlineRegion;
+      const region = (r.origin?.region || 'Asia') as AirlineRegion;
       if (!map.has(region)) map.set(region, []);
       map.get(region)!.push(r);
     }

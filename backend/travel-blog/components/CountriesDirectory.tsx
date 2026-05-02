@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import type { AirlineRegion } from '@/lib/strapi';
 
-const REGION_ORDER: AirlineRegion[] = ['Oceania', 'Asia-Pacific', 'Europe', 'Americas', 'Middle East', 'Africa'];
+const REGION_ORDER: AirlineRegion[] = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America'];
 const PER_REGION_LIMIT = 24;
 
 export type CountryRow = {
@@ -37,7 +37,7 @@ export default function CountriesDirectory({ countries }: { countries: CountryRo
   const byRegion = useMemo(() => {
     const map = new Map<AirlineRegion, CountryRow[]>();
     for (const c of filtered) {
-      const r = (c.region || 'Asia-Pacific') as AirlineRegion;
+      const r = (c.region || 'Asia') as AirlineRegion;
       if (!map.has(r)) map.set(r, []);
       map.get(r)!.push(c);
     }

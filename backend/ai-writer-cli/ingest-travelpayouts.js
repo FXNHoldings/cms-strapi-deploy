@@ -62,14 +62,21 @@ function buildRegionMap() {
   const add = (region, codes) => codes.forEach((c) => (map[c] = region));
 
   add('Oceania', ['AU','NZ','FJ','PG','SB','VU','NC','WS','TO','KI','NR','TV','FM','MH','PW','AS','GU','MP','CK','NU','NF','PN','TK','WF','PF']);
-  add('Asia-Pacific', ['CN','JP','KR','KP','TW','HK','MO','IN','PK','BD','LK','NP','BT','MV','AF','ID','MY','SG','TH','VN','LA','KH','MM','PH','BN','MN','TL','KZ','KG','TJ','TM','UZ']);
+  // Asia = former Asia-Pacific + Middle East
+  add('Asia', [
+    'CN','JP','KR','KP','TW','HK','MO','IN','PK','BD','LK','NP','BT','MV','AF','ID','MY','SG','TH','VN','LA','KH','MM','PH','BN','MN','TL','KZ','KG','TJ','TM','UZ',
+    'AE','SA','KW','BH','QA','OM','YE','IQ','IR','IL','PS','JO','LB','SY',
+  ]);
   add('Europe', [
     'AD','AL','AT','BA','BE','BG','BY','CH','CY','CZ','DE','DK','EE','ES','FI','FO','FR','GB','GE','GG','GI','GR','HR','HU','IE','IM','IS','IT','JE','LI','LT','LU','LV','MC','MD','ME','MK','MT','NL','NO','PL','PT','RO','RS','RU','SE','SI','SJ','SK','SM','UA','VA','XK','AM','AZ','TR',
   ]);
-  add('Americas', [
-    'US','CA','MX','AR','BR','CL','CO','PE','VE','UY','PY','BO','EC','GY','SR','GF','PA','CR','GT','HN','NI','SV','BZ','CU','DO','HT','JM','BS','BB','TT','GD','LC','VC','KN','AG','DM','CW','AW','BM','PR','VI','TC','KY','MS','AI','VG','SX','BL','MF','PM','BQ','GP','MQ','FK',
+  // Americas split: Northern America + Central America + Caribbean → North America;
+  // South America stays its own continent.
+  add('North America', [
+    'US','CA','MX','GL','PA','CR','GT','HN','NI','SV','BZ',
+    'CU','DO','HT','JM','BS','BB','TT','GD','LC','VC','KN','AG','DM','CW','AW','BM','PR','VI','TC','KY','MS','AI','VG','SX','BL','MF','PM','BQ','GP','MQ',
   ]);
-  add('Middle East', ['AE','SA','KW','BH','QA','OM','YE','IQ','IR','IL','PS','JO','LB','SY']);
+  add('South America', ['AR','BR','CL','CO','PE','VE','UY','PY','BO','EC','GY','SR','GF','FK']);
   add('Africa', [
     'DZ','AO','BJ','BW','BF','BI','CM','CV','CF','TD','KM','CG','CD','DJ','EG','GQ','ER','SZ','ET','GA','GM','GH','GN','GW','CI','KE','LS','LR','LY','MG','MW','ML','MR','MU','YT','MA','MZ','NA','NE','NG','RE','RW','SH','ST','SN','SC','SL','SO','ZA','SS','SD','TZ','TG','TN','UG','EH','ZM','ZW',
   ]);
