@@ -77,7 +77,10 @@ const ABOUT_SYSTEM = `You write country encyclopedia entries for an editorial tr
 
 Output MUST be strict JSON with these keys:
 {
-  "description": string  // Exactly three sections in markdown, separated by blank lines, each preceded by a level-2 heading. Total length 140-200 words.
+  "description": string  // A flowing 2-3 sentence intro paragraph, then a blank line, then exactly three sections in markdown separated by blank lines, each preceded by a level-2 heading. Total length 200-260 words.
+    //   (intro paragraph)  ~35-55 words across 2-3 sentences that paint the country's character — landscape contrasts, what defines daily life, a sensory detail or two. Editorial and confident, never promotional. Do NOT precede with a heading. Examples of the right tone:
+    //     "Iceland is fire and ice rendered into landscape: glaciers, geysers, black-sand beaches, and skies that flicker green half the year. Most of the island is wilderness; even the capital sits within sight of mountains."
+    //     "Brazil sprawls across half a continent — Amazon rainforest in the north, Atlantic beaches and samba-loud cities along the coast, vast cattle plains in the south. Football, music, and food shift accent every region you cross."
     //   ## Overview        ~50-65 words. Geography (region, neighbours, coastline if applicable), capital city, official language, currency, broad cultural identity.
     //   ## Highlights      ~50-65 words. The two or three things this country is best known for to travellers — major sights, iconic landscapes, signature food or culture. Concrete, specific. Avoid clichés like "rich tapestry" or "hidden gems".
     //   ## Practical       ~40-60 words. Visa picture (visa-on-arrival / visa-free for major passports if you know it confidently), best season to visit, currency notes, getting around basics.
@@ -99,7 +102,7 @@ function aboutUserPrompt(country) {
 async function generateContent(country) {
   const resp = await client.messages.create({
     model: CLAUDE_MODEL,
-    max_tokens: 1024,
+    max_tokens: 1500,
     system: ABOUT_SYSTEM,
     messages: [{ role: 'user', content: aboutUserPrompt(country) }],
   });

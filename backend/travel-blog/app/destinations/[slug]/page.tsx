@@ -164,6 +164,9 @@ function CountryDestinationPage({
   articles: Awaited<ReturnType<typeof listArticles>>['data'];
 }) {
   const cityCount = new Set(airports.map((a) => a.city).filter(Boolean)).size;
+  const aboutSections = destination.description ? parseAboutSections(destination.description) : [];
+  const leadParagraphs = aboutSections.find((s) => !s.heading)?.paragraphs ?? [];
+  const namedSections = aboutSections.filter((s) => s.heading);
 
   return (
     <article data-testid={`destination-page-${destination.slug}`}>
@@ -191,9 +194,9 @@ function CountryDestinationPage({
               <h1 className="editorial-h mt-3 text-3xl font-bold text-forest-900 sm:text-4xl">
                 {destination.name}
               </h1>
-              {destination.description && !destination.description.includes('##') && (
+              {leadParagraphs.length > 0 && (
                 <p className="mt-4 max-w-2xl text-lg leading-relaxed text-forest-900/75">
-                  {destination.description}
+                  {leadParagraphs.join(' ')}
                 </p>
               )}
             </div>
@@ -209,26 +212,22 @@ function CountryDestinationPage({
         </div>
       </section>
 
-      {/* About — only when description uses the 3-section markdown format */}
-      {destination.description && destination.description.includes('##') && (
+      {/* About — only when description has named sections (## Overview / ## Highlights / ## Practical) */}
+      {namedSections.length > 0 && (
         <section className="mx-auto mt-14 max-w-3xl px-6" data-testid="country-about">
           <p className="section-eyebrow">
             <span className="inline-block h-px w-8 bg-forest-800/60" />
             About {destination.name}
           </p>
           <div className="prose-article mt-4">
-            {parseAboutSections(destination.description).map((s, i) =>
-              s.heading ? (
-                <div key={i} className={i === 0 ? '' : 'mt-8'}>
-                  <h3 className="font-urbanist text-xl font-bold text-forest-900">{s.heading}</h3>
-                  {s.paragraphs.map((p, j) => (
-                    <p key={j} className="mt-3">{p}</p>
-                  ))}
-                </div>
-              ) : (
-                s.paragraphs.map((p, j) => <p key={`${i}-${j}`}>{p}</p>)
-              ),
-            )}
+            {namedSections.map((s, i) => (
+              <div key={i} className={i === 0 ? '' : 'mt-8'}>
+                <h3 className="font-urbanist text-xl font-bold text-forest-900">{s.heading}</h3>
+                {s.paragraphs.map((p, j) => (
+                  <p key={j} className="mt-3">{p}</p>
+                ))}
+              </div>
+            ))}
           </div>
         </section>
       )}
