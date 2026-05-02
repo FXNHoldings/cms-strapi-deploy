@@ -55,7 +55,7 @@ export default async function ArticlePage({ params }: Props) {
       {/* Breadcrumb */}
       <nav
         aria-label="Breadcrumb"
-        className="mx-auto max-w-5xl px-6 pt-8"
+        className="mx-auto max-w-7xl px-6 pt-8"
         data-testid="breadcrumb"
       >
         <ol
@@ -107,7 +107,7 @@ export default async function ArticlePage({ params }: Props) {
       </nav>
 
       {/* Hero */}
-      <header className="mx-auto max-w-5xl px-6 pt-6">
+      <header className="mx-auto max-w-7xl px-6 pt-6">
         <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-forest-800/70">
           {article.category && (
             <Link href={`/category/${article.category.slug}`} className="chip hover:bg-forest-800/10">
@@ -137,7 +137,7 @@ export default async function ArticlePage({ params }: Props) {
       </header>
 
       {hero && (
-        <div className="mx-auto mt-10 max-w-6xl px-6">
+        <div className="mx-auto mt-10 max-w-7xl px-6">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={hero}
