@@ -14,15 +14,15 @@
   .prose-article h2, .prose-article h3 {
     scroll-margin-top: 6rem;
   }
-  /* Default body text — Outfit, weight 300 (set in body className too for specificity) */
+  /* Default body text — Inter */
   body {
-    font-family: var(--font-outfit), system-ui, sans-serif;
-    font-weight: 300;
-    font-feature-settings: 'ss01', 'cv11';
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-weight: 400;
+    font-feature-settings: 'cv11';
   }
-  /* All headings default to Urbanist 700 */
+  /* All headings default to Inter */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-urbanist), system-ui, sans-serif;
+    font-family: var(--font-inter), system-ui, sans-serif;
     font-weight: 700;
     letter-spacing: 0;
   }
@@ -69,11 +69,11 @@
   }
 }
 
-/* Article body — Outfit 300 through prose, keep headings Urbanist 700 */
+/* Article body — Inter normal, keep headings bold */
 .prose-article {
   @apply prose prose-stone max-w-prose
-         prose-p:font-sans prose-p:font-light
-         prose-li:font-sans prose-li:font-light
+         prose-p:font-sans prose-p:font-normal
+         prose-li:font-sans prose-li:font-normal
          prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tightest prose-headings:text-forest-900
          prose-a:text-primary-emphasis prose-a:no-underline hover:prose-a:text-primary-highlight hover:prose-a:underline
          prose-strong:font-medium prose-strong:text-ink

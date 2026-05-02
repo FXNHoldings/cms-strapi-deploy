@@ -252,6 +252,48 @@ export async function listCountryDestinations(limit = 12) {
   return res.data;
 }
 
+/**
+ * Country destinations ranked by "popularity":
+ *   1. Only countries with a hero image are eligible (no blank tiles).
+ *   2. Within that pool, rank by number of articles linked to the destination.
+ *   3. Tie-break alphabetically.
+ *
+ * Uses 1-3 paginated requests on /articles plus one on /destinations.
+ */
+export async function listPopularCountryDestinations(limit = 8) {
+  const ready = await fetchAllPages<StrapiDestination>('destinations', {
+    filters: { type: { $eq: 'country' }, heroImage: { $notNull: true } },
+    populate: ['heroImage'],
+  });
+
+  // Walk articles once and build a slug → count map.
+  const counts = new Map<string, number>();
+  type ArticleWithDests = { destinations?: { slug?: string }[] };
+  let page = 1;
+  const pageSize = 100;
+  while (true) {
+    const r = await strapiFetch<ListResponse<ArticleWithDests>>('articles', {
+      fields: ['id'],
+      populate: { destinations: { fields: ['slug'] } },
+      pagination: { page, pageSize },
+    });
+    for (const a of r.data) {
+      for (const d of a.destinations ?? []) {
+        if (d?.slug) counts.set(d.slug, (counts.get(d.slug) ?? 0) + 1);
+      }
+    }
+    const pageCount = r.meta?.pagination?.pageCount ?? 1;
+    if (page >= pageCount) break;
+    page++;
+  }
+
+  return ready
+    .map((c) => ({ c, count: counts.get(c.slug) ?? 0 }))
+    .sort((a, b) => b.count - a.count || a.c.name.localeCompare(b.c.name))
+    .slice(0, limit)
+    .map((r) => r.c);
+}
+
 export async function listCitiesByCountryCode(code: string, limit = 100) {
   const res = await strapiFetch<ListResponse<StrapiDestination>>('destinations', {
     filters: { type: { $eq: 'city' }, countryCode: { $eqi: code } },

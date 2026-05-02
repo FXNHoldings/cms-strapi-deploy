@@ -1,20 +1,13 @@
 import type { Metadata } from 'next';
-import { Urbanist, Outfit } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-const urbanist = Urbanist({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-urbanist',
-  weight: ['400', '500', '600', '700', '800', '900'],
-  display: 'swap',
-});
-
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-outfit',
-  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-inter',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
 });
 
@@ -32,8 +25,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${urbanist.variable} ${outfit.variable}`}>
-      <body className="min-h-screen flex flex-col font-sans font-light grain" data-testid="app-shell">
+    <html lang="en" className={inter.variable}>
+      <body className="min-h-screen flex flex-col font-sans font-normal grain" data-testid="app-shell">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

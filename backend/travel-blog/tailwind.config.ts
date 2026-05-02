@@ -39,12 +39,10 @@ export default {
         paper: '#f0f2f4',
       },
       fontFamily: {
-        // Body default — Outfit (light 300)
-        sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
-        // Headings — Urbanist (bold 700)
-        display: ['var(--font-urbanist)', 'system-ui', 'sans-serif'],
-        urbanist: ['var(--font-urbanist)', 'system-ui', 'sans-serif'],
-        outfit: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        urbanist: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        outfit: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       letterSpacing: { tightest: '0' },
       maxWidth: { prose: '68ch' },

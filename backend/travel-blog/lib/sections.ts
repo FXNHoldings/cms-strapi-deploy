@@ -38,17 +38,17 @@ export const SECTIONS: Section[] = [
     layout: 'wirecutter',
   },
   {
-    slug: 'travel-resources',
-    title: 'Travel Resources',
-    tagline: 'The tools we actually use',
-    description: 'Travel insurance, eSIMs, credit cards, apps, and gear we trust on the road.',
-    layout: 'directory',
+    slug: 'car-rental',
+    title: 'Car Rental',
+    tagline: 'Wheels without the markup',
+    description: 'Airport vs city pickup, the hidden fees to dodge, and how to find a fair daily rate every time.',
+    layout: 'wirecutter',
   },
   {
     slug: 'travel-tips',
     title: 'Travel Tips',
     tagline: 'Shortcuts from the road',
-    description: 'How-tos, pitfalls to avoid, and the small moves that make travel dramatically easier.',
+    description: 'How-tos, pitfalls to avoid, the gear we trust, and the small moves that make travel dramatically easier.',
     layout: 'masonry',
   },
 ];

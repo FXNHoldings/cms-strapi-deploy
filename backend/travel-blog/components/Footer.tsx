@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { SECTIONS } from '@/lib/sections';
 import { LEGAL_DOCS } from '@/lib/legal';
 
@@ -13,7 +14,15 @@ export default function Footer() {
     <footer className="mt-24 border-t border-primary-emphasis/10 bg-forest-950 text-white" data-testid="site-footer">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-4">
         <div>
-          <div className="editorial-h text-3xl font-bold">Originfacts</div>
+          <Link href="/" aria-label="Originfacts home" className="inline-block" data-testid="footer-logo-link">
+            <Image
+              src="/footer-logo.svg"
+              alt="Originfacts"
+              width={300}
+              height={167}
+              className="h-10 w-auto !rounded-none"
+            />
+          </Link>
           <p className="mt-3 max-w-sm text-white/75">
             Travel writing without the fluff. Real itineraries, cheap flight tactics, hotels we'd actually book twice.
           </p>

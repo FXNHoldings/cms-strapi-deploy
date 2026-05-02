@@ -13,7 +13,10 @@ const nextConfig = {
     ],
   },
   async redirects() {
-    return [];
+    return [
+      // Travel Resources merged into Travel Tips on 2026-05-02.
+      { source: '/category/travel-resources', destination: '/category/travel-tips', permanent: true },
+    ];
   },
 };
 

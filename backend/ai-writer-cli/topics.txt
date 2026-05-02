@@ -1,0 +1,104 @@
+# One "category | topic [| destination(s)]" per line. Lines starting with # are ignored.
+# Save this as topics.txt and run:  node generate.js --topics topics.txt
+#
+# Format:
+#   category | topic                      ← 2 fields, destinations auto-detected from title
+#   category | topic | destination        ← 3 fields, destination explicit (highest priority)
+#   category | topic | dest1, dest2       ← multiple destinations, comma-separated
+#
+# Destinations should match the `name` of an existing Destination in Strapi
+# (case-insensitive). Slugs also work. Auto-detect runs first; explicit
+# destinations override.
+#
+# The CLI will look up each category in Strapi (by slug or name), auto-create
+# it if it doesn't exist, attach the article to it, and skip topics whose
+# title (or derived slug) already exists in Strapi.
+
+# --- car rental ---
+car-rental | Cheap Car Rentals in Bali: Smart Tips for Driving in Indonesia | Indonesia
+car-rental | Renting a Car in Japan: How to Save Money on Self-Drive Tours | Japan
+car-rental | Cheap Car Rentals in Dubai: Best Pickup Spots Across the UAE | United Arab Emirates
+car-rental | Car Rental Tips for Vietnam: Should You Drive or Hire a Driver? | Vietnam
+car-rental | Renting a Car in South Korea: Budget-Friendly Tips for Seoul and Beyond | South Korea
+car-rental | Cheap Car Rentals in Sri Lanka: Self-Drive vs Driver-Hired Options | Sri Lanka
+car-rental | Renting a Car in Malaysia: Best Road Trip Routes from KL to Penang | Malaysia
+car-rental | Cheap Car Rentals in the Philippines: Manila and Cebu Comparison Guide | Philippines
+car-rental | Renting a Car in Taiwan: Smart Driving Tips for Taipei and the East Coast | Taiwan
+car-rental | Cheap Car Rentals in India: What Travelers Need to Know Before Booking | India
+car-rental | Cheap Car Rentals at Airports vs City Locations: Which Is Better?
+car-rental | How to Find Cheap Car Rentals Without Getting Hit by Hidden Fees
+car-rental | Best Time to Book Cheap Car Rentals for Maximum Savings
+car-rental | Top Mistakes to Avoid When Booking Cheap Car Rentals Online
+car-rental | Cheap Car Rentals for Family Trips: How to Save More and Travel Smarter
+
+# --- flights ---
+flights | Cheap Flights to Tokyo: Best Booking Strategies for Japan Trips | Japan
+flights | How to Find Cheap Flights to Bali Without Falling for Hidden Fees | Indonesia
+flights | Best Time to Book Flights to Singapore for the Lowest Fares | Singapore
+flights | Cheap Flights to Vietnam: Hanoi vs Ho Chi Minh Routes Compared | Vietnam
+flights | Smart Booking Tips for Cheap Flights to Seoul, South Korea | South Korea
+flights | Cheap Flights to the Maldives: When to Book for Off-Peak Savings | Maldives
+flights | How to Find Cheap Flights to Dubai from Australia and the UK | United Arab Emirates
+flights | Cheap Flights to the Philippines: Manila, Cebu, and Boracay Travel Tips | Philippines
+flights | Best Time to Book Cheap Flights to India During Festival Seasons | India
+flights | Cheap Flights to Hong Kong: How to Score Discounted Asia Layovers | Hong Kong
+flights | Cheap Flights for Families: Smart Ways to Save on Group Travel
+flights | How to Find Cheap Flights in 2026 Without Falling for Hidden Fees
+flights | Best Time to Book Cheap Flights for Domestic and International Travel
+flights | Last-Minute Cheap Flights: What Actually Works for Budget Travelers
+flights | Cheap Flights vs Budget Airlines: Which Option Saves You More?
+flights | Best Time to Book Flights to Sydney for the Lowest Fares | Sydney, Australia
+flights | Where to Stay in Sydney: Best Hotels for Every Budget | Sydney, Australia
+flights | Sydney Travel Guide: Top Attractions, Hotels, and Flight Tips | Sydney, Australia
+flights | Cheap Flights to Sydney: How to Save on Your Australia Trip | Sydney, Australia
+
+# --- hotels ---
+hotels | Cheap Hotels in Tokyo: Best Areas for Budget Travelers in Japan | Japan
+hotels | Where to Stay in Bali: Top Hotel Picks for Every Budget in Indonesia | Indonesia
+hotels | Best Beach Hotels in the Maldives Without the Five-Star Price Tag | Maldives
+hotels | Affordable Hotels in Singapore: Smart Stays Near MRT Stations | Singapore
+hotels | Cheap Hotels in Vietnam: Top Picks in Hanoi, Hoi An, and Da Nang | Vietnam
+hotels | Best Family Hotels in Dubai for Stress-Free UAE Holidays | United Arab Emirates
+hotels | Budget Hotels in Seoul: Where to Stay in South Korea Without Overspending | South Korea
+hotels | Cheap Hotels in Sri Lanka: Coastal Stays for Backpackers and Families | Sri Lanka
+hotels | Where to Stay in Hong Kong: Best Hotel Districts for First-Time Visitors | Hong Kong
+hotels | Best Boutique Hotels in Kyoto: Traditional Stays Across Japan | Japan
+hotels | Best Apps and Websites to Find Cheap Hotels for Any Destination
+hotels | 5 Boutique Hotels in Kyoto Under $150 a Night | Kyoto, Japan
+hotels | How to Book Cheap Hotels Without Compromising Comfort and Safety
+hotels | Cheap Hotels for Families: What to Look for Before You Book
+hotels | How to Save More on Cheap Hotels During Peak Travel Seasons
+hotels | Cheap Hotels vs Vacation Rentals: Which Is Better for Budget Travel?
+hotels | Best Areas to Book a Hotel in Sydney for First-Time Visitors | Sydney, Australia
+hotels | Best Time to Visit Perth for Good Weather and Lower Travel Costs | Perth, Australia
+hotels | Top Budget Hotels in Perth for Smart Travelers | Perth, Australia
+hotels | Things to Do in Perth: A Complete Guide for First-Time Visitors | Perth, Australia
+hotels | How to Plan a Budget-Friendly Trip to Perth | Perth, Australia
+
+# --- travel tips ---
+travel-tips | Digital Detox Travel Guide: How to Unplug Without Losing Access to Maps and Tickets
+travel-tips | Cashless Travel Tips for 2026: How to Pay Safely in Countries Using Less Cash
+travel-tips | eSIM vs. International Roaming: Which Travel Connectivity Option Saves More Money?
+travel-tips | How to Avoid Overtourism and Find Non-Viral Destinations Worth Visiting
+travel-tips | Shoulder Season Travel Benefits: Why the Hidden Season Is the Smartest Time to Travel
+travel-tips | Zero-Waste Packing Tips for Travelers Who Want to Pack Light and Travel Greener
+travel-tips | Pet Travel Requirements 2026: What to Know Before Flying With Your Dog or Cat
+travel-tips | Solo Travel Group Tours: The Best Way to Travel Alone Without Feeling Isolated
+travel-tips | Mid-Career Sabbatical Planning: How to Take a Micro-Retirement Trip Without Derailing Your Career
+travel-tips | Best AI Trip Planning Prompts to Build Smarter Travel Itineraries
+travel-tips | Thailand Travel Guide: Best Places to Visit for First-Time Travelers | Thailand
+travel-tips | Best Time to Visit Thailand for Beaches, Festivals, and Budget Travel | Thailand
+travel-tips | Thailand on a Budget: How to Save on Flights, Hotels, and Transport | Thailand
+travel-tips | Top Tourist Destinations in Thailand You Should Not Miss | Thailand
+travel-tips | Where to Stay in Thailand: Best Areas and Hotel Options for Travelers | Thailand
+travel-tips | Packing Tips for Carry-On Only: How to Travel Light Without Forgetting Essentials
+travel-tips | Best Travel Insurance for 2026: How to Choose the Right Coverage for Your Trip
+travel-tips | Top Travel Planning Apps in 2026: Best AI Tools to Organize Your Trip
+travel-tips | The Ultimate International Travel Checklist for Stress-Free Travel
+travel-tips | Best Cheap Flight Search Engines to Find Lower Airfares Fast
+travel-tips | Global Entry vs. TSA PreCheck: Which One Is Better for Frequent Travelers?
+travel-tips | How to Find Error Fares and Book Cheap Flights Before They Disappear
+travel-tips | Sustainable Travel Tips for Eco-Conscious Travelers Who Want to Reduce Their Impact
+travel-tips | Solo Female Travel Safety Tips for Safer and More Confident Trips
+travel-tips | How to Handle a Canceled Flight: What to Do, What to Claim, and How to Rebook Fast
+

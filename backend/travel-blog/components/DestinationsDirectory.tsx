@@ -76,13 +76,10 @@ export default function DestinationsDirectory({
     return buckets;
   }, [matches]);
 
-  // Split the region bucket: continents first (canonical 6), travel regions after.
+  // Continents — only the canonical 6. Sub-national `type=region` destinations
+  // (Patagonia, Tuscany, …) are intentionally hidden on this directory.
   const continents = useMemo(
     () => byType.region.filter((d) => CONTINENT_NAMES.has(d.name)),
-    [byType.region],
-  );
-  const travelRegions = useMemo(
-    () => byType.region.filter((d) => !CONTINENT_NAMES.has(d.name)),
     [byType.region],
   );
 
@@ -134,15 +131,6 @@ export default function DestinationsDirectory({
           )}
           {continents.length > 0 && <SectionIntro>{SECTION_INTROS.continents}</SectionIntro>}
           {continents.length > 0 && <RegionsLayout items={continents.slice(0, SECTION_LIMITS.region)} />}
-
-          {travelRegions.length > 0 && (
-            <SectionHeader
-              title="Travel regions"
-              count={travelRegions.length}
-              onViewAll={travelRegions.length > SECTION_LIMITS.region ? () => setFilter('region') : undefined}
-            />
-          )}
-          {travelRegions.length > 0 && <RegionsLayout items={travelRegions.slice(0, SECTION_LIMITS.region)} />}
 
           {byType.country.length > 0 && (
             <SectionHeader

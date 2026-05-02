@@ -6,7 +6,7 @@ import { readPageMarkdown } from '@/lib/pages';
 export const metadata: Metadata = {
   title: 'About Originfacts',
   description:
-    'Originfacts is a travel information and comparison site — flights, hotels, car rentals, and travel resources in one place.',
+    'Originfacts is a travel blog about the facts of origins — the cultures, histories, and stories behind destinations — alongside the latest travel info on flights, hotels, airlines, airports, and destinations.',
 };
 
 export default async function AboutPage() {
@@ -23,7 +23,7 @@ export default async function AboutPage() {
           About Originfacts
         </h1>
         <p className="mt-3 text-lg font-light text-forest-900/75">
-          Smarter travel research, all in one place.
+          The facts behind every place worth visiting — paired with the latest travel info on flights, hotels, airlines, airports, and destinations.
         </p>
       </header>
       <div

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {
   listArticles,
-  listCountryDestinations,
+  listPopularCountryDestinations,
   listDestinationArticles,
   mediaUrl,
   type StrapiArticle,
@@ -23,7 +23,7 @@ export default async function HomePage() {
         return articles.then((r) => r.data).catch(() => []);
       }),
     ),
-    listCountryDestinations(12).catch(() => []),
+    listPopularCountryDestinations(8).catch(() => []),
   ]);
 
   const bySection = Object.fromEntries(SECTIONS.map((s, i) => [s.slug, perSection[i] as StrapiArticle[]]));

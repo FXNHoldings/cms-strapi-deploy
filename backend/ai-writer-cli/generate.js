@@ -30,6 +30,7 @@ const argv = yargs(hideBin(process.argv))
   .usage('Usage: $0 [topic] [options]')
   .option('topic', { alias: 't', type: 'string' })
   .option('topics', { type: 'string', describe: 'File with "category | topic" per line' })
+  .option('only-category', { type: 'string', describe: 'When used with --topics, only run jobs whose category is in this comma-separated list (e.g. "car-rental,travel-resources")' })
   .option('auto-fill', { type: 'boolean', default: false, describe: 'Auto-generate across the 6 preset categories' })
   .option('count', { alias: 'n', type: 'number', describe: 'How many articles to generate (Claude will brainstorm the titles)' })
   .option('tone', { type: 'string', default: 'friendly', choices: ['friendly', 'professional', 'adventurous', 'witty', 'luxury'] })
@@ -346,18 +347,32 @@ async function generateTitles({ category, count, tone, language, keywords, desti
 
 async function generateArticle(p) {
   const lengthLabel = ({ short: '400-600', medium: '800-1200', long: '1500-2200' })[p.length];
+  // 16K output gives long-form articles (~2000 words) plenty of headroom
+  // for the surrounding JSON envelope. 8K previously ran out mid-stream
+  // for some longer pieces, producing truncated JSON.
   const msg = await client.messages.create({
     model: CLAUDE_MODEL,
-    max_tokens: parseInt(CLAUDE_MAX_TOKENS, 10),
-    thinking: { type: 'adaptive' },
-    output_config: { effort: 'high' },
+    max_tokens: Math.max(parseInt(CLAUDE_MAX_TOKENS, 10) || 0, 16000),
     system: systemPromptArticle(lengthLabel),
     messages: [{ role: 'user', content: userPromptArticle(p) }],
   });
   const text = msg.content.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
   const json = safeParse(text);
-  if (!json) throw new Error(`Claude returned non-JSON:\n${text.slice(0, 400)}`);
+  if (!json) {
+    const stop = msg.stop_reason ?? '?';
+    throw new Error(`Claude returned non-JSON (stop_reason=${stop}):\n${text.slice(0, 400)}`);
+  }
   if (!json.slug) json.slug = slugify(json.title || p.topic, { lower: true, strict: true }).slice(0, 60);
+
+  // Defensive truncations — Claude's compliance with length hints is
+  // imperfect, and Strapi schema validation rejects over-length fields.
+  // Hard-cap the SEO and excerpt fields a few chars under the schema limit.
+  const truncate = (s, max) => (s && s.length > max ? s.slice(0, max - 1).trimEnd() + '…' : s);
+  json.seoTitle = truncate(json.seoTitle, 65);
+  json.seoDescription = truncate(json.seoDescription, 160);
+  json.excerpt = truncate(json.excerpt, 300);
+  if (json.slug) json.slug = json.slug.slice(0, 60);
+
   return json;
 }
 
@@ -519,12 +534,37 @@ const AUTO_TOPICS = {
 
 /* ---------- Runners ---------- */
 
-async function runOne({ topic, category }) {
+async function findExistingArticle(...candidates) {
+  // Look up by any of: exact title (case-insensitive), or exact slug.
+  // Pass any number of {title?, slug?} candidates — useful for both the
+  // upfront topic-based check and the post-Claude generated-draft check.
+  const titles = [...new Set(candidates.map((c) => c?.title).filter(Boolean))];
+  const slugs = [...new Set(candidates.map((c) => c?.slug).filter(Boolean))];
+  if (!titles.length && !slugs.length) return null;
+  const qs = new URLSearchParams();
+  let i = 0;
+  for (const t of titles) qs.set(`filters[$or][${i++}][title][$eqi]`, t);
+  for (const s of slugs) qs.set(`filters[$or][${i++}][slug][$eq]`, s);
+  qs.append('fields[0]', 'id');
+  qs.append('fields[1]', 'title');
+  qs.append('fields[2]', 'slug');
+  qs.set('pagination[pageSize]', '1');
+  // publicationState=preview so drafts also count as "exists" — we don't
+  // want to regenerate a draft we wrote yesterday and haven't published yet.
+  qs.set('publicationState', 'preview');
+  const r = await strapi(`/api/articles?${qs.toString()}`);
+  return r.data?.[0] ?? null;
+}
+
+async function runOne({ topic, category, destination }) {
+  // Per-job `destination` (from a 3-field topics.txt line) takes precedence
+  // over the global --destination flag. Falls back to flag, then auto-detect.
+  const effectiveDestination = destination || argv.destination;
   const params = {
     topic,
     tone: argv.tone,
     length: argv.length,
-    destination: argv.destination,
+    destination: effectiveDestination,
     category: category || argv.category,
     keywords: argv.keywords,
     language: argv.language,
@@ -533,8 +573,48 @@ async function runOne({ topic, category }) {
   const label = (category || argv.category || 'uncategorised').padEnd(18);
   const short = topic.slice(0, 60) + (topic.length > 60 ? '…' : '');
   process.stdout.write(`→ [${label}] "${short}" … `);
+
+  // Idempotency check #1 (cheap): skip if an article with this exact title
+  // or its derived slug already exists. Avoids burning tokens on a re-run
+  // of the same topics.txt.
+  if (!argv['dry-run']) {
+    try {
+      const existing = await findExistingArticle({
+        title: topic,
+        slug: slugify(topic, { lower: true, strict: true }),
+      });
+      if (existing) {
+        const ex = existing.attributes ?? existing;
+        console.log(`SKIP (exists id=${existing.id}, slug=${ex.slug})`);
+        return;
+      }
+    } catch (e) {
+      console.log(`(lookup failed: ${e.message.slice(0, 80)}) — proceeding`);
+    }
+  }
+
   const t0 = Date.now();
   const draft = await generateArticle(params);
+
+  // Idempotency check #2 (after Claude): Claude often rewrites the title
+  // (e.g. "Cheap Car Rentals at Airports vs City…" → "Airport vs City Car
+  // Rentals…"). The new title/slug might collide with an existing article
+  // even though the original topic didn't. Catch that here and skip the
+  // write rather than failing on a Strapi 400.
+  if (!argv['dry-run']) {
+    try {
+      const existing = await findExistingArticle(
+        { title: draft.title, slug: draft.slug },
+      );
+      if (existing) {
+        const ex = existing.attributes ?? existing;
+        console.log(`${((Date.now() - t0) / 1000).toFixed(1)}s · SKIP after-generate (Claude title clashes with id=${existing.id}, slug=${ex.slug})`);
+        return;
+      }
+    } catch (e) {
+      console.log(`(post-generate lookup failed: ${e.message.slice(0, 80)}) — proceeding`);
+    }
+  }
   process.stdout.write(`${((Date.now() - t0) / 1000).toFixed(1)}s · `);
 
   if (argv['dry-run']) {
@@ -553,7 +633,7 @@ async function runOne({ topic, category }) {
   }
 
   const categoryId = await resolveCategoryId(category || argv.category);
-  const { ids: destinationIds, names: destinationNames } = await detectDestinations(topic, argv.destination);
+  const { ids: destinationIds, names: destinationNames } = await detectDestinations(topic, effectiveDestination);
   const created = await postToStrapi(draft, { categoryId, destinationIds, coverId, galleryIds, publish: argv.publish });
   const id = created?.data?.id ?? '?';
   const destPart = destinationNames.length ? ` · dest=[${destinationNames.join(', ')}]` : '';
@@ -590,22 +670,34 @@ async function runBatch(file) {
     .filter((l) => l && !l.startsWith('#'));
 
   const allJobs = raw.map((line) => {
-    // Format: "category | topic"
-    const m = line.match(/^([^|]+)\|(.+)$/);
-    if (m) {
-      const category = m[1].trim();
-      const topic = m[2].trim();
-      if (!topic) return null; // skip "category |" with empty topic
-      return { category, topic };
+    // Format (pipe-separated):
+    //   category | topic                      ← 2 fields
+    //   category | topic | destination(s)     ← 3 fields, destinations comma-separated
+    // Falls back to (no pipe) the whole line as topic.
+    if (line.includes('|')) {
+      const parts = line.split('|').map((s) => s.trim());
+      const category = parts[0] || null;
+      const topic = parts[1] || '';
+      const destination = parts[2] || null; // comma-separated destination names/slugs
+      if (!topic) return null;
+      return { category, topic, destination };
     }
-    // Fallback: treat whole line as topic, use --category flag
-    return { category: null, topic: line };
+    return { category: null, topic: line, destination: null };
   }).filter(Boolean);
 
-  const jobs = argv.count > 0 ? allJobs.slice(0, argv.count) : allJobs;
+  // Optional category filter (comma-separated list of slugs).
+  const onlyFilter = argv['only-category']
+    ? new Set(argv['only-category'].split(',').map((s) => s.trim().toLowerCase()).filter(Boolean))
+    : null;
+  const filteredJobs = onlyFilter
+    ? allJobs.filter((j) => j.category && onlyFilter.has(j.category.toLowerCase()))
+    : allJobs;
 
-  const capNote = argv.count > 0 && allJobs.length > argv.count ? ` (of ${allJobs.length} total, capped by --count)` : '';
-  console.log(`Batch: ${jobs.length} articles${capNote}\n`);
+  const jobs = argv.count > 0 ? filteredJobs.slice(0, argv.count) : filteredJobs;
+
+  const filterNote = onlyFilter ? ` (filtered to category ${[...onlyFilter].join(', ')})` : '';
+  const capNote = argv.count > 0 && filteredJobs.length > argv.count ? ` (of ${filteredJobs.length} matching, capped by --count)` : '';
+  console.log(`Batch: ${jobs.length} articles${filterNote}${capNote}\n`);
   let ok = 0, fail = 0;
   for (const j of jobs) {
     try { await runOne(j); ok++; } catch (e) { console.error(`  ✖ ${e.message}`); fail++; }

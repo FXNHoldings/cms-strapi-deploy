@@ -21,11 +21,11 @@ export default function Header() {
 
         <div className="ml-auto flex items-center justify-end gap-2">
           <nav className="hidden md:block" data-testid="primary-nav">
-            <ul className="flex items-center justify-end gap-1 text-sm font-medium">
+            <ul className="flex items-center justify-end gap-1 text-base font-medium">
               <li data-testid="nav-item-destinations">
                 <Link
                   href="/destinations"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-primary-emphasis transition-colors hover:text-primary-highlight"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-[#000000] transition-colors hover:text-[rgb(1,79,211)]"
                   data-testid="nav-destinations"
                 >
                   Destinations
@@ -34,7 +34,7 @@ export default function Header() {
               <li data-testid="nav-item-flights">
                 <Link
                   href="/flights"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-primary-emphasis transition-colors hover:text-primary-highlight"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-[#000000] transition-colors hover:text-[rgb(1,79,211)]"
                   data-testid="nav-flights"
                 >
                   Flights
@@ -43,7 +43,7 @@ export default function Header() {
               <li data-testid="nav-item-hotels">
                 <Link
                   href="/hotels"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-primary-emphasis transition-colors hover:text-primary-highlight"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-[#000000] transition-colors hover:text-[rgb(1,79,211)]"
                   data-testid="nav-hotels"
                 >
                   Hotels
@@ -52,7 +52,7 @@ export default function Header() {
               <li data-testid="nav-item-airlines">
                 <Link
                   href="/airlines"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-primary-emphasis transition-colors hover:text-primary-highlight"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-[#000000] transition-colors hover:text-[rgb(1,79,211)]"
                   data-testid="nav-airlines"
                 >
                   Airlines
@@ -64,7 +64,7 @@ export default function Header() {
               >
                 <Link
                   href="/airports"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-primary-emphasis transition-colors hover:text-primary-highlight"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-[#000000] transition-colors hover:text-[rgb(1,79,211)]"
                   data-testid="nav-airports"
                   aria-haspopup="true"
                 >
@@ -90,7 +90,7 @@ export default function Header() {
                 >
                   <Link
                     href="/airports"
-                    className="block rounded px-3 py-2 text-sm text-primary-emphasis transition-colors hover:bg-forest-900/5 hover:text-primary-highlight"
+                    className="block rounded px-3 py-2 text-base text-[#000000] transition-colors hover:bg-forest-900/5 hover:text-[rgb(1,79,211)]"
                     role="menuitem"
                     data-testid="nav-airports-all"
                   >
@@ -98,7 +98,7 @@ export default function Header() {
                   </Link>
                   <Link
                     href="/airports/hubs"
-                    className="block rounded px-3 py-2 text-sm text-primary-emphasis transition-colors hover:bg-forest-900/5 hover:text-primary-highlight"
+                    className="block rounded px-3 py-2 text-base text-[#000000] transition-colors hover:bg-forest-900/5 hover:text-[rgb(1,79,211)]"
                     role="menuitem"
                     data-testid="nav-airports-hubs"
                   >
@@ -109,7 +109,7 @@ export default function Header() {
               <li data-testid="nav-item-countries">
                 <Link
                   href="/countries"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-primary-emphasis transition-colors hover:text-primary-highlight"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-[#000000] transition-colors hover:text-[rgb(1,79,211)]"
                   data-testid="nav-countries"
                 >
                   Countries
