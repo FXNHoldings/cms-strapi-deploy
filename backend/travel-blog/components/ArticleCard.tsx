@@ -8,7 +8,7 @@ export default function ArticleCard({ article, size = 'md' }: { article: StrapiA
 
   const sizeClasses = {
     compact: { img: 'aspect-[4/3]', title: 'text-base', excerpt: 'line-clamp-2 text-sm', radius: 'rounded-lg' },
-    sm: { img: 'aspect-[4/3]', title: 'text-lg', excerpt: 'line-clamp-2 text-sm', radius: 'rounded-2xl' },
+    sm: { img: 'aspect-[4/3]', title: 'text-lg', excerpt: 'line-clamp-2 text-sm', radius: 'rounded' },
     md: { img: 'aspect-[5/4]', title: 'text-2xl', excerpt: 'line-clamp-3 text-base', radius: 'rounded-2xl' },
     lg: { img: 'aspect-[16/10]', title: 'text-2xl sm:text-3xl', excerpt: 'line-clamp-4 text-base sm:text-lg', radius: 'rounded-2xl' },
   }[size];

@@ -52,8 +52,62 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <article data-testid="article-page">
+      {/* Breadcrumb */}
+      <nav
+        aria-label="Breadcrumb"
+        className="mx-auto max-w-5xl px-6 pt-8"
+        data-testid="breadcrumb"
+      >
+        <ol
+          itemScope
+          itemType="https://schema.org/BreadcrumbList"
+          className="flex flex-wrap items-center gap-2 text-xs text-forest-900/60"
+        >
+          <li
+            itemProp="itemListElement"
+            itemScope
+            itemType="https://schema.org/ListItem"
+            className="flex items-center gap-2"
+          >
+            <Link href="/" itemProp="item" className="hover:text-primary-emphasis">
+              <span itemProp="name">Home</span>
+            </Link>
+            <meta itemProp="position" content="1" />
+            <span aria-hidden className="text-forest-900/30">/</span>
+          </li>
+          {article.category && (
+            <li
+              itemProp="itemListElement"
+              itemScope
+              itemType="https://schema.org/ListItem"
+              className="flex items-center gap-2"
+            >
+              <Link
+                href={`/category/${article.category.slug}`}
+                itemProp="item"
+                className="hover:text-primary-emphasis"
+              >
+                <span itemProp="name">{article.category.name}</span>
+              </Link>
+              <meta itemProp="position" content="2" />
+              <span aria-hidden className="text-forest-900/30">/</span>
+            </li>
+          )}
+          <li
+            itemProp="itemListElement"
+            itemScope
+            itemType="https://schema.org/ListItem"
+            aria-current="page"
+            className="truncate text-forest-900"
+          >
+            <span itemProp="name">{article.title}</span>
+            <meta itemProp="position" content={article.category ? '3' : '2'} />
+          </li>
+        </ol>
+      </nav>
+
       {/* Hero */}
-      <header className="mx-auto max-w-5xl px-6 pt-12">
+      <header className="mx-auto max-w-5xl px-6 pt-6">
         <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-widest text-forest-800/70">
           {article.category && (
             <Link href={`/category/${article.category.slug}`} className="chip hover:bg-forest-800/10">
@@ -155,8 +209,8 @@ export default async function ArticlePage({ params }: Props) {
           </div>
 
           <aside className="lg:sticky lg:top-24 lg:self-start" data-testid="article-sidebar">
-            <div className="rounded-2xl border border-forest-900/10 bg-paper p-5">
-              <h3 className="editorial-h text-sm uppercase tracking-widest text-forest-800/70">
+            <div className="rounded border border-forest-900/10 bg-paper p-5">
+              <h3 className="editorial-h text-sm uppercase tracking-normal text-forest-800/70">
                 Categories
               </h3>
               <ul className="mt-3 space-y-2 text-sm" data-testid="sidebar-categories">
@@ -178,8 +232,8 @@ export default async function ArticlePage({ params }: Props) {
             </div>
 
             {latest.length > 0 && (
-              <div className="mt-6 rounded-2xl border border-forest-900/10 bg-paper p-5">
-                <h3 className="editorial-h text-sm uppercase tracking-widest text-forest-800/70">
+              <div className="mt-6 rounded border border-forest-900/10 bg-paper p-5">
+                <h3 className="editorial-h text-sm uppercase tracking-normal text-forest-800/70">
                   Latest posts
                 </h3>
                 <ul className="mt-3 space-y-4" data-testid="sidebar-latest">
