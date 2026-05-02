@@ -1,0 +1,16 @@
+# Originfacts ads.txt
+# Authorised digital sellers — IAB Tech Lab Ads.txt v1.1
+#
+# This file lists the advertising partners authorised to sell ad inventory
+# on www.originfacts.com. It is required by Google AdSense and other
+# compliant ad systems.
+#
+# Once Google AdSense / other ad networks are approved, the publisher line(s)
+# below should be replaced with real entries in the form:
+#   <ssp-domain>, <publisher-id>, <relationship>, <certification-id>
+# e.g. google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+#
+# Until then this file exists as a placeholder so AdSense reviewers can
+# fetch it without a 404.
+
+# placeholder.example.com, 0, DIRECT

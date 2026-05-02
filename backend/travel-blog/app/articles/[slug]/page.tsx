@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { getArticle, listArticles, mediaUrl } from '@/lib/strapi';
 import ArticleCard from '@/components/ArticleCard';
 import ShareButtons from '@/components/ShareButtons';
+import { SECTIONS } from '@/lib/sections';
 import type { Metadata } from 'next';
 
 export const revalidate = 60;
@@ -39,12 +40,15 @@ export default async function ArticlePage({ params }: Props) {
   const hero = mediaUrl(article.coverImage ?? null);
   const date = article.publishedAt ? format(new Date(article.publishedAt), 'd MMMM yyyy') : '';
 
-  // Related by category
-  let related: Awaited<ReturnType<typeof listArticles>>['data'] = [];
-  if (article.category) {
-    const { data } = await listArticles({ category: article.category.slug, pageSize: 4 });
-    related = data.filter((x) => x.id !== article.id).slice(0, 3);
-  }
+  // Related by category + sidebar latest
+  const [relatedRes, latestRes] = await Promise.all([
+    article.category
+      ? listArticles({ category: article.category.slug, pageSize: 4 }).catch(() => ({ data: [] as Awaited<ReturnType<typeof listArticles>>['data'] }))
+      : Promise.resolve({ data: [] as Awaited<ReturnType<typeof listArticles>>['data'] }),
+    listArticles({ pageSize: 6 }).catch(() => ({ data: [] as Awaited<ReturnType<typeof listArticles>>['data'] })),
+  ]);
+  const related = relatedRes.data.filter((x) => x.id !== article.id).slice(0, 3);
+  const latest = latestRes.data.filter((x) => x.id !== article.id).slice(0, 5);
 
   return (
     <article data-testid="article-page">
@@ -89,63 +93,132 @@ export default async function ArticlePage({ params }: Props) {
         </div>
       )}
 
-      {/* Body */}
-      <div className="mx-auto max-w-3xl px-6 py-16">
-        <div className="mb-10">
-          <ShareButtons title={article.title} slug={article.slug} />
+      {/* Body + sidebar */}
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="min-w-0" data-testid="article-main">
+            <div className="mb-10">
+              <ShareButtons title={article.title} slug={article.slug} />
+            </div>
+            <div
+              className="prose-article"
+              data-testid="article-body"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+
+            {article.gallery && article.gallery.length > 0 && (
+              <div className="mt-12" data-testid="article-gallery">
+                <h3 className="editorial-h text-sm uppercase tracking-widest text-forest-800/70">
+                  Gallery
+                </h3>
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  {article.gallery.map((img, i) => {
+                    const url = mediaUrl(img);
+                    if (!url) return null;
+                    return (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        key={i}
+                        src={url}
+                        alt={img.alternativeText || `${article.title} — image ${i + 1}`}
+                        className="aspect-[4/3] w-full rounded-lg object-cover"
+                        loading="lazy"
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {article.destinations && article.destinations.length > 0 && (
+              <div className="mt-12 border-t border-forest-900/10 pt-8">
+                <h3 className="editorial-h text-sm uppercase tracking-widest text-forest-800/70">Places in this story</h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {article.destinations.map((d) => (
+                    <Link key={d.id} href={`/destinations/${d.slug}`} className="chip hover:bg-forest-800/10">
+                      {d.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {article.tags && article.tags.length > 0 && (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {article.tags.map((t) => (
+                  <span key={t.id} className="rounded-full border border-forest-900/15 px-3 py-1 text-xs text-forest-900/70">
+                    #{t.name}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <aside className="lg:sticky lg:top-24 lg:self-start" data-testid="article-sidebar">
+            <div className="rounded-2xl border border-forest-900/10 bg-paper p-5">
+              <h3 className="editorial-h text-sm uppercase tracking-widest text-forest-800/70">
+                Categories
+              </h3>
+              <ul className="mt-3 space-y-2 text-sm" data-testid="sidebar-categories">
+                {SECTIONS.map((s) => (
+                  <li key={s.slug}>
+                    <Link
+                      href={`/category/${s.slug}`}
+                      className={`block rounded-md px-2 py-1.5 transition hover:bg-forest-900/5 ${
+                        article.category?.slug === s.slug
+                          ? 'font-semibold text-primary-emphasis'
+                          : 'text-forest-900'
+                      }`}
+                    >
+                      {s.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {latest.length > 0 && (
+              <div className="mt-6 rounded-2xl border border-forest-900/10 bg-paper p-5">
+                <h3 className="editorial-h text-sm uppercase tracking-widest text-forest-800/70">
+                  Latest posts
+                </h3>
+                <ul className="mt-3 space-y-4" data-testid="sidebar-latest">
+                  {latest.map((p) => {
+                    const thumb = mediaUrl(p.coverImage ?? null);
+                    const pubDate = p.publishedAt ? format(new Date(p.publishedAt), 'd MMM yyyy') : '';
+                    return (
+                      <li key={p.id}>
+                        <Link href={`/articles/${p.slug}`} className="group grid grid-cols-[64px_minmax(0,1fr)] gap-3">
+                          <div className="overflow-hidden rounded-md bg-forest-900/5">
+                            {thumb ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={thumb}
+                                alt={p.coverImage?.alternativeText || p.title}
+                                className="aspect-square h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                                loading="lazy"
+                              />
+                            ) : (
+                              <div className="aspect-square bg-gradient-to-br from-primary-hover to-primary-pressed" />
+                            )}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="line-clamp-2 text-sm font-semibold leading-snug text-forest-900 transition group-hover:text-primary-highlight">
+                              {p.title}
+                            </p>
+                            {pubDate && (
+                              <p className="mt-1 text-xs text-forest-900/60">{pubDate}</p>
+                            )}
+                          </div>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </aside>
         </div>
-        <div
-          className="prose-article"
-          data-testid="article-body"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-
-        {article.gallery && article.gallery.length > 0 && (
-          <div className="mt-12" data-testid="article-gallery">
-            <h3 className="editorial-h text-sm uppercase tracking-widest text-forest-800/70">
-              Gallery
-            </h3>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {article.gallery.map((img, i) => {
-                const url = mediaUrl(img);
-                if (!url) return null;
-                return (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={i}
-                    src={url}
-                    alt={img.alternativeText || `${article.title} — image ${i + 1}`}
-                    className="aspect-[4/3] w-full rounded-lg object-cover"
-                    loading="lazy"
-                  />
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {article.destinations && article.destinations.length > 0 && (
-          <div className="mt-12 border-t border-forest-900/10 pt-8">
-            <h3 className="editorial-h text-sm uppercase tracking-widest text-forest-800/70">Places in this story</h3>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {article.destinations.map((d) => (
-                <Link key={d.id} href={`/destinations/${d.slug}`} className="chip hover:bg-forest-800/10">
-                  {d.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {article.tags && article.tags.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-2">
-            {article.tags.map((t) => (
-              <span key={t.id} className="rounded-full border border-forest-900/15 px-3 py-1 text-xs text-forest-900/70">
-                #{t.name}
-              </span>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Related */}

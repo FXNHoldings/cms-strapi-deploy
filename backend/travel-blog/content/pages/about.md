@@ -63,6 +63,20 @@ Originfacts is built for readers around the world. Our content is currently publ
 
 Originfacts is a custom-built, independently operated website. We're continuously improving content quality, comparison features, accessibility, performance, and transparency.
 
+## How our content is produced
+
+Originfacts uses AI-assisted research and drafting to produce articles at scale, and every published piece passes through a human editorial layer before it goes live.
+
+The process for each article looks like this:
+
+1. **Topic selection.** A human editor decides what to cover — often based on traveller search behaviour, current routes, seasonal demand, or destinations we want to write about in depth.
+2. **Research and drafting.** We use large language models (currently Anthropic's Claude) as a research and drafting assistant. The model is given a brief, a set of editorial guidelines, and structured prompts. It produces an initial draft.
+3. **Image generation.** Cover and gallery images are produced with generative image models (currently Fal.ai FLUX). Real photographs are used where licensing permits; AI-generated images are clearly stylised and used to illustrate concepts, not to misrepresent specific places, brands, prices, or people.
+4. **Editorial review.** Drafts are reviewed by a human editor before publication. We check facts that are likely to change (prices, routes, visa rules, fees), tighten language, remove anything misleading, and confirm affiliate disclosures are correct.
+5. **Updating.** Travel facts move quickly. We revisit and update articles as conditions, prices, routes, and policies change.
+
+We use AI as a tool to research and structure content faster, not as a way to publish without human judgement. If you ever spot something inaccurate, out of date, or misleading, please tell us at **contact@originfacts.com** and we'll fix or remove it.
+
 ## Important reminder
 
 Originfacts provides travel information and affiliate links only. We are not a travel agent, airline, hotel, car rental company, tour operator, insurer, payment processor, or booking provider. Before booking or travelling, verify all important information with the relevant third-party provider and official sources.
