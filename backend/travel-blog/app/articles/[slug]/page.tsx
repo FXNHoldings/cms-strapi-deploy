@@ -4,6 +4,7 @@ import { marked } from 'marked';
 import Link from 'next/link';
 import { getArticle, listArticles, mediaUrl } from '@/lib/strapi';
 import ArticleCard from '@/components/ArticleCard';
+import ShareButtons from '@/components/ShareButtons';
 import type { Metadata } from 'next';
 
 export const revalidate = 60;
@@ -90,6 +91,9 @@ export default async function ArticlePage({ params }: Props) {
 
       {/* Body */}
       <div className="mx-auto max-w-3xl px-6 py-16">
+        <div className="mb-10">
+          <ShareButtons title={article.title} slug={article.slug} />
+        </div>
         <div
           className="prose-article"
           data-testid="article-body"

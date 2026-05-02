@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getCategory, listArticles } from '@/lib/strapi';
+import { getCategory, listArticles, listDestinationArticles } from '@/lib/strapi';
 import { findSection } from '@/lib/sections';
 import ArticleCard from '@/components/ArticleCard';
 import type { Metadata } from 'next';
@@ -43,7 +43,10 @@ export default async function CategoryPage({ params }: Props) {
   const category = await resolveCategory(slug);
   if (!category) notFound();
 
-  const { data: articles } = await listArticles({ category: slug, pageSize: 24 }).catch(
+  const { data: articles } = await (slug === 'destinations'
+    ? listDestinationArticles({ pageSize: 24 })
+    : listArticles({ category: slug, pageSize: 24 })
+  ).catch(
     () => ({ data: [], meta: { pagination: { page: 1, pageSize: 24, pageCount: 0, total: 0 } } }),
   );
 
