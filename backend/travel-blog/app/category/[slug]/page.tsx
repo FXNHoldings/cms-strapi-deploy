@@ -35,7 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const c = await resolveCategory(slug);
   if (!c) return { title: 'Not found' };
-  return { title: c.name, description: c.description };
+  return {
+    title: c.name,
+    description: c.description,
+    alternates: { canonical: `/category/${slug}` },
+  };
 }
 
 export default async function CategoryPage({ params }: Props) {

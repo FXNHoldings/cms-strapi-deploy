@@ -41,8 +41,44 @@ export default async function HomePage() {
   const hero = latest[0];
   const side = latest.slice(1, 5);
 
+  const organizationJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Originfacts',
+    url: 'https://www.originfacts.com',
+    logo: 'https://www.originfacts.com/brand/logo/logo.svg',
+    description:
+      'The facts behind every place worth visiting — plus the latest on flights, hotels, airlines, airports and destinations.',
+    sameAs: [
+      'https://x.com/realoriginfacts',
+      'https://www.facebook.com/originfacts/',
+    ],
+  };
+
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Originfacts',
+    url: 'https://www.originfacts.com',
+    publisher: { '@type': 'Organization', name: 'Originfacts' },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://www.originfacts.com/articles?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
   return (
     <div data-testid="home-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+
       <Hero hero={hero} side={side} />
 
       <FeaturedCountries countries={countries} />

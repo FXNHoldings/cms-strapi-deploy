@@ -28,7 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const d = await getDestination(slug);
   if (!d) return { title: 'Not found' };
-  return { title: d.name, description: d.description };
+  return {
+    title: d.name,
+    description: d.description,
+    alternates: { canonical: `/destinations/${slug}` },
+  };
 }
 
 export default async function DestinationPage({ params }: Props) {

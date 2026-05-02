@@ -13,16 +13,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.fxnstudio.com'),
+  metadataBase: new URL('https://www.originfacts.com'),
   title: {
-    default: 'Originfacts — Travel stories, cheap flights, smart stays',
+    default: 'Originfacts — The facts behind every place worth visiting',
     template: '%s · Originfacts',
   },
   description:
-    'Hand-picked travel guides, cheap flight hacks, hotel reviews and destination deep-dives from writers who actually go places.',
+    'The facts behind every place worth visiting — plus the latest on flights, hotels, airlines, airports and destinations.',
   openGraph: { type: 'website', siteName: 'Originfacts', locale: 'en_US' },
   twitter: { card: 'summary_large_image' },
   alternates: {
+    canonical: '/',
     types: {
       'application/rss+xml': [{ url: '/feed.xml', title: 'Originfacts RSS' }],
     },

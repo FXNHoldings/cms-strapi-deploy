@@ -20,13 +20,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: a.seoTitle || a.title,
     description: a.seoDescription || a.excerpt,
+    alternates: { canonical: `/articles/${a.slug}` },
     openGraph: {
       title: a.seoTitle || a.title,
       description: a.seoDescription || a.excerpt,
       type: 'article',
       publishedTime: a.publishedAt,
+      modifiedTime: a.updatedAt,
       authors: a.author ? [a.author.name] : undefined,
       images: ogImg ? [{ url: ogImg }] : undefined,
+      url: `/articles/${a.slug}`,
     },
   };
 }
@@ -50,8 +53,67 @@ export default async function ArticlePage({ params }: Props) {
   const related = relatedRes.data.filter((x) => x.id !== article.id).slice(0, 3);
   const latest = latestRes.data.filter((x) => x.id !== article.id).slice(0, 5);
 
+  const articleUrl = `https://www.originfacts.com/articles/${article.slug}`;
+  const articleImage = mediaUrl(article.ogImage ?? article.coverImage ?? null);
+
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.seoDescription || article.excerpt,
+    image: articleImage ? [articleImage] : undefined,
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt || article.publishedAt,
+    author: article.author?.name
+      ? { '@type': 'Person', name: article.author.name }
+      : { '@type': 'Organization', name: 'Originfacts' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Originfacts',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.originfacts.com/brand/logo/logo.svg',
+      },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
+    url: articleUrl,
+    articleSection: article.category?.name,
+    keywords: article.seoKeywords,
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.originfacts.com/' },
+      ...(article.category
+        ? [{
+            '@type': 'ListItem',
+            position: 2,
+            name: article.category.name,
+            item: `https://www.originfacts.com/category/${article.category.slug}`,
+          }]
+        : []),
+      {
+        '@type': 'ListItem',
+        position: article.category ? 3 : 2,
+        name: article.title,
+        item: articleUrl,
+      },
+    ],
+  };
+
   return (
     <article data-testid="article-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+
       {/* Breadcrumb */}
       <nav
         aria-label="Breadcrumb"
