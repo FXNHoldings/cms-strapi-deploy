@@ -61,7 +61,7 @@ export default async function HomePage() {
 function Hero({ hero, side }: { hero?: StrapiArticle; side: StrapiArticle[] }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-12" data-testid="home-hero">
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-[3fr_2fr]">
         {hero ? <HeroLargeCard article={hero} /> : <div />}
         <div className="grid gap-6 sm:grid-cols-2">
           {side.slice(0, 4).map((p) => (
@@ -128,14 +128,18 @@ function CategoryLabel({ article, light = false }: { article: StrapiArticle; lig
   );
 }
 
-function HeroMeta({ article }: { article: StrapiArticle }) {
+function HeroMeta({ article, hideReadingTime = false }: { article: StrapiArticle; hideReadingTime?: boolean }) {
   return (
     <div className="mt-3 flex items-center gap-3 text-sm">
       {article.author?.name && (
         <span className="font-medium text-forest-900">{article.author.name}</span>
       )}
-      <span className="inline-block h-1.5 w-1.5 rounded-full bg-secondary-emphasis" />
-      <span className="text-forest-900/70">{article.readingTimeMinutes ?? 5} min</span>
+      {!hideReadingTime && (
+        <>
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-secondary-emphasis" />
+          <span className="text-forest-900/70">{article.readingTimeMinutes ?? 5} min</span>
+        </>
+      )}
     </div>
   );
 }
@@ -145,7 +149,7 @@ function HeroLargeCard({ article }: { article: StrapiArticle }) {
   return (
     <Link
       href={`/articles/${article.slug}`}
-      className="group flex flex-col"
+      className="group flex h-full flex-col"
       data-testid="hero-large"
     >
       {img ? (
@@ -153,10 +157,10 @@ function HeroLargeCard({ article }: { article: StrapiArticle }) {
         <img
           src={img}
           alt={article.title}
-          className="aspect-[4/3] w-full rounded-2xl object-cover transition duration-500 group-hover:scale-[1.01]"
+          className="min-h-0 w-full flex-1 rounded-2xl object-cover transition duration-500 group-hover:scale-[1.01]"
         />
       ) : (
-        <div className="aspect-[4/3] w-full rounded-2xl bg-forest-900/10" />
+        <div className="min-h-0 w-full flex-1 rounded-2xl bg-forest-900/10" />
       )}
       <div className="mt-5">
         <CategoryLabel article={article} />
@@ -189,10 +193,10 @@ function HeroSideCard({ article }: { article: StrapiArticle }) {
       )}
       <div className="mt-4">
         <CategoryLabel article={article} />
-        <h2 className="font-urbanist mt-2 line-clamp-2 text-lg font-bold leading-snug text-forest-900 transition group-hover:text-forest-700">
+        <h3 className="font-urbanist mt-2 line-clamp-2 text-base font-medium leading-snug text-forest-900 transition group-hover:text-forest-700">
           {article.title}
-        </h2>
-        <HeroMeta article={article} />
+        </h3>
+        <HeroMeta article={article} hideReadingTime />
       </div>
     </Link>
   );
