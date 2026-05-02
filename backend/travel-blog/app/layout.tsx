@@ -21,6 +21,11 @@ export const metadata: Metadata = {
     'Hand-picked travel guides, cheap flight hacks, hotel reviews and destination deep-dives from writers who actually go places.',
   openGraph: { type: 'website', siteName: 'Originfacts', locale: 'en_US' },
   twitter: { card: 'summary_large_image' },
+  alternates: {
+    types: {
+      'application/rss+xml': [{ url: '/feed.xml', title: 'Originfacts RSS' }],
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

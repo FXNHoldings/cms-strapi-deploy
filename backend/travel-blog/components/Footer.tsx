@@ -56,6 +56,19 @@ export default function Footer() {
                 </svg>
               </a>
             </li>
+            <li>
+              <a
+                href="/feed.xml"
+                aria-label="Originfacts RSS feed"
+                title="RSS feed"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white transition hover:border-secondary-emphasis hover:text-secondary-emphasis"
+                data-testid="footer-social-rss"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
+                  <path d="M4.252 11.105a8.643 8.643 0 0 1 8.643 8.643h-2.882a5.761 5.761 0 0 0-5.761-5.761zM4.252 5.343A14.404 14.404 0 0 1 18.657 19.748h-2.882A11.523 11.523 0 0 0 4.252 8.225zM6.413 16.146a2.16 2.16 0 1 1-4.321 0 2.16 2.16 0 0 1 4.321 0z" />
+                </svg>
+              </a>
+            </li>
           </ul>
         </div>
         <div>
@@ -87,7 +100,7 @@ export default function Footer() {
             <li><Link href="/about" className="hover:text-secondary">About</Link></li>
             <li><Link href="/contact" className="hover:text-secondary">Contact</Link></li>
             <li><Link href="/legal/affiliate-disclosure" className="hover:text-secondary">Affiliate Disclosure</Link></li>
-            <li><Link href="/sitemap.xml" className="hover:text-secondary">Site Map</Link></li>
+            <li><Link href="/sitemap" className="hover:text-secondary">Site Map</Link></li>
           </ul>
         </div>
       </div>
