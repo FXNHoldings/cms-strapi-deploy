@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bls_categories",
+  "info": {
+    "singularName": "bls-category",
+    "pluralName": "bls-categories",
+    "displayName": "BLS · Category",
+    "description": "Categories for BestLooking.Skin (Skincare Reviews, How-to Guides, Top Rated, etc.)"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 80 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "description": { "type": "text" },
+    "order": { "type": "integer", "default": 0 },
+    "icon": { "type": "string", "maxLength": 40 },
+    "legacyWpId": { "type": "integer", "unique": false },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::bls-category.bls-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bls-category.bls-category",
+      "mappedBy": "parent"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::bls-post.bls-post",
+      "mappedBy": "categories"
+    }
+  }
+}

@@ -25,6 +25,15 @@ node_modules/
 next-env.d.ts
 *.tsbuildinfo
 
+# Sibling repos — these now live in their own GitHub repos and should
+# not be tracked from this monorepo:
+#   backend/nxt-bargains/    → FXNHoldings/nxtbargains-strapi-blog
+#   backend/originfacts-com/ → FXNHoldings/originfacts-strapi-blog (formerly travel-blog/)
+#   backend/bestlooking-skin/ — pending its own repo
+backend/nxt-bargains/
+backend/originfacts-com/
+backend/bestlooking-skin/
+
 # Production builds
 /build
 dist/

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "airline",
     "pluralName": "airlines",
-    "displayName": "Airline",
+    "displayName": "Travel Blog · Airline",
     "description": "Airline directory entries — identifiers, base of operations, contact info"
   },
   "options": { "draftAndPublish": false },

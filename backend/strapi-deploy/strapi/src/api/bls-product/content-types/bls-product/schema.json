@@ -1,0 +1,95 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bls_products",
+  "info": {
+    "singularName": "bls-product",
+    "pluralName": "bls-products",
+    "displayName": "BLS · Product",
+    "description": "Skincare products for BestLooking.Skin — searchable, embeddable in posts"
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "name":        { "type": "string", "required": true, "maxLength": 200 },
+    "slug":        { "type": "uid", "targetField": "name", "required": true },
+    "brand":       { "type": "string", "maxLength": 80 },
+    "shortDescription": { "type": "text", "maxLength": 320 },
+    "description": { "type": "richtext" },
+    "keyFeatures": { "type": "json", "description": "Array of bullet points" },
+    "primaryImage":{ "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "gallery":     { "type": "media", "multiple": true,  "allowedTypes": ["images"] },
+    "asin":        { "type": "string", "maxLength": 30, "description": "Amazon ASIN if applicable" },
+    "gtin":        { "type": "string", "maxLength": 14, "description": "Global Trade Item Number (UPC/EAN/GTIN-13/14) — used for cross-merchant matching (Walmart, eBay)" },
+    "skuOrModel":  { "type": "string", "maxLength": 80, "description": "Manufacturer Part Number / model number" },
+    "skinTypes": {
+      "type": "json",
+      "description": "Array of strings — e.g. dry, oily, sensitive, combination, normal"
+    },
+    "ingredients": { "type": "text" },
+    "rating":      { "type": "decimal", "min": 0, "max": 10 },
+    "ratingCount": { "type": "integer", "default": 0, "min": 0 },
+    "primaryAffiliateUrl": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Default outbound link with affiliate tag (e.g. Amazon Associates URL)"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Canonical product page on the source marketplace (Amazon, eBay, Walmart, etc.) — distinct from primaryAffiliateUrl"
+    },
+    "sourceMerchant": {
+      "type": "enumeration",
+      "enum": [
+        "amazon",
+        "ebay",
+        "walmart",
+        "target",
+        "sephora",
+        "ulta",
+        "amazon-uk",
+        "amazon-au",
+        "manufacturer",
+        "other"
+      ],
+      "description": "Which marketplace the sourceUrl points at"
+    },
+    "currentPrice":  { "type": "decimal" },
+    "originalPrice": { "type": "decimal" },
+    "currency":      { "type": "string", "default": "USD", "maxLength": 8 },
+    "lastPriceSyncAt": { "type": "datetime" },
+    "available":   { "type": "boolean", "default": true },
+    "seoTitle":       { "type": "string", "maxLength": 70 },
+    "seoDescription": { "type": "text",   "maxLength": 160 },
+    "seoKeywords":    { "type": "string" },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::bls-product-category.bls-product-category",
+      "inversedBy": "products"
+    },
+    "featuredInPosts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::bls-post.bls-post",
+      "mappedBy": "featuredProducts"
+    },
+    "offers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bls-product-offer.bls-product-offer",
+      "mappedBy": "product"
+    },
+    "priceSnapshots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bls-price-snapshot.bls-price-snapshot",
+      "mappedBy": "product"
+    },
+    "walmartPrice":      { "type": "decimal" },
+    "walmartUrl":        { "type": "string", "maxLength": 500 },
+    "walmartLastSyncAt": { "type": "datetime" },
+    "ebayPrice":         { "type": "decimal" },
+    "ebayUrl":           { "type": "string", "maxLength": 500 },
+    "ebayLastSyncAt":    { "type": "datetime" }
+  }
+}

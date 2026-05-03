@@ -4,7 +4,7 @@
   "info": {
     "singularName": "category",
     "pluralName": "categories",
-    "displayName": "Category",
+    "displayName": "Travel Blog · Category",
     "description": "Top-level content categories (e.g. Flights, Hotels, Destinations, Travel Tips) with unlimited sub-category depth"
   },
   "options": { "draftAndPublish": false },
@@ -17,7 +17,7 @@
     "order": { "type": "integer", "default": 0 },
     "site": {
       "type": "enumeration",
-      "enum": ["all", "travel", "future-1", "future-2", "future-3"],
+      "enum": ["all", "travel", "nxt-bargains", "future-1", "future-2"],
       "default": "all",
       "description": "Restrict this category to a specific blog site (leave 'all' for shared)"
     },

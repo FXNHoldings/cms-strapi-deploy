@@ -1,0 +1,75 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bls_product_offers",
+  "info": {
+    "singularName": "bls-product-offer",
+    "pluralName": "bls-product-offers",
+    "displayName": "BLS · Product Offer",
+    "description": "One offer per merchant per product (Amazon, eBay, Walmart, etc.) — price + URL + last sync timestamp"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::bls-product.bls-product",
+      "inversedBy": "offers"
+    },
+    "merchant": {
+      "type": "enumeration",
+      "enum": [
+        "amazon",
+        "amazon-uk",
+        "amazon-au",
+        "ebay",
+        "walmart",
+        "target",
+        "sephora",
+        "ulta",
+        "manufacturer",
+        "other"
+      ],
+      "required": true
+    },
+    "merchantLabel": {
+      "type": "string",
+      "maxLength": 60,
+      "description": "Optional override of the displayed merchant name (e.g. 'Amazon Marketplace - Refurbished')"
+    },
+    "currentPrice":  { "type": "decimal" },
+    "originalPrice": { "type": "decimal" },
+    "currency":      { "type": "string", "default": "USD", "maxLength": 8 },
+    "url": {
+      "type": "string",
+      "required": true,
+      "maxLength": 700,
+      "description": "Affiliate-tagged outbound URL"
+    },
+    "rawUrl": {
+      "type": "string",
+      "maxLength": 700,
+      "description": "Original product URL on the merchant (no affiliate tag) — useful for de-dupe"
+    },
+    "skuOnMerchant": {
+      "type": "string",
+      "maxLength": 80,
+      "description": "Merchant-side identifier (ASIN, eBay item ID, Walmart ID, etc.)"
+    },
+    "available":     { "type": "boolean", "default": true },
+    "shippingCost":  { "type": "decimal" },
+    "rating":        { "type": "decimal", "min": 0, "max": 10 },
+    "ratingCount":   { "type": "integer", "default": 0, "min": 0 },
+    "lastSyncedAt":  { "type": "datetime" },
+    "syncStatus": {
+      "type": "enumeration",
+      "enum": ["ok", "stale", "error", "manual"],
+      "default": "manual"
+    },
+    "syncError": { "type": "text" },
+    "displayOrder": {
+      "type": "integer",
+      "default": 0,
+      "description": "Lower = shown higher in the offer panel. Default 0; use to pin a preferred merchant."
+    }
+  }
+}

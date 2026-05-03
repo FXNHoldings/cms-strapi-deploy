@@ -4,7 +4,7 @@
   "info": {
     "singularName": "blog-destination",
     "pluralName": "blog-destinations",
-    "displayName": "Blog Destination",
+    "displayName": "Travel Blog · Blog Destination",
     "description": "External blog/site where articles are syndicated (webhook + schedule)"
   },
   "options": { "draftAndPublish": false },

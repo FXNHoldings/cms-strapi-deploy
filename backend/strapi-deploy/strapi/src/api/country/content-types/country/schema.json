@@ -4,7 +4,7 @@
   "info": {
     "singularName": "country",
     "pluralName": "countries",
-    "displayName": "Country",
+    "displayName": "Travel Blog · Country",
     "description": "Countries — ISO code, name, currency, region"
   },
   "options": { "draftAndPublish": false },

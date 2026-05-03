@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bls_product_categories",
+  "info": {
+    "singularName": "bls-product-category",
+    "pluralName": "bls-product-categories",
+    "displayName": "BLS · Product Category",
+    "description": "Product taxonomy for BestLooking.Skin (Moisturizer, Serum, Eye Cream, etc.)"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name":        { "type": "string", "required": true, "maxLength": 80 },
+    "slug":        { "type": "uid", "targetField": "name", "required": true },
+    "description": { "type": "text" },
+    "order":       { "type": "integer", "default": 0 },
+    "icon":        { "type": "string", "maxLength": 40 },
+    "image":       { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::bls-product-category.bls-product-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bls-product-category.bls-product-category",
+      "mappedBy": "parent"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::bls-product.bls-product",
+      "mappedBy": "categories"
+    }
+  }
+}

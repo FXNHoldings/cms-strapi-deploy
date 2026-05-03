@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bls_price_snapshots",
+  "info": {
+    "singularName": "bls-price-snapshot",
+    "pluralName": "bls-price-snapshots",
+    "displayName": "BLS · Price Snapshot",
+    "description": "Time-series record of a product's price at a single merchant. One row per (product, merchant, recordedAt). Used to render the price history chart on the product page."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::bls-product.bls-product",
+      "inversedBy": "priceSnapshots"
+    },
+    "merchant": {
+      "type": "enumeration",
+      "enum": ["amazon", "amazon-uk", "amazon-au", "ebay", "walmart", "target", "sephora", "ulta", "manufacturer", "other"],
+      "required": true
+    },
+    "price":      { "type": "decimal", "required": true },
+    "currency":   { "type": "string", "default": "USD", "maxLength": 8 },
+    "available":  { "type": "boolean", "default": true },
+    "recordedAt": { "type": "datetime", "required": true },
+    "source": {
+      "type": "enumeration",
+      "enum": ["sync-script", "manual", "lifecycle", "import"],
+      "default": "sync-script",
+      "description": "Where this snapshot came from — useful for filtering manual overrides out of the time-series chart."
+    }
+  }
+}

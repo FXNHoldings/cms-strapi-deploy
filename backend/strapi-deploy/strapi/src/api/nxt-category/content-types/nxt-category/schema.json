@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxt_categories",
+  "info": {
+    "singularName": "nxt-category",
+    "pluralName": "nxt-categories",
+    "displayName": "NXT Bargains · Category",
+    "description": "Categories for NXT.Bargains (Product Comparisons, Reviews, How-to Guides, etc.)"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 80 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "description": { "type": "text" },
+    "order": { "type": "integer", "default": 0 },
+    "icon": { "type": "string", "maxLength": 40 },
+    "legacyWpId": { "type": "integer", "unique": false },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxt-category.nxt-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxt-category.nxt-category",
+      "mappedBy": "parent"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nxt-post.nxt-post",
+      "mappedBy": "categories"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxt_posts",
+  "info": {
+    "singularName": "nxt-post",
+    "pluralName": "nxt-posts",
+    "displayName": "NXT Bargains · Post",
+    "description": "Posts for NXT.Bargains — product comparisons, reviews, roundups, how-to guides"
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "title": { "type": "string", "required": true, "maxLength": 255 },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "excerpt": { "type": "text", "maxLength": 500 },
+    "content": { "type": "richtext", "required": true },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images"]
+    },
+    "postType": {
+      "type": "enumeration",
+      "enum": [
+        "product-comparison",
+        "product-review",
+        "product-roundup",
+        "how-to-guide",
+        "informative",
+        "top-rated",
+        "other"
+      ],
+      "default": "product-comparison"
+    },
+    "amazonAffiliateTag": {
+      "type": "string",
+      "maxLength": 40,
+      "description": "Default Amazon Associates tag for affiliate links in this post"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Original URL if imported from another site"
+    },
+    "legacyWpId": {
+      "type": "integer",
+      "description": "Original WordPress post ID (for re-import idempotency)"
+    },
+    "readingTimeMinutes": { "type": "integer", "default": 5, "min": 1 },
+    "seoTitle": { "type": "string", "maxLength": 70 },
+    "seoDescription": { "type": "text", "maxLength": 160 },
+    "seoKeywords": { "type": "string" },
+    "ogImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "source": {
+      "type": "enumeration",
+      "enum": ["manual", "wp-import", "ai", "csv-import"],
+      "default": "manual"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nxt-category.nxt-category",
+      "inversedBy": "posts"
+    }
+  }
+}
