@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bls_product_brands",
+  "info": {
+    "singularName": "bls-product-brand",
+    "pluralName": "bls-product-brands",
+    "displayName": "BLS · Product Brand",
+    "description": "Brand taxonomy for BestLooking.Skin products"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name":        { "type": "string", "required": true, "maxLength": 120 },
+    "slug":        { "type": "uid", "targetField": "name", "required": true },
+    "description": { "type": "text" },
+    "websiteUrl":  { "type": "string", "maxLength": 500 },
+    "logo":        { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "order":       { "type": "integer", "default": 0 },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bls-product.bls-product",
+      "mappedBy": "brandRef"
+    }
+  }
+}

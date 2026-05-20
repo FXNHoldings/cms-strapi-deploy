@@ -11,7 +11,13 @@
   "attributes": {
     "name":        { "type": "string", "required": true, "maxLength": 200 },
     "slug":        { "type": "uid", "targetField": "name", "required": true },
-    "brand":       { "type": "string", "maxLength": 80 },
+    "brand":       { "type": "string", "maxLength": 80, "description": "Legacy brand text. Prefer brandRef for CMS-managed brand options." },
+    "brandRef": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::bls-product-brand.bls-product-brand",
+      "inversedBy": "products"
+    },
     "shortDescription": { "type": "text", "maxLength": 320 },
     "description": { "type": "richtext" },
     "keyFeatures": { "type": "json", "description": "Array of bullet points" },

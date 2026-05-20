@@ -14,91 +14,309 @@
 # it if it doesn't exist, attach the article to it, and skip topics whose
 # title (or derived slug) already exists in Strapi.
 
-# --- car rental ---
-car-rental | Cheap Car Rentals in Bali: Smart Tips for Driving in Indonesia | Indonesia
-car-rental | Renting a Car in Japan: How to Save Money on Self-Drive Tours | Japan
-car-rental | Cheap Car Rentals in Dubai: Best Pickup Spots Across the UAE | United Arab Emirates
-car-rental | Car Rental Tips for Vietnam: Should You Drive or Hire a Driver? | Vietnam
-car-rental | Renting a Car in South Korea: Budget-Friendly Tips for Seoul and Beyond | South Korea
-car-rental | Cheap Car Rentals in Sri Lanka: Self-Drive vs Driver-Hired Options | Sri Lanka
-car-rental | Renting a Car in Malaysia: Best Road Trip Routes from KL to Penang | Malaysia
-car-rental | Cheap Car Rentals in the Philippines: Manila and Cebu Comparison Guide | Philippines
-car-rental | Renting a Car in Taiwan: Smart Driving Tips for Taipei and the East Coast | Taiwan
-car-rental | Cheap Car Rentals in India: What Travelers Need to Know Before Booking | India
-car-rental | Cheap Car Rentals at Airports vs City Locations: Which Is Better?
-car-rental | How to Find Cheap Car Rentals Without Getting Hit by Hidden Fees
-car-rental | Best Time to Book Cheap Car Rentals for Maximum Savings
-car-rental | Top Mistakes to Avoid When Booking Cheap Car Rentals Online
-car-rental | Cheap Car Rentals for Family Trips: How to Save More and Travel Smarter
+# ---------------------------------------------- car rentals ----------------------------------------------
+# --- Australia (cities) ---
+car-rentals | Best Car Rental at Sydney Airport | Sydney, Australia
+car-rentals | Best Car Rental at Melbourne Airport | Melbourne, Australia
+car-rentals | Best Car Rental at Perth Airport | Perth, Australia
 
-# --- flights ---
-flights | Cheap Flights to Tokyo: Best Booking Strategies for Japan Trips | Japan
-flights | How to Find Cheap Flights to Bali Without Falling for Hidden Fees | Indonesia
-flights | Best Time to Book Flights to Singapore for the Lowest Fares | Singapore
-flights | Cheap Flights to Vietnam: Hanoi vs Ho Chi Minh Routes Compared | Vietnam
-flights | Smart Booking Tips for Cheap Flights to Seoul, South Korea | South Korea
-flights | Cheap Flights to the Maldives: When to Book for Off-Peak Savings | Maldives
-flights | How to Find Cheap Flights to Dubai from Australia and the UK | United Arab Emirates
-flights | Cheap Flights to the Philippines: Manila, Cebu, and Boracay Travel Tips | Philippines
-flights | Best Time to Book Cheap Flights to India During Festival Seasons | India
-flights | Cheap Flights to Hong Kong: How to Score Discounted Asia Layovers | Hong Kong
-flights | Cheap Flights for Families: Smart Ways to Save on Group Travel
-flights | How to Find Cheap Flights in 2026 Without Falling for Hidden Fees
-flights | Best Time to Book Cheap Flights for Domestic and International Travel
-flights | Last-Minute Cheap Flights: What Actually Works for Budget Travelers
-flights | Cheap Flights vs Budget Airlines: Which Option Saves You More?
-flights | Best Time to Book Flights to Sydney for the Lowest Fares | Sydney, Australia
-flights | Where to Stay in Sydney: Best Hotels for Every Budget | Sydney, Australia
-flights | Sydney Travel Guide: Top Attractions, Hotels, and Flight Tips | Sydney, Australia
-flights | Cheap Flights to Sydney: How to Save on Your Australia Trip | Sydney, Australia
+# --- Australia (country-wide) ---
+car-rentals | Cheap Car Rental Australia Deals and Tips | Australia
+car-rentals | Best Car Rental Companies in Australia Compared | Australia
+car-rentals | One Way Car Rental Australia Explained | Australia
+car-rentals | Best Long Term Car Rental in Australia | Australia
+car-rentals | Best Family Car Rental Options in Australia | Australia
+car-rentals | Luxury Car Rental in Australia for Premium Travel | Australia
+car-rentals | Campervan Rental Australia Road Trip Guide | Australia
+car-rentals | 4WD Rental Australia for Off Road Adventures | Australia
+car-rentals | Cheap SUV Rental Australia Deals | Australia
+car-rentals | Airport Car Rental Tips for Australia Travelers | Australia
+car-rentals | Car Rental Insurance Guide in Australia | Australia
+car-rentals | Cheap Weekly Car Rental Deals in Australia | Australia
+car-rentals | Car Hire Rules and Requirements in Australia | Australia
+car-rentals | Best Self Drive Australia Itineraries | Australia
+car-rentals | Best Road Trips in Australia with Rental Cars | Australia
+car-rentals | Cheap One Way Car Hire Australia Deals | Australia
+car-rentals | Electric Car Rental in Australia Guide | Australia
 
-# --- hotels ---
-hotels | Cheap Hotels in Tokyo: Best Areas for Budget Travelers in Japan | Japan
-hotels | Where to Stay in Bali: Top Hotel Picks for Every Budget in Indonesia | Indonesia
-hotels | Best Beach Hotels in the Maldives Without the Five-Star Price Tag | Maldives
-hotels | Affordable Hotels in Singapore: Smart Stays Near MRT Stations | Singapore
-hotels | Cheap Hotels in Vietnam: Top Picks in Hanoi, Hoi An, and Da Nang | Vietnam
-hotels | Best Family Hotels in Dubai for Stress-Free UAE Holidays | United Arab Emirates
-hotels | Budget Hotels in Seoul: Where to Stay in South Korea Without Overspending | South Korea
-hotels | Cheap Hotels in Sri Lanka: Coastal Stays for Backpackers and Families | Sri Lanka
-hotels | Where to Stay in Hong Kong: Best Hotel Districts for First-Time Visitors | Hong Kong
-hotels | Best Boutique Hotels in Kyoto: Traditional Stays Across Japan | Japan
-hotels | Best Apps and Websites to Find Cheap Hotels for Any Destination
-hotels | 5 Boutique Hotels in Kyoto Under $150 a Night | Kyoto, Japan
-hotels | How to Book Cheap Hotels Without Compromising Comfort and Safety
-hotels | Cheap Hotels for Families: What to Look for Before You Book
-hotels | How to Save More on Cheap Hotels During Peak Travel Seasons
-hotels | Cheap Hotels vs Vacation Rentals: Which Is Better for Budget Travel?
-hotels | Best Areas to Book a Hotel in Sydney for First-Time Visitors | Sydney, Australia
-hotels | Best Time to Visit Perth for Good Weather and Lower Travel Costs | Perth, Australia
-hotels | Top Budget Hotels in Perth for Smart Travelers | Perth, Australia
-hotels | Things to Do in Perth: A Complete Guide for First-Time Visitors | Perth, Australia
-hotels | How to Plan a Budget-Friendly Trip to Perth | Perth, Australia
+# --- Thailand (cities) ---
+car-rentals | Best Car Rental at Bangkok Airport | Bangkok, Thailand
+car-rentals | Best Car Rental at Phuket Airport | Phuket, Thailand
+car-rentals | Best Car Rental in Chiang Mai Thailand | Chiang Mai, Thailand
 
-# --- travel tips ---
-travel-tips | Digital Detox Travel Guide: How to Unplug Without Losing Access to Maps and Tickets
-travel-tips | Cashless Travel Tips for 2026: How to Pay Safely in Countries Using Less Cash
-travel-tips | eSIM vs. International Roaming: Which Travel Connectivity Option Saves More Money?
-travel-tips | How to Avoid Overtourism and Find Non-Viral Destinations Worth Visiting
-travel-tips | Shoulder Season Travel Benefits: Why the Hidden Season Is the Smartest Time to Travel
-travel-tips | Zero-Waste Packing Tips for Travelers Who Want to Pack Light and Travel Greener
-travel-tips | Pet Travel Requirements 2026: What to Know Before Flying With Your Dog or Cat
-travel-tips | Solo Travel Group Tours: The Best Way to Travel Alone Without Feeling Isolated
-travel-tips | Mid-Career Sabbatical Planning: How to Take a Micro-Retirement Trip Without Derailing Your Career
-travel-tips | Best AI Trip Planning Prompts to Build Smarter Travel Itineraries
-travel-tips | Thailand Travel Guide: Best Places to Visit for First-Time Travelers | Thailand
-travel-tips | Best Time to Visit Thailand for Beaches, Festivals, and Budget Travel | Thailand
-travel-tips | Thailand on a Budget: How to Save on Flights, Hotels, and Transport | Thailand
-travel-tips | Top Tourist Destinations in Thailand You Should Not Miss | Thailand
-travel-tips | Where to Stay in Thailand: Best Areas and Hotel Options for Travelers | Thailand
-travel-tips | Packing Tips for Carry-On Only: How to Travel Light Without Forgetting Essentials
-travel-tips | Best Travel Insurance for 2026: How to Choose the Right Coverage for Your Trip
-travel-tips | Top Travel Planning Apps in 2026: Best AI Tools to Organize Your Trip
-travel-tips | The Ultimate International Travel Checklist for Stress-Free Travel
-travel-tips | Best Cheap Flight Search Engines to Find Lower Airfares Fast
-travel-tips | Global Entry vs. TSA PreCheck: Which One Is Better for Frequent Travelers?
-travel-tips | How to Find Error Fares and Book Cheap Flights Before They Disappear
-travel-tips | Sustainable Travel Tips for Eco-Conscious Travelers Who Want to Reduce Their Impact
-travel-tips | Solo Female Travel Safety Tips for Safer and More Confident Trips
-travel-tips | How to Handle a Canceled Flight: What to Do, What to Claim, and How to Rebook Fast
+# --- Thailand (country-wide) ---
+car-rentals | Cheap Car Rental Thailand Deals and Tips | Thailand
+car-rentals | Best Car Rental Companies in Thailand Compared | Thailand
+car-rentals | One Way Car Rental in Thailand Explained | Thailand
+car-rentals | Best Long Term Car Rental in Thailand | Thailand
+car-rentals | Best Family Car Rental Options in Thailand | Thailand
+car-rentals | Luxury Car Rental in Thailand for Premium Travel | Thailand
+car-rentals | 4WD Rental Thailand for Adventure Travel | Thailand
+car-rentals | Cheap SUV Rental Thailand Deals | Thailand
+car-rentals | Scooter vs Car Rental in Thailand Guide | Thailand
+car-rentals | Thailand Car Rental Insurance Guide | Thailand
+car-rentals | Airport Car Rental Tips for Thailand Travelers | Thailand
+car-rentals | Cheap Weekly Car Rental Deals in Thailand | Thailand
+car-rentals | Car Hire Requirements in Thailand Explained | Thailand
+car-rentals | Best Self Drive Thailand Itineraries | Thailand
+car-rentals | Best Thailand Road Trips with Rental Cars | Thailand
+car-rentals | Cheap One Way Car Hire Thailand Deals | Thailand
+car-rentals | Electric Car Rental in Thailand Guide | Thailand
 
+# ---------------------------------------------- flights ----------------------------------------------
+# --- Australia (city routes) ---
+flights | Cheap Flights Within Australia for Every Budget | Australia
+flights | Sydney to Melbourne Flights with the Best Deals | Sydney, Australia, Melbourne, Australia
+flights | Perth to Sydney Flights at the Best Prices | Perth, Australia, Sydney, Australia
+flights | Brisbane to Perth Flights with Top Airlines | Brisbane, Australia, Perth, Australia
+flights | Melbourne to Brisbane Flights for Less | Melbourne, Australia, Brisbane, Australia
+flights | Direct Flights Between Australian Cities Guide | Australia
+
+# --- Australia (international + cities) ---
+flights | Cheap Flights to Australia from Around the World | Australia
+flights | Best Flights to Sydney Australia | Sydney, Australia
+flights | Best Flights to Melbourne Australia | Melbourne, Australia
+flights | Best Flights to Perth Australia | Perth, Australia
+flights | Best Flights to Brisbane Australia | Brisbane, Australia
+flights | Direct Flights to Australia from Major Cities | Australia
+flights | Best Airlines to Fly to Australia Compared | Australia
+
+# --- Australia (airline reviews) ---
+flights | Qantas Domestic Flights Review and Comparison | Australia
+flights | Virgin Australia Flight Review for Domestic Travel | Australia
+flights | Jetstar Cheap Flights Review and Tips | Australia
+flights | Rex Airlines Domestic Flights Review | Australia
+flights | Best Domestic Airlines in Australia Compared | Australia
+flights | Best Budget Airlines in Australia Compared | Australia
+flights | Australia Airline Baggage Allowance Guide | Australia
+flights | Best Frequent Flyer Programs in Australia | Australia
+
+# --- Australia (booking tips) ---
+flights | Best Time to Book Flights in Australia | Australia
+flights | How to Find Cheap Flights in Australia | Australia
+flights | Best Last Minute Flights in Australia | Australia
+flights | One Way Flights in Australia at Great Prices | Australia
+flights | Best Return Flights in Australia | Australia
+flights | Best Flexible Ticket Flights in Australia | Australia
+flights | Best Student Flight Discounts in Australia | Australia
+flights | Best Flights and Hotels Australia Packages | Australia
+flights | Multi City Flights Australia Made Easy | Australia
+flights | Best Round Australia Flight Routes | Australia
+flights | Best Business Class Flights in Australia | Australia
+flights | Best Family Flight Deals in Australia | Australia
+flights | Best Stopover Flights to Australia | Australia
+
+# --- Bangkok ---
+flights | Cheap Flights to Bangkok Thailand | Bangkok, Thailand
+flights | Best Airlines to Fly to Bangkok Compared | Bangkok, Thailand
+flights | Direct Flights to Bangkok Thailand Guide | Bangkok, Thailand
+flights | Best Flights to Bangkok from Australia | Bangkok, Thailand, Australia
+flights | Best Business Class Flights to Bangkok | Bangkok, Thailand
+flights | Best Last Minute Flights to Bangkok | Bangkok, Thailand
+flights | Return Flights to Bangkok at Great Prices | Bangkok, Thailand
+
+# --- Phuket ---
+flights | Cheap Flights to Phuket Thailand | Phuket, Thailand
+flights | Direct Flights to Phuket Thailand | Phuket, Thailand
+flights | Best Flights to Phuket from Australia | Phuket, Thailand, Australia
+flights | Best Airlines to Fly to Phuket Compared | Phuket, Thailand
+flights | Best Business Class Flights to Phuket | Phuket, Thailand
+flights | Best Family Flight Deals to Phuket | Phuket, Thailand
+flights | One Way Flights to Phuket at Great Prices | Phuket, Thailand
+
+# --- Chiang Mai ---
+flights | Cheap Flights to Chiang Mai Thailand | Chiang Mai, Thailand
+flights | Best Flights from Bangkok to Chiang Mai | Bangkok, Thailand, Chiang Mai, Thailand
+flights | Direct Flights to Chiang Mai Guide | Chiang Mai, Thailand
+flights | Best Airlines to Fly to Chiang Mai | Chiang Mai, Thailand
+flights | Best Business Class Flights to Chiang Mai | Chiang Mai, Thailand
+flights | Return Flights to Chiang Mai at Great Prices | Chiang Mai, Thailand
+
+# --- Thailand (airline reviews) ---
+flights | Thai Airways Flights Review and Comparison | Thailand
+flights | Bangkok Airways Review for Thailand Flights | Thailand
+flights | AirAsia Thailand Flights Review | Thailand
+flights | Nok Air Domestic Flights Review | Thailand
+flights | Best Domestic Airlines in Thailand Compared | Thailand
+flights | Thailand Airline Baggage Allowance Guide | Thailand
+flights | Best Frequent Flyer Programs for Thailand Travel | Thailand
+
+# --- Thailand (country-wide) ---
+flights | Cheap Domestic Flights in Thailand | Thailand
+flights | Best Time to Book Flights to Thailand | Thailand
+flights | How to Find Cheap Flights to Thailand | Thailand
+flights | Best Last Minute Flights to Thailand | Thailand
+flights | Best Flexible Ticket Flights to Thailand | Thailand
+flights | Best Student Flight Discounts to Thailand | Thailand
+flights | Best Flights and Hotels Thailand Packages | Thailand
+flights | Multi City Flights in Thailand Made Easy | Thailand
+flights | Best Island Hopping Flights in Thailand | Thailand
+flights | Best Family Flight Deals to Thailand | Thailand
+flights | Best Business Class Flights to Thailand | Thailand
+
+# ---------------------------------------------- hotels ----------------------------------------------
+# --- Sydney ---
+hotels | Best Hotels in Sydney Australia for Every Budget | Sydney, Australia
+hotels | Top Luxury Hotels in Sydney CBD for an Unforgettable Stay | Sydney, Australia
+hotels | Cheap Hotels in Sydney Near the Opera House | Sydney, Australia
+hotels | Best Family Friendly Hotels in Sydney | Sydney, Australia
+hotels | Best Boutique Hotels in Sydney Australia | Sydney, Australia
+hotels | Best Sydney Hotels with Spectacular Harbour Views | Sydney, Australia
+hotels | Best Airport Hotels Near Sydney Airport | Sydney, Australia
+
+# --- Melbourne ---
+hotels | Best Hotels in Melbourne Australia for Every Traveller | Melbourne, Australia
+hotels | Top Luxury Hotels in Melbourne CBD | Melbourne, Australia
+hotels | Cheap Hotels in Melbourne City Centre | Melbourne, Australia
+hotels | Best Family Hotels in Melbourne | Melbourne, Australia
+hotels | Best Boutique Hotels in Melbourne Australia | Melbourne, Australia
+hotels | Best Hotels Near Crown Melbourne | Melbourne, Australia
+hotels | Best Airport Hotels Near Melbourne Airport | Melbourne, Australia
+
+# --- Perth ---
+hotels | Best Hotels in Perth Australia for Every Budget | Perth, Australia
+hotels | Top Luxury Hotels in Perth CBD | Perth, Australia
+hotels | Cheap Hotels in Perth City with Great Reviews | Perth, Australia
+hotels | Best Family Friendly Hotels in Perth | Perth, Australia
+hotels | Best Hotels Near Elizabeth Quay Perth | Perth, Australia
+hotels | Best Beach Hotels in Perth Western Australia | Perth, Australia
+hotels | Best Airport Hotels Near Perth Airport | Perth, Australia
+
+# --- Brisbane ---
+hotels | Best Hotels in Brisbane Australia for Every Traveller | Brisbane, Australia
+hotels | Top Luxury Hotels in Brisbane CBD | Brisbane, Australia
+hotels | Cheap Hotels in Brisbane City Centre | Brisbane, Australia
+hotels | Best Family Friendly Hotels in Brisbane | Brisbane, Australia
+hotels | Best Hotels Near South Bank Brisbane | Brisbane, Australia
+hotels | Best Boutique Hotels in Brisbane Australia | Brisbane, Australia
+hotels | Best Airport Hotels Near Brisbane Airport | Brisbane, Australia
+
+# --- Australia (country-wide) ---
+hotels | Best Hotels in Australia for Every Type of Traveller | Australia
+hotels | Most Luxurious Hotels in Australia Worth Booking | Australia
+hotels | Best Cheap Hotels in Australia with Great Reviews | Australia
+hotels | Best Family Friendly Hotels in Australia | Australia
+hotels | Best Boutique Hotels in Australia for Unique Stays | Australia
+hotels | Best Beach Resorts in Australia for Coastal Escapes | Australia
+hotels | Best Airport Hotels in Australia for Stress Free Travel | Australia
+
+# --- Bangkok ---
+hotels | Best Hotels in Bangkok Thailand for Every Budget | Bangkok, Thailand
+hotels | Top Luxury Hotels in Bangkok Sukhumvit | Bangkok, Thailand
+hotels | Cheap Hotels in Bangkok City Centre | Bangkok, Thailand
+hotels | Best Family Friendly Hotels in Bangkok | Bangkok, Thailand
+hotels | Best Boutique Hotels in Bangkok Thailand | Bangkok, Thailand
+hotels | Best Hotels Near Suvarnabhumi Airport | Bangkok, Thailand
+hotels | Best Hotels Near BTS Skytrain Bangkok | Bangkok, Thailand
+
+# --- Phuket ---
+hotels | Best Hotels in Phuket Thailand for Beach Lovers | Phuket, Thailand
+hotels | Best Luxury Resorts in Phuket Thailand | Phuket, Thailand
+hotels | Cheap Hotels in Patong Beach | Phuket, Thailand
+hotels | Best Family Resorts in Phuket | Phuket, Thailand
+hotels | Best Boutique Hotels in Phuket | Phuket, Thailand
+hotels | Best Beachfront Hotels in Phuket | Phuket, Thailand
+hotels | Best Honeymoon Resorts in Phuket | Phuket, Thailand
+
+# --- Chiang Mai ---
+hotels | Best Hotels in Chiang Mai Thailand | Chiang Mai, Thailand
+hotels | Best Boutique Hotels in Chiang Mai Old City | Chiang Mai, Thailand
+hotels | Best Luxury Resorts in Chiang Mai | Chiang Mai, Thailand
+hotels | Cheap Hotels in Chiang Mai with Great Reviews | Chiang Mai, Thailand
+hotels | Best Family Friendly Hotels in Chiang Mai | Chiang Mai, Thailand
+hotels | Best Hotels Near Chiang Mai Night Bazaar | Chiang Mai, Thailand
+hotels | Best Wellness Resorts in Chiang Mai | Chiang Mai, Thailand
+
+# --- Pattaya ---
+hotels | Best Hotels in Pattaya Thailand | Pattaya, Thailand
+hotels | Best Beachfront Hotels in Pattaya | Pattaya, Thailand
+hotels | Best Family Resorts in Pattaya | Pattaya, Thailand
+hotels | Cheap Hotels on Pattaya Beach Road | Pattaya, Thailand
+hotels | Best Luxury Hotels in Pattaya | Pattaya, Thailand
+hotels | Best Hotels Near Walking Street Pattaya | Pattaya, Thailand
+hotels | Best Boutique Hotels in Pattaya | Pattaya, Thailand
+
+# --- Thailand (country-wide) ---
+hotels | Best Hotels in Thailand for Every Traveller | Thailand
+hotels | Most Luxurious Hotels in Thailand Worth Booking | Thailand
+hotels | Best Cheap Hotels in Thailand with Great Reviews | Thailand
+hotels | Best Family Friendly Hotels in Thailand | Thailand
+hotels | Best Beachfront Resorts in Thailand | Thailand
+hotels | Best Honeymoon Resorts in Thailand | Thailand
+hotels | Best Airport Hotels in Thailand for Easy Travel | Thailand
+
+
+
+# ---------------------------------------------- travel tips ----------------------------------------------
+# --- Australia (overview & planning) ---
+travel-tips | Best Time to Visit Australia for Perfect Weather | Australia
+travel-tips | 10 Day Australia Itinerary for First Time Visitors | Australia
+travel-tips | 2 Week Australia Itinerary for the Ultimate Trip | Australia
+travel-tips | How to Travel Around Australia Like a Pro | Australia
+travel-tips | Australia Travel Visa Requirements Explained | Australia
+travel-tips | How Much Does It Cost to Travel in Australia per Day | Australia
+travel-tips | Essential Australia Travel Tips for First Time Visitors | Australia
+
+# --- Australia (cities) ---
+travel-tips | Sydney Travel Tips for an Unforgettable Trip | Sydney, Australia
+travel-tips | Melbourne Travel Tips for Food, Culture, and Hidden Gems | Melbourne, Australia
+travel-tips | Perth Travel Tips for the Perfect Western Australia Trip | Perth, Australia
+travel-tips | Brisbane Travel Tips for a Sunny City Escape | Brisbane, Australia
+travel-tips | Gold Coast Travel Tips for Beaches and Theme Parks | Gold Coast, Australia
+travel-tips | Cairns Travel Tips for Great Barrier Reef Adventures | Cairns, Australia
+travel-tips | Adelaide Travel Tips for Food, Wine, and Culture | Adelaide, Australia
+
+# --- Australia (transport, budget & general) ---
+travel-tips | Cheapest Ways to Travel Within Australia | Australia
+travel-tips | Domestic Flight Tips for Traveling Across Australia | Australia
+travel-tips | Australia Public Transport Guide for Travelers | Australia
+travel-tips | Australia Road Trip Tips for Epic Adventures | Australia
+travel-tips | Campervan Travel Tips for Exploring Australia | Australia
+travel-tips | How to Travel Australia on a Budget | Australia
+travel-tips | Backpacking Australia Guide for First Timers | Australia
+travel-tips | Best Hostel Tips for Traveling in Australia | Australia
+travel-tips | How to Save Money While Traveling in Australia | Australia
+travel-tips | Best Travel Discount Passes in Australia | Australia
+travel-tips | Things You Must Know Before Visiting Australia | Australia
+travel-tips | Australia Safety Travel Tips for Tourists | Australia
+travel-tips | Australia Food Travel Tips for First Time Visitors | Australia
+travel-tips | Best SIM Card Tips for Traveling in Australia | Australia
+travel-tips | Australia Packing List for Every Season | Australia
+
+# --- Thailand (overview & planning) ---
+travel-tips | Best Time to Visit Thailand for Perfect Weather | Thailand
+travel-tips | 7 Day Thailand Itinerary for First Time Visitors | Thailand
+travel-tips | 2 Week Thailand Itinerary for the Ultimate Adventure | Thailand
+travel-tips | Thailand Visa Requirements Explained for Tourists | Thailand
+travel-tips | How Much Does It Cost to Travel in Thailand per Day | Thailand
+travel-tips | Essential Thailand Travel Tips for First Time Visitors | Thailand
+travel-tips | Complete Thailand Packing List for Every Traveller | Thailand
+
+# --- Bangkok ---
+travel-tips | Bangkok Travel Tips for a Smooth City Experience | Bangkok, Thailand
+travel-tips | How to Get Around Bangkok Easily | Bangkok, Thailand
+travel-tips | Bangkok Scams to Avoid for Tourists | Bangkok, Thailand
+travel-tips | Best Bangkok Street Food Tips for First Timers | Bangkok, Thailand
+travel-tips | Bangkok Temple Dress Code Guide for Visitors | Bangkok, Thailand
+travel-tips | Bangkok Airport Transfer Tips for Easy Arrival | Bangkok, Thailand
+
+# --- Thailand (other islands & beach destinations) ---
+travel-tips | Phuket Travel Tips for Beaches and Island Life | Phuket, Thailand
+travel-tips | Krabi Travel Tips for Stunning Limestone Beaches | Krabi, Thailand
+travel-tips | Koh Samui Travel Tips for Luxury Island Stays | Koh Samui, Thailand
+
+# --- Thailand (transport, budget & general) ---
+travel-tips | Island Hopping in Thailand Travel Guide | Thailand
+travel-tips | Domestic Flights in Thailand Travel Tips | Thailand
+travel-tips | Cheapest Ways to Travel Around Thailand | Thailand
+travel-tips | Thailand Train Travel Tips for Scenic Journeys | Thailand
+travel-tips | Tuk Tuk Tips for Traveling in Thailand | Thailand
+travel-tips | Using Taxis and Grab in Thailand Guide | Thailand
+travel-tips | Backpacking Thailand Travel Guide for Beginners | Thailand
+travel-tips | How to Find Cheap Hotels in Thailand | Thailand
+travel-tips | How to Save Money While Traveling in Thailand | Thailand
+travel-tips | Complete Budget Travel Guide to Thailand | Thailand
+travel-tips | Thailand Safety Tips for Tourists | Thailand
+travel-tips | Thailand Cultural Etiquette Guide for Visitors | Thailand
+travel-tips | Thailand Food Travel Tips for First Timers | Thailand
+travel-tips | Thailand SIM Card and eSIM Travel Tips | Thailand
