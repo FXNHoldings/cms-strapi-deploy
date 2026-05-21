@@ -1,6 +1,15 @@
 #!/usr/bin/env node
-// FXN — Generate `description` (3-section markdown) + hero image for one or
-// more country destinations.
+// FXN — Generate `description` (intro + 3-section markdown with bullet list) +
+// hero image for one or more country destinations.
+//
+// Section structure matches the UK destination page:
+//   (intro paragraph, no heading)
+//   ## Overview                       — short paragraph        (rendered in About block)
+//   ## Visa Requirements              — short paragraph        (rendered in About block)
+//   ## Famous Attractions in {Country} — short paragraph       (rendered above Flights)
+//   ## Weather & Climate              — short paragraph        (rendered above Flights)
+//   ## Interesting Facts About {Country} — 5-item bullet list  (rendered above Flights)
+//   ## Official Resources             — 4-6 item bullet list   (rendered above Flights)
 //
 // Mirrors enrich-airport-content.js but writes to `destinations(type=country)`
 // matched by slug, and uses a country-flavoured prompt.
@@ -77,14 +86,30 @@ const ABOUT_SYSTEM = `You write country encyclopedia entries for an editorial tr
 
 Output MUST be strict JSON with these keys:
 {
-  "description": string  // A flowing 2-3 sentence intro paragraph, then a blank line, then exactly three sections in markdown separated by blank lines, each preceded by a level-2 heading. Total length 200-260 words.
-    //   (intro paragraph)  ~35-55 words across 2-3 sentences that paint the country's character — landscape contrasts, what defines daily life, a sensory detail or two. Editorial and confident, never promotional. Do NOT precede with a heading. Examples of the right tone:
-    //     "Iceland is fire and ice rendered into landscape: glaciers, geysers, black-sand beaches, and skies that flicker green half the year. Most of the island is wilderness; even the capital sits within sight of mountains."
-    //     "Brazil sprawls across half a continent — Amazon rainforest in the north, Atlantic beaches and samba-loud cities along the coast, vast cattle plains in the south. Football, music, and food shift accent every region you cross."
-    //   ## Overview        ~50-65 words. Geography (region, neighbours, coastline if applicable), capital city, official language, currency, broad cultural identity.
-    //   ## Highlights      ~50-65 words. The two or three things this country is best known for to travellers — major sights, iconic landscapes, signature food or culture. Concrete, specific. Avoid clichés like "rich tapestry" or "hidden gems".
-    //   ## Practical       ~40-60 words. Visa picture (visa-on-arrival / visa-free for major passports if you know it confidently), best season to visit, currency notes, getting around basics.
-    // No bullet lists. Plain prose under each heading. Don't fabricate visa details, prices, or population figures — generalise if uncertain.
+  "description": string  // A flowing 1-2 sentence intro paragraph, then a blank line, then EXACTLY SIX sections in markdown separated by blank lines, in the order below. Substitute the actual country name where {COUNTRY} appears. Total length 400-600 words.
+    //   (intro paragraph)  ~25-45 words, 1-2 sentences. Paint the country's character — landscape contrasts, what defines daily life, a sensory detail. Editorial, confident, never promotional. NO heading. Examples of the right tone:
+    //     "Four nations on one island — chalk cliffs, Highland lochs, Welsh valleys and Northern Irish coastline across roughly 244,000 km², home to 68 million people and four capitals."
+    //     "Iceland is fire and ice rendered into landscape: glaciers, geysers, black-sand beaches, and skies that flicker green half the year."
+    //   ## Overview        ~55-75 words of flowing prose. Geography (region, neighbours, coastline if applicable), capital city, official language, currency, broad cultural identity. No bullets.
+    //   ## Visa Requirements  ~30-55 words of flowing prose. Generalise honestly — many travellers visa-free or visa-on-arrival, point to the country's official electronic travel authority / eVisa system if you confidently know its name. Do NOT fabricate specific fees, durations, or nationality lists. Plain prose, no bullets.
+    //   ## Famous Attractions in {COUNTRY}  ~50-80 words of flowing prose. Name 4-6 of the country's most iconic, verifiable attractions (landmarks, natural wonders, cultural sites) with one specific detail each. Be concrete (e.g. "Stonehenge on Salisbury Plain") not generic ("ancient ruins"). No bullets.
+    //   ## Weather & Climate  ~50-80 words of flowing prose. Climate type, typical summer + winter temperature ranges in °C, best season to visit, regional variation if meaningful, one practical packing note. Use real numbers but don't fabricate specific rainfall figures. No bullets.
+    //   ## Interesting Facts About {COUNTRY}  EXACTLY 5 bullet points, each on its own line, each starting with "- " (hyphen + space). Keep each bullet SHORT — strictly 7-10 words, one crisp declarative sentence, ideally headline-style (e.g. "- Home to over 1,500 medieval castles." or "- World's largest exporter of high-grade saffron."). No follow-up explanation, avoid commas mid-sentence unless necessary. Facts should be verifiable and surprising — historical firsts, geographic superlatives, cultural icons, distinctive customs. Avoid clichés, avoid promotional language, do NOT invent statistics.
+    //   ## Official Resources  EXACTLY 4-6 bullet points. Each bullet "- domain.tld — short description" naming an official .gov / national tourist board / national transport / weather agency / national rail or transit authority site. Use ONLY real, well-known official domains. Do NOT fabricate URLs. If unsure of a country's specific resource, omit that bullet rather than invent.
+    // Do NOT add ## Highlights, ## Practical, or any other section. Do not wrap bullets in code fences.
+  "facts": object  // Structured per-country facts rendered in the right-hand sidebar. ALL fields are optional — OMIT any you are not confident about; do NOT fabricate. Use exactly these keys:
+    //   officialName    string  — full constitutional name (e.g. "French Republic", "Kingdom of Thailand")
+    //   capital         string  — primary capital city
+    //   currencyCode    string  — ISO 4217 code, uppercase (e.g. "EUR", "JPY")
+    //   currencyName    string  — friendly name (e.g. "Euro", "Japanese yen")
+    //   population      number  — most recent UN/national estimate, integer (no commas)
+    //   areaKm2         number  — total area in square kilometres, integer
+    //   languages       string[] — official / dominant languages in usage order (e.g. ["French"])
+    //   government      string  — short form (e.g. "Unitary semi-presidential republic", "Parliamentary constitutional monarchy")
+    //   monarch         string  — current head of state IF a monarchy (e.g. "King Charles III"). OMIT for republics.
+    //   timezones       string  — short form (e.g. "CET / CEST", "JST (UTC+9)", "UTC−3:30 to −8")
+    //   drivesOn        string  — "left" or "right"
+    //   callingCode     string  — international dialling prefix with + (e.g. "+33")
   "imagePrompt": string  // 30-60 words for FLUX. A landscape or cityscape that visually represents the country. Specific (e.g. "Angkor Wat at sunrise" not "Cambodian temple"; "the Amalfi coast at golden hour" not "Italian coast"). Photorealistic, editorial-magazine style. NO text overlays, NO flags, NO people's faces. End with: "cinematic lighting, shot on Hasselblad, 16:9 aspect ratio, ultra-detailed".
 }
 
@@ -95,6 +120,9 @@ function aboutUserPrompt(country) {
     `Country name: ${country.name}`,
     `ISO code: ${country.countryCode ?? '(unknown)'}`,
     '',
+    `Use "${country.name}" exactly where the system prompt says {COUNTRY}`,
+    `(e.g. the heading must read: ## Interesting Facts About ${country.name}).`,
+    '',
     'Generate the JSON now.',
   ].join('\n');
 }
@@ -102,7 +130,7 @@ function aboutUserPrompt(country) {
 async function generateContent(country) {
   const resp = await client.messages.create({
     model: CLAUDE_MODEL,
-    max_tokens: 1500,
+    max_tokens: 3000,
     system: ABOUT_SYSTEM,
     messages: [{ role: 'user', content: aboutUserPrompt(country) }],
   });
@@ -112,6 +140,7 @@ async function generateContent(country) {
   try { json = JSON.parse(cleaned); }
   catch { throw new Error(`Claude returned non-JSON: ${cleaned.slice(0, 200)}…`); }
   if (!json.description || !json.imagePrompt) throw new Error('Claude response missing description/imagePrompt');
+  if (json.facts && typeof json.facts !== 'object') throw new Error('Claude response: facts must be an object');
   return json;
 }
 
@@ -151,7 +180,7 @@ async function uploadImageToStrapi(imageUrl, filename) {
 
 async function findCountryDestinationBySlug(slug) {
   const r = await strapi(
-    `/api/destinations?filters[slug][$eq]=${slug}&filters[type][$eq]=country&fields[0]=id&fields[1]=documentId&fields[2]=name&fields[3]=slug&fields[4]=countryCode&fields[5]=description&populate=heroImage&pagination[pageSize]=1`,
+    `/api/destinations?filters[slug][$eq]=${slug}&filters[type][$eq]=country&fields[0]=id&fields[1]=documentId&fields[2]=name&fields[3]=slug&fields[4]=countryCode&fields[5]=description&fields[6]=facts&populate=heroImage&pagination[pageSize]=1`,
   );
   const a = r.data?.[0];
   if (!a) return null;
@@ -163,6 +192,7 @@ async function findCountryDestinationBySlug(slug) {
     slug: x.slug,
     countryCode: x.countryCode,
     description: x.description,
+    facts: x.facts,
     heroImage: x.heroImage ?? a.heroImage,
   };
 }
@@ -177,17 +207,23 @@ async function processCountry(slug) {
 
   const hasDesc = dest.description && dest.description.trim().length > 0;
   const hasHero = dest.heroImage != null;
-  if (hasDesc && hasHero && !argv.overwrite) {
-    console.log('  · already has description + heroImage — skipped (use --overwrite)');
+  const hasFacts = dest.facts && Object.keys(dest.facts).length > 0;
+  if (hasDesc && hasHero && hasFacts && !argv.overwrite) {
+    console.log('  · already has description + heroImage + facts — skipped (use --overwrite)');
     return;
   }
 
-  process.stdout.write('  · generating description + image prompt … ');
+  process.stdout.write('  · generating description + facts + image prompt … ');
   const t0 = Date.now();
   const content = await generateContent(dest);
   console.log(`${((Date.now() - t0) / 1000).toFixed(1)}s`);
   console.log(`    description (${content.description.split(/\s+/).length} words):`);
   console.log(`    "${content.description.slice(0, 220).replace(/\n/g, ' ')}…"`);
+  if (content.facts) {
+    console.log(`    facts: ${Object.keys(content.facts).join(', ')}`);
+  } else {
+    console.log('    facts: (none returned)');
+  }
   console.log(`    image prompt: "${content.imagePrompt.slice(0, 140)}…"`);
 
   if (argv['dry-run']) {
@@ -208,6 +244,7 @@ async function processCountry(slug) {
 
   const data = {};
   if (!hasDesc || argv.overwrite) data.description = content.description;
+  if ((!hasFacts || argv.overwrite) && content.facts) data.facts = content.facts;
   if (heroImageId) data.heroImage = heroImageId;
   if (Object.keys(data).length === 0) {
     console.log('  · nothing to update');

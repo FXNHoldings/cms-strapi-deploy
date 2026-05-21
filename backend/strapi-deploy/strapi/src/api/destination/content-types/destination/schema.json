@@ -18,6 +18,7 @@
     },
     "countryCode": { "type": "string", "maxLength": 3 },
     "description": { "type": "text" },
+    "facts": { "type": "json" },
     "heroImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
     "articles": {
       "type": "relation",

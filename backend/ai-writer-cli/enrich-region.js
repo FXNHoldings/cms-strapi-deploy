@@ -1,72 +1,66 @@
 #!/usr/bin/env node
-// FXN — Backfill `region` (continent) on airports + airlines.
+// FXN — Generate `description` (intro + 2-paragraph Overview + extras) and a
+// `facts` JSON sidebar for each region (continent) destination.
 //
-// Why: we changed the region enum from
-//   ['Oceania','Asia-Pacific','Europe','Americas','Middle East','Africa']
-// to the 6-continent model
-//   ['Africa','Asia','Europe','North America','Oceania','South America']
-// so existing rows with stale values (or null) need fresh ones.
+// Mirrors enrich-country-content.js but writes to `destinations(type=region)`
+// and uses a continent-flavoured prompt + fact schema.
 //
-// Airports use `countryCode`; airlines use `country` (name string). We handle
-// both — code→continent for airports, name→continent for airlines.
-//
-// Source of truth for code→continent: the `countries` collection (populated
-// by seed-countries.js). Hard-coded fallbacks cover the gaps.
+// Section structure rendered by the destination page (see
+// app/destinations/[slug]/page.tsx → ContinentDestinationPage):
+//   (intro paragraph, no heading)            — short, 1-2 sentences
+//   ## Overview                              — exactly 2 paragraphs of prose
+//   ## Travel Notes                          — short paragraph (visas, seasons, currencies)
+//   ## Interesting Facts About {Region}      — 5-item bullet list
 //
 // Usage:
-//   node enrich-region.js --dry-run     # preview both
-//   node enrich-region.js               # apply both
-//   node enrich-region.js --airports    # only airports
-//   node enrich-region.js --airlines    # only airlines
+//   node enrich-region.js --slugs asia                       # one
+//   node enrich-region.js --slugs africa,asia,europe,north-america,oceania,south-america
+//   node enrich-region.js --slugs asia --no-images
+//   node enrich-region.js --slugs asia --dry-run
+//   node enrich-region.js --slugs asia --overwrite
 
 import 'dotenv/config';
+import Anthropic from '@anthropic-ai/sdk';
+import { fal } from '@fal-ai/client';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 const argv = yargs(hideBin(process.argv))
-  .option('airports', { type: 'boolean', default: false })
-  .option('airlines', { type: 'boolean', default: false })
-  .option('concurrency', { type: 'number', default: 6 })
+  .option('slugs', { type: 'string', describe: 'Comma-separated destination slugs (e.g. "asia,europe")', demandOption: true })
+  .option('images', { type: 'boolean', default: true })
+  .option('image-model', { type: 'string', default: 'dev', choices: ['schnell', 'dev', 'pro'] })
+  .option('overwrite', { type: 'boolean', default: false })
   .option('dry-run', { type: 'boolean', default: false })
   .help()
   .parseSync();
 
-const doAirports = argv.airports || (!argv.airports && !argv.airlines);
-const doAirlines = argv.airlines || (!argv.airports && !argv.airlines);
+const {
+  ANTHROPIC_API_KEY,
+  CLAUDE_MODEL = 'claude-sonnet-4-6',
+  STRAPI_URL,
+  STRAPI_API_TOKEN,
+  FAL_KEY,
+} = process.env;
 
-const { STRAPI_URL, STRAPI_API_TOKEN } = process.env;
-if (!STRAPI_URL) fatal('STRAPI_URL is not set in .env');
-if (!STRAPI_API_TOKEN) fatal('STRAPI_API_TOKEN is not set in .env');
+if (!ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set.');
+if (!argv['dry-run']) {
+  if (!STRAPI_URL) fatal('STRAPI_URL is not set in .env');
+  if (!STRAPI_API_TOKEN) fatal('STRAPI_API_TOKEN is not set in .env');
+}
+if (argv.images && !argv['dry-run'] && !FAL_KEY) {
+  fatal('FAL_KEY is not set in .env. Use --no-images to skip.');
+}
 
-const STALE_VALUES = new Set(['Asia-Pacific', 'Americas', 'Middle East']);
+const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
+if (FAL_KEY) fal.config({ credentials: FAL_KEY });
 
-/* ---------- Country code → continent fallback (mirrors ingest-travelpayouts.js) ---------- */
+const FAL_MODEL_IDS = {
+  schnell: 'fal-ai/flux/schnell',
+  dev: 'fal-ai/flux/dev',
+  pro: 'fal-ai/flux-pro',
+};
 
-const FALLBACK_BY_CODE = (() => {
-  const map = {};
-  const add = (region, codes) => codes.forEach((c) => (map[c] = region));
-  add('Oceania', ['AU','NZ','FJ','PG','SB','VU','NC','WS','TO','KI','NR','TV','FM','MH','PW','AS','GU','MP','CK','NU','NF','PN','TK','WF','PF']);
-  add('Asia', [
-    'CN','JP','KR','KP','TW','HK','MO','IN','PK','BD','LK','NP','BT','MV','AF','ID','MY','SG','TH','VN','LA','KH','MM','PH','BN','MN','TL','KZ','KG','TJ','TM','UZ',
-    'AE','SA','KW','BH','QA','OM','YE','IQ','IR','IL','PS','JO','LB','SY',
-  ]);
-  add('Europe', [
-    'AD','AL','AT','BA','BE','BG','BY','CH','CY','CZ','DE','DK','EE','ES','FI','FO','FR','GB','GE','GG','GI','GR','HR','HU','IE','IM','IS','IT','JE','LI','LT','LU','LV','MC','MD','ME','MK','MT','NL','NO','PL','PT','RO','RS','RU','SE','SI','SJ','SK','SM','UA','VA','XK','AM','AZ','TR',
-  ]);
-  add('North America', [
-    'US','CA','MX','GL','PA','CR','GT','HN','NI','SV','BZ',
-    'CU','DO','HT','JM','BS','BB','TT','GD','LC','VC','KN','AG','DM','CW','AW','BM','PR','VI','TC','KY','MS','AI','VG','SX','BL','MF','PM','BQ','GP','MQ',
-  ]);
-  add('South America', ['AR','BR','CL','CO','PE','VE','UY','PY','BO','EC','GY','SR','GF','FK']);
-  add('Africa', [
-    'DZ','AO','BJ','BW','BF','BI','CM','CV','CF','TD','KM','CG','CD','DJ','EG','GQ','ER','SZ','ET','GA','GM','GH','GN','GW','CI','KE','LS','LR','LY','MG','MW','ML','MR','MU','YT','MA','MZ','NA','NE','NG','RE','RW','SH','ST','SN','SC','SL','SO','ZA','SS','SD','TZ','TG','TN','UG','EH','ZM','ZW',
-  ]);
-  return map;
-})();
-
-/* ---------- Helpers ---------- */
-
-function fatal(msg) { console.error('✖', msg); process.exit(1); }
+function fatal(m) { console.error('✖', m); process.exit(1); }
 
 async function strapi(pathname, init = {}) {
   const res = await fetch(`${STRAPI_URL}${pathname}`, {
@@ -77,288 +71,196 @@ async function strapi(pathname, init = {}) {
       ...(init.headers || {}),
     },
   });
-  if (!res.ok) {
-    const body = await res.text().catch(() => '');
-    throw new Error(`Strapi ${res.status} on ${pathname}: ${body.slice(0, 240)}`);
-  }
+  if (!res.ok) throw new Error(`Strapi ${res.status} on ${pathname}: ${(await res.text()).slice(0, 240)}`);
   return res.json();
 }
 
-async function runConcurrent(items, worker, concurrency) {
-  let idx = 0;
-  const stats = { updated: 0, failed: 0 };
-  const workers = Array.from({ length: concurrency }, async () => {
-    while (idx < items.length) {
-      const i = idx++;
-      try {
-        const r = await worker(items[i]);
-        if (r === 'updated') stats.updated++;
-      } catch (e) {
-        stats.failed++;
-        console.error(`    ✖ ${items[i]?.id}: ${e.message.slice(0, 140)}`);
-      }
-    }
+/* ---------- Claude ---------- */
+
+const ABOUT_SYSTEM = `You write continent encyclopedia entries for an editorial travel blog. Tone: informative, calm, factual — not promotional. No travel-brochure superlatives. Substitute the actual continent name where {REGION} appears.
+
+Output MUST be strict JSON with these keys:
+{
+  "description": string  // A flowing 1-2 sentence intro paragraph, then a blank line, then exactly THREE sections in markdown separated by blank lines, each preceded by a level-2 heading. Total length 350-500 words.
+    //   (intro paragraph)  ~25-45 words, 1-2 sentences. Paint the continent's character — landscape contrasts, scale, what defines it from the outside. NO heading. Examples of the right tone:
+    //     "Africa is a continent of 54 countries spanning roughly 30 million km² — Sahara to Cape, equator to Mediterranean, more linguistic and cultural diversity per capita than anywhere on Earth."
+    //     "Asia is the largest continent by both area and population — 4.7 billion people, 49 countries, climates from Arctic tundra to monsoon rainforest, and roughly 60% of humanity in one geographic frame."
+    //   ## Overview        Exactly TWO paragraphs of flowing prose separated by a blank line.
+    //     Paragraph 1 (~70-90 words): Geography & physical structure — major sub-regions, dominant landmasses, mountain ranges, defining rivers/seas. Where the continent sits on the globe and what its broad shape is.
+    //     Paragraph 2 (~70-90 words): Cultural & political composition — number of countries, dominant linguistic families, historical layers (colonial / pre-colonial), the rough split between developed economies and emerging ones, what an outsider should know to read a map.
+    //     Plain prose, no bullets.
+    //   ## Travel Notes    ~50-80 words of flowing prose. Visa picture for major passports across the continent (highly variable — flag that), best seasons (continent often spans multiple climate zones; note the split), currency overlay (single currency areas like EUR, or fragmented), getting around (regional aviation hubs, rail vs. road norms).
+    //   ## Interesting Facts About {REGION}  EXACTLY 5 bullet points, each on its own line, each starting with "- " (hyphen + space). Keep each bullet SHORT — strictly 7-10 words, one crisp declarative sentence, headline-style. Facts should be verifiable and surprising — geographic superlatives, historical firsts, demographic records, cultural records. Avoid clichés, do NOT invent statistics.
+    // Do NOT add ## Highlights, ## Practical, or any other section. Do not wrap bullets in code fences.
+  "facts": object  // Structured continent facts for the right-hand sidebar. ALL fields are optional — OMIT any you are not confident about; do NOT fabricate. Use exactly these keys:
+    //   countriesCount   number  — number of sovereign UN-member countries on the continent (54 for Africa, 49 for Asia, etc.)
+    //   population       number  — approximate latest UN population estimate, integer
+    //   areaKm2          number  — approximate total area in square kilometres, integer
+    //   languagesTop     string[] — 3-5 most-spoken languages, in order
+    //   currenciesTop    string[] — 3-5 most widely circulated currencies (e.g. ["Euro", "Pound sterling", "Swiss franc"])
+    //   largestCountry   string  — country with the largest population
+    //   largestByArea    string  — country with the largest land area
+    //   highestPoint     string  — highest peak with elevation in metres (e.g. "Mount Everest, 8,849 m")
+    //   longestRiver     string  — longest river with length in km (e.g. "Nile, 6,650 km")
+    //   timezoneSpan     string  — range of timezones (e.g. "UTC+2 to UTC+12")
+    //   subregions       string[] — major sub-regions (e.g. ["Northern Africa", "Sub-Saharan Africa"])
+  "imagePrompt": string  // 30-60 words for FLUX. A wide landscape that visually represents the continent at scale. Specific (e.g. "the Serengeti at golden hour with acacia trees and migrating wildebeest" not "African savannah"; "the Himalayan ridge under prayer flags at sunrise" not "Asian mountains"). Photorealistic, editorial-magazine style. NO text overlays, NO flags, NO close-up faces. End with: "cinematic lighting, shot on Hasselblad, 16:9 aspect ratio, ultra-detailed".
+}
+
+No prose outside the JSON. No code fences.`;
+
+function aboutUserPrompt(region) {
+  return [
+    `Continent / region name: ${region.name}`,
+    `Slug: ${region.slug}`,
+    '',
+    `Use "${region.name}" exactly where the system prompt says {REGION}`,
+    `(e.g. the heading must read: ## Interesting Facts About ${region.name}).`,
+    '',
+    'Generate the JSON now.',
+  ].join('\n');
+}
+
+async function generateContent(region) {
+  const resp = await client.messages.create({
+    model: CLAUDE_MODEL,
+    max_tokens: 3000,
+    system: ABOUT_SYSTEM,
+    messages: [{ role: 'user', content: aboutUserPrompt(region) }],
   });
-  await Promise.all(workers);
-  return stats;
+  const text = resp.content.map((b) => (b.type === 'text' ? b.text : '')).join('').trim();
+  const cleaned = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+  let json;
+  try { json = JSON.parse(cleaned); }
+  catch { throw new Error(`Claude returned non-JSON: ${cleaned.slice(0, 200)}…`); }
+  if (!json.description || !json.imagePrompt) throw new Error('Claude response missing description/imagePrompt');
+  if (json.facts && typeof json.facts !== 'object') throw new Error('Claude response: facts must be an object');
+  return json;
 }
 
-async function loadCountriesMap() {
-  // Returns { byCode: { US: 'North America', ... }, byName: { 'united states': 'North America', ... } }.
-  // Built off the Strapi `countries` collection — single source of truth.
-  const byCode = {};
-  const byName = {};
-  let page = 1;
-  while (true) {
-    const qs = new URLSearchParams();
-    qs.append('fields[0]', 'code');
-    qs.append('fields[1]', 'name');
-    qs.append('fields[2]', 'region');
-    qs.set('pagination[page]', String(page));
-    qs.set('pagination[pageSize]', '100');
-    const r = await strapi(`/api/countries?${qs.toString()}`);
-    for (const c of r.data ?? []) {
-      const a = c.attributes ?? c;
-      if (a?.region) {
-        if (a.code) byCode[String(a.code).toUpperCase()] = a.region;
-        if (a.name) byName[String(a.name).trim().toLowerCase()] = a.region;
-      }
-    }
-    const total = r.meta?.pagination?.pageCount ?? 1;
-    if (page >= total) break;
-    page++;
-  }
-  return { byCode, byName };
+/* ---------- Fal.ai ---------- */
+
+async function generateHeroImage(prompt) {
+  const result = await fal.subscribe(FAL_MODEL_IDS[argv['image-model']], {
+    input: { prompt, image_size: 'landscape_16_9', num_images: 1, enable_safety_checker: true },
+    logs: false,
+  });
+  const url = result?.data?.images?.[0]?.url;
+  if (!url) throw new Error('Fal.ai returned no image URL');
+  return url;
 }
 
-function continentForCode(code, strapiByCode) {
-  if (!code) return null;
-  const cc = String(code).toUpperCase();
-  return strapiByCode[cc] ?? FALLBACK_BY_CODE[cc] ?? null;
+async function uploadImageToStrapi(imageUrl, filename) {
+  const res = await fetch(imageUrl);
+  if (!res.ok) throw new Error(`Failed to download image: ${res.status}`);
+  const ab = await res.arrayBuffer();
+  const contentType = res.headers.get('content-type') || 'image/jpeg';
+  const ext = contentType.includes('png') ? 'png' : contentType.includes('webp') ? 'webp' : 'jpg';
+  const form = new FormData();
+  form.append('files', new Blob([ab], { type: contentType }), `${filename}.${ext}`);
+  const uploadRes = await fetch(`${STRAPI_URL}/api/upload`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${STRAPI_API_TOKEN}` },
+    body: form,
+  });
+  if (!uploadRes.ok) throw new Error(`Upload ${uploadRes.status}: ${(await uploadRes.text()).slice(0, 240)}`);
+  const json = await uploadRes.json();
+  const first = Array.isArray(json) ? json[0] : json;
+  if (!first?.id) throw new Error('Upload returned no id');
+  return first.id;
 }
 
-// Map weird input spellings (from Wikidata, OpenFlights, etc.) → Strapi
-// canonical country names (which come from REST Countries, lower-cased).
-const NAME_ALIASES = {
-  // United States
-  'usa': 'united states',
-  'us': 'united states',
-  'united states of america': 'united states',
-  // China & SARs
-  "people's republic of china": 'china',
-  'hong kong sar of china': 'hong kong',
-  'hong kong sar': 'hong kong',
-  'macao': 'macau',
-  'macao sar of china': 'macau',
-  // Korea
-  'republic of korea': 'south korea',
-  'korea (republic of)': 'south korea',
-  'korea, republic of': 'south korea',
-  "korea (democratic people's republic of)": 'north korea',
-  "democratic people's republic of korea": 'north korea',
-  // Congo (two countries)
-  'democratic republic of the congo': 'dr congo',
-  'congo (kinshasa)': 'dr congo',
-  'congo, the democratic republic of the': 'dr congo',
-  'congo (brazzaville)': 'republic of the congo',
-  'congo, republic of the': 'republic of the congo',
-  // Côte d'Ivoire — both quote forms + paren form
-  "côte d'ivoire": 'ivory coast',
-  "côte d’ivoire": 'ivory coast',
-  "côte d'ivoire (ivory coast)": 'ivory coast',
-  "côte d’ivoire (ivory coast)": 'ivory coast',
-  // Taiwan
-  'taiwan (republic of china)': 'taiwan',
-  'taiwan, province of china': 'taiwan',
-  'republic of china': 'taiwan',
-  // Other variants
-  'czech republic': 'czechia',
-  'east timor': 'timor-leste',
-  'reunion': 'réunion',
-  'burma': 'myanmar',
-};
+/* ---------- Per-region runner ---------- */
 
-/* ---------- Country NAME → continent (mirrors enrich-airlines.js) ---------- */
-
-const NAME_TO_CONTINENT = (() => {
-  const map = {};
-  const add = (region, names) => names.forEach((n) => (map[n.toLowerCase()] = region));
-  add('Oceania', ['Australia', 'New Zealand', 'Fiji', 'Papua New Guinea', 'Samoa', 'Tonga', 'Vanuatu']);
-  add('Asia', [
-    'Japan', 'China', "People's Republic of China", 'South Korea', 'Korea', 'Taiwan', 'Hong Kong', 'Macau',
-    'Singapore', 'Malaysia', 'Indonesia', 'Thailand', 'Vietnam', 'Philippines', 'Cambodia', 'Laos',
-    'Myanmar', 'Brunei', 'India', 'Pakistan', 'Bangladesh', 'Sri Lanka', 'Nepal', 'Bhutan', 'Mongolia', 'Maldives',
-    'United Arab Emirates', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Bahrain', 'Oman', 'Yemen', 'Iraq',
-    'Iran', 'Israel', 'Jordan', 'Lebanon', 'Syria',
-  ]);
-  add('Europe', [
-    'United Kingdom', 'Ireland', 'France', 'Germany', 'Spain', 'Portugal', 'Italy', 'Netherlands',
-    'Belgium', 'Luxembourg', 'Switzerland', 'Austria', 'Denmark', 'Sweden', 'Norway', 'Finland',
-    'Iceland', 'Poland', 'Czech Republic', 'Czechia', 'Slovakia', 'Hungary', 'Romania', 'Bulgaria',
-    'Greece', 'Cyprus', 'Malta', 'Croatia', 'Slovenia', 'Serbia', 'Bosnia and Herzegovina', 'Montenegro',
-    'North Macedonia', 'Albania', 'Estonia', 'Latvia', 'Lithuania', 'Ukraine', 'Belarus', 'Russia',
-    'Moldova', 'Turkey',
-  ]);
-  add('North America', [
-    'United States', 'United States of America', 'USA', 'Canada', 'Mexico', 'Guatemala', 'Belize',
-    'Honduras', 'El Salvador', 'Nicaragua', 'Costa Rica', 'Panama', 'Cuba', 'Dominican Republic',
-    'Haiti', 'Jamaica', 'Puerto Rico', 'Bahamas', 'Barbados', 'Trinidad and Tobago',
-  ]);
-  add('South America', [
-    'Brazil', 'Argentina', 'Chile', 'Uruguay', 'Paraguay', 'Bolivia', 'Peru', 'Ecuador', 'Colombia',
-    'Venezuela', 'Guyana', 'Suriname',
-  ]);
-  add('Africa', [
-    'South Africa', 'Egypt', 'Morocco', 'Tunisia', 'Algeria', 'Libya', 'Nigeria', 'Kenya', 'Ethiopia',
-    'Tanzania', 'Uganda', 'Rwanda', 'Ghana', 'Senegal', "Côte d'Ivoire", 'Ivory Coast', 'Cameroon',
-    'Mozambique', 'Zambia', 'Zimbabwe', 'Botswana', 'Namibia', 'Angola', 'Madagascar', 'Mauritius',
-    'Seychelles',
-  ]);
-  return map;
-})();
-
-function continentForName(name, strapiByName) {
-  if (!name) return null;
-  const k = String(name).trim().toLowerCase();
-  // 1. Strapi countries (canonical) — primary source.
-  if (strapiByName[k]) return strapiByName[k];
-  // 2. Alias → re-lookup against Strapi.
-  const aliased = NAME_ALIASES[k];
-  if (aliased && strapiByName[aliased]) return strapiByName[aliased];
-  // 3. Fallback to hard-coded name list.
-  return NAME_TO_CONTINENT[k] ?? null;
+async function findRegionDestinationBySlug(slug) {
+  const r = await strapi(
+    `/api/destinations?filters[slug][$eq]=${slug}&filters[type][$eq]=region&fields[0]=id&fields[1]=documentId&fields[2]=name&fields[3]=slug&fields[4]=description&fields[5]=facts&populate=heroImage&pagination[pageSize]=1`,
+  );
+  const a = r.data?.[0];
+  if (!a) return null;
+  const x = a.attributes ?? a;
+  return {
+    id: a.id,
+    documentId: a.documentId ?? x.documentId,
+    name: x.name,
+    slug: x.slug,
+    description: x.description,
+    facts: x.facts,
+    heroImage: x.heroImage ?? a.heroImage,
+  };
 }
 
-/* ---------- Per-collection enrichment ---------- */
-
-async function enrichAirports(strapiByCode) {
-  console.log('\n=== Airports ===');
-  const stale = [];
-  let page = 1;
-  while (true) {
-    const qs = new URLSearchParams();
-    qs.append('fields[0]', 'id');
-    qs.append('fields[1]', 'documentId');
-    qs.append('fields[2]', 'countryCode');
-    qs.append('fields[3]', 'region');
-    qs.set('pagination[page]', String(page));
-    qs.set('pagination[pageSize]', '100');
-    const r = await strapi(`/api/airports?${qs.toString()}`);
-    for (const item of r.data ?? []) {
-      const a = item.attributes ?? item;
-      if (!a.countryCode) continue;
-      if (a.region && !STALE_VALUES.has(a.region)) continue;
-      stale.push({
-        id: item.id,
-        documentId: item.documentId ?? a.documentId,
-        countryCode: a.countryCode,
-        currentRegion: a.region ?? '(null)',
-      });
-    }
-    const total = r.meta?.pagination?.pageCount ?? 1;
-    if (page >= total) break;
-    page++;
-  }
-
-  if (stale.length === 0) {
-    console.log('  · no airports need updating');
+async function processRegion(slug) {
+  const dest = await findRegionDestinationBySlug(slug);
+  if (!dest) {
+    console.error(`✖ ${slug}: not found in destinations(type=region)`);
     return;
   }
-  console.log(`  ${stale.length} airports to update`);
+  console.log(`\n=== ${dest.slug} ${dest.name} ===`);
 
-  const stats = await runConcurrent(stale, async (item) => {
-    const next = continentForCode(item.countryCode, strapiByCode);
-    if (!next) {
-      console.warn(`    ⚠ ${item.id} ${item.countryCode}: no continent mapping`);
-      return null;
-    }
-    if (argv['dry-run']) {
-      console.log(`    [dry] ${item.id} ${item.countryCode}: ${item.currentRegion} → ${next}`);
-      return 'updated';
-    }
-    const target = item.documentId ?? item.id;
-    await strapi(`/api/airports/${target}`, {
-      method: 'PUT',
-      body: JSON.stringify({ data: { region: next } }),
-    });
-    return 'updated';
-  }, argv.concurrency);
-
-  console.log(`  airports updated: ${stats.updated}, failed: ${stats.failed}`);
-}
-
-async function enrichAirlines(strapiByName) {
-  console.log('\n=== Airlines ===');
-  const stale = [];
-  let page = 1;
-  while (true) {
-    const qs = new URLSearchParams();
-    qs.append('fields[0]', 'id');
-    qs.append('fields[1]', 'documentId');
-    qs.append('fields[2]', 'country');
-    qs.append('fields[3]', 'region');
-    qs.append('fields[4]', 'name');
-    qs.set('pagination[page]', String(page));
-    qs.set('pagination[pageSize]', '100');
-    const r = await strapi(`/api/airlines?${qs.toString()}`);
-    for (const item of r.data ?? []) {
-      const a = item.attributes ?? item;
-      if (a.region && !STALE_VALUES.has(a.region)) continue;
-      stale.push({
-        id: item.id,
-        documentId: item.documentId ?? a.documentId,
-        country: a.country,
-        name: a.name,
-        currentRegion: a.region ?? '(null)',
-      });
-    }
-    const total = r.meta?.pagination?.pageCount ?? 1;
-    if (page >= total) break;
-    page++;
-  }
-
-  if (stale.length === 0) {
-    console.log('  · no airlines need updating');
+  const hasDesc = dest.description && dest.description.trim().length > 0;
+  const hasHero = dest.heroImage != null;
+  const hasFacts = dest.facts && Object.keys(dest.facts).length > 0;
+  if (hasDesc && hasHero && hasFacts && !argv.overwrite) {
+    console.log('  · already has description + heroImage + facts — skipped (use --overwrite)');
     return;
   }
-  console.log(`  ${stale.length} airlines to update`);
 
-  let unresolved = 0;
-  const stats = await runConcurrent(stale, async (item) => {
-    const next = continentForName(item.country, strapiByName);
-    if (!next) {
-      unresolved++;
-      if (unresolved <= 10) {
-        console.warn(`    ⚠ "${item.name}" (country="${item.country ?? ''}"): no continent — skipped`);
-      }
-      return null;
-    }
-    if (argv['dry-run']) {
-      console.log(`    [dry] ${item.name} (${item.country}): ${item.currentRegion} → ${next}`);
-      return 'updated';
-    }
-    const target = item.documentId ?? item.id;
-    await strapi(`/api/airlines/${target}`, {
-      method: 'PUT',
-      body: JSON.stringify({ data: { region: next } }),
-    });
-    return 'updated';
-  }, argv.concurrency);
+  process.stdout.write('  · generating description + facts + image prompt … ');
+  const t0 = Date.now();
+  const content = await generateContent(dest);
+  console.log(`${((Date.now() - t0) / 1000).toFixed(1)}s`);
+  console.log(`    description (${content.description.split(/\s+/).length} words):`);
+  console.log(`    "${content.description.slice(0, 220).replace(/\n/g, ' ')}…"`);
+  if (content.facts) {
+    console.log(`    facts: ${Object.keys(content.facts).join(', ')}`);
+  } else {
+    console.log('    facts: (none returned)');
+  }
+  console.log(`    image prompt: "${content.imagePrompt.slice(0, 140)}…"`);
 
-  console.log(`  airlines updated: ${stats.updated}, failed: ${stats.failed}, unresolved: ${unresolved}`);
+  if (argv['dry-run']) {
+    console.log('  [DRY RUN] no writes');
+    return;
+  }
+
+  let heroImageId = null;
+  if (argv.images && (!hasHero || argv.overwrite)) {
+    process.stdout.write('  · generating hero image … ');
+    const t1 = Date.now();
+    const url = await generateHeroImage(content.imagePrompt);
+    console.log(`${((Date.now() - t1) / 1000).toFixed(1)}s`);
+    process.stdout.write('  · uploading to Strapi … ');
+    heroImageId = await uploadImageToStrapi(url, `region-${dest.slug}-hero`);
+    console.log(`media id ${heroImageId}`);
+  }
+
+  const data = {};
+  if (!hasDesc || argv.overwrite) data.description = content.description;
+  if ((!hasFacts || argv.overwrite) && content.facts) data.facts = content.facts;
+  if (heroImageId) data.heroImage = heroImageId;
+  if (Object.keys(data).length === 0) {
+    console.log('  · nothing to update');
+    return;
+  }
+  await strapi(`/api/destinations/${dest.documentId ?? dest.id}`, {
+    method: 'PUT',
+    body: JSON.stringify({ data }),
+  });
+  console.log(`  ✓ updated ${dest.slug} (${Object.keys(data).join(', ')})`);
 }
 
 /* ---------- Main ---------- */
 
 async function main() {
-  console.log('=== FXN region enrichment ===');
+  const slugs = argv.slugs.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
+  console.log(`=== FXN region content (${slugs.length} ${slugs.length === 1 ? 'region' : 'regions'}) — model ${CLAUDE_MODEL} ===`);
   if (argv['dry-run']) console.log('  [DRY RUN] No writes will happen.');
 
-  const { byCode, byName } = await loadCountriesMap();
-  console.log(`  loaded ${Object.keys(byCode).length} country→continent rows from Strapi`);
-
-  if (doAirports) await enrichAirports(byCode);
-  if (doAirlines) await enrichAirlines(byName);
+  for (const slug of slugs) {
+    try { await processRegion(slug); }
+    catch (e) { console.error(`  ✖ ${slug}: ${e.message.slice(0, 240)}`); }
+  }
 }
 
 main().catch((e) => fatal(e.message));
