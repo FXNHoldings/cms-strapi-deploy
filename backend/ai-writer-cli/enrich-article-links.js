@@ -33,9 +33,18 @@ const argv = yargs(hideBin(process.argv))
   .option('min-term-length', { type: 'number', default: 4, describe: 'Skip terms shorter than this' })
   .option('destinations', { type: 'boolean', default: true, describe: 'Link destinations (use --no-destinations to skip)' })
   .option('airlines', { type: 'boolean', default: true, describe: 'Link airlines (use --no-airlines to skip)' })
+  .option('tp-airlines', { type: 'boolean', default: false, describe: 'When set, airline mentions become Travelpayouts/Aviasales affiliate links (requires --marker or NEXT_PUBLIC_TP_MARKER env). Airlines without an IATA code keep their internal /airlines/<slug> link.' })
+  .option('marker', { type: 'string', describe: 'Travelpayouts affiliate marker. Defaults to NEXT_PUBLIC_TP_MARKER from env.' })
+  .option('tp-host', { type: 'string', describe: 'Override Aviasales/white-label host. Defaults to NEXT_PUBLIC_TP_WL_HOST or aviasales.com.' })
   .option('verbose', { alias: 'v', type: 'boolean', default: false })
   .help()
   .parseSync();
+
+const TP_MARKER = argv.marker || process.env.NEXT_PUBLIC_TP_MARKER || process.env.TRAVELPAYOUTS_MARKER;
+const TP_HOST = argv['tp-host'] || process.env.NEXT_PUBLIC_TP_WL_HOST || 'www.aviasales.com';
+if (argv['tp-airlines'] && !TP_MARKER) {
+  fatal('--tp-airlines requires a marker. Pass --marker <id> or set NEXT_PUBLIC_TP_MARKER in .env.');
+}
 
 const { STRAPI_URL, STRAPI_API_TOKEN } = process.env;
 if (!STRAPI_URL) fatal('STRAPI_URL is not set in .env');
@@ -88,6 +97,23 @@ async function fetchAll(endpoint, fields, extraQs = []) {
   return all;
 }
 
+/* ---------- URL builders ---------- */
+
+function airlineUrl(airline) {
+  // Internal page by default. With --tp-airlines and a known IATA, route to
+  // an Aviasales search filtered by carrier so the click pays out through the
+  // affiliate. Airlines without an IATA always fall back to internal.
+  if (argv['tp-airlines'] && airline.iataCode && TP_MARKER) {
+    const params = new URLSearchParams({
+      marker: TP_MARKER,
+      sub_id: `article_airline_${airline.slug}`,
+      airline: airline.iataCode.toUpperCase(),
+    });
+    return `https://${TP_HOST}/?${params.toString()}`;
+  }
+  return `/airlines/${airline.slug}`;
+}
+
 /* ---------- Term map ---------- */
 
 function buildTerms({ destinations, airlines }) {
@@ -108,7 +134,9 @@ function buildTerms({ destinations, airlines }) {
   }
   if (argv.airlines) {
     for (const a of airlines) {
-      if (a.name && a.slug) add(a.name, `/airlines/${a.slug}`, 'airline');
+      if (!a.name || !a.slug) continue;
+      const url = airlineUrl(a);
+      add(a.name, url, 'airline');
     }
   }
   // Longest first so "Bangkok Airways" wins over "Bangkok".
@@ -181,7 +209,7 @@ async function main() {
   log(`▸ Loading destinations + airlines from Strapi …`);
   const [destinations, airlines] = await Promise.all([
     argv.destinations ? fetchAll('destinations', ['id', 'name', 'slug']) : [],
-    argv.airlines ? fetchAll('airlines', ['id', 'name', 'slug']) : [],
+    argv.airlines ? fetchAll('airlines', ['id', 'name', 'slug', 'iataCode']) : [],
   ]);
   log(`  destinations: ${destinations.length}   airlines: ${airlines.length}`);
 

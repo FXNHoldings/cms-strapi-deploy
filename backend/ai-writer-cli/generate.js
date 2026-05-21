@@ -30,7 +30,7 @@ const argv = yargs(hideBin(process.argv))
   .usage('Usage: $0 [topic] [options]')
   .option('topic', { alias: 't', type: 'string' })
   .option('topics', { type: 'string', describe: 'File with "category | topic" per line' })
-  .option('only-category', { type: 'string', describe: 'When used with --topics, only run jobs whose category is in this comma-separated list (e.g. "car-rental,travel-resources")' })
+  .option('only-category', { type: 'string', describe: 'When used with --topics, only run jobs whose category is in this comma-separated list (e.g. "car-rentals,travel-tips")' })
   .option('auto-fill', { type: 'boolean', default: false, describe: 'Auto-generate across the 6 preset categories' })
   .option('count', { alias: 'n', type: 'number', describe: 'How many articles to generate (Claude will brainstorm the titles)' })
   .option('tone', { type: 'string', default: 'friendly', choices: ['friendly', 'professional', 'adventurous', 'witty', 'luxury'] })
@@ -82,9 +82,8 @@ const FAL_MODEL_IDS = {
 const CATEGORY_CHOICES = [
   { name: 'Flights',           value: 'flights' },
   { name: 'Hotels',            value: 'hotels' },
-  { name: 'Travel Resources',  value: 'travel-resources' },
   { name: 'Travel Tips',       value: 'travel-tips' },
-  { name: 'Car Rental',        value: 'car-rentals' },
+  { name: 'Car Rentals',       value: 'car-rentals' },
 ];
 
 /** In-memory cache so we only hit /api/categories once per run */
@@ -505,14 +504,6 @@ const AUTO_TOPICS = {
     'How to get free hotel upgrades (without being annoying)',
     'Why you should book direct instead of Booking.com',
     'The best hotel loyalty programme in 2026, explained',
-  ],
-  'travel-resources': [
-    'The travel insurance we actually buy (and why)',
-    '10 essential travel apps we use every trip',
-    'How to pack a carry-on for 3 weeks: our exact list',
-    'Best travel credit cards for UK residents in 2026',
-    'The eSIM providers we trust (and which to avoid)',
-    'Travel adapters, power banks, and the gear we swear by',
   ],
   'travel-tips': [
     'How to avoid jet lag on long-haul flights',
