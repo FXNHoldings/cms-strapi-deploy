@@ -1,26 +1,42 @@
 #!/usr/bin/env node
-// FXN — Scan every Strapi article and auto-insert internal links for known
-// destinations and airlines (e.g. "Qantas" → /airlines/qantas, "Bangkok" →
-// /destinations/bangkok).
+// FXN — Scan every Strapi article and auto-insert links for known terms.
 //
-// Strategy:
-//   1. Pull all destinations + airlines from Strapi → build a term map.
-//   2. For each article, protect code fences, inline code, headings, existing
-//      markdown links and images, then replace the first occurrence of each
-//      matched term with [term](url). Longest terms run first so
-//      "Bangkok Airways" wins over "Bangkok".
-//   3. PUT the updated `content` back, capped at --max-links per article.
+// Four link types, each independently toggleable:
+//   • destinations  → /destinations/<slug>     (from Strapi)
+//   • airlines      → /airlines/<slug>         (from Strapi, optionally swapped
+//                                                for Aviasales affiliate URLs)
+//   • articles      → /articles/<slug>         (cross-link between posts;
+//                                                excludes the article itself)
+//   • external      → https://…                (from a JSON dictionary file)
+//
+// Strategy per article:
+//   1. Protect code fences, inline code, headings, existing markdown links
+//      and images.
+//   2. Replace the first occurrence of each matched term with [term](url).
+//      Longest terms run first so "Bangkok Airways" wins over "Bangkok".
+//   3. PUT updated `content` back, capped at --max-links per article.
 //
 // Idempotent: skips any term whose target URL is already linked in the body.
+// Single-word terms require exact-case match so common English words that
+// happen to be airline/place names don't link inside lowercase prose.
+//
+// When no link-type flags are passed, an interactive picker prompts which
+// types to enable. Use --yes / --non-interactive to skip the prompt and
+// run with the defaults (or whatever --no-X flags were passed).
 //
 // Usage:
 //   node enrich-article-links.js --dry-run                 # preview all
 //   node enrich-article-links.js --slug bali-jungle-hotels # one article
 //   node enrich-article-links.js --limit 5                 # first 5 only
 //   node enrich-article-links.js --no-destinations         # airlines only
-//   node enrich-article-links.js                           # apply all
+//   node enrich-article-links.js --external                # turn on external links
+//   node enrich-article-links.js --external-file links.json
+//   node enrich-article-links.js -y                        # apply all, no prompt
 
 import 'dotenv/config';
+import fs from 'node:fs';
+import path from 'node:path';
+import { checkbox } from '@inquirer/prompts';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
@@ -31,11 +47,16 @@ const argv = yargs(hideBin(process.argv))
   .option('limit', { type: 'number', describe: 'Only process the first N articles' })
   .option('max-links', { type: 'number', default: 10, describe: 'Max NEW links to insert per article' })
   .option('min-term-length', { type: 'number', default: 4, describe: 'Skip terms shorter than this' })
-  .option('destinations', { type: 'boolean', default: true, describe: 'Link destinations (use --no-destinations to skip)' })
-  .option('airlines', { type: 'boolean', default: true, describe: 'Link airlines (use --no-airlines to skip)' })
+  .option('destinations', { type: 'boolean', default: true, describe: 'Link destinations → /destinations/<slug> (use --no-destinations to skip)' })
+  .option('airlines', { type: 'boolean', default: true, describe: 'Link airlines → /airlines/<slug> (use --no-airlines to skip)' })
+  .option('articles', { type: 'boolean', default: true, describe: 'Link OTHER post titles → /articles/<slug> (use --no-articles to skip). Excludes the current article itself.' })
+  .option('external', { type: 'boolean', default: false, describe: 'Link external terms from --external-file (use --external to enable)' })
+  .option('external-file', { type: 'string', default: './external-links.json', describe: 'JSON dictionary of external term → URL. Accepts {"term":"url",…} or [{"term":"…","url":"…","subId":"…"}].' })
   .option('tp-airlines', { type: 'boolean', default: false, describe: 'When set, airline mentions become Travelpayouts/Aviasales affiliate links (requires --marker or NEXT_PUBLIC_TP_MARKER env). Airlines without an IATA code keep their internal /airlines/<slug> link.' })
   .option('marker', { type: 'string', describe: 'Travelpayouts affiliate marker. Defaults to NEXT_PUBLIC_TP_MARKER from env.' })
   .option('tp-host', { type: 'string', describe: 'Override Aviasales/white-label host. Defaults to NEXT_PUBLIC_TP_WL_HOST or aviasales.com.' })
+  .option('yes', { alias: 'y', type: 'boolean', default: false, describe: 'Skip the interactive link-type picker; run with the current flag values.' })
+  .option('non-interactive', { type: 'boolean', default: false, describe: 'Same as --yes — skip the interactive prompt.' })
   .option('verbose', { alias: 'v', type: 'boolean', default: false })
   .help()
   .parseSync();
@@ -114,9 +135,34 @@ function airlineUrl(airline) {
   return `/airlines/${airline.slug}`;
 }
 
+/* ---------- External-links loader ---------- */
+
+function loadExternalLinks(filePath) {
+  const abs = path.resolve(filePath);
+  if (!fs.existsSync(abs)) {
+    console.warn(`  ! external file not found at ${abs} — skipping external links.`);
+    return [];
+  }
+  let raw;
+  try { raw = JSON.parse(fs.readFileSync(abs, 'utf8')); }
+  catch (e) { fatal(`Failed to parse ${abs}: ${e.message}`); }
+
+  const out = [];
+  if (Array.isArray(raw)) {
+    for (const row of raw) {
+      if (row && row.term && row.url) out.push({ term: row.term, url: row.url });
+    }
+  } else if (raw && typeof raw === 'object') {
+    for (const [term, url] of Object.entries(raw)) {
+      if (typeof url === 'string') out.push({ term, url });
+    }
+  }
+  return out;
+}
+
 /* ---------- Term map ---------- */
 
-function buildTerms({ destinations, airlines }) {
+function buildTerms({ destinations, airlines, articles, externals }) {
   const seen = new Map(); // normalised term → entry (first wins after sorting)
   const add = (term, url, kind) => {
     if (!term || !url) return;
@@ -135,9 +181,19 @@ function buildTerms({ destinations, airlines }) {
   if (argv.airlines) {
     for (const a of airlines) {
       if (!a.name || !a.slug) continue;
-      const url = airlineUrl(a);
-      add(a.name, url, 'airline');
+      add(a.name, airlineUrl(a), 'airline');
     }
+  }
+  if (argv.articles) {
+    // Inter-post linking — match the full article title only. Titles are
+    // long, distinctive multi-word phrases so collision risk is low; we
+    // never invent a partial-title term.
+    for (const ar of articles) {
+      if (ar.title && ar.slug) add(ar.title, `/articles/${ar.slug}`, 'article');
+    }
+  }
+  if (argv.external) {
+    for (const e of externals) add(e.term, e.url, 'external');
   }
   // Longest first so "Bangkok Airways" wins over "Bangkok".
   return Array.from(seen.values()).sort((a, b) => b.len - a.len);
@@ -203,25 +259,78 @@ function insertLinks(content, terms, maxLinks) {
 
 /* ---------- Main ---------- */
 
+async function promptLinkTypes() {
+  if (argv.yes || argv['non-interactive']) return;
+  if (!process.stdout.isTTY) return; // piped/non-interactive shell — skip
+
+  const choices = [
+    { name: 'Destinations  → /destinations/<slug>', value: 'destinations', checked: !!argv.destinations },
+    { name: 'Airlines      → /airlines/<slug>',     value: 'airlines',     checked: !!argv.airlines },
+    { name: 'Other posts   → /articles/<slug>',     value: 'articles',     checked: !!argv.articles },
+    { name: 'External      → URLs from --external-file', value: 'external', checked: !!argv.external },
+  ];
+  const picked = await checkbox({
+    message: 'Which link types should the enricher create?',
+    choices,
+    instructions: ' (space to toggle, enter to confirm)',
+  });
+  const set = new Set(picked);
+  argv.destinations = set.has('destinations');
+  argv.airlines     = set.has('airlines');
+  argv.articles     = set.has('articles');
+  argv.external     = set.has('external');
+}
+
+function printRunSummary({ destinations, airlines, articles, externals }) {
+  const row = (on, label, count, target, extra = '') => {
+    const mark = on ? '✓' : '✗';
+    const c = count == null ? '   —' : String(count).padStart(4);
+    console.log(`  ${mark} ${label.padEnd(13)} ${c}   → ${target}${extra}`);
+  };
+  console.log(`▸ Link types:`);
+  row(argv.destinations, 'destinations', destinations.length, '/destinations/<slug>');
+  row(
+    argv.airlines,
+    'airlines',
+    airlines.length,
+    argv['tp-airlines'] && TP_MARKER ? `https://${TP_HOST}/?marker=${TP_MARKER}&airline=<IATA>` : '/airlines/<slug>',
+    argv['tp-airlines'] && TP_MARKER ? '  [affiliate: ON]' : (argv['tp-airlines'] ? '  [affiliate: NO MARKER]' : ''),
+  );
+  row(argv.articles, 'articles', articles.length, '/articles/<slug>');
+  row(
+    argv.external,
+    'external',
+    externals.length,
+    `URLs from ${argv['external-file']}`,
+  );
+  console.log('');
+}
+
 async function main() {
   const log = (...args) => console.log(...args);
 
-  log(`▸ Loading destinations + airlines from Strapi …`);
-  const [destinations, airlines] = await Promise.all([
+  await promptLinkTypes();
+
+  log(`▸ Loading data from Strapi …`);
+  const [destinations, airlines, allArticles] = await Promise.all([
     argv.destinations ? fetchAll('destinations', ['id', 'name', 'slug']) : [],
     argv.airlines ? fetchAll('airlines', ['id', 'name', 'slug', 'iataCode']) : [],
+    argv.articles ? fetchAll('articles', ['id', 'title', 'slug']) : [],
   ]);
-  log(`  destinations: ${destinations.length}   airlines: ${airlines.length}`);
+  const externals = argv.external ? loadExternalLinks(argv['external-file']) : [];
 
-  const terms = buildTerms({ destinations, airlines });
-  log(`  built ${terms.length} unique terms (min length ${argv['min-term-length']})\n`);
+  printRunSummary({ destinations, airlines, articles: allArticles, externals });
+
+  if (!argv.destinations && !argv.airlines && !argv.articles && !argv.external) {
+    fatal('No link types enabled — nothing to do.');
+  }
 
   const categoryFilter = argv.category
     ? argv.category.split(',').map((s) => s.trim()).filter(Boolean)
     : [];
   const categoryQs = categoryFilter.map((slug, i) => [`filters[category][slug][$in][${i}]`, slug]);
 
-  log(`▸ Loading articles${categoryFilter.length ? ` (category: ${categoryFilter.join(', ')})` : ''} …`);
+  log(`▸ Loading articles to process${categoryFilter.length ? ` (category: ${categoryFilter.join(', ')})` : ''} …`);
   let articles;
   if (argv.slug) {
     const qs = new URLSearchParams();
@@ -240,7 +349,7 @@ async function main() {
   if (argv.limit) articles = articles.slice(0, argv.limit);
   log(`  ${articles.length} article(s) to process${argv['dry-run'] ? ' (DRY RUN)' : ''}\n`);
 
-  const stats = { processed: 0, modified: 0, totalLinks: 0, errors: 0 };
+  const stats = { processed: 0, modified: 0, totalLinks: 0, errors: 0, byKind: {} };
 
   for (const a of articles) {
     stats.processed++;
@@ -248,6 +357,11 @@ async function main() {
       log(`  [skip] ${a.slug} — empty content`);
       continue;
     }
+    // Build per-article term map so we can exclude the article from
+    // linking to itself (inter-post linking).
+    const allTerms = buildTerms({ destinations, airlines, articles: allArticles, externals });
+    const selfUrl = `/articles/${a.slug}`;
+    const terms = allTerms.filter((t) => t.url !== selfUrl);
     const { content: next, inserted } = insertLinks(a.content, terms, argv['max-links']);
     if (inserted.length === 0) {
       if (argv.verbose) log(`  [—] ${a.slug} — no new links`);
@@ -255,6 +369,9 @@ async function main() {
     }
     stats.modified++;
     stats.totalLinks += inserted.length;
+    for (const ins of inserted) {
+      stats.byKind[ins.kind] = (stats.byKind[ins.kind] ?? 0) + 1;
+    }
     log(`  [+${inserted.length}] ${a.slug}`);
     if (argv.verbose || argv['dry-run']) {
       for (const ins of inserted) {
@@ -278,6 +395,9 @@ async function main() {
   log(`  processed:  ${stats.processed}`);
   log(`  modified:   ${stats.modified}${argv['dry-run'] ? ' (dry run, no writes)' : ''}`);
   log(`  new links:  ${stats.totalLinks}`);
+  for (const [kind, n] of Object.entries(stats.byKind).sort((a, b) => b[1] - a[1])) {
+    log(`    · ${kind.padEnd(11)} ${n}`);
+  }
   if (stats.errors) log(`  errors:     ${stats.errors}`);
 }
 
