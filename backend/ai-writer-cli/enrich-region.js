@@ -8,9 +8,11 @@
 // Section structure rendered by the destination page (see
 // app/destinations/[slug]/page.tsx → ContinentDestinationPage):
 //   (intro paragraph, no heading)            — short, 1-2 sentences
-//   ## Overview                              — exactly 2 paragraphs of prose
-//   ## Travel Notes                          — short paragraph (visas, seasons, currencies)
-//   ## Interesting Facts About {Region}      — 5-item bullet list
+//   ## Overview                              — ONE paragraph of prose (renders right column of about block)
+//   ## History and Ancient Civilizations     — ONE paragraph of prose (renders right column of about block, under Overview)
+//   ## Travel Notes                          — short paragraph (renders full-width below Countries)
+//   ## Interesting Facts About {Region}      — 5-item bullet list, 5-10 words each (renders LEFT col of 2-col grid)
+//   ## Top Travel Highlights                 — 5-item bullet list, "Place — short reason" (renders RIGHT col of 2-col grid)
 //
 // Usage:
 //   node enrich-region.js --slugs asia                       # one
@@ -81,16 +83,15 @@ const ABOUT_SYSTEM = `You write continent encyclopedia entries for an editorial 
 
 Output MUST be strict JSON with these keys:
 {
-  "description": string  // A flowing 1-2 sentence intro paragraph, then a blank line, then exactly THREE sections in markdown separated by blank lines, each preceded by a level-2 heading. Total length 350-500 words.
+  "description": string  // A flowing 1-2 sentence intro paragraph, then a blank line, then exactly FOUR sections in markdown separated by blank lines, each preceded by a level-2 heading. Total length 350-500 words.
     //   (intro paragraph)  ~25-45 words, 1-2 sentences. Paint the continent's character — landscape contrasts, scale, what defines it from the outside. NO heading. Examples of the right tone:
     //     "Africa is a continent of 54 countries spanning roughly 30 million km² — Sahara to Cape, equator to Mediterranean, more linguistic and cultural diversity per capita than anywhere on Earth."
     //     "Asia is the largest continent by both area and population — 4.7 billion people, 49 countries, climates from Arctic tundra to monsoon rainforest, and roughly 60% of humanity in one geographic frame."
-    //   ## Overview        Exactly TWO paragraphs of flowing prose separated by a blank line.
-    //     Paragraph 1 (~70-90 words): Geography & physical structure — major sub-regions, dominant landmasses, mountain ranges, defining rivers/seas. Where the continent sits on the globe and what its broad shape is.
-    //     Paragraph 2 (~70-90 words): Cultural & political composition — number of countries, dominant linguistic families, historical layers (colonial / pre-colonial), the rough split between developed economies and emerging ones, what an outsider should know to read a map.
-    //     Plain prose, no bullets.
+    //   ## Overview        EXACTLY ONE paragraph of flowing prose (~80-120 words, NOT two paragraphs). Cover geography + cultural/political composition together: major sub-regions, dominant landmasses, defining rivers/seas, number of countries, dominant linguistic families, what an outsider should know to read a map. Plain prose, no bullets.
+    //   ## History and Ancient Civilizations  EXACTLY ONE paragraph of flowing prose (~80-120 words). Walk through the continent's major historical layers — earliest civilisations and what they're known for (pyramids, city-states, trading empires, religious origins), key empires that shaped its political map, the colonial / post-colonial inflection if applicable, and what physical traces (ruins, UNESCO sites, archaeological zones) a modern visitor can still see. Concrete names and dates where confidently known; never fabricate dates. Plain prose, no bullets.
     //   ## Travel Notes    ~50-80 words of flowing prose. Visa picture for major passports across the continent (highly variable — flag that), best seasons (continent often spans multiple climate zones; note the split), currency overlay (single currency areas like EUR, or fragmented), getting around (regional aviation hubs, rail vs. road norms).
-    //   ## Interesting Facts About {REGION}  EXACTLY 5 bullet points, each on its own line, each starting with "- " (hyphen + space). Keep each bullet SHORT — strictly 7-10 words, one crisp declarative sentence, headline-style. Facts should be verifiable and surprising — geographic superlatives, historical firsts, demographic records, cultural records. Avoid clichés, do NOT invent statistics.
+    //   ## Interesting Facts About {REGION}  EXACTLY 5 bullet points, each on its own line, each starting with "- " (hyphen + space). Keep each bullet SHORT — strictly 5-10 words, one crisp declarative sentence, headline-style. Facts should be verifiable and surprising — geographic superlatives, historical firsts, demographic records, cultural records. Avoid clichés, do NOT invent statistics.
+    //   ## Top Travel Highlights  EXACTLY 5 bullet points, each on its own line, each starting with "- " (hyphen + space). Format: "- {Place name} — {one-line reason it's worth visiting, strictly 6-10 words total per bullet AFTER the em-dash}". Name specific, verifiable, iconic destinations (e.g. "- Marrakech — labyrinthine medina, riads, and souks"). Mix country geographies across the continent.
     // Do NOT add ## Highlights, ## Practical, or any other section. Do not wrap bullets in code fences.
   "facts": object  // Structured continent facts for the right-hand sidebar. ALL fields are optional — OMIT any you are not confident about; do NOT fabricate. Use exactly these keys:
     //   countriesCount   number  — number of sovereign UN-member countries on the continent (54 for Africa, 49 for Asia, etc.)
