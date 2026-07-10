@@ -25,6 +25,8 @@ RUN if [ -f yarn.lock ]; then \
 
 COPY src ./src
 COPY config ./config
+COPY scripts ./scripts
+COPY imports ./imports
 COPY public ./public
 COPY favicon.png ./
 

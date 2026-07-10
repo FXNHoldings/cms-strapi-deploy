@@ -4,7 +4,7 @@
   "info": {
     "singularName": "author",
     "pluralName": "authors",
-    "displayName": "Travel Blog · Author"
+    "displayName": "Originfacts · Author"
   },
   "options": { "draftAndPublish": false },
   "attributes": {

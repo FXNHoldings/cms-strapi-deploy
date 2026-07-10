@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commerce_price_alerts",
+  "info": {
+    "singularName": "commerce-price-alert",
+    "pluralName": "commerce-price-alerts",
+    "displayName": "Commerce · Price Alert",
+    "description": "Visitor price-drop alerts: notify by email when a product reaches a target price."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "email": { "type": "email", "required": true },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-product.commerce-product"
+    },
+    "targetPrice": { "type": "decimal", "required": true },
+    "currency": { "type": "string", "default": "USD", "maxLength": 8 },
+    "priceAtSignup": { "type": "decimal" },
+    "notifiedPrice": { "type": "decimal" },
+    "alertStatus": {
+      "type": "enumeration",
+      "enum": ["active", "triggered", "cancelled"],
+      "default": "active",
+      "required": true
+    },
+    "triggeredAt": { "type": "datetime" },
+    "lastCheckedAt": { "type": "datetime" },
+    "cancelToken": { "type": "string", "maxLength": 64 },
+    "source": { "type": "string", "maxLength": 120 }
+  }
+}

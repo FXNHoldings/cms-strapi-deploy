@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // FXN AI Writer CLI
-// Generates travel articles with Claude Sonnet 4.5 and posts them as drafts (or published) to Strapi,
+// Generates travel articles with OpenAI by default and posts them as drafts (or published) to Strapi,
 // optionally assigning each article to the right category.
 //
 // Three ways to use it:
-//   1) Fully automatic — pick a category + count, Claude invents the titles AND writes them:
+//   1) Fully automatic — pick a category + count, AI invents the titles AND writes them:
 //        node generate.js --category flights --count 5
 //        node generate.js -c hotels -n 10 --publish
 //
@@ -18,6 +18,7 @@
 
 import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
+import OpenAI from 'openai';
 import { fal } from '@fal-ai/client';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -32,7 +33,7 @@ const argv = yargs(hideBin(process.argv))
   .option('topics', { type: 'string', describe: 'File with "category | topic" per line' })
   .option('only-category', { type: 'string', describe: 'When used with --topics, only run jobs whose category is in this comma-separated list (e.g. "car-rentals,travel-tips")' })
   .option('auto-fill', { type: 'boolean', default: false, describe: 'Auto-generate across the 6 preset categories' })
-  .option('count', { alias: 'n', type: 'number', describe: 'How many articles to generate (Claude will brainstorm the titles)' })
+  .option('count', { alias: 'n', type: 'number', describe: 'How many articles to generate (AI will brainstorm the titles)' })
   .option('tone', { type: 'string', default: 'friendly', choices: ['friendly', 'professional', 'adventurous', 'witty', 'luxury'] })
   .option('length', { alias: 'l', type: 'string', default: 'long', choices: ['short', 'medium', 'long'] })
   .option('destination', { alias: 'd', type: 'string', describe: 'Destination name(s), comma-separated — attached to the article in Strapi' })
@@ -52,6 +53,15 @@ const positionalTopic = argv._[0];
 if (!argv.topic && positionalTopic) argv.topic = String(positionalTopic);
 
 const {
+  AI_PROVIDER = 'openai',
+  OPENAI_API_KEY,
+  OPENAI_MODEL = 'gpt-5.5',
+  OPENAI_MAX_OUTPUT_TOKENS = '16000',
+  OPENROUTER_API_KEY,
+  OPENROUTER_MODEL = '~openai/gpt-latest',
+  OPENROUTER_MAX_TOKENS = '16000',
+  OPENROUTER_SITE_URL = 'https://cms.fxnstudio.com',
+  OPENROUTER_APP_NAME = 'FXN AI Writer CLI',
   ANTHROPIC_API_KEY,
   CLAUDE_MODEL = 'claude-sonnet-4-5-20250929',
   CLAUDE_MAX_TOKENS = '4096',
@@ -60,7 +70,11 @@ const {
   FAL_KEY,
 } = process.env;
 
-if (!ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set.');
+const aiProvider = AI_PROVIDER.toLowerCase();
+if (!['openai', 'openrouter', 'anthropic'].includes(aiProvider)) fatal('AI_PROVIDER must be "openai", "openrouter", or "anthropic".');
+if (aiProvider === 'openai' && !OPENAI_API_KEY) fatal('OPENAI_API_KEY is not set.');
+if (aiProvider === 'openrouter' && !OPENROUTER_API_KEY) fatal('OPENROUTER_API_KEY is not set.');
+if (aiProvider === 'anthropic' && !ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set.');
 if (!argv['dry-run']) {
   if (!STRAPI_URL) fatal('STRAPI_URL is not set in .env');
   if (!STRAPI_API_TOKEN) fatal('STRAPI_API_TOKEN is not set in .env');
@@ -69,7 +83,11 @@ if (argv.images && !argv['dry-run'] && !FAL_KEY) {
   fatal('FAL_KEY is not set in .env. Get one at https://fal.ai/dashboard/keys — or pass --no-images to skip image generation.');
 }
 
-const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
+const anthropicClient = aiProvider === 'anthropic' ? new Anthropic({ apiKey: ANTHROPIC_API_KEY }) : null;
+const openaiClient = aiProvider === 'openai' ? new OpenAI({ apiKey: OPENAI_API_KEY }) : null;
+const openrouterClient = aiProvider === 'openrouter'
+  ? new OpenAI({ apiKey: OPENROUTER_API_KEY, baseURL: 'https://openrouter.ai/api/v1' })
+  : null;
 if (FAL_KEY) fal.config({ credentials: FAL_KEY });
 
 const FAL_MODEL_IDS = {
@@ -145,22 +163,69 @@ async function loadDestinationIndex() {
   return destinationIndex;
 }
 
+/**
+ * Auto-create a city-type destination when an explicit topics-line destination
+ * doesn't match anything in Strapi. We default to `type='city'` because the
+ * country collection is already fully seeded (234 countries) — anything new
+ * referenced here is almost always a city, region, or named area inside a
+ * known country.
+ *
+ * Returns the new entry (in the same shape as loadDestinationIndex rows) and
+ * pushes it into the in-memory index so subsequent matches in the same run
+ * see it without a refetch.
+ */
+async function createCityDestination(name) {
+  const slug = name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  const res = await strapi('/api/destinations', {
+    method: 'POST',
+    body: JSON.stringify({ data: { name, slug, type: 'city' } }),
+  });
+  const row = res.data ?? res;
+  const created = {
+    id: row.id ?? row.data?.id,
+    name,
+    slug,
+    type: 'city',
+    variants: dedupe([name, slug.replace(/-/g, ' ')]).map((v) => v.toLowerCase()),
+  };
+  destinationIndex.push(created);
+  return created;
+}
+
 /** Detect destinations in a string via whole-word, case-insensitive match. */
 async function detectDestinations(text, explicit) {
   const ids = new Set();
   const names = new Set();
   const index = await loadDestinationIndex();
 
-  // Explicit first (comma-separated names or slugs from --destination or topics line)
+  // Explicit first (comma-separated names or slugs from --destination or topics line).
+  // Any explicit name that doesn't match a known destination gets auto-created
+  // as a city-type destination so future articles can link to it.
   for (const raw of (explicit || '').split(',').map((s) => s.trim()).filter(Boolean)) {
     const needle = raw.toLowerCase();
-    const hit = index.find(
+    let hit = index.find(
       (d) => d.name.toLowerCase() === needle || d.slug.toLowerCase() === needle,
     );
-    if (hit) { ids.add(hit.id); names.add(hit.name); }
+    if (!hit) {
+      try {
+        hit = await createCityDestination(raw);
+        console.log(`    + auto-created destination: "${raw}" (city, id ${hit.id})`);
+      } catch (e) {
+        console.warn(`    ⚠ couldn't auto-create destination "${raw}": ${e.message.slice(0, 120)}`);
+        continue;
+      }
+    }
+    ids.add(hit.id); names.add(hit.name);
   }
 
-  // Auto-detect from title
+  // Auto-detect from title (matches against existing index only — does NOT
+  // auto-create, since substring matches across unrelated cities would be
+  // unsafe).
   if (argv['auto-destinations'] && text) {
     const hay = ` ${text.toLowerCase()} `;
     for (const d of index) {
@@ -207,7 +272,7 @@ async function strapi(pathname, init = {}) {
   return res.json();
 }
 
-/* ---------- Claude prompts ---------- */
+/* ---------- AI prompts ---------- */
 
 function systemPromptArticle(lengthLabel) {
   return `You are a senior travel journalist writing for a travel blog (flights, hotels, destinations, tips).
@@ -309,24 +374,17 @@ function userPromptTitles({ category, count, tone, language, keywords, destinati
   ].filter(Boolean).join('\n');
 }
 
-/* ---------- Claude calls ---------- */
+/* ---------- AI calls ---------- */
 
 async function generateTitles({ category, count, tone, language, keywords, destination }) {
-  const msg = await client.messages.create({
-    model: CLAUDE_MODEL,
-    max_tokens: 2048,
-    thinking: { type: 'adaptive' },
-    output_config: { effort: 'high' },
+  const text = await callAI({
     system: systemPromptTitles(),
-    messages: [{
-      role: 'user',
-      content: userPromptTitles({ category, count, tone, language, keywords, destination }),
-    }],
+    user: userPromptTitles({ category, count, tone, language, keywords, destination }),
+    maxTokens: 2048,
   });
-  const text = msg.content.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
   const json = safeParse(text);
   if (!json || !Array.isArray(json.titles)) {
-    throw new Error(`Claude did not return a titles array:\n${text.slice(0, 400)}`);
+    throw new Error(`${activeProviderName()} did not return a titles array:\n${text.slice(0, 400)}`);
   }
   // De-dupe & trim
   const seen = new Set();
@@ -340,7 +398,7 @@ async function generateTitles({ category, count, tone, language, keywords, desti
     })
     .slice(0, count);
 
-  if (!titles.length) throw new Error('Claude returned zero usable titles.');
+  if (!titles.length) throw new Error(`${activeProviderName()} returned zero usable titles.`);
   return titles;
 }
 
@@ -349,21 +407,18 @@ async function generateArticle(p) {
   // 16K output gives long-form articles (~2000 words) plenty of headroom
   // for the surrounding JSON envelope. 8K previously ran out mid-stream
   // for some longer pieces, producing truncated JSON.
-  const msg = await client.messages.create({
-    model: CLAUDE_MODEL,
-    max_tokens: Math.max(parseInt(CLAUDE_MAX_TOKENS, 10) || 0, 16000),
+  const text = await callAI({
     system: systemPromptArticle(lengthLabel),
-    messages: [{ role: 'user', content: userPromptArticle(p) }],
+    user: userPromptArticle(p),
+    maxTokens: Math.max(parseInt(maxOutputTokensEnv(), 10) || 0, 16000),
   });
-  const text = msg.content.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
   const json = safeParse(text);
   if (!json) {
-    const stop = msg.stop_reason ?? '?';
-    throw new Error(`Claude returned non-JSON (stop_reason=${stop}):\n${text.slice(0, 400)}`);
+    throw new Error(`${activeProviderName()} returned non-JSON:\n${text.slice(0, 400)}`);
   }
   if (!json.slug) json.slug = slugify(json.title || p.topic, { lower: true, strict: true }).slice(0, 60);
 
-  // Defensive truncations — Claude's compliance with length hints is
+  // Defensive truncations — model compliance with length hints is
   // imperfect, and Strapi schema validation rejects over-length fields.
   // Hard-cap the SEO and excerpt fields a few chars under the schema limit.
   const truncate = (s, max) => (s && s.length > max ? s.slice(0, max - 1).trimEnd() + '…' : s);
@@ -373,6 +428,60 @@ async function generateArticle(p) {
   if (json.slug) json.slug = json.slug.slice(0, 60);
 
   return json;
+}
+
+async function callAI({ system, user, maxTokens }) {
+  if (aiProvider === 'openai') {
+    const response = await openaiClient.responses.create({
+      model: OPENAI_MODEL,
+      instructions: system,
+      input: user,
+      max_output_tokens: maxTokens,
+    });
+    return response.output_text?.trim() || '';
+  }
+
+  if (aiProvider === 'openrouter') {
+    const completion = await openrouterClient.chat.completions.create({
+      model: OPENROUTER_MODEL,
+      messages: [
+        { role: 'system', content: system },
+        { role: 'user', content: user },
+      ],
+      max_tokens: maxTokens,
+      extra_headers: {
+        'HTTP-Referer': OPENROUTER_SITE_URL,
+        'X-OpenRouter-Title': OPENROUTER_APP_NAME,
+      },
+    });
+    return completion.choices?.[0]?.message?.content?.trim() || '';
+  }
+
+  const msg = await anthropicClient.messages.create({
+    model: CLAUDE_MODEL,
+    max_tokens: maxTokens,
+    system,
+    messages: [{ role: 'user', content: user }],
+  });
+  return msg.content.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
+}
+
+function activeModel() {
+  if (aiProvider === 'openai') return OPENAI_MODEL;
+  if (aiProvider === 'openrouter') return OPENROUTER_MODEL;
+  return CLAUDE_MODEL;
+}
+
+function activeProviderName() {
+  if (aiProvider === 'openai') return 'OpenAI';
+  if (aiProvider === 'openrouter') return 'OpenRouter';
+  return 'Claude';
+}
+
+function maxOutputTokensEnv() {
+  if (aiProvider === 'openai') return OPENAI_MAX_OUTPUT_TOKENS;
+  if (aiProvider === 'openrouter') return OPENROUTER_MAX_TOKENS;
+  return CLAUDE_MAX_TOKENS;
 }
 
 /* ---------- Fal.ai images ---------- */
@@ -422,7 +531,7 @@ async function uploadImageToStrapi(imageUrl, filename) {
 async function generateAndUploadImages(draft) {
   const prompts = draft?.imagePrompts;
   if (!prompts?.cover || !Array.isArray(prompts.gallery) || prompts.gallery.length < 1) {
-    console.log('  (no image prompts returned by Claude — skipping images)');
+    console.log(`  (no image prompts returned by ${activeProviderName()} - skipping images)`);
     return { coverId: null, galleryIds: [] };
   }
 
@@ -528,7 +637,7 @@ const AUTO_TOPICS = {
 async function findExistingArticle(...candidates) {
   // Look up by any of: exact title (case-insensitive), or exact slug.
   // Pass any number of {title?, slug?} candidates — useful for both the
-  // upfront topic-based check and the post-Claude generated-draft check.
+  // upfront topic-based check and the post-generation draft check.
   const titles = [...new Set(candidates.map((c) => c?.title).filter(Boolean))];
   const slugs = [...new Set(candidates.map((c) => c?.slug).filter(Boolean))];
   if (!titles.length && !slugs.length) return null;
@@ -587,7 +696,7 @@ async function runOne({ topic, category, destination }) {
   const t0 = Date.now();
   const draft = await generateArticle(params);
 
-  // Idempotency check #2 (after Claude): Claude often rewrites the title
+  // Idempotency check #2 (after generation): the model often rewrites the title
   // (e.g. "Cheap Car Rentals at Airports vs City…" → "Airport vs City Car
   // Rentals…"). The new title/slug might collide with an existing article
   // even though the original topic didn't. Catch that here and skip the
@@ -599,7 +708,7 @@ async function runOne({ topic, category, destination }) {
       );
       if (existing) {
         const ex = existing.attributes ?? existing;
-        console.log(`${((Date.now() - t0) / 1000).toFixed(1)}s · SKIP after-generate (Claude title clashes with id=${existing.id}, slug=${ex.slug})`);
+        console.log(`${((Date.now() - t0) / 1000).toFixed(1)}s · SKIP after-generate (generated title clashes with id=${existing.id}, slug=${ex.slug})`);
         return;
       }
     } catch (e) {
@@ -632,7 +741,7 @@ async function runOne({ topic, category, destination }) {
 }
 
 async function runCategoryAuto({ category, count }) {
-  console.log(`\nBrainstorming ${count} title${count === 1 ? '' : 's'} for "${category}" with ${CLAUDE_MODEL}…`);
+  console.log(`\nBrainstorming ${count} title${count === 1 ? '' : 's'} for "${category}" with ${activeModel()}...`);
   const titles = await generateTitles({
     category,
     count,

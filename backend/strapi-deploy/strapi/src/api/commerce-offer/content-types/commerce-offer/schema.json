@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commerce_offers",
+  "info": {
+    "singularName": "commerce-offer",
+    "pluralName": "commerce-offers",
+    "displayName": "Commerce · Offer",
+    "description": "Store-specific price/link for a shared product."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-product.commerce-product",
+      "inversedBy": "offers"
+    },
+    "merchant": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-merchant.commerce-merchant",
+      "inversedBy": "offers"
+    },
+    "title": { "type": "string", "maxLength": 220 },
+    "price": { "type": "decimal" },
+    "originalPrice": { "type": "decimal" },
+    "currency": { "type": "string", "default": "USD", "maxLength": 8 },
+    "discountPercent": { "type": "decimal", "min": 0, "max": 100 },
+    "productUrl": { "type": "text", "required": true },
+    "affiliateUrl": { "type": "text" },
+    "couponCode": { "type": "string", "maxLength": 80 },
+    "availability": {
+      "type": "enumeration",
+      "enum": ["in_stock", "out_of_stock", "preorder", "unknown"],
+      "default": "unknown"
+    },
+    "shippingCost": { "type": "decimal" },
+    "condition": {
+      "type": "enumeration",
+      "enum": ["new", "used", "refurbished", "open_box", "unknown"],
+      "default": "new"
+    },
+    "merchantSku": { "type": "string", "maxLength": 120 },
+    "source": { "type": "string", "maxLength": 120, "description": "Manual, Amazon PA API, eBay API, feed name, scraper, etc." },
+    "lastCheckedAt": { "type": "datetime" },
+    "status": {
+      "type": "enumeration",
+      "enum": ["active", "expired", "stale", "error"],
+      "default": "active",
+      "required": true
+    },
+    "syncError": { "type": "text" },
+    "displayOrder": { "type": "integer", "default": 0 },
+    "deals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commerce-deal.commerce-deal",
+      "mappedBy": "primaryOffer"
+    },
+    "priceSnapshots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commerce-price-snapshot.commerce-price-snapshot",
+      "mappedBy": "offer"
+    }
+  }
+}

@@ -1,11 +1,11 @@
-name: fxnstudio-cms
+name: strapi-cms
 
 services:
   strapi:
     build:
       context: ./strapi
       dockerfile: Dockerfile
-    container_name: fxn-strapi
+    container_name: strapi-cms
     restart: unless-stopped
     environment:
       NODE_ENV: production
@@ -27,8 +27,8 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       ENCRYPTION_KEY: ${ENCRYPTION_KEY}
       # Public URL
-      PUBLIC_URL: https://cms.fxnstudio.com
-      URL: https://cms.fxnstudio.com
+      PUBLIC_URL: https://strapi.fxnstudio.com
+      URL: https://strapi.fxnstudio.com
       STRAPI_ADMIN_PREVIEW_BASE_URL: ${STRAPI_ADMIN_PREVIEW_BASE_URL:-https://preview.fxnstudio.com}
       # AI Writer plugin
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
@@ -48,7 +48,7 @@ services:
 
   postgres:
     image: postgres:16-alpine
-    container_name: fxn-postgres
+    container_name: strapi-cms-postgres
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${DATABASE_NAME}

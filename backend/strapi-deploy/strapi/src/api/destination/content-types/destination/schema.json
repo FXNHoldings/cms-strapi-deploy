@@ -4,7 +4,7 @@
   "info": {
     "singularName": "destination",
     "pluralName": "destinations",
-    "displayName": "Travel Blog · Destination",
+    "displayName": "Originfacts · Destination",
     "description": "Geographic destinations (country / city / region)"
   },
   "options": { "draftAndPublish": false },

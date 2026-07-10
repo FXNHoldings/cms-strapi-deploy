@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtsmart_categories",
+  "info": {
+    "singularName": "nxtsmart-category",
+    "pluralName": "nxtsmart-categories",
+    "displayName": "NXTSmart.Homes · Category",
+    "description": "Categories for NXTSmart.Homes (Smart Home Automation, Security, Devices, How-to Guides, etc.)"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 80 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "description": { "type": "text" },
+    "order": { "type": "integer", "default": 0 },
+    "icon": { "type": "string", "maxLength": 40 },
+    "legacyWpId": { "type": "integer", "unique": false },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxtsmart-category.nxtsmart-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxtsmart-category.nxtsmart-category",
+      "mappedBy": "parent"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nxtsmart-post.nxtsmart-post",
+      "mappedBy": "categories"
+    }
+  }
+}

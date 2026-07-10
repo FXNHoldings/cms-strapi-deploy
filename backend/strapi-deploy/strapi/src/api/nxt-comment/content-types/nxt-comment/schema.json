@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxt_comments",
+  "info": {
+    "singularName": "nxt-comment",
+    "pluralName": "nxt-comments",
+    "displayName": "NXT Bargains · Comment",
+    "description": "Moderated visitor comments for NXT.Bargains posts."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxt-post.nxt-post",
+      "inversedBy": "comments"
+    },
+    "authorName": { "type": "string", "required": true, "maxLength": 80 },
+    "email": { "type": "email", "private": true },
+    "body": { "type": "text", "required": true, "maxLength": 4000 },
+    "commentStatus": {
+      "type": "enumeration",
+      "enum": ["pending", "approved", "rejected"],
+      "default": "pending",
+      "required": true
+    },
+    "source": { "type": "string", "maxLength": 120 },
+    "userAgent": { "type": "text", "private": true }
+  }
+}

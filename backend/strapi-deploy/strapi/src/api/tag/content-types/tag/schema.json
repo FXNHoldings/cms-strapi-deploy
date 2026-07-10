@@ -4,7 +4,7 @@
   "info": {
     "singularName": "tag",
     "pluralName": "tags",
-    "displayName": "Travel Blog · Tag"
+    "displayName": "Originfacts · Tag"
   },
   "options": { "draftAndPublish": false },
   "attributes": {

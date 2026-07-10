@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commerce_products",
+  "info": {
+    "singularName": "commerce-product",
+    "pluralName": "commerce-products",
+    "displayName": "Commerce · Product",
+    "description": "Shared product catalog records reused across blogs and deal websites."
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 220 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "brand": { "type": "string", "maxLength": 120 },
+    "brandRef": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-brand.commerce-brand",
+      "inversedBy": "products"
+    },
+    "shortDescription": { "type": "text", "maxLength": 360 },
+    "description": { "type": "richtext" },
+    "primaryImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "gallery": { "type": "media", "multiple": true, "allowedTypes": ["images"] },
+    "category": { "type": "string", "maxLength": 120 },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::commerce-category.commerce-category",
+      "inversedBy": "products"
+    },
+    "tags": { "type": "json", "description": "Array of product tags shared across sites." },
+    "specs": { "type": "json", "description": "Structured product specifications." },
+    "asin": { "type": "string", "maxLength": 30 },
+    "gtin": { "type": "string", "maxLength": 14, "description": "UPC/EAN/GTIN for cross-merchant matching." },
+    "mpn": { "type": "string", "maxLength": 100, "description": "Manufacturer part/model number." },
+    "sku": { "type": "string", "maxLength": 100 },
+    "rating": { "type": "decimal", "min": 0, "max": 10 },
+    "ratingCount": { "type": "integer", "default": 0, "min": 0 },
+    "productStatus": {
+      "type": "enumeration",
+      "enum": ["active", "draft", "archived"],
+      "default": "active",
+      "required": true
+    },
+    "offers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commerce-offer.commerce-offer",
+      "mappedBy": "product"
+    },
+    "deals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commerce-deal.commerce-deal",
+      "mappedBy": "product"
+    },
+    "priceSnapshots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commerce-price-snapshot.commerce-price-snapshot",
+      "mappedBy": "product"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commerce_brands",
+  "info": {
+    "singularName": "commerce-brand",
+    "pluralName": "commerce-brands",
+    "displayName": "Commerce · Brand",
+    "description": "Shared product brands reused across commerce sites."
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "description": { "type": "text" },
+    "websiteUrl": { "type": "string", "maxLength": 500 },
+    "logo": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "country": { "type": "string", "maxLength": 2 },
+    "order": { "type": "integer", "default": 0 },
+    "brandStatus": {
+      "type": "enumeration",
+      "enum": ["active", "inactive"],
+      "default": "active",
+      "required": true
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commerce-product.commerce-product",
+      "mappedBy": "brandRef"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commerce_price_snapshots",
+  "info": {
+    "singularName": "commerce-price-snapshot",
+    "pluralName": "commerce-price-snapshots",
+    "displayName": "Commerce · Price Snapshot",
+    "description": "Historical price record for price charts and buy/wait signals."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-product.commerce-product",
+      "inversedBy": "priceSnapshots"
+    },
+    "merchant": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-merchant.commerce-merchant",
+      "inversedBy": "priceSnapshots"
+    },
+    "offer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-offer.commerce-offer",
+      "inversedBy": "priceSnapshots"
+    },
+    "price": { "type": "decimal", "required": true },
+    "originalPrice": { "type": "decimal" },
+    "currency": { "type": "string", "default": "USD", "maxLength": 8 },
+    "availability": {
+      "type": "enumeration",
+      "enum": ["in_stock", "out_of_stock", "preorder", "unknown"],
+      "default": "unknown"
+    },
+    "checkedAt": { "type": "datetime", "required": true },
+    "source": { "type": "string", "maxLength": 120 },
+    "rawPayload": { "type": "json" }
+  }
+}

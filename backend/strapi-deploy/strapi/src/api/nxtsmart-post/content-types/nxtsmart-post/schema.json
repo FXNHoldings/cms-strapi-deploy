@@ -1,0 +1,89 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtsmart_posts",
+  "info": {
+    "singularName": "nxtsmart-post",
+    "pluralName": "nxtsmart-posts",
+    "displayName": "NXTSmart.Homes · Post",
+    "description": "Posts for NXTSmart.Homes — smart home guides, reviews, comparisons, how-to articles"
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "title": { "type": "string", "required": true, "maxLength": 255 },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "excerpt": { "type": "text", "maxLength": 500 },
+    "content": { "type": "richtext", "required": true },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "coverImageUrl": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "External image URL (e.g. CDN or Amazon). Used when coverImage media is not set."
+    },
+    "coverImageAlt": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images"]
+    },
+    "postType": {
+      "type": "enumeration",
+      "enum": [
+        "product-comparison",
+        "product-review",
+        "product-roundup",
+        "how-to-guide",
+        "informative",
+        "top-rated",
+        "smart-home-automation",
+        "smart-home-security",
+        "smart-home-devices",
+        "smart-home-entertainment",
+        "smart-home-energy",
+        "smart-home-integration",
+        "other"
+      ],
+      "default": "informative"
+    },
+    "amazonAffiliateTag": {
+      "type": "string",
+      "maxLength": 40,
+      "description": "Default Amazon Associates tag for affiliate links in this post"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Original URL if imported from another site"
+    },
+    "legacyWpId": {
+      "type": "integer",
+      "description": "Original WordPress post ID (for re-import idempotency)"
+    },
+    "readingTimeMinutes": { "type": "integer", "default": 5, "min": 1 },
+    "seoTitle": { "type": "string", "maxLength": 70 },
+    "seoDescription": { "type": "text", "maxLength": 160 },
+    "seoKeywords": { "type": "string" },
+    "ogImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "source": {
+      "type": "enumeration",
+      "enum": ["manual", "wp-import", "ai", "csv-import"],
+      "default": "manual"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nxtsmart-category.nxtsmart-category",
+      "inversedBy": "posts"
+    }
+  }
+}

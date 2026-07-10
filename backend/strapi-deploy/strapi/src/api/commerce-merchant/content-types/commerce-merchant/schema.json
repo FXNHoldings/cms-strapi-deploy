@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commerce_merchants",
+  "info": {
+    "singularName": "commerce-merchant",
+    "pluralName": "commerce-merchants",
+    "displayName": "Commerce · Merchant",
+    "description": "Shared retailer/marketplace records used by all bargain and product sites."
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "websiteUrl": { "type": "string", "maxLength": 500 },
+    "logo": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "country": { "type": "string", "maxLength": 2, "description": "ISO 3166-1 alpha-2 country code, e.g. US, GB, AU." },
+    "affiliateNetwork": { "type": "string", "maxLength": 120 },
+    "affiliateBaseUrl": { "type": "string", "maxLength": 700 },
+    "trackingParams": { "type": "json", "description": "Default affiliate/tracking parameters for generated links." },
+    "merchantStatus": {
+      "type": "enumeration",
+      "enum": ["active", "inactive"],
+      "default": "active",
+      "required": true
+    },
+    "offers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commerce-offer.commerce-offer",
+      "mappedBy": "merchant"
+    },
+    "priceSnapshots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commerce-price-snapshot.commerce-price-snapshot",
+      "mappedBy": "merchant"
+    }
+  }
+}

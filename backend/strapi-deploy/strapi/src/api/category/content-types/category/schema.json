@@ -4,7 +4,7 @@
   "info": {
     "singularName": "category",
     "pluralName": "categories",
-    "displayName": "Travel Blog · Category",
+    "displayName": "Originfacts · Category",
     "description": "Top-level content categories (e.g. Flights, Hotels, Destinations, Travel Tips) with unlimited sub-category depth"
   },
   "options": { "draftAndPublish": false },

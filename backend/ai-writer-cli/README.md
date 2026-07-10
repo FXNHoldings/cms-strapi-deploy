@@ -1,13 +1,15 @@
 # FXN AI Writer CLI
 
-A tiny standalone Node.js tool that generates full travel articles with **Claude Sonnet 4.5** and posts them as **drafts** to your Strapi CMS. No plugin, no rebuild, zero risk to your live admin.
+A tiny standalone Node.js tool that generates full articles with **OpenAI by default** and posts them as **drafts** to your Strapi CMS. OpenRouter and Anthropic Claude are also available through `AI_PROVIDER`.
 
 Drafts appear in Strapi → you review, attach a cover image and destinations → publish.
 
 ## Prerequisites
 
 - Node.js 20+ on whatever machine you run this from (your laptop is fine)
-- An Anthropic API key — get one at https://console.anthropic.com/settings/keys
+- An OpenAI API key — set it as `OPENAI_API_KEY`
+- Or an OpenRouter API key — set `AI_PROVIDER=openrouter` and `OPENROUTER_API_KEY`
+- Optional Anthropic API key if using `AI_PROVIDER=anthropic`
 - A Strapi **API Token** with write permission for Articles **and** Upload
   - In Strapi admin → **Settings → API Tokens → Create new API Token**
   - Name: `ai-writer-cli`
@@ -29,9 +31,9 @@ nano .env
 npm install    # or: yarn install / pnpm install
 ```
 
-## Quickest way — let Claude invent the titles AND write them
+## Quickest way — let AI invent the titles AND write them
 
-Just pick a category and how many articles you want. Claude brainstorms unique titles first, then writes each one in full:
+Just pick a category and how many articles you want. The configured AI provider brainstorms unique titles first, then writes each one in full:
 
 ```bash
 # 5 fresh Flights articles, saved as drafts
@@ -62,6 +64,50 @@ Output:
 
 Open the `review:` URL → Strapi draft is waiting for you.
 
+## Generate posts for NXT.Bargains, BestLooking.Skin, and NXTSmart.Homes
+
+Use `generate-site-post.js` for the site-specific blog collections:
+
+```bash
+# Prompt for site, category, and what to generate
+node generate-site-post.js
+
+# NXT.Bargains → /api/nxt-posts
+node generate-site-post.js --site nxt.bargains --category product-comparisons --count 3
+
+# BestLooking.Skin → /api/bls-posts
+node generate-site-post.js --site bestlooking.skin "Best vitamin C serums for sensitive skin" --category skincare-reviews
+
+# NXTSmart.Homes → /api/nxtsmart-posts
+node generate-site-post.js --site nxtsmart.homes --category smart-home-security --count 5
+
+# Publish immediately instead of creating drafts
+node generate-site-post.js --site nxtsmart.homes --category smart-home-devices --count 2 --publish
+
+# Text-only posts, no Fal.ai images
+node generate-site-post.js --site nxt.bargains --category product-roundups --count 2 --no-images
+
+# Higher-quality image model
+node generate-site-post.js --site bestlooking.skin --category skincare-reviews --count 1 --image-model dev
+
+# Preview without writing to Strapi
+node generate-site-post.js --site bestlooking.skin --category how-to-guides --count 1 --dry-run
+```
+
+Supported sites:
+
+| Site | Posts endpoint | Categories endpoint |
+|---|---|---|
+| `nxt.bargains` | `/api/nxt-posts` | `/api/nxt-categories` |
+| `bestlooking.skin` | `/api/bls-posts` | `/api/bls-categories` |
+| `nxtsmart.homes` | `/api/nxtsmart-posts` | `/api/nxtsmart-categories` |
+
+Topic files work with either `category | topic` or `site | category | topic`:
+
+```bash
+node generate-site-post.js --site nxt.bargains --topics topics.txt
+```
+
 ## With all the knobs
 
 ```bash
@@ -82,7 +128,7 @@ Flags:
 | `--length` / `-l` | `medium` | `short` (~500), `medium` (~1000), `long` (~1800) words |
 | `--destination` / `-d` | — | any place name |
 | `--category` / `-c` | — | any category slug (e.g. `flights`, `hotels`) |
-| `--count` / `-n` | — | integer — triggers Claude to auto-brainstorm that many titles for `--category` |
+| `--count` / `-n` | — | integer — triggers AI to auto-brainstorm that many titles for `--category` |
 | `--keywords` / `-k` | — | comma-separated SEO keywords |
 | `--language` | `English` | any language |
 | `--publish` | `false` | publish immediately (default: save as draft) |
@@ -98,7 +144,7 @@ Every generated article automatically gets:
 - **1 cover image** (16:9) → attached to `coverImage`
 - **2 gallery images** (4:3) → attached to `gallery`
 
-Claude writes 3 tailored photographic prompts for each article (in the JSON response), then the CLI calls **Fal.ai FLUX** to generate the images, downloads them, uploads to Strapi's Media Library, and links them to the draft.
+The AI model writes 3 tailored photographic prompts for each article (in the JSON response), then the CLI calls **Fal.ai FLUX** to generate the images, downloads them, uploads to Strapi's Media Library, and links them to the draft.
 
 **Costs** (as of 2026):
 - FLUX `schnell` (default): **~$0.003/image → ~$0.009 per article** (3 images)
@@ -126,26 +172,38 @@ Create a text file with one topic per line (see `topics.sample.txt`) then:
 node generate.js --topics my-topics.txt
 ```
 
-The script generates them sequentially (to respect Anthropic rate limits) and prints a summary at the end. Expect **~8-12 seconds per article** with Claude Sonnet 4.5.
+The script generates them sequentially to respect provider rate limits and prints a summary at the end.
 
-## Cost per article
+## AI provider and model
 
-Claude Sonnet 4.5: **$3/M input, $15/M output tokens**.
+OpenAI is the default provider:
 
-- **Short** (~500 words): ~0.5K input + 1.5K output ≈ **$0.024**
-- **Medium** (~1000 words): ~0.5K input + 2.5K output ≈ **$0.039**
-- **Long** (~1800 words): ~0.5K input + 4K output ≈ **$0.062**
-
-## Swap to a different model
-
-Edit `.env`:
-```
-CLAUDE_MODEL=claude-sonnet-4-5-20250929   # current default (Claude Sonnet 4.5)
-# CLAUDE_MODEL=claude-opus-4-5-20251125   # higher quality, ~5x cost
-# CLAUDE_MODEL=claude-haiku-4-5-20251001  # cheaper/faster, less polished
+```env
+AI_PROVIDER=openai
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-5.5
+OPENAI_MAX_OUTPUT_TOKENS=16000
 ```
 
-To swap to OpenAI or Gemini, ask me and I'll add a `--provider openai` flag.
+To use Anthropic instead:
+
+```env
+AI_PROVIDER=anthropic
+ANTHROPIC_API_KEY=sk-ant-...
+CLAUDE_MODEL=claude-sonnet-4-5-20250929
+CLAUDE_MAX_TOKENS=4096
+```
+
+To use OpenRouter instead:
+
+```env
+AI_PROVIDER=openrouter
+OPENROUTER_API_KEY=sk-or-...
+OPENROUTER_MODEL=~openai/gpt-latest
+OPENROUTER_MAX_TOKENS=16000
+OPENROUTER_SITE_URL=https://cms.fxnstudio.com
+OPENROUTER_APP_NAME=FXN AI Writer CLI
+```
 
 ## Automation ideas
 

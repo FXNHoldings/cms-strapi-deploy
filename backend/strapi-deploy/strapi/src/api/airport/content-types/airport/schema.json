@@ -4,7 +4,7 @@
   "info": {
     "singularName": "airport",
     "pluralName": "airports",
-    "displayName": "Travel Blog · Airport",
+    "displayName": "Originfacts · Airport",
     "description": "Commercial airports — IATA/ICAO codes, city, country, coordinates"
   },
   "options": { "draftAndPublish": false },

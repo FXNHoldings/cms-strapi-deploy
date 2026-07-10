@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commerce_deals",
+  "info": {
+    "singularName": "commerce-deal",
+    "pluralName": "commerce-deals",
+    "displayName": "Commerce · Deal",
+    "description": "Curated bargain placements that can be targeted to one or more sites."
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "title": { "type": "string", "required": true, "maxLength": 220 },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "summary": { "type": "text", "maxLength": 420 },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-product.commerce-product",
+      "inversedBy": "deals"
+    },
+    "primaryOffer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-offer.commerce-offer",
+      "inversedBy": "deals"
+    },
+    "targetSites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::commerce-site.commerce-site",
+      "inversedBy": "deals"
+    },
+    "heroImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "bargainScore": { "type": "decimal", "min": 0, "max": 100 },
+    "featured": { "type": "boolean", "default": false },
+    "startsAt": { "type": "datetime" },
+    "expiresAt": { "type": "datetime" },
+    "dealStatus": {
+      "type": "enumeration",
+      "enum": ["active", "expired", "scheduled", "hidden"],
+      "default": "active",
+      "required": true
+    },
+    "editorNotes": { "type": "richtext" },
+    "seoTitle": { "type": "string", "maxLength": 70 },
+    "seoDescription": { "type": "text", "maxLength": 160 }
+  }
+}

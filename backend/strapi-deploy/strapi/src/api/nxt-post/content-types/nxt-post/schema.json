@@ -41,6 +41,34 @@
       "maxLength": 40,
       "description": "Default Amazon Associates tag for affiliate links in this post"
     },
+    "priceComparisonEnabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Display a post-level merchant price comparison block on the public post page"
+    },
+    "priceComparisonKeyword": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Keyword used by the sourcing search to find prices for this post"
+    },
+    "priceComparisonMerchantLimit": {
+      "type": "integer",
+      "default": 2,
+      "min": 1,
+      "max": 10,
+      "description": "Maximum source results inspected per merchant when refreshing post prices"
+    },
+    "priceComparisonStatus": {
+      "type": "enumeration",
+      "enum": ["idle", "success", "failed"],
+      "default": "idle"
+    },
+    "priceComparisonLastRunAt": { "type": "datetime" },
+    "priceComparisonError": { "type": "text" },
+    "priceComparisonResults": {
+      "type": "json",
+      "description": "Cheapest merchant offers stored for the post page price comparison block"
+    },
     "sourceUrl": {
       "type": "string",
       "maxLength": 500,
@@ -69,6 +97,12 @@
       "relation": "manyToMany",
       "target": "api::nxt-category.nxt-category",
       "inversedBy": "posts"
+    },
+    "comments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxt-comment.nxt-comment",
+      "mappedBy": "post"
     }
   }
 }

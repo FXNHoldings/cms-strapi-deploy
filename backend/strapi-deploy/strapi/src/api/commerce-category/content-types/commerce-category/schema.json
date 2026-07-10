@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commerce_categories",
+  "info": {
+    "singularName": "commerce-category",
+    "pluralName": "commerce-categories",
+    "displayName": "Commerce · Category",
+    "description": "Shared product taxonomy for commerce products."
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "description": { "type": "text" },
+    "order": { "type": "integer", "default": 0 },
+    "icon": { "type": "string", "maxLength": 40 },
+    "image": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-category.commerce-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commerce-category.commerce-category",
+      "mappedBy": "parent"
+    },
+    "categoryStatus": {
+      "type": "enumeration",
+      "enum": ["active", "inactive"],
+      "default": "active",
+      "required": true
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::commerce-product.commerce-product",
+      "mappedBy": "categories"
+    }
+  }
+}

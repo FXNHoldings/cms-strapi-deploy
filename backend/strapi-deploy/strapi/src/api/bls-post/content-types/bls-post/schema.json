@@ -69,12 +69,6 @@
       "relation": "manyToMany",
       "target": "api::bls-category.bls-category",
       "inversedBy": "posts"
-    },
-    "featuredProducts": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::bls-product.bls-product",
-      "inversedBy": "featuredInPosts"
     }
   }
 }

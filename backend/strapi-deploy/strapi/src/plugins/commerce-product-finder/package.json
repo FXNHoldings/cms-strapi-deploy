@@ -1,0 +1,15 @@
+{
+  "name": "commerce-product-finder",
+  "version": "1.0.0",
+  "description": "Find, preview, and save Commerce products from the Strapi admin",
+  "strapi": {
+    "name": "commerce-product-finder",
+    "displayName": "Commerce Product Finder",
+    "description": "Search and add shared Commerce products from the CMS",
+    "kind": "plugin"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^5.0.0"
+  },
+  "main": "./server/index.js"
+}

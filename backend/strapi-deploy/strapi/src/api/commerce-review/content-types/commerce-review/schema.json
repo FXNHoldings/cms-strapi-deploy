@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commerce_reviews",
+  "info": {
+    "singularName": "commerce-review",
+    "pluralName": "commerce-reviews",
+    "displayName": "Commerce · Review",
+    "description": "First-party visitor product reviews (moderated; only approved ones display)."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-product.commerce-product"
+    },
+    "authorName": { "type": "string", "required": true, "maxLength": 80 },
+    "email": { "type": "email" },
+    "rating": { "type": "decimal", "required": true, "min": 1, "max": 5 },
+    "title": { "type": "string", "maxLength": 140 },
+    "body": { "type": "text", "required": true, "maxLength": 4000 },
+    "reviewStatus": {
+      "type": "enumeration",
+      "enum": ["pending", "approved", "rejected"],
+      "default": "pending",
+      "required": true
+    },
+    "source": { "type": "string", "maxLength": 120 }
+  }
+}

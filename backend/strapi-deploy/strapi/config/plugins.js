@@ -32,4 +32,8 @@ module.exports = ({ env }) => ({
       jwtSecret: env('JWT_SECRET'),
     },
   },
+  'commerce-product-finder': {
+    enabled: true,
+    resolve: './src/plugins/commerce-product-finder',
+  },
 });

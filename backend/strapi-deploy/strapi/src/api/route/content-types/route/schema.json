@@ -4,7 +4,7 @@
   "info": {
     "singularName": "route",
     "pluralName": "routes",
-    "displayName": "Travel Blog · Route",
+    "displayName": "Originfacts · Route",
     "description": "Flight routes between airport pairs — origin, destination, carriers, distance"
   },
   "options": { "draftAndPublish": false },
