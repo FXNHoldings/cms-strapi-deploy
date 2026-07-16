@@ -203,9 +203,36 @@ const NXT_BARGAINS_DEAL_MARKETPLACES = [
   },
 ];
 const NXT_BARGAINS_DEALS_MIN_WORDS = 1000;
+const NXT_BARGAINS_SITE_URL = 'https://nxt.bargains';
+const NXT_SMART_HOME_CATEGORY = 'smart-home';
+const NXT_SMART_HOME_MIN_WORDS = 1000;
+const NXT_SMART_HOME_PRODUCT_CAROUSEL_LIMIT = 8;
+const NXT_SMART_HOME_PRODUCT_CATEGORIES = [
+  {
+    slug: 'smart-light-bulbs',
+    label: 'Smart Light Bulbs',
+    categoryPage: `${NXT_BARGAINS_SITE_URL}/category/smart-light-bulbs`,
+  },
+  {
+    slug: 'smart-plugs',
+    label: 'Smart Plugs',
+    categoryPage: `${NXT_BARGAINS_SITE_URL}/category/smart-plugs`,
+  },
+  {
+    slug: 'video-doorbells',
+    label: 'Smart Doorbells',
+    categoryPage: `${NXT_BARGAINS_SITE_URL}/category/video-doorbells`,
+  },
+  {
+    slug: 'smart-door-locks',
+    label: 'Smart Door Locks',
+    categoryPage: `${NXT_BARGAINS_SITE_URL}/category/smart-door-locks`,
+  },
+];
 
 let site = null;
 const categoryCache = new Map();
+let smartHomeProductsCache = null;
 
 async function strapi(pathname, init = {}) {
   const res = await fetch(`${STRAPI_URL}${pathname}`, {
@@ -352,6 +379,11 @@ async function brainstormTopics(category, count) {
     return products.map((product) => dealTopicForProduct(product));
   }
 
+  if (isNxtSmartHomeCategory(category)) {
+    const products = await pickRandomSmartHomeProducts(count);
+    return products.map((product) => smartHomeTopicForProduct(product));
+  }
+
   const prompt = `Brainstorm ${count} strong blog article titles for ${site.label}.
 
 Site niche: ${site.topicNiche}
@@ -380,15 +412,20 @@ Rules:
   return topics.slice(0, count);
 }
 
-async function generatePost(topic, category, { dealProduct = null } = {}) {
+async function generatePost(topic, category, { dealProduct = null, smartHomeProduct = null } = {}) {
   const isDealsPost = isNxtDealsCategory(category);
-  const wordTarget = isDealsPost ? `at least ${NXT_BARGAINS_DEALS_MIN_WORDS}` : {
-    short: '650-850',
-    medium: '1000-1300',
-    long: '1500-2200',
-  }[argv.length];
+  const isSmartHomePost = isNxtSmartHomeCategory(category);
+  const wordTarget = isDealsPost ? `at least ${NXT_BARGAINS_DEALS_MIN_WORDS}`
+    : isSmartHomePost ? `at least ${NXT_SMART_HOME_MIN_WORDS}`
+      : {
+        short: '650-850',
+        medium: '1000-1300',
+        long: '1500-2200',
+      }[argv.length];
 
   const dealContext = dealProductPromptContext(dealProduct);
+  const smartHomeContext = smartHomeProductPromptContext(smartHomeProduct);
+  const contentFormat = isSmartHomePost && smartHomeProduct ? 'HTML' : 'Markdown';
 
   const prompt = `${site.editorialBrief}
 
@@ -400,7 +437,7 @@ Tone: ${argv.tone}
 Length: ${wordTarget} words
 Language: ${argv.language}
 SEO keywords: ${argv.keywords || 'choose natural keywords from the topic'}
-${dealContext}
+${dealContext}${smartHomeContext}
 
 Return STRICT JSON only with exactly these keys:
 {
@@ -419,13 +456,17 @@ Return STRICT JSON only with exactly these keys:
 }
 
 Content requirements:
-- Markdown only in "content".
-- Use useful H2/H3 headings.
+- ${contentFormat} only in "content".
+- Use useful ${contentFormat === 'HTML' ? 'h2/h3' : 'H2/H3'} headings.
 - Include practical comparisons, tips, caveats, and buying/setup guidance where relevant.
 - For NXT.Bargains Best Sellers articles, write at least ${NXT_BARGAINS_DEALS_MIN_WORDS} words in "content".
 - For NXT.Bargains Best Sellers articles, optimize the title for deal-shopping intent and make it concise, specific, and clickable without sounding spammy.
 - For NXT.Bargains Best Sellers articles, make the selected best-seller product the article's main subject and keep the article focused on whether it is a worthwhile deal.
 - For NXT.Bargains Best Sellers articles, include why shoppers may want it, where the value is, who should skip it, competing alternatives to compare, and what to check before buying.
+- For NXT.Bargains Smart Home articles, write at least ${NXT_SMART_HOME_MIN_WORDS} words in "content".
+- For NXT.Bargains Smart Home articles, make the selected smart home product the article's main subject and keep the article focused on setup, compatibility, features, and buyer fit.
+- For NXT.Bargains Smart Home articles, include who should consider it, who should skip it, alternatives to compare, and what to verify before buying.
+- For NXT.Bargains Smart Home articles, use valid HTML with useful <h2>, <h3>, <p>, <ul>, and <li> tags only. Do not include a product snapshot card, summary box, or product image URL; the script inserts those automatically.
 - Keep claims factual and cautious.
 - Do not invent exact prices, ratings, availability, certifications, medical outcomes, or specs.
 - Only mention prices, ratings, ranks, marketplace names, and URLs that appear in the selected product context.
@@ -446,8 +487,12 @@ Image prompt requirements:
   const post = parseJson(text);
   validatePost(post);
   validateDealPost(post, category);
+  validateSmartHomePost(post, category);
   normalizePostForStrapi(post);
   post.slug = slugifyValue(post.slug || post.title);
+  if (smartHomeProduct) {
+    post.content = buildSmartHomePostContent(post.content, smartHomeProduct);
+  }
   post.readingTimeMinutes = Number(post.readingTimeMinutes) || estimateReadingTime(post.content);
   return post;
 }
@@ -550,7 +595,7 @@ async function generateAndUploadImages(post) {
   return { coverId, galleryIds };
 }
 
-async function postToStrapi(post, { categoryId, coverId, galleryIds } = {}) {
+async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl } = {}) {
   const data = {
     title: post.title,
     slug: post.slug,
@@ -567,6 +612,7 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds } = {}) {
   if (categoryId) data.categories = [categoryId];
   if (coverId) data.coverImage = coverId;
   if (galleryIds?.length) data.gallery = galleryIds;
+  if (sourceUrl) data.sourceUrl = sourceUrl;
   if (argv['amazon-tag']) data.amazonAffiliateTag = argv['amazon-tag'];
   if (argv.publish) data.publishedAt = new Date().toISOString();
 
@@ -576,7 +622,7 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds } = {}) {
   });
 }
 
-function readTopicFile(file) {
+async function readTopicFile(file) {
   const rows = fs.readFileSync(file, 'utf8')
     .split(/\r?\n/)
     .map((line) => line.trim())
@@ -586,12 +632,14 @@ function readTopicFile(file) {
   for (const row of rows) {
     const parts = row.split('|').map((part) => part.trim()).filter(Boolean);
     if (parts.length === 2) {
-      jobs.push(withDealProductIfNeeded({ category: parts[0], topic: parts[1] }));
+      jobs.push(await enrichJobWithProductSeed({ category: parts[0], topic: parts[1] }));
     } else if (parts.length >= 3) {
       const [rowSite, category, ...topicParts] = parts;
-      if (rowSite === argv.site) jobs.push(withDealProductIfNeeded({ category, topic: topicParts.join(' | ') }));
+      if (rowSite === argv.site) {
+        jobs.push(await enrichJobWithProductSeed({ category, topic: topicParts.join(' | ') }));
+      }
     } else {
-      jobs.push(withDealProductIfNeeded({ category: argv.category, topic: row }));
+      jobs.push(await enrichJobWithProductSeed({ category: argv.category, topic: row }));
     }
   }
 
@@ -602,7 +650,7 @@ async function buildJobs() {
   if (argv.topics) return readTopicFile(argv.topics);
 
   if (argv.topic) {
-    return [withDealProductIfNeeded({ category: argv.category, topic: argv.topic })];
+    return [await enrichJobWithProductSeed({ category: argv.category, topic: argv.topic })];
   }
 
   if (argv.category && argv.count) {
@@ -611,6 +659,15 @@ async function buildJobs() {
         category: argv.category,
         topic: dealTopicForProduct(dealProduct),
         dealProduct,
+      }));
+    }
+
+    if (isNxtSmartHomeCategory(argv.category)) {
+      const products = await pickRandomSmartHomeProducts(argv.count);
+      return products.map((smartHomeProduct) => ({
+        category: argv.category,
+        topic: smartHomeTopicForProduct(smartHomeProduct),
+        smartHomeProduct,
       }));
     }
 
@@ -633,6 +690,17 @@ async function buildJobs() {
         continue;
       }
 
+      if (isNxtSmartHomeCategory(category)) {
+        const smartHomeJobs = (await pickRandomSmartHomeProducts(perCategory)).map((smartHomeProduct) => ({
+          category,
+          topic: smartHomeTopicForProduct(smartHomeProduct),
+          smartHomeProduct,
+        }));
+        jobs.push(...smartHomeJobs);
+        if (jobs.length >= argv.count) break;
+        continue;
+      }
+
       const topics = await brainstormTopics(category, perCategory);
       jobs.push(...topics.map((topic) => ({ category, topic })));
       if (jobs.length >= argv.count) break;
@@ -649,12 +717,29 @@ function isNxtDealsCategory(category) {
   return slug === 'best-sellers-articles' || slug === 'deals' || slug === 'best-deals';
 }
 
-function withDealProductIfNeeded(job) {
-  if (!isNxtDealsCategory(job.category)) return job;
-  return {
-    ...job,
-    dealProduct: pickRandomDealProducts(1)[0],
-  };
+function isNxtSmartHomeCategory(category) {
+  if (argv.site !== 'nxt.bargains') return false;
+  return slugifyValue(category || '') === NXT_SMART_HOME_CATEGORY;
+}
+
+async function enrichJobWithProductSeed(job) {
+  if (isNxtDealsCategory(job.category) && !job.dealProduct) {
+    return {
+      ...job,
+      dealProduct: pickRandomDealProducts(1)[0],
+    };
+  }
+
+  if (isNxtSmartHomeCategory(job.category) && !job.smartHomeProduct) {
+    const smartHomeProduct = (await pickRandomSmartHomeProducts(1))[0];
+    return {
+      ...job,
+      smartHomeProduct,
+      topic: job.topic || smartHomeTopicForProduct(smartHomeProduct),
+    };
+  }
+
+  return job;
 }
 
 function loadNxtBestSellerProducts() {
@@ -708,6 +793,188 @@ function pickRandomDealProducts(count = 1) {
 function dealTopicForProduct(product) {
   const prefix = product.rank ? `#${product.rank} ${product.marketplace} best seller` : `${product.marketplace} best seller`;
   return `${prefix}: Is ${product.title} actually a good deal?`;
+}
+
+async function loadNxtSmartHomeProducts() {
+  if (smartHomeProductsCache) return smartHomeProductsCache;
+
+  const products = [];
+  for (const categoryMeta of NXT_SMART_HOME_PRODUCT_CATEGORIES) {
+    let page = 1;
+    while (true) {
+      const params = new URLSearchParams({
+        'pagination[page]': String(page),
+        'pagination[pageSize]': '100',
+        'filters[productStatus][$eq]': 'active',
+        'filters[categories][slug][$eqi]': categoryMeta.slug,
+        'populate[categories][fields][0]': 'name',
+        'populate[categories][fields][1]': 'slug',
+        'populate[brandRef][fields][0]': 'name',
+        'sort[0]': 'updatedAt:desc',
+      });
+      const response = await strapi(`/api/commerce-products?${params.toString()}`);
+      const rows = Array.isArray(response?.data) ? response.data : [];
+      for (const row of rows) {
+        const normalized = normalizeSmartHomeProduct(row, categoryMeta);
+        if (normalized) products.push(normalized);
+      }
+
+      const pageCount = response?.meta?.pagination?.pageCount ?? 1;
+      if (page >= pageCount || rows.length === 0) break;
+      page += 1;
+    }
+  }
+
+  if (!products.length) {
+    fatal('No active NXT.Bargains smart home products found in Smart Light Bulbs, Smart Plugs, Smart Doorbells, or Smart Door Locks.');
+  }
+
+  smartHomeProductsCache = products;
+  return products;
+}
+
+function normalizeSmartHomeProduct(row, categoryMeta) {
+  const title = String(row?.name || row?.title || '').trim();
+  const slug = String(row?.slug || '').trim();
+  if (!title || !slug) return null;
+
+  const categorySlug = row?.categories?.[0]?.slug || categoryMeta.slug;
+  const brand = row?.brandRef?.name || row?.brand || row?.specs?.technicalSpecs?.Brand || null;
+
+  return {
+    documentId: row.documentId,
+    title,
+    slug,
+    categorySlug,
+    categoryLabel: categoryMeta.label,
+    categoryPage: categoryMeta.categoryPage,
+    shortDescription: String(row?.shortDescription || '').trim(),
+    brand: brand ? String(brand).trim() : null,
+    imageUrl: absolutizeMediaUrl(row?.specs?.imageUrl || row?.specs?.sourceImageUrl || null),
+    sourceUrl: row?.specs?.sourceUrl || row?.specs?.specSourceUrl || null,
+    productUrl: `${NXT_BARGAINS_SITE_URL}/${categorySlug}/${slug}`,
+  };
+}
+
+function absolutizeMediaUrl(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return null;
+  if (/^https?:\/\//i.test(raw)) return raw;
+  const base = String(STRAPI_URL || '').replace(/\/$/, '');
+  return base ? `${base}${raw.startsWith('/') ? raw : `/${raw}`}` : raw;
+}
+
+async function pickRandomSmartHomeProducts(count = 1) {
+  const products = await loadNxtSmartHomeProducts();
+  const shuffled = [...products];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
+  return shuffled.slice(0, Math.max(1, Number(count) || 1));
+}
+
+function smartHomeTopicForProduct(product) {
+  return `${product.categoryLabel}: Is ${product.title} worth adding to your smart home setup?`;
+}
+
+function smartHomeProductPromptContext(product) {
+  if (!product) return '';
+
+  return `
+
+Selected NXT.Bargains smart home product context:
+- Product category: ${product.categoryLabel}
+- Category page: ${product.categoryPage}
+- Product title: ${product.title}
+- Brand: ${product.brand ?? 'not listed'}
+- Short description: ${product.shortDescription || 'not listed'}
+- NXT.Bargains product page: ${product.productUrl}
+- Merchant/source URL: ${product.sourceUrl ?? 'not listed'}
+
+Smart Home article requirements:
+- Base the article on this selected product from the NXT.Bargains ${product.categoryLabel} catalog.
+- Keep the selected product as the main subject throughout the article. Do not drift into a generic category roundup.
+- Write at least ${NXT_SMART_HOME_MIN_WORDS} words of article content.
+- Focus on setup, compatibility, automation, security, energy, convenience, and buyer fit for smart home shoppers.
+- Include who should consider it, who should skip it, alternatives to compare, and what to verify before buying.
+- Mention the product category and link naturally to the NXT.Bargains product page when relevant.
+- Do not invent exact prices, ratings, certifications, compatibility claims, or specs that are not provided.
+- Do not claim the product is objectively the best; explain practical reasons it may or may not fit a smart home setup.`;
+}
+
+function buildSmartHomePostContent(html, product) {
+  const content = sanitizeGeneratedHtml(html);
+  const card = buildSmartHomeProductCard(product);
+  return `${card}\n${insertSmartHomeProductCarouselInMiddle(content, product)}`;
+}
+
+function sanitizeGeneratedHtml(html) {
+  return String(html || '')
+    .replace(/^```(?:html|json)?/i, '')
+    .replace(/```$/i, '')
+    .trim();
+}
+
+function insertSmartHomeProductCarouselInMiddle(html, product) {
+  const content = String(html || '').trim();
+  const carousel = buildSmartHomeProductCarousel(product);
+  if (!carousel) return content;
+
+  const paragraphMatches = [...content.matchAll(/<\/p>/gi)];
+  if (!paragraphMatches.length) return `${content}\n${carousel}`;
+
+  const middleParagraph = Math.max(3, Math.floor(paragraphMatches.length / 2));
+  const targetMatch = paragraphMatches[Math.min(middleParagraph - 1, paragraphMatches.length - 1)];
+  const splitAt = targetMatch.index + targetMatch[0].length;
+  return `${content.slice(0, splitAt)}\n${carousel}\n${content.slice(splitAt).trimStart()}`;
+}
+
+function buildSmartHomeProductCarousel(product) {
+  const siblings = (smartHomeProductsCache || [])
+    .filter((item) => item.categorySlug === product.categorySlug && item.slug !== product.slug && item.imageUrl)
+    .slice(0, NXT_SMART_HOME_PRODUCT_CAROUSEL_LIMIT);
+
+  if (!siblings.length) return '';
+
+  const cards = siblings.map((item) => `<a class="nxt-product-carousel__item" href="${escapeAttr(item.productUrl)}" target="_blank" rel="noopener">
+<span class="nxt-product-carousel__image"><img src="${escapeAttr(item.imageUrl)}" alt="${escapeAttr(item.title)}" loading="lazy" /></span>
+<span class="nxt-product-carousel__body">
+<span class="nxt-product-carousel__title">${escapeHtml(item.title)}</span>
+<span class="nxt-product-carousel__meta">${escapeHtml(item.categoryLabel)}</span>
+<span class="nxt-product-carousel__price">View on NXT.Bargains</span>
+</span>
+</a>`).join('\n');
+
+  return `<section class="nxt-product-carousel" data-autoslide="true" aria-label="More ${escapeAttr(product.categoryLabel)} products">
+<h3 class="nxt-product-carousel__heading">More ${escapeHtml(product.categoryLabel)} to compare</h3>
+<div class="nxt-product-carousel__track">
+${cards}
+</div>
+<p class="nxt-product-carousel__meta"><a href="${escapeAttr(product.categoryPage)}" target="_blank" rel="noopener">Browse all ${escapeHtml(product.categoryLabel)} on NXT.Bargains</a></p>
+</section>`;
+}
+
+function buildSmartHomeProductCard(product) {
+  const details = [
+    `<li><strong>Category:</strong> ${escapeHtml(product.categoryLabel)}</li>`,
+    product.brand ? `<li><strong>Brand:</strong> ${escapeHtml(product.brand)}</li>` : '',
+    product.shortDescription ? `<li><strong>Summary:</strong> ${escapeHtml(product.shortDescription)}</li>` : '',
+    `<li><strong>Category page:</strong> <a href="${escapeAttr(product.categoryPage)}" target="_blank" rel="noopener">NXT.Bargains ${escapeHtml(product.categoryLabel)}</a></li>`,
+  ].filter(Boolean).join('\n');
+
+  const ctaUrl = product.sourceUrl || product.productUrl;
+  const ctaLabel = product.sourceUrl ? 'View merchant listing' : 'View on NXT.Bargains';
+
+  return `<aside class="nxt-product-card" aria-label="Product snapshot">
+${product.imageUrl ? `<a class="nxt-product-card__image" href="${escapeAttr(ctaUrl)}" target="_blank" rel="${product.sourceUrl ? 'nofollow sponsored noopener' : 'noopener'}"><img src="${escapeAttr(product.imageUrl)}" alt="${escapeAttr(product.title)}" loading="lazy" /></a>` : '<div class="nxt-product-card__image" aria-hidden="true"></div>'}
+<div class="nxt-product-card__details">
+<p class="nxt-product-card__eyebrow">Smart Home Product</p>
+<h3>${escapeHtml(product.title)}</h3>
+${details ? `<ul>${details}</ul>` : ''}
+<a class="nxt-product-card__button" href="${escapeAttr(ctaUrl)}" target="_blank" rel="${product.sourceUrl ? 'nofollow sponsored noopener' : 'noopener'}">${escapeHtml(ctaLabel)}</a>
+</div>
+</aside>`;
 }
 
 function dealProductPromptContext(product) {
@@ -801,6 +1068,29 @@ function validateDealPost(post, category) {
   }
 }
 
+function validateSmartHomePost(post, category) {
+  if (!isNxtSmartHomeCategory(category)) return;
+  const words = wordCount(post.content);
+  if (words < NXT_SMART_HOME_MIN_WORDS) {
+    throw new Error(
+      `${activeProviderName()} returned a Smart Home article with ${words} words; minimum is ${NXT_SMART_HOME_MIN_WORDS}. Run again or increase max tokens.`,
+    );
+  }
+}
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function escapeAttr(value) {
+  return escapeHtml(value).replace(/`/g, '&#96;');
+}
+
 function slugifyValue(value) {
   return slugify(String(value || ''), { lower: true, strict: true, trim: true });
 }
@@ -816,8 +1106,12 @@ function estimateReadingTime(markdown) {
   return Math.max(1, Math.ceil(words / 220));
 }
 
-function wordCount(markdown) {
-  return String(markdown || '').trim().split(/\s+/).filter(Boolean).length;
+function wordCount(content) {
+  return String(content || '')
+    .replace(/<[^>]*>/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
 }
 
 function fatal(message) {
@@ -840,11 +1134,23 @@ async function run() {
     if (job.dealProduct) {
       console.log(`  best-seller seed: ${job.dealProduct.marketplace} #${job.dealProduct.rank ?? '?'} · ${job.dealProduct.title}`);
     }
-    const post = await generatePost(job.topic, job.category, { dealProduct: job.dealProduct });
+    if (job.smartHomeProduct) {
+      console.log(`  smart-home seed: ${job.smartHomeProduct.categoryLabel} · ${job.smartHomeProduct.title}`);
+    }
+    const post = await generatePost(job.topic, job.category, {
+      dealProduct: job.dealProduct,
+      smartHomeProduct: job.smartHomeProduct,
+    });
     const categoryId = argv['dry-run'] ? null : await resolveCategoryId(job.category);
 
     if (argv['dry-run']) {
-      console.log(JSON.stringify({ site: argv.site, category: job.category, dealProduct: job.dealProduct ?? null, data: post }, null, 2));
+      console.log(JSON.stringify({
+        site: argv.site,
+        category: job.category,
+        dealProduct: job.dealProduct ?? null,
+        smartHomeProduct: job.smartHomeProduct ?? null,
+        data: post,
+      }, null, 2));
       results.push({ topic: job.topic, slug: post.slug, status: 'dry-run' });
       continue;
     }
@@ -853,13 +1159,25 @@ async function run() {
     let galleryIds = [];
     if (argv.images) {
       try {
-        ({ coverId, galleryIds } = await generateAndUploadImages(post));
+        if (job.smartHomeProduct?.imageUrl) {
+          coverId = await uploadImageToStrapi(
+            job.smartHomeProduct.imageUrl,
+            slugifyValue(post.title).slice(0, 60),
+          );
+        } else {
+          ({ coverId, galleryIds } = await generateAndUploadImages(post));
+        }
       } catch (error) {
         console.log(`  image step failed (${error.message.slice(0, 140)}) - saving post without images`);
       }
     }
 
-    const saved = await postToStrapi(post, { categoryId, coverId, galleryIds });
+    const saved = await postToStrapi(post, {
+      categoryId,
+      coverId,
+      galleryIds,
+      sourceUrl: job.smartHomeProduct?.productUrl || job.dealProduct?.url || null,
+    });
     const id = saved?.data?.documentId || saved?.data?.id;
     const adminUrl = `${STRAPI_URL}/admin/content-manager/collection-types/${site.adminUid}/${id}`;
     console.log(`  saved ${argv.publish ? 'published' : 'draft'}: ${post.slug}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}`);

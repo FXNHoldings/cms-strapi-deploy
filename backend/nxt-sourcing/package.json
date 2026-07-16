@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start -H 127.0.0.1 -p 3005",
     "remove-backgrounds": "node scripts/remove-product-backgrounds.mjs",
+    "replace-white-product-images": "node scripts/replace-nonwhite-product-images.mjs",
     "keepa-audit": "node scripts/keepa-coverage-audit.mjs",
     "lint": "next lint"
   },
