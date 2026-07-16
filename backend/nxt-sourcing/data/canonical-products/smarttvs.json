@@ -1,0 +1,949 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart TVs",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "remote",
+    "wall mount",
+    "mount",
+    "stand",
+    "power cord",
+    "replacement",
+    "screen protector",
+    "soundbar",
+    "projector",
+    "monitor",
+    "tv antenna",
+    "streaming stick",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Samsung",
+      "family": "OLED S Series",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Samsung S90F OLED 4K Vision AI Smart TV",
+          "model": "S90F OLED 4K Vision AI Smart TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "samsung",
+            "s90f",
+            "oled",
+            "vision"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung S90F OLED 4K Vision AI Smart TV",
+            "Samsung S90F OLED 4K Vision AI Smart TV new",
+            "Samsung S90F OLED 4K Vision AI Smart TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung S90D OLED 4K Smart Tizen TV",
+          "model": "S90D OLED 4K Smart Tizen TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "samsung",
+            "s90d",
+            "oled",
+            "tizen"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung S90D OLED 4K Smart Tizen TV",
+            "Samsung S90D OLED 4K Smart Tizen TV new",
+            "Samsung S90D OLED 4K Smart Tizen TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung S95D OLED 4K Glare-Free Smart Tizen TV",
+          "model": "S95D OLED 4K Glare-Free Smart Tizen TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "samsung",
+            "s95d",
+            "oled",
+            "glare",
+            "free",
+            "tizen"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung S95D OLED 4K Glare-Free Smart Tizen TV",
+            "Samsung S95D OLED 4K Glare-Free Smart Tizen TV new",
+            "Samsung S95D OLED 4K Glare-Free Smart Tizen TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Samsung",
+      "family": "Neo QLED",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Samsung QN80F Neo QLED 4K Vision AI Smart TV",
+          "model": "QN80F Neo QLED 4K Vision AI Smart TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "samsung",
+            "qn80f",
+            "neo",
+            "qled",
+            "vision"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung QN80F Neo QLED 4K Vision AI Smart TV",
+            "Samsung QN80F Neo QLED 4K Vision AI Smart TV new",
+            "Samsung QN80F Neo QLED 4K Vision AI Smart TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Samsung",
+      "family": "Crystal UHD",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Samsung U7900F Crystal UHD 4K Smart TV",
+          "model": "U7900F Crystal UHD 4K Smart TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "samsung",
+            "u7900f",
+            "crystal",
+            "uhd"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung U7900F Crystal UHD 4K Smart TV",
+            "Samsung U7900F Crystal UHD 4K Smart TV new",
+            "Samsung U7900F Crystal UHD 4K Smart TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "LG",
+      "family": "OLED evo",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "LG C4 OLED evo 4K Smart webOS TV",
+          "model": "C4 OLED evo 4K Smart webOS TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "lg",
+            "c4",
+            "oled",
+            "evo",
+            "webos"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "LG C4 OLED evo 4K Smart webOS TV",
+            "LG C4 OLED evo 4K Smart webOS TV new",
+            "LG C4 OLED evo 4K Smart webOS TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "LG C5 OLED evo AI 4K Smart webOS TV",
+          "model": "C5 OLED evo AI 4K Smart webOS TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "lg",
+            "c5",
+            "oled",
+            "evo",
+            "webos"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "LG C5 OLED evo AI 4K Smart webOS TV",
+            "LG C5 OLED evo AI 4K Smart webOS TV new",
+            "LG C5 OLED evo AI 4K Smart webOS TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "LG C6 OLED AI 4K Smart webOS TV",
+          "model": "C6 OLED AI 4K Smart webOS TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "lg",
+            "c6",
+            "oled",
+            "webos"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "LG C6 OLED AI 4K Smart webOS TV",
+            "LG C6 OLED AI 4K Smart webOS TV new",
+            "LG C6 OLED AI 4K Smart webOS TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sony",
+      "family": "BRAVIA",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sony BRAVIA 8 4K OLED Google TV",
+          "model": "BRAVIA 8 4K OLED Google TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "sony",
+            "bravia",
+            "8",
+            "oled",
+            "google"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sony BRAVIA 8 4K OLED Google TV",
+            "Sony BRAVIA 8 4K OLED Google TV new",
+            "Sony BRAVIA 8 4K OLED Google TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TCL",
+      "family": "QM Series",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TCL QM8L SQD-Mini LED 4K Smart Google TV",
+          "model": "QM8L SQD-Mini LED 4K Smart Google TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tcl",
+            "qm8l",
+            "sqd",
+            "mini",
+            "led",
+            "google"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TCL QM8L SQD-Mini LED 4K Smart Google TV",
+            "TCL QM8L SQD-Mini LED 4K Smart Google TV new",
+            "TCL QM8L SQD-Mini LED 4K Smart Google TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TCL QM8K QD-Mini LED 4K Smart Google TV",
+          "model": "QM8K QD-Mini LED 4K Smart Google TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tcl",
+            "qm8k",
+            "qd",
+            "mini",
+            "led",
+            "google"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TCL QM8K QD-Mini LED 4K Smart Google TV",
+            "TCL QM8K QD-Mini LED 4K Smart Google TV new",
+            "TCL QM8K QD-Mini LED 4K Smart Google TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TCL QM7K QD-Mini LED 4K Smart Google TV",
+          "model": "QM7K QD-Mini LED 4K Smart Google TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tcl",
+            "qm7k",
+            "qd",
+            "mini",
+            "led",
+            "google"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TCL QM7K QD-Mini LED 4K Smart Google TV",
+            "TCL QM7K QD-Mini LED 4K Smart Google TV new",
+            "TCL QM7K QD-Mini LED 4K Smart Google TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TCL QM6K QD-Mini LED 4K Smart Google TV",
+          "model": "QM6K QD-Mini LED 4K Smart Google TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tcl",
+            "qm6k",
+            "qd",
+            "mini",
+            "led",
+            "google"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TCL QM6K QD-Mini LED 4K Smart Google TV",
+            "TCL QM6K QD-Mini LED 4K Smart Google TV new",
+            "TCL QM6K QD-Mini LED 4K Smart Google TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TCL QM5K QD-Mini LED 4K Smart Google TV",
+          "model": "QM5K QD-Mini LED 4K Smart Google TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tcl",
+            "qm5k",
+            "qd",
+            "mini",
+            "led",
+            "google"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TCL QM5K QD-Mini LED 4K Smart Google TV",
+            "TCL QM5K QD-Mini LED 4K Smart Google TV new",
+            "TCL QM5K QD-Mini LED 4K Smart Google TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TCL",
+      "family": "Q6 Series",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TCL Q6-Series 4K QLED Smart Google TV",
+          "model": "Q6-Series 4K QLED Smart Google TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tcl",
+            "q6",
+            "series",
+            "qled",
+            "google"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TCL Q6-Series 4K QLED Smart Google TV",
+            "TCL Q6-Series 4K QLED Smart Google TV new",
+            "TCL Q6-Series 4K QLED Smart Google TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TCL",
+      "family": "S5 Series",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TCL S5-Series 4K UHD LED Smart Google TV",
+          "model": "S5-Series 4K UHD LED Smart Google TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tcl",
+            "s5",
+            "series",
+            "uhd",
+            "led",
+            "google"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TCL S5-Series 4K UHD LED Smart Google TV",
+            "TCL S5-Series 4K UHD LED Smart Google TV new",
+            "TCL S5-Series 4K UHD LED Smart Google TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Hisense",
+      "family": "U8 Series",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Hisense U8N Mini-LED ULED 4K Google Smart TV",
+          "model": "U8N Mini-LED ULED 4K Google Smart TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "hisense",
+            "u8n",
+            "mini",
+            "led",
+            "uled",
+            "google"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Hisense U8N Mini-LED ULED 4K Google Smart TV",
+            "Hisense U8N Mini-LED ULED 4K Google Smart TV new",
+            "Hisense U8N Mini-LED ULED 4K Google Smart TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Hisense",
+      "family": "U7 Series",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Hisense U7 Series Mini-LED ULED 4K Google Smart TV",
+          "model": "U7 Series Mini-LED ULED 4K Google Smart TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "hisense",
+            "u7",
+            "series",
+            "mini",
+            "led",
+            "uled",
+            "google"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Hisense U7 Series Mini-LED ULED 4K Google Smart TV",
+            "Hisense U7 Series Mini-LED ULED 4K Google Smart TV new",
+            "Hisense U7 Series Mini-LED ULED 4K Google Smart TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Roku",
+      "family": "Select Series",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Roku Select Series 4K HDR Smart Roku TV",
+          "model": "Select Series 4K HDR Smart Roku TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "roku",
+            "select",
+            "series",
+            "hdr",
+            "roku"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Roku Select Series 4K HDR Smart Roku TV",
+            "Roku Select Series 4K HDR Smart Roku TV new",
+            "Roku Select Series 4K HDR Smart Roku TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Insignia",
+      "family": "QF Series",
+      "category": "Smart TVs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Insignia QF Series QLED 4K UHD Smart Fire TV",
+          "model": "QF Series QLED 4K UHD Smart Fire TV",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "insignia",
+            "qf",
+            "series",
+            "qled",
+            "uhd",
+            "fire"
+          ],
+          "excludeTerms": [
+            "remote",
+            "wall mount",
+            "mount",
+            "stand",
+            "power cord",
+            "replacement",
+            "screen protector",
+            "soundbar",
+            "projector",
+            "monitor",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Insignia QF Series QLED 4K UHD Smart Fire TV",
+            "Insignia QF Series QLED 4K UHD Smart Fire TV new",
+            "Insignia QF Series QLED 4K UHD Smart Fire TV television"
+          ],
+          "variantsToSplitLater": [
+            "screenSize",
+            "panelType",
+            "year",
+            "region"
+          ]
+        }
+      ]
+    }
+  ]
+}

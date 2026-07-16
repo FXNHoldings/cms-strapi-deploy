@@ -1,0 +1,2347 @@
+{
+  "schemaVersion": 1,
+  "category": "Tablets",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "case",
+    "cover",
+    "sleeve",
+    "skin",
+    "sticker",
+    "screen protector",
+    "tempered glass",
+    "keyboard case",
+    "keyboard cover",
+    "stylus",
+    "pen tip",
+    "charger",
+    "charging cable",
+    "adapter",
+    "dock",
+    "stand",
+    "mount",
+    "bag",
+    "battery",
+    "replacement screen",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Apple",
+      "family": "iPad Pro",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple iPad Pro 13-inch (M5)",
+          "model": "iPad Pro 13-inch (M5)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "pro",
+            "13",
+            "m5"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad Pro 13-inch (M5) tablet",
+            "Apple iPad Pro 13-inch (M5) new tablet",
+            "Apple iPad Pro 13-inch (M5)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple iPad Pro 11-inch (M5)",
+          "model": "iPad Pro 11-inch (M5)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "pro",
+            "11",
+            "m5"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad Pro 11-inch (M5) tablet",
+            "Apple iPad Pro 11-inch (M5) new tablet",
+            "Apple iPad Pro 11-inch (M5)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple iPad Pro 13-inch (M4)",
+          "model": "iPad Pro 13-inch (M4)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "pro",
+            "13",
+            "m4"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad Pro 13-inch (M4) tablet",
+            "Apple iPad Pro 13-inch (M4) new tablet",
+            "Apple iPad Pro 13-inch (M4)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple iPad Pro 11-inch (M4)",
+          "model": "iPad Pro 11-inch (M4)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "pro",
+            "11",
+            "m4"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad Pro 11-inch (M4) tablet",
+            "Apple iPad Pro 11-inch (M4) new tablet",
+            "Apple iPad Pro 11-inch (M4)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Apple",
+      "family": "iPad Air",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple iPad Air 13-inch (M4)",
+          "model": "iPad Air 13-inch (M4)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "air",
+            "13",
+            "m4"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad Air 13-inch (M4) tablet",
+            "Apple iPad Air 13-inch (M4) new tablet",
+            "Apple iPad Air 13-inch (M4)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple iPad Air 11-inch (M4)",
+          "model": "iPad Air 11-inch (M4)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "air",
+            "11",
+            "m4"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad Air 11-inch (M4) tablet",
+            "Apple iPad Air 11-inch (M4) new tablet",
+            "Apple iPad Air 11-inch (M4)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple iPad Air 13-inch (M3)",
+          "model": "iPad Air 13-inch (M3)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "air",
+            "13",
+            "m3"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad Air 13-inch (M3) tablet",
+            "Apple iPad Air 13-inch (M3) new tablet",
+            "Apple iPad Air 13-inch (M3)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple iPad Air 11-inch (M3)",
+          "model": "iPad Air 11-inch (M3)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "air",
+            "11",
+            "m3"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad Air 11-inch (M3) tablet",
+            "Apple iPad Air 11-inch (M3) new tablet",
+            "Apple iPad Air 11-inch (M3)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple iPad Air 13-inch (M2)",
+          "model": "iPad Air 13-inch (M2)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "air",
+            "13",
+            "m2"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad Air 13-inch (M2) tablet",
+            "Apple iPad Air 13-inch (M2) new tablet",
+            "Apple iPad Air 13-inch (M2)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple iPad Air 11-inch (M2)",
+          "model": "iPad Air 11-inch (M2)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "air",
+            "11",
+            "m2"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad Air 11-inch (M2) tablet",
+            "Apple iPad Air 11-inch (M2) new tablet",
+            "Apple iPad Air 11-inch (M2)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Apple",
+      "family": "iPad mini",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple iPad mini (A17 Pro)",
+          "model": "iPad mini (A17 Pro)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "mini",
+            "a17",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad mini (A17 Pro) tablet",
+            "Apple iPad mini (A17 Pro) new tablet",
+            "Apple iPad mini (A17 Pro)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Apple",
+      "family": "iPad",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple iPad (A16)",
+          "model": "iPad (A16)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ipad",
+            "a16"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple iPad (A16) tablet",
+            "Apple iPad (A16) new tablet",
+            "Apple iPad (A16)"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Samsung",
+      "family": "Galaxy Tab S",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Samsung Galaxy Tab S9",
+          "model": "Galaxy Tab S9",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s9"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S9 tablet",
+            "Samsung Galaxy Tab S9 new tablet",
+            "Samsung Galaxy Tab S9"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab S9+",
+          "model": "Galaxy Tab S9+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s9",
+            "plus"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S9+ tablet",
+            "Samsung Galaxy Tab S9+ new tablet",
+            "Samsung Galaxy Tab S9+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab S9 Ultra",
+          "model": "Galaxy Tab S9 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s9",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S9 Ultra tablet",
+            "Samsung Galaxy Tab S9 Ultra new tablet",
+            "Samsung Galaxy Tab S9 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab S9 FE",
+          "model": "Galaxy Tab S9 FE",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s9",
+            "fe"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S9 FE tablet",
+            "Samsung Galaxy Tab S9 FE new tablet",
+            "Samsung Galaxy Tab S9 FE"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab S9 FE+",
+          "model": "Galaxy Tab S9 FE+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s9",
+            "fe",
+            "plus"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S9 FE+ tablet",
+            "Samsung Galaxy Tab S9 FE+ new tablet",
+            "Samsung Galaxy Tab S9 FE+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab S10+",
+          "model": "Galaxy Tab S10+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s10",
+            "plus"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S10+ tablet",
+            "Samsung Galaxy Tab S10+ new tablet",
+            "Samsung Galaxy Tab S10+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab S10 Ultra",
+          "model": "Galaxy Tab S10 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s10",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S10 Ultra tablet",
+            "Samsung Galaxy Tab S10 Ultra new tablet",
+            "Samsung Galaxy Tab S10 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab S10 FE",
+          "model": "Galaxy Tab S10 FE",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s10",
+            "fe"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S10 FE tablet",
+            "Samsung Galaxy Tab S10 FE new tablet",
+            "Samsung Galaxy Tab S10 FE"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab S10 FE+",
+          "model": "Galaxy Tab S10 FE+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s10",
+            "fe",
+            "plus"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S10 FE+ tablet",
+            "Samsung Galaxy Tab S10 FE+ new tablet",
+            "Samsung Galaxy Tab S10 FE+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab S11",
+          "model": "Galaxy Tab S11",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s11"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S11 tablet",
+            "Samsung Galaxy Tab S11 new tablet",
+            "Samsung Galaxy Tab S11"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab S11 Ultra",
+          "model": "Galaxy Tab S11 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "s11",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab S11 Ultra tablet",
+            "Samsung Galaxy Tab S11 Ultra new tablet",
+            "Samsung Galaxy Tab S11 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Samsung",
+      "family": "Galaxy Tab A",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Samsung Galaxy Tab A9",
+          "model": "Galaxy Tab A9",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "a9"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab A9 tablet",
+            "Samsung Galaxy Tab A9 new tablet",
+            "Samsung Galaxy Tab A9"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Tab A9+",
+          "model": "Galaxy Tab A9+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "a9",
+            "plus"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Tab A9+ tablet",
+            "Samsung Galaxy Tab A9+ new tablet",
+            "Samsung Galaxy Tab A9+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Pixel Tablet",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Pixel Tablet",
+          "model": "Pixel Tablet",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "pixel"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Pixel Tablet tablet",
+            "Google Pixel Tablet new tablet",
+            "Google Pixel Tablet"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "OnePlus",
+      "family": "Pad",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "OnePlus Pad",
+          "model": "Pad",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Pad tablet",
+            "OnePlus Pad new tablet",
+            "OnePlus Pad"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Pad 2",
+          "model": "Pad 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "2"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Pad 2 tablet",
+            "OnePlus Pad 2 new tablet",
+            "OnePlus Pad 2"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Pad 3",
+          "model": "Pad 3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "3"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Pad 3 tablet",
+            "OnePlus Pad 3 new tablet",
+            "OnePlus Pad 3"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "OnePlus",
+      "family": "Pad Go",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "OnePlus Pad Go",
+          "model": "Pad Go",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "go"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Pad Go tablet",
+            "OnePlus Pad Go new tablet",
+            "OnePlus Pad Go"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Xiaomi",
+      "family": "Xiaomi Pad",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Xiaomi Pad 6",
+          "model": "Pad 6",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "6"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi Pad 6 tablet",
+            "Xiaomi Pad 6 new tablet",
+            "Xiaomi Pad 6"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi Pad 6S Pro 12.4",
+          "model": "Pad 6S Pro 12.4",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "6s",
+            "pro",
+            "12.4"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi Pad 6S Pro 12.4 tablet",
+            "Xiaomi Pad 6S Pro 12.4 new tablet",
+            "Xiaomi Pad 6S Pro 12.4"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi Pad 7",
+          "model": "Pad 7",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "7"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi Pad 7 tablet",
+            "Xiaomi Pad 7 new tablet",
+            "Xiaomi Pad 7"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi Pad 7 Pro",
+          "model": "Pad 7 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "7",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi Pad 7 Pro tablet",
+            "Xiaomi Pad 7 Pro new tablet",
+            "Xiaomi Pad 7 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi Pad 8",
+          "model": "Pad 8",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "8"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi Pad 8 tablet",
+            "Xiaomi Pad 8 new tablet",
+            "Xiaomi Pad 8"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi Pad 8 Pro",
+          "model": "Pad 8 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "8",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi Pad 8 Pro tablet",
+            "Xiaomi Pad 8 Pro new tablet",
+            "Xiaomi Pad 8 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi Pad Mini",
+          "model": "Pad Mini",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "mini"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi Pad Mini tablet",
+            "Xiaomi Pad Mini new tablet",
+            "Xiaomi Pad Mini"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Xiaomi",
+      "family": "Redmi Pad",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Redmi Pad Pro",
+          "model": "Redmi Pad Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Pad Pro tablet",
+            "Redmi Pad Pro new tablet",
+            "Redmi Pad Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Redmi Pad Pro 5G",
+          "model": "Redmi Pad Pro 5G",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "pro",
+            "5g"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Pad Pro 5G tablet",
+            "Redmi Pad Pro 5G new tablet",
+            "Redmi Pad Pro 5G"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Redmi Pad SE 8.7",
+          "model": "Redmi Pad SE 8.7",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "se",
+            "8.7"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Pad SE 8.7 tablet",
+            "Redmi Pad SE 8.7 new tablet",
+            "Redmi Pad SE 8.7"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Redmi Pad SE 8.7 4G",
+          "model": "Redmi Pad SE 8.7 4G",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "se",
+            "8.7",
+            "4g"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Pad SE 8.7 4G tablet",
+            "Redmi Pad SE 8.7 4G new tablet",
+            "Redmi Pad SE 8.7 4G"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Redmi Pad 2",
+          "model": "Redmi Pad 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "2"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Pad 2 tablet",
+            "Redmi Pad 2 new tablet",
+            "Redmi Pad 2"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Lenovo",
+      "family": "Yoga Tab",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Lenovo Yoga Tab Plus",
+          "model": "Yoga Tab Plus",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "yoga",
+            "plus"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Lenovo Yoga Tab Plus tablet",
+            "Lenovo Yoga Tab Plus new tablet",
+            "Lenovo Yoga Tab Plus"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Lenovo Yoga Tab",
+          "model": "Yoga Tab",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "yoga"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Lenovo Yoga Tab tablet",
+            "Lenovo Yoga Tab new tablet",
+            "Lenovo Yoga Tab"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Lenovo",
+      "family": "Idea Tab",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Lenovo Idea Tab Pro",
+          "model": "Idea Tab Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "idea",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Lenovo Idea Tab Pro tablet",
+            "Lenovo Idea Tab Pro new tablet",
+            "Lenovo Idea Tab Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Lenovo Idea Tab Plus",
+          "model": "Idea Tab Plus",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "idea",
+            "plus"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Lenovo Idea Tab Plus tablet",
+            "Lenovo Idea Tab Plus new tablet",
+            "Lenovo Idea Tab Plus"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Lenovo",
+      "family": "Legion Tab",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Lenovo Legion Tab Gen 3",
+          "model": "Legion Tab Gen 3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "legion",
+            "gen",
+            "3"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Lenovo Legion Tab Gen 3 tablet",
+            "Lenovo Legion Tab Gen 3 new tablet",
+            "Lenovo Legion Tab Gen 3"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TCL",
+      "family": "NXTPAPER",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TCL NXTPAPER 14",
+          "model": "NXTPAPER 14",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "nxtpaper",
+            "14"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TCL NXTPAPER 14 tablet",
+            "TCL NXTPAPER 14 new tablet",
+            "TCL NXTPAPER 14"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "HONOR",
+      "family": "Pad",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "HONOR Pad 10",
+          "model": "Pad 10",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "10"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR Pad 10 tablet",
+            "HONOR Pad 10 new tablet",
+            "HONOR Pad 10"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "HONOR",
+      "family": "MagicPad",
+      "category": "Tablets",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "HONOR MagicPad 3",
+          "model": "MagicPad 3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "magicpad",
+            "3"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "sleeve",
+            "screen protector",
+            "keyboard case",
+            "keyboard cover",
+            "stylus",
+            "pen",
+            "charger",
+            "charging cable",
+            "adapter",
+            "stand",
+            "mount",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR MagicPad 3 tablet",
+            "HONOR MagicPad 3 new tablet",
+            "HONOR MagicPad 3"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "memory",
+            "connectivity",
+            "color",
+            "screenSize",
+            "region"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1607 @@
+{
+  "schemaVersion": 1,
+  "category": "Video Doorbells",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "chime",
+    "chime pro",
+    "wedge kit",
+    "corner kit",
+    "mount",
+    "wall mount",
+    "bracket",
+    "transformer",
+    "subscription",
+    "cloud storage",
+    "battery pack",
+    "solar panel",
+    "power adapter",
+    "cable",
+    "faceplate",
+    "skin",
+    "cover",
+    "replacement",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Aqara",
+      "family": "Aqara Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Aqara Doorbell Camera Hub G4",
+          "model": "Aqara Doorbell Camera Hub G4",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "aqara",
+            "doorbell",
+            "camera",
+            "hub",
+            "g4"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Aqara Doorbell Camera Hub G4",
+            "Aqara Doorbell Camera Hub G4 video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Aqara Doorbell Camera Hub G410",
+          "model": "Aqara Doorbell Camera Hub G410",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "aqara",
+            "doorbell",
+            "camera",
+            "hub",
+            "g410"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Aqara Doorbell Camera Hub G410",
+            "Aqara Doorbell Camera Hub G410 video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Arlo",
+      "family": "Arlo Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Arlo Essential Video Doorbell Wire-Free",
+          "model": "Arlo Essential Video Doorbell Wire-Free",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "arlo",
+            "essential",
+            "video",
+            "doorbell",
+            "wire-free"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Arlo Essential Video Doorbell Wire-Free",
+            "Arlo Essential Video Doorbell Wire-Free video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Arlo Video Doorbell 2K (2nd Gen)",
+          "model": "Arlo Video Doorbell 2K (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "arlo",
+            "video",
+            "doorbell",
+            "2k",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Arlo Video Doorbell 2K (2nd Gen)",
+            "Arlo Video Doorbell 2K (2nd Gen) video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Blink",
+      "family": "Blink Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Blink Battery Doorbell 2K+",
+          "model": "Blink Battery Doorbell 2K+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "blink",
+            "battery",
+            "doorbell",
+            "2k"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Blink Battery Doorbell 2K+",
+            "Blink Battery Doorbell 2K+ video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Blink Video Doorbell",
+          "model": "Blink Video Doorbell",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "blink",
+            "video",
+            "doorbell"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Blink Video Doorbell",
+            "Blink Video Doorbell video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Blink Wired Doorbell 2K+",
+          "model": "Blink Wired Doorbell 2K+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "blink",
+            "wired",
+            "doorbell",
+            "2k"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Blink Wired Doorbell 2K+",
+            "Blink Wired Doorbell 2K+ video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eufy",
+      "family": "Eufy Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Eufy Video Doorbell C30",
+          "model": "Eufy Video Doorbell C30",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "video",
+            "doorbell",
+            "c30"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Video Doorbell C30",
+            "Eufy Video Doorbell C30 video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Eufy Video Doorbell C31",
+          "model": "Eufy Video Doorbell C31",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "video",
+            "doorbell",
+            "c31"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Video Doorbell C31",
+            "Eufy Video Doorbell C31 video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Eufy Video Doorbell Dual S330",
+          "model": "Eufy Video Doorbell Dual S330",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "video",
+            "doorbell",
+            "dual",
+            "s330"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Video Doorbell Dual S330",
+            "Eufy Video Doorbell Dual S330 video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Eufy Video Doorbell E340",
+          "model": "Eufy Video Doorbell E340",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "video",
+            "doorbell",
+            "e340"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Video Doorbell E340",
+            "Eufy Video Doorbell E340 video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Eufy Video Doorbell S220",
+          "model": "Eufy Video Doorbell S220",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "video",
+            "doorbell",
+            "s220"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Video Doorbell S220",
+            "Eufy Video Doorbell S220 video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "EZVIZ",
+      "family": "EZVIZ Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "EZVIZ EP3x Pro",
+          "model": "EZVIZ EP3x Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ezviz",
+            "ep3x",
+            "pro"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "EZVIZ EP3x Pro",
+            "EZVIZ EP3x Pro video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Google Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Nest Doorbell (Battery)",
+          "model": "Google Nest Doorbell (Battery)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "google",
+            "nest",
+            "doorbell",
+            "battery"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Nest Doorbell (Battery)",
+            "Google Nest Doorbell (Battery) video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Google Nest Doorbell (Wired, 3rd Gen)",
+          "model": "Google Nest Doorbell (Wired, 3rd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "google",
+            "nest",
+            "doorbell",
+            "wired",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Nest Doorbell (Wired, 3rd Gen)",
+            "Google Nest Doorbell (Wired, 3rd Gen) video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Reolink",
+      "family": "Reolink Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Reolink Video Doorbell PoE",
+          "model": "Reolink Video Doorbell PoE",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reolink",
+            "video",
+            "doorbell",
+            "poe"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Reolink Video Doorbell PoE",
+            "Reolink Video Doorbell PoE video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Reolink Video Doorbell WiFi",
+          "model": "Reolink Video Doorbell WiFi",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reolink",
+            "video",
+            "doorbell",
+            "wifi"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Reolink Video Doorbell WiFi",
+            "Reolink Video Doorbell WiFi video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Ring Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ring Battery Doorbell",
+          "model": "Ring Battery Doorbell",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "battery",
+            "doorbell"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Battery Doorbell",
+            "Ring Battery Doorbell video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ring Battery Doorbell Plus (2nd Gen)",
+          "model": "Ring Battery Doorbell Plus (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "battery",
+            "doorbell",
+            "plus",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Battery Doorbell Plus (2nd Gen)",
+            "Ring Battery Doorbell Plus (2nd Gen) video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ring Battery Doorbell Pro (2nd Gen)",
+          "model": "Ring Battery Doorbell Pro (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "battery",
+            "doorbell",
+            "pro",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Battery Doorbell Pro (2nd Gen)",
+            "Ring Battery Doorbell Pro (2nd Gen) video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ring Video Doorbell Wired",
+          "model": "Ring Video Doorbell Wired",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "video",
+            "doorbell",
+            "wired"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Video Doorbell Wired",
+            "Ring Video Doorbell Wired video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ring Wired Doorbell Plus",
+          "model": "Ring Wired Doorbell Plus",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "wired",
+            "doorbell",
+            "plus"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Wired Doorbell Plus",
+            "Ring Wired Doorbell Plus video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ring Wired Doorbell Pro (3rd Gen)",
+          "model": "Ring Wired Doorbell Pro (3rd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "wired",
+            "doorbell",
+            "pro",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Wired Doorbell Pro (3rd Gen)",
+            "Ring Wired Doorbell Pro (3rd Gen) video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "SimpliSafe",
+      "family": "SimpliSafe Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "SimpliSafe Video Doorbell Pro",
+          "model": "SimpliSafe Video Doorbell Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "simplisafe",
+            "video",
+            "doorbell",
+            "pro"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "SimpliSafe Video Doorbell Pro",
+            "SimpliSafe Video Doorbell Pro video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "SwannBuddy4K",
+      "family": "SwannBuddy4K Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "SwannBuddy4K Wireless Video Doorbell",
+          "model": "SwannBuddy4K Wireless Video Doorbell",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "swannbuddy4k",
+            "wireless",
+            "video",
+            "doorbell"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "SwannBuddy4K Wireless Video Doorbell",
+            "SwannBuddy4K Wireless Video Doorbell video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo D225",
+          "model": "TP-Link Tapo D225",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "d225"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo D225",
+            "TP-Link Tapo D225 video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo D230S1",
+          "model": "TP-Link Tapo D230S1",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "d230s1"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo D230S1",
+            "TP-Link Tapo D230S1 video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo TD25",
+          "model": "TP-Link Tapo TD25",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "td25"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo TD25",
+            "TP-Link Tapo TD25 video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Wyze",
+      "family": "Wyze Doorbells",
+      "category": "Video Doorbells",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Wyze Battery Video Doorbell",
+          "model": "Wyze Battery Video Doorbell",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wyze",
+            "battery",
+            "video",
+            "doorbell"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wyze Battery Video Doorbell",
+            "Wyze Battery Video Doorbell video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Wyze Duo Cam Battery Doorbell",
+          "model": "Wyze Duo Cam Battery Doorbell",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wyze",
+            "duo",
+            "cam",
+            "battery",
+            "doorbell"
+          ],
+          "excludeTerms": [
+            "chime",
+            "chime pro",
+            "wedge kit",
+            "corner kit",
+            "mount",
+            "wall mount",
+            "bracket",
+            "transformer",
+            "subscription",
+            "cloud storage",
+            "battery pack",
+            "solar panel",
+            "power adapter",
+            "cable",
+            "faceplate",
+            "skin",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wyze Duo Cam Battery Doorbell",
+            "Wyze Duo Cam Battery Doorbell video doorbell"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    }
+  ]
+}

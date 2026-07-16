@@ -1,0 +1,4984 @@
+{
+  "schemaVersion": 1,
+  "category": "Smartphones",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "case",
+    "cover",
+    "screen protector",
+    "tempered glass",
+    "charger",
+    "charging cable",
+    "adapter",
+    "battery case",
+    "wallet",
+    "mount",
+    "skin",
+    "sticker",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Xiaomi",
+      "family": "Xiaomi / Redmi / POCO",
+      "category": "Smartphones",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Xiaomi 13",
+          "model": "13",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "13"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 13"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 13 Pro",
+          "model": "13 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "13",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 13 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 13 Ultra",
+          "model": "13 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "13",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 13 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 13T",
+          "model": "13T",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "13t"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 13T"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 13T Pro",
+          "model": "13T Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "13t",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 13T Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 14",
+          "model": "14",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "14"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 14"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 14 Pro",
+          "model": "14 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "14",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 14 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 14 Ultra",
+          "model": "14 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "14",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 14 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 14T",
+          "model": "14T",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "14t"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 14T"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 14T Pro",
+          "model": "14T Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "14t",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 14T Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 15",
+          "model": "15",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "15"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 15"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 15 Pro",
+          "model": "15 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "15",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 15 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi 15 Ultra",
+          "model": "15 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "15",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi 15 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Xiaomi MIX Flip",
+          "model": "MIX Flip",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "mix",
+            "flip"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Xiaomi MIX Flip"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Redmi Note 13",
+          "model": "Redmi Note 13",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "note",
+            "13"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Note 13"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Redmi Note 13 Pro",
+          "model": "Redmi Note 13 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "note",
+            "13",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Note 13 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Redmi Note 13 Pro+",
+          "model": "Redmi Note 13 Pro+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "note",
+            "13",
+            "pro+"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Note 13 Pro+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Redmi Note 14",
+          "model": "Redmi Note 14",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "note",
+            "14"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Note 14"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Redmi Note 14 Pro",
+          "model": "Redmi Note 14 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "note",
+            "14",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Note 14 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Redmi Note 14 Pro+",
+          "model": "Redmi Note 14 Pro+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "redmi",
+            "note",
+            "14",
+            "pro+"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Redmi Note 14 Pro+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO F5",
+          "model": "POCO F5",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "f5"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO F5"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO F5 Pro",
+          "model": "POCO F5 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "f5",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO F5 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO F6",
+          "model": "POCO F6",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "f6"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO F6"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO F6 Pro",
+          "model": "POCO F6 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "f6",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO F6 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO F7",
+          "model": "POCO F7",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "f7"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO F7"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO F7 Pro",
+          "model": "POCO F7 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "f7",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO F7 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO X5",
+          "model": "POCO X5",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "x5"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO X5"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO X5 Pro",
+          "model": "POCO X5 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "x5",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO X5 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO X6",
+          "model": "POCO X6",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "x6"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO X6"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO X6 Pro",
+          "model": "POCO X6 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "x6",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO X6 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO X7",
+          "model": "POCO X7",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "x7"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO X7"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "POCO X7 Pro",
+          "model": "POCO X7 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "poco",
+            "x7",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "POCO X7 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "OnePlus",
+      "family": "OnePlus",
+      "category": "Smartphones",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "OnePlus 11",
+          "model": "11",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "11"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus 11"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus 11R",
+          "model": "11R",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "11r"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus 11R"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus 12",
+          "model": "12",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "12"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus 12"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus 12R",
+          "model": "12R",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "12r"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus 12R"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus 13",
+          "model": "13",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "13"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus 13"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus 13R",
+          "model": "13R",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "13r"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus 13R"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus 15",
+          "model": "15",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "15"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus 15"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Nord 3",
+          "model": "Nord 3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "nord",
+            "3"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Nord 3"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Nord 4",
+          "model": "Nord 4",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "nord",
+            "4"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Nord 4"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Nord CE 3",
+          "model": "Nord CE 3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "nord",
+            "ce",
+            "3"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Nord CE 3"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Nord CE 3 Lite",
+          "model": "Nord CE 3 Lite",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "nord",
+            "ce",
+            "3",
+            "lite"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Nord CE 3 Lite"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Nord CE4",
+          "model": "Nord CE4",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "nord",
+            "ce4"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Nord CE4"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Nord CE4 Lite",
+          "model": "Nord CE4 Lite",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "nord",
+            "ce4",
+            "lite"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Nord CE4 Lite"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Nord N30 SE",
+          "model": "Nord N30 SE",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "nord",
+            "n30",
+            "se"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Nord N30 SE"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Open",
+          "model": "Open",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "open"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Open"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Motorola",
+      "family": "Motorola",
+      "category": "Smartphones",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Motorola Edge 40",
+          "model": "Edge 40",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "40"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 40"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 40 Pro",
+          "model": "Edge 40 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "40",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 40 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 40 Neo",
+          "model": "Edge 40 Neo",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "40",
+            "neo"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 40 Neo"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 50",
+          "model": "Edge 50",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "50"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 50"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 50 Pro",
+          "model": "Edge 50 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "50",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 50 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 50 Ultra",
+          "model": "Edge 50 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "50",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 50 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 50 Fusion",
+          "model": "Edge 50 Fusion",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "50",
+            "fusion"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 50 Fusion"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 60",
+          "model": "Edge 60",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "60"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 60"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 60 Pro",
+          "model": "Edge 60 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "60",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 60 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 60 Fusion",
+          "model": "Edge 60 Fusion",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "60",
+            "fusion"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 60 Fusion"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 70",
+          "model": "Edge 70",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "70"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 70"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Edge 70 Fusion",
+          "model": "Edge 70 Fusion",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "edge",
+            "70",
+            "fusion"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Edge 70 Fusion"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Razr 40",
+          "model": "Razr 40",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "razr",
+            "40"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Razr 40"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Razr 40 Ultra",
+          "model": "Razr 40 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "razr",
+            "40",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Razr 40 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Razr 50",
+          "model": "Razr 50",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "razr",
+            "50"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Razr 50"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Razr 50 Ultra",
+          "model": "Razr 50 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "razr",
+            "50",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Razr 50 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Razr 60",
+          "model": "Razr 60",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "razr",
+            "60"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Razr 60"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Razr 60 Ultra",
+          "model": "Razr 60 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "razr",
+            "60",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Razr 60 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Motorola Razr Ultra 2025",
+          "model": "Razr Ultra 2025",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "razr",
+            "ultra",
+            "2025"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Motorola Razr Ultra 2025"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Moto G Power 5G 2024",
+          "model": "Moto G Power 5G 2024",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "moto",
+            "g",
+            "power",
+            "5g",
+            "2024"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Moto G Power 5G 2024"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Moto G Power 2025",
+          "model": "Moto G Power 2025",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "moto",
+            "g",
+            "power",
+            "2025"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Moto G Power 2025"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Moto G Power 2026",
+          "model": "Moto G Power 2026",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "moto",
+            "g",
+            "power",
+            "2026"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Moto G Power 2026"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Moto G Stylus 5G 2024",
+          "model": "Moto G Stylus 5G 2024",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "moto",
+            "g",
+            "stylus",
+            "5g",
+            "2024"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Moto G Stylus 5G 2024"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Moto G Stylus 2025",
+          "model": "Moto G Stylus 2025",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "moto",
+            "g",
+            "stylus",
+            "2025"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Moto G Stylus 2025"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Moto G84 5G",
+          "model": "Moto G84 5G",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "moto",
+            "g84",
+            "5g"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Moto G84 5G"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Moto G85 5G",
+          "model": "Moto G85 5G",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "moto",
+            "g85",
+            "5g"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Moto G85 5G"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Moto G75 5G",
+          "model": "Moto G75 5G",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "moto",
+            "g75",
+            "5g"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Moto G75 5G"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "OPPO",
+      "family": "OPPO",
+      "category": "Smartphones",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "OPPO Find X6",
+          "model": "Find X6",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "x6"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find X6"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find X6 Pro",
+          "model": "Find X6 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "x6",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find X6 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find X7",
+          "model": "Find X7",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "x7"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find X7"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find X7 Ultra",
+          "model": "Find X7 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "x7",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find X7 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find X8",
+          "model": "Find X8",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "x8"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find X8"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find X8 Pro",
+          "model": "Find X8 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "x8",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find X8 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find X9",
+          "model": "Find X9",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "x9"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find X9"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find X9 Pro",
+          "model": "Find X9 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "x9",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find X9 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find N3",
+          "model": "Find N3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "n3"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find N3"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find N3 Flip",
+          "model": "Find N3 Flip",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "n3",
+            "flip"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find N3 Flip"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find N5",
+          "model": "Find N5",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "n5"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find N5"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Find N6",
+          "model": "Find N6",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "find",
+            "n6"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Find N6"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno10",
+          "model": "Reno10",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno10"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno10"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno10 Pro",
+          "model": "Reno10 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno10",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno10 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno11",
+          "model": "Reno11",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno11"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno11"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno11 Pro",
+          "model": "Reno11 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno11",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno11 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno12",
+          "model": "Reno12",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno12"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno12"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno12 Pro",
+          "model": "Reno12 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno12",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno12 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno13",
+          "model": "Reno13",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno13"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno13"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno13 Pro",
+          "model": "Reno13 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno13",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno13 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno14",
+          "model": "Reno14",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno14"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno14"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno14 Pro",
+          "model": "Reno14 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno14",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno14 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno15",
+          "model": "Reno15",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno15"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno15"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno15 Pro",
+          "model": "Reno15 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno15",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno15 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno16 F 5G",
+          "model": "Reno16 F 5G",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno16",
+            "f",
+            "5g"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno16 F 5G"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO Reno16 Pro 5G",
+          "model": "Reno16 Pro 5G",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reno16",
+            "pro",
+            "5g"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO Reno16 Pro 5G"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO A5 Pro",
+          "model": "A5 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "a5",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO A5 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OPPO A6 5G",
+          "model": "A6 5G",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "a6",
+            "5g"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OPPO A6 5G"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "vivo",
+      "family": "vivo / iQOO",
+      "category": "Smartphones",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "vivo X90",
+          "model": "X90",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x90"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X90"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo X90 Pro",
+          "model": "X90 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x90",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X90 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo X100",
+          "model": "X100",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x100"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X100"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo X100 Pro",
+          "model": "X100 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x100",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X100 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo X100 Ultra",
+          "model": "X100 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x100",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X100 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo X200",
+          "model": "X200",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x200"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X200"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo X200 Pro",
+          "model": "X200 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x200",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X200 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo X200 FE",
+          "model": "X200 FE",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x200",
+            "fe"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X200 FE"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo X300",
+          "model": "X300",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x300"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X300"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo X300 FE",
+          "model": "X300 FE",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x300",
+            "fe"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X300 FE"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo X300 Ultra",
+          "model": "X300 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x300",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo X300 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo V29",
+          "model": "V29",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "v29"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo V29"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo V30",
+          "model": "V30",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "v30"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo V30"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo V30 Pro",
+          "model": "V30 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "v30",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo V30 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo V40",
+          "model": "V40",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "v40"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo V40"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo V40 Pro",
+          "model": "V40 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "v40",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo V40 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo V50",
+          "model": "V50",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "v50"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo V50"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo V50 Pro",
+          "model": "V50 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "v50",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo V50 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "vivo V60 5G",
+          "model": "V60 5G",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "v60",
+            "5g"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "vivo V60 5G"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "iQOO 11",
+          "model": "iQOO 11",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "iqoo",
+            "11"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "iQOO 11"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "iQOO 12",
+          "model": "iQOO 12",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "iqoo",
+            "12"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "iQOO 12"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "iQOO 13",
+          "model": "iQOO 13",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "iqoo",
+            "13"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "iQOO 13"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "iQOO Neo 9 Pro",
+          "model": "iQOO Neo 9 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "iqoo",
+            "neo",
+            "9",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "iQOO Neo 9 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "iQOO Neo 10",
+          "model": "iQOO Neo 10",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "iqoo",
+            "neo",
+            "10"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "iQOO Neo 10"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "iQOO Z9",
+          "model": "iQOO Z9",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "iqoo",
+            "z9"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "iQOO Z9"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "iQOO Z9x",
+          "model": "iQOO Z9x",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "iqoo",
+            "z9x"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "iQOO Z9x"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "HONOR",
+      "family": "HONOR",
+      "category": "Smartphones",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "HONOR Magic5 Pro",
+          "model": "Magic5 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "magic5",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR Magic5 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR Magic6 Pro",
+          "model": "Magic6 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "magic6",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR Magic6 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR Magic7 Pro",
+          "model": "Magic7 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "magic7",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR Magic7 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR Magic8 Pro",
+          "model": "Magic8 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "magic8",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR Magic8 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR Magic V2",
+          "model": "Magic V2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "magic",
+            "v2"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR Magic V2"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR Magic V3",
+          "model": "Magic V3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "magic",
+            "v3"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR Magic V3"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR Magic V5",
+          "model": "Magic V5",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "magic",
+            "v5"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR Magic V5"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR Magic V6",
+          "model": "Magic V6",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "magic",
+            "v6"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR Magic V6"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR 90",
+          "model": "90",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "90"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR 90"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR 90 Lite",
+          "model": "90 Lite",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "90",
+            "lite"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR 90 Lite"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR 100",
+          "model": "100",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "100"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR 100"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR 100 Pro",
+          "model": "100 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "100",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR 100 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR 200",
+          "model": "200",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "200"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR 200"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR 200 Pro",
+          "model": "200 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "200",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR 200 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR 400",
+          "model": "400",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "400"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR 400"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR 400 Pro",
+          "model": "400 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "400",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR 400 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR 400 Lite",
+          "model": "400 Lite",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "400",
+            "lite"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR 400 Lite"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR X8b",
+          "model": "X8b",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x8b"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR X8b"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR X9b",
+          "model": "X9b",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x9b"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR X9b"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "HONOR X9c",
+          "model": "X9c",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "x9c"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "HONOR X9c"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nothing",
+      "family": "Nothing / CMF",
+      "category": "Smartphones",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Nothing Phone 2",
+          "model": "Phone 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "phone",
+            "2"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Nothing Phone 2"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Nothing Phone 2a",
+          "model": "Phone 2a",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "phone",
+            "2a"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Nothing Phone 2a"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Nothing Phone 2a Plus",
+          "model": "Phone 2a Plus",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "phone",
+            "2a",
+            "plus"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Nothing Phone 2a Plus"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Nothing Phone 3",
+          "model": "Phone 3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "phone",
+            "3"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Nothing Phone 3"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Nothing Phone 3a",
+          "model": "Phone 3a",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "phone",
+            "3a"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Nothing Phone 3a"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Nothing Phone 3a Pro",
+          "model": "Phone 3a Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "phone",
+            "3a",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Nothing Phone 3a Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Nothing Phone 4a",
+          "model": "Phone 4a",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "phone",
+            "4a"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Nothing Phone 4a"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Nothing Phone 4a Pro",
+          "model": "Phone 4a Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "phone",
+            "4a",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Nothing Phone 4a Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Nothing Phone 4b",
+          "model": "Phone 4b",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "phone",
+            "4b"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Nothing Phone 4b"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "CMF Phone 1",
+          "model": "CMF Phone 1",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "cmf",
+            "phone",
+            "1"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "CMF Phone 1"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "CMF Phone 2 Pro",
+          "model": "CMF Phone 2 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "cmf",
+            "phone",
+            "2",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "CMF Phone 2 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sony",
+      "family": "Xperia",
+      "category": "Smartphones",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sony Xperia 1 V",
+          "model": "Xperia 1 V",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "xperia",
+            "1",
+            "v"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sony Xperia 1 V"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Sony Xperia 5 V",
+          "model": "Xperia 5 V",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "xperia",
+            "5",
+            "v"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sony Xperia 5 V"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Sony Xperia 10 V",
+          "model": "Xperia 10 V",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "xperia",
+            "10",
+            "v"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sony Xperia 10 V"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Sony Xperia 1 VI",
+          "model": "Xperia 1 VI",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "xperia",
+            "1",
+            "vi"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sony Xperia 1 VI"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Sony Xperia 10 VI",
+          "model": "Xperia 10 VI",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "xperia",
+            "10",
+            "vi"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sony Xperia 10 VI"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Sony Xperia 1 VII",
+          "model": "Xperia 1 VII",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "xperia",
+            "1",
+            "vii"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sony Xperia 1 VII"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Sony Xperia 10 VII",
+          "model": "Xperia 10 VII",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "xperia",
+            "10",
+            "vii"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sony Xperia 10 VII"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "ASUS",
+      "family": "ASUS ROG / Zenfone",
+      "category": "Smartphones",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "ASUS ROG Phone 7",
+          "model": "ROG Phone 7",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "rog",
+            "phone",
+            "7"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "ASUS ROG Phone 7"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "ASUS ROG Phone 7 Ultimate",
+          "model": "ROG Phone 7 Ultimate",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "rog",
+            "phone",
+            "7",
+            "ultimate"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "ASUS ROG Phone 7 Ultimate"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "ASUS ROG Phone 8",
+          "model": "ROG Phone 8",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "rog",
+            "phone",
+            "8"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "ASUS ROG Phone 8"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "ASUS ROG Phone 8 Pro",
+          "model": "ROG Phone 8 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "rog",
+            "phone",
+            "8",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "ASUS ROG Phone 8 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "ASUS ROG Phone 8 Pro Edition",
+          "model": "ROG Phone 8 Pro Edition",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "rog",
+            "phone",
+            "8",
+            "pro",
+            "edition"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "ASUS ROG Phone 8 Pro Edition"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "ASUS ROG Phone 9",
+          "model": "ROG Phone 9",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "rog",
+            "phone",
+            "9"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "ASUS ROG Phone 9"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "ASUS ROG Phone 9 Pro",
+          "model": "ROG Phone 9 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "rog",
+            "phone",
+            "9",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "ASUS ROG Phone 9 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "ASUS Zenfone 10",
+          "model": "Zenfone 10",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "zenfone",
+            "10"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "ASUS Zenfone 10"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "ASUS Zenfone 11 Ultra",
+          "model": "Zenfone 11 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "zenfone",
+            "11",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "ASUS Zenfone 11 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "ASUS Zenfone 12 Ultra",
+          "model": "Zenfone 12 Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "zenfone",
+            "12",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "ASUS Zenfone 12 Ultra"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Realme",
+      "family": "Realme",
+      "category": "Smartphones",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Realme GT 5",
+          "model": "GT 5",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "gt",
+            "5"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme GT 5"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme GT 5 Pro",
+          "model": "GT 5 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "gt",
+            "5",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme GT 5 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme GT 6",
+          "model": "GT 6",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "gt",
+            "6"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme GT 6"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme GT 6T",
+          "model": "GT 6T",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "gt",
+            "6t"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme GT 6T"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme GT 7",
+          "model": "GT 7",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "gt",
+            "7"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme GT 7"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme GT 7 Pro",
+          "model": "GT 7 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "gt",
+            "7",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme GT 7 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme 11 Pro",
+          "model": "11 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "11",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme 11 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme 11 Pro+",
+          "model": "11 Pro+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "11",
+            "pro+"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme 11 Pro+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme 12 Pro",
+          "model": "12 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "12",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme 12 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme 12 Pro+",
+          "model": "12 Pro+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "12",
+            "pro+"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme 12 Pro+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme 13 Pro",
+          "model": "13 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "13",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme 13 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme 13 Pro+",
+          "model": "13 Pro+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "13",
+            "pro+"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme 13 Pro+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme 14 Pro",
+          "model": "14 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "14",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme 14 Pro"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme 14 Pro+",
+          "model": "14 Pro+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "14",
+            "pro+"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme 14 Pro+"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme Narzo 60",
+          "model": "Narzo 60",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "narzo",
+            "60"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme Narzo 60"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme Narzo 70",
+          "model": "Narzo 70",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "narzo",
+            "70"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme Narzo 70"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Realme Narzo 80",
+          "model": "Narzo 80",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "narzo",
+            "80"
+          ],
+          "excludeTerms": [
+            "case",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Realme Narzo 80"
+          ],
+          "variantsToSplitLater": [
+            "storage",
+            "color",
+            "carrier",
+            "region"
+          ]
+        }
+      ]
+    }
+  ]
+}

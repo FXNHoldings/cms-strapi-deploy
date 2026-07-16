@@ -1,0 +1,1515 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart Speakers",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "stand",
+    "mount",
+    "wall mount",
+    "bracket",
+    "power cord",
+    "power cable",
+    "adapter",
+    "charger",
+    "charging dock",
+    "remote",
+    "case",
+    "cover",
+    "skin",
+    "replacement",
+    "speaker wire",
+    "subwoofer only",
+    "soundbar",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Amazon",
+      "family": "Amazon Speakers",
+      "category": "Smart Speakers",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Echo Dot (5th Gen)",
+          "model": "Amazon Echo Dot (5th Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "dot",
+            "5th"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Echo Dot (5th Gen)",
+            "Amazon Echo Dot (5th Gen) smart speaker",
+            "Amazon Echo Dot (5th Gen) wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Pop",
+          "model": "Amazon Echo Pop",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "pop"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Echo Pop",
+            "Amazon Echo Pop smart speaker",
+            "Amazon Echo Pop wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo (4th Gen)",
+          "model": "Amazon Echo (4th Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "4th"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Echo (4th Gen)",
+            "Amazon Echo (4th Gen) smart speaker",
+            "Amazon Echo (4th Gen) wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Studio",
+          "model": "Amazon Echo Studio",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "studio"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Echo Studio",
+            "Amazon Echo Studio smart speaker",
+            "Amazon Echo Studio wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Show 8",
+          "model": "Amazon Echo Show 8",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "show",
+            "8"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Echo Show 8",
+            "Amazon Echo Show 8 smart speaker",
+            "Amazon Echo Show 8 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Show 5",
+          "model": "Amazon Echo Show 5",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "show",
+            "5"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Echo Show 5",
+            "Amazon Echo Show 5 smart speaker",
+            "Amazon Echo Show 5 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Show 10 (3rd Gen)",
+          "model": "Amazon Echo Show 10 (3rd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "show",
+            "10",
+            "3rd"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Echo Show 10 (3rd Gen)",
+            "Amazon Echo Show 10 (3rd Gen) smart speaker",
+            "Amazon Echo Show 10 (3rd Gen) wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Show 15",
+          "model": "Amazon Echo Show 15",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "show",
+            "15"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Echo Show 15",
+            "Amazon Echo Show 15 smart speaker",
+            "Amazon Echo Show 15 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Spot",
+          "model": "Amazon Echo Spot",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "spot"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Echo Spot",
+            "Amazon Echo Spot smart speaker",
+            "Amazon Echo Spot wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Hub",
+          "model": "Amazon Echo Hub",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "hub"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Echo Hub",
+            "Amazon Echo Hub smart speaker",
+            "Amazon Echo Hub wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Apple",
+      "family": "Apple Speakers",
+      "category": "Smart Speakers",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple HomePod Mini",
+          "model": "Apple HomePod Mini",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "apple",
+            "homepod",
+            "mini"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple HomePod Mini",
+            "Apple HomePod Mini smart speaker",
+            "Apple HomePod Mini wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple HomePod (2nd Gen)",
+          "model": "Apple HomePod (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "apple",
+            "homepod",
+            "2nd"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple HomePod (2nd Gen)",
+            "Apple HomePod (2nd Gen) smart speaker",
+            "Apple HomePod (2nd Gen) wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Google Speakers",
+      "category": "Smart Speakers",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Nest Mini (2nd Gen)",
+          "model": "Google Nest Mini (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "google",
+            "nest",
+            "mini",
+            "2nd"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Nest Mini (2nd Gen)",
+            "Google Nest Mini (2nd Gen) smart speaker",
+            "Google Nest Mini (2nd Gen) wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Google Nest Audio",
+          "model": "Google Nest Audio",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "google",
+            "nest",
+            "audio"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Nest Audio",
+            "Google Nest Audio smart speaker",
+            "Google Nest Audio wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Google Nest Hub (2nd Gen)",
+          "model": "Google Nest Hub (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "google",
+            "nest",
+            "hub",
+            "2nd"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Nest Hub (2nd Gen)",
+            "Google Nest Hub (2nd Gen) smart speaker",
+            "Google Nest Hub (2nd Gen) wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Google Nest Hub Max",
+          "model": "Google Nest Hub Max",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "google",
+            "nest",
+            "hub",
+            "max"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Nest Hub Max",
+            "Google Nest Hub Max smart speaker",
+            "Google Nest Hub Max wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Google Home Mini (1st Gen)",
+          "model": "Google Home Mini (1st Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "google",
+            "home",
+            "mini",
+            "1st"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Home Mini (1st Gen)",
+            "Google Home Mini (1st Gen) smart speaker",
+            "Google Home Mini (1st Gen) wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sonos",
+      "family": "Sonos Speakers",
+      "category": "Smart Speakers",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sonos Era 100",
+          "model": "Sonos Era 100",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "sonos",
+            "era",
+            "100"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sonos Era 100",
+            "Sonos Era 100 smart speaker",
+            "Sonos Era 100 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Sonos Era 300",
+          "model": "Sonos Era 300",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "sonos",
+            "era",
+            "300"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sonos Era 300",
+            "Sonos Era 300 smart speaker",
+            "Sonos Era 300 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Sonos Move 2",
+          "model": "Sonos Move 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "sonos",
+            "move",
+            "2"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sonos Move 2",
+            "Sonos Move 2 smart speaker",
+            "Sonos Move 2 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Sonos Roam 2",
+          "model": "Sonos Roam 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "sonos",
+            "roam",
+            "2"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sonos Roam 2",
+            "Sonos Roam 2 smart speaker",
+            "Sonos Roam 2 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Sonos One (Gen 2)",
+          "model": "Sonos One (Gen 2)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "sonos",
+            "one",
+            "2"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Sonos One (Gen 2)",
+            "Sonos One (Gen 2) smart speaker",
+            "Sonos One (Gen 2) wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "JBL",
+      "family": "JBL Speakers",
+      "category": "Smart Speakers",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "JBL Authentics 500",
+          "model": "JBL Authentics 500",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "jbl",
+            "authentics",
+            "500"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "JBL Authentics 500",
+            "JBL Authentics 500 smart speaker",
+            "JBL Authentics 500 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "JBL Authentics 300",
+          "model": "JBL Authentics 300",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "jbl",
+            "authentics",
+            "300"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "JBL Authentics 300",
+            "JBL Authentics 300 smart speaker",
+            "JBL Authentics 300 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "JBL Authentics 200",
+          "model": "JBL Authentics 200",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "jbl",
+            "authentics",
+            "200"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "JBL Authentics 200",
+            "JBL Authentics 200 smart speaker",
+            "JBL Authentics 200 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Bose",
+      "family": "Bose Speakers",
+      "category": "Smart Speakers",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Bose Smart Speaker 500",
+          "model": "Bose Smart Speaker 500",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "bose",
+            "500"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Bose Smart Speaker 500",
+            "Bose Smart Speaker 500 smart speaker",
+            "Bose Smart Speaker 500 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Bose Portable Smart Speaker",
+          "model": "Bose Portable Smart Speaker",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "bose",
+            "portable"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Bose Portable Smart Speaker",
+            "Bose Portable Smart Speaker smart speaker",
+            "Bose Portable Smart Speaker wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Bose Home Speaker 300",
+          "model": "Bose Home Speaker 300",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "bose",
+            "home",
+            "300"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Bose Home Speaker 300",
+            "Bose Home Speaker 300 smart speaker",
+            "Bose Home Speaker 300 wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Bang & Olufsen",
+      "family": "Bang & Olufsen Speakers",
+      "category": "Smart Speakers",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Bang & Olufsen Beosound A1 (2nd Gen)",
+          "model": "Bang & Olufsen Beosound A1 (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "bang",
+            "olufsen",
+            "beosound",
+            "a1",
+            "2nd"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Bang & Olufsen Beosound A1 (2nd Gen)",
+            "Bang & Olufsen Beosound A1 (2nd Gen) smart speaker",
+            "Bang & Olufsen Beosound A1 (2nd Gen) wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Marshall",
+      "family": "Marshall Speakers",
+      "category": "Smart Speakers",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Marshall Uxbridge Voice",
+          "model": "Marshall Uxbridge Voice",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "marshall",
+            "uxbridge",
+            "voice"
+          ],
+          "excludeTerms": [
+            "stand",
+            "mount",
+            "wall mount",
+            "bracket",
+            "power cord",
+            "power cable",
+            "adapter",
+            "charger",
+            "charging dock",
+            "remote",
+            "case",
+            "cover",
+            "skin",
+            "replacement",
+            "speaker wire",
+            "subwoofer only",
+            "soundbar",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Marshall Uxbridge Voice",
+            "Marshall Uxbridge Voice smart speaker",
+            "Marshall Uxbridge Voice wireless speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    }
+  ]
+}

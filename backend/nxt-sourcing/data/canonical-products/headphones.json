@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "category": "Headphones",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "case",
+    "cover",
+    "ear tips",
+    "ear pads",
+    "ear cushions",
+    "replacement",
+    "charger",
+    "charging cable",
+    "adapter",
+    "stand",
+    "skin",
+    "sticker",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Apple",
+      "family": "AirPods",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "Apple AirPods Pro 3", "model": "AirPods Pro 3", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["airpods", "pro", "3"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Apple AirPods Pro 3 headphones", "Apple AirPods Pro 3 earbuds", "Apple AirPods Pro 3"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Apple AirPods Pro 2 USB-C", "model": "AirPods Pro 2 USB-C", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["airpods", "pro", "2"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Apple AirPods Pro 2 USB-C headphones", "Apple AirPods Pro 2 USB-C earbuds", "Apple AirPods Pro 2 USB-C"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Apple AirPods 4", "model": "AirPods 4", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["airpods", "4"], "excludeTerms": ["case", "cover", "pro", "max", "refurbished", "renewed", "used"], "searchQueries": ["Apple AirPods 4 headphones", "Apple AirPods 4 earbuds", "Apple AirPods 4"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Apple AirPods 4 with Active Noise Cancellation", "model": "AirPods 4 Active Noise Cancellation", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["airpods", "4", "noise"], "excludeTerms": ["case", "cover", "pro", "max", "refurbished", "renewed", "used"], "searchQueries": ["Apple AirPods 4 Active Noise Cancellation headphones", "Apple AirPods 4 with Active Noise Cancellation earbuds", "Apple AirPods 4 ANC"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Apple AirPods Max USB-C", "model": "AirPods Max USB-C", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["airpods", "max"], "excludeTerms": ["case", "cover", "ear cushions", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Apple AirPods Max USB-C headphones", "Apple AirPods Max USB-C", "AirPods Max USB-C headphones"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "Beats",
+      "family": "Beats Headphones",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "Beats Studio Pro", "model": "Studio Pro", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["studio", "pro"], "excludeTerms": ["case", "cover", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Beats Studio Pro headphones", "Beats Studio Pro wireless headphones", "Beats Studio Pro"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Beats Solo 4", "model": "Solo 4", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["solo", "4"], "excludeTerms": ["case", "cover", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Beats Solo 4 headphones", "Beats Solo 4 wireless headphones", "Beats Solo 4"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Beats Studio Buds+", "model": "Studio Buds+", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["studio", "buds"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Beats Studio Buds+ earbuds", "Beats Studio Buds Plus earbuds", "Beats Studio Buds+"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Beats Fit Pro", "model": "Fit Pro", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["fit", "pro"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Beats Fit Pro earbuds", "Beats Fit Pro wireless earbuds", "Beats Fit Pro"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Beats Solo Buds", "model": "Solo Buds", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["solo", "buds"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Beats Solo Buds earbuds", "Beats Solo Buds wireless earbuds", "Beats Solo Buds"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Beats Powerbeats Pro 2", "model": "Powerbeats Pro 2", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["powerbeats", "pro", "2"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Beats Powerbeats Pro 2 earbuds", "Beats Powerbeats Pro 2 wireless earbuds", "Powerbeats Pro 2"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "Sony",
+      "family": "Sony Headphones",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "Sony WH-1000XM6", "model": "WH-1000XM6", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["wh", "1000xm6"], "excludeTerms": ["case", "cover", "ear pads", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sony WH-1000XM6 headphones", "Sony WH-1000XM6 wireless headphones", "Sony WH-1000XM6"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Sony WH-1000XM5", "model": "WH-1000XM5", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["wh", "1000xm5"], "excludeTerms": ["case", "cover", "ear pads", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sony WH-1000XM5 headphones", "Sony WH-1000XM5 wireless headphones", "Sony WH-1000XM5"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Sony WH-1000XM4", "model": "WH-1000XM4", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["wh", "1000xm4"], "excludeTerms": ["case", "cover", "ear pads", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sony WH-1000XM4 headphones", "Sony WH-1000XM4 wireless headphones", "Sony WH-1000XM4"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Sony WF-1000XM6", "model": "WF-1000XM6", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["wf", "1000xm6"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sony WF-1000XM6 earbuds", "Sony WF-1000XM6 wireless earbuds", "Sony WF-1000XM6"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Sony WF-1000XM5", "model": "WF-1000XM5", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["wf", "1000xm5"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sony WF-1000XM5 earbuds", "Sony WF-1000XM5 wireless earbuds", "Sony WF-1000XM5"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Sony WF-C710N", "model": "WF-C710N", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["wf", "c710n"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sony WF-C710N earbuds", "Sony WF-C710N wireless earbuds", "Sony WF-C710N"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Sony WH-CH720N", "model": "WH-CH720N", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["wh", "ch720n"], "excludeTerms": ["case", "cover", "ear pads", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sony WH-CH720N headphones", "Sony WH-CH720N wireless headphones", "Sony WH-CH720N"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Sony WH-CH520", "model": "WH-CH520", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["wh", "ch520"], "excludeTerms": ["case", "cover", "ear pads", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sony WH-CH520 headphones", "Sony WH-CH520 wireless headphones", "Sony WH-CH520"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "Bose",
+      "family": "Bose Headphones",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "Bose QuietComfort Ultra Headphones 2nd Gen", "model": "QuietComfort Ultra Headphones 2nd Gen", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["quietcomfort", "ultra", "headphones"], "excludeTerms": ["case", "cover", "ear pads", "earbuds", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Bose QuietComfort Ultra Headphones 2nd Gen", "Bose QuietComfort Ultra Headphones second generation", "Bose QuietComfort Ultra wireless headphones"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Bose QuietComfort Ultra Headphones", "model": "QuietComfort Ultra Headphones", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["quietcomfort", "ultra", "headphones"], "excludeTerms": ["case", "cover", "ear pads", "earbuds", "2nd gen", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Bose QuietComfort Ultra Headphones", "Bose QuietComfort Ultra wireless headphones", "Bose QC Ultra Headphones"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Bose QuietComfort Headphones", "model": "QuietComfort Headphones", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["quietcomfort", "headphones"], "excludeTerms": ["case", "cover", "ear pads", "earbuds", "ultra", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Bose QuietComfort Headphones", "Bose QuietComfort wireless headphones", "Bose QC Headphones"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Bose QuietComfort Ultra Earbuds 2nd Gen", "model": "QuietComfort Ultra Earbuds 2nd Gen", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["quietcomfort", "ultra", "earbuds"], "excludeTerms": ["case", "cover", "ear tips", "headphones", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Bose QuietComfort Ultra Earbuds 2nd Gen", "Bose QuietComfort Ultra Earbuds second generation", "Bose QC Ultra Earbuds 2nd Gen"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Bose QuietComfort Ultra Earbuds", "model": "QuietComfort Ultra Earbuds", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["quietcomfort", "ultra", "earbuds"], "excludeTerms": ["case", "cover", "ear tips", "headphones", "2nd gen", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Bose QuietComfort Ultra Earbuds", "Bose QC Ultra Earbuds", "Bose QuietComfort Ultra wireless earbuds"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Bose QuietComfort Earbuds", "model": "QuietComfort Earbuds", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["quietcomfort", "earbuds"], "excludeTerms": ["case", "cover", "ear tips", "headphones", "ultra", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Bose QuietComfort Earbuds", "Bose QuietComfort wireless earbuds", "Bose QC Earbuds"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Bose Ultra Open Earbuds", "model": "Ultra Open Earbuds", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["ultra", "open", "earbuds"], "excludeTerms": ["case", "cover", "ear tips", "headphones", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Bose Ultra Open Earbuds", "Bose Ultra Open wireless earbuds", "Bose Ultra Open Earbuds headphones"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "JBL",
+      "family": "JBL Headphones",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "JBL Tour One M3", "model": "Tour One M3", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["tour", "one", "m3"], "excludeTerms": ["case", "cover", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["JBL Tour One M3 headphones", "JBL Tour One M3 wireless headphones", "JBL Tour One M3"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "JBL Tour Pro 3", "model": "Tour Pro 3", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["tour", "pro", "3"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["JBL Tour Pro 3 earbuds", "JBL Tour Pro 3 wireless earbuds", "JBL Tour Pro 3"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "JBL Live 770NC", "model": "Live 770NC", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["live", "770nc"], "excludeTerms": ["case", "cover", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["JBL Live 770NC headphones", "JBL Live 770NC wireless headphones", "JBL Live 770NC"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "JBL Tune 770NC", "model": "Tune 770NC", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["tune", "770nc"], "excludeTerms": ["case", "cover", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["JBL Tune 770NC headphones", "JBL Tune 770NC wireless headphones", "JBL Tune 770NC"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "JBL Tune 720BT", "model": "Tune 720BT", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["tune", "720bt"], "excludeTerms": ["case", "cover", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["JBL Tune 720BT headphones", "JBL Tune 720BT wireless headphones", "JBL Tune 720BT"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "JBL Tune 510BT", "model": "Tune 510BT", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["tune", "510bt"], "excludeTerms": ["case", "cover", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["JBL Tune 510BT headphones", "JBL Tune 510BT wireless headphones", "JBL Tune 510BT"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "JBL Vibe Beam 2", "model": "Vibe Beam 2", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["vibe", "beam", "2"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["JBL Vibe Beam 2 earbuds", "JBL Vibe Beam 2 wireless earbuds", "JBL Vibe Beam 2"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "JBL Tune 245NC", "model": "Tune 245NC", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["tune", "245nc"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["JBL Tune 245NC earbuds", "JBL Tune 245NC wireless earbuds", "JBL Tune 245NC"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "JBL Endurance Peak 3", "model": "Endurance Peak 3", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["endurance", "peak", "3"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["JBL Endurance Peak 3 earbuds", "JBL Endurance Peak 3 wireless earbuds", "JBL Endurance Peak 3"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "Samsung",
+      "family": "Galaxy Buds",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "Samsung Galaxy Buds3 Pro", "model": "Galaxy Buds3 Pro", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["galaxy", "buds3", "pro"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Samsung Galaxy Buds3 Pro earbuds", "Samsung Galaxy Buds3 Pro wireless earbuds", "Galaxy Buds3 Pro"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Samsung Galaxy Buds3", "model": "Galaxy Buds3", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["galaxy", "buds3"], "excludeTerms": ["case", "cover", "ear tips", "pro", "fe", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Samsung Galaxy Buds3 earbuds", "Samsung Galaxy Buds3 wireless earbuds", "Galaxy Buds3"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Samsung Galaxy Buds FE", "model": "Galaxy Buds FE", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["galaxy", "buds", "fe"], "excludeTerms": ["case", "cover", "ear tips", "pro", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Samsung Galaxy Buds FE earbuds", "Samsung Galaxy Buds FE wireless earbuds", "Galaxy Buds FE"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Pixel Buds",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "Google Pixel Buds Pro 2", "model": "Pixel Buds Pro 2", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["pixel", "buds", "pro", "2"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Google Pixel Buds Pro 2 earbuds", "Google Pixel Buds Pro 2 wireless earbuds", "Pixel Buds Pro 2"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Google Pixel Buds 2a", "model": "Pixel Buds 2a", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["pixel", "buds", "2a"], "excludeTerms": ["case", "cover", "ear tips", "pro", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Google Pixel Buds 2a earbuds", "Google Pixel Buds 2a wireless earbuds", "Pixel Buds 2a"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "Sennheiser",
+      "family": "Sennheiser Headphones",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "Sennheiser Momentum 4 Wireless", "model": "Momentum 4 Wireless", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["momentum", "4"], "excludeTerms": ["case", "cover", "ear pads", "true wireless", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sennheiser Momentum 4 Wireless headphones", "Sennheiser Momentum 4 headphones", "Sennheiser Momentum 4 Wireless"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Sennheiser Momentum True Wireless 4", "model": "Momentum True Wireless 4", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["momentum", "true", "wireless", "4"], "excludeTerms": ["case", "cover", "ear tips", "headphones", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sennheiser Momentum True Wireless 4 earbuds", "Sennheiser Momentum True Wireless 4", "Sennheiser MTW4 earbuds"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Sennheiser Accentum Wireless", "model": "Accentum Wireless", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["accentum"], "excludeTerms": ["case", "cover", "ear pads", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Sennheiser Accentum Wireless headphones", "Sennheiser Accentum headphones", "Sennheiser Accentum Wireless"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "Soundcore by Anker",
+      "family": "Soundcore Headphones",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "Soundcore by Anker Space One", "model": "Space One", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["space", "one"], "excludeTerms": ["case", "cover", "ear pads", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Soundcore by Anker Space One headphones", "Anker Soundcore Space One headphones", "Soundcore Space One"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Soundcore by Anker Space Q45", "model": "Space Q45", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["space", "q45"], "excludeTerms": ["case", "cover", "ear pads", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Soundcore by Anker Space Q45 headphones", "Anker Soundcore Space Q45 headphones", "Soundcore Space Q45"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Soundcore by Anker Life Q30", "model": "Life Q30", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["life", "q30"], "excludeTerms": ["case", "cover", "ear pads", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Soundcore by Anker Life Q30 headphones", "Anker Soundcore Life Q30 headphones", "Soundcore Life Q30"], "variantsToSplitLater": ["color", "condition", "region"] },
+        { "canonicalName": "Soundcore by Anker Liberty 4 NC", "model": "Liberty 4 NC", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["liberty", "4", "nc"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Soundcore by Anker Liberty 4 NC earbuds", "Anker Soundcore Liberty 4 NC earbuds", "Soundcore Liberty 4 NC"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "JLab",
+      "family": "JLab Earbuds",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "JLab Go Air Pop", "model": "Go Air Pop", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["go", "air", "pop"], "excludeTerms": ["case", "cover", "ear tips", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["JLab Go Air Pop earbuds", "JLab Go Air Pop wireless earbuds", "JLab Go Air Pop"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "Skullcandy",
+      "family": "Skullcandy Headphones",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "Skullcandy Crusher ANC 2", "model": "Crusher ANC 2", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["crusher", "anc", "2"], "excludeTerms": ["case", "cover", "ear pads", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Skullcandy Crusher ANC 2 headphones", "Skullcandy Crusher ANC 2 wireless headphones", "Skullcandy Crusher ANC 2"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    },
+    {
+      "brand": "Shokz",
+      "family": "Shokz OpenFit",
+      "category": "Headphones",
+      "sourceStatus": "seed",
+      "variants": [
+        { "canonicalName": "Shokz OpenFit 2+", "model": "OpenFit 2+", "identifierStatus": "needs_verification", "identifiers": {}, "requiredTerms": ["openfit", "2"], "excludeTerms": ["case", "cover", "replacement", "refurbished", "renewed", "used"], "searchQueries": ["Shokz OpenFit 2+ earbuds", "Shokz OpenFit 2 Plus earbuds", "Shokz OpenFit 2+"], "variantsToSplitLater": ["color", "condition", "region"] }
+      ]
+    }
+  ]
+}

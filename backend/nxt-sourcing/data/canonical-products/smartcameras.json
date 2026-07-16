@@ -1,0 +1,1489 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart Cameras",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "mount",
+    "wall mount",
+    "bracket",
+    "cable",
+    "power adapter",
+    "charger",
+    "solar panel",
+    "subscription",
+    "cloud storage",
+    "memory card",
+    "sd card",
+    "case",
+    "cover",
+    "lens cover",
+    "replacement",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Blink",
+      "family": "Blink Cameras",
+      "category": "Smart Cameras",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Blink Outdoor 4",
+          "model": "Blink Outdoor 4",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "blink",
+            "outdoor",
+            "4"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Blink Outdoor 4",
+            "Blink Outdoor 4 security camera",
+            "Blink Outdoor 4 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Blink Mini 2",
+          "model": "Blink Mini 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "blink",
+            "mini",
+            "2"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Blink Mini 2",
+            "Blink Mini 2 security camera",
+            "Blink Mini 2 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Blink Mini Pan-Tilt Camera",
+          "model": "Blink Mini Pan-Tilt Camera",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "blink",
+            "mini",
+            "pan",
+            "tilt"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Blink Mini Pan-Tilt Camera",
+            "Blink Mini Pan-Tilt Camera security camera",
+            "Blink Mini Pan-Tilt Camera smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Blink Outdoor 4 Floodlight Camera",
+          "model": "Blink Outdoor 4 Floodlight Camera",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "blink",
+            "outdoor",
+            "4",
+            "floodlight"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Blink Outdoor 4 Floodlight Camera",
+            "Blink Outdoor 4 Floodlight Camera security camera",
+            "Blink Outdoor 4 Floodlight Camera smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Ring Cameras",
+      "category": "Smart Cameras",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ring Indoor Cam (2nd Gen)",
+          "model": "Ring Indoor Cam (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "indoor",
+            "2nd"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Indoor Cam (2nd Gen)",
+            "Ring Indoor Cam (2nd Gen) security camera",
+            "Ring Indoor Cam (2nd Gen) smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ring Stick Up Cam Battery",
+          "model": "Ring Stick Up Cam Battery",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "stick",
+            "up",
+            "battery"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Stick Up Cam Battery",
+            "Ring Stick Up Cam Battery security camera",
+            "Ring Stick Up Cam Battery smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ring Spotlight Cam Plus Battery",
+          "model": "Ring Spotlight Cam Plus Battery",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "spotlight",
+            "plus",
+            "battery"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Spotlight Cam Plus Battery",
+            "Ring Spotlight Cam Plus Battery security camera",
+            "Ring Spotlight Cam Plus Battery smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ring Floodlight Cam Wired Plus",
+          "model": "Ring Floodlight Cam Wired Plus",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "floodlight",
+            "wired",
+            "plus"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Floodlight Cam Wired Plus",
+            "Ring Floodlight Cam Wired Plus security camera",
+            "Ring Floodlight Cam Wired Plus smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ring Outdoor Cam Plus Battery",
+          "model": "Ring Outdoor Cam Plus Battery",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ring",
+            "outdoor",
+            "plus",
+            "battery"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ring Outdoor Cam Plus Battery",
+            "Ring Outdoor Cam Plus Battery security camera",
+            "Ring Outdoor Cam Plus Battery smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Wyze",
+      "family": "Wyze Cameras",
+      "category": "Smart Cameras",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Wyze Cam v4",
+          "model": "Wyze Cam v4",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wyze",
+            "v4"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wyze Cam v4",
+            "Wyze Cam v4 security camera",
+            "Wyze Cam v4 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Wyze Battery Cam Pro",
+          "model": "Wyze Battery Cam Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wyze",
+            "battery",
+            "pro"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wyze Battery Cam Pro",
+            "Wyze Battery Cam Pro security camera",
+            "Wyze Battery Cam Pro smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Wyze Cam Pan v3",
+          "model": "Wyze Cam Pan v3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wyze",
+            "pan",
+            "v3"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wyze Cam Pan v3",
+            "Wyze Cam Pan v3 security camera",
+            "Wyze Cam Pan v3 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Wyze Cam OG",
+          "model": "Wyze Cam OG",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wyze",
+            "og"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wyze Cam OG",
+            "Wyze Cam OG security camera",
+            "Wyze Cam OG smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo Cameras",
+      "category": "Smart Cameras",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo C120",
+          "model": "TP-Link Tapo C120",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp",
+            "link",
+            "tapo",
+            "c120"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo C120",
+            "TP-Link Tapo C120 security camera",
+            "TP-Link Tapo C120 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo C210",
+          "model": "TP-Link Tapo C210",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp",
+            "link",
+            "tapo",
+            "c210"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo C210",
+            "TP-Link Tapo C210 security camera",
+            "TP-Link Tapo C210 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo C425 MagCam",
+          "model": "TP-Link Tapo C425 MagCam",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp",
+            "link",
+            "tapo",
+            "c425",
+            "magcam"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo C425 MagCam",
+            "TP-Link Tapo C425 MagCam security camera",
+            "TP-Link Tapo C425 MagCam smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo C500",
+          "model": "TP-Link Tapo C500",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp",
+            "link",
+            "tapo",
+            "c500"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo C500",
+            "TP-Link Tapo C500 security camera",
+            "TP-Link Tapo C500 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo C520WS",
+          "model": "TP-Link Tapo C520WS",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp",
+            "link",
+            "tapo",
+            "c520ws"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo C520WS",
+            "TP-Link Tapo C520WS security camera",
+            "TP-Link Tapo C520WS smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eufy",
+      "family": "Eufy Cameras",
+      "category": "Smart Cameras",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Eufy Indoor Cam S350",
+          "model": "Eufy Indoor Cam S350",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "indoor",
+            "s350"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Indoor Cam S350",
+            "Eufy Indoor Cam S350 security camera",
+            "Eufy Indoor Cam S350 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Eufy SoloCam S340",
+          "model": "Eufy SoloCam S340",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "solocam",
+            "s340"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy SoloCam S340",
+            "Eufy SoloCam S340 security camera",
+            "Eufy SoloCam S340 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Eufy Floodlight Camera E340",
+          "model": "Eufy Floodlight Camera E340",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "floodlight",
+            "e340"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Floodlight Camera E340",
+            "Eufy Floodlight Camera E340 security camera",
+            "Eufy Floodlight Camera E340 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "EufyCam S330",
+          "model": "EufyCam S330",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufycam",
+            "s330"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "EufyCam S330",
+            "EufyCam S330 security camera",
+            "EufyCam S330 smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "EufyCam 2C Pro",
+          "model": "EufyCam 2C Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufycam",
+            "2c",
+            "pro"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "EufyCam 2C Pro",
+            "EufyCam 2C Pro security camera",
+            "EufyCam 2C Pro smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Arlo",
+      "family": "Arlo Cameras",
+      "category": "Smart Cameras",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Arlo Essential Security Camera 2K (3rd Gen)",
+          "model": "Arlo Essential Security Camera 2K (3rd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "arlo",
+            "essential",
+            "2k",
+            "3rd"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Arlo Essential Security Camera 2K (3rd Gen)",
+            "Arlo Essential Security Camera 2K (3rd Gen) security camera",
+            "Arlo Essential Security Camera 2K (3rd Gen) smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Arlo Essential Indoor Camera (3rd Gen)",
+          "model": "Arlo Essential Indoor Camera (3rd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "arlo",
+            "essential",
+            "indoor",
+            "3rd"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Arlo Essential Indoor Camera (3rd Gen)",
+            "Arlo Essential Indoor Camera (3rd Gen) security camera",
+            "Arlo Essential Indoor Camera (3rd Gen) smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Arlo Pro Security Camera 2K HDR (6th Gen)",
+          "model": "Arlo Pro Security Camera 2K HDR (6th Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "arlo",
+            "pro",
+            "2k",
+            "hdr",
+            "6th"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Arlo Pro Security Camera 2K HDR (6th Gen)",
+            "Arlo Pro Security Camera 2K HDR (6th Gen) security camera",
+            "Arlo Pro Security Camera 2K HDR (6th Gen) smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Arlo Essential XL Security Camera (3rd Gen)",
+          "model": "Arlo Essential XL Security Camera (3rd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "arlo",
+            "essential",
+            "xl",
+            "3rd"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Arlo Essential XL Security Camera (3rd Gen)",
+            "Arlo Essential XL Security Camera (3rd Gen) security camera",
+            "Arlo Essential XL Security Camera (3rd Gen) smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Google Cameras",
+      "category": "Smart Cameras",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Nest Cam Indoor (3rd Gen)",
+          "model": "Google Nest Cam Indoor (3rd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "google",
+            "nest",
+            "indoor",
+            "3rd"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Nest Cam Indoor (3rd Gen)",
+            "Google Nest Cam Indoor (3rd Gen) security camera",
+            "Google Nest Cam Indoor (3rd Gen) smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Google Nest Cam Battery",
+          "model": "Google Nest Cam Battery",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "google",
+            "nest",
+            "battery"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Nest Cam Battery",
+            "Google Nest Cam Battery security camera",
+            "Google Nest Cam Battery smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Reolink",
+      "family": "Reolink Cameras",
+      "category": "Smart Cameras",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Reolink Duo 3 WiFi",
+          "model": "Reolink Duo 3 WiFi",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "reolink",
+            "duo",
+            "3",
+            "wifi"
+          ],
+          "excludeTerms": [
+            "mount",
+            "wall mount",
+            "bracket",
+            "cable",
+            "power adapter",
+            "charger",
+            "solar panel",
+            "subscription",
+            "cloud storage",
+            "memory card",
+            "sd card",
+            "case",
+            "cover",
+            "lens cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Reolink Duo 3 WiFi",
+            "Reolink Duo 3 WiFi security camera",
+            "Reolink Duo 3 WiFi smart camera"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "powerType",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    }
+  ]
+}

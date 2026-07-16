@@ -1,0 +1,1289 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart Plugs",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "extension cord",
+    "power strip",
+    "outdoor cable",
+    "hub only",
+    "remote only",
+    "cover",
+    "replacement",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Amazon",
+      "family": "Amazon Basics Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Basics Smart Plug",
+          "model": "Amazon Basics Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "basics",
+            "smart",
+            "plug"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Basics Smart Plug",
+            "Amazon Basics Smart Plug smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Amazon",
+      "family": "Amazon Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Smart Plug",
+          "model": "Amazon Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "amazon",
+            "smart",
+            "plug"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Amazon Smart Plug",
+            "Amazon Smart Plug smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "GE",
+      "family": "Cync Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "GE Cync Indoor Smart Plug",
+          "model": "GE Cync Indoor Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ge",
+            "cync",
+            "indoor",
+            "smart",
+            "plug"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "GE Cync Indoor Smart Plug",
+            "GE Cync Indoor Smart Plug smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eve",
+      "family": "Eve Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Eve Energy Smart Plug",
+          "model": "Eve Energy Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eve",
+            "energy",
+            "smart",
+            "plug"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eve Energy Smart Plug",
+            "Eve Energy Smart Plug smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Govee",
+      "family": "Govee Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Govee Smart Plug H5080",
+          "model": "Govee Smart Plug H5080",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "govee",
+            "smart",
+            "plug",
+            "h5080"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Govee Smart Plug H5080",
+            "Govee Smart Plug H5080 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Govee Smart Plug H5083",
+          "model": "Govee Smart Plug H5083",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "govee",
+            "smart",
+            "plug",
+            "h5083"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Govee Smart Plug H5083",
+            "Govee Smart Plug H5083 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Govee Smart Plug Pro H5086",
+          "model": "Govee Smart Plug Pro H5086",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "govee",
+            "smart",
+            "plug",
+            "pro",
+            "h5086"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Govee Smart Plug Pro H5086",
+            "Govee Smart Plug Pro H5086 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Philips",
+      "family": "Hue Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Philips Hue Smart Plug",
+          "model": "Philips Hue Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "smart",
+            "plug"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Philips Hue Smart Plug",
+            "Philips Hue Smart Plug smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Kasa Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Kasa Matter Smart Plug KP125M",
+          "model": "TP-Link Kasa Matter Smart Plug KP125M",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "matter",
+            "smart",
+            "plug",
+            "kp125m"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa Matter Smart Plug KP125M",
+            "TP-Link Kasa Matter Smart Plug KP125M smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Kasa Outdoor Smart Plug EP40",
+          "model": "TP-Link Kasa Outdoor Smart Plug EP40",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "outdoor",
+            "smart",
+            "plug",
+            "ep40"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa Outdoor Smart Plug EP40",
+            "TP-Link Kasa Outdoor Smart Plug EP40 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Kasa Outdoor Smart Plug KP400",
+          "model": "TP-Link Kasa Outdoor Smart Plug KP400",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "outdoor",
+            "smart",
+            "plug",
+            "kp400"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa Outdoor Smart Plug KP400",
+            "TP-Link Kasa Outdoor Smart Plug KP400 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Kasa Smart Plug Mini HS103",
+          "model": "TP-Link Kasa Smart Plug Mini HS103",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "smart",
+            "plug",
+            "mini",
+            "hs103"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa Smart Plug Mini HS103",
+            "TP-Link Kasa Smart Plug Mini HS103 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Kasa Smart Plug Mini HS105",
+          "model": "TP-Link Kasa Smart Plug Mini HS105",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "smart",
+            "plug",
+            "mini",
+            "hs105"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa Smart Plug Mini HS105",
+            "TP-Link Kasa Smart Plug Mini HS105 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Kasa Smart Plug Ultra Mini EP10",
+          "model": "TP-Link Kasa Smart Plug Ultra Mini EP10",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "smart",
+            "plug",
+            "ultra",
+            "mini",
+            "ep10"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa Smart Plug Ultra Mini EP10",
+            "TP-Link Kasa Smart Plug Ultra Mini EP10 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Kasa Smart Plug with Energy Monitoring KP115",
+          "model": "TP-Link Kasa Smart Plug with Energy Monitoring KP115",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "smart",
+            "plug",
+            "with",
+            "energy",
+            "monitoring",
+            "kp115"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa Smart Plug with Energy Monitoring KP115",
+            "TP-Link Kasa Smart Plug with Energy Monitoring KP115 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Kasa Smart Wi-Fi Plug HS100",
+          "model": "TP-Link Kasa Smart Wi-Fi Plug HS100",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "smart",
+            "wi-fi",
+            "plug",
+            "hs100"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa Smart Wi-Fi Plug HS100",
+            "TP-Link Kasa Smart Wi-Fi Plug HS100 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Kasa Smart Wi-Fi Plug Mini EP25",
+          "model": "TP-Link Kasa Smart Wi-Fi Plug Mini EP25",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "smart",
+            "wi-fi",
+            "plug",
+            "mini",
+            "ep25"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa Smart Wi-Fi Plug Mini EP25",
+            "TP-Link Kasa Smart Wi-Fi Plug Mini EP25 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Meross",
+      "family": "Meross Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Meross Outdoor Smart Plug MSS620",
+          "model": "Meross Outdoor Smart Plug MSS620",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "meross",
+            "outdoor",
+            "smart",
+            "plug",
+            "mss620"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Meross Outdoor Smart Plug MSS620",
+            "Meross Outdoor Smart Plug MSS620 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Meross Smart Wi-Fi Plug Mini MSS110",
+          "model": "Meross Smart Wi-Fi Plug Mini MSS110",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "meross",
+            "smart",
+            "wi-fi",
+            "plug",
+            "mini",
+            "mss110"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Meross Smart Wi-Fi Plug Mini MSS110",
+            "Meross Smart Wi-Fi Plug Mini MSS110 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Meross Smart Wi-Fi Plug Mini MSS115",
+          "model": "Meross Smart Wi-Fi Plug Mini MSS115",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "meross",
+            "smart",
+            "wi-fi",
+            "plug",
+            "mini",
+            "mss115"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Meross Smart Wi-Fi Plug Mini MSS115",
+            "Meross Smart Wi-Fi Plug Mini MSS115 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo Matter Smart Plug P125M",
+          "model": "TP-Link Tapo Matter Smart Plug P125M",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "matter",
+            "smart",
+            "plug",
+            "p125m"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo Matter Smart Plug P125M",
+            "TP-Link Tapo Matter Smart Plug P125M smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo Mini Smart Wi-Fi Plug P100",
+          "model": "TP-Link Tapo Mini Smart Wi-Fi Plug P100",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "mini",
+            "smart",
+            "wi-fi",
+            "plug",
+            "p100"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo Mini Smart Wi-Fi Plug P100",
+            "TP-Link Tapo Mini Smart Wi-Fi Plug P100 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo Mini Smart Wi-Fi Plug P105",
+          "model": "TP-Link Tapo Mini Smart Wi-Fi Plug P105",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "mini",
+            "smart",
+            "wi-fi",
+            "plug",
+            "p105"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo Mini Smart Wi-Fi Plug P105",
+            "TP-Link Tapo Mini Smart Wi-Fi Plug P105 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo Outdoor Smart Plug TP25",
+          "model": "TP-Link Tapo Outdoor Smart Plug TP25",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "outdoor",
+            "smart",
+            "plug",
+            "tp25"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo Outdoor Smart Plug TP25",
+            "TP-Link Tapo Outdoor Smart Plug TP25 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo Smart Wi-Fi Plug P110",
+          "model": "TP-Link Tapo Smart Wi-Fi Plug P110",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "smart",
+            "wi-fi",
+            "plug",
+            "p110"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo Smart Wi-Fi Plug P110",
+            "TP-Link Tapo Smart Wi-Fi Plug P110 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "TP-Link Tapo Smart Wi-Fi Plug P115",
+          "model": "TP-Link Tapo Smart Wi-Fi Plug P115",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "smart",
+            "wi-fi",
+            "plug",
+            "p115"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo Smart Wi-Fi Plug P115",
+            "TP-Link Tapo Smart Wi-Fi Plug P115 smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Wemo",
+      "family": "Wemo Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Wemo Mini Smart Plug",
+          "model": "Wemo Mini Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wemo",
+            "mini",
+            "smart",
+            "plug"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wemo Mini Smart Plug",
+            "Wemo Mini Smart Plug smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Wemo Smart Plug with Thread",
+          "model": "Wemo Smart Plug with Thread",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wemo",
+            "smart",
+            "plug",
+            "with",
+            "thread"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wemo Smart Plug with Thread",
+            "Wemo Smart Plug with Thread smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Wyze",
+      "family": "Wyze Plugs",
+      "category": "Smart Plugs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Wyze Plug",
+          "model": "Wyze Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wyze",
+            "plug"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wyze Plug",
+            "Wyze Plug smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Wyze Plug Outdoor",
+          "model": "Wyze Plug Outdoor",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wyze",
+            "plug",
+            "outdoor"
+          ],
+          "excludeTerms": [
+            "extension cord",
+            "power strip",
+            "outdoor cable",
+            "hub only",
+            "remote only",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wyze Plug Outdoor",
+            "Wyze Plug Outdoor smart plug"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    }
+  ]
+}

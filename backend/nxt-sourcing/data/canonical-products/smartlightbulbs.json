@@ -1,0 +1,1006 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart Light Bulbs",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "lamp",
+    "fixture",
+    "socket",
+    "adapter",
+    "switch",
+    "dimmer",
+    "remote",
+    "hub only",
+    "bridge only",
+    "strip",
+    "lightstrip",
+    "light strip",
+    "string lights",
+    "extension",
+    "replacement part",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Philips",
+      "family": "Hue",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Philips Hue White and Color Ambiance A19 Smart Bulb",
+          "model": "Hue White and Color Ambiance A19 Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "and",
+            "ambiance",
+            "a19"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Philips Hue White and Color Ambiance A19 Smart Bulb",
+            "Philips Hue White and Color Ambiance A19 Smart Bulb new",
+            "Philips Hue White and Color Ambiance A19 Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Philips Hue White Ambiance A19 Smart Bulb",
+          "model": "Hue White Ambiance A19 Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "ambiance",
+            "a19"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Philips Hue White Ambiance A19 Smart Bulb",
+            "Philips Hue White Ambiance A19 Smart Bulb new",
+            "Philips Hue White Ambiance A19 Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Philips Hue White A19 Smart Bulb",
+          "model": "Hue White A19 Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "a19"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Philips Hue White A19 Smart Bulb",
+            "Philips Hue White A19 Smart Bulb new",
+            "Philips Hue White A19 Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Philips Hue Essential A19 Smart Bulb",
+          "model": "Hue Essential A19 Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "essential",
+            "a19"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Philips Hue Essential A19 Smart Bulb",
+            "Philips Hue Essential A19 Smart Bulb new",
+            "Philips Hue Essential A19 Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Philips Hue A19 75W Smart LED Bulb",
+          "model": "Hue A19 75W Smart LED Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "a19",
+            "75w"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Philips Hue A19 75W Smart LED Bulb",
+            "Philips Hue A19 75W Smart LED Bulb new",
+            "Philips Hue A19 75W Smart LED Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Philips",
+      "family": "Smart Wi-Fi",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Philips Smart Wi-Fi Connected LED A19 Color & Tunable White Bulb",
+          "model": "Smart Wi-Fi Connected LED A19 Color & Tunable White Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "philips",
+            "a19",
+            "and",
+            "tunable"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Philips Smart Wi-Fi Connected LED A19 Color & Tunable White Bulb",
+            "Philips Smart Wi-Fi Connected LED A19 Color & Tunable White Bulb new",
+            "Philips Smart Wi-Fi Connected LED A19 Color & Tunable White Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Philips Smart Wi-Fi 60W Tunable White A19 Bulb",
+          "model": "Smart Wi-Fi 60W Tunable White A19 Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "philips",
+            "60w",
+            "tunable",
+            "a19"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Philips Smart Wi-Fi 60W Tunable White A19 Bulb",
+            "Philips Smart Wi-Fi 60W Tunable White A19 Bulb new",
+            "Philips Smart Wi-Fi 60W Tunable White A19 Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "WiZ",
+      "family": "A19",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "WiZ A19 Color Smart Bulb",
+          "model": "A19 Color Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wiz",
+            "a19"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "WiZ A19 Color Smart Bulb",
+            "WiZ A19 Color Smart Bulb new",
+            "WiZ A19 Color Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "WiZ A19 Tunable White Smart Bulb",
+          "model": "A19 Tunable White Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wiz",
+            "a19",
+            "tunable"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "WiZ A19 Tunable White Smart Bulb",
+            "WiZ A19 Tunable White Smart Bulb new",
+            "WiZ A19 Tunable White Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "GE CYNC",
+      "family": "Dynamic Effects",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "GE CYNC Dynamic Effects A19 Full Color Smart Bulb",
+          "model": "Dynamic Effects A19 Full Color Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ge",
+            "cync",
+            "dynamic",
+            "effects",
+            "a19",
+            "full"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "GE CYNC Dynamic Effects A19 Full Color Smart Bulb",
+            "GE CYNC Dynamic Effects A19 Full Color Smart Bulb new",
+            "GE CYNC Dynamic Effects A19 Full Color Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "GE CYNC",
+      "family": "Reveal",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "GE CYNC Reveal A21 Full Color Smart Bulb",
+          "model": "Reveal A21 Full Color Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ge",
+            "cync",
+            "reveal",
+            "a21",
+            "full"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "GE CYNC Reveal A21 Full Color Smart Bulb",
+            "GE CYNC Reveal A21 Full Color Smart Bulb new",
+            "GE CYNC Reveal A21 Full Color Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "GE CYNC",
+      "family": "Globe",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "GE CYNC G25 Globe Full Color Smart Bulb",
+          "model": "G25 Globe Full Color Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ge",
+            "cync",
+            "g25",
+            "globe",
+            "full"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "GE CYNC G25 Globe Full Color Smart Bulb",
+            "GE CYNC G25 Globe Full Color Smart Bulb new",
+            "GE CYNC G25 Globe Full Color Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Govee",
+      "family": "A19",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Govee Smart A19 LED Color Bulb 800lm",
+          "model": "Smart A19 LED Color Bulb 800lm",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "govee",
+            "a19",
+            "800lm"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Govee Smart A19 LED Color Bulb 800lm",
+            "Govee Smart A19 LED Color Bulb 800lm new",
+            "Govee Smart A19 LED Color Bulb 800lm smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Govee A19 1000lm Color Changing Smart Bulb",
+          "model": "A19 1000lm Color Changing Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "govee",
+            "a19",
+            "1000lm",
+            "changing"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Govee A19 1000lm Color Changing Smart Bulb",
+            "Govee A19 1000lm Color Changing Smart Bulb new",
+            "Govee A19 1000lm Color Changing Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Govee",
+      "family": "A21",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Govee A21 1600lm Matter Smart Bulb",
+          "model": "A21 1600lm Matter Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "govee",
+            "a21",
+            "1600lm",
+            "matter"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Govee A21 1600lm Matter Smart Bulb",
+            "Govee A21 1600lm Matter Smart Bulb new",
+            "Govee A21 1600lm Matter Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Kasa Smart",
+      "family": "Kasa Smart Bulbs",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Kasa Smart KL125 A19 Multicolor Wi-Fi Bulb",
+          "model": "KL125 A19 Multicolor Wi-Fi Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "kasa",
+            "kl125",
+            "a19",
+            "multicolor"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Kasa Smart KL125 A19 Multicolor Wi-Fi Bulb",
+            "Kasa Smart KL125 A19 Multicolor Wi-Fi Bulb new",
+            "Kasa Smart KL125 A19 Multicolor Wi-Fi Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Kasa Smart KL135 A19 1000lm Multicolor Wi-Fi Bulb",
+          "model": "KL135 A19 1000lm Multicolor Wi-Fi Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "kasa",
+            "kl135",
+            "a19",
+            "1000lm",
+            "multicolor"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Kasa Smart KL135 A19 1000lm Multicolor Wi-Fi Bulb",
+            "Kasa Smart KL135 A19 1000lm Multicolor Wi-Fi Bulb new",
+            "Kasa Smart KL135 A19 1000lm Multicolor Wi-Fi Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo L530E Smart Wi-Fi Color Bulb",
+          "model": "Tapo L530E Smart Wi-Fi Color Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "tp",
+            "link",
+            "tapo",
+            "l530e"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo L530E Smart Wi-Fi Color Bulb",
+            "TP-Link Tapo L530E Smart Wi-Fi Color Bulb new",
+            "TP-Link Tapo L530E Smart Wi-Fi Color Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nanoleaf",
+      "family": "Essentials",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Nanoleaf Essentials A19 Matter Smart Bulb",
+          "model": "Essentials A19 Matter Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "nanoleaf",
+            "essentials",
+            "a19",
+            "matter"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Nanoleaf Essentials A19 Matter Smart Bulb",
+            "Nanoleaf Essentials A19 Matter Smart Bulb new",
+            "Nanoleaf Essentials A19 Matter Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Linkind",
+      "family": "Matter",
+      "category": "Smart Light Bulbs",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Linkind Matter A19 Color Changing Smart Bulb",
+          "model": "Matter A19 Color Changing Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "linkind",
+            "matter",
+            "a19",
+            "changing"
+          ],
+          "excludeTerms": [
+            "lamp",
+            "fixture",
+            "socket",
+            "adapter",
+            "switch",
+            "dimmer",
+            "remote",
+            "hub only",
+            "bridge only",
+            "strip",
+            "lightstrip",
+            "string lights",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Linkind Matter A19 Color Changing Smart Bulb",
+            "Linkind Matter A19 Color Changing Smart Bulb new",
+            "Linkind Matter A19 Color Changing Smart Bulb smart light bulb"
+          ],
+          "variantsToSplitLater": [
+            "packSize",
+            "baseType",
+            "wattage",
+            "lumens",
+            "protocol",
+            "region"
+          ]
+        }
+      ]
+    }
+  ]
+}

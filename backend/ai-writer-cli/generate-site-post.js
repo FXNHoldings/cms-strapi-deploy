@@ -24,9 +24,12 @@ const SITE_CONFIG = {
       'product-comparisons',
       'product-reviews',
       'product-roundups',
-      'deals',
+      'buying-guides',
       'how-to-guides',
-      'top-rated',
+      'top-rated-smart-electronics-devices',
+      'nxt-bargains-informative-articles',
+      'smart-home',
+      'best-sellers-articles',
     ],
     editorialBrief:
       'Write practical shopping content for NXT.Bargains. Focus on product comparisons, roundups, value, specs, tradeoffs, and buyer intent. Avoid fake prices, fake availability, and unsupported claims.',
@@ -419,10 +422,10 @@ Content requirements:
 - Markdown only in "content".
 - Use useful H2/H3 headings.
 - Include practical comparisons, tips, caveats, and buying/setup guidance where relevant.
-- For NXT.Bargains deals articles, write at least ${NXT_BARGAINS_DEALS_MIN_WORDS} words in "content".
-- For NXT.Bargains deals articles, optimize the title for deal-shopping intent and make it concise, specific, and clickable without sounding spammy.
-- For NXT.Bargains deals articles, make the selected best-seller product the article's main subject and keep the article focused on whether it is a worthwhile deal.
-- For NXT.Bargains deals articles, include why shoppers may want it, where the value is, who should skip it, competing alternatives to compare, and what to check before buying.
+- For NXT.Bargains Best Sellers articles, write at least ${NXT_BARGAINS_DEALS_MIN_WORDS} words in "content".
+- For NXT.Bargains Best Sellers articles, optimize the title for deal-shopping intent and make it concise, specific, and clickable without sounding spammy.
+- For NXT.Bargains Best Sellers articles, make the selected best-seller product the article's main subject and keep the article focused on whether it is a worthwhile deal.
+- For NXT.Bargains Best Sellers articles, include why shoppers may want it, where the value is, who should skip it, competing alternatives to compare, and what to check before buying.
 - Keep claims factual and cautious.
 - Do not invent exact prices, ratings, availability, certifications, medical outcomes, or specs.
 - Only mention prices, ratings, ranks, marketplace names, and URLs that appear in the selected product context.
@@ -643,7 +646,7 @@ async function buildJobs() {
 function isNxtDealsCategory(category) {
   if (argv.site !== 'nxt.bargains') return false;
   const slug = slugifyValue(category || '');
-  return slug === 'deals' || slug === 'best-deals';
+  return slug === 'best-sellers-articles' || slug === 'deals' || slug === 'best-deals';
 }
 
 function withDealProductIfNeeded(job) {
@@ -712,7 +715,7 @@ function dealProductPromptContext(product) {
 
   return `
 
-Selected NXT.Bargains deal product context:
+Selected NXT.Bargains best-seller product context:
 - Source best-seller page: ${product.sourcePage}
 - Marketplace: ${product.marketplace}
 - Best-seller rank: ${product.rank ?? 'not listed'}
@@ -722,7 +725,7 @@ Selected NXT.Bargains deal product context:
 - Rating count: ${product.ratingCount ?? 'not listed'}
 - Product URL: ${product.url ?? 'not listed'}
 
-Deal article requirements:
+Best Sellers article requirements:
 - Base the article on this selected product from the NXT.Bargains Best Sellers list.
 - Write as a shopping/deals analysis for someone deciding whether to click through, wait, or compare alternatives.
 - Keep the selected product as the main subject throughout the article. Do not drift into a generic buying guide.
@@ -793,7 +796,7 @@ function validateDealPost(post, category) {
   const words = wordCount(post.content);
   if (words < NXT_BARGAINS_DEALS_MIN_WORDS) {
     throw new Error(
-      `${activeProviderName()} returned a Deals article with ${words} words; minimum is ${NXT_BARGAINS_DEALS_MIN_WORDS}. Run again or increase max tokens.`,
+      `${activeProviderName()} returned a Best Sellers article with ${words} words; minimum is ${NXT_BARGAINS_DEALS_MIN_WORDS}. Run again or increase max tokens.`,
     );
   }
 }
@@ -835,7 +838,7 @@ async function run() {
   for (const [index, job] of jobs.entries()) {
     console.log(`[${index + 1}/${jobs.length}] Generating: ${job.topic}`);
     if (job.dealProduct) {
-      console.log(`  deal seed: ${job.dealProduct.marketplace} #${job.dealProduct.rank ?? '?'} · ${job.dealProduct.title}`);
+      console.log(`  best-seller seed: ${job.dealProduct.marketplace} #${job.dealProduct.rank ?? '?'} · ${job.dealProduct.title}`);
     }
     const post = await generatePost(job.topic, job.category, { dealProduct: job.dealProduct });
     const categoryId = argv['dry-run'] ? null : await resolveCategoryId(job.category);

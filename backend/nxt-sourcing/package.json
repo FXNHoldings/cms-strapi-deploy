@@ -1,0 +1,27 @@
+{
+  "name": "nxt-commerce-sourcing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Internal NXT.Bargains product sourcing tool for searching merchants and adding products to Strapi Commerce",
+  "scripts": {
+    "dev": "next dev -H 127.0.0.1 -p 3005",
+    "build": "next build",
+    "start": "next start -H 127.0.0.1 -p 3005",
+    "remove-backgrounds": "node scripts/remove-product-backgrounds.mjs",
+    "keepa-audit": "node scripts/keepa-coverage-audit.mjs",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "gsmarena-api": "^2.0.5",
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "typescript": "^5.7.2"
+  }
+}

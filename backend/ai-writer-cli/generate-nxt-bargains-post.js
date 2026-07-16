@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Generate NXT.Bargains Deals posts from cached best-seller products.
+// Generate NXT.Bargains Best Sellers posts from cached best-seller products.
 
 import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
@@ -16,7 +16,7 @@ const argv = yargs(hideBin(process.argv))
   .option('count', {
     alias: 'n',
     type: 'number',
-    describe: 'How many random Deals posts to generate. Prompts when omitted in an interactive terminal.',
+    describe: 'How many random Best Sellers posts to generate. Prompts when omitted in an interactive terminal.',
   })
   .option('merchant', {
     alias: 'm',
@@ -81,7 +81,8 @@ const openrouterClient = aiProvider === 'openrouter'
 
 const BEST_SELLERS_DIR = '/var/www/html/nxt.bargains/data';
 const ADMIN_UID = 'api::nxt-post.nxt-post';
-const DEALS_CATEGORY = 'deals';
+const BEST_SELLERS_CATEGORY = 'best-sellers-articles';
+const BEST_SELLERS_CATEGORY_NAME = 'Best Sellers';
 const MARKETPLACES = [
   {
     key: 'newegg',
@@ -120,7 +121,7 @@ async function promptForMissingOptions() {
   if (argv.count === undefined) {
     if (process.stdin.isTTY && process.stdout.isTTY) {
       const answer = await input({
-        message: 'How many Deals articles should I generate?',
+        message: 'How many Best Sellers articles should I generate?',
         default: '1',
         validate: (value) => {
           const n = Number(value);
@@ -137,7 +138,7 @@ async function promptForMissingOptions() {
     if (argv.merchant === 'all') argv.merchant = undefined;
   } else if (process.stdin.isTTY && process.stdout.isTTY) {
     argv.merchant = await select({
-      message: 'Which merchant should this Deals article use?',
+      message: 'Which merchant should this Best Sellers article use?',
       choices: [
         { name: 'Random from all merchants', value: 'all' },
         ...MARKETPLACES.map((marketplace) => ({
@@ -181,16 +182,16 @@ async function strapi(pathname, init = {}) {
   return res.json();
 }
 
-async function resolveDealsCategoryId() {
-  const bySlug = await strapi('/api/nxt-categories?filters[slug][$eq]=deals&pagination[pageSize]=1');
+async function resolveBestSellersCategoryId() {
+  const bySlug = await strapi(`/api/nxt-categories?filters[slug][$eq]=${BEST_SELLERS_CATEGORY}&pagination[pageSize]=1`);
   if (bySlug?.data?.[0]?.id) return bySlug.data[0].id;
 
-  const byName = await strapi('/api/nxt-categories?filters[name][$eqi]=Deals&pagination[pageSize]=1');
+  const byName = await strapi(`/api/nxt-categories?filters[name][$eqi]=${encodeURIComponent(BEST_SELLERS_CATEGORY_NAME)}&pagination[pageSize]=1`);
   if (byName?.data?.[0]?.id) return byName.data[0].id;
 
   const created = await strapi('/api/nxt-categories', {
     method: 'POST',
-    body: JSON.stringify({ data: { name: 'Deals', slug: DEALS_CATEGORY } }),
+    body: JSON.stringify({ data: { name: BEST_SELLERS_CATEGORY_NAME, slug: BEST_SELLERS_CATEGORY } }),
   });
   return created.data.id;
 }
@@ -244,7 +245,7 @@ function pickRandomProducts(count) {
 }
 
 async function generatePost(product) {
-  const prompt = `Write one NXT.Bargains Deals article about this randomly selected best-seller product.
+  const prompt = `Write one NXT.Bargains Best Sellers article about this randomly selected best-seller product.
 
 Selected product:
 - Product title: ${product.title}
@@ -270,7 +271,7 @@ Return STRICT JSON only:
 }
 
 Rules:
-- The article is for the NXT.Bargains category "Deals".
+- The article is for the NXT.Bargains category "Best Sellers".
 - Focus on the selected product. Do not turn this into a generic buying guide.
 - The "title" field must exactly match the selected product title above. Do not rewrite, shorten, clean up, or optimize the product title.
 - The "content" field must be valid HTML, not Markdown.
@@ -564,11 +565,11 @@ function fatal(message) {
 async function run() {
   await promptForMissingOptions();
 
-  console.log(`NXT.Bargains Deals generator`);
+  console.log(`NXT.Bargains Best Sellers generator`);
   console.log(`AI: ${aiProvider} | Model: ${activeModel()} | merchant: ${argv.merchant || 'all'} | count: ${argv.count} | images: ${argv.images} | dry-run: ${argv['dry-run']} | publish: ${argv.publish}\n`);
 
   const products = pickRandomProducts(argv.count);
-  const categoryId = argv['dry-run'] ? null : await resolveDealsCategoryId();
+  const categoryId = argv['dry-run'] ? null : await resolveBestSellersCategoryId();
   const results = [];
 
   for (const [index, product] of products.entries()) {

@@ -1,0 +1,1375 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart Door Locks",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "keypad only",
+    "cylinder",
+    "keys only",
+    "mounting plate",
+    "adapter",
+    "bridge",
+    "hub only",
+    "battery pack",
+    "cover",
+    "replacement",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Aqara",
+      "family": "Aqara Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Aqara Smart Lock U100",
+          "model": "Aqara Smart Lock U100",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "aqara",
+            "smart",
+            "lock",
+            "u100"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Aqara Smart Lock U100",
+            "Aqara Smart Lock U100 smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Aqara Smart Lock U200",
+          "model": "Aqara Smart Lock U200",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "aqara",
+            "smart",
+            "lock",
+            "u200"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Aqara Smart Lock U200",
+            "Aqara Smart Lock U200 smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "August",
+      "family": "August Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "August Smart Lock Pro (3rd Gen)",
+          "model": "August Smart Lock Pro (3rd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "august",
+            "smart",
+            "lock",
+            "pro",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "August Smart Lock Pro (3rd Gen)",
+            "August Smart Lock Pro (3rd Gen) smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "August Wi-Fi Smart Lock (4th Gen)",
+          "model": "August Wi-Fi Smart Lock (4th Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "august",
+            "wi-fi",
+            "smart",
+            "lock",
+            "4th",
+            "gen"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "August Wi-Fi Smart Lock (4th Gen)",
+            "August Wi-Fi Smart Lock (4th Gen) smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eufy",
+      "family": "Eufy Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Eufy Smart Lock C210",
+          "model": "Eufy Smart Lock C210",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "smart",
+            "lock",
+            "c210"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Smart Lock C210",
+            "Eufy Smart Lock C210 smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Eufy Smart Lock C220",
+          "model": "Eufy Smart Lock C220",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "smart",
+            "lock",
+            "c220"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Smart Lock C220",
+            "Eufy Smart Lock C220 smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Eufy Smart Lock E30",
+          "model": "Eufy Smart Lock E30",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "smart",
+            "lock",
+            "e30"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Smart Lock E30",
+            "Eufy Smart Lock E30 smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Eufy Video Smart Lock E330",
+          "model": "Eufy Video Smart Lock E330",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "eufy",
+            "video",
+            "smart",
+            "lock",
+            "e330"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Eufy Video Smart Lock E330",
+            "Eufy Video Smart Lock E330 smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Kwikset",
+      "family": "Kwikset Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Kwikset Halo Select",
+          "model": "Kwikset Halo Select",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "kwikset",
+            "halo",
+            "select"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Kwikset Halo Select",
+            "Kwikset Halo Select smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Kwikset Halo Touch",
+          "model": "Kwikset Halo Touch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "kwikset",
+            "halo",
+            "touch"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Kwikset Halo Touch",
+            "Kwikset Halo Touch smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Kwikset Halo Wi-Fi Smart Lock",
+          "model": "Kwikset Halo Wi-Fi Smart Lock",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "kwikset",
+            "halo",
+            "wi-fi",
+            "smart",
+            "lock"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Kwikset Halo Wi-Fi Smart Lock",
+            "Kwikset Halo Wi-Fi Smart Lock smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Kwikset Premis",
+          "model": "Kwikset Premis",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "kwikset",
+            "premis"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Kwikset Premis",
+            "Kwikset Premis smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Level",
+      "family": "Level Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Level Lock+",
+          "model": "Level Lock+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "level",
+            "lock"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Level Lock+",
+            "Level Lock+ smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Lockly",
+      "family": "Lockly Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Lockly Flex Touch Pro",
+          "model": "Lockly Flex Touch Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "lockly",
+            "flex",
+            "touch",
+            "pro"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Lockly Flex Touch Pro",
+            "Lockly Flex Touch Pro smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Lockly Secure Pro",
+          "model": "Lockly Secure Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "lockly",
+            "secure",
+            "pro"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Lockly Secure Pro",
+            "Lockly Secure Pro smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Lockly Visage Zeno Series",
+          "model": "Lockly Visage Zeno Series",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "lockly",
+            "visage",
+            "zeno",
+            "series"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Lockly Visage Zeno Series",
+            "Lockly Visage Zeno Series smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Schlage",
+      "family": "Schlage Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Schlage Connect Smart Deadbolt",
+          "model": "Schlage Connect Smart Deadbolt",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "schlage",
+            "connect",
+            "smart",
+            "deadbolt"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Schlage Connect Smart Deadbolt",
+            "Schlage Connect Smart Deadbolt smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Schlage Encode Plus Smart WiFi Deadbolt",
+          "model": "Schlage Encode Plus Smart WiFi Deadbolt",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "schlage",
+            "encode",
+            "plus",
+            "smart",
+            "wifi",
+            "deadbolt"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Schlage Encode Plus Smart WiFi Deadbolt",
+            "Schlage Encode Plus Smart WiFi Deadbolt smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Schlage Encode Smart WiFi Deadbolt",
+          "model": "Schlage Encode Smart WiFi Deadbolt",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "schlage",
+            "encode",
+            "smart",
+            "wifi",
+            "deadbolt"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Schlage Encode Smart WiFi Deadbolt",
+            "Schlage Encode Smart WiFi Deadbolt smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Schlage Encode Smart WiFi Lever",
+          "model": "Schlage Encode Smart WiFi Lever",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "schlage",
+            "encode",
+            "smart",
+            "wifi",
+            "lever"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Schlage Encode Smart WiFi Lever",
+            "Schlage Encode Smart WiFi Lever smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "SwitchBot",
+      "family": "SwitchBot Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "SwitchBot Lock Pro",
+          "model": "SwitchBot Lock Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "switchbot",
+            "lock",
+            "pro"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "SwitchBot Lock Pro",
+            "SwitchBot Lock Pro smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "SwitchBot Lock Ultra Vision Combo",
+          "model": "SwitchBot Lock Ultra Vision Combo",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "switchbot",
+            "lock",
+            "ultra",
+            "vision",
+            "combo"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "SwitchBot Lock Ultra Vision Combo",
+            "SwitchBot Lock Ultra Vision Combo smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ultraloq",
+      "family": "Ultraloq Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ultraloq Bolt Fingerprint",
+          "model": "Ultraloq Bolt Fingerprint",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ultraloq",
+            "bolt",
+            "fingerprint"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ultraloq Bolt Fingerprint",
+            "Ultraloq Bolt Fingerprint smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ultraloq Bolt NFC",
+          "model": "Ultraloq Bolt NFC",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ultraloq",
+            "bolt",
+            "nfc"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ultraloq Bolt NFC",
+            "Ultraloq Bolt NFC smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Ultraloq U-Bolt Pro WiFi",
+          "model": "Ultraloq U-Bolt Pro WiFi",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ultraloq",
+            "u-bolt",
+            "pro",
+            "wifi"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Ultraloq U-Bolt Pro WiFi",
+            "Ultraloq U-Bolt Pro WiFi smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Wyze",
+      "family": "Wyze Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Wyze Lock Bolt v2",
+          "model": "Wyze Lock Bolt v2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "wyze",
+            "lock",
+            "bolt",
+            "v2"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Wyze Lock Bolt v2",
+            "Wyze Lock Bolt v2 smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Yale",
+      "family": "Yale Smart Locks",
+      "category": "Smart Door Locks",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Yale Approach Lock with Wi-Fi",
+          "model": "Yale Approach Lock with Wi-Fi",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "yale",
+            "approach",
+            "lock",
+            "with",
+            "wi-fi"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Yale Approach Lock with Wi-Fi",
+            "Yale Approach Lock with Wi-Fi smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Yale Assure Lock 2 Key-Free Touchscreen",
+          "model": "Yale Assure Lock 2 Key-Free Touchscreen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "yale",
+            "assure",
+            "lock",
+            "key-free",
+            "touchscreen"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Yale Assure Lock 2 Key-Free Touchscreen",
+            "Yale Assure Lock 2 Key-Free Touchscreen smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Yale Assure Lock 2 Plus",
+          "model": "Yale Assure Lock 2 Plus",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "yale",
+            "assure",
+            "lock",
+            "plus"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Yale Assure Lock 2 Plus",
+            "Yale Assure Lock 2 Plus smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Yale Assure Lock 2 Touch",
+          "model": "Yale Assure Lock 2 Touch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "yale",
+            "assure",
+            "lock",
+            "touch"
+          ],
+          "excludeTerms": [
+            "keypad only",
+            "cylinder",
+            "keys only",
+            "mounting plate",
+            "adapter",
+            "bridge",
+            "hub only",
+            "battery pack",
+            "cover",
+            "replacement",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Yale Assure Lock 2 Touch",
+            "Yale Assure Lock 2 Touch smart lock"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "finish",
+            "connectivity",
+            "condition",
+            "region"
+          ]
+        }
+      ]
+    }
+  ]
+}

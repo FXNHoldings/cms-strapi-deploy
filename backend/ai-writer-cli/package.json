@@ -7,12 +7,12 @@
   "bin": {
     "fxn-ai": "./generate.js",
     "fxn-site-post": "./generate-site-post.js",
-    "fxn-nxt-deals-post": "./generate-nxt-deals-post.js"
+    "fxn-nxt-bargains-post": "./generate-nxt-bargains-post.js"
   },
   "scripts": {
     "generate": "node generate.js",
     "generate:site-post": "node generate-site-post.js",
-    "generate:nxt-deals-post": "node generate-nxt-deals-post.js"
+    "generate:nxt-bargains-post": "node generate-nxt-bargains-post.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",

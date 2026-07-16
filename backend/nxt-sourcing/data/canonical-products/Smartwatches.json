@@ -1,0 +1,942 @@
+{
+  "schemaVersion": 1,
+  "category": "Smartwatches",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "band",
+    "strap",
+    "watch band",
+    "watch strap",
+    "case",
+    "cover",
+    "screen protector",
+    "tempered glass",
+    "charger",
+    "charging cable",
+    "adapter",
+    "dock",
+    "stand",
+    "mount",
+    "skin",
+    "sticker",
+    "battery",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model"
+  ],
+  "families": [
+    {
+      "brand": "Apple",
+      "family": "Apple Watch Series",
+      "category": "Smartwatches",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple Watch Series 9",
+          "model": "Watch Series 9",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "series",
+            "9"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple Watch Series 9 smartwatch",
+            "Apple Watch Series 9 new smartwatch",
+            "Apple Watch Series 9 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple Watch Series 10",
+          "model": "Watch Series 10",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "series",
+            "10"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple Watch Series 10 smartwatch",
+            "Apple Watch Series 10 new smartwatch",
+            "Apple Watch Series 10 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple Watch Series 11",
+          "model": "Watch Series 11",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "series",
+            "11"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple Watch Series 11 smartwatch",
+            "Apple Watch Series 11 new smartwatch",
+            "Apple Watch Series 11 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Apple",
+      "family": "Apple Watch Ultra",
+      "category": "Smartwatches",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple Watch Ultra 2",
+          "model": "Watch Ultra 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ultra",
+            "2"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple Watch Ultra 2 smartwatch",
+            "Apple Watch Ultra 2 new smartwatch",
+            "Apple Watch Ultra 2 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Apple Watch Ultra 3",
+          "model": "Watch Ultra 3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "ultra",
+            "3"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple Watch Ultra 3 smartwatch",
+            "Apple Watch Ultra 3 new smartwatch",
+            "Apple Watch Ultra 3 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Apple",
+      "family": "Apple Watch SE",
+      "category": "Smartwatches",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple Watch SE 3",
+          "model": "Watch SE 3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "se",
+            "3"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Apple Watch SE 3 smartwatch",
+            "Apple Watch SE 3 new smartwatch",
+            "Apple Watch SE 3 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Samsung",
+      "family": "Galaxy Watch",
+      "category": "Smartwatches",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Samsung Galaxy Watch6",
+          "model": "Galaxy Watch6",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "watch6"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Watch6 smartwatch",
+            "Samsung Galaxy Watch6 new smartwatch",
+            "Samsung Galaxy Watch6 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Watch7",
+          "model": "Galaxy Watch7",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "watch7"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Watch7 smartwatch",
+            "Samsung Galaxy Watch7 new smartwatch",
+            "Samsung Galaxy Watch7 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Watch8",
+          "model": "Galaxy Watch8",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "watch8"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Watch8 smartwatch",
+            "Samsung Galaxy Watch8 new smartwatch",
+            "Samsung Galaxy Watch8 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Samsung",
+      "family": "Galaxy Watch Classic",
+      "category": "Smartwatches",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Samsung Galaxy Watch6 Classic",
+          "model": "Galaxy Watch6 Classic",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "watch6",
+            "classic"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Watch6 Classic smartwatch",
+            "Samsung Galaxy Watch6 Classic new smartwatch",
+            "Samsung Galaxy Watch6 Classic watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Samsung Galaxy Watch8 Classic",
+          "model": "Galaxy Watch8 Classic",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "watch8",
+            "classic"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Watch8 Classic smartwatch",
+            "Samsung Galaxy Watch8 Classic new smartwatch",
+            "Samsung Galaxy Watch8 Classic watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Samsung",
+      "family": "Galaxy Watch FE",
+      "category": "Smartwatches",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Samsung Galaxy Watch FE",
+          "model": "Galaxy Watch FE",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "fe"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Watch FE smartwatch",
+            "Samsung Galaxy Watch FE new smartwatch",
+            "Samsung Galaxy Watch FE watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Samsung",
+      "family": "Galaxy Watch Ultra",
+      "category": "Smartwatches",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Samsung Galaxy Watch Ultra",
+          "model": "Galaxy Watch Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "galaxy",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Samsung Galaxy Watch Ultra smartwatch",
+            "Samsung Galaxy Watch Ultra new smartwatch",
+            "Samsung Galaxy Watch Ultra watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Pixel Watch",
+      "category": "Smartwatches",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Pixel Watch 2",
+          "model": "Pixel Watch 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "pixel",
+            "2"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Pixel Watch 2 smartwatch",
+            "Google Pixel Watch 2 new smartwatch",
+            "Google Pixel Watch 2 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Google Pixel Watch 3 41mm",
+          "model": "Pixel Watch 3 41mm",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "pixel",
+            "3",
+            "41mm"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Pixel Watch 3 41mm smartwatch",
+            "Google Pixel Watch 3 41mm new smartwatch",
+            "Google Pixel Watch 3 41mm watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Google Pixel Watch 3 45mm",
+          "model": "Pixel Watch 3 45mm",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "pixel",
+            "3",
+            "45mm"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Pixel Watch 3 45mm smartwatch",
+            "Google Pixel Watch 3 45mm new smartwatch",
+            "Google Pixel Watch 3 45mm watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Google Pixel Watch 4 41mm",
+          "model": "Pixel Watch 4 41mm",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "pixel",
+            "4",
+            "41mm"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Pixel Watch 4 41mm smartwatch",
+            "Google Pixel Watch 4 41mm new smartwatch",
+            "Google Pixel Watch 4 41mm watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "Google Pixel Watch 4 45mm",
+          "model": "Pixel Watch 4 45mm",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "pixel",
+            "4",
+            "45mm"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "Google Pixel Watch 4 45mm smartwatch",
+            "Google Pixel Watch 4 45mm new smartwatch",
+            "Google Pixel Watch 4 45mm watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "OnePlus",
+      "family": "OnePlus Watch",
+      "category": "Smartwatches",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "OnePlus Watch 2",
+          "model": "Watch 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "2"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Watch 2 smartwatch",
+            "OnePlus Watch 2 new smartwatch",
+            "OnePlus Watch 2 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Watch 2R",
+          "model": "Watch 2R",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "2r"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Watch 2R smartwatch",
+            "OnePlus Watch 2R new smartwatch",
+            "OnePlus Watch 2R watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Watch 3",
+          "model": "Watch 3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "3"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Watch 3 smartwatch",
+            "OnePlus Watch 3 new smartwatch",
+            "OnePlus Watch 3 watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        },
+        {
+          "canonicalName": "OnePlus Watch 3 43mm",
+          "model": "Watch 3 43mm",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "requiredTerms": [
+            "3",
+            "43mm"
+          ],
+          "excludeTerms": [
+            "band",
+            "strap",
+            "case",
+            "cover",
+            "screen protector",
+            "charger",
+            "charging cable",
+            "dock",
+            "stand",
+            "for parts",
+            "parts only",
+            "refurbished",
+            "renewed",
+            "used"
+          ],
+          "searchQueries": [
+            "OnePlus Watch 3 43mm smartwatch",
+            "OnePlus Watch 3 43mm new smartwatch",
+            "OnePlus Watch 3 43mm watch"
+          ],
+          "variantsToSplitLater": [
+            "size",
+            "connectivity",
+            "color",
+            "band",
+            "region"
+          ]
+        }
+      ]
+    }
+  ]
+}
