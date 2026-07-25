@@ -23,7 +23,15 @@ if [[ -z "${PRICE_REFRESH_SECRET:-}" ]]; then
   exit 1
 fi
 
-flock -n "${LOCK_FILE}" curl --fail --show-error --silent \
+# Skip (not fail) if another run is already in progress, so overlapping
+# scheduled/manual runs don't get reported as errors.
+exec 9>"${LOCK_FILE}"
+if ! flock -n 9; then
+  echo "$(date -Is) another run holds the lock; skipping"
+  exit 0
+fi
+
+curl --fail --show-error --silent \
   --request POST "${REFRESH_URL}" \
   --header "Authorization: Bearer ${PRICE_REFRESH_SECRET}" \
   --header "Content-Type: application/json" \
