@@ -63,6 +63,9 @@
       "multiple": false,
       "allowedTypes": ["images"]
     },
+    "faqs": {
+      "type": "json"
+    },
     "scheduledFor": {
       "type": "datetime"
     },
