@@ -66,6 +66,9 @@
     "faqs": {
       "type": "json"
     },
+    "steps": {
+      "type": "json"
+    },
     "scheduledFor": {
       "type": "datetime"
     },
