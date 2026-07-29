@@ -3,23 +3,31 @@
  * Generate product descriptions for BLS products via the Anthropic API.
  *
  * For each product (or a single product when SLUG is set):
- *   1. Skip if `description` already meets MIN_LENGTH (unless FORCE=1).
- *   2. Build a prompt from name + brand + keyFeatures + ingredients +
+ *   1. Skip if this script already generated the description (descriptionGeneratedAt
+ *      or the ### Overview / ### Key Features / ### Benefits template), unless FORCE=1.
+ *   2. Also skip when `description` already meets MIN_LENGTH (unless FORCE=1).
+ *   3. Build a prompt from name + brand + keyFeatures + ingredients +
  *      shortDescription. Ask Claude for ~150-220 words of markdown copy:
  *      one short opening line, then 1-2 paragraphs covering what the product
  *      does, who it's for, and any standout ingredient notes.
- *   3. PUT the result into Strapi's `description` field.
+ *   4. PUT the result into Strapi's `description` field and stamp
+ *      `descriptionGeneratedAt` so reruns can skip it.
  *
  * Cost: ~$0.003 per product on Sonnet (~700 in / ~300 out tokens).
  *       60 products → ~$0.18.
  *
  * Required env:
  *   STRAPI_URL              default: http://127.0.0.1:8888
- *   STRAPI_TOKEN            REQUIRED
- *   ANTHROPIC_API_KEY       REQUIRED
+ *   OPENROUTER_API_KEY      preferred for anthropic/claude-opus-4-8
+ *   ANTHROPIC_API_KEY       fallback direct Anthropic API
+ *
+ * Strapi auth (auto-loaded from ../.env when present):
+ *   STRAPI_TOKEN | STRAPI_API_TOKEN | AUTOPOST_STRAPI_TOKEN
+ *   Required only when writing to Strapi (not needed for DRY_RUN=1 previews).
  *
  * Optional env:
- *   CLAUDE_MODEL            default: claude-sonnet-4-5-20250929
+ *   CLAUDE_MODEL            default: anthropic/claude-opus-4-8
+ *   OPENROUTER_MODEL        alias for CLAUDE_MODEL when using OpenRouter
  *   LIMIT                   cap product count
  *   DRY_RUN=1               print generated copy but don't write to Strapi
  *   FORCE=1                 regenerate even when a description exists
@@ -39,10 +47,39 @@
  *   FORCE=1 node scripts/generate-product-descriptions.mjs
  */
 
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+function loadEnv(path) {
+  if (!existsSync(path)) return;
+  const content = readFileSync(path, 'utf8');
+  content.split(/\r?\n/).forEach((line) => {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) return;
+    const match = trimmed.match(/^([A-Za-z_][A-Za-z0-9_]*)=(.*)$/);
+    if (!match) return;
+    const [, key, rawValue] = match;
+    if (process.env[key] !== undefined) return;
+    process.env[key] = rawValue.replace(/^['"]|['"]$/g, '');
+  });
+}
+
+const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
+const APP_DIR = resolve(SCRIPT_DIR, '..');
+loadEnv(resolve(APP_DIR, '.env'));
+loadEnv(resolve(APP_DIR, '.env.local'));
+
 const STRAPI_URL = (process.env.STRAPI_URL || 'http://127.0.0.1:8888').replace(/\/$/, '');
-const STRAPI_TOKEN = process.env.STRAPI_TOKEN;
+const STRAPI_TOKEN =
+  process.env.STRAPI_TOKEN ||
+  process.env.STRAPI_API_TOKEN ||
+  process.env.AUTOPOST_STRAPI_TOKEN ||
+  '';
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || '';
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
-const CLAUDE_MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-4-5-20250929';
+const AI_MODEL = process.env.CLAUDE_MODEL || process.env.OPENROUTER_MODEL || 'anthropic/claude-opus-4-8';
+const USE_OPENROUTER = Boolean(OPENROUTER_API_KEY);
 const LIMIT = process.env.LIMIT ? parseInt(process.env.LIMIT, 10) : 0;
 const DRY_RUN = process.env.DRY_RUN === '1';
 const FORCE = process.env.FORCE === '1';
@@ -50,13 +87,33 @@ const SLUG = process.env.SLUG || '';
 const MIN_LENGTH = process.env.MIN_LENGTH ? parseInt(process.env.MIN_LENGTH, 10) : 300;
 const CONCURRENCY = process.env.CONCURRENCY ? parseInt(process.env.CONCURRENCY, 10) : 3;
 const VERBOSE = process.env.VERBOSE === '1';
+const GENERATED_SECTIONS = [/###\s*Overview\b/i, /###\s*Key Features\b/i, /###\s*Benefits\b/i];
 
-if (!STRAPI_TOKEN) abort('STRAPI_TOKEN env var is required');
-if (!ANTHROPIC_KEY) abort('ANTHROPIC_API_KEY env var is required');
+if (!USE_OPENROUTER && !ANTHROPIC_KEY) {
+  abort('OPENROUTER_API_KEY or ANTHROPIC_API_KEY env var is required');
+}
 
 function abort(msg) {
   console.error(`error: ${msg}`);
   process.exit(1);
+}
+
+function looksLikeGeneratedDescription(text) {
+  const value = String(text || '').trim();
+  if (!value) return false;
+  return GENERATED_SECTIONS.every((pattern) => pattern.test(value));
+}
+
+function hasGeneratedDescription(product) {
+  if (product.descriptionGeneratedAt) return true;
+  return looksLikeGeneratedDescription(product.description);
+}
+
+function needsDescription(product) {
+  if (FORCE) return true;
+  if (hasGeneratedDescription(product)) return false;
+  const current = String(product.description || '').trim();
+  return current.length < MIN_LENGTH;
 }
 
 // --------------------------------------------------------------------------
@@ -67,7 +124,7 @@ async function strapi(path, init = {}) {
     ...init,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${STRAPI_TOKEN}`,
+      ...(STRAPI_TOKEN ? { Authorization: `Bearer ${STRAPI_TOKEN}` } : {}),
       ...(init.headers || {}),
     },
   });
@@ -101,6 +158,7 @@ async function listProducts() {
 
 async function updateProduct(documentId, patch) {
   if (DRY_RUN) return;
+  if (!STRAPI_TOKEN) abort('Strapi token required to write. Set STRAPI_TOKEN, STRAPI_API_TOKEN, or AUTOPOST_STRAPI_TOKEN.');
   await strapi(`/api/bls-products/${documentId}`, {
     method: 'PUT',
     body: JSON.stringify({ data: patch }),
@@ -179,8 +237,38 @@ function buildUserPrompt(p) {
 }
 
 async function callClaude(userPrompt) {
+  if (USE_OPENROUTER) {
+    const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': process.env.OPENROUTER_SITE_URL || 'https://bestlooking.skin',
+        'X-Title': process.env.OPENROUTER_APP_NAME || 'BLS Product Descriptions',
+      },
+      body: JSON.stringify({
+        model: AI_MODEL,
+        max_tokens: 1200,
+        temperature: 0.35,
+        response_format: { type: 'json_object' },
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: userPrompt },
+        ],
+      }),
+    });
+    if (!r.ok) {
+      const txt = await r.text();
+      throw new Error(`OpenRouter ${r.status}: ${txt.slice(0, 300)}`);
+    }
+    const j = await r.json();
+    const text = String(j.choices?.[0]?.message?.content || '').trim();
+    if (!text) throw new Error('Empty response from OpenRouter');
+    return { text, usage: j.usage };
+  }
+
   const body = {
-    model: CLAUDE_MODEL,
+    model: AI_MODEL,
     max_tokens: 1200,
     system: SYSTEM_PROMPT,
     messages: [{ role: 'user', content: userPrompt }],
@@ -254,17 +342,20 @@ async function runPool(items, worker, concurrency) {
 // main
 // --------------------------------------------------------------------------
 async function main() {
-  console.log(`▶ generating descriptions via ${CLAUDE_MODEL}${DRY_RUN ? ' (DRY RUN)' : ''}`);
+  console.log(`▶ generating descriptions via ${AI_MODEL}${DRY_RUN ? ' (DRY RUN)' : ''}${USE_OPENROUTER ? ' [openrouter]' : ' [anthropic]'}`);
 
   const all = await listProducts();
-  const candidates = all.filter((p) => {
-    if (FORCE) return true;
-    const cur = (p.description || '').trim();
-    return cur.length < MIN_LENGTH;
-  });
+  const candidates = all.filter(needsDescription);
+  const skippedGenerated = FORCE
+    ? 0
+    : all.filter((product) => hasGeneratedDescription(product)).length;
   if (LIMIT > 0 && candidates.length > LIMIT) candidates.length = LIMIT;
 
-  console.log(`  ${all.length} products total · ${candidates.length} need a description\n`);
+  console.log(
+    `  ${all.length} products total · ${candidates.length} need a description` +
+    (skippedGenerated ? ` · ${skippedGenerated} already generated` : '') +
+    '\n',
+  );
 
   let written = 0, errored = 0, totalIn = 0, totalOut = 0;
 
@@ -277,7 +368,11 @@ async function main() {
       totalIn += usage?.input_tokens ?? 0;
       totalOut += usage?.output_tokens ?? 0;
       const { description, keyFeatures } = parseClaudeJson(text);
-      await updateProduct(p.documentId, { description, keyFeatures });
+      await updateProduct(p.documentId, {
+        description,
+        keyFeatures,
+        descriptionGeneratedAt: new Date().toISOString(),
+      });
       written += 1;
       console.log(`  ✓ ${p.slug}: ${description.length} chars · ${keyFeatures.length} features`);
     } catch (err) {

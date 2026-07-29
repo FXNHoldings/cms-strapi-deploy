@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -7,6 +7,7 @@ import {
   Main,
   SingleSelect,
   SingleSelectOption,
+  TextInput,
   Textarea,
   Typography,
   Alert,
@@ -14,8 +15,20 @@ import {
 } from '@strapi/design-system';
 import { useFetchClient, useNotification } from '@strapi/strapi/admin';
 
+type ProviderOption = {
+  id: 'openrouter' | 'anthropic';
+  configured: boolean;
+  defaultModel: string;
+};
+
+type WriterOptions = {
+  defaultProvider: 'openrouter' | 'anthropic';
+  providers: ProviderOption[];
+  maxTokens: number;
+};
+
 export const App = () => {
-  const { post } = useFetchClient();
+  const { get, post } = useFetchClient();
   const { toggleNotification } = useNotification();
   const [topic, setTopic] = useState('');
   const [tone, setTone] = useState('friendly');
@@ -23,9 +36,35 @@ export const App = () => {
   const [destination, setDestination] = useState('');
   const [category, setCategory] = useState('');
   const [keywords, setKeywords] = useState('');
+  const [customInstructions, setCustomInstructions] = useState('');
+  const [provider, setProvider] = useState<'openrouter' | 'anthropic'>('openrouter');
+  const [model, setModel] = useState('');
+  const [options, setOptions] = useState<WriterOptions | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await get('/ai-writer/options');
+        setOptions(data);
+        setProvider(data.defaultProvider);
+        const active = data.providers.find((p: ProviderOption) => p.id === data.defaultProvider);
+        setModel(active?.defaultModel || '');
+      } catch {
+        setOptions(null);
+      }
+    })();
+  }, [get]);
+
+  const onProviderChange = (next: 'openrouter' | 'anthropic') => {
+    setProvider(next);
+    const picked = options?.providers.find((p) => p.id === next);
+    setModel(picked?.defaultModel || '');
+  };
+
+  const providerConfigured = options?.providers.find((p) => p.id === provider)?.configured ?? true;
 
   const run = async () => {
     if (!topic.trim()) return;
@@ -40,6 +79,9 @@ export const App = () => {
         destination: destination || undefined,
         category: category || undefined,
         keywords: keywords ? keywords.split(',').map((k) => k.trim()).filter(Boolean) : undefined,
+        customInstructions: customInstructions.trim() || undefined,
+        provider,
+        model: model.trim() || undefined,
         createDraft: true,
       });
       setResult(data);
@@ -57,12 +99,36 @@ export const App = () => {
         <Typography variant="alpha">AI Writer</Typography>
         <Box paddingTop={2} paddingBottom={6}>
           <Typography variant="omega" textColor="neutral600">
-            Generate SEO-ready travel articles with Claude Sonnet 4.5. A draft Article will be
+            Generate SEO-ready travel articles via OpenRouter or Anthropic. A draft Article will be
             created — review, attach media, pick destinations, then publish.
           </Typography>
         </Box>
 
         <Grid.Root gap={4}>
+          <Grid.Item col={6} s={12}>
+            <Field.Root name="provider">
+              <Field.Label>AI provider</Field.Label>
+              <SingleSelect value={provider} onChange={(v: any) => onProviderChange(v)}>
+                <SingleSelectOption value="openrouter">OpenRouter</SingleSelectOption>
+                <SingleSelectOption value="anthropic">Anthropic (direct)</SingleSelectOption>
+              </SingleSelect>
+              <Field.Hint>
+                Default from server config. OpenRouter supports many models via one API key.
+              </Field.Hint>
+            </Field.Root>
+          </Grid.Item>
+
+          <Grid.Item col={6} s={12}>
+            <Field.Root name="model">
+              <Field.Label>Model</Field.Label>
+              <TextInput
+                value={model}
+                onChange={(e: any) => setModel(e.target.value)}
+                placeholder={provider === 'openrouter' ? 'anthropic/claude-sonnet-4.6' : 'claude-sonnet-4-5-20250929'}
+              />
+            </Field.Root>
+          </Grid.Item>
+
           <Grid.Item col={12} s={12}>
             <Field.Root name="topic" required>
               <Field.Label>Topic</Field.Label>
@@ -118,14 +184,43 @@ export const App = () => {
               <Textarea value={keywords} onChange={(e: any) => setKeywords(e.target.value)} />
             </Field.Root>
           </Grid.Item>
+
+          <Grid.Item col={12} s={12}>
+            <Field.Root name="customInstructions">
+              <Field.Label>Additional instructions (optional)</Field.Label>
+              <Textarea
+                value={customInstructions}
+                onChange={(e: any) => setCustomInstructions(e.target.value)}
+                placeholder="e.g. Mention budget airlines, include a packing list section, avoid luxury positioning"
+              />
+            </Field.Root>
+          </Grid.Item>
         </Grid.Root>
+
+        {!providerConfigured && (
+          <Box paddingTop={4}>
+            <Alert variant="warning" title="API key missing">
+              {provider === 'openrouter'
+                ? 'Set OPENROUTER_API_KEY in Strapi .env and restart Strapi.'
+                : 'Set ANTHROPIC_API_KEY in Strapi .env and restart Strapi.'}
+            </Alert>
+          </Box>
+        )}
 
         <Box paddingTop={6}>
           <Flex gap={3}>
-            <Button loading={loading} disabled={!topic.trim()} onClick={run}>
+            <Button loading={loading} disabled={!topic.trim() || !providerConfigured} onClick={run}>
               Generate article
             </Button>
-            <Button variant="tertiary" onClick={() => { setTopic(''); setResult(null); setError(null); }}>
+            <Button
+              variant="tertiary"
+              onClick={() => {
+                setTopic('');
+                setCustomInstructions('');
+                setResult(null);
+                setError(null);
+              }}
+            >
               Reset
             </Button>
           </Flex>
@@ -140,6 +235,13 @@ export const App = () => {
         {result?.draft && (
           <Box paddingTop={8}>
             <Typography variant="beta">Preview: {result.draft.title}</Typography>
+            {result?.meta?.provider && (
+              <Box paddingTop={1}>
+                <Typography textColor="neutral600">
+                  {result.meta.provider} / {result.meta.model}
+                </Typography>
+              </Box>
+            )}
             <Box paddingTop={2}>
               <Typography textColor="neutral600">{result.draft.excerpt}</Typography>
             </Box>

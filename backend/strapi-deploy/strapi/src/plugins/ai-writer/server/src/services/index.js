@@ -1,3 +1,8 @@
 'use strict';
-const claude = require('./claude');
-module.exports = { claude };
+
+const ai = require('./ai');
+
+module.exports = {
+  ai,
+  claude: ai,
+};

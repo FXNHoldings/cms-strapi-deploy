@@ -1,14 +1,20 @@
 'use strict';
+
 const slugify = require('slugify');
 
 module.exports = {
+  async options(ctx) {
+    const svc = strapi.plugin('ai-writer').service('ai');
+    ctx.body = svc.getOptions();
+  },
+
   async generate(ctx) {
     const body = ctx.request.body || {};
     if (!body.topic || typeof body.topic !== 'string') {
       return ctx.badRequest('Missing required field: topic');
     }
 
-    const svc = strapi.plugin('ai-writer').service('claude');
+    const svc = strapi.plugin('ai-writer').service('ai');
     const draft = await svc.generate({
       topic: body.topic,
       tone: body.tone,
@@ -17,6 +23,9 @@ module.exports = {
       category: body.category,
       keywords: body.keywords,
       language: body.language,
+      provider: body.provider,
+      model: body.model,
+      customInstructions: body.customInstructions,
     });
 
     if (!draft.slug) {
@@ -40,6 +49,8 @@ module.exports = {
       });
     }
 
-    ctx.body = { draft, created };
+    const meta = draft._meta || {};
+    delete draft._meta;
+    ctx.body = { draft, created, meta };
   },
 };

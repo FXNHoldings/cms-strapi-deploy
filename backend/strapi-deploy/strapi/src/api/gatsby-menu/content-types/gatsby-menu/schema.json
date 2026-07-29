@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gatsby_menus",
+  "info": {
+    "singularName": "gatsby-menu",
+    "pluralName": "gatsby-menus",
+    "displayName": "Gatsby · Menu",
+    "description": "Navigation links for the Gatsby starter website at build.fxnstudio.com"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "location": {
+      "type": "enumeration",
+      "enum": ["header", "footer", "utility"],
+      "default": "header",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "target": {
+      "type": "enumeration",
+      "enum": ["self", "blank"],
+      "default": "self"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::gatsby-menu.gatsby-menu",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::gatsby-menu.gatsby-menu",
+      "mappedBy": "parent"
+    }
+  }
+}

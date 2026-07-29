@@ -12,6 +12,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import slugify from 'slugify';
 import { input, select } from '@inquirer/prompts';
+import { parseAiJson } from './parse-ai-json.js';
 
 const SITE_CONFIG = {
   'nxt.bargains': {
@@ -19,6 +20,7 @@ const SITE_CONFIG = {
     postEndpoint: '/api/nxt-posts',
     categoryEndpoint: '/api/nxt-categories',
     adminUid: 'api::nxt-post.nxt-post',
+    publicMediaUrl: 'https://nxt.bargains',
     defaultPostType: 'product-comparison',
     defaultCategories: [
       'product-comparisons',
@@ -40,6 +42,7 @@ const SITE_CONFIG = {
     postEndpoint: '/api/bls-posts',
     categoryEndpoint: '/api/bls-categories',
     adminUid: 'api::bls-post.bls-post',
+    publicMediaUrl: 'https://bestlooking.skin',
     defaultPostType: 'product-review',
     defaultCategories: [
       'skincare-reviews',
@@ -57,6 +60,7 @@ const SITE_CONFIG = {
     postEndpoint: '/api/nxtsmart-posts',
     categoryEndpoint: '/api/nxtsmart-categories',
     adminUid: 'api::nxtsmart-post.nxtsmart-post',
+    publicMediaUrl: 'https://nxtsmart.homes',
     defaultPostType: 'informative',
     defaultCategories: [
       'smart-home-automation',
@@ -101,8 +105,8 @@ const argv = yargs(hideBin(process.argv))
   .option('length', {
     alias: 'l',
     type: 'string',
-    default: 'long',
-    choices: ['short', 'medium', 'long'],
+    choices: ['medium', 'long', 'very-long'],
+    describe: 'Article length target. Prompts when omitted in an interactive terminal.',
   })
   .option('post-type', {
     type: 'string',
@@ -144,6 +148,8 @@ const {
   CLAUDE_MAX_TOKENS = '4096',
   STRAPI_URL,
   STRAPI_API_TOKEN,
+  STRAPI_PUBLIC_URL,
+  NEXT_PUBLIC_STRAPI_URL,
   FAL_KEY,
 } = process.env;
 
@@ -202,10 +208,28 @@ const NXT_BARGAINS_DEAL_MARKETPLACES = [
     file: 'best-sellers-newegg.json',
   },
 ];
-const NXT_BARGAINS_DEALS_MIN_WORDS = 1000;
 const NXT_BARGAINS_SITE_URL = 'https://nxt.bargains';
 const NXT_SMART_HOME_CATEGORY = 'smart-home';
-const NXT_SMART_HOME_MIN_WORDS = 1000;
+const ARTICLE_LENGTH_TARGETS = {
+  medium: {
+    label: 'Medium',
+    words: '1000-1300',
+    dealsMin: 1000,
+    smartHomeMin: 1000,
+  },
+  long: {
+    label: 'Long',
+    words: '1500-2200',
+    dealsMin: 1400,
+    smartHomeMin: 1400,
+  },
+  'very-long': {
+    label: 'Very long',
+    words: '2200-3000',
+    dealsMin: 1800,
+    smartHomeMin: 1800,
+  },
+};
 const NXT_SMART_HOME_PRODUCT_CAROUSEL_LIMIT = 8;
 const NXT_SMART_HOME_PRODUCT_CATEGORIES = [
   {
@@ -229,10 +253,41 @@ const NXT_SMART_HOME_PRODUCT_CATEGORIES = [
     categoryPage: `${NXT_BARGAINS_SITE_URL}/category/smart-door-locks`,
   },
 ];
+const NXT_CORE_ELECTRONICS_CATEGORIES = [
+  { slug: 'smart-phones', label: 'Smart Phones', categoryPage: `${NXT_BARGAINS_SITE_URL}/category/smart-phones` },
+  { slug: 'smartwatches', label: 'Smartwatches', categoryPage: `${NXT_BARGAINS_SITE_URL}/category/smartwatches` },
+  { slug: 'tablets', label: 'Tablets', categoryPage: `${NXT_BARGAINS_SITE_URL}/category/tablets` },
+  { slug: 'laptops', label: 'Laptops', categoryPage: `${NXT_BARGAINS_SITE_URL}/category/laptops` },
+  { slug: 'smart-tvs', label: 'Smart TVs', categoryPage: `${NXT_BARGAINS_SITE_URL}/category/smart-tvs` },
+  { slug: 'smart-cameras', label: 'Smart Cameras', categoryPage: `${NXT_BARGAINS_SITE_URL}/category/smart-cameras` },
+  { slug: 'smart-speakers', label: 'Smart Speakers', categoryPage: `${NXT_BARGAINS_SITE_URL}/category/smart-speakers` },
+  { slug: 'headphones', label: 'Headphones', categoryPage: `${NXT_BARGAINS_SITE_URL}/category/headphones` },
+  { slug: 'raspberry-pi', label: 'Raspberry PI', categoryPage: `${NXT_BARGAINS_SITE_URL}/category/raspberry-pi` },
+];
+const NXT_COMMERCE_CATEGORIES = [...NXT_CORE_ELECTRONICS_CATEGORIES, ...NXT_SMART_HOME_PRODUCT_CATEGORIES];
+const NXT_COMMERCE_CATEGORY_BY_SLUG = Object.fromEntries(
+  NXT_COMMERCE_CATEGORIES.map((category) => [category.slug, category]),
+);
+const NXT_CORE_ELECTRONICS_SLUGS = NXT_CORE_ELECTRONICS_CATEGORIES.map((category) => category.slug);
+const NXT_SMART_HOME_COMMERCE_SLUGS = NXT_SMART_HOME_PRODUCT_CATEGORIES.map((category) => category.slug);
+const NXT_ALL_COMMERCE_SLUGS = NXT_COMMERCE_CATEGORIES.map((category) => category.slug);
+const NXT_EDITORIAL_COMMERCE_MAP = {
+  'product-comparisons': NXT_CORE_ELECTRONICS_SLUGS,
+  'product-reviews': NXT_ALL_COMMERCE_SLUGS,
+  'product-roundups': NXT_ALL_COMMERCE_SLUGS,
+  'buying-guides': NXT_ALL_COMMERCE_SLUGS,
+  'how-to-guides': [...NXT_SMART_HOME_COMMERCE_SLUGS, 'smart-phones', 'laptops', 'tablets', 'smart-tvs', 'smart-speakers'],
+  'top-rated-smart-electronics-devices': NXT_CORE_ELECTRONICS_SLUGS,
+  'nxt-bargains-informative-articles': NXT_ALL_COMMERCE_SLUGS,
+  'smart-home': NXT_SMART_HOME_COMMERCE_SLUGS,
+};
 
 let site = null;
 const categoryCache = new Map();
-let smartHomeProductsCache = null;
+const commerceProductsCache = {
+  byCategorySlug: new Map(),
+  all: [],
+};
 
 async function strapi(pathname, init = {}) {
   const res = await fetch(`${STRAPI_URL}${pathname}`, {
@@ -248,6 +303,18 @@ async function strapi(pathname, init = {}) {
     throw new Error(`Strapi ${res.status} on ${pathname}: ${detail.slice(0, 500)}`);
   }
   return res.json();
+}
+
+function lengthWasProvided() {
+  return process.argv.some((arg) => arg === '--length' || arg.startsWith('--length=') || arg === '-l' || /^-l[^-]/.test(arg));
+}
+
+function resolveArticleLengthConfig() {
+  return ARTICLE_LENGTH_TARGETS[argv.length] || ARTICLE_LENGTH_TARGETS.long;
+}
+
+function articleLengthLabel() {
+  return resolveArticleLengthConfig().label;
 }
 
 async function resolveCategoryId(slugOrName) {
@@ -350,6 +417,20 @@ async function promptForMissingOptions() {
   if (argv.images && !argv['dry-run'] && !FAL_KEY) {
     fatal('FAL_KEY is not set in .env. Get one at https://fal.ai/dashboard/keys - or pass --no-images to skip image generation.');
   }
+
+  if (!lengthWasProvided() && process.stdin.isTTY && process.stdout.isTTY) {
+    argv.length = await select({
+      message: 'How long should each article be?',
+      choices: [
+        { name: 'Medium (about 1,000-1,300 words)', value: 'medium' },
+        { name: 'Long (about 1,500-2,200 words)', value: 'long' },
+        { name: 'Very long (about 2,200-3,000 words)', value: 'very-long' },
+      ],
+      default: 'long',
+    });
+  } else if (!argv.length) {
+    argv.length = 'long';
+  }
 }
 
 async function promptForCategory() {
@@ -379,9 +460,9 @@ async function brainstormTopics(category, count) {
     return products.map((product) => dealTopicForProduct(product));
   }
 
-  if (isNxtSmartHomeCategory(category)) {
-    const products = await pickRandomSmartHomeProducts(count);
-    return products.map((product) => smartHomeTopicForProduct(product));
+  if (isNxtCatalogSeededCategory(category)) {
+    const jobs = await buildCatalogProductJobs(category, count);
+    return jobs.map((job) => job.topic);
   }
 
   const prompt = `Brainstorm ${count} strong blog article titles for ${site.label}.
@@ -406,26 +487,26 @@ Rules:
     user: prompt,
     maxTokens: 1200,
   });
-  const parsed = parseJson(result);
+  const parsed = parseAiJson(result, { providerName: activeProviderName() });
   const topics = Array.isArray(parsed?.topics) ? parsed.topics : [];
   if (!topics.length) throw new Error(`${activeProviderName()} did not return any topics.`);
   return topics.slice(0, count);
 }
 
-async function generatePost(topic, category, { dealProduct = null, smartHomeProduct = null } = {}) {
+async function generatePost(topic, category, { dealProduct = null, catalogProducts = null } = {}) {
   const isDealsPost = isNxtDealsCategory(category);
   const isSmartHomePost = isNxtSmartHomeCategory(category);
-  const wordTarget = isDealsPost ? `at least ${NXT_BARGAINS_DEALS_MIN_WORDS}`
-    : isSmartHomePost ? `at least ${NXT_SMART_HOME_MIN_WORDS}`
-      : {
-        short: '650-850',
-        medium: '1000-1300',
-        long: '1500-2200',
-      }[argv.length];
+  const seededProducts = Array.isArray(catalogProducts) ? catalogProducts.filter(Boolean) : [];
+  const primaryCatalogProduct = seededProducts[0] ?? null;
+  const lengthConfig = resolveArticleLengthConfig();
+  const wordTarget = isDealsPost ? `at least ${lengthConfig.dealsMin}`
+    : isSmartHomePost ? `at least ${lengthConfig.smartHomeMin}`
+      : lengthConfig.words;
 
   const dealContext = dealProductPromptContext(dealProduct);
-  const smartHomeContext = smartHomeProductPromptContext(smartHomeProduct);
-  const contentFormat = isSmartHomePost && smartHomeProduct ? 'HTML' : 'Markdown';
+  const catalogContext = isSmartHomePost ? '' : catalogProductPromptContext(seededProducts, category);
+  const smartHomeContext = isSmartHomePost ? smartHomeProductPromptContext(primaryCatalogProduct) : '';
+  const contentFormat = isSmartHomePost && primaryCatalogProduct ? 'HTML' : 'Markdown';
 
   const prompt = `${site.editorialBrief}
 
@@ -437,7 +518,7 @@ Tone: ${argv.tone}
 Length: ${wordTarget} words
 Language: ${argv.language}
 SEO keywords: ${argv.keywords || 'choose natural keywords from the topic'}
-${dealContext}${smartHomeContext}
+${dealContext}${catalogContext}${smartHomeContext}
 
 Return STRICT JSON only with exactly these keys:
 {
@@ -459,11 +540,14 @@ Content requirements:
 - ${contentFormat} only in "content".
 - Use useful ${contentFormat === 'HTML' ? 'h2/h3' : 'H2/H3'} headings.
 - Include practical comparisons, tips, caveats, and buying/setup guidance where relevant.
-- For NXT.Bargains Best Sellers articles, write at least ${NXT_BARGAINS_DEALS_MIN_WORDS} words in "content".
+- When selected NXT.Bargains catalog products are provided, keep the article grounded in those exact products and their product category. Do not invent specs, prices, ratings, or availability.
+- For NXT.Bargains product comparison articles with two selected catalog products, compare those exact products side by side and keep both as the main subjects.
+- For NXT.Bargains product review articles with a selected catalog product, center the review on that exact product.
+- For NXT.Bargains Best Sellers articles, write at least ${lengthConfig.dealsMin} words in "content".
 - For NXT.Bargains Best Sellers articles, optimize the title for deal-shopping intent and make it concise, specific, and clickable without sounding spammy.
 - For NXT.Bargains Best Sellers articles, make the selected best-seller product the article's main subject and keep the article focused on whether it is a worthwhile deal.
 - For NXT.Bargains Best Sellers articles, include why shoppers may want it, where the value is, who should skip it, competing alternatives to compare, and what to check before buying.
-- For NXT.Bargains Smart Home articles, write at least ${NXT_SMART_HOME_MIN_WORDS} words in "content".
+- For NXT.Bargains Smart Home articles, write at least ${lengthConfig.smartHomeMin} words in "content".
 - For NXT.Bargains Smart Home articles, make the selected smart home product the article's main subject and keep the article focused on setup, compatibility, features, and buyer fit.
 - For NXT.Bargains Smart Home articles, include who should consider it, who should skip it, alternatives to compare, and what to verify before buying.
 - For NXT.Bargains Smart Home articles, use valid HTML with useful <h2>, <h3>, <p>, <ul>, and <li> tags only. Do not include a product snapshot card, summary box, or product image URL; the script inserts those automatically.
@@ -484,14 +568,17 @@ Image prompt requirements:
     user: prompt,
     maxTokens: Math.max(Number(maxOutputTokensEnv()) || 0, 16000),
   });
-  const post = parseJson(text);
+  const post = parseAiJson(text, { providerName: activeProviderName() });
   validatePost(post);
   validateDealPost(post, category);
   validateSmartHomePost(post, category);
   normalizePostForStrapi(post);
   post.slug = slugifyValue(post.slug || post.title);
-  if (smartHomeProduct) {
-    post.content = buildSmartHomePostContent(post.content, smartHomeProduct);
+  if (seededProducts.length) {
+    post.content = rewriteEmbeddedMediaUrls(post.content);
+  }
+  if (isSmartHomePost && primaryCatalogProduct) {
+    post.content = buildSmartHomePostContent(post.content, primaryCatalogProduct);
   }
   post.readingTimeMinutes = Number(post.readingTimeMinutes) || estimateReadingTime(post.content);
   return post;
@@ -662,13 +749,8 @@ async function buildJobs() {
       }));
     }
 
-    if (isNxtSmartHomeCategory(argv.category)) {
-      const products = await pickRandomSmartHomeProducts(argv.count);
-      return products.map((smartHomeProduct) => ({
-        category: argv.category,
-        topic: smartHomeTopicForProduct(smartHomeProduct),
-        smartHomeProduct,
-      }));
+    if (isNxtCatalogSeededCategory(argv.category)) {
+      return buildCatalogProductJobs(argv.category, argv.count);
     }
 
     const topics = await brainstormTopics(argv.category, argv.count);
@@ -690,13 +772,9 @@ async function buildJobs() {
         continue;
       }
 
-      if (isNxtSmartHomeCategory(category)) {
-        const smartHomeJobs = (await pickRandomSmartHomeProducts(perCategory)).map((smartHomeProduct) => ({
-          category,
-          topic: smartHomeTopicForProduct(smartHomeProduct),
-          smartHomeProduct,
-        }));
-        jobs.push(...smartHomeJobs);
+      if (isNxtCatalogSeededCategory(category)) {
+        const catalogJobs = await buildCatalogProductJobs(category, perCategory);
+        jobs.push(...catalogJobs);
         if (jobs.length >= argv.count) break;
         continue;
       }
@@ -722,6 +800,20 @@ function isNxtSmartHomeCategory(category) {
   return slugifyValue(category || '') === NXT_SMART_HOME_CATEGORY;
 }
 
+function isNxtCatalogSeededCategory(category) {
+  if (argv.site !== 'nxt.bargains') return false;
+  if (isNxtDealsCategory(category)) return false;
+  return Boolean(NXT_EDITORIAL_COMMERCE_MAP[slugifyValue(category || '')]);
+}
+
+function commerceSlugsForEditorialCategory(category) {
+  return NXT_EDITORIAL_COMMERCE_MAP[slugifyValue(category || '')] || [];
+}
+
+function catalogProductsNeededForEditorialCategory(category) {
+  return slugifyValue(category || '') === 'product-comparisons' ? 2 : 1;
+}
+
 async function enrichJobWithProductSeed(job) {
   if (isNxtDealsCategory(job.category) && !job.dealProduct) {
     return {
@@ -730,12 +822,12 @@ async function enrichJobWithProductSeed(job) {
     };
   }
 
-  if (isNxtSmartHomeCategory(job.category) && !job.smartHomeProduct) {
-    const smartHomeProduct = (await pickRandomSmartHomeProducts(1))[0];
+  if (isNxtCatalogSeededCategory(job.category) && !job.catalogProducts?.length) {
+    const { products, topic } = await pickCatalogProductsForEditorial(job.category);
     return {
       ...job,
-      smartHomeProduct,
-      topic: job.topic || smartHomeTopicForProduct(smartHomeProduct),
+      catalogProducts: products,
+      topic: job.topic || topic,
     };
   }
 
@@ -795,11 +887,15 @@ function dealTopicForProduct(product) {
   return `${prefix}: Is ${product.title} actually a good deal?`;
 }
 
-async function loadNxtSmartHomeProducts() {
-  if (smartHomeProductsCache) return smartHomeProductsCache;
+async function loadNxtCommerceProducts(categorySlugs = NXT_ALL_COMMERCE_SLUGS) {
+  const normalizedSlugs = [...new Set(categorySlugs.map((slug) => slugifyValue(slug)).filter(Boolean))];
+  const slugsToLoad = normalizedSlugs.filter((slug) => !commerceProductsCache.byCategorySlug.has(slug));
 
-  const products = [];
-  for (const categoryMeta of NXT_SMART_HOME_PRODUCT_CATEGORIES) {
+  for (const categorySlug of slugsToLoad) {
+    const categoryMeta = NXT_COMMERCE_CATEGORY_BY_SLUG[categorySlug];
+    if (!categoryMeta) continue;
+
+    const products = [];
     let page = 1;
     while (true) {
       const params = new URLSearchParams({
@@ -810,12 +906,18 @@ async function loadNxtSmartHomeProducts() {
         'populate[categories][fields][0]': 'name',
         'populate[categories][fields][1]': 'slug',
         'populate[brandRef][fields][0]': 'name',
+        'populate[primaryImage][fields][0]': 'url',
+        'populate[primaryImage][fields][1]': 'alternativeText',
+        'populate[offers][fields][0]': 'price',
+        'populate[offers][fields][1]': 'originalPrice',
+        'populate[offers][fields][2]': 'currency',
+        'populate[offers][fields][3]': 'status',
         'sort[0]': 'updatedAt:desc',
       });
       const response = await strapi(`/api/commerce-products?${params.toString()}`);
       const rows = Array.isArray(response?.data) ? response.data : [];
       for (const row of rows) {
-        const normalized = normalizeSmartHomeProduct(row, categoryMeta);
+        const normalized = normalizeCommerceProduct(row, categoryMeta);
         if (normalized) products.push(normalized);
       }
 
@@ -823,22 +925,26 @@ async function loadNxtSmartHomeProducts() {
       if (page >= pageCount || rows.length === 0) break;
       page += 1;
     }
+
+    commerceProductsCache.byCategorySlug.set(categorySlug, products);
+    commerceProductsCache.all.push(...products);
   }
 
-  if (!products.length) {
-    fatal('No active NXT.Bargains smart home products found in Smart Light Bulbs, Smart Plugs, Smart Doorbells, or Smart Door Locks.');
+  const loadedProducts = normalizedSlugs.flatMap((slug) => commerceProductsCache.byCategorySlug.get(slug) || []);
+  if (!loadedProducts.length) {
+    fatal(`No active NXT.Bargains catalog products found for categories: ${normalizedSlugs.join(', ')}`);
   }
 
-  smartHomeProductsCache = products;
-  return products;
+  return loadedProducts;
 }
 
-function normalizeSmartHomeProduct(row, categoryMeta) {
+function normalizeCommerceProduct(row, categoryMeta) {
   const title = String(row?.name || row?.title || '').trim();
   const slug = String(row?.slug || '').trim();
   if (!title || !slug) return null;
 
   const categorySlug = row?.categories?.[0]?.slug || categoryMeta.slug;
+  const meta = NXT_COMMERCE_CATEGORY_BY_SLUG[categorySlug] || categoryMeta;
   const brand = row?.brandRef?.name || row?.brand || row?.specs?.technicalSpecs?.Brand || null;
 
   return {
@@ -846,32 +952,241 @@ function normalizeSmartHomeProduct(row, categoryMeta) {
     title,
     slug,
     categorySlug,
-    categoryLabel: categoryMeta.label,
-    categoryPage: categoryMeta.categoryPage,
+    categoryLabel: meta.label,
+    categoryPage: meta.categoryPage,
     shortDescription: String(row?.shortDescription || '').trim(),
     brand: brand ? String(brand).trim() : null,
-    imageUrl: absolutizeMediaUrl(row?.specs?.imageUrl || row?.specs?.sourceImageUrl || null),
+    imageUrl: resolveProductImageUrl(row),
     sourceUrl: row?.specs?.sourceUrl || row?.specs?.specSourceUrl || null,
     productUrl: `${NXT_BARGAINS_SITE_URL}/${categorySlug}/${slug}`,
+    displayPrice: catalogProductDisplayPrice(row),
   };
+}
+
+function catalogProductDisplayPrice(row) {
+  const offers = Array.isArray(row?.offers) ? row.offers : [];
+  const activeOffers = offers.filter((offer) => !offer?.status || offer.status === 'active');
+  const pool = activeOffers.length ? activeOffers : offers;
+
+  let bestPrice = null;
+  let bestCurrency = 'USD';
+  for (const offer of pool) {
+    const price = Number(offer?.price ?? offer?.originalPrice);
+    if (!Number.isFinite(price)) continue;
+    if (bestPrice === null || price < bestPrice) {
+      bestPrice = price;
+      bestCurrency = offer?.currency || 'USD';
+    }
+  }
+
+  if (bestPrice === null) return null;
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: bestCurrency,
+    maximumFractionDigits: bestPrice % 1 === 0 ? 0 : 2,
+  }).format(bestPrice);
+}
+
+function catalogCarouselPriceMarkup(product) {
+  if (!product?.displayPrice) return '';
+  return `<span class="nxt-product-carousel__price">${escapeHtml(product.displayPrice)}</span>`;
+}
+
+async function pickCatalogProductsForEditorial(editorialCategory, { commerceCategorySlug = null } = {}) {
+  const allowedSlugs = commerceSlugsForEditorialCategory(editorialCategory);
+  if (!allowedSlugs.length) {
+    fatal(`No commerce category mapping configured for editorial category "${editorialCategory}".`);
+  }
+
+  const targetSlug = commerceCategorySlug && allowedSlugs.includes(commerceCategorySlug)
+    ? commerceCategorySlug
+    : allowedSlugs[Math.floor(Math.random() * allowedSlugs.length)];
+
+  await loadNxtCommerceProducts([targetSlug]);
+  const pool = [...(commerceProductsCache.byCategorySlug.get(targetSlug) || [])];
+  if (!pool.length) {
+    fatal(`No active NXT.Bargains products found in ${targetSlug}.`);
+  }
+
+  shuffleInPlace(pool);
+  const needed = catalogProductsNeededForEditorialCategory(editorialCategory);
+  const products = pool.slice(0, Math.min(needed, pool.length));
+  return {
+    commerceCategorySlug: targetSlug,
+    products,
+    topic: topicForCatalogProducts(products, editorialCategory),
+  };
+}
+
+async function buildCatalogProductJobs(editorialCategory, count = 1) {
+  const jobs = [];
+  const allowedSlugs = commerceSlugsForEditorialCategory(editorialCategory);
+
+  for (let index = 0; index < Math.max(1, Number(count) || 1); index += 1) {
+    const commerceCategorySlug = allowedSlugs[index % allowedSlugs.length];
+    const { products, topic } = await pickCatalogProductsForEditorial(editorialCategory, { commerceCategorySlug });
+    jobs.push({
+      category: editorialCategory,
+      topic,
+      catalogProducts: products,
+    });
+  }
+
+  return jobs;
+}
+
+function topicForCatalogProducts(products, editorialCategory) {
+  const [primary, secondary] = products;
+  if (!primary) return 'Untitled catalog article';
+
+  const editorialSlug = slugifyValue(editorialCategory || '');
+  const categoryLabel = primary.categoryLabel;
+
+  if (editorialSlug === 'product-comparisons' && secondary) {
+    return `${primary.title} vs ${secondary.title}: which ${categoryLabel} is the better buy?`;
+  }
+  if (editorialSlug === 'product-reviews') {
+    return `Review: Is ${primary.title} worth buying?`;
+  }
+  if (editorialSlug === 'product-roundups') {
+    return `Best ${categoryLabel} picks to compare right now, starting with ${primary.title}`;
+  }
+  if (editorialSlug === 'buying-guides') {
+    return `How to choose the right ${categoryLabel}: ${primary.title} and what to compare`;
+  }
+  if (editorialSlug === 'how-to-guides') {
+    return `How to set up and get the most from ${primary.title}`;
+  }
+  if (editorialSlug === 'top-rated-smart-electronics-devices') {
+    return `Top-rated ${categoryLabel}: why ${primary.title} stands out`;
+  }
+  if (editorialSlug === 'nxt-bargains-informative-articles') {
+    return `${categoryLabel} explained: what ${primary.title} tells shoppers`;
+  }
+  if (editorialSlug === NXT_SMART_HOME_CATEGORY) {
+    return smartHomeTopicForProduct(primary);
+  }
+
+  return `${categoryLabel}: Is ${primary.title} worth checking on NXT.Bargains?`;
+}
+
+function catalogProductPromptContext(products, editorialCategory) {
+  const list = Array.isArray(products) ? products.filter(Boolean) : [];
+  if (!list.length) return '';
+
+  const editorialSlug = slugifyValue(editorialCategory || '');
+  const productBlocks = list.map((product, index) => `Product ${index + 1}:
+- Product category: ${product.categoryLabel}
+- Category page: ${product.categoryPage}
+- Product title: ${product.title}
+- Brand: ${product.brand ?? 'not listed'}
+- Short description: ${product.shortDescription || 'not listed'}
+- NXT.Bargains product page: ${product.productUrl}
+- Merchant/source URL: ${product.sourceUrl ?? 'not listed'}`).join('\n\n');
+
+  const comparisonRule = editorialSlug === 'product-comparisons' && list.length > 1
+    ? '- Compare the selected catalog products directly. Keep both products as the main subjects and stay within the same product category.'
+    : '- Keep the selected catalog product as the main subject throughout the article. Do not drift into a generic category roundup.';
+
+  return `
+
+Selected NXT.Bargains catalog product context:
+${productBlocks}
+
+Catalog-grounded article requirements:
+- Base the article on the selected product(s) from the NXT.Bargains catalog above.
+${comparisonRule}
+- Keep the article aligned with the same or similar product category shown above.
+- Mention the product category naturally and link to the NXT.Bargains product page when relevant.
+- Do not invent exact prices, ratings, certifications, compatibility claims, or specs that are not provided.
+- Do not claim the product is objectively the best; explain practical reasons it may or may not fit the shopper.`;
+}
+
+function shuffleInPlace(items) {
+  for (let index = items.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [items[index], items[swapIndex]] = [items[swapIndex], items[index]];
+  }
+  return items;
+}
+
+function publicMediaBase() {
+  return String(
+    STRAPI_PUBLIC_URL
+    || NEXT_PUBLIC_STRAPI_URL
+    || site?.publicMediaUrl
+    || 'https://nxt.bargains',
+  ).replace(/\/$/, '');
+}
+
+function privateStrapiBase() {
+  return String(STRAPI_URL || '').replace(/\/$/, '');
+}
+
+function isLocalStrapiUrl(value) {
+  try {
+    const url = new URL(String(value));
+    return url.hostname === '127.0.0.1' || url.hostname === 'localhost';
+  } catch {
+    return false;
+  }
+}
+
+function resolveProductImageUrl(row) {
+  const primaryImageUrl = row?.primaryImage?.url;
+  if (primaryImageUrl) return absolutizeMediaUrl(primaryImageUrl);
+
+  const specs = row?.specs || {};
+  const candidates = [specs.sourceImageUrl, specs.imageUrl];
+  for (const candidate of candidates) {
+    if (typeof candidate !== 'string' || !candidate.trim()) continue;
+    if (/^https?:\/\//i.test(candidate) && !isLocalStrapiUrl(candidate)) {
+      return candidate.trim();
+    }
+  }
+
+  return absolutizeMediaUrl(specs.imageUrl || specs.sourceImageUrl || null);
 }
 
 function absolutizeMediaUrl(value) {
   const raw = String(value || '').trim();
   if (!raw) return null;
-  if (/^https?:\/\//i.test(raw)) return raw;
-  const base = String(STRAPI_URL || '').replace(/\/$/, '');
-  return base ? `${base}${raw.startsWith('/') ? raw : `/${raw}`}` : raw;
+
+  const publicBase = publicMediaBase();
+  const apiBase = privateStrapiBase();
+
+  if (/^https?:\/\//i.test(raw)) {
+    if (apiBase && raw.startsWith(apiBase)) {
+      return `${publicBase}${raw.slice(apiBase.length)}`;
+    }
+    if (isLocalStrapiUrl(raw)) {
+      const { pathname, search } = new URL(raw);
+      return `${publicBase}${pathname}${search}`;
+    }
+    return raw;
+  }
+
+  return `${publicBase}${raw.startsWith('/') ? raw : `/${raw}`}`;
+}
+
+function rewriteEmbeddedMediaUrls(html) {
+  let content = String(html || '');
+  const publicBase = publicMediaBase();
+  const apiBase = privateStrapiBase();
+
+  if (apiBase) {
+    content = content.split(apiBase).join(publicBase);
+  }
+
+  return content.replace(
+    /https?:\/\/(?:127\.0\.0\.1|localhost)(?::\d+)?(\/[^"'\\s>]*)/gi,
+    `${publicBase}$1`,
+  );
 }
 
 async function pickRandomSmartHomeProducts(count = 1) {
-  const products = await loadNxtSmartHomeProducts();
-  const shuffled = [...products];
-  for (let index = shuffled.length - 1; index > 0; index -= 1) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
-  }
-  return shuffled.slice(0, Math.max(1, Number(count) || 1));
+  const jobs = await buildCatalogProductJobs(NXT_SMART_HOME_CATEGORY, count);
+  return jobs.map((job) => job.catalogProducts[0]).filter(Boolean);
 }
 
 function smartHomeTopicForProduct(product) {
@@ -895,7 +1210,7 @@ Selected NXT.Bargains smart home product context:
 Smart Home article requirements:
 - Base the article on this selected product from the NXT.Bargains ${product.categoryLabel} catalog.
 - Keep the selected product as the main subject throughout the article. Do not drift into a generic category roundup.
-- Write at least ${NXT_SMART_HOME_MIN_WORDS} words of article content.
+- Write at least ${resolveArticleLengthConfig().smartHomeMin} words of article content.
 - Focus on setup, compatibility, automation, security, energy, convenience, and buyer fit for smart home shoppers.
 - Include who should consider it, who should skip it, alternatives to compare, and what to verify before buying.
 - Mention the product category and link naturally to the NXT.Bargains product page when relevant.
@@ -906,7 +1221,7 @@ Smart Home article requirements:
 function buildSmartHomePostContent(html, product) {
   const content = sanitizeGeneratedHtml(html);
   const card = buildSmartHomeProductCard(product);
-  return `${card}\n${insertSmartHomeProductCarouselInMiddle(content, product)}`;
+  return rewriteEmbeddedMediaUrls(`${card}\n${insertSmartHomeProductCarouselInMiddle(content, product)}`);
 }
 
 function sanitizeGeneratedHtml(html) {
@@ -931,8 +1246,8 @@ function insertSmartHomeProductCarouselInMiddle(html, product) {
 }
 
 function buildSmartHomeProductCarousel(product) {
-  const siblings = (smartHomeProductsCache || [])
-    .filter((item) => item.categorySlug === product.categorySlug && item.slug !== product.slug && item.imageUrl)
+  const siblings = (commerceProductsCache.byCategorySlug.get(product.categorySlug) || [])
+    .filter((item) => item.slug !== product.slug && item.imageUrl)
     .slice(0, NXT_SMART_HOME_PRODUCT_CAROUSEL_LIMIT);
 
   if (!siblings.length) return '';
@@ -942,7 +1257,7 @@ function buildSmartHomeProductCarousel(product) {
 <span class="nxt-product-carousel__body">
 <span class="nxt-product-carousel__title">${escapeHtml(item.title)}</span>
 <span class="nxt-product-carousel__meta">${escapeHtml(item.categoryLabel)}</span>
-<span class="nxt-product-carousel__price">View on NXT.Bargains</span>
+${catalogCarouselPriceMarkup(item)}
 </span>
 </a>`).join('\n');
 
@@ -997,7 +1312,7 @@ Best Sellers article requirements:
 - Write as a shopping/deals analysis for someone deciding whether to click through, wait, or compare alternatives.
 - Keep the selected product as the main subject throughout the article. Do not drift into a generic buying guide.
 - The final title should be rewritten and optimized for deal intent, using the product type, marketplace, and deal angle instead of copying the raw product title.
-- Write at least ${NXT_BARGAINS_DEALS_MIN_WORDS} words of article content.
+- Write at least ${resolveArticleLengthConfig().dealsMin} words of article content.
 - Explain the deal angle: why it appeared on a best-seller list, what value shoppers might see, what hidden tradeoffs could reduce the value, and what price/condition/shipping checks matter before buying.
 - Include the marketplace and source best-seller page.
 - Discuss what to verify before buying: final price, shipping, seller, return policy, condition, warranty, compatibility, and current availability.
@@ -1040,17 +1355,6 @@ async function callAI({ system, user, maxTokens }) {
   return msg.content.map((block) => (block.type === 'text' ? block.text : '')).join('').trim();
 }
 
-function parseJson(text) {
-  const cleaned = text.replace(/^```(?:json)?/i, '').replace(/```$/i, '').trim();
-  try {
-    return JSON.parse(cleaned);
-  } catch {
-    const match = cleaned.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error(`${activeProviderName()} did not return JSON.`);
-    return JSON.parse(match[0]);
-  }
-}
-
 function validatePost(post) {
   const required = ['title', 'excerpt', 'content', 'seoTitle', 'seoDescription', 'seoKeywords'];
   for (const field of required) {
@@ -1060,20 +1364,22 @@ function validatePost(post) {
 
 function validateDealPost(post, category) {
   if (!isNxtDealsCategory(category)) return;
+  const minWords = resolveArticleLengthConfig().dealsMin;
   const words = wordCount(post.content);
-  if (words < NXT_BARGAINS_DEALS_MIN_WORDS) {
+  if (words < minWords) {
     throw new Error(
-      `${activeProviderName()} returned a Best Sellers article with ${words} words; minimum is ${NXT_BARGAINS_DEALS_MIN_WORDS}. Run again or increase max tokens.`,
+      `${activeProviderName()} returned a Best Sellers article with ${words} words; minimum is ${minWords}. Run again or increase max tokens.`,
     );
   }
 }
 
 function validateSmartHomePost(post, category) {
   if (!isNxtSmartHomeCategory(category)) return;
+  const minWords = resolveArticleLengthConfig().smartHomeMin;
   const words = wordCount(post.content);
-  if (words < NXT_SMART_HOME_MIN_WORDS) {
+  if (words < minWords) {
     throw new Error(
-      `${activeProviderName()} returned a Smart Home article with ${words} words; minimum is ${NXT_SMART_HOME_MIN_WORDS}. Run again or increase max tokens.`,
+      `${activeProviderName()} returned a Smart Home article with ${words} words; minimum is ${minWords}. Run again or increase max tokens.`,
     );
   }
 }
@@ -1123,7 +1429,7 @@ async function run() {
   await promptForMissingOptions();
 
   console.log(`${site.label} site-post generator`);
-  console.log(`AI: ${aiProvider} | Model: ${activeModel()} | dry-run: ${argv['dry-run']} | publish: ${argv.publish} | images: ${argv.images}\n`);
+  console.log(`AI: ${aiProvider} | Model: ${activeModel()} | length: ${articleLengthLabel()} | dry-run: ${argv['dry-run']} | publish: ${argv.publish} | images: ${argv.images}\n`);
 
   const jobs = await buildJobs();
   console.log(`Queue: ${jobs.length} post(s)\n`);
@@ -1134,12 +1440,12 @@ async function run() {
     if (job.dealProduct) {
       console.log(`  best-seller seed: ${job.dealProduct.marketplace} #${job.dealProduct.rank ?? '?'} · ${job.dealProduct.title}`);
     }
-    if (job.smartHomeProduct) {
-      console.log(`  smart-home seed: ${job.smartHomeProduct.categoryLabel} · ${job.smartHomeProduct.title}`);
+    if (job.catalogProducts?.length) {
+      console.log(`  catalog seed: ${job.catalogProducts.map((product) => `${product.categoryLabel} · ${product.title}`).join(' | ')}`);
     }
     const post = await generatePost(job.topic, job.category, {
       dealProduct: job.dealProduct,
-      smartHomeProduct: job.smartHomeProduct,
+      catalogProducts: job.catalogProducts,
     });
     const categoryId = argv['dry-run'] ? null : await resolveCategoryId(job.category);
 
@@ -1148,7 +1454,7 @@ async function run() {
         site: argv.site,
         category: job.category,
         dealProduct: job.dealProduct ?? null,
-        smartHomeProduct: job.smartHomeProduct ?? null,
+        catalogProducts: job.catalogProducts ?? null,
         data: post,
       }, null, 2));
       results.push({ topic: job.topic, slug: post.slug, status: 'dry-run' });
@@ -1159,9 +1465,9 @@ async function run() {
     let galleryIds = [];
     if (argv.images) {
       try {
-        if (job.smartHomeProduct?.imageUrl) {
+        if (job.catalogProducts?.[0]?.imageUrl) {
           coverId = await uploadImageToStrapi(
-            job.smartHomeProduct.imageUrl,
+            job.catalogProducts[0].imageUrl,
             slugifyValue(post.title).slice(0, 60),
           );
         } else {
@@ -1176,7 +1482,7 @@ async function run() {
       categoryId,
       coverId,
       galleryIds,
-      sourceUrl: job.smartHomeProduct?.productUrl || job.dealProduct?.url || null,
+      sourceUrl: job.catalogProducts?.[0]?.productUrl || job.dealProduct?.url || null,
     });
     const id = saved?.data?.documentId || saved?.data?.id;
     const adminUrl = `${STRAPI_URL}/admin/content-manager/collection-types/${site.adminUid}/${id}`;

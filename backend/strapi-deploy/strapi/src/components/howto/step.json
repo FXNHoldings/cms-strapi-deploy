@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_howto_steps",
+  "info": {
+    "displayName": "HowTo Step",
+    "icon": "list",
+    "description": "A single step in a how-to guide"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 300
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

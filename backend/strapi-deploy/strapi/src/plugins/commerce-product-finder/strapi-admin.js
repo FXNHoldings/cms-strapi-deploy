@@ -19,10 +19,10 @@ export default {
       to: `plugins/${PLUGIN_ID}`,
       icon: ShoppingCart,
       intlLabel: { id: `${PLUGIN_ID}.plugin.name`, defaultMessage: PLUGIN_NAME },
-      Component: async () => {
-        const mod = await import('./admin/src/pages/App');
-        return mod.App || mod.default;
-      },
+      Component: () =>
+        import('./admin/src/pages/App').then((mod) => ({
+          default: mod.App || mod.default,
+        })),
     });
 
     app.registerPlugin({

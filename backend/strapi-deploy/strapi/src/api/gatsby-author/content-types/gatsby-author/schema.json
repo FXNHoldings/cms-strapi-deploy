@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gatsby_authors",
+  "info": {
+    "singularName": "gatsby-author",
+    "pluralName": "gatsby-authors",
+    "displayName": "Gatsby · Author",
+    "description": "Authors for the Gatsby FlexiBlog starter website"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    },
+    "bio": {
+      "type": "text"
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "twitter": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::gatsby-post.gatsby-post",
+      "mappedBy": "author"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxt_authors",
+  "info": {
+    "singularName": "nxt-author",
+    "pluralName": "nxt-authors",
+    "displayName": "NXT Bargains · Author",
+    "description": "Editorial authors for NXT.Bargains (E-E-A-T attribution)"
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "role": { "type": "string", "maxLength": 120 },
+    "bio": { "type": "text", "maxLength": 2000 },
+    "avatar": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "sameAs": { "type": "json" },
+    "posts": { "type": "relation", "relation": "oneToMany", "target": "api::nxt-post.nxt-post", "mappedBy": "author" }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "functions": {
+    "/api/refresh-prices": {
+      "maxDuration": 800
+    }
+  }
+}

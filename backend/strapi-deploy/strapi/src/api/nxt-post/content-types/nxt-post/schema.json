@@ -7,21 +7,44 @@
     "displayName": "NXT Bargains · Post",
     "description": "Posts for NXT.Bargains — product comparisons, reviews, roundups, how-to guides"
   },
-  "options": { "draftAndPublish": true },
+  "options": {
+    "draftAndPublish": true
+  },
   "attributes": {
-    "title": { "type": "string", "required": true, "maxLength": 255 },
-    "slug": { "type": "uid", "targetField": "title", "required": true },
-    "excerpt": { "type": "text", "maxLength": 500 },
-    "content": { "type": "richtext", "required": true },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "keyTakeaways": {
+      "type": "richtext"
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
     "coverImage": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "gallery": {
       "type": "media",
       "multiple": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "postType": {
       "type": "enumeration",
@@ -60,11 +83,19 @@
     },
     "priceComparisonStatus": {
       "type": "enumeration",
-      "enum": ["idle", "success", "failed"],
+      "enum": [
+        "idle",
+        "success",
+        "failed"
+      ],
       "default": "idle"
     },
-    "priceComparisonLastRunAt": { "type": "datetime" },
-    "priceComparisonError": { "type": "text" },
+    "priceComparisonLastRunAt": {
+      "type": "datetime"
+    },
+    "priceComparisonError": {
+      "type": "text"
+    },
     "priceComparisonResults": {
       "type": "json",
       "description": "Cheapest merchant offers stored for the post page price comparison block"
@@ -78,18 +109,37 @@
       "type": "integer",
       "description": "Original WordPress post ID (for re-import idempotency)"
     },
-    "readingTimeMinutes": { "type": "integer", "default": 5, "min": 1 },
-    "seoTitle": { "type": "string", "maxLength": 70 },
-    "seoDescription": { "type": "text", "maxLength": 160 },
-    "seoKeywords": { "type": "string" },
+    "readingTimeMinutes": {
+      "type": "integer",
+      "default": 5,
+      "min": 1
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 70
+    },
+    "seoDescription": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "seoKeywords": {
+      "type": "string"
+    },
     "ogImage": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "source": {
       "type": "enumeration",
-      "enum": ["manual", "wp-import", "ai", "csv-import"],
+      "enum": [
+        "manual",
+        "wp-import",
+        "ai",
+        "csv-import"
+      ],
       "default": "manual"
     },
     "categories": {
@@ -103,6 +153,22 @@
       "relation": "oneToMany",
       "target": "api::nxt-comment.nxt-comment",
       "mappedBy": "post"
+    },
+    "faqs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.item"
+    },
+    "steps": {
+      "type": "component",
+      "repeatable": true,
+      "component": "howto.step"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxt-author.nxt-author",
+      "inversedBy": "posts"
     }
   }
 }

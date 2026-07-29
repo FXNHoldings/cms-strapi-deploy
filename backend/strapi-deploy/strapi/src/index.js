@@ -1,8 +1,19 @@
 'use strict';
 
 const { startPoller } = require('./ai-images');
+const { ensureCommerceProductAdminLayout } = require('./bootstrap/commerce-product-admin-layout');
 
 const PUBLIC_BLS_READ_ACTIONS = [
+  'api::gatsby-author.gatsby-author.find',
+  'api::gatsby-author.gatsby-author.findOne',
+  'api::gatsby-category.gatsby-category.find',
+  'api::gatsby-category.gatsby-category.findOne',
+  'api::gatsby-menu.gatsby-menu.find',
+  'api::gatsby-menu.gatsby-menu.findOne',
+  'api::gatsby-post.gatsby-post.find',
+  'api::gatsby-post.gatsby-post.findOne',
+  'api::gatsby-tag.gatsby-tag.find',
+  'api::gatsby-tag.gatsby-tag.findOne',
   'api::bls-category.bls-category.find',
   'api::bls-category.bls-category.findOne',
   'api::bls-post.bls-post.find',
@@ -11,6 +22,10 @@ const PUBLIC_BLS_READ_ACTIONS = [
   'api::nxtsmart-category.nxtsmart-category.findOne',
   'api::nxtsmart-post.nxtsmart-post.find',
   'api::nxtsmart-post.nxtsmart-post.findOne',
+  'api::nxtsmart-comment.nxtsmart-comment.find',
+  'api::nxtsmart-comment.nxtsmart-comment.findOne',
+  'api::nxtsmart-author.nxtsmart-author.find',
+  'api::nxtsmart-author.nxtsmart-author.findOne',
   'api::commerce-deal.commerce-deal.find',
   'api::commerce-deal.commerce-deal.findOne',
   'api::commerce-brand.commerce-brand.find',
@@ -79,6 +94,11 @@ module.exports = {
       await ensurePublicBlsReadPermissions(strapi);
     } catch (error) {
       strapi.log.error(`[fxn-cms] Failed to verify BLS public read permissions: ${error.message}`);
+    }
+    try {
+      await ensureCommerceProductAdminLayout(strapi);
+    } catch (error) {
+      strapi.log.error(`[fxn-cms] Failed to configure commerce product admin layout: ${error.message}`);
     }
     startPoller(strapi);
     strapi.log.info('[fxn-cms] Bootstrap complete. AI Writer + Bulk Import plugins loaded.');

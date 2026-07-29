@@ -1,0 +1,11 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/add-to-strapi/route": "app/api/add-to-strapi/route.js",
+  "/api/categories/route": "app/api/categories/route.js",
+  "/api/geniuslink/create/route": "app/api/geniuslink/create/route.js",
+  "/api/geniuslink/groups/route": "app/api/geniuslink/groups/route.js",
+  "/api/merchants/route": "app/api/merchants/route.js",
+  "/api/search/route": "app/api/search/route.js",
+  "/api/refresh-prices/route": "app/api/refresh-prices/route.js",
+  "/page": "app/page.js"
+}

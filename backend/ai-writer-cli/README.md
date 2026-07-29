@@ -37,19 +37,19 @@ Just pick a category and how many articles you want. The configured AI provider 
 
 ```bash
 # 5 fresh Flights articles, saved as drafts
-node generate.js --category flights --count 5
+node generate-originfacts-posts.js --category flights --count 5
 
 # 10 Hotels articles, published immediately
-node generate.js -c hotels -n 10 --publish
+node generate-originfacts-posts.js -c hotels -n 10 --publish
 
 # Or, no flags at all — arrow-key menu asks you for category + count:
-node generate.js
+node generate-originfacts-posts.js
 ```
 
 ## Generate one specific article (you supply the title)
 
 ```bash
-node generate.js "Best cheap flights from London to Bangkok in 2026"
+node generate-originfacts-posts.js "Best cheap flights from London to Bangkok in 2026"
 ```
 
 Output:
@@ -111,7 +111,7 @@ node generate-site-post.js --site nxt.bargains --topics topics.txt
 ## With all the knobs
 
 ```bash
-node generate.js \
+node generate-originfacts-posts.js \
   --topic "A weekend in Lisbon under £300" \
   --tone luxury \
   --length long \
@@ -155,13 +155,13 @@ Add `--no-images` to any command to skip image generation entirely.
 
 ```bash
 # Fastest & cheapest (default)
-node generate.js -c flights -n 5
+node generate-originfacts-posts.js -c flights -n 5
 
 # Higher-quality dev model
-node generate.js -c hotels -n 3 --image-model dev
+node generate-originfacts-posts.js -c hotels -n 3 --image-model dev
 
 # Text-only drafts, no images
-node generate.js -c destinations -n 10 --no-images
+node generate-originfacts-posts.js -c destinations -n 10 --no-images
 ```
 
 ## Batch mode — generate 50 articles overnight
@@ -169,7 +169,7 @@ node generate.js -c destinations -n 10 --no-images
 Create a text file with one topic per line (see `topics.sample.txt`) then:
 
 ```bash
-node generate.js --topics my-topics.txt
+node generate-originfacts-posts.js --topics my-topics.txt
 ```
 
 The script generates them sequentially to respect provider rate limits and prints a summary at the end.

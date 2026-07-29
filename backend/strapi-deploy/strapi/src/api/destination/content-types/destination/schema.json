@@ -20,6 +20,8 @@
     "description": { "type": "text" },
     "facts": { "type": "json" },
     "faqs": { "type": "json" },
+    "tldr": { "type": "text", "maxLength": 600 },
+    "keyFacts": { "type": "json" },
     "heroImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
     "articles": {
       "type": "relation",

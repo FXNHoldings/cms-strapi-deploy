@@ -1,15 +1,16 @@
 {
   "name": "ai-writer",
   "version": "1.0.0",
-  "description": "Generate travel articles with Claude Sonnet 4.5",
+  "description": "Generate travel articles with OpenRouter or Anthropic",
   "strapi": {
     "name": "ai-writer",
-    "displayName": "AI Writer (Claude)",
-    "description": "Generate SEO-ready travel articles from a topic using Claude Sonnet 4.5",
+    "displayName": "AI Writer",
+    "description": "Generate SEO-ready travel articles via OpenRouter or Anthropic",
     "kind": "plugin"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
+    "openai": "^6.45.0",
     "slugify": "^1.6.6"
   },
   "peerDependencies": {

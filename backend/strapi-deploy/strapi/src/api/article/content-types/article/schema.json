@@ -69,6 +69,13 @@
     "steps": {
       "type": "json"
     },
+    "tldr": {
+      "type": "text",
+      "maxLength": 600
+    },
+    "keyFacts": {
+      "type": "json"
+    },
     "scheduledFor": {
       "type": "datetime"
     },

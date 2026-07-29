@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_faq_items",
+  "info": {
+    "displayName": "FAQ Item",
+    "icon": "question",
+    "description": "A single question / answer pair for FAQ sections"
+  },
+  "options": {},
+  "attributes": {
+    "question": {
+      "type": "string",
+      "required": true,
+      "maxLength": 300
+    },
+    "answer": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

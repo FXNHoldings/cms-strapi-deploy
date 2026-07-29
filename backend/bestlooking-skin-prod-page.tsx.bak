@@ -1,0 +1,692 @@
+import Link from 'next/link';
+import { listPosts, listProducts, mediaUrl, type BlsPost, type BlsProduct } from '@/lib/strapi';
+import { SECTIONS, SITE } from '@/lib/site';
+import { fmtDate, firstImageUrl, postPath } from '@/lib/format';
+import PostCard from '@/components/PostCard';
+import ArticlesCarousel from '@/components/ArticlesCarousel';
+import ProductsCarousel from '@/components/ProductsCarousel';
+import AdsenseUnit from '@/components/AdsenseUnit';
+import ToolsCarousel, { type ToolCard } from '@/components/ToolsCarousel';
+
+export const revalidate = 60;
+
+/* Homepage modeled on https://bestlooking.skin/ — same flow:
+   1. Hero (welcome banner + tagline + intro)
+   2. Product Selection Tools (4 cards: How-to / Top-Rated / Informative / Comparisons)
+   3. Category Showcase (Moisturizer / Reviews / Serum / Eye Cream)
+   4. Welcome intro
+   5. Latest Arrivals (recent products carousel)
+   6. Skincare-type sections (Moisturizer / Serum / Eye Cream / Anti-Aging) — show
+      posts whose title or content mentions the term, since we don't yet have a
+      product-type taxonomy
+   7. Product Reviews — feature + grid pulled from reviews category
+   8. Our Commitment (mission blurb)
+   9. Articles (latest editorial)
+   10. Articles                                                                  */
+
+const SKINCARE_TYPES: { label: string; query: string }[] = [
+  { label: 'Moisturizer', query: 'moisturizer' },
+  { label: 'Serum',       query: 'serum' },
+  { label: 'Eye Cream',   query: 'eye cream' },
+  { label: 'Anti-Aging',  query: 'anti-aging' },
+];
+
+const TOOLS: ToolCard[] = [
+  { title: 'How-To Guides',         href: '/how-to-guides',           blurb: 'Step-by-step routines and layering rules.',     emoji: '📖' },
+  { title: 'Top-Rated Products',    href: '/top-rated-products',      blurb: 'The standouts across cleansers, serums, SPF.',  emoji: '⭐' },
+  { title: 'Product Reviews',       href: '/product-reviews',         blurb: 'Clear product verdicts, details and routine fit.', emoji: '🔎' },
+  { title: 'Informative Articles',  href: '/informative-articles',    blurb: 'Ingredients, skin types, the science behind it.', emoji: '🧪' },
+  { title: 'Comparisons',           href: '/product-comparisons',     blurb: 'Side-by-side breakdowns to pick a routine.',    emoji: '⚖️' },
+];
+
+const SHOWCASE: { label: string; href: string; img: string }[] = [
+  {
+    label: 'Moisturizer',
+    href: '/products?category=moisturisers',
+    img: '/showcase-moisturizer.jpg',
+  },
+  {
+    label: 'Anti-Aging',
+    href: '/products?category=anti-aging',
+    img: '/showcase-reviews.jpg',
+  },
+  {
+    label: 'Serum',
+    href: '/products?category=facial-serums',
+    img: '/showcase-serum.jpg',
+  },
+  {
+    label: 'Eye Cream',
+    href: '/products?category=facial-cleansers',
+    img: '/showcase-eyecream.jpg',
+  },
+];
+
+export default async function HomePage() {
+  // Fetch all editorial sections in parallel
+  const perSection = await Promise.all(
+    SECTIONS.map((s) =>
+      listPosts({ category: s.slug, pageSize: 8 })
+        .then((r) => r.data)
+        .catch(() => [] as BlsPost[]),
+    ),
+  );
+  const bySection: Record<string, BlsPost[]> = Object.fromEntries(
+    SECTIONS.map((s, i) => [s.slug, perSection[i]]),
+  );
+
+  // Skincare-type sections — driven by full-text search of post bodies
+  const perSkincareType = await Promise.all(
+    SKINCARE_TYPES.map((t) =>
+      listPosts({ q: t.query, pageSize: 4 })
+        .then((r) => r.data)
+        .catch(() => [] as BlsPost[]),
+    ),
+  );
+
+  // Latest Arrivals — most recently added products (max 8 for the carousel)
+  const latestProducts = await listProducts({ sort: 'newest', pageSize: 10 })
+    .then((r) => r.data)
+    .catch(() => [] as BlsProduct[]);
+
+  // Facial Serums section — products in the bls-product-category 'facial-serums'
+  const facialSerumProducts = await listProducts({ category: 'facial-serums', sort: 'newest', pageSize: 10 })
+    .then((r) => r.data)
+    .catch(() => [] as BlsProduct[]);
+
+  // Facial Cleansers section — products in the bls-product-category 'facial-cleansers'
+  const facialCleanserProducts = await listProducts({ category: 'facial-cleansers', sort: 'newest', pageSize: 10 })
+    .then((r) => r.data)
+    .catch(() => [] as BlsProduct[]);
+
+  // Top-section hero posts — pulled directly from Strapi so the hero updates
+  // automatically when new posts are published.
+  const heroPosts = await listPosts({ pageSize: 5 })
+    .then((r) => r.data)
+    .catch(() => [] as BlsPost[]);
+
+  // Latest across all sections (de-duped)
+  const latest: BlsPost[] = [];
+  const seen = new Set<number>();
+  for (const p of perSection
+    .flat()
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())) {
+    if (seen.has(p.id)) continue;
+    seen.add(p.id);
+    latest.push(p);
+  }
+
+  const reviews = bySection['product-reviews'] ?? [];
+  const articles = bySection['informative-articles'] ?? [];
+
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    description: SITE.description,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${SITE.url}/search?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
+  return (
+    <div data-testid="home-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+
+      <Hero posts={heroPosts.length > 0 ? heroPosts : latest.slice(0, 5)} />
+      <section className="bg-white py-8 sm:py-10" data-testid="home-ad">
+        <div className="mx-auto max-w-7xl px-6">
+          <AdsenseUnit slot="3958661572" />
+        </div>
+      </section>
+      <ProductSelectionTools />
+      <CategoryShowcase />
+      <WelcomeIntro />
+      <LatestArrivals products={latestProducts} />
+      <CommitmentBlock />
+      {/* Facial Serums product carousel (replaces former Moisturizer / Serum
+          / Eye Cream post sections). Pulls from the bls-product-category
+          'facial-serums' — create that category in Strapi or via the importer
+          (BLS_PRODUCT_CATEGORY=facial-serums) to populate it. */}
+      <FacialSerumsSection products={facialSerumProducts} />
+      <FacialCleansersSection products={facialCleanserProducts} />
+      <FirstStepSection />
+      {articles.length > 0 && <ArticlesGrid posts={articles.slice(0, 5)} />}
+    </div>
+  );
+}
+
+/* ---------- HERO ---------- */
+
+function Hero({ posts }: { posts: BlsPost[] }) {
+  const [feature, ...sidePosts] = posts;
+
+  return (
+    <section className="bg-paper" data-testid="home-hero">
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:py-14">
+        <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <h1 className="mt-3 max-w-3xl font-display text-ink">
+              Skincare research, routines and product reviews for confident choices.
+            </h1>
+          </div>
+          <p className="max-w-md text-sm leading-7 text-ink/70 sm:text-base">
+            We helps you compare formulas, understand ingredients and build a routine with clear
+            editorial guidance.
+          </p>
+        </div>
+
+        <div className="grid gap-4 lg:grid-cols-[3fr_2fr]">
+          {feature ? <HeroFeatureCard post={feature} /> : <HeroFallbackCard />}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {sidePosts.slice(0, 4).map((post) => (
+              <HeroSideCard key={post.id} post={post} />
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+function HeroFeatureCard({ post }: { post: BlsPost }) {
+  const img = mediaUrl(post.coverImage ?? null) ?? firstImageUrl(post.content);
+  const cat = post.categories?.[0];
+
+  return (
+    <Link
+      href={postPath(post)}
+      className="group relative block min-h-[420px] overflow-hidden bg-forest-900 text-white sm:min-h-[540px]"
+    >
+      {img ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={img}
+          alt={post.coverImage?.alternativeText || post.title}
+          className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-forest-300 to-forest-800" />
+      )}
+      <span className="absolute inset-0 bg-ink/50" aria-hidden />
+      <span className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink/85 to-transparent" aria-hidden />
+      <span className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8">
+        {cat && <span className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-secondary-emphasis">{cat.name}</span>}
+        <h2 className="max-w-2xl text-2xl font-bold leading-tight text-white sm:text-3xl">
+          {post.title}
+        </h2>
+        <span className="mt-4 block text-sm text-white/72">
+          {fmtDate(post.publishedAt)} · {post.readingTimeMinutes ?? 5} min read
+        </span>
+      </span>
+    </Link>
+  );
+}
+
+function HeroSideCard({ post }: { post: BlsPost }) {
+  const img = mediaUrl(post.coverImage ?? null) ?? firstImageUrl(post.content);
+  const cat = post.categories?.[0];
+
+  return (
+    <Link
+      href={postPath(post)}
+      className="group relative block min-h-[240px] overflow-hidden bg-forest-900 text-white"
+    >
+      {img ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={img}
+          alt={post.coverImage?.alternativeText || post.title}
+          className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-forest-200 to-forest-700" />
+      )}
+      <span className="absolute inset-0 bg-ink/50" aria-hidden />
+      <span className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink/85 to-transparent" aria-hidden />
+      <span className="absolute bottom-5 left-5 right-5 rounded bg-forest-900/85 px-4 py-3">
+        {cat && <span className="mb-2 inline-flex h-2 w-2 rounded-full bg-secondary-emphasis" aria-hidden />}
+        <h6 className="hero-side-title line-clamp-2 text-base font-medium leading-tight text-white">
+          {post.title}
+        </h6>
+      </span>
+    </Link>
+  );
+}
+
+function HeroFallbackCard() {
+  return (
+    <div className="relative min-h-[420px] overflow-hidden bg-forest-900 text-white sm:min-h-[540px]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/hero-banner-products.png"
+        alt="Curated skincare products"
+        className="absolute inset-0 h-full w-full object-cover opacity-80"
+      />
+      <span className="absolute inset-0 bg-ink/55" aria-hidden />
+      <div className="absolute bottom-8 left-8 right-8">
+        <h2 className="max-w-xl text-3xl font-bold leading-tight text-white">
+          Your guide to the best skincare.
+        </h2>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- PRODUCT SELECTION TOOLS — 4 large cards ---------- */
+
+function ProductSelectionTools() {
+  return (
+    <section className="bg-white py-16 sm:py-20" data-testid="selection-tools">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Editorial picks"
+          title="Product Selection Tools"
+          subtitle="Five ways to find the right product — pick the one that matches what you're shopping for."
+        />
+        <ToolsCarousel tools={TOOLS} />
+      </div>
+    </section>
+  );
+}
+
+/* ---------- CATEGORY SHOWCASE ---------- */
+
+function CategoryShowcase() {
+  const [moisturizer, reviewsTile, serum, eyeCream] = SHOWCASE;
+
+  return (
+    <section className="bg-paper py-16 sm:py-20" data-testid="category-showcase">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="font-inter text-xs font-semibold uppercase tracking-[0.28em] text-primary">Shop by concern</p>
+            <h3 className="mt-3 font-display font-extrabold tracking-tight text-ink">Start with your routine.</h3>
+          </div>
+          <p className="max-w-md text-sm font-normal leading-7 text-ink/65">
+            Explore common skincare categories through visual entry points designed for quick browsing.
+          </p>
+        </div>
+        <div className="grid gap-4 md:grid-cols-[1.02fr_0.98fr] md:items-stretch">
+          <ShowcaseTile tile={moisturizer} className="min-h-[440px] md:min-h-[620px]" featured />
+          <div className="grid gap-4 sm:grid-cols-2">
+            <ShowcaseTile tile={reviewsTile} className="min-h-[250px] sm:col-span-2 md:min-h-[300px]" />
+            <ShowcaseTile tile={serum} className="min-h-[250px] md:min-h-[300px]" />
+            <ShowcaseTile tile={eyeCream} className="min-h-[250px] md:min-h-[300px]" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ShowcaseTile({
+  tile,
+  className,
+  featured = false,
+}: {
+  tile: (typeof SHOWCASE)[number];
+  className: string;
+  featured?: boolean;
+}) {
+  return (
+    <Link
+      href={tile.href}
+      className={`group relative block overflow-hidden rounded-3xl ${className}`}
+      data-testid={`showcase-${tile.label.toLowerCase().replace(/\s+/g, '-')}`}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={tile.img}
+        alt={tile.label}
+        className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+      />
+      <span className="absolute inset-0 bg-ink/42 transition group-hover:bg-ink/30" aria-hidden />
+      <span className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 to-transparent" aria-hidden />
+      <span className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 sm:bottom-8 sm:left-8 sm:right-8">
+        <span className={`${featured ? 'text-4xl' : 'text-2xl'} font-display font-bold leading-none text-white`}>
+          {tile.label}
+        </span>
+        <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/90 text-lg text-ink transition group-hover:translate-x-1 sm:inline-flex" aria-hidden>
+          →
+        </span>
+      </span>
+    </Link>
+  );
+}
+
+/* ---------- WELCOME INTRO (mission block, copy from bestlooking.skin) ---------- */
+
+function WelcomeIntro() {
+  return (
+    <section className="bg-white py-20 sm:py-28" data-testid="welcome-intro">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <p className="font-inter text-xs font-semibold uppercase tracking-[0.28em] text-primary">Welcome</p>
+          <h2 className="brand-welcome-title mt-4 font-display font-extrabold leading-[1.05] tracking-tight">
+            <span className="brand-welcome-main">BESTLOOKING</span>
+            <span className="brand-welcome-sub">
+              <span aria-hidden className="brand-welcome-rule" />
+              <span>SKIN</span>
+            </span>
+          </h2>
+        </div>
+        <div className="space-y-6 border-l border-ink/10 pl-6 text-base font-normal leading-8 text-ink/72 sm:pl-10 sm:text-lg sm:leading-9">
+          <p>
+            BestLooking.Skin is built for people who want skincare advice that feels clear,
+            practical and easy to act on. We bring together product research, ingredient notes,
+            comparisons and reviews so you can understand what a formula does before it earns a
+            place in your routine.
+          </p>
+          <p>
+            Every skin journey is different. That is why we look beyond hype and focus on the
+            details that matter: skin type, texture, ingredients, value and how products work
+            together. Whether you are building your first routine or refining an existing one, our
+            goal is to help you choose with confidence.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- LATEST ARRIVALS ---------- */
+
+function LatestArrivals({ products }: { products: BlsProduct[] }) {
+  if (products.length === 0) {
+    return (
+      <section className="bg-paper py-16 sm:py-20" data-testid="latest-arrivals-empty">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionHeader
+            eyebrow="Just in"
+            title="Recently Added"
+            subtitle="Fresh products will appear here once they're added to the catalog."
+            viewAll="/products"
+          />
+        </div>
+      </section>
+    );
+  }
+  return (
+    <section className="bg-paper py-16 sm:py-20" data-testid="latest-arrivals">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Just in"
+          title="Recently Added"
+          subtitle="The newest products in the catalog — handpicked for your routine."
+          viewAll="/products"
+        />
+        <div className="mt-10 rounded px-4 py-6 sm:px-6">
+          <ProductsCarousel products={products} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- COMMITMENT BLOCK (editorial copy from bestlooking.skin) ---------- */
+
+function CommitmentBlock() {
+  const commitments = [
+    {
+      title: 'Clear product guidance',
+      text: 'We translate product claims, ingredient lists and routine advice into practical notes you can use before you buy.',
+    },
+    {
+      title: 'Inclusive skin education',
+      text: 'Our guides are written for every level, from first routines to focused treatments, with care for different skin needs and budgets.',
+    },
+    {
+      title: 'Current, useful picks',
+      text: 'We keep recommendations, reviews and top-rated lists refreshed so the content stays relevant as formulas and products change.',
+    },
+  ];
+
+  return (
+    <section className="bg-ink py-16 text-white sm:py-20" data-testid="commitment-block">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Promise</p>
+            <h3 className="mt-4 max-w-xl text-white">
+              Skincare advice.
+            </h3>
+          </div>
+          <div className="max-w-2xl">
+            <p className="text-base leading-8 text-white/72 sm:text-lg sm:leading-9">
+              The platform is built to help you compare formulas, understand ingredients and
+              choose routines with more confidence. We focus on useful reviews, practical education
+              and product discovery that respects your skin, your budget and your time.
+            </p>
+            <div className="mt-8 divide-y divide-white/12 border-y border-white/12">
+              {commitments.map((item) => (
+                <details key={item.title} className="group py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-5 [&::-webkit-details-marker]:hidden">
+                    <h6 className="text-lg font-semibold text-white">{item.title}</h6>
+                    <span
+                      aria-hidden
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded border border-white/15 text-lg leading-none text-primary transition group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-4 max-w-xl text-sm leading-7 text-white/68">{item.text}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- FACIAL SERUMS — products carousel ---------- */
+
+function FacialSerumsSection({ products }: { products: BlsProduct[] }) {
+  return (
+    <section className="bg-white py-16 sm:py-20" data-testid="facial-serums">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Editor's pick"
+          title="Facial Serums"
+          subtitle="Targeted treatments — vitamin C, hyaluronic, retinol and more."
+          viewAll="/products?category=facial-serums"
+        />
+        {products.length === 0 ? (
+          <div className="mt-10 rounded-3xl border border-dashed border-ink/15 px-6 py-12 text-center text-sm text-ink/55">
+            No products in the <strong>Facial Serums</strong> product category yet — create the
+            category in Strapi (Commerce · Category) or run the Apify importer with{' '}
+            <code className="rounded bg-muted px-1.5 py-0.5">BLS_PRODUCT_CATEGORY=facial-serums</code>.
+          </div>
+        ) : (
+          <div className="mt-10 border-t border-ink/10 pt-8">
+            <ProductsCarousel products={products} thumbBg="bg-[#f7f7f7]" />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ---------- FACIAL CLEANSERS — products carousel ---------- */
+
+function FacialCleansersSection({ products }: { products: BlsProduct[] }) {
+  return (
+    <section className="bg-paper py-16 sm:py-20" data-testid="facial-cleansers">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Editor's pick"
+          title="Facial Cleansers"
+          subtitle="Wash, prep and reset — the first step in any solid routine."
+          viewAll="/products?category=facial-cleansers"
+        />
+        {products.length === 0 ? (
+          <div className="mt-10 rounded-3xl border border-dashed border-ink/15 bg-paper px-6 py-12 text-center text-sm text-ink/55">
+            No products in the <strong>Facial Cleansers</strong> product category yet —
+            create the category in Strapi (Commerce · Category) or run the Apify importer with{' '}
+            <code className="rounded bg-white px-1.5 py-0.5">BLS_PRODUCT_CATEGORY=facial-cleansers</code>.
+          </div>
+        ) : (
+          <div className="mt-10 rounded-[1.75rem] px-4 py-6 sm:px-6">
+            <ProductsCarousel products={products} />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ---------- SKINCARE-TYPE SECTIONS ---------- */
+
+function SkincareTypeSection({
+  label,
+  query,
+  posts,
+  alt,
+}: {
+  label: string;
+  query: string;
+  posts: BlsPost[];
+  alt?: boolean;
+}) {
+  return (
+    <section
+      className={alt ? 'bg-muted py-14' : 'bg-paper py-14'}
+      data-testid={`skincare-type-${query}`}
+    >
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Shop the category"
+          title={label}
+          subtitle={`Latest editorial covering ${label.toLowerCase()} — picks, comparisons and how-to.`}
+          viewAll={`/search?q=${encodeURIComponent(query)}`}
+        />
+        {posts.length === 0 ? (
+          <div className="mt-8 rounded-3xl border border-dashed border-ink/15 px-6 py-12 text-center text-sm text-ink/55">
+            No posts mention {label} yet — check back after content is imported.
+          </div>
+        ) : (
+          <div className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {posts.slice(0, 4).map((p) => (
+              <PostCard key={p.id} post={p} variant="tile" thumbBg="bg-white" />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ---------- PRODUCT REVIEWS — feature + 4-up ---------- */
+
+function ProductReviews({ posts }: { posts: BlsPost[] }) {
+  const [feature, ...rest] = posts;
+  return (
+    <section className="bg-white py-16" data-testid="product-reviews">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Hands-on"
+          title="Product Reviews"
+          subtitle="Honest takes on the products people are actually shopping for."
+          viewAll="/product-reviews"
+        />
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+          <PostCard post={feature} variant="feature" thumbBg="bg-white" />
+          <div className="grid gap-6 sm:grid-cols-2">
+            {rest.slice(0, 4).map((p) => (
+              <PostCard key={p.id} post={p} variant="tile" thumbBg="bg-white" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- FIRST STEP TO GREAT SKIN — editorial closer ---------- */
+
+function FirstStepSection() {
+  return (
+    <section className="bg-white py-20 sm:py-24" data-testid="first-step">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div>
+          <p className="font-inter text-xs font-semibold uppercase tracking-[0.28em] text-primary">Next step</p>
+          <h3 className="mt-4 font-display font-extrabold tracking-tight text-ink">Steps, to Great Skin</h3>
+        </div>
+        <div className="space-y-6 border-l border-ink/10 pl-6 text-base font-normal leading-8 text-ink/72 sm:pl-10 sm:text-lg sm:leading-9">
+          <p>
+            Start with one clear skin goal, then build from there. Browse cleansers, serums,
+            moisturisers and targeted treatments by category so you can compare products without
+            feeling pulled in every direction at once.
+          </p>
+          <p>
+            Use our reviews, comparisons and top-rated picks to understand what each formula does,
+            who it may suit and how it can fit into a simple routine. Better skin choices begin
+            with better information.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- ARTICLES ---------- */
+
+function ArticlesGrid({ posts }: { posts: BlsPost[] }) {
+  return (
+    <section className="bg-paper py-16 sm:py-20" data-testid="articles">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Read more"
+          title="Articles"
+          subtitle="Background reading — ingredients, skin types and the science behind the bottle."
+          viewAll="/informative-articles"
+        />
+        <div className="mt-10 rounded-[1.75rem] px-4 py-6 sm:px-6">
+          <ArticlesCarousel posts={posts} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- shared section header ---------- */
+
+function SectionHeader({
+  eyebrow,
+  title,
+  subtitle,
+  viewAll,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  subtitle: React.ReactNode;
+  viewAll?: string;
+}) {
+  return (
+    <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <div className="max-w-3xl">
+        <p className="font-inter text-xs font-semibold uppercase tracking-[0.28em] text-primary">{eyebrow}</p>
+        <h3 className="mt-3 font-display font-extrabold tracking-tight text-ink">{title}</h3>
+        <p className="mt-3 max-w-2xl text-sm font-normal leading-7 text-ink/65 sm:text-base">{subtitle}</p>
+      </div>
+      {viewAll && (
+        <Link
+          href={viewAll}
+          className="inline-flex w-fit items-center gap-2 rounded-full border border-ink/15 bg-white/70 px-4 py-2 font-inter text-xs font-semibold uppercase tracking-[0.2em] text-ink transition hover:border-primary hover:text-primary"
+        >
+          See all
+          <span aria-hidden>→</span>
+        </Link>
+      )}
+    </div>
+  );
+}

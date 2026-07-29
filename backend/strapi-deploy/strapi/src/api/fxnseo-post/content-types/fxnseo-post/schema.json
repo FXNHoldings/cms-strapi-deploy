@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fxnseo_posts",
+  "info": {
+    "singularName": "fxnseo-post",
+    "pluralName": "fxnseo-posts",
+    "displayName": "FXNSEO Post",
+    "description": "Content for fxnseo.com (Strapi-powered articles / resources)"
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "title": { "type": "string", "required": true, "maxLength": 255 },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "excerpt": { "type": "text", "maxLength": 500 },
+    "content": { "type": "richtext" },
+    "coverImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "seoTitle": { "type": "string", "maxLength": 255 },
+    "seoDescription": { "type": "text", "maxLength": 320 }
+  }
+}

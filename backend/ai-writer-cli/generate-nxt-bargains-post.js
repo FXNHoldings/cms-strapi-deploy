@@ -10,6 +10,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import slugify from 'slugify';
 import { input, select } from '@inquirer/prompts';
+import { parseAiJson } from './parse-ai-json.js';
 
 const argv = yargs(hideBin(process.argv))
   .usage('Usage: $0 [options]')
@@ -286,6 +287,7 @@ Rules:
 - Do not include the merchant image URL inside "content"; the script inserts the feature image and product card automatically.
 - Do not invent exact specs, prices, ratings, discounts, availability, warranties, certifications, or claims.
 - Keep seoDescription at most 160 characters.
+- Escape every double quote inside JSON string values as \\" (including inch marks like 55\\").
 - Do not include markdown fences.`;
 
   const text = await callAI({
@@ -293,7 +295,7 @@ Rules:
     user: prompt,
     maxTokens: Math.max(Number(maxOutputTokensEnv()) || 0, 16000),
   });
-  const post = parseJson(text);
+  const post = parseAiJson(text, { providerName: activeProviderName() });
   validatePost(post);
   post.title = limitText(product.title, 255);
   post.slug = slugifyValue(post.title);
@@ -481,17 +483,6 @@ async function callAI({ system, user, maxTokens }) {
     messages: [{ role: 'user', content: user }],
   });
   return msg.content.map((block) => (block.type === 'text' ? block.text : '')).join('').trim();
-}
-
-function parseJson(text) {
-  const cleaned = text.replace(/^```(?:json)?/i, '').replace(/```$/i, '').trim();
-  try {
-    return JSON.parse(cleaned);
-  } catch {
-    const match = cleaned.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error(`${activeProviderName()} did not return JSON.`);
-    return JSON.parse(match[0]);
-  }
 }
 
 function validatePost(post) {

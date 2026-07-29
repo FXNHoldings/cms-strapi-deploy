@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtsmart_comments",
+  "info": {
+    "singularName": "nxtsmart-comment",
+    "pluralName": "nxtsmart-comments",
+    "displayName": "NXTSmart.Homes · Comment",
+    "description": "Visitor comments for NXTSmart.Homes posts, including comments imported from the legacy WordPress site."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxtsmart-post.nxtsmart-post",
+      "inversedBy": "comments"
+    },
+    "authorName": { "type": "string", "required": true, "maxLength": 80 },
+    "email": { "type": "email", "private": true },
+    "body": { "type": "text", "required": true, "maxLength": 4000 },
+    "commentStatus": {
+      "type": "enumeration",
+      "enum": ["pending", "approved", "rejected"],
+      "default": "pending",
+      "required": true
+    },
+    "postedAt": {
+      "type": "datetime",
+      "description": "When the comment was originally posted (WP date for imported comments)."
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxtsmart-comment.nxtsmart-comment",
+      "inversedBy": "replies"
+    },
+    "replies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxtsmart-comment.nxtsmart-comment",
+      "mappedBy": "parent"
+    },
+    "legacyWpId": {
+      "type": "integer",
+      "unique": true,
+      "description": "Comment id on the legacy WordPress site (wp.nxtsmart.homes); import de-dupe key."
+    },
+    "source": { "type": "string", "maxLength": 120 },
+    "userAgent": { "type": "text", "private": true }
+  }
+}

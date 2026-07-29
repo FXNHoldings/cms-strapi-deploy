@@ -84,6 +84,18 @@
       "relation": "manyToMany",
       "target": "api::nxtsmart-category.nxtsmart-category",
       "inversedBy": "posts"
+    },
+    "comments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxtsmart-comment.nxtsmart-comment",
+      "mappedBy": "post"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxtsmart-author.nxtsmart-author",
+      "inversedBy": "posts"
     }
   }
 }

@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gatsby_categories",
+  "info": {
+    "singularName": "gatsby-category",
+    "pluralName": "gatsby-categories",
+    "displayName": "Gatsby · Category",
+    "description": "Categories for the Gatsby FlexiBlog starter website"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "string",
+      "maxLength": 40
+    },
+    "color": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::gatsby-category.gatsby-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::gatsby-category.gatsby-category",
+      "mappedBy": "parent"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gatsby-post.gatsby-post",
+      "mappedBy": "categories"
+    },
+    "sites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gatsby-site.gatsby-site",
+      "inversedBy": "categories"
+    }
+  }
+}

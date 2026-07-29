@@ -1,0 +1,114 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gatsby_posts",
+  "info": {
+    "singularName": "gatsby-post",
+    "pluralName": "gatsby-posts",
+    "displayName": "Gatsby · Post",
+    "description": "Posts for the Gatsby FlexiBlog starter website"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images"]
+    },
+    "postType": {
+      "type": "enumeration",
+      "enum": ["article", "guide", "review", "roundup", "news", "other"],
+      "default": "article"
+    },
+    "readingTimeMinutes": {
+      "type": "integer",
+      "default": 5,
+      "min": 1
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show in the homepage hero / featured slider"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Original URL if imported from another site"
+    },
+    "legacyId": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Original CMS/import ID for idempotent imports"
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 70
+    },
+    "seoDescription": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "seoKeywords": {
+      "type": "string"
+    },
+    "ogImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "source": {
+      "type": "enumeration",
+      "enum": ["manual", "wp-import", "csv-import", "ai", "markdown-import"],
+      "default": "manual"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gatsby-category.gatsby-category",
+      "inversedBy": "posts"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gatsby-tag.gatsby-tag",
+      "inversedBy": "posts"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::gatsby-author.gatsby-author",
+      "inversedBy": "posts"
+    },
+    "sites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gatsby-site.gatsby-site",
+      "inversedBy": "posts"
+    }
+  }
+}

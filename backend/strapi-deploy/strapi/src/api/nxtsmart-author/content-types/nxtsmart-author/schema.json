@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtsmart_authors",
+  "info": {
+    "singularName": "nxtsmart-author",
+    "pluralName": "nxtsmart-authors",
+    "displayName": "NXTSmart.Homes · Author",
+    "description": "Editorial authors for NXTSmart.Homes (E-E-A-T attribution)"
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "role": { "type": "string", "maxLength": 120 },
+    "bio": { "type": "text", "maxLength": 2000 },
+    "avatar": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "sameAs": { "type": "json" },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxtsmart-post.nxtsmart-post",
+      "mappedBy": "author"
+    }
+  }
+}

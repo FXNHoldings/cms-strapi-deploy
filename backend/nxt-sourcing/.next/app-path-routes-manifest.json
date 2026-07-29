@@ -1,0 +1,11 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/api/add-to-strapi/route": "/api/add-to-strapi",
+  "/api/categories/route": "/api/categories",
+  "/api/geniuslink/create/route": "/api/geniuslink/create",
+  "/api/geniuslink/groups/route": "/api/geniuslink/groups",
+  "/api/merchants/route": "/api/merchants",
+  "/api/search/route": "/api/search",
+  "/api/refresh-prices/route": "/api/refresh-prices",
+  "/page": "/"
+}

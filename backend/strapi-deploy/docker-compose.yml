@@ -31,8 +31,14 @@ services:
       URL: https://strapi.fxnstudio.com
       STRAPI_ADMIN_PREVIEW_BASE_URL: ${STRAPI_ADMIN_PREVIEW_BASE_URL:-https://preview.fxnstudio.com}
       # AI Writer plugin
+      AI_WRITER_PROVIDER: ${AI_WRITER_PROVIDER:-openrouter}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-anthropic/claude-sonnet-4.6}
+      OPENROUTER_SITE_URL: ${OPENROUTER_SITE_URL:-https://cms.fxnstudio.com}
+      OPENROUTER_APP_NAME: ${OPENROUTER_APP_NAME:-Strapi AI Writer}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
-      CLAUDE_MODEL: claude-sonnet-4-5-20250929
+      AI_WRITER_ANTHROPIC_MODEL: ${AI_WRITER_ANTHROPIC_MODEL:-claude-sonnet-4-5-20250929}
+      AI_WRITER_MAX_TOKENS: ${AI_WRITER_MAX_TOKENS:-4096}
       # Fal.ai for AI image generation (per-article lifecycle hook)
       FAL_KEY: ${FAL_KEY}
       FAL_IMAGE_MODEL: ${FAL_IMAGE_MODEL:-fal-ai/flux/schnell}
