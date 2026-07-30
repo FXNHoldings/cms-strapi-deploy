@@ -7,7 +7,9 @@
     "displayName": "NXTSmart.Homes · Comment",
     "description": "Visitor comments for NXTSmart.Homes posts, including comments imported from the legacy WordPress site."
   },
-  "options": { "draftAndPublish": false },
+  "options": {
+    "draftAndPublish": false
+  },
   "attributes": {
     "post": {
       "type": "relation",
@@ -15,12 +17,27 @@
       "target": "api::nxtsmart-post.nxtsmart-post",
       "inversedBy": "comments"
     },
-    "authorName": { "type": "string", "required": true, "maxLength": 80 },
-    "email": { "type": "email", "private": true },
-    "body": { "type": "text", "required": true, "maxLength": 4000 },
+    "authorName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80
+    },
+    "email": {
+      "type": "email",
+      "private": true
+    },
+    "body": {
+      "type": "text",
+      "required": true,
+      "maxLength": 4000
+    },
     "commentStatus": {
       "type": "enumeration",
-      "enum": ["pending", "approved", "rejected"],
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
       "default": "pending",
       "required": true
     },
@@ -45,7 +62,19 @@
       "unique": true,
       "description": "Comment id on the legacy WordPress site (wp.nxtsmart.homes); import de-dupe key."
     },
-    "source": { "type": "string", "maxLength": 120 },
-    "userAgent": { "type": "text", "private": true }
+    "source": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "userAgent": {
+      "type": "text",
+      "private": true
+    },
+    "rating": {
+      "type": "integer",
+      "min": 1,
+      "max": 5,
+      "description": "Reader-submitted rating from 1 to 5 stars. Only display when commentStatus is approved."
+    }
   }
 }
