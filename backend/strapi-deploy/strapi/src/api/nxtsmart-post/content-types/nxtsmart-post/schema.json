@@ -7,16 +7,34 @@
     "displayName": "NXTSmart.Homes · Post",
     "description": "Posts for NXTSmart.Homes — smart home guides, reviews, comparisons, how-to articles"
   },
-  "options": { "draftAndPublish": true },
+  "options": {
+    "draftAndPublish": true
+  },
   "attributes": {
-    "title": { "type": "string", "required": true, "maxLength": 255 },
-    "slug": { "type": "uid", "targetField": "title", "required": true },
-    "excerpt": { "type": "text", "maxLength": 500 },
-    "content": { "type": "richtext", "required": true },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
     "coverImage": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "coverImageUrl": {
       "type": "string",
@@ -30,7 +48,9 @@
     "gallery": {
       "type": "media",
       "multiple": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "postType": {
       "type": "enumeration",
@@ -65,18 +85,37 @@
       "type": "integer",
       "description": "Original WordPress post ID (for re-import idempotency)"
     },
-    "readingTimeMinutes": { "type": "integer", "default": 5, "min": 1 },
-    "seoTitle": { "type": "string", "maxLength": 70 },
-    "seoDescription": { "type": "text", "maxLength": 160 },
-    "seoKeywords": { "type": "string" },
+    "readingTimeMinutes": {
+      "type": "integer",
+      "default": 5,
+      "min": 1
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 70
+    },
+    "seoDescription": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "seoKeywords": {
+      "type": "string"
+    },
     "ogImage": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "source": {
       "type": "enumeration",
-      "enum": ["manual", "wp-import", "ai", "csv-import"],
+      "enum": [
+        "manual",
+        "wp-import",
+        "ai",
+        "csv-import"
+      ],
       "default": "manual"
     },
     "categories": {
@@ -96,6 +135,10 @@
       "relation": "manyToOne",
       "target": "api::nxtsmart-author.nxtsmart-author",
       "inversedBy": "posts"
+    },
+    "dateModified": {
+      "type": "datetime",
+      "description": "Original or last genuine content modification date used for article metadata and schema."
     }
   }
 }
