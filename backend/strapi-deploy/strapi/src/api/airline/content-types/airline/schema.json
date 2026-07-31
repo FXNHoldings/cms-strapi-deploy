@@ -59,6 +59,24 @@
     "goodToKnow": {
       "type": "json",
       "description": "AI-generated 'Good to know' cards (array of { title, body }, at least 4) rendered in the airline page's 'Flying with X — what to expect' section."
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::airline-review.airline-review",
+      "mappedBy": "airline"
+    },
+    "reviewCount": {
+      "type": "integer",
+      "default": 0,
+      "min": 0,
+      "description": "Number of imported passenger reviews. Maintained by import-airline-reviews.js — do not edit by hand."
+    },
+    "ratingAvg": {
+      "type": "decimal",
+      "min": 0,
+      "max": 5,
+      "description": "Mean rating across imported passenger reviews, 1 decimal place. Maintained by import-airline-reviews.js — do not edit by hand."
     }
   }
 }

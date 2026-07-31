@@ -1,3 +1,8 @@
 node_modules
 .env
 *.log
+
+# import-airline-reviews.js run artifacts
+.import-airline-reviews.progress.json
+airline-review-aliases.json
+tp-reviews-report/

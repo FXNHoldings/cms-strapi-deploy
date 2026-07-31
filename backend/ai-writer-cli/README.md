@@ -212,3 +212,43 @@ OPENROUTER_APP_NAME=FXN AI Writer CLI
 - **On-demand from Slack** — tiny bot that calls `generate.js --topic "$MSG"` when you type `/write "..."`.
 
 I can wire any of these — just ask.
+
+### Airline review import (Originfacts)
+
+`import-airline-reviews.js` loads an Apify `tripadvisor-reviews-bulk` dump — an
+array of `{ url, data: [review, ...] }` blocks, one per airline — into the
+`Originfacts · Airline Review` collection, linked to the matching `airline`.
+
+```bash
+# Match + report only, nothing written
+node import-airline-reviews.js --dry-run
+
+# Import everything that matched
+node import-airline-reviews.js
+
+# One airline, or a small slice, while testing
+node import-airline-reviews.js --company Yeti_Airlines
+node import-airline-reviews.js --limit 5 --max-reviews 3
+
+# Recompute airline.reviewCount / airline.ratingAvg from what Strapi holds
+node import-airline-reviews.js --aggregates-only
+```
+
+Every review is stored with `sourceId = "tripadvisor:<upstream id>"`, which is
+unique in Strapi, and the script pre-loads the sourceIds already present for
+each airline — so re-running only imports what is new. A `.import-airline-
+reviews.progress.json` checkpoint lets an interrupted run resume; `--no-resume`
+starts over.
+
+**Airlines are never created.** A company with no confident match in the airline
+directory is skipped and listed in `tp-reviews-report/unmatched.csv`. To bring
+one in, map its company token to an existing airline slug in
+`airline-review-aliases.json` (see `airline-review-aliases.example.json`) and
+re-run. An empty string as the slug means "skip this one on purpose".
+
+Matching is deliberately conservative — `matched.csv` records how each airline
+was resolved (`name`, `name-suffix`, `reduced-name`, `alias`), so a bad match is
+visible before it reaches the CMS. Names are only reduced to their brand words
+when both sides reduce identically (`Vueling Airlines` → `Vueling`); leading
+words are only dropped when the token repeats a parent brand
+(`AirAsia_Thai_AirAsia`) or abbreviates what follows (`DAT_Danish_Air_Transport`).
