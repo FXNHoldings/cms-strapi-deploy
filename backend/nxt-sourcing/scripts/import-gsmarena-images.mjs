@@ -105,6 +105,39 @@ function sourceUrlFor(product) {
   return /^https?:\/\//i.test(stored) ? stored : null;
 }
 
+/**
+ * Full-resolution alternatives to a GSMArena "bigpic" URL, best first.
+ *
+ * bigpic serves a 160x212 catalogue thumbnail, which the dimension guard rightly
+ * rejects. The same photo exists at full size under a different path:
+ *
+ *   .../vv/bigpic/oneplus-15r.jpg  ->  .../vv/pics/oneplus/oneplus-15r-1.jpg
+ *
+ * That is 655x650 rather than 160x212. The brand directory is the filename's
+ * first token, which is how GSMArena names these files.
+ *
+ * Two rewrites are needed before the guess lands, both seen in this catalogue:
+ * bigpic names often carry trailing hyphens where a suffix was trimmed
+ * ("google-pixel-9-"), and some carry a revision marker that the pics path does
+ * not use ("oneplus-12r-new", "samsung-galaxy-s24-fe-r1"). Applying both takes
+ * this from 29 of 40 URLs resolving to 37 of 40.
+ *
+ * The original bigpic URL is returned last. It will normally be rejected as too
+ * small, which is the correct outcome -- but if a product only exists as a
+ * thumbnail, --min-dimension can still be lowered deliberately.
+ */
+function gsmarenaCandidates(url) {
+  const m = /^(https?:\/\/[^/]+)\/vv\/bigpic\/(.+)\.jpg$/i.exec(url);
+  if (!m) return [url];
+  const [, origin, rawName] = m;
+  const brand = rawName.split('-')[0];
+  const trimmed = rawName.replace(/-+$/, '');
+  const noRevision = trimmed.replace(/-(new|r1|rt)$/, '');
+
+  const names = [...new Set([trimmed, noRevision])].filter(Boolean);
+  return [...names.map((n) => `${origin}/vv/pics/${brand}/${n}-1.jpg`), url];
+}
+
 /** Dimensions from the file header — enough to reject placeholders and icons. */
 function imageSize(buf) {
   if (buf.length > 24 && buf.readUInt32BE(0) === 0x89504e47) {
@@ -206,16 +239,38 @@ for (const { product, url } of candidates) {
   process.stdout.write(`${product.slug.slice(0, 42).padEnd(44)}`);
   if (!WRITE) { console.log(`would fetch ${url.slice(-42)}`); continue; }
   try {
-    const res = await fetch(url, { headers: HEADERS, signal: AbortSignal.timeout(45_000) });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const buf = Buffer.from(await res.arrayBuffer());
-    const size = imageSize(buf);
-    if (!size) throw new Error('unrecognised image format');
-    // Byte size alone cannot tell a thumbnail from a photo; check the pixels.
-    const longEdge = Math.max(size.w || 0, size.h || 0);
-    if (buf.length < 4000 || (longEdge && longEdge < MIN_DIMENSION)) {
-      tooSmall += 1;
-      console.log(`skipped — ${size.w || '?'}x${size.h || '?'}, below ${MIN_DIMENSION}px`);
+    /*
+     * Walk the candidates and keep the first that downloads and clears the
+     * dimension floor, so a full-size photo is preferred over the thumbnail
+     * without giving up on products that only have the thumbnail.
+     */
+    let buf = null; let size = null; let lastReject = null;
+    for (const candidate of gsmarenaCandidates(url)) {
+      let attempt = null;
+      try {
+        const res = await fetch(candidate, { headers: HEADERS, signal: AbortSignal.timeout(45_000) });
+        if (!res.ok) { lastReject = `HTTP ${res.status}`; continue; }
+        attempt = Buffer.from(await res.arrayBuffer());
+      } catch (e) { lastReject = String(e.message).slice(0, 40); continue; }
+
+      const measured = imageSize(attempt);
+      if (!measured) { lastReject = 'unrecognised image format'; continue; }
+      const edge = Math.max(measured.w || 0, measured.h || 0);
+      if (attempt.length < 4000 || (edge && edge < MIN_DIMENSION)) {
+        lastReject = `${measured.w || '?'}x${measured.h || '?'}, below ${MIN_DIMENSION}px`;
+        continue;
+      }
+      buf = attempt; size = measured; break;
+    }
+
+    if (!buf) {
+      if (/below|x/.test(String(lastReject))) {
+        tooSmall += 1;
+        console.log(`skipped — ${lastReject}`);
+      } else {
+        failed += 1;
+        console.log(`FAILED ${lastReject}`);
+      }
       continue;
     }
 
