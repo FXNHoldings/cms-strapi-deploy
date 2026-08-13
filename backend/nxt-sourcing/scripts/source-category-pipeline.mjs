@@ -32,6 +32,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { searchKeyword } from './lib/product-match.mjs';
 
 const ROOT = path.dirname(path.dirname(new URL(import.meta.url).pathname));
 const args = process.argv.slice(2);
@@ -746,7 +747,9 @@ if (!products.length) { console.log('Nothing to source.'); process.exit(0); }
 console.log('2. fetching prices per product ...');
 const priceTasks = products.map((p) => ({
   tag: `price:${p.slug}`,
-  payload: { keyword: p.name, location_code: LOCATION, language_code: LANGUAGE, depth: DEPTH },
+  // Searched without the storage capacity; matching below still uses p.name,
+  // so a listing naming a different capacity is still rejected.
+  payload: { keyword: searchKeyword(p.name), location_code: LOCATION, language_code: LANGUAGE, depth: DEPTH },
 }));
 const priceResults = await runTasks('products', priceTasks, state);
 
