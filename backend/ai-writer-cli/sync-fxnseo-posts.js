@@ -148,6 +148,33 @@ for (const p of unpublished) {
   }
 }
 
+/*
+ * The importer creates post translations with robots_meta = 0, which is not a
+ * draft flag -- it emits <meta name="robots" content="noindex"> on the post AND
+ * drops it from sitemap.xml, since resources/views/sitemap.blade.php skips any
+ * translation whose robots_meta is falsy. All 14 posts were live, linked from
+ * /blog, and invisible to search engines because of it.
+ *
+ * Swept for every post rather than only the ones touched above: the flag is set
+ * at import time, so posts synced before this ran are still wrong, and the
+ * update is idempotent.
+ */
+if (WRITE) {
+  log('ensuring posts are indexable');
+  try {
+    await ssh(
+      `cd ${LIVE_APP_DIR} && php artisan tinker --execute='` +
+      `DB::table("page_translations")->whereIn("page_id", ` +
+      `DB::table("pages")->where("type","post")->pluck("id"))` +
+      `->update(["robots_meta"=>1]);' 2>/dev/null`,
+    );
+    log('  robots_meta set on post translations');
+  } catch (e) {
+    failed += 1;
+    log(`  FAILED: ${String(e.message).slice(0, 160)}`);
+  }
+}
+
 /* Covers: reuse a Strapi cover when there is one, otherwise generate. */
 const generate = [];
 for (const p of [...coverNeeded, ...needImage]) {
