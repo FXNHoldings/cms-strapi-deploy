@@ -1,0 +1,5455 @@
+[
+  {
+    "product_slug": "oneplus-pad-3-pro-256gb",
+    "product_title": "OnePlus Pad 3 Pro 256GB",
+    "clean_model": "OnePlus Pad 3 Pro",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_3_pro-14739.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_3_pro-14739.php",
+      "source_title": "OnePlus Pad 3 Pro",
+      "clean_model": "OnePlus Pad 3 Pro",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-4-new.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2026, June 18"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2026, June 18"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "1.3% 40,395 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "23"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2026, June 18 | 13.2\" 2400x3392 pixels | 13MP | 2160p | 12/16GB RAM | Snapdragon 8 Elite Gen 5 | 13380mAh | 67W | Android 16, OxygenOS 16 | 256GB/512GB storage, no card slot | 672g, 5.9mm thickness | 1.3% 40,395 hits | 23 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2026, June 18"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2026, June 18"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "289.7 x 209.8 x 5.9 mm (11.41 x 8.26 x 0.23 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "672 g (1.48 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum frame, aluminum back"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, 144Hz, Dolby Vision, HDR Vivid, 700 nits (typ), 1000 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "13.2 inches, 530.0 cm2 (~87.2% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2400 x 3392 pixels (~315 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 16, OxygenOS 16"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8850-AC Snapdragon 8 Elite Gen 5 (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (2x4.6 GHz Oryon V3 Phoenix L + 6x3.62 GHz Oryon V3 Phoenix M)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 840"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "256GB 12GB RAM, 512GB 12GB RAM, 512GB 16GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 4.1"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (8 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz Hi-Res audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "6.0, A2DP, LE, aptX HD, aptX Adaptive, LHDC 5.0"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector pins"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "13380 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired, 44W/67W UFCS, 55W PPS, 13.5W PD/QC"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Dune Glow, Sage Mist"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2513"
+            },
+            {
+              "label": "Price",
+              "value": "About 570 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-3-pro-512gb",
+    "product_title": "OnePlus Pad 3 Pro 512GB",
+    "clean_model": "OnePlus Pad 3 Pro",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_3_pro-14739.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_3_pro-14739.php",
+      "source_title": "OnePlus Pad 3 Pro",
+      "clean_model": "OnePlus Pad 3 Pro",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-4-new.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2026, June 18"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2026, June 18"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "1.3% 40,395 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "23"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2026, June 18 | 13.2\" 2400x3392 pixels | 13MP | 2160p | 12/16GB RAM | Snapdragon 8 Elite Gen 5 | 13380mAh | 67W | Android 16, OxygenOS 16 | 256GB/512GB storage, no card slot | 672g, 5.9mm thickness | 1.3% 40,395 hits | 23 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2026, June 18"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2026, June 18"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "289.7 x 209.8 x 5.9 mm (11.41 x 8.26 x 0.23 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "672 g (1.48 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum frame, aluminum back"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, 144Hz, Dolby Vision, HDR Vivid, 700 nits (typ), 1000 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "13.2 inches, 530.0 cm2 (~87.2% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2400 x 3392 pixels (~315 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 16, OxygenOS 16"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8850-AC Snapdragon 8 Elite Gen 5 (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (2x4.6 GHz Oryon V3 Phoenix L + 6x3.62 GHz Oryon V3 Phoenix M)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 840"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "256GB 12GB RAM, 512GB 12GB RAM, 512GB 16GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 4.1"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (8 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz Hi-Res audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "6.0, A2DP, LE, aptX HD, aptX Adaptive, LHDC 5.0"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector pins"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "13380 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired, 44W/67W UFCS, 55W PPS, 13.5W PD/QC"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Dune Glow, Sage Mist"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2513"
+            },
+            {
+              "label": "Price",
+              "value": "About 570 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-4-256gb",
+    "product_title": "OnePlus Pad 4 256GB",
+    "clean_model": "OnePlus Pad 4",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_4-14630.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_4-14630.php",
+      "source_title": "OnePlus Pad 4",
+      "clean_model": "OnePlus Pad 4",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-4-new.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2026, April 24"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2026, April 30"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "3.3% 144,205 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "44"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2026, April 30 | 13.2\" 2400x3392 pixels | 13MP | 2160p | 8/12GB RAM | Snapdragon 8 Elite Gen 5 | 13380mAh | 80W | Android 16, OxygenOS 16 | 256GB/512GB storage, no card slot | 672g, 5.9mm thickness | 3.3% 144,205 hits | 44 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2026, April 24"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2026, April 30"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "289.7 x 209.8 x 5.9 mm (11.41 x 8.26 x 0.23 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "672 g (1.48 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum frame, aluminum back"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, Dolby Vision, 144Hz, 700 nits (typ), 1000 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "13.2 inches, 530.0 cm2 (~87.2% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2400 x 3392 pixels (~315 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 16, OxygenOS 16"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8850-AC Snapdragon 8 Elite Gen 5 (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (2x4.6 GHz Oryon V3 Phoenix L + 6x3.62 GHz Oryon V3 Phoenix M)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 840"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "256GB 8GB RAM, 512GB 12GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 4.1"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (8 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz Hi-Res audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "6.0, A2DP, LE, aptX HD"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector pins"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "13380 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "80W wired"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Dune Glow, Sage Mist"
+            },
+            {
+              "label": "Price",
+              "value": "About 600 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-4-512gb",
+    "product_title": "OnePlus Pad 4 512GB",
+    "clean_model": "OnePlus Pad 4",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_4-14630.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_4-14630.php",
+      "source_title": "OnePlus Pad 4",
+      "clean_model": "OnePlus Pad 4",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-4-new.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2026, April 24"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2026, April 30"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "3.3% 144,205 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "44"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2026, April 30 | 13.2\" 2400x3392 pixels | 13MP | 2160p | 8/12GB RAM | Snapdragon 8 Elite Gen 5 | 13380mAh | 80W | Android 16, OxygenOS 16 | 256GB/512GB storage, no card slot | 672g, 5.9mm thickness | 3.3% 144,205 hits | 44 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2026, April 24"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2026, April 30"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "289.7 x 209.8 x 5.9 mm (11.41 x 8.26 x 0.23 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "672 g (1.48 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum frame, aluminum back"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, Dolby Vision, 144Hz, 700 nits (typ), 1000 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "13.2 inches, 530.0 cm2 (~87.2% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2400 x 3392 pixels (~315 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 16, OxygenOS 16"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8850-AC Snapdragon 8 Elite Gen 5 (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (2x4.6 GHz Oryon V3 Phoenix L + 6x3.62 GHz Oryon V3 Phoenix M)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 840"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "256GB 8GB RAM, 512GB 12GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 4.1"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (8 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz Hi-Res audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "6.0, A2DP, LE, aptX HD"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector pins"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "13380 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "80W wired"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Dune Glow, Sage Mist"
+            },
+            {
+              "label": "Price",
+              "value": "About 600 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-2-pro-256gb",
+    "product_title": "OnePlus Pad 2 Pro 256GB",
+    "clean_model": "OnePlus Pad 2 Pro",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_2_pro-13860.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_2_pro-13860.php",
+      "source_title": "OnePlus Pad 2 Pro",
+      "clean_model": "OnePlus Pad 2 Pro",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-2-pro.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, May 13"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, May 20"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.4% 204,828 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "52"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, May 20 | 13.2\" 2400x3392 pixels | 13MP | 2160p | 8-16GB RAM | Snapdragon 8 Elite | 12140mAh | 67W | Android 15, ColorOS 15 | 256GB/512GB storage, no card slot | 675g, 6mm thickness | 0.4% 204,828 hits | 52 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, May 13"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, May 20"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "289.6 x 209.7 x 6 mm (11.40 x 8.26 x 0.24 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "675 g (1.49 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum frame, aluminum back"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, Dolby Vision, 144Hz, 900 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "13.2 inches, 530.0 cm2 (~87.3% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2400 x 3392 pixels (~315 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 15, ColorOS 15"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8750-AB Snapdragon 8 Elite (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (2x4.32 GHz Oryon V2 Phoenix L + 6x3.53 GHz Oryon V2 Phoenix M)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 830"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "256GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM, 512GB 16GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 4.0"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP"
+            },
+            {
+              "label": "Features",
+              "value": "Color spectrum sensor, LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "12140 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Blue, Silver"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2413"
+            },
+            {
+              "label": "Price",
+              "value": "About 400 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-2-pro-512gb",
+    "product_title": "OnePlus Pad 2 Pro 512GB",
+    "clean_model": "OnePlus Pad 2 Pro",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_2_pro-13860.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_2_pro-13860.php",
+      "source_title": "OnePlus Pad 2 Pro",
+      "clean_model": "OnePlus Pad 2 Pro",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-2-pro.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, May 13"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, May 20"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.4% 204,828 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "52"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, May 20 | 13.2\" 2400x3392 pixels | 13MP | 2160p | 8-16GB RAM | Snapdragon 8 Elite | 12140mAh | 67W | Android 15, ColorOS 15 | 256GB/512GB storage, no card slot | 675g, 6mm thickness | 0.4% 204,828 hits | 52 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, May 13"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, May 20"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "289.6 x 209.7 x 6 mm (11.40 x 8.26 x 0.24 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "675 g (1.49 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum frame, aluminum back"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, Dolby Vision, 144Hz, 900 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "13.2 inches, 530.0 cm2 (~87.3% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2400 x 3392 pixels (~315 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 15, ColorOS 15"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8750-AB Snapdragon 8 Elite (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (2x4.32 GHz Oryon V2 Phoenix L + 6x3.53 GHz Oryon V2 Phoenix M)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 830"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "256GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM, 512GB 16GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 4.0"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP"
+            },
+            {
+              "label": "Features",
+              "value": "Color spectrum sensor, LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "12140 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Blue, Silver"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2413"
+            },
+            {
+              "label": "Price",
+              "value": "About 400 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-3-global-256gb",
+    "product_title": "OnePlus Pad 3 256GB",
+    "clean_model": "OnePlus Pad 3",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_3_(global)-13881.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_3_(global)-13881.php",
+      "source_title": "OnePlus Pad 3",
+      "clean_model": "OnePlus Pad 3",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-2-pro.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, June 05"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, June 19"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "2.8% 745,618 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "107"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, June 19 | 13.2\" 2400x3392 pixels | 13MP | 2160p | 12/16GB RAM | Snapdragon 8 Elite | 12140mAh | 80W | Android 15, ColorOS 15 | 256GB/512GB storage, no card slot | 675g, 6mm thickness | 2.8% 745,618 hits | 107 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, June 05"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, June 19"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "289.6 x 209.7 x 6 mm (11.40 x 8.26 x 0.24 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "675 g (1.49 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum frame, aluminum back"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, Dolby Vision, 144Hz, 900 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "13.2 inches, 530.0 cm2 (~87.3% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2400 x 3392 pixels (~315 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 15, ColorOS 15"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8750-AB Snapdragon 8 Elite (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (2x4.32 GHz Oryon V2 Phoenix L + 6x3.53 GHz Oryon V2 Phoenix M)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 830"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "256GB 12GB RAM, 512GB 16GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 4.0"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP"
+            },
+            {
+              "label": "Features",
+              "value": "Color spectrum sensor, LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (8 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE, aptX HD"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "12140 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "80W wired"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Storm Blue"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2415"
+            },
+            {
+              "label": "Price",
+              "value": "About 600 EUR"
+            }
+          ]
+        },
+        {
+          "section": "Our Tests",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "-23.6 LUFS (Very good)"
+            },
+            {
+              "label": "Battery",
+              "value": "Active use score 10:49h"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-3-global-512gb",
+    "product_title": "OnePlus Pad 3 512GB",
+    "clean_model": "OnePlus Pad 3",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_3_(global)-13881.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_3_(global)-13881.php",
+      "source_title": "OnePlus Pad 3",
+      "clean_model": "OnePlus Pad 3",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-2-pro.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, June 05"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, June 19"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "2.8% 745,618 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "107"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, June 19 | 13.2\" 2400x3392 pixels | 13MP | 2160p | 12/16GB RAM | Snapdragon 8 Elite | 12140mAh | 80W | Android 15, ColorOS 15 | 256GB/512GB storage, no card slot | 675g, 6mm thickness | 2.8% 745,618 hits | 107 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, June 05"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, June 19"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "289.6 x 209.7 x 6 mm (11.40 x 8.26 x 0.24 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "675 g (1.49 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum frame, aluminum back"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, Dolby Vision, 144Hz, 900 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "13.2 inches, 530.0 cm2 (~87.3% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2400 x 3392 pixels (~315 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 15, ColorOS 15"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8750-AB Snapdragon 8 Elite (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (2x4.32 GHz Oryon V2 Phoenix L + 6x3.53 GHz Oryon V2 Phoenix M)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 830"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "256GB 12GB RAM, 512GB 16GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 4.0"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP"
+            },
+            {
+              "label": "Features",
+              "value": "Color spectrum sensor, LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (8 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE, aptX HD"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "12140 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "80W wired"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Storm Blue"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2415"
+            },
+            {
+              "label": "Price",
+              "value": "About 600 EUR"
+            }
+          ]
+        },
+        {
+          "section": "Our Tests",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "-23.6 LUFS (Very good)"
+            },
+            {
+              "label": "Battery",
+              "value": "Active use score 10:49h"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-lite-128gb",
+    "product_title": "OnePlus Pad Lite 128GB",
+    "clean_model": "OnePlus Pad Lite",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_lite-13956.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_lite-13956.php",
+      "source_title": "OnePlus Pad Lite",
+      "clean_model": "OnePlus Pad Lite",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-lite.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, July 08"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, August 14"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "1.2% 291,219 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "15"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, August 14 | 11.0\" 1200x1920 pixels | 5MP | 1080p | 6/8GB RAM | Helio G100 | 9340mAh | 33W | Android 15, OxygenOS 15 | 128GB storage, Unspecified | 530g, 7.4mm thickness | 1.2% 291,219 hits | 15 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900 - cellular model only"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 2100 - cellular model only"
+            },
+            {
+              "label": "4G bands",
+              "value": "LTE - cellular model only"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE - cellular model only"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, July 08"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, August 14"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "254.9 x 166.5 x 7.4 mm (10.04 x 6.56 x 0.29 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "530 g (1.17 lb)"
+            },
+            {
+              "label": "SIM",
+              "value": "Yes - cellular model only"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 1B colors, 90Hz, 500 nits"
+            },
+            {
+              "label": "Size",
+              "value": "11.0 inches, 347.5 cm2 (~81.9% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "1200 x 1920 pixels, 16:10 ratio (~207 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 15, OxygenOS 15"
+            },
+            {
+              "label": "Chipset",
+              "value": "Mediatek Helio G100 (6 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (2x2.2 GHz Cortex-A76 & 6x2.0 GHz Cortex-A55)"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali-G57 MC2"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "Unspecified"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 6GB RAM, 128GB 8GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "5 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "5 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers, Hi-Res audio)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz Hi-Res audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.2, A2DP, LE, aptX HD"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS, (cellular model only) - unconfirmed"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 2.0"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Unspecified"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Po 9340 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "33W wired"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Aero Blue"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2480"
+            },
+            {
+              "label": "Price",
+              "value": "About 200 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-go-2-5g-128gb",
+    "product_title": "OnePlus Pad Go 2 128GB",
+    "clean_model": "OnePlus Pad Go 2",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_go_2_5g-14343.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_go_2_5g-14343.php",
+      "source_title": "OnePlus Pad Go 2",
+      "clean_model": "OnePlus Pad Go 2",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-go2.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, December 17"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, December 24"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "2.4% 252,402 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "32"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, December 24 | 12.1\" 1980x2800 pixels | 8MP | 1080p | 8GB RAM | Dimensity 7300 Ultra | 10050mAh | 33W | Android 16, OxygenOS 16 | 128GB/256GB storage, microSDXC | 597g or 599g, 6.8mm thickness | 2.4% 252,402 hits | 32 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE / 5G"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900 - cellular model only"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 2100 - cellular model only"
+            },
+            {
+              "label": "4G bands",
+              "value": "LTE - cellular model only"
+            },
+            {
+              "label": "5G bands",
+              "value": "SA/NSA/Sub6 - cellular model only"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE, 5G - cellular model only"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, December 17"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, December 24"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "266 x 192.8 x 6.8 mm (10.47 x 7.59 x 0.27 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "597 g or 599 g (1.32 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum frame, aluminum back"
+            },
+            {
+              "label": "SIM",
+              "value": "Yes - cellular model only"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, 120Hz, Dolby Vision, HDR10+, 900 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "12.1 inches, 445.3 cm2 (~86.8% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "1980 x 2800 pixels (~283 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Mohs level 6"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 16, OxygenOS 16"
+            },
+            {
+              "label": "Chipset",
+              "value": "Mediatek Dimensity 7300 Ultra (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (4x2.5 GHz Cortex-A78 & 4x2.0 GHz Cortex-A55)"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali-G615 MC2"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "microSDXC (dedicated slot)"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 8GB RAM, 256GB 8GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 3.1"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE, aptX HD"
+            },
+            {
+              "label": "Positioning",
+              "value": "Unspecified"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 2.0, OTG"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "10050 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "33W wired Reverse wired"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Shadow Black, Lavender Drift"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2504, OPD2505"
+            },
+            {
+              "label": "Price",
+              "value": "About 350 EUR"
+            }
+          ]
+        },
+        {
+          "section": "Our Tests",
+          "rows": [
+            {
+              "label": "Performance",
+              "value": "AnTuTu: 719742 (v10), 1022818 (v11) GeekBench: 2939 (v6) 3DMark: 877 (Wild Life Extreme)"
+            },
+            {
+              "label": "Display",
+              "value": "842 nits max brightness (measured)"
+            },
+            {
+              "label": "Loudspeaker",
+              "value": "-22.1 LUFS (Excellent)"
+            },
+            {
+              "label": "Battery",
+              "value": "Active use score 14:35h"
+            }
+          ]
+        },
+        {
+          "section": "EU LABEL",
+          "rows": [
+            {
+              "label": "Energy",
+              "value": "Class F"
+            },
+            {
+              "label": "Battery",
+              "value": "101:19h endurance, 800 cycles"
+            },
+            {
+              "label": "Free fall",
+              "value": "Class E (10 falls)"
+            },
+            {
+              "label": "Repairability",
+              "value": "Class B"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-go-2-5g-256gb",
+    "product_title": "OnePlus Pad Go 2 256GB",
+    "clean_model": "OnePlus Pad Go 2",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_go_2_5g-14343.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_go_2_5g-14343.php",
+      "source_title": "OnePlus Pad Go 2",
+      "clean_model": "OnePlus Pad Go 2",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-go2.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, December 17"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, December 24"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "2.4% 252,402 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "32"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, December 24 | 12.1\" 1980x2800 pixels | 8MP | 1080p | 8GB RAM | Dimensity 7300 Ultra | 10050mAh | 33W | Android 16, OxygenOS 16 | 128GB/256GB storage, microSDXC | 597g or 599g, 6.8mm thickness | 2.4% 252,402 hits | 32 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE / 5G"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900 - cellular model only"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 2100 - cellular model only"
+            },
+            {
+              "label": "4G bands",
+              "value": "LTE - cellular model only"
+            },
+            {
+              "label": "5G bands",
+              "value": "SA/NSA/Sub6 - cellular model only"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE, 5G - cellular model only"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, December 17"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, December 24"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "266 x 192.8 x 6.8 mm (10.47 x 7.59 x 0.27 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "597 g or 599 g (1.32 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum frame, aluminum back"
+            },
+            {
+              "label": "SIM",
+              "value": "Yes - cellular model only"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, 120Hz, Dolby Vision, HDR10+, 900 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "12.1 inches, 445.3 cm2 (~86.8% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "1980 x 2800 pixels (~283 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Mohs level 6"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 16, OxygenOS 16"
+            },
+            {
+              "label": "Chipset",
+              "value": "Mediatek Dimensity 7300 Ultra (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (4x2.5 GHz Cortex-A78 & 4x2.0 GHz Cortex-A55)"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali-G615 MC2"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "microSDXC (dedicated slot)"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 8GB RAM, 256GB 8GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 3.1"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE, aptX HD"
+            },
+            {
+              "label": "Positioning",
+              "value": "Unspecified"
+            },
+            {
+              "label": "NFC",
+              "value": "No"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 2.0, OTG"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "10050 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "33W wired Reverse wired"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Shadow Black, Lavender Drift"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2504, OPD2505"
+            },
+            {
+              "label": "Price",
+              "value": "About 350 EUR"
+            }
+          ]
+        },
+        {
+          "section": "Our Tests",
+          "rows": [
+            {
+              "label": "Performance",
+              "value": "AnTuTu: 719742 (v10), 1022818 (v11) GeekBench: 2939 (v6) 3DMark: 877 (Wild Life Extreme)"
+            },
+            {
+              "label": "Display",
+              "value": "842 nits max brightness (measured)"
+            },
+            {
+              "label": "Loudspeaker",
+              "value": "-22.1 LUFS (Excellent)"
+            },
+            {
+              "label": "Battery",
+              "value": "Active use score 14:35h"
+            }
+          ]
+        },
+        {
+          "section": "EU LABEL",
+          "rows": [
+            {
+              "label": "Energy",
+              "value": "Class F"
+            },
+            {
+              "label": "Battery",
+              "value": "101:19h endurance, 800 cycles"
+            },
+            {
+              "label": "Free fall",
+              "value": "Class E (10 falls)"
+            },
+            {
+              "label": "Repairability",
+              "value": "Class B"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-pro-128gb",
+    "product_title": "OnePlus Pad Pro 128GB",
+    "clean_model": "OnePlus Pad Pro",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_pro-13180.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_pro-13180.php",
+      "source_title": "OnePlus Pad Pro",
+      "clean_model": "OnePlus Pad Pro",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-pro.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, June 27"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, June 29"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.3% 270,783 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "34"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, June 29 | 12.1\" 2120x3000 pixels | 13MP | 2160p | 8-16GB RAM | Snapdragon 8 Gen 3 | 9510mAh | 67W | Android 14, OxygenOS 14.1 | 128GB/256GB/512GB storage, no card slot | 584g, 6.5mm thickness | 0.3% 270,783 hits | 34 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, June 27"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, June 29"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "268.7 x 195.1 x 6.5 mm (10.58 x 7.68 x 0.26 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "584 g (1.29 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum back, aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, Dolby Vision, HDR10+, 144Hz, 600 nits (typ), 900 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "12.1 inches, 445.2 cm2 (~84.9% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2120 x 3000 pixels (~304 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 14, OxygenOS 14.1"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8650-AB Snapdragon 8 Gen 3 (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (1x3.3 GHz Cortex-X4 & 3x3.2 GHz Cortex-A720 & 2x3.0 GHz Cortex-A720 & 2x2.3 GHz Cortex-A520)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 750"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 8GB RAM, 256GB 8GB RAM, 256GB 12GB RAM, 512GB 16GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP, f/2.2, 23mm (wide)"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP, f/2.3, (wide), 1/4.0\", 1.12µm"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE, aptX HD, LHDC"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "NFC (data sharing only)"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, proximity (accessories only), compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Po 9510 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired, PD, QC"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Gray, Green"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2404"
+            },
+            {
+              "label": "Price",
+              "value": "About 370 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-pro-256gb",
+    "product_title": "OnePlus Pad Pro 256GB",
+    "clean_model": "OnePlus Pad Pro",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_pro-13180.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_pro-13180.php",
+      "source_title": "OnePlus Pad Pro",
+      "clean_model": "OnePlus Pad Pro",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-pro.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, June 27"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, June 29"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.3% 270,783 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "34"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, June 29 | 12.1\" 2120x3000 pixels | 13MP | 2160p | 8-16GB RAM | Snapdragon 8 Gen 3 | 9510mAh | 67W | Android 14, OxygenOS 14.1 | 128GB/256GB/512GB storage, no card slot | 584g, 6.5mm thickness | 0.3% 270,783 hits | 34 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, June 27"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, June 29"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "268.7 x 195.1 x 6.5 mm (10.58 x 7.68 x 0.26 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "584 g (1.29 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum back, aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, Dolby Vision, HDR10+, 144Hz, 600 nits (typ), 900 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "12.1 inches, 445.2 cm2 (~84.9% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2120 x 3000 pixels (~304 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 14, OxygenOS 14.1"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8650-AB Snapdragon 8 Gen 3 (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (1x3.3 GHz Cortex-X4 & 3x3.2 GHz Cortex-A720 & 2x3.0 GHz Cortex-A720 & 2x2.3 GHz Cortex-A520)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 750"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 8GB RAM, 256GB 8GB RAM, 256GB 12GB RAM, 512GB 16GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP, f/2.2, 23mm (wide)"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP, f/2.3, (wide), 1/4.0\", 1.12µm"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE, aptX HD, LHDC"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "NFC (data sharing only)"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, proximity (accessories only), compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Po 9510 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired, PD, QC"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Gray, Green"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2404"
+            },
+            {
+              "label": "Price",
+              "value": "About 370 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-pro-512gb",
+    "product_title": "OnePlus Pad Pro 512GB",
+    "clean_model": "OnePlus Pad Pro",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_pro-13180.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_pro-13180.php",
+      "source_title": "OnePlus Pad Pro",
+      "clean_model": "OnePlus Pad Pro",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad-pro.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, June 27"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, June 29"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.3% 270,783 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "34"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, June 29 | 12.1\" 2120x3000 pixels | 13MP | 2160p | 8-16GB RAM | Snapdragon 8 Gen 3 | 9510mAh | 67W | Android 14, OxygenOS 14.1 | 128GB/256GB/512GB storage, no card slot | 584g, 6.5mm thickness | 0.3% 270,783 hits | 34 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, June 27"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, June 29"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "268.7 x 195.1 x 6.5 mm (10.58 x 7.68 x 0.26 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "584 g (1.29 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum back, aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 68B colors, Dolby Vision, HDR10+, 144Hz, 600 nits (typ), 900 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "12.1 inches, 445.2 cm2 (~84.9% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2120 x 3000 pixels (~304 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 14, OxygenOS 14.1"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8650-AB Snapdragon 8 Gen 3 (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (1x3.3 GHz Cortex-X4 & 3x3.2 GHz Cortex-A720 & 2x3.0 GHz Cortex-A720 & 2x2.3 GHz Cortex-A520)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 750"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 8GB RAM, 256GB 8GB RAM, 256GB 12GB RAM, 512GB 16GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP, f/2.2, 23mm (wide)"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP, f/2.3, (wide), 1/4.0\", 1.12µm"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE, aptX HD, LHDC"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "NFC (data sharing only)"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, proximity (accessories only), compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Po 9510 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired, PD, QC"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Gray, Green"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2404"
+            },
+            {
+              "label": "Price",
+              "value": "About 370 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-2-128gb",
+    "product_title": "OnePlus Pad 2 128GB",
+    "clean_model": "OnePlus Pad 2",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_2-13210.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_2-13210.php",
+      "source_title": "OnePlus Pad 2",
+      "clean_model": "OnePlus Pad 2",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad2.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, July 16"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, August 01"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "2.1% 814,812 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "90"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, August 01 | 12.1\" 2120x3000 pixels | 13MP | 2160p | 8/12GB RAM | Snapdragon 8 Gen 3 | 9510mAh | 67W | Android 14, up to Android 16, OxygenOS 16 | 128GB/256GB storage, no card slot | 584g, 6.5mm thickness | 2.1% 814,812 hits | 90 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, July 16"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, August 01"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "268.7 x 195.1 x 6.5 mm (10.58 x 7.68 x 0.26 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "584 g (1.29 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum back, aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 1B colors, Dolby Vision, HDR10+, 144Hz, 600 nits (typ), 900 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "12.1 inches, 445.2 cm2 (~84.9% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2120 x 3000 pixels (~304 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 14, upgradable to Android 16, OxygenOS 16"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8650-AB Snapdragon 8 Gen 3 (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (1x3.3 GHz Cortex-X4 & 3x3.2 GHz Cortex-A720 & 2x3.0 GHz Cortex-A720 & 2x2.3 GHz Cortex-A520)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 750"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 8GB RAM, 256GB 12GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 3.1"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP, f/2.2, 23mm (wide)"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP, f/2.3, (wide), 1/4.0\", 1.12µm"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (6 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz Hi-Res & Hi-Res Wireless audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE, aptX HD, LHDC"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "NFC (data sharing only)"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, proximity (accessories only), compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Po 9510 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired, 64% in 30 min, 100% in 81 min"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Nimbus Gray"
+            },
+            {
+              "label": "Price",
+              "value": "About 550 EUR"
+            }
+          ]
+        },
+        {
+          "section": "Our Tests",
+          "rows": [
+            {
+              "label": "Performance",
+              "value": "AnTuTu: 1977475 (v10) GeekBench: 6616 (v6) 3DMark: 4699 (Wild Life Extreme)"
+            },
+            {
+              "label": "Display",
+              "value": "864:1 contrast ratio, 793 nits max brightness (measured)"
+            },
+            {
+              "label": "Loudspeaker",
+              "value": "-21.8 LUFS (Excellent)"
+            },
+            {
+              "label": "Battery",
+              "value": "Active use score 10:51h"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-2-256gb",
+    "product_title": "OnePlus Pad 2 256GB",
+    "clean_model": "OnePlus Pad 2",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_2-13210.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_2-13210.php",
+      "source_title": "OnePlus Pad 2",
+      "clean_model": "OnePlus Pad 2",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad2.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, July 16"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, August 01"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "2.1% 814,812 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "90"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, August 01 | 12.1\" 2120x3000 pixels | 13MP | 2160p | 8/12GB RAM | Snapdragon 8 Gen 3 | 9510mAh | 67W | Android 14, up to Android 16, OxygenOS 16 | 128GB/256GB storage, no card slot | 584g, 6.5mm thickness | 2.1% 814,812 hits | 90 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, July 16"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, August 01"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "268.7 x 195.1 x 6.5 mm (10.58 x 7.68 x 0.26 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "584 g (1.29 lb)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, aluminum back, aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 1B colors, Dolby Vision, HDR10+, 144Hz, 600 nits (typ), 900 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "12.1 inches, 445.2 cm2 (~84.9% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2120 x 3000 pixels (~304 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 14, upgradable to Android 16, OxygenOS 16"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SM8650-AB Snapdragon 8 Gen 3 (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (1x3.3 GHz Cortex-X4 & 3x3.2 GHz Cortex-A720 & 2x3.0 GHz Cortex-A720 & 2x2.3 GHz Cortex-A520)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno 750"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 8GB RAM, 256GB 12GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "UFS 3.1"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "13 MP, f/2.2, 23mm (wide)"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP, f/2.3, (wide), 1/4.0\", 1.12µm"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (6 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz Hi-Res & Hi-Res Wireless audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6/7, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE, aptX HD, LHDC"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "NFC (data sharing only)"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, proximity (accessories only), compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Po 9510 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired, 64% in 30 min, 100% in 81 min"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Nimbus Gray"
+            },
+            {
+              "label": "Price",
+              "value": "About 550 EUR"
+            }
+          ]
+        },
+        {
+          "section": "Our Tests",
+          "rows": [
+            {
+              "label": "Performance",
+              "value": "AnTuTu: 1977475 (v10) GeekBench: 6616 (v6) 3DMark: 4699 (Wild Life Extreme)"
+            },
+            {
+              "label": "Display",
+              "value": "864:1 contrast ratio, 793 nits max brightness (measured)"
+            },
+            {
+              "label": "Loudspeaker",
+              "value": "-21.8 LUFS (Excellent)"
+            },
+            {
+              "label": "Battery",
+              "value": "Active use score 10:51h"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-3-128gb",
+    "product_title": "OnePlus Pad 3 (China) 128GB",
+    "clean_model": "OnePlus Pad 3 (China)",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_3-13593.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_3-13593.php",
+      "source_title": "OnePlus Pad 3 (China)",
+      "clean_model": "OnePlus Pad 3 (China)",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad3.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, December 26"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, December 26"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.3% 204,781 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "23"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, December 26 | 11.61\" 2000x2800 pixels | 8MP | 2160p | 8/12GB RAM | Dimensity 8350 | 9520mAh | 67W | Android 15, ColorOS 15 | 128GB/256GB/512GB storage, no card slot | 533g, 6.3mm thickness | 0.3% 204,781 hits | 23 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, December 26"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, December 26"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "257.8 x 189.1 x 6.3 mm (10.15 x 7.44 x 0.25 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "533 g (1.18 lb)"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 1B colors, 144Hz, 500 nits (typ), 700 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "11.61 inches, 411.3 cm2 (~84.4% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2000 x 2800 pixels (~296 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 15, ColorOS 15"
+            },
+            {
+              "label": "Chipset",
+              "value": "Mediatek Dimensity 8350 (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (1x3.35 GHz Cortex-A715 & 3x3.20 GHz Cortex-A715 & 4x2.20 GHz Cortex-A510)"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali G615-MC6"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 8GB RAM, 256GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "128GB UFS 3.1 256/512GB UFS 4.0"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes (accessories only)"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "9520 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired, PD, QC, UFCS"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Green, Gray"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2407"
+            },
+            {
+              "label": "Price",
+              "value": "About 280 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-3-256gb",
+    "product_title": "OnePlus Pad 3 (China) 256GB",
+    "clean_model": "OnePlus Pad 3 (China)",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_3-13593.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_3-13593.php",
+      "source_title": "OnePlus Pad 3 (China)",
+      "clean_model": "OnePlus Pad 3 (China)",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad3.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, December 26"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, December 26"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.3% 204,781 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "23"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, December 26 | 11.61\" 2000x2800 pixels | 8MP | 2160p | 8/12GB RAM | Dimensity 8350 | 9520mAh | 67W | Android 15, ColorOS 15 | 128GB/256GB/512GB storage, no card slot | 533g, 6.3mm thickness | 0.3% 204,781 hits | 23 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, December 26"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, December 26"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "257.8 x 189.1 x 6.3 mm (10.15 x 7.44 x 0.25 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "533 g (1.18 lb)"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 1B colors, 144Hz, 500 nits (typ), 700 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "11.61 inches, 411.3 cm2 (~84.4% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2000 x 2800 pixels (~296 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 15, ColorOS 15"
+            },
+            {
+              "label": "Chipset",
+              "value": "Mediatek Dimensity 8350 (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (1x3.35 GHz Cortex-A715 & 3x3.20 GHz Cortex-A715 & 4x2.20 GHz Cortex-A510)"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali G615-MC6"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 8GB RAM, 256GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "128GB UFS 3.1 256/512GB UFS 4.0"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes (accessories only)"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "9520 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired, PD, QC, UFCS"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Green, Gray"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2407"
+            },
+            {
+              "label": "Price",
+              "value": "About 280 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "oneplus-pad-3-512gb",
+    "product_title": "OnePlus Pad 3 (China) 512GB",
+    "clean_model": "OnePlus Pad 3 (China)",
+    "gsmarena_url": "https://www.gsmarena.com/oneplus_pad_3-13593.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/oneplus_pad_3-13593.php",
+      "source_title": "OnePlus Pad 3 (China)",
+      "clean_model": "OnePlus Pad 3 (China)",
+      "extracted_at": "2026-08-13",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-pad3.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, December 26"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, December 26"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.3% 204,781 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "23"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, December 26 | 11.61\" 2000x2800 pixels | 8MP | 2160p | 8/12GB RAM | Dimensity 8350 | 9520mAh | 67W | Android 15, ColorOS 15 | 128GB/256GB/512GB storage, no card slot | 533g, 6.3mm thickness | 0.3% 204,781 hits | 23 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "No cellular connectivity"
+            },
+            {
+              "label": "2G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "3G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "4G bands",
+              "value": "N/A"
+            },
+            {
+              "label": "GPRS",
+              "value": "No"
+            },
+            {
+              "label": "EDGE",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, December 26"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, December 26"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "257.8 x 189.1 x 6.3 mm (10.15 x 7.44 x 0.25 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "533 g (1.18 lb)"
+            },
+            {
+              "label": "SIM",
+              "value": "No"
+            },
+            {
+              "label": "Body",
+              "value": "Stylus support"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "IPS LCD, 1B colors, 144Hz, 500 nits (typ), 700 nits (HBM)"
+            },
+            {
+              "label": "Size",
+              "value": "11.61 inches, 411.3 cm2 (~84.4% screen-to-body ratio)"
+            },
+            {
+              "label": "Resolution",
+              "value": "2000 x 2800 pixels (~296 ppi density)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android 15, ColorOS 15"
+            },
+            {
+              "label": "Chipset",
+              "value": "Mediatek Dimensity 8350 (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Octa-core (1x3.35 GHz Cortex-A715 & 3x3.20 GHz Cortex-A715 & 4x2.20 GHz Cortex-A510)"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali G615-MC6"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "128GB 8GB RAM, 256GB 8GB RAM, 256GB 12GB RAM, 512GB 12GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "128GB UFS 3.1 256/512GB UFS 4.0"
+            }
+          ]
+        },
+        {
+          "section": "Main Camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Features",
+              "value": "LED flash"
+            },
+            {
+              "label": "Video",
+              "value": "4K@30fps, 1080p@30ps, gyro-EIS"
+            }
+          ]
+        },
+        {
+          "section": "Selfie camera",
+          "rows": [
+            {
+              "label": "Single",
+              "value": "8 MP"
+            },
+            {
+              "label": "Video",
+              "value": "1080p@30fps"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with stereo speakers (4 speakers)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            },
+            {
+              "label": "Sound",
+              "value": "24-bit/192kHz audio"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.4, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "No"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes (accessories only)"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "USB Type-C 3.2, OTG, accessory connector"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, proximity (accessories only), gyro, compass"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "9520 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "67W wired, PD, QC, UFCS"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Green, Gray"
+            },
+            {
+              "label": "Models",
+              "value": "OPD2407"
+            },
+            {
+              "label": "Price",
+              "value": "About 280 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

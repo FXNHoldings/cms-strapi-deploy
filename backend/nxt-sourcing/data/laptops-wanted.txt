@@ -1,0 +1,114 @@
+Apple MacBook Air 13-inch (M3) 256GB
+Apple MacBook Air 13-inch (M3) 512GB
+Apple MacBook Air 13-inch (M3) 1TB
+Apple MacBook Air 13-inch (M3) 2TB
+Apple MacBook Air 15-inch (M3) 256GB
+Apple MacBook Air 15-inch (M3) 512GB
+Apple MacBook Air 15-inch (M3) 1TB
+Apple MacBook Air 15-inch (M3) 2TB
+Apple MacBook Air 13-inch (M4) 256GB
+Apple MacBook Air 13-inch (M4) 512GB
+Apple MacBook Air 13-inch (M4) 1TB
+Apple MacBook Air 13-inch (M4) 2TB
+Apple MacBook Air 15-inch (M4) 256GB
+Apple MacBook Air 15-inch (M4) 512GB
+Apple MacBook Air 15-inch (M4) 1TB
+Apple MacBook Air 15-inch (M4) 2TB
+Apple MacBook Air 13-inch (M5) 512GB
+Apple MacBook Air 13-inch (M5) 1TB
+Apple MacBook Air 13-inch (M5) 2TB
+Apple MacBook Air 15-inch (M5) 512GB
+Apple MacBook Air 15-inch (M5) 1TB
+Apple MacBook Air 15-inch (M5) 2TB
+Apple MacBook Pro 14-inch (M4) 512GB
+Apple MacBook Pro 14-inch (M4) 1TB
+Apple MacBook Pro 14-inch (M4) 2TB
+Apple MacBook Pro 16-inch (M4) 512GB
+Apple MacBook Pro 16-inch (M4) 1TB
+Apple MacBook Pro 16-inch (M4) 2TB
+Apple MacBook Pro 14-inch (M5) 512GB
+Apple MacBook Pro 14-inch (M5) 1TB
+Apple MacBook Pro 14-inch (M5) 2TB
+Apple MacBook Pro 14-inch (M5 Pro) 1TB
+Apple MacBook Pro 14-inch (M5 Max) 1TB
+Apple MacBook Pro 14-inch (M5 Pro) 2TB
+Apple MacBook Pro 14-inch (M5 Max) 2TB
+Apple MacBook Pro 16-inch (M5 Pro) 1TB
+Apple MacBook Pro 16-inch (M5 Max) 1TB
+Apple MacBook Pro 16-inch (M5 Pro) 2TB
+Apple MacBook Pro 16-inch (M5 Max) 2TB
+Apple MacBook Neo 13-inch (A18 Pro) 256GB
+Apple MacBook Neo 13-inch (A18 Pro) 512GB
+Dell XPS 13 (9345) 512GB
+Dell XPS 13 (9345) 1TB
+Dell XPS 13 (9345) 2TB
+Dell XPS 13 (9350) 512GB
+Dell XPS 13 (9350) 1TB
+Dell XPS 13 (9350) 2TB
+Dell XPS 14 (9440) 512GB
+Dell XPS 14 (9440) 1TB
+Dell XPS 14 (9440) 2TB
+Dell XPS 16 (9640) 512GB
+Dell XPS 16 (9640) 1TB
+Dell XPS 16 (9640) 2TB
+Dell 14 Plus (2025) 512GB
+Dell 14 Plus (2025) 1TB
+Dell 16 Plus (2025) 512GB
+Dell 16 Plus (2025) 1TB
+Dell 14 Premium (2025) 512GB
+Dell 14 Premium (2025) 1TB
+Dell 14 Premium (2025) 2TB
+Dell 16 Premium (2025) 512GB
+Dell 16 Premium (2025) 1TB
+Dell 16 Premium (2025) 2TB
+Dell XPS 13 (2026) 512GB
+Dell XPS 14 (2026) 512GB
+Dell XPS 14 (2026) 1TB
+Dell XPS 14 (2026) 2TB
+Dell XPS 16 (2026) 512GB
+Dell XPS 16 (2026) 1TB
+Dell XPS 16 (2026) 2TB
+Lenovo ThinkPad X1 Carbon Gen 12 14-inch 512GB
+Lenovo ThinkPad X1 Carbon Gen 12 14-inch 1TB
+Lenovo ThinkPad X1 Carbon Gen 12 14-inch 2TB
+Lenovo ThinkPad X1 Carbon Gen 13 Aura Edition 14-inch 512GB
+Lenovo ThinkPad X1 Carbon Gen 13 Aura Edition 14-inch 1TB
+Lenovo ThinkPad X1 Carbon Gen 13 Aura Edition 14-inch 2TB
+Lenovo ThinkPad X1 Carbon Gen 14 14-inch 512GB
+Lenovo ThinkPad X1 Carbon Gen 14 14-inch 1TB
+Lenovo Yoga Slim 7x 14.5-inch 512GB
+Lenovo Yoga Slim 7x 14.5-inch 1TB
+Lenovo IdeaPad Slim 5 14-inch 512GB
+Lenovo IdeaPad Slim 5 14-inch 1TB
+Lenovo IdeaPad Slim 5 16-inch 512GB
+Lenovo IdeaPad Slim 5 16-inch 1TB
+Lenovo Legion 5i Gen 9 16-inch 512GB
+Lenovo Legion 5i Gen 9 16-inch 1TB
+Lenovo Legion Pro 7i Gen 9 16-inch 1TB
+Lenovo Legion Pro 7i Gen 9 16-inch 2TB
+HP Spectre x360 14 14-inch 512GB
+HP Spectre x360 14 14-inch 1TB
+HP Spectre x360 14 14-inch 2TB
+HP OmniBook X 14-inch 512GB
+HP OmniBook X 14-inch 1TB
+HP OmniBook Ultra 14 14-inch 512GB
+HP OmniBook Ultra 14 14-inch 1TB
+HP OmniBook Ultra 14 14-inch 2TB
+HP OmniBook Ultra Flip 14 14-inch 512GB
+HP OmniBook Ultra Flip 14 14-inch 1TB
+HP OmniBook Ultra Flip 14 14-inch 2TB
+HP OmniBook 5 14-inch 512GB
+HP OmniBook 5 14-inch 1TB
+HP OmniBook 5 16-inch 512GB
+HP OmniBook 5 16-inch 1TB
+Asus Zenbook 14 OLED (UX3405) 14-inch 512GB
+Asus Zenbook 14 OLED (UX3405) 14-inch 1TB
+Asus Zenbook A14 (UX3407) 14-inch 512GB
+Asus Zenbook A14 (UX3407) 14-inch 1TB
+Asus Zenbook S 16 (UM5606) 16-inch 512GB
+Asus Zenbook S 16 (UM5606) 16-inch 1TB
+Asus Zenbook S 16 (UM5606) 16-inch 2TB
+Asus Vivobook S 15 (S5507) 15.6-inch 512GB
+Asus Vivobook S 15 (S5507) 15.6-inch 1TB
+Asus ROG Zephyrus G14 (2024) 14-inch 1TB
+Asus ROG Zephyrus G14 (2025) 14-inch 1TB
