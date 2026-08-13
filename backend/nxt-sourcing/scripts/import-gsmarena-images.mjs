@@ -84,6 +84,27 @@ function imageUrlFrom(specs) {
   return null;
 }
 
+/**
+ * The URL to download for a product, best source first.
+ *
+ * The GSMArena spec sheets were the original source, but they are not the only
+ * one: the sourcing pipeline stores whatever Google Shopping returned in the
+ * `imageUrl` column, and for products that never got a spec sheet that column is
+ * the only reference there is. Of the 40 products currently missing a featured
+ * image, 29 have an `imageUrl` and none have a spec-sheet URL — reading only the
+ * spec tree found nothing to do.
+ *
+ * These are not interchangeable in quality, which is why the MIN_DIMENSION guard
+ * applies to both: spec-sheet URLs are 160x212 catalogue thumbnails, while the
+ * gstatic ones measured between 168x299 and 659x659.
+ */
+function sourceUrlFor(product) {
+  const fromSpecs = imageUrlFrom(product.specs);
+  if (fromSpecs) return fromSpecs;
+  const stored = String(product.imageUrl ?? '').trim();
+  return /^https?:\/\//i.test(stored) ? stored : null;
+}
+
 /** Dimensions from the file header — enough to reject placeholders and icons. */
 function imageSize(buf) {
   if (buf.length > 24 && buf.readUInt32BE(0) === 0x89504e47) {
@@ -100,7 +121,31 @@ function imageSize(buf) {
       i += 2 + buf.readUInt16BE(i + 2);
     }
   }
+  /*
+   * WebP. This used to return 0x0, and the caller reads a zero as "cannot
+   * measure, let it through" -- so the dimension guard was inert for exactly the
+   * format Google Shopping serves. Two products picked up 168x299 and 281x363
+   * heroes that way, which is the downgrade the guard exists to prevent.
+   *
+   * Three chunk layouts, all little-endian:
+   *   VP8  lossy     14-bit w/h at 26 and 28
+   *   VP8L lossless  14-bit w/h packed into 4 bytes at 21
+   *   VP8X extended  24-bit canvas size minus one at 24 and 27
+   */
   if (buf.length > 30 && buf.toString('ascii', 0, 4) === 'RIFF' && buf.toString('ascii', 8, 12) === 'WEBP') {
+    const chunk = buf.toString('ascii', 12, 16);
+    if (chunk === 'VP8 ' && buf.length > 30) {
+      return { w: buf.readUInt16LE(26) & 0x3fff, h: buf.readUInt16LE(28) & 0x3fff, type: 'webp' };
+    }
+    if (chunk === 'VP8L' && buf.length > 25) {
+      const bits = buf.readUInt32LE(21);
+      return { w: (bits & 0x3fff) + 1, h: ((bits >> 14) & 0x3fff) + 1, type: 'webp' };
+    }
+    if (chunk === 'VP8X' && buf.length > 30) {
+      const w = buf[24] | (buf[25] << 8) | (buf[26] << 16);
+      const h = buf[27] | (buf[28] << 8) | (buf[29] << 16);
+      return { w: w + 1, h: h + 1, type: 'webp' };
+    }
     return { w: 0, h: 0, type: 'webp' };
   }
   return null;
@@ -147,12 +192,12 @@ async function allProducts() {
 }
 
 const candidates = (await allProducts())
-  .map((p) => ({ product: p, url: imageUrlFrom(p.specs) }))
+  .map((p) => ({ product: p, url: sourceUrlFor(p) }))
   .filter((c) => c.url)
   .filter((c) => OVERWRITE || !c.product.primaryImage)
   .slice(0, LIMIT);
 
-console.log(`products with a GSMArena image url : ${candidates.length}`);
+console.log(`products with a usable image url : ${candidates.length}`);
 console.log(`mode : ${WRITE ? 'WRITE' : 'DRY RUN'}${OVERWRITE ? ' (overwrite)' : ''}\n`);
 if (!candidates.length) process.exit(0);
 
