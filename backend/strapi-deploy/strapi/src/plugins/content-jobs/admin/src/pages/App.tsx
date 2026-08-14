@@ -47,7 +47,7 @@ const COST_BADGE: Record<string, { label: string; fg: string; bg: string }> = {
   free: { label: 'free', fg: 'success600', bg: 'success100' },
 };
 
-const GROUP_ORDER = ['Sourcing', 'Pricing & offers', 'Content', 'Images', 'Merchants'];
+const GROUP_ORDER = ['Blog & posts', 'Sourcing', 'Pricing & offers', 'Content', 'Images', 'Merchants'];
 
 const STATUS_TONE: Record<string, 'success' | 'danger' | 'warning' | 'secondary'> = {
   succeeded: 'success', failed: 'danger', cancelled: 'warning',
@@ -177,10 +177,17 @@ const App = () => {
             <Typography variant="delta">Jobs</Typography>
             <Box paddingTop={3}>
               <Flex direction="column" alignItems="stretch" gap={5}>
-                {GROUP_ORDER
-                  .map((group) => ({ group, items: jobs.filter((j) => j.group === group) }))
-                  /* Groups with nothing in them are dropped rather than shown
-                     empty, so the list matches what is actually runnable. */
+                {/*
+                    Known groups first, then a bucket for anything else.
+                    Filtering strictly by GROUP_ORDER hid the entire catalogue
+                    once — the runner was serving jobs with no `group` field and
+                    every one of them silently vanished. A job with an
+                    unrecognised group must still be reachable.
+                  */}
+                {[
+                  ...GROUP_ORDER.map((group) => ({ group, items: jobs.filter((j) => j.group === group) })),
+                  { group: 'Other', items: jobs.filter((j) => !GROUP_ORDER.includes(j.group)) },
+                ]
                   .filter(({ items }) => items.length > 0)
                   .map(({ group, items }) => (
                     <Box key={group}>
