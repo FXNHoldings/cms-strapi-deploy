@@ -1,0 +1,13 @@
+{
+  "name": "content-jobs",
+  "version": "1.0.0",
+  "description": "Run the content sourcing and enrichment scripts from the admin",
+  "strapi": {
+    "name": "content-jobs",
+    "displayName": "Content Jobs",
+    "description": "Run the sourcing, pricing and enrichment scripts and watch their output",
+    "kind": "plugin"
+  },
+  "peerDependencies": { "@strapi/strapi": "^5.0.0" },
+  "main": "./server/index.js"
+}

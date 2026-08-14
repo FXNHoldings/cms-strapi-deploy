@@ -36,6 +36,10 @@ module.exports = ({ env }) => ({
     enabled: true,
     resolve: './src/plugins/commerce-product-finder',
   },
+  'content-jobs': {
+    enabled: true,
+    resolve: './src/plugins/content-jobs',
+  },
   'ai-writer': {
     enabled: true,
     resolve: './src/plugins/ai-writer',
