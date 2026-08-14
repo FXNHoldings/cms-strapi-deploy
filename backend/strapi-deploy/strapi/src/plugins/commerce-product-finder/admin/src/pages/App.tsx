@@ -197,7 +197,7 @@ export const App = () => {
         </Box>
 
         <Grid.Root gap={4}>
-          <Grid.Item col={6} s={12}>
+          <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
             <Box padding={5} background="neutral100" hasRadius>
               <Typography variant="delta">Search existing products</Typography>
               <Box paddingTop={4}>
@@ -227,7 +227,7 @@ export const App = () => {
             </Box>
           </Grid.Item>
 
-          <Grid.Item col={6} s={12}>
+          <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
             <Box padding={5} background="neutral100" hasRadius>
               <Typography variant="delta">Preview from product URL</Typography>
               <Box paddingTop={4}>
@@ -254,7 +254,7 @@ export const App = () => {
             <Typography variant="beta">Search results</Typography>
             <Grid.Root gap={4}>
               {results.map((product) => (
-                <Grid.Item key={product.documentId} col={4} s={12}>
+                <Grid.Item key={product.documentId} col={4} s={12} direction="column" alignItems="stretch">
                   <Box padding={4} background="neutral100" hasRadius>
                     <Flex gap={3} alignItems="flex-start">
                       {product.imageUrl && (
@@ -292,31 +292,31 @@ export const App = () => {
           <Typography variant="beta">Save product and offer</Typography>
           <Box paddingTop={4} background="neutral100" padding={5} hasRadius>
             <Grid.Root gap={4}>
-              <Grid.Item col={8} s={12}>
+              <Grid.Item col={8} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="productName" required>
                   <Field.Label>Product name</Field.Label>
                   <TextInput value={form.productName} onChange={(e: any) => update('productName', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="productSlug">
                   <Field.Label>Product slug</Field.Label>
                   <TextInput value={form.productSlug} onChange={(e: any) => update('productSlug', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="brand">
                   <Field.Label>Brand</Field.Label>
                   <TextInput value={form.brand} onChange={(e: any) => update('brand', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="category">
                   <Field.Label>Category</Field.Label>
                   <TextInput value={form.category} onChange={(e: any) => update('category', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="merchant">
                   <Field.Label>Merchant</Field.Label>
                   <SingleSelect value={form.merchantSlug || 'new'} onChange={(value: any) => chooseMerchant(value || 'new')}>
@@ -329,37 +329,37 @@ export const App = () => {
                   </SingleSelect>
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="merchantName">
                   <Field.Label>Merchant name</Field.Label>
                   <TextInput value={form.merchantName} onChange={(e: any) => update('merchantName', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="merchantWebsite">
                   <Field.Label>Merchant website</Field.Label>
                   <TextInput value={form.merchantWebsite} onChange={(e: any) => update('merchantWebsite', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="price">
                   <Field.Label>Price</Field.Label>
                   <TextInput value={form.price} onChange={(e: any) => update('price', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="originalPrice">
                   <Field.Label>Original price</Field.Label>
                   <TextInput value={form.originalPrice} onChange={(e: any) => update('originalPrice', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="currency">
                   <Field.Label>Currency</Field.Label>
                   <TextInput value={form.currency} onChange={(e: any) => update('currency', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="availability">
                   <Field.Label>Availability</Field.Label>
                   <SingleSelect value={form.availability} onChange={(value: any) => update('availability', value || 'unknown')}>
@@ -370,7 +370,7 @@ export const App = () => {
                   </SingleSelect>
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={4} s={12}>
+              <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="condition">
                   <Field.Label>Condition</Field.Label>
                   <SingleSelect value={form.condition} onChange={(value: any) => update('condition', value || 'unknown')}>
@@ -382,52 +382,52 @@ export const App = () => {
                   </SingleSelect>
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={12} s={12}>
+              <Grid.Item col={12} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="productUrl" required>
                   <Field.Label>Product URL</Field.Label>
                   <TextInput value={form.productUrl} onChange={(e: any) => update('productUrl', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={12} s={12}>
+              <Grid.Item col={12} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="affiliateUrl">
                   <Field.Label>Affiliate URL</Field.Label>
                   <TextInput value={form.affiliateUrl} onChange={(e: any) => update('affiliateUrl', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={12} s={12}>
+              <Grid.Item col={12} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="imageUrl">
                   <Field.Label>Image URL</Field.Label>
                   <TextInput value={form.imageUrl} onChange={(e: any) => update('imageUrl', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={3} s={12}>
+              <Grid.Item col={3} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="asin">
                   <Field.Label>ASIN</Field.Label>
                   <TextInput value={form.asin} onChange={(e: any) => update('asin', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={3} s={12}>
+              <Grid.Item col={3} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="gtin">
                   <Field.Label>GTIN</Field.Label>
                   <TextInput value={form.gtin} onChange={(e: any) => update('gtin', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={3} s={12}>
+              <Grid.Item col={3} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="mpn">
                   <Field.Label>MPN</Field.Label>
                   <TextInput value={form.mpn} onChange={(e: any) => update('mpn', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={3} s={12}>
+              <Grid.Item col={3} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="sku">
                   <Field.Label>SKU</Field.Label>
                   <TextInput value={form.sku} onChange={(e: any) => update('sku', e.target.value)} />
                 </Field.Root>
               </Grid.Item>
-              <Grid.Item col={12} s={12}>
+              <Grid.Item col={12} s={12} direction="column" alignItems="stretch">
                 <Field.Root name="shortDescription">
                   <Field.Label>Short description</Field.Label>
-                  <Textarea value={form.shortDescription} onChange={(e: any) => update('shortDescription', e.target.value)} />
+                  <Textarea value={form.shortDescription} onChange={(e: any) => update('shortDescription', e.target.value)} rows={6} />
                 </Field.Root>
               </Grid.Item>
             </Grid.Root>
