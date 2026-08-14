@@ -12,6 +12,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import slugify from 'slugify';
 import { input, select } from '@inquirer/prompts';
+import { PROMPT_STYLES, PROMPT_STYLE_KEYS, EDITORIAL_NOTES_SCHEMA } from './prompt-styles.js';
 import { parseAiJson } from './parse-ai-json.js';
 
 const SITE_CONFIG = {
@@ -92,6 +93,12 @@ const argv = yargs(hideBin(process.argv))
     describe: 'Topic file. Lines may be "category | topic" or "site | category | topic".',
   })
   .option('category', { alias: 'c', type: 'string', describe: 'Category slug or name' })
+  .option('prompt-style', {
+    type: 'string',
+    choices: PROMPT_STYLE_KEYS,
+    default: 'default',
+    describe: 'Article writing method. See prompt-styles.js.',
+  })
   .option('count', {
     alias: 'n',
     type: 'number',
@@ -105,7 +112,7 @@ const argv = yargs(hideBin(process.argv))
   .option('length', {
     alias: 'l',
     type: 'string',
-    choices: ['medium', 'long', 'very-long'],
+    choices: ['short', 'medium', 'long'],
     describe: 'Article length target. Prompts when omitted in an interactive terminal.',
   })
   .option('post-type', {
@@ -211,6 +218,12 @@ const NXT_BARGAINS_DEAL_MARKETPLACES = [
 const NXT_BARGAINS_SITE_URL = 'https://nxt.bargains';
 const NXT_SMART_HOME_CATEGORY = 'smart-home';
 const ARTICLE_LENGTH_TARGETS = {
+  short: {
+    label: 'Short',
+    words: '700-900',
+    dealsMin: 800,
+    smartHomeMin: 800,
+  },
   medium: {
     label: 'Medium',
     words: '1000-1300',
@@ -315,6 +328,43 @@ function resolveArticleLengthConfig() {
 
 function articleLengthLabel() {
   return resolveArticleLengthConfig().label;
+}
+
+function categoryUrlSlug(category) {
+  return slugifyValue(category || "uncategorized") || "uncategorized";
+}
+
+async function loadInternalLinkCandidates(category, limit = 8) {
+  if (!site || argv["dry-run"] || !category) return [];
+  const slug = categoryUrlSlug(category);
+  const params = new URLSearchParams({
+    "pagination[page]": "1",
+    "pagination[pageSize]": String(limit),
+    "sort[0]": "publishedAt:desc",
+    "fields[0]": "title",
+    "fields[1]": "slug",
+    "filters[categories][slug][$eqi]": slug,
+  });
+  try {
+    const res = await strapi(`${site.postEndpoint}?${params.toString()}`);
+    return (res.data || [])
+      .map((post) => ({
+        title: String(post.title || "").trim(),
+        url: `${site.publicMediaUrl}/${slug}/${post.slug}`,
+      }))
+      .filter((post) => post.title && post.url);
+  } catch (error) {
+    console.warn(`  · Could not load internal link candidates for ${slug}: ${error.message.slice(0, 120)}`);
+    return [];
+  }
+}
+
+async function buildInternalLinkContext(category) {
+  if (argv.site !== "nxtsmart.homes") return "";
+  const candidates = await loadInternalLinkCandidates(category);
+  if (!candidates.length) return "";
+  const lines = candidates.map((post, index) => `${index + 1}. ${post.title} - ${post.url}`).join("\\n");
+  return `\n\nInternal-link opportunities from existing ${site.label} posts in this category:\n${lines}\n\nInternal linking requirements:\n- Add 2-4 links only where they help the reader continue the same topic.\n- Use the exact URLs above.\n- Use descriptive anchor text, not "click here".\n- Do not link to the new article itself.\n`;
 }
 
 async function resolveCategoryId(slugOrName) {
@@ -422,9 +472,9 @@ async function promptForMissingOptions() {
     argv.length = await select({
       message: 'How long should each article be?',
       choices: [
+        { name: 'Short (about 700-900 words)', value: 'short' },
         { name: 'Medium (about 1,000-1,300 words)', value: 'medium' },
         { name: 'Long (about 1,500-2,200 words)', value: 'long' },
-        { name: 'Very long (about 2,200-3,000 words)', value: 'very-long' },
       ],
       default: 'long',
     });
@@ -494,6 +544,7 @@ Rules:
 }
 
 async function generatePost(topic, category, { dealProduct = null, catalogProducts = null } = {}) {
+  const internalLinkContext = await buildInternalLinkContext(category);
   const isDealsPost = isNxtDealsCategory(category);
   const isSmartHomePost = isNxtSmartHomeCategory(category);
   const seededProducts = Array.isArray(catalogProducts) ? catalogProducts.filter(Boolean) : [];
@@ -508,8 +559,12 @@ async function generatePost(topic, category, { dealProduct = null, catalogProduc
   const smartHomeContext = isSmartHomePost ? smartHomeProductPromptContext(primaryCatalogProduct) : '';
   const contentFormat = isSmartHomePost && primaryCatalogProduct ? 'HTML' : 'Markdown';
 
-  const prompt = `${site.editorialBrief}
+  const styleKey = argv['prompt-style'] || 'default';
+  const style = PROMPT_STYLES[styleKey] ?? PROMPT_STYLES.default;
+  const styleBlock = style.instructions ? `\n${style.instructions}\n` : '';
 
+  const prompt = `${site.editorialBrief}
+${styleBlock}
 Write one complete blog post.
 
 Topic: ${topic}
@@ -518,7 +573,7 @@ Tone: ${argv.tone}
 Length: ${wordTarget} words
 Language: ${argv.language}
 SEO keywords: ${argv.keywords || 'choose natural keywords from the topic'}
-${dealContext}${catalogContext}${smartHomeContext}
+${dealContext}${catalogContext}${smartHomeContext}${internalLinkContext}
 
 Return STRICT JSON only with exactly these keys:
 {
@@ -533,13 +588,14 @@ Return STRICT JSON only with exactly these keys:
   "imagePrompts": {
     "cover": string,
     "gallery": [string, string]
-  }
+  }${style.instructions ? ',' + EDITORIAL_NOTES_SCHEMA : ''}
 }
 
 Content requirements:
 - ${contentFormat} only in "content".
 - Use useful ${contentFormat === 'HTML' ? 'h2/h3' : 'H2/H3'} headings.
 - Include practical comparisons, tips, caveats, and buying/setup guidance where relevant.
+- Where useful and natural, add internal links to relevant existing posts from the provided internal-link opportunities. Use Markdown links in Markdown content and <a> tags in HTML content. Do not force every link; 2-4 high-relevance links is better than stuffing.
 - When selected NXT.Bargains catalog products are provided, keep the article grounded in those exact products and their product category. Do not invent specs, prices, ratings, or availability.
 - For NXT.Bargains product comparison articles with two selected catalog products, compare those exact products side by side and keep both as the main subjects.
 - For NXT.Bargains product review articles with a selected catalog product, center the review on that exact product.
@@ -581,6 +637,27 @@ Image prompt requirements:
     post.content = buildSmartHomePostContent(post.content, primaryCatalogProduct);
   }
   post.readingTimeMinutes = Number(post.readingTimeMinutes) || estimateReadingTime(post.content);
+
+  /*
+   * editorialNotes has no home in Strapi, so it is printed and then dropped.
+   * Leaving it on the object would send an unknown field to the API; the value
+   * is in a human reading the intent, the keywords and -- most of all -- what
+   * still needs verifying before this goes out.
+   */
+  if (post.editorialNotes) {
+    const n = post.editorialNotes;
+    const list = (v) => (Array.isArray(v) ? v : v ? [v] : []);
+    console.log(`\n  -- editorial notes (${styleKey}) --`);
+    if (n.searchIntent) console.log(`  intent   : ${n.searchIntent}`);
+    if (n.primaryKeyword) console.log(`  keyword  : ${n.primaryKeyword}`);
+    if (n.secondaryKeywords) console.log(`  related  : ${n.secondaryKeywords}`);
+    if (n.audience) console.log(`  audience : ${n.audience}`);
+    if (n.angle) console.log(`  angle    : ${n.angle}`);
+    for (const v of list(n.verifyThese)) console.log(`  VERIFY   : ${v}`);
+    for (const c of list(n.checklist)) console.log(`  check    : ${c}`);
+    console.log('');
+    delete post.editorialNotes;
+  }
   return post;
 }
 
