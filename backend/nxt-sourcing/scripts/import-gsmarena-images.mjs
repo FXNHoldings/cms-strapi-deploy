@@ -44,7 +44,7 @@ const MIN_DIMENSION = Number(flag('min-dimension', 400));
 
 const STRAPI_URL = (process.env.STRAPI_INTERNAL_URL || process.env.STRAPI_URL || 'http://127.0.0.1:8888').replace(/\/$/, '');
 const TOKEN = process.env.STRAPI_API_TOKEN || process.env.STRAPI_TOKEN || '';
-const MEDIA_ORIGIN = process.env.NXT_MEDIA_ORIGIN || 'https://strapi.fxnstudio.com';
+const MEDIA_ORIGIN = process.env.NXT_MEDIA_ORIGIN || 'https://cms.fxnstudio.com';
 
 /* gsmarena refuses default clients; a browser UA and a referer get the file. */
 const HEADERS = {

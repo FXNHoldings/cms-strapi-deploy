@@ -29,6 +29,7 @@ type Param = {
 };
 type Job = {
   id: string; title: string; summary: string; script: string;
+  group: string; cost: 'free' | 'dataforseo' | 'ai';
   paid: boolean; costPerItem?: number; writeFlag: string | null; params: Param[];
 };
 type Run = {
@@ -37,6 +38,16 @@ type Run = {
   status: 'running' | 'succeeded' | 'failed' | 'cancelled' | 'interrupted';
   exitCode: number | null; startedAt: number; endedAt: number | null;
 };
+
+/* What the job consumes. Kept separate from `paid`, which only decides the
+   one-at-a-time rule: the AI rewrites are not free either. */
+const COST_BADGE: Record<string, { label: string; fg: string; bg: string }> = {
+  dataforseo: { label: 'DataForSEO credit', fg: 'warning600', bg: 'warning100' },
+  ai: { label: 'AI tokens', fg: 'secondary600', bg: 'secondary100' },
+  free: { label: 'free', fg: 'success600', bg: 'success100' },
+};
+
+const GROUP_ORDER = ['Sourcing', 'Pricing & offers', 'Content', 'Images', 'Merchants'];
 
 const STATUS_TONE: Record<string, 'success' | 'danger' | 'warning' | 'secondary'> = {
   succeeded: 'success', failed: 'danger', cancelled: 'warning',
@@ -165,26 +176,45 @@ const App = () => {
           <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
             <Typography variant="delta">Jobs</Typography>
             <Box paddingTop={3}>
-              <Flex direction="column" alignItems="stretch" gap={2}>
-                {jobs.map((job) => (
-                  <Box
-                    key={job.id}
-                    padding={3}
-                    hasRadius
-                    background={selected?.id === job.id ? 'primary100' : 'neutral0'}
-                    borderColor={selected?.id === job.id ? 'primary600' : 'neutral200'}
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => pick(job)}
-                  >
-                    <Flex justifyContent="space-between" alignItems="center" gap={2}>
-                      <Typography fontWeight="bold">{job.title}</Typography>
-                      {job.paid ? <Badge textColor="warning600" backgroundColor="warning100">costs</Badge> : null}
-                    </Flex>
-                    <Box paddingTop={1}>
-                      <Typography variant="pi" textColor="neutral600">{job.summary}</Typography>
+              <Flex direction="column" alignItems="stretch" gap={5}>
+                {GROUP_ORDER
+                  .map((group) => ({ group, items: jobs.filter((j) => j.group === group) }))
+                  /* Groups with nothing in them are dropped rather than shown
+                     empty, so the list matches what is actually runnable. */
+                  .filter(({ items }) => items.length > 0)
+                  .map(({ group, items }) => (
+                    <Box key={group}>
+                      <Typography variant="sigma" textColor="neutral600">{group}</Typography>
+                      <Box paddingTop={2}>
+                        <Flex direction="column" alignItems="stretch" gap={2}>
+                          {items.map((job) => {
+                            const badge = COST_BADGE[job.cost] ?? COST_BADGE.free;
+                            return (
+                              <Box
+                                key={job.id}
+                                padding={3}
+                                hasRadius
+                                background={selected?.id === job.id ? 'primary100' : 'neutral0'}
+                                borderColor={selected?.id === job.id ? 'primary600' : 'neutral200'}
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => pick(job)}
+                              >
+                                <Flex justifyContent="space-between" alignItems="center" gap={2}>
+                                  <Typography fontWeight="bold">{job.title}</Typography>
+                                  <Badge textColor={badge.fg as any} backgroundColor={badge.bg as any}>
+                                    {badge.label}
+                                  </Badge>
+                                </Flex>
+                                <Box paddingTop={1}>
+                                  <Typography variant="pi" textColor="neutral600">{job.summary}</Typography>
+                                </Box>
+                              </Box>
+                            );
+                          })}
+                        </Flex>
+                      </Box>
                     </Box>
-                  </Box>
-                ))}
+                  ))}
                 {jobs.length === 0 && !error ? <Loader small>Loading…</Loader> : null}
               </Flex>
             </Box>
@@ -253,10 +283,14 @@ const App = () => {
                   ))}
                 </Grid.Root>
 
-                {selected.paid ? (
+                {selected.cost !== 'free' ? (
                   <Box paddingTop={4}>
-                    <Alert variant="warning" title="This job spends DataForSEO credit">
-                      {estimate()} A dry run costs nothing and shows exactly what would change.
+                    <Alert
+                      variant="warning"
+                      title={selected.cost === 'ai' ? 'This job spends AI provider tokens' : 'This job spends DataForSEO credit'}
+                    >
+                      {selected.cost === 'dataforseo' ? `${estimate()} ` : ''}
+                      A dry run costs nothing and shows exactly what would change.
                     </Alert>
                   </Box>
                 ) : null}
@@ -269,10 +303,10 @@ const App = () => {
                     <Button
                       onClick={() => run(true)}
                       loading={busy}
-                      variant={selected.paid ? 'danger' : 'default'}
+                      variant={selected.cost !== 'free' ? 'danger' : 'default'}
                       disabled={!selected.writeFlag && !selected.paid ? false : false}
                     >
-                      {selected.paid ? 'Run for real (spends credit)' : 'Run for real'}
+                      {selected.cost === 'free' ? 'Run for real' : 'Run for real (spends credit)'}
                     </Button>
                     {activeRun?.status === 'running' ? (
                       <Button onClick={cancel} variant="tertiary">Cancel</Button>
