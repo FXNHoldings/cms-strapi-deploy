@@ -47,7 +47,7 @@ const COST_BADGE: Record<string, { label: string; fg: string; bg: string }> = {
   free: { label: 'free', fg: 'success600', bg: 'success100' },
 };
 
-const GROUP_ORDER = ['Blog & posts', 'Sourcing', 'Pricing & offers', 'Content', 'Images', 'Merchants'];
+const GROUP_ORDER = ['Blog & posts', 'Travel (originfacts)', 'Sourcing', 'Pricing & offers', 'Content', 'Images', 'Merchants'];
 
 const STATUS_TONE: Record<string, 'success' | 'danger' | 'warning' | 'secondary'> = {
   succeeded: 'success', failed: 'danger', cancelled: 'warning',
