@@ -14,5 +14,8 @@ const guarded = (method, path, handler) => ({
 
 module.exports = {
   type: 'admin',
-  routes: [guarded('GET', '/sites', 'sites.list')],
+  routes: [
+    guarded('GET', '/sites', 'sites.list'),
+    guarded('GET', '/sites/:slug', 'sites.detail'),
+  ],
 };

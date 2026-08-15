@@ -127,7 +127,64 @@ async function statsForSite(strapi, site) {
   };
 }
 
+/**
+ * Most recent content across a role's sources, newest first.
+ *
+ * Deliberately fetches whole documents rather than naming `fields`: the six
+ * post types do not agree on their shape, and asking for a column one of them
+ * lacks fails the whole query. Eight rows of overfetch is the cheaper mistake.
+ */
+async function recentDocuments(strapi, sources, limit = 8) {
+  const rows = [];
+
+  for (const source of sources) {
+    if (!source?.uid || !strapi.contentTypes[source.uid]) continue;
+    const filters = source.filter && Object.keys(source.filter).length ? source.filter : undefined;
+
+    try {
+      const docs = await strapi.documents(source.uid).findMany({
+        ...(filters ? { filters } : {}),
+        status: 'draft',
+        sort: 'updatedAt:desc',
+        limit,
+      });
+
+      for (const doc of docs) {
+        rows.push({
+          uid: source.uid,
+          documentId: doc.documentId,
+          title: doc.title ?? doc.name ?? '(untitled)',
+          updatedAt: doc.updatedAt ?? null,
+          publishedAt: doc.publishedAt ?? null,
+        });
+      }
+    } catch {
+      // countSource already reports why this source is unreadable; no need to
+      // fail the whole page over its recent list too.
+    }
+  }
+
+  return rows
+    .sort((a, b) => String(b.updatedAt ?? '').localeCompare(String(a.updatedAt ?? '')))
+    .slice(0, limit);
+}
+
 module.exports = ({ strapi }) => ({
+  async detail(slug) {
+    const [site] = await strapi.documents(SITE_UID).findMany({
+      filters: { slug },
+      status: 'draft',
+      populate: { thumbnail: true },
+      limit: 1,
+    });
+    if (!site) return null;
+
+    const stats = await statsForSite(strapi, site);
+    const raw = site.contentTypes?.posts ?? [];
+    stats.recentPosts = await recentDocuments(strapi, Array.isArray(raw) ? raw : [raw]);
+    return stats;
+  },
+
   async list() {
     // Read the draft version: it exists for every row, so a site added but not
     // yet published still appears here rather than silently missing from the
