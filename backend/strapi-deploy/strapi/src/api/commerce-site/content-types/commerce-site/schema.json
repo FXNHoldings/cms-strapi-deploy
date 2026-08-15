@@ -42,6 +42,37 @@
     "enabledCategories": {
       "type": "json"
     },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "description": "Screenshot shown on the site card in the dashboard. Decorative only — nothing breaks if it is empty."
+    },
+    "repoPath": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Absolute path to the site's repo on the host, e.g. /opt/projects/nxt.bargains. Read-only reference for now; nothing in the CMS executes against it."
+    },
+    "deployCommand": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "How this site is published, recorded so the dashboard can say it rather than guess. Not run from the admin — deploys stay on the host."
+    },
+    "gaMeasurementId": {
+      "type": "string",
+      "maxLength": 24,
+      "description": "GA4 measurement ID as set in the site's layout.tsx. Unused until traffic metrics are wired in, but recorded here so the mapping lives in one place."
+    },
+    "affiliateTags": {
+      "type": "json",
+      "description": "Per-network affiliate identifiers for this site, keyed by network — e.g. { \"amazon\": \"tag-20\" }. Never put API secrets here; this is readable by anyone with content access."
+    },
+    "contentTypes": {
+      "type": "json",
+      "description": "Which collections belong to this site, keyed by role, each an array because a role can have more than one source: { \"posts\": [{ \"uid\": \"api::bls-post.bls-post\" }] }. An entry may carry a \"filter\" when a type is shared between sites, as nxtsmart-post is — without it the dashboard counts another site's rows as this one's."
+    },
     "siteStatus": {
       "type": "enumeration",
       "enum": [
