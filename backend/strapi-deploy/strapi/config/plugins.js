@@ -40,6 +40,10 @@ module.exports = ({ env }) => ({
     enabled: true,
     resolve: './src/plugins/content-jobs',
   },
+  'site-dashboard': {
+    enabled: true,
+    resolve: './src/plugins/site-dashboard',
+  },
   'ai-writer': {
     enabled: true,
     resolve: './src/plugins/ai-writer',
