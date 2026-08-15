@@ -1,0 +1,126 @@
+# One "category | topic [| destination(s)]" per line. Lines starting with # are ignored.
+# Save this as topics.txt and run:  node generate.js --topics topics.txt
+#
+# Format:
+#   category | topic                      ← 2 fields, destinations auto-detected from title
+#   category | topic | destination        ← 3 fields, destination explicit (highest priority)
+#   category | topic | dest1, dest2       ← multiple destinations, comma-separated
+#
+# Destinations should match the `name` of an existing Destination in Strapi
+# (case-insensitive). Slugs also work. Auto-detect runs first; explicit
+# destinations override.
+#
+# The CLI will look up each category in Strapi (by slug or name), auto-create
+# it if it doesn't exist, attach the article to it, and skip topics whose
+# title (or derived slug) already exists in Strapi.
+
+Smart Home Automation | Smart Home Automation: How Scenes, Routines and Sensors Actually Work
+Smart Home Automation | Kitchen Automation: Which Smart Devices Actually Earn Their Place
+Smart Home Automation | Bedroom Automation: Sleep, Wake and Light Scheduling
+Smart Home Automation | Nursery Automation: What's Genuinely Useful and What's Just Noise
+Smart Home Automation | Garage and Entryway Automation: Arrival and Departure Routines
+Smart Home Automation | Home Office Automation: Lighting, Air and Do-Not-Disturb
+Smart Home Automation | Presence Detection That Actually Works - and Why Geofencing Doesn't
+Smart Home Automation | Designing Automations That Fail Safe When Something Breaks
+Smart Home Automation | Smart Home Automation for Households With Young Children
+Smart Home Automation | Automating a Rented Apartment Without Drilling a Single Hole
+Smart Home Security | Smart Home Security: Cameras, Locks, Sensors and Privacy Explained
+Smart Home Security | Smart Home Security Without a Monthly Subscription: What You Give Up
+Smart Home Security | Are Smart Locks Actually Safe? Failure Modes, Power Cuts and Lockouts
+Smart Home Security | What Happens to Your Security System When the Manufacturer Shuts Down
+Smart Home Security | Smart Camera Privacy: Where Your Footage Goes and How to Limit It
+Smart Home Security | Securing Your Smart Home Network Without a Networking Degree
+Smart Home Security | Renter-Friendly Home Security That Needs No Drilling
+Smart Home Security | Event Recording vs 24/7: Does Your Camera Need to Record Continuously?
+Smart Home Security | Smart Locks Without Wi-Fi: Bluetooth, Keypad and Offline Options
+Smart Home Security | Account Security for Smart Homes: Why 2FA Matters More Than the Lock
+Smart Home Devices | Smart Home Devices: What Each Type Does and What to Check Before Buying
+Smart Home Devices | The First Five Smart Home Devices Worth Buying - and the Order to Buy Them
+Smart Home Devices | Smart Bulbs vs Smart Switches vs Smart Plugs: When to Use Which
+Smart Home Devices | Smart Home Sensors Explained: Motion, Contact, Presence and Environmental
+Smart Home Devices | Smart Switches Without a Neutral Wire: What Your Options Really Are
+Smart Home Devices | Smart Thermostats and the C-Wire Problem
+Smart Home Devices | How to Read a Smart Device Spec Sheet
+Smart Home Devices | Smart Home Devices That Keep Working When the Internet Drops
+Smart Home Devices | Battery vs Wired Smart Devices: The Maintenance Trade-Off Nobody Mentions
+Smart Home Devices | Smart Home Devices for Older Houses and Awkward Wiring
+Smart Home Entertainment | Smart Home Entertainment: TVs, Audio, Streaming and Multi-Room Explained
+Smart Home Entertainment | Multi-Room Audio Without Committing to a Single Ecosystem
+Smart Home Entertainment | Smart TV Privacy: What Your Television Reports Back
+Smart Home Entertainment | Do You Need a Streaming Stick If Your TV Is Already Smart?
+Smart Home Entertainment | Syncing Lights to What's on Screen: How Ambient Systems Work
+Smart Home Entertainment | Voice Control for Your TV: What Works and What Doesn't
+Smart Home Entertainment | Building a Movie-Night Scene Across TV, Lights and Blinds
+Smart Home Entertainment | Soundbar vs Speaker Pair vs AV Receiver for a Smart Setup
+Smart Home Entertainment | Smart Entertainment for a Small Apartment
+Smart Home Entertainment | Controlling Legacy Gear: IR Bridges, Hubs and Universal Remotes
+Smart Home Energy | Smart Home Energy: What Saves Money and What Doesn't
+Smart Home Energy | Do Smart Thermostats Save Money? What the Evidence Shows
+Smart Home Energy | Smart Plugs and Standby Power: Measuring the Real Saving
+Smart Home Energy | Whole-Home vs Plug-Level Energy Monitoring
+Smart Home Energy | Automating Heating and Cooling Around Who's Actually Home
+Smart Home Energy | What a Smart Home Costs to Run
+Smart Home Energy | Smart Home Energy Setup for Solar Households
+Smart Home Energy | Time-of-Use Tariffs and Smart Home Scheduling
+Smart Home Energy | Smart Water Monitoring: Leaks, Usage and Waste
+Smart Home Energy | Which Smart Devices Draw Power Doing Nothing
+Smart Home Integration | Smart Home Compatibility: Matter, Thread, Zigbee, Z-Wave and Wi-Fi Explained
+Smart Home Integration | Matter vs Thread: Why They're Not Actually Competitors
+Smart Home Integration | Do You Need a Smart Home Hub?
+Smart Home Integration | Thread Border Routers: How Many You Need and Where to Put Them
+Smart Home Integration | Will a US Smart Home Device Work in the UK, EU or Australia?
+Smart Home Integration | Bridging Incompatible Ecosystems: Hubs, Bridges and Home Assistant
+Smart Home Integration | How to Check Matter Certification Before You Buy
+Smart Home Integration | Switching Ecosystems Without Re-Buying Your Hardware
+Smart Home Integration | Why Your Zigbee Network Gets Less Reliable as You Add Devices
+Smart Home Integration | Choosing a Smart Home Ecosystem You Won't Regret in Three Years
+Product Reviews | [Smart Lock] Review: What Installation Actually Involves
+Product Reviews | [Video Doorbell] Review: What You Get Without the Subscription
+Product Reviews | [Smart Thermostat] Review: Compatibility Before Features
+Product Reviews | [Robot Vacuum] Review: Mapping, Maintenance and Running Costs
+Product Reviews | [Indoor Camera] Review: Local Storage vs Cloud in Practice
+Product Reviews | [Smart Speaker] Review: What It Can and Can't Actually Control
+Product Reviews | [Smart Plug] Review: How Accurate Is the Energy Monitoring?
+Product Reviews | [Matter Sensor] Review: Setup Across Three Ecosystems
+Product Reviews | [Smart Blind Kit] Review: The Retrofit Reality
+Product Reviews | [Hub] Review: Which Protocols It Actually Bridges
+Product Comparisons | Alexa vs Google Home vs Apple Home: Which Fits Your Household
+Product Comparisons | Camera Subscriptions Compared: Ring Protect vs Nest Aware vs Arlo Secure
+Product Comparisons | Zigbee vs Z-Wave: Which Protocol for a Sensor-Heavy Home
+Product Comparisons | Home Assistant vs SmartThings vs Hubitat
+Product Comparisons | Local vs Cloud Camera Storage: The Five-Year Cost Compared
+Product Comparisons | Wired vs Battery Video Doorbells
+Product Comparisons | Smart Lock Types Compared: Deadbolt Replacement vs Retrofit vs Keypad
+Product Comparisons | Robot Vacuum vs Robot Mop vs Combo Units
+Product Comparisons | Smart Bulbs vs Smart Switches: Cost per Room Compared
+Product Comparisons | Mesh Wi-Fi vs a Dedicated IoT Network for Smart Homes
+How-to Guides | How to Set Up Wi-Fi for 30+ Smart Home Devices
+How-to Guides | How to Diagnose Smart Devices That Keep Going Offline
+How-to Guides | How to Put Smart Devices on a Separate Network
+How-to Guides | How to Add a Non-Matter Device to a Matter Setup
+How-to Guides | How to Move Your Smart Home to a New Router Without Re-Pairing Everything
+How-to Guides | How to Set Up a Smart Home in a Rental
+How-to Guides | How to Build an Away-From-Home Routine
+How-to Guides | How to Test Whether Your Automations Still Work
+How-to Guides | How to Hand Over a Smart Home When You Move Out
+How-to Guides | How to Give Guests Access Without Sharing Your Accounts
+Top-Rated Products | Best Smart Home Devices for Renters
+Top-Rated Products | Best Smart Switches for Homes Without a Neutral Wire
+Top-Rated Products | Best Security Cameras With No Subscription Required
+Top-Rated Products | Best Matter-Certified Devices for a First Smart Home
+Top-Rated Products | Best Smart Home Devices Under $50
+Top-Rated Products | Best Smart Thermostats for Homes Without a C-Wire
+Top-Rated Products | Best Smart Home Devices That Work Without Internet
+Top-Rated Products | Best Smart Home Devices for Aging in Place
+Top-Rated Products | Best Smart Home Devices for Pet Owners
+Top-Rated Products | Smart Home Starter Kits Compared by Ecosystem
+Informative Articles | What a Smart Home Really Costs Over Five Years
+Informative Articles | What Happens When a Smart Home Company Shuts Down Its Servers
+Informative Articles | How to Read a Smart Device Privacy Policy
+Informative Articles | Why Smart Home Devices Sold in One Country Don't Work in Another
+Informative Articles | Smart Home Terminology: A Plain-English Glossary
+Informative Articles | Is a Smart Home Worth It? An Honest Assessment
+Informative Articles | Who Can See Your Smart Home Data
+Informative Articles | Why Nothing Works Together: A Short History of Smart Home Standards
+Informative Articles | Firmware Updates: Why Devices Break After Working Fine for Months
+Informative Articles | Smart Homes and Home Insurance: What Actually Affects Your Premium

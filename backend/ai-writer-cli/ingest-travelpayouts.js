@@ -32,6 +32,7 @@ const argv = yargs(hideBin(process.argv))
   .option('refresh', { type: 'boolean', default: false, describe: 'Force re-download of TP data dumps (ignore local cache)' })
   .option('concurrency', { type: 'number', default: 6, describe: 'Parallel Strapi write requests' })
   .option('with-logos', { type: 'boolean', default: true, describe: 'For new airlines, fetch logo from pics.avs.io. Use --no-with-logos to skip.' })
+  .option('validate', { type: 'boolean', default: true, describe: 'Run the post-ingest integrity gate (validate-aviation-data.mjs --gate). Use --no-validate to skip.' })
   .option('dry-run', { type: 'boolean', default: false })
   .help()
   .parseSync();
@@ -363,8 +364,18 @@ async function ingestRoutes({ airportMap, airlineMap }) {
   console.log(`  source: ${raw.length.toLocaleString()} carrier-route rows`);
 
   // Group by (origin IATA, destination IATA), aggregate carriers.
+  //
+  // codeshare rows are MARKETING carriers, not operators — the dump flags
+  // them explicitly, and ingesting them is how Lufthansa/American/US Airways
+  // ended up listed as carriers on SYD→MEL (2026-07 data audit). Operating
+  // rows only. Note the dump also contains stale rows with recycled IATA
+  // codes (e.g. DJ = Virgin Blue in this snapshot, Air Djibouti today) —
+  // those can't be detected here; the validate-aviation-data.mjs harness
+  // flags them against the reference registry after ingest.
+  let codeshareRows = 0;
   const grouped = new Map();
   for (const r of raw) {
+    if (r.codeshare) { codeshareRows++; continue; }
     const o = (r.departure_airport_iata || '').toUpperCase();
     const d = (r.arrival_airport_iata || '').toUpperCase();
     const a = (r.airline_iata || '').toUpperCase();
@@ -375,6 +386,7 @@ async function ingestRoutes({ airportMap, airlineMap }) {
     if (a) entry.carriers.add(a);
     entry.popularity += 1; // crude popularity = number of carriers × duplicates
   }
+  console.log(`  skipped ${codeshareRows.toLocaleString()} codeshare (marketing-carrier) rows`);
   console.log(`  deduped: ${grouped.size.toLocaleString()} unique routes`);
 
   // Only keep routes where both endpoints exist in our airport table.
@@ -549,6 +561,34 @@ async function main() {
     if (!airportMap) airportMap = await fetchAllAsMap('airports', 'iata');
     if (!airlineMap) airlineMap = await fetchAllAsMap('airlines', 'iataCode');
     await ingestRoutes({ airportMap, airlineMap });
+  }
+
+  // Post-ingest integrity gate — reconciles the dataset against reference
+  // registries (OpenFlights + Wikidata) and FAILS the ingest run when new
+  // high-confidence violations appear that aren't in the accepted baseline.
+  // Report-only harness lives in the site repo; disable with --no-validate.
+  if (argv.validate && !argv['dry-run']) {
+    const { spawnSync } = await import('node:child_process');
+    // Repo-canonical location is ops/ (the site repo's scripts/ entry is a
+    // symlink to /opt/scripts/originfacts, which serves as the fallback).
+    const script =
+      process.env.VALIDATE_SCRIPT ||
+      ['/var/www/html/originfacts.com/ops/validate-aviation-data.mjs', '/opt/scripts/originfacts/validate-aviation-data.mjs'].find((p) => fs.existsSync(p)) ||
+      '/var/www/html/originfacts.com/ops/validate-aviation-data.mjs';
+    const baseline = process.env.VALIDATE_BASELINE || '/var/www/html/originfacts.com/docs/data/integrity-baseline.json';
+    if (fs.existsSync(script)) {
+      console.log('\n=== Integrity gate ===');
+      const r = spawnSync(process.execPath, [script, '--gate', baseline], {
+        stdio: 'inherit',
+        env: { ...process.env, STRAPI_URL, STRAPI_API_TOKEN },
+      });
+      if (r.status !== 0) {
+        console.error('\n✖ Integrity gate FAILED — ingest introduced new high-confidence data violations (see above).');
+        process.exit(1);
+      }
+    } else {
+      console.warn(`  validate script not found at ${script} — skipping gate (set VALIDATE_SCRIPT)`);
+    }
   }
 
   console.log('\nAll done.');

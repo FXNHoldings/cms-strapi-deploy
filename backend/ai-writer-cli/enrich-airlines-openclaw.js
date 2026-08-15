@@ -1,36 +1,37 @@
 #!/usr/bin/env node
-// FXN AI Writer — Enrich Airlines (factual fields + About content)
-// Backfills legalName / address / phone / website (and gaps in iataCode /
-// icaoCode / country / region) AND generates the `about` prose +
-// `keyDestinations` for airlines already in Strapi.
+// FXN AI Writer — Enrich Airlines via OPENCLAW (factual fields + About content)
 //
-//   Factual fields: Wikidata first (structured, free) → Claude fallback
-//   About + keyDestinations: Claude (grounded in the record's own fields)
+// OpenClaw-backed variant of enrich-airlines.js. Identical Wikidata / Strapi /
+// FAQ-gate / resume logic, but ALL content generation is routed through the
+// local OpenClaw gateway's agent (openai/gpt-5.6-sol on the codex/ChatGPT
+// sign-in) instead of the Anthropic API — so generation uses the ChatGPT
+// subscription (auth-profile), not metered API tokens. No ANTHROPIC_API_KEY.
+//
+//   Factual fields: Wikidata first (structured, free) → OpenClaw fallback
+//   About + keyDestinations + FAQs: OpenClaw agent (grounded in the record)
 //   → PUT /api/airlines/:id
 //
-// The `about` step runs AFTER the factual step in the same pass, so the prose
-// is grounded in freshly-corrected facts. It is capped at 4 paragraphs and
-// only lists real destinations Claude is confident about (empty otherwise).
+// Generation shells out to:  node /opt/OpenClaw/openclaw.mjs agent --json ...
 //
 // Run:
-//   node enrich-airlines.js                               # fill empty factual fields + empty about
-//   node enrich-airlines.js --iata SQ                     # one airline
-//   node enrich-airlines.js --fields website,phone -n 25  # limit which factual fields & how many
-//   node enrich-airlines.js --fields about                # ONLY (re)generate the about + destinations
-//   node enrich-airlines.js --source wikidata             # skip Claude for facts (about still needs Claude)
-//   node enrich-airlines.js --no-about                    # factual fields only, skip about
-//   node enrich-airlines.js --overwrite                   # replace existing values (incl. rewrite about)
-//   node enrich-airlines.js --dry-run                     # log diffs / print about, no writes
+//   node enrich-airlines-openclaw.js                       # fill empty facts + generate about/FAQs (<8) via OpenClaw
+//   node enrich-airlines-openclaw.js --iata SQ             # one airline
+//   node enrich-airlines-openclaw.js --source wikidata     # skip OpenClaw for facts (Wikidata only), still generate about
+//   node enrich-airlines-openclaw.js --no-about            # factual fields only
+//   node enrich-airlines-openclaw.js --overwrite           # replace existing values
+//   node enrich-airlines-openclaw.js --dry-run             # log diffs, no writes
 //
 // The script is idempotent and resumable — a checkpoint file records the
 // last-processed airline slug so interruptions don't restart from zero.
 
 import 'dotenv/config';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
-import Anthropic from '@anthropic-ai/sdk';
+import { spawn } from 'node:child_process';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import { airlineFacts } from './tp-airline-facts.js';
 
 // `about` is a synthesised field (Claude prose + keyDestinations), handled by
 // a separate stage from the factual/Wikidata fields below.
@@ -59,22 +60,25 @@ const argv = yargs(hideBin(process.argv))
   .option('about', { type: 'boolean', default: true, describe: 'Generate the about prose + keyDestinations. Use --no-about to skip.' })
   .option('min-words', { type: 'number', default: 180, describe: 'Reject about drafts shorter than this' })
   .option('min-paragraphs', { type: 'number', default: 5, describe: 'Skip about generation when the existing about already has this many paragraphs (ignored with --overwrite)' })
-  .option('concurrency', { type: 'number', default: 3, describe: 'Parallel airlines (keep ≤4 to respect Wikidata rate limits)' })
+  .option('concurrency', { type: 'number', default: 3, describe: 'Parallel airlines. With async OpenClaw, this runs N agent calls at once (2-4 is a good range; higher risks ChatGPT rate limits).' })
+  .option('oc-facts', { type: 'boolean', default: false, describe: 'Also use OpenClaw to fill factual fields Wikidata missed (adds a 2nd agent call per airline). Off by default for speed — content (about/FAQs) is always via OpenClaw.' })
+  .option('only-with-facts', { type: 'boolean', default: false, describe: 'Only process airlines that have TravelPayouts route facts (so FAQ answers can be grounded in real destination/route data). Pair with --overwrite to re-ground already-generated pages.' })
   .option('resume', { type: 'boolean', default: true, describe: 'Skip airlines already processed per checkpoint file. Use --no-resume to restart.' })
   .option('dry-run', { type: 'boolean', default: false })
   .help()
   .parseSync();
 
 const {
-  ANTHROPIC_API_KEY,
-  // Factual lookup — Sonnet 4.6 has ~8× the TPM budget of Opus 4.7 and is fine
-  // for this JSON-shaped task. Override with ENRICH_CLAUDE_MODEL if you prefer.
-  ENRICH_CLAUDE_MODEL = 'claude-sonnet-4-6',
   STRAPI_URL,
   STRAPI_API_TOKEN,
   WIKIDATA_USER_AGENT = 'fxn-enrich-airlines/1.0 (https://originfacts.com)',
+  // OpenClaw invocation — content is generated by the local OpenClaw gateway
+  // agent (ChatGPT/codex sign-in), not the Anthropic API. Overridable via env.
+  OPENCLAW_NODE = '/root/.nvm/versions/node/v22.23.1/bin/node',
+  OPENCLAW_ENTRY = '/opt/OpenClaw/openclaw.mjs',
+  OPENCLAW_AGENT = 'main',
+  OPENCLAW_TIMEOUT_SEC = '300',
 } = process.env;
-const CLAUDE_MODEL = ENRICH_CLAUDE_MODEL;
 
 const requestedFields = argv.fields.split(',').map((s) => s.trim()).filter(Boolean);
 for (const f of requestedFields) if (!ALL_FIELDS.includes(f)) fatal(`Unknown field "${f}". Allowed: ${ALL_FIELDS.join(', ')}`);
@@ -89,16 +93,97 @@ const useWikidata = argv.source === 'wikidata' || argv.source === 'both';
 // airline page ends up with the full 8-question set.
 const MIN_FAQS = 8;
 
-// About generation always needs Claude regardless of --source.
-if ((useClaude || wantAbout) && !ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY not set (required for Claude facts and about generation)');
+// Generation runs through OpenClaw regardless of --source.
+if ((useClaude || wantAbout) && !fs.existsSync(OPENCLAW_ENTRY)) {
+  fatal(`OpenClaw entry not found at ${OPENCLAW_ENTRY} (set OPENCLAW_ENTRY). Content generation needs the OpenClaw gateway.`);
+}
 if (!argv['dry-run']) {
   if (!STRAPI_URL) fatal('STRAPI_URL not set');
   if (!STRAPI_API_TOKEN) fatal('STRAPI_API_TOKEN not set');
 }
 
-const claude = (useClaude || wantAbout) && ANTHROPIC_API_KEY ? new Anthropic({ apiKey: ANTHROPIC_API_KEY }) : null;
+// `claude` is a truthy capability flag here (kept so downstream guards like
+// `if (!claude) return null` still read naturally) — generation is via OpenClaw.
+const claude = useClaude || wantAbout;
 
-const CHECKPOINT = path.join(process.cwd(), '.enrich-airlines.progress.json');
+/* ---------- OpenClaw generation bridge ---------- */
+
+// Run one agent turn through OpenClaw and return the assistant's raw text.
+// System + user prompts are combined into a single message (the agent has its
+// own persona); we force a JSON-only reply. Uses --json to get a structured
+// envelope, then digs out finalAssistantVisibleText. Returns '' on failure.
+//
+// ASYNC (child_process.spawn) rather than spawnSync so multiple airlines can
+// have their OpenClaw calls in flight at once — spawnSync blocked the event
+// loop and made --concurrency a no-op. Now concurrency N runs N agents at once.
+function openclawGenerate(systemPrompt, userPrompt, { sessionKey, timeoutSec } = {}) {
+  const message = `${systemPrompt}\n\n----- INPUT -----\n${userPrompt}\n\n----- OUTPUT RULES -----\nRespond with ONLY the strict JSON object described above. No prose, no explanation, no markdown code fences. Output must start with { and end with }.`;
+  const tmp = path.join(os.tmpdir(), `oc-enrich-${Date.now()}-${Math.floor(Math.random() * 1e6)}.txt`);
+  fs.writeFileSync(tmp, message, 'utf8');
+  const tSec = Number(timeoutSec || OPENCLAW_TIMEOUT_SEC) || 300;
+  const args = [
+    OPENCLAW_ENTRY, 'agent',
+    '--agent', OPENCLAW_AGENT,
+    '--session-key', `agent:${OPENCLAW_AGENT}:${sessionKey || `oc-${Date.now()}`}`,
+    '--message-file', tmp,
+    '--thinking', 'off',
+    '--json',
+    '--timeout', String(tSec),
+  ];
+  return new Promise((resolve) => {
+    let stdout = '';
+    let settled = false;
+    const done = (text) => {
+      if (settled) return;
+      settled = true;
+      try { fs.unlinkSync(tmp); } catch {}
+      resolve(text);
+    };
+    let child;
+    try {
+      child = spawn(OPENCLAW_NODE, args, { cwd: path.dirname(OPENCLAW_ENTRY) });
+    } catch {
+      return done('');
+    }
+    // Hard wall-clock guard — kill a hung agent so one bad airline can't stall a batch.
+    const killer = setTimeout(() => { try { child.kill('SIGKILL'); } catch {} done(''); }, (tSec + 60) * 1000);
+    child.stdout.on('data', (d) => { stdout += d; });
+    child.stderr.on('data', () => {});
+    child.on('error', () => { clearTimeout(killer); done(''); });
+    child.on('close', () => { clearTimeout(killer); done(extractOpenclawText(stdout)); });
+  });
+}
+
+// Pull the assistant's visible text out of the `openclaw agent --json` envelope.
+function extractOpenclawText(stdout) {
+  const s = String(stdout || '');
+  // The envelope is JSON; strip any leading non-JSON log noise.
+  const start = s.indexOf('{');
+  const end = s.lastIndexOf('}');
+  if (start === -1 || end === -1 || end < start) return '';
+  let env;
+  try { env = JSON.parse(s.slice(start, end + 1)); } catch { return ''; }
+  let found = '';
+  const visit = (o) => {
+    if (found || !o || typeof o !== 'object') return;
+    if (typeof o.finalAssistantVisibleText === 'string' && o.finalAssistantVisibleText.trim()) {
+      found = o.finalAssistantVisibleText;
+      return;
+    }
+    if (typeof o.finalAssistantRawText === 'string' && o.finalAssistantRawText.trim()) {
+      found = o.finalAssistantRawText;
+      return;
+    }
+    for (const v of Object.values(o)) {
+      if (v && typeof v === 'object') visit(v);
+      if (found) return;
+    }
+  };
+  visit(env);
+  return (found || '').trim();
+}
+
+const CHECKPOINT = path.join(process.cwd(), '.enrich-airlines-openclaw.progress.json');
 const checkpoint = loadCheckpoint();
 
 /* ---------- Main ---------- */
@@ -143,19 +228,37 @@ async function main() {
 /* ---------- Strapi ---------- */
 
 async function strapi(pathname, init = {}) {
-  const res = await fetch(`${STRAPI_URL}${pathname}`, {
-    ...init,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
-      ...(init.headers || {}),
-    },
-  });
-  if (!res.ok) {
-    const body = await res.text().catch(() => '');
-    throw new Error(`Strapi ${res.status} on ${pathname}: ${body.slice(0, 300)}`);
+  // Long spawnSync OpenClaw calls block the event loop for minutes, which can
+  // leave undici's pooled keep-alive socket dead — the next fetch then throws a
+  // bare "fetch failed". Retry connection-level errors a few times (HTTP error
+  // statuses are NOT retried — they surface immediately). Force Connection:
+  // close so each request opens a fresh socket rather than reusing a stale one.
+  let lastErr;
+  for (let attempt = 1; attempt <= 4; attempt++) {
+    try {
+      const res = await fetch(`${STRAPI_URL}${pathname}`, {
+        ...init,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${STRAPI_API_TOKEN}`,
+          Connection: 'close',
+          ...(init.headers || {}),
+        },
+      });
+      if (!res.ok) {
+        const body = await res.text().catch(() => '');
+        throw new Error(`Strapi ${res.status} on ${pathname}: ${body.slice(0, 300)}`);
+      }
+      return res.json();
+    } catch (e) {
+      // Only retry genuine network failures ("fetch failed" / undici causes),
+      // never a Strapi HTTP-status error (those messages start with "Strapi ").
+      if (String(e.message).startsWith('Strapi ') || attempt === 4) throw e;
+      lastErr = e;
+      await sleep(1000 * attempt);
+    }
   }
-  return res.json();
+  throw lastErr;
 }
 
 async function fetchTargetAirlines() {
@@ -181,6 +284,12 @@ async function fetchTargetAirlines() {
   }
   let skippedFullFaqs = 0;
   const eligible = all.filter((a) => {
+    // --only-with-facts: skip airlines with no TravelPayouts route facts (their
+    // FAQs can't be grounded in real route data anyway).
+    if (argv['only-with-facts']) {
+      const f = a.iataCode ? airlineFacts(a.iataCode) : null;
+      if (!f || f.empty || f.destinationCount < 3) return false;
+    }
     // Skip any airline whose FAQ section already shows the full 8 questions.
     if (!argv.overwrite && faqCount(a) >= MIN_FAQS) {
       skippedFullFaqs++;
@@ -262,11 +371,18 @@ Return STRICT JSON: { "shortDescription": string, "aboutParagraphs": string[], "
   8. "How does Originfacts find low prices on <NAME> flights?"
 Each answer: 1-3 sentences, factual and specific to this airline where possible, otherwise sensible general guidance. For Q8 always explain that Originfacts compares live fares from hundreds of airlines and travel agencies via its partner Travelpayouts and never adds a fee. Do not fabricate exact figures (carry-on dimensions, precise route distances) — speak generally if unsure. No markdown, no newlines inside answers.
 
+IMPORTANT — VERIFIED ROUTE FACTS: If the user's data includes a "VERIFIED ROUTE FACTS" block, treat those figures as authoritative ground truth and use them EXACTLY:
+  - Q3 ("How many destinations…"): state the exact destination count and country count from the facts.
+  - Q7 ("What is the longest … route?"): name the exact longest route and its distance from the facts.
+  - Q1 ("primary hub") and Q4 ("most popular airports to depart from"): use the busiest hubs listed.
+  - keyDestinations, the fleet paragraph, and the about prose should align with the verified destinations and aircraft.
+Never replace a verified number with an estimate, hedge it with "around/approximately", or contradict it. State these figures naturally as the airline's own facts — do NOT reference the data source: never write "according to the verified data", "the provided data", "verified route data", "on record", or any similar meta-phrase. When no such block is present, follow the general-guidance rules above.
+
 Ground every claim in the airline identified by the user's data. If unsure of a specific fact, speak generally rather than inventing specifics. Do not fabricate awards, statistics, dates, or destinations. Output only the JSON object — no text outside it, no markdown fences.`;
 }
 
 function userPromptAbout(a) {
-  return [
+  const lines = [
     `Airline: ${a.name}`,
     a.iataCode ? `IATA: ${a.iataCode}` : '',
     a.icaoCode ? `ICAO: ${a.icaoCode}` : '',
@@ -277,9 +393,34 @@ function userPromptAbout(a) {
     a.airport ? `Main hub airport: ${a.airport}` : '',
     a.founded ? `Founded: ${a.founded}` : '',
     a.website ? `Website: ${a.website}` : '',
-    '',
-    'Write the "about" prose for this airline.',
-  ].filter(Boolean).join('\n');
+  ];
+
+  // Verified route facts from TravelPayouts route data — authoritative numbers
+  // the model must use in the relevant FAQ answers (destinations count, longest
+  // route, hubs) instead of estimating.
+  const facts = a.iataCode ? airlineFacts(a.iataCode) : null;
+  if (facts && !facts.empty && facts.destinationCount >= 3) {
+    lines.push('');
+    lines.push('VERIFIED ROUTE FACTS (authoritative — use these EXACT figures; do not contradict or replace with estimates):');
+    lines.push(`- Destinations served: ${facts.destinationCount} destinations across ${facts.countryCount} countries`);
+    lines.push(`- Routes operated: ${facts.routeCount}`);
+    if (facts.topHubs?.length) {
+      lines.push(`- Busiest departure hubs (most routes first): ${facts.topHubs.map((h) => h.city).join(', ')}`);
+    }
+    if (facts.longestRoute) {
+      lines.push(`- Longest route: ${facts.longestRoute.from} to ${facts.longestRoute.to}, about ${facts.longestRoute.km.toLocaleString()} km nonstop`);
+    }
+    if (facts.keyDestinations?.length) {
+      lines.push(`- Example destinations actually served: ${facts.keyDestinations.slice(0, 14).join(', ')}`);
+    }
+    if (facts.fleet?.length) {
+      lines.push(`- Aircraft types on record: ${facts.fleet.slice(0, 12).join(', ')}`);
+    }
+  }
+
+  lines.push('');
+  lines.push('Write the "about" prose for this airline.');
+  return lines.filter(Boolean).join('\n');
 }
 
 // Returns { about, keyDestinations } or null when the draft is unusable.
@@ -287,20 +428,14 @@ function userPromptAbout(a) {
 // already applied, so the prose reflects corrected facts.
 async function generateAbout(merged) {
   if (!claude) return null;
-  const msg = await claude.messages.create({
-    model: CLAUDE_MODEL,
-    // Generous ceiling: adaptive thinking + the full JSON (5 paragraphs,
-    // destinations, FFP + URL, 4-6 good-to-know cards, 8 FAQ Q&As) is large.
-    max_tokens: 10000,
-    thinking: { type: 'adaptive' },
-    output_config: { effort: 'high' },
-    system: systemPromptAbout(),
-    messages: [{ role: 'user', content: userPromptAbout(merged) }],
+  // Content generated by the OpenClaw agent (ChatGPT/codex), not the API.
+  const text = await openclawGenerate(systemPromptAbout(), userPromptAbout(merged), {
+    sessionKey: `about-${merged.slug || merged.iataCode || 'x'}`,
   });
-  if (msg.stop_reason === 'max_tokens') {
-    console.log('\n    about warning: response hit max_tokens (may be incomplete)');
+  if (!text) {
+    console.log('\n    about warning: OpenClaw returned no text');
+    return null;
   }
-  const text = msg.content.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
   const json = safeParse(text);
   // Paragraphs come as an array (avoids invalid raw newlines inside a JSON
   // string); fall back to a legacy single `about` string if present.
@@ -435,7 +570,7 @@ async function lookupClaude(airline, missing) {
   if (!claude || missing.length === 0) return { values: {}, sources: {} };
   const { name, iataCode, icaoCode, country } = airline;
   const system = `You are a research assistant verifying corporate details for airlines.
-Use the web_search tool to find information from primary sources: the airline's own site, regulator filings (CAA/FAA/EASA), or Wikipedia with citations.
+Use web search if you have it, favouring primary sources: the airline's own site, regulator filings (CAA/FAA/EASA), or Wikipedia with citations. If you cannot verify a value, omit it — never guess.
 Return ONLY strict JSON with this shape:
 {
   "website":   "https://...",   // official homepage, optional
@@ -452,46 +587,14 @@ Omit any field you cannot verify from an official source. Do not guess. Do not w
   const user = `Airline: ${name}${iataCode ? ` (IATA ${iataCode})` : ''}${icaoCode ? ` (ICAO ${icaoCode})` : ''}${country ? ` — based in ${country}` : ''}
 Please find: ${missing.join(', ')}.`;
 
-  const res = await callClaudeWithRetry({
-    model: CLAUDE_MODEL,
-    max_tokens: 1024,
-    system,
-    tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 2 }],
-    messages: [{ role: 'user', content: user }],
+  const text = await openclawGenerate(system, user, {
+    sessionKey: `facts-${airline.slug || airline.iataCode || 'x'}`,
   });
-  const text = res.content
-    .filter((b) => b.type === 'text')
-    .map((b) => b.text)
-    .join('\n')
-    .trim();
   const json = extractJson(text);
   if (!json) return { values: {}, sources: {} };
   const values = {};
   for (const f of missing) if (json[f]) values[f] = String(json[f]).trim();
   return { values, sources: json.sources || {} };
-}
-
-async function callClaudeWithRetry(payload, maxAttempts = 5) {
-  let lastErr;
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    try {
-      return await claude.messages.create(payload);
-    } catch (e) {
-      lastErr = e;
-      // 429 → respect Retry-After, else exponential backoff (6s, 12s, 24s, 48s, capped 60s).
-      // 529 (overloaded) → same treatment. Everything else → surface immediately.
-      const status = e.status ?? e.response?.status;
-      if (status !== 429 && status !== 529) break;
-      if (attempt === maxAttempts) break;
-      const headerWait = Number(e.headers?.['retry-after'] ?? e.response?.headers?.get?.('retry-after'));
-      const waitSec = Number.isFinite(headerWait) && headerWait > 0
-        ? Math.min(headerWait, 60)
-        : Math.min(6 * 2 ** (attempt - 1), 60);
-      console.log(`\n    claude ${status} — waiting ${waitSec}s (attempt ${attempt}/${maxAttempts - 1})`);
-      await sleep(waitSec * 1000);
-    }
-  }
-  throw new Error(`Claude: ${lastErr?.message || 'unknown error'}`);
 }
 
 function extractJson(text) {
@@ -582,7 +685,9 @@ async function enrichOne(airline, idx, total) {
 
   let claudeResult = { values: {}, sources: {} };
   const stillMissing = missingInitial.filter((f) => !wiki[f]);
-  if (useClaude && stillMissing.length > 0) {
+  // OpenClaw facts fallback is opt-in (--oc-facts) — off by default so each
+  // airline makes ONE OpenClaw call (the about/FAQ bundle) instead of two.
+  if (useClaude && argv['oc-facts'] && stillMissing.length > 0) {
     try {
       claudeResult = await lookupClaude(airline, stillMissing);
     } catch (e) {
