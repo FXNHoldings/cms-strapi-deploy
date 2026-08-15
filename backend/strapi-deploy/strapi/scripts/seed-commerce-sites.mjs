@@ -217,7 +217,14 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+// Exit explicitly rather than waiting for a quiet event loop. The app's
+// bootstrap starts the AI-image poller, and its interval outlives
+// strapi.destroy() — once the pool is closed it fails to acquire a connection
+// every five seconds forever, so the script would hang after printing its
+// summary. A one-off script has nothing left to do by this point.
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
