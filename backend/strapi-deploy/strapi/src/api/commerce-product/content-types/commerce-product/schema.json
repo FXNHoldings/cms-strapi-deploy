@@ -7,39 +7,104 @@
     "displayName": "Commerce · Product",
     "description": "Shared product catalog records reused across blogs and deal websites."
   },
-  "options": { "draftAndPublish": true },
+  "options": {
+    "draftAndPublish": true
+  },
   "attributes": {
-    "name": { "type": "string", "required": true, "maxLength": 220 },
-    "slug": { "type": "uid", "targetField": "name", "required": true },
-    "brand": { "type": "string", "maxLength": 120 },
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 220
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "brand": {
+      "type": "string",
+      "maxLength": 120
+    },
     "brandRef": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::commerce-brand.commerce-brand",
       "inversedBy": "products"
     },
-    "shortDescription": { "type": "text", "maxLength": 360 },
-    "description": { "type": "richtext" },
-    "primaryImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
-    "gallery": { "type": "media", "multiple": true, "allowedTypes": ["images"] },
-    "category": { "type": "string", "maxLength": 120 },
+    "shortDescription": {
+      "type": "text",
+      "maxLength": 360
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "primaryImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "maxLength": 120
+    },
     "categories": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::commerce-category.commerce-category",
       "inversedBy": "products"
     },
-    "tags": { "type": "json", "description": "Array of product tags shared across sites." },
-    "specs": { "type": "json", "description": "Structured product specifications." },
-    "asin": { "type": "string", "maxLength": 30 },
-    "gtin": { "type": "string", "maxLength": 14, "description": "UPC/EAN/GTIN for cross-merchant matching." },
-    "mpn": { "type": "string", "maxLength": 100, "description": "Manufacturer part/model number." },
-    "sku": { "type": "string", "maxLength": 100 },
-    "rating": { "type": "decimal", "min": 0, "max": 10 },
-    "ratingCount": { "type": "integer", "default": 0, "min": 0 },
+    "tags": {
+      "type": "json",
+      "description": "Array of product tags shared across sites."
+    },
+    "specs": {
+      "type": "json",
+      "description": "Structured product specifications."
+    },
+    "asin": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "gtin": {
+      "type": "string",
+      "maxLength": 14,
+      "description": "UPC/EAN/GTIN for cross-merchant matching."
+    },
+    "mpn": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Manufacturer part/model number."
+    },
+    "sku": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "rating": {
+      "type": "decimal",
+      "min": 0,
+      "max": 10
+    },
+    "ratingCount": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
     "productStatus": {
       "type": "enumeration",
-      "enum": ["active", "draft", "archived"],
+      "enum": [
+        "active",
+        "draft",
+        "archived"
+      ],
       "default": "active",
       "required": true
     },
@@ -60,6 +125,35 @@
       "relation": "oneToMany",
       "target": "api::commerce-price-snapshot.commerce-price-snapshot",
       "mappedBy": "product"
+    },
+    "site": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-site.commerce-site",
+      "inversedBy": "products",
+      "description": "Which property this product belongs to. The commerce-* types are shared across several catalogues; without this they are one undifferentiated pool."
+    },
+    "imageUrl": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "External image URL. Used when primaryImage media is not set — catalogues that serve their own images keep them on their CDN rather than duplicating them into Strapi's media library, so regenerating an image needs no re-import."
+    },
+    "googleProductId": {
+      "type": "string",
+      "maxLength": 64,
+      "description": "Google Shopping product id. An exact identifier for merchant/google/products, so a product carrying one never needs fuzzy name matching."
+    },
+    "reviewSummary": {
+      "type": "text",
+      "description": "The 'Customers are saying' paragraph. Written or generated from real reviews; the UI labels it as generated so readers are not misled."
+    },
+    "reviewTopics": {
+      "type": "json",
+      "description": "Topic pills: [{label, count, sentiment}] derived from review text."
+    },
+    "recommendPercent": {
+      "type": "integer",
+      "description": "Share who would recommend. Only populate from a source that actually asks that question — it is not derivable from a star rating."
     }
   }
 }
