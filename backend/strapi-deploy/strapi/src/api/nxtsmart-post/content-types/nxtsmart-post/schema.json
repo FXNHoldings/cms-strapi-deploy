@@ -4,19 +4,43 @@
   "info": {
     "singularName": "nxtsmart-post",
     "pluralName": "nxtsmart-posts",
-    "displayName": "NXTSmart.Homes · Post",
-    "description": "Posts for NXTSmart.Homes — smart home guides, reviews, comparisons, how-to articles"
+    "displayName": "NXTSmart.Homes \u00b7 Post",
+    "description": "Posts for NXTSmart.Homes \u2014 smart home guides, reviews, comparisons, how-to articles"
   },
-  "options": { "draftAndPublish": true },
+  "options": {
+    "draftAndPublish": true
+  },
   "attributes": {
-    "title": { "type": "string", "required": true, "maxLength": 255 },
-    "slug": { "type": "uid", "targetField": "title", "required": true },
-    "excerpt": { "type": "text", "maxLength": 500 },
-    "content": { "type": "richtext", "required": true },
+    "site": {
+      "type": "enumeration",
+      "enum": ["nxtsmarthome.com.au", "nxtsmart.homes"],
+      "default": "nxtsmart.homes",
+      "description": "Which property this post belongs to. These types are shared between two sites, so filter the Content Manager on this rather than assuming everything here is one site's."
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
     "coverImage": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "coverImageUrl": {
       "type": "string",
@@ -30,7 +54,9 @@
     "gallery": {
       "type": "media",
       "multiple": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "postType": {
       "type": "enumeration",
@@ -47,7 +73,9 @@
         "smart-home-entertainment",
         "smart-home-energy",
         "smart-home-integration",
-        "other"
+        "other",
+        "buying-guide",
+        "pillar"
       ],
       "default": "informative"
     },
@@ -65,18 +93,37 @@
       "type": "integer",
       "description": "Original WordPress post ID (for re-import idempotency)"
     },
-    "readingTimeMinutes": { "type": "integer", "default": 5, "min": 1 },
-    "seoTitle": { "type": "string", "maxLength": 70 },
-    "seoDescription": { "type": "text", "maxLength": 160 },
-    "seoKeywords": { "type": "string" },
+    "readingTimeMinutes": {
+      "type": "integer",
+      "default": 5,
+      "min": 1
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 70
+    },
+    "seoDescription": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "seoKeywords": {
+      "type": "string"
+    },
     "ogImage": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "source": {
       "type": "enumeration",
-      "enum": ["manual", "wp-import", "ai", "csv-import"],
+      "enum": [
+        "manual",
+        "wp-import",
+        "ai",
+        "csv-import"
+      ],
       "default": "manual"
     },
     "categories": {
@@ -96,6 +143,31 @@
       "relation": "manyToOne",
       "target": "api::nxtsmart-author.nxtsmart-author",
       "inversedBy": "posts"
+    },
+    "dateModified": {
+      "type": "datetime",
+      "description": "Original or last genuine content modification date used for article metadata and schema."
+    },
+    "keyTakeaways": {
+      "type": "richtext",
+      "description": "The short answer summary shown above the article body"
+    },
+    "publishDate": {
+      "type": "datetime",
+      "description": "Original publication date from the source article front matter"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "tags": {
+      "type": "json",
+      "description": "Free-form tag list from the source front matter"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.item"
     }
   }
 }

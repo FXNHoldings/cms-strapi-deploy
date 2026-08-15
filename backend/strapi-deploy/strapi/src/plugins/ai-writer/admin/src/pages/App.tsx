@@ -105,7 +105,7 @@ export const App = () => {
         </Box>
 
         <Grid.Root gap={4}>
-          <Grid.Item col={6} s={12}>
+          <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
             <Field.Root name="provider">
               <Field.Label>AI provider</Field.Label>
               <SingleSelect value={provider} onChange={(v: any) => onProviderChange(v)}>
@@ -118,7 +118,7 @@ export const App = () => {
             </Field.Root>
           </Grid.Item>
 
-          <Grid.Item col={6} s={12}>
+          <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
             <Field.Root name="model">
               <Field.Label>Model</Field.Label>
               <TextInput
@@ -129,32 +129,33 @@ export const App = () => {
             </Field.Root>
           </Grid.Item>
 
-          <Grid.Item col={12} s={12}>
+          <Grid.Item col={12} s={12} direction="column" alignItems="stretch">
             <Field.Root name="topic" required>
               <Field.Label>Topic</Field.Label>
               <Textarea
                 value={topic}
                 onChange={(e: any) => setTopic(e.target.value)}
+                rows={3}
                 placeholder="e.g. Best cheap flights from London to Bangkok in 2026"
               />
             </Field.Root>
           </Grid.Item>
 
-          <Grid.Item col={6} s={12}>
+          <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
             <Field.Root name="destination">
               <Field.Label>Destination (optional)</Field.Label>
-              <Textarea value={destination} onChange={(e: any) => setDestination(e.target.value)} />
+              <TextInput value={destination} onChange={(e: any) => setDestination(e.target.value)} placeholder="e.g. Bangkok, Thailand" />
             </Field.Root>
           </Grid.Item>
 
-          <Grid.Item col={6} s={12}>
+          <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
             <Field.Root name="category">
               <Field.Label>Category (optional)</Field.Label>
-              <Textarea value={category} onChange={(e: any) => setCategory(e.target.value)} />
+              <TextInput value={category} onChange={(e: any) => setCategory(e.target.value)} placeholder="e.g. Flight Deals" />
             </Field.Root>
           </Grid.Item>
 
-          <Grid.Item col={4} s={12}>
+          <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
             <Field.Root name="tone">
               <Field.Label>Tone</Field.Label>
               <SingleSelect value={tone} onChange={(v: any) => setTone(v)}>
@@ -167,7 +168,7 @@ export const App = () => {
             </Field.Root>
           </Grid.Item>
 
-          <Grid.Item col={4} s={12}>
+          <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
             <Field.Root name="length">
               <Field.Label>Length</Field.Label>
               <SingleSelect value={length} onChange={(v: any) => setLength(v)}>
@@ -178,19 +179,20 @@ export const App = () => {
             </Field.Root>
           </Grid.Item>
 
-          <Grid.Item col={4} s={12}>
+          <Grid.Item col={4} s={12} direction="column" alignItems="stretch">
             <Field.Root name="keywords">
               <Field.Label>Keywords (comma-separated)</Field.Label>
-              <Textarea value={keywords} onChange={(e: any) => setKeywords(e.target.value)} />
+              <TextInput value={keywords} onChange={(e: any) => setKeywords(e.target.value)} placeholder="cheap flights, bangkok, 2026" />
             </Field.Root>
           </Grid.Item>
 
-          <Grid.Item col={12} s={12}>
+          <Grid.Item col={12} s={12} direction="column" alignItems="stretch">
             <Field.Root name="customInstructions">
               <Field.Label>Additional instructions (optional)</Field.Label>
               <Textarea
                 value={customInstructions}
                 onChange={(e: any) => setCustomInstructions(e.target.value)}
+                rows={12}
                 placeholder="e.g. Mention budget airlines, include a packing list section, avoid luxury positioning"
               />
             </Field.Root>

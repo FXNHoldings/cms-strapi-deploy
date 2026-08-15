@@ -11,6 +11,10 @@ services:
       NODE_ENV: production
       HOST: 0.0.0.0
       PORT: 1337
+      # Content Jobs plugin -> host job runner. 172.18.0.1 is this bridge's
+      # gateway; "localhost" here would mean the container itself.
+      RUNNER_URL: ${RUNNER_URL:-http://172.18.0.1:4310}
+      RUNNER_TOKEN: ${RUNNER_TOKEN}
       # Database
       DATABASE_CLIENT: postgres
       DATABASE_HOST: postgres

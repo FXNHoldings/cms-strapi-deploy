@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtsmart_menus",
+  "info": {
+    "singularName": "nxtsmart-menu",
+    "pluralName": "nxtsmart-menus",
+    "displayName": "nxtsmarthome.com.au · Menu",
+    "description": "Header navigation for nxtsmarthome.com.au. One row per link; `group` decides which dropdown it renders in."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "title": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "url": { "type": "string", "required": true, "maxLength": 255 },
+    "site": {
+      "type": "enumeration",
+      "enum": ["nxtsmarthome.com.au", "nxtsmart.homes"],
+      "default": "nxtsmarthome.com.au",
+      "required": true,
+      "description": "The nxtsmart-* types are shared between two properties, so every menu row must name its own site or it will leak into the other one's nav."
+    },
+    "group": {
+      "type": "enumeration",
+      "enum": ["products-root", "product-categories", "topics", "guides", "latest", "search"],
+      "default": "topics",
+      "required": true,
+      "description": "Maps 1:1 onto the nav slots the header renders. 'products-root' and 'latest'/'search' are single links; the rest are dropdown lists."
+    },
+    "emoji": { "type": "string", "maxLength": 16 },
+    "order": { "type": "integer", "default": 0 },
+    "isActive": { "type": "boolean", "default": true },
+    "target": {
+      "type": "enumeration",
+      "enum": ["self", "blank"],
+      "default": "self"
+    }
+  }
+}

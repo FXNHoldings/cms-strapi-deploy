@@ -11,9 +11,12 @@
     "name": { "type": "string", "required": true, "maxLength": 120 },
     "slug": { "type": "uid", "targetField": "name", "required": true },
     "email": { "type": "email" },
+    "role": { "type": "string", "maxLength": 120 },
     "bio": { "type": "text" },
+    "credentials": { "type": "text" },
     "avatar": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
     "twitter": { "type": "string" },
+    "linkedin": { "type": "string" },
     "website": { "type": "string" },
     "articles": {
       "type": "relation",

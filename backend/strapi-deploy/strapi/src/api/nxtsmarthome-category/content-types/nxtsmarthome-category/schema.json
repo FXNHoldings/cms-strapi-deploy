@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtsmarthome_categories",
+  "info": {
+    "singularName": "nxtsmarthome-category",
+    "pluralName": "nxtsmarthome-categories",
+    "displayName": "nxtsmarthome.com.au · Category",
+    "description": "The nine editorial categories for nxtsmarthome.com.au. Slugs match the `category:` key in the site's article front matter, not the URL slug."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 80 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "description": { "type": "text" },
+    "order": { "type": "integer", "default": 0 },
+    "icon": { "type": "string", "maxLength": 40 },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxtsmarthome-category.nxtsmarthome-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxtsmarthome-category.nxtsmarthome-category",
+      "mappedBy": "parent"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nxtsmarthome-post.nxtsmarthome-post",
+      "mappedBy": "categories"
+    }
+  }
+}

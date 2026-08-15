@@ -20,9 +20,30 @@ const WRITE = Boolean(args.write);
 const OVERWRITE = Boolean(args.overwrite);
 const LIMIT = positiveInt(args.limit, 0);
 const ONLY_SLUG = text(args.slug);
+/*
+ * Create a product when the slug is not in Strapi yet, instead of reporting it
+ * missing. A spec sheet often covers devices the catalogue has never carried —
+ * 96 of 105 in the first GSMArena batch — and importing specs for the nine that
+ * existed left the rest stranded.
+ *
+ * The new product carries only what the spec sheet actually knows: name, brand,
+ * slug, category and the site tag. Offers, prices and images come from the
+ * sourcing pipeline afterwards, which queries published products, so these are
+ * created published rather than draft — a draft would be invisible to it.
+ */
+const CREATE_MISSING = Boolean(args.createMissing || args['create-missing']);
+const NEW_CATEGORY = text(args.category || args.categorySlug);
+const SITE_TAG = text(args.tag) || 'nxt-bargains';
 
 if (!STRAPI_API_TOKEN) fail('STRAPI_API_TOKEN is not set in .env.local.');
 if (!existsSync(INPUT_FILE)) fail(`Input file not found: ${INPUT_FILE}`);
+
+let categoryDocumentId = null;
+if (CREATE_MISSING) {
+  if (!NEW_CATEGORY) fail('--create-missing requires --category=<slug or name>, e.g. --category=tablets');
+  categoryDocumentId = await resolveCategory(NEW_CATEGORY);
+  if (!categoryDocumentId) fail(`No active commerce category matches "${NEW_CATEGORY}".`);
+}
 
 const records = JSON.parse(readFileSync(INPUT_FILE, 'utf8'));
 if (!Array.isArray(records)) fail(`Expected ${INPUT_FILE} to contain a JSON array.`);
@@ -37,6 +58,7 @@ if (!selectedRecords.length) {
 }
 
 let processed = 0;
+let created = 0;
 let updated = 0;
 let skipped = 0;
 let missing = 0;
@@ -61,7 +83,23 @@ for (const record of selectedRecords) {
   }
 
   try {
-    const product = await getProductBySlug(slug);
+    let product = await getProductBySlug(slug);
+    if (!product?.documentId && CREATE_MISSING) {
+      if (!categoryDocumentId) {
+        errors += 1;
+        console.error(`! cannot create ${slug}: --category is required with --create-missing`);
+        continue;
+      }
+      if (WRITE) {
+        product = await createProduct({ slug, title, record });
+        created += 1;
+        console.log(`* created ${slug} in ${NEW_CATEGORY}`);
+      } else {
+        created += 1;
+        console.log(`DRY RUN ${slug}: would create product in ${NEW_CATEGORY}`);
+        continue;
+      }
+    }
     if (!product?.documentId) {
       missing += 1;
       console.log(`- missing in Strapi: ${slug}`);
@@ -104,6 +142,7 @@ console.log(JSON.stringify({
   dryRun: !WRITE,
   file: INPUT_FILE,
   processed,
+  created,
   updated,
   skipped,
   missing,
@@ -160,6 +199,51 @@ async function getProductBySlug(slug) {
   if (!response.ok) throw new Error(`Strapi product slug lookup failed: HTTP ${response.status} ${await response.text()}`);
   const json = await response.json();
   return json.data?.[0] || null;
+}
+
+/** Match a category by slug first, then by name, so either form works. */
+async function resolveCategory(value) {
+  for (const field of ['slug', 'name']) {
+    const params = new URLSearchParams({
+      [`filters[${field}][$eqi]`]: value,
+      'pagination[pageSize]': '1',
+    });
+    const response = await fetch(`${STRAPI_URL}/api/commerce-categories?${params.toString()}`, {
+      headers: strapiHeaders(), cache: 'no-store',
+    });
+    if (!response.ok) continue;
+    const hit = (await response.json()).data?.[0];
+    if (hit?.documentId) return hit.documentId;
+  }
+  return null;
+}
+
+/**
+ * Brand is the first word of the model name — "OnePlus Pad 3 Pro" -> "OnePlus".
+ * Crude, but the spec sheet has no brand column and a wrong brand is visible and
+ * correctable, whereas a guessed one derived from specs would not be.
+ */
+function brandFromModel(model, title) {
+  const source = text(model) || text(title);
+  return source.split(/\s+/)[0] || null;
+}
+
+async function createProduct({ slug, title, record }) {
+  const body = {
+    data: {
+      name: title,
+      slug,
+      brand: brandFromModel(record.clean_model, title),
+      tags: [SITE_TAG],
+      productStatus: 'active',
+      categories: [categoryDocumentId],
+    },
+  };
+  const response = await fetch(`${STRAPI_URL}/api/commerce-products`, {
+    method: 'POST', headers: strapiHeaders(), body: JSON.stringify(body),
+  });
+  if (!response.ok) throw new Error(`Strapi create failed: HTTP ${response.status} ${await response.text()}`);
+  return (await response.json()).data;
 }
 
 async function updateProduct(documentId, data) {

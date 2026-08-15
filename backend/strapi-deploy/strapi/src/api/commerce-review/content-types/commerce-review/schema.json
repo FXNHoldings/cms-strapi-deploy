@@ -7,24 +7,78 @@
     "displayName": "Commerce · Review",
     "description": "First-party visitor product reviews (moderated; only approved ones display)."
   },
-  "options": { "draftAndPublish": false },
+  "options": {
+    "draftAndPublish": false
+  },
   "attributes": {
     "product": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::commerce-product.commerce-product"
     },
-    "authorName": { "type": "string", "required": true, "maxLength": 80 },
-    "email": { "type": "email" },
-    "rating": { "type": "decimal", "required": true, "min": 1, "max": 5 },
-    "title": { "type": "string", "maxLength": 140 },
-    "body": { "type": "text", "required": true, "maxLength": 4000 },
+    "authorName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80
+    },
+    "email": {
+      "type": "email"
+    },
+    "rating": {
+      "type": "decimal",
+      "required": true,
+      "min": 1,
+      "max": 5
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 140
+    },
+    "body": {
+      "type": "text",
+      "required": true,
+      "maxLength": 4000
+    },
     "reviewStatus": {
       "type": "enumeration",
-      "enum": ["pending", "approved", "rejected"],
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
       "default": "pending",
       "required": true
     },
-    "source": { "type": "string", "maxLength": 120 }
+    "source": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "verifiedPurchase": {
+      "type": "boolean",
+      "default": false,
+      "description": "Shown as a 'Verified Purchaser' badge. Only set it where the source actually confirms a purchase — the badge is a trust claim."
+    },
+    "incentivized": {
+      "type": "boolean",
+      "default": false,
+      "description": "Reviewer received the product free or discounted. Disclosure is required by the FTC endorsement guides where it applies."
+    },
+    "ownershipDuration": {
+      "type": "string",
+      "maxLength": 40,
+      "description": "Free text as the source states it, e.g. 'Owned for 4 months'."
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ],
+      "description": "Customer photos, rendered in the Customer Images strip."
+    },
+    "helpfulCount": {
+      "type": "integer",
+      "default": 0
+    }
   }
 }

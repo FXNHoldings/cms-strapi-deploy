@@ -1,0 +1,82 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtsmarthome_posts",
+  "info": {
+    "singularName": "nxtsmarthome-post",
+    "pluralName": "nxtsmarthome-posts",
+    "displayName": "nxtsmarthome.com.au · Post",
+    "description": "Articles for nxtsmarthome.com.au. Pushed one-way from content/articles/*.md in the site repo — markdown stays the source of truth and the site builds from it, not from here."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true, "maxLength": 255 },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "excerpt": { "type": "text", "maxLength": 500 },
+    "content": { "type": "richtext", "required": true },
+    "keyTakeaways": {
+      "type": "richtext",
+      "description": "The short answer summary shown above the article body"
+    },
+    "coverImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "coverImageUrl": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "The site serves covers from its own /covers/<slug>.webp, so this is normally set and coverImage left empty — regenerating a cover then needs no re-import."
+    },
+    "coverImageAlt": { "type": "string", "maxLength": 255 },
+    "gallery": { "type": "media", "multiple": true, "allowedTypes": ["images"] },
+    "ogImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "postType": {
+      "type": "enumeration",
+      "enum": [
+        "buying-guide",
+        "pillar",
+        "informative",
+        "product-comparison",
+        "how-to-guide",
+        "product-roundup",
+        "product-review",
+        "other"
+      ],
+      "default": "informative"
+    },
+    "publishDate": {
+      "type": "datetime",
+      "description": "Original publication date from the source article front matter"
+    },
+    "dateModified": {
+      "type": "datetime",
+      "description": "Last genuine content modification, used for article metadata and schema"
+    },
+    "featured": { "type": "boolean", "default": false },
+    "tags": { "type": "json", "description": "Free-form tag list from the source front matter" },
+    "readingTimeMinutes": { "type": "integer", "default": 5, "min": 1 },
+    "seoTitle": { "type": "string", "maxLength": 70 },
+    "seoDescription": { "type": "text", "maxLength": 160 },
+    "seoKeywords": { "type": "string" },
+    "sourceUrl": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Canonical URL of this article on the live site"
+    },
+    "amazonAffiliateTag": {
+      "type": "string",
+      "maxLength": 40,
+      "description": "Default Amazon Associates tag for affiliate links in this post"
+    },
+    "source": {
+      "type": "enumeration",
+      "enum": ["manual", "ai", "csv-import"],
+      "default": "manual"
+    },
+    "faq": { "type": "component", "repeatable": true, "component": "faq.item" },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nxtsmarthome-category.nxtsmarthome-category",
+      "inversedBy": "posts"
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "airline_reviews",
+  "info": {
+    "singularName": "airline-review",
+    "pluralName": "airline-reviews",
+    "displayName": "Originfacts · Airline Review",
+    "description": "Passenger reviews for airlines, imported from third-party review sites. `sourceId` is the upstream review id and is unique, so imports are idempotent."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "airline": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::airline.airline",
+      "inversedBy": "reviews"
+    },
+    "source": {
+      "type": "string",
+      "required": true,
+      "maxLength": 40,
+      "default": "tripadvisor",
+      "description": "Upstream provider the review was collected from."
+    },
+    "sourceId": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 64,
+      "description": "Upstream review id, prefixed with the source (e.g. 'tripadvisor:539261889'). Used to de-duplicate re-runs of the importer."
+    },
+    "sourceUrl": { "type": "string", "maxLength": 255 },
+    "sourceCompany": {
+      "type": "string",
+      "maxLength": 160,
+      "description": "Raw company token from the source feed (e.g. 'Thai_AirAsia'), kept so unmatched airlines can be re-mapped later."
+    },
+    "rating": { "type": "integer", "required": true, "min": 1, "max": 5 },
+    "title": { "type": "string", "maxLength": 200 },
+    "body": { "type": "text", "required": true, "maxLength": 10000 },
+    "authorName": { "type": "string", "maxLength": 120 },
+    "authorLocation": { "type": "string", "maxLength": 160 },
+    "authorContributions": { "type": "integer" },
+    "authorHelpfulVotes": { "type": "integer" },
+    "reviewedAt": {
+      "type": "date",
+      "description": "Date the review was published upstream."
+    },
+    "travelDate": {
+      "type": "date",
+      "description": "Month of travel as reported by the reviewer."
+    },
+    "route": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Route as labelled upstream, e.g. 'Bengaluru - Visakhapatnam'."
+    },
+    "tripType": {
+      "type": "string",
+      "maxLength": 60,
+      "description": "Trip scope label, e.g. 'Domestic', 'International', 'Europe'."
+    },
+    "cabinClass": {
+      "type": "enumeration",
+      "enum": ["Economy", "Premium Economy", "Business Class", "First Class"]
+    },
+    "language": { "type": "string", "maxLength": 10, "default": "en" }
+  }
+}
