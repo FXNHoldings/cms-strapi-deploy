@@ -19,6 +19,11 @@
 
 import { createRequire } from 'module';
 
+// Must be set before the app loads: bootstrap reads it to decide whether to
+// start the AI-image poller, which otherwise competes with this script for the
+// connection pool and times its queries out.
+process.env.STRAPI_SKIP_POLLERS = '1';
+
 const require = createRequire(import.meta.url);
 const { createStrapi } = require('@strapi/strapi');
 
