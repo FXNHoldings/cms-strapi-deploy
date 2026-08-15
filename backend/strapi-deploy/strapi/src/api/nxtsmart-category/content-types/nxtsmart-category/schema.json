@@ -9,6 +9,12 @@
   },
   "options": { "draftAndPublish": false },
   "attributes": {
+    "site": {
+      "type": "enumeration",
+      "enum": ["nxtsmarthome.com.au", "nxtsmart.homes"],
+      "default": "nxtsmart.homes",
+      "description": "Which property this category belongs to. Shared type — the WordPress-era categories (those with a legacyWpId) are nxtsmart.homes."
+    },
     "name": { "type": "string", "required": true, "maxLength": 80 },
     "slug": { "type": "uid", "targetField": "name", "required": true },
     "description": { "type": "text" },

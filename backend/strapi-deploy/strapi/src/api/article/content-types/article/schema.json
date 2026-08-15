@@ -66,6 +66,11 @@
     "faqs": {
       "type": "json"
     },
+    "faqItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.item"
+    },
     "steps": {
       "type": "json"
     },

@@ -15,6 +15,10 @@
     "answer": {
       "type": "text",
       "required": true
+    },
+    "order": {
+      "type": "integer",
+      "min": 0
     }
   }
 }

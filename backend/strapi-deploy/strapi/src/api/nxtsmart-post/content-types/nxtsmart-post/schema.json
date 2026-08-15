@@ -4,13 +4,19 @@
   "info": {
     "singularName": "nxtsmart-post",
     "pluralName": "nxtsmart-posts",
-    "displayName": "NXTSmart.Homes · Post",
-    "description": "Posts for NXTSmart.Homes — smart home guides, reviews, comparisons, how-to articles"
+    "displayName": "NXTSmart.Homes \u00b7 Post",
+    "description": "Posts for NXTSmart.Homes \u2014 smart home guides, reviews, comparisons, how-to articles"
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
+    "site": {
+      "type": "enumeration",
+      "enum": ["nxtsmarthome.com.au", "nxtsmart.homes"],
+      "default": "nxtsmart.homes",
+      "description": "Which property this post belongs to. These types are shared between two sites, so filter the Content Manager on this rather than assuming everything here is one site's."
+    },
     "title": {
       "type": "string",
       "required": true,
@@ -67,7 +73,9 @@
         "smart-home-entertainment",
         "smart-home-energy",
         "smart-home-integration",
-        "other"
+        "other",
+        "buying-guide",
+        "pillar"
       ],
       "default": "informative"
     },
@@ -139,6 +147,27 @@
     "dateModified": {
       "type": "datetime",
       "description": "Original or last genuine content modification date used for article metadata and schema."
+    },
+    "keyTakeaways": {
+      "type": "richtext",
+      "description": "The short answer summary shown above the article body"
+    },
+    "publishDate": {
+      "type": "datetime",
+      "description": "Original publication date from the source article front matter"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "tags": {
+      "type": "json",
+      "description": "Free-form tag list from the source front matter"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.item"
     }
   }
 }

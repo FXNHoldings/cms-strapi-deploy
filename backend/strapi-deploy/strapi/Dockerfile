@@ -2,6 +2,10 @@
 FROM node:20-alpine AS builder
 WORKDIR /opt/app
 
+# Use sharp's prebuilt musl binaries instead of compiling against system libvips
+# (source builds fetch Node headers from unofficial-builds.nodejs.org at build time)
+ENV SHARP_IGNORE_GLOBAL_LIBVIPS=1
+
 # Build deps for native modules (sharp, better-sqlite3 fallback, bcrypt)
 RUN apk add --no-cache --virtual .build-deps \
     build-base \
