@@ -75,6 +75,45 @@ async function countSource(strapi, source) {
   }
 }
 
+const CLICK_TABLE = 'affiliate_clicks';
+const CLICK_WINDOW_DAYS = 30;
+
+/**
+ * Clicks and their estimated value over the last 30 days.
+ *
+ * Done in SQL rather than through the Document Service because this is an
+ * aggregate: counting and summing in the database beats pulling every row into
+ * Node to add them up, and this number is rendered on every card.
+ *
+ * Returns null rather than throwing when the table is absent — it does not
+ * exist until the image carrying the content type has been deployed, and the
+ * dashboard predates that.
+ */
+async function clickStats(strapi, siteSlug) {
+  const knex = strapi.db.connection;
+
+  try {
+    const exists = await knex.schema.hasTable(CLICK_TABLE);
+    if (!exists) return null;
+
+    const since = new Date(Date.now() - CLICK_WINDOW_DAYS * 86_400_000);
+    const [row] = await knex(CLICK_TABLE)
+      .where('site_slug', siteSlug)
+      .andWhere('clicked_at', '>=', since)
+      .count({ clicks: '*' })
+      .sum({ value: 'estimated_value' });
+
+    return {
+      windowDays: CLICK_WINDOW_DAYS,
+      clicks: Number(row?.clicks ?? 0),
+      estimatedValue: row?.value == null ? null : Number(row.value),
+    };
+  } catch (error) {
+    strapi.log.warn(`[site-dashboard] click stats unavailable for ${siteSlug}: ${error.message}`);
+    return null;
+  }
+}
+
 async function statsForSite(strapi, site) {
   const map = site.contentTypes && typeof site.contentTypes === 'object' ? site.contentTypes : {};
   const roles = {};
@@ -123,6 +162,7 @@ async function statsForSite(strapi, site) {
     thumbnailUrl: site.thumbnail?.url ?? null,
     isPublished: Boolean(site.publishedAt),
     roles,
+    clicks: await clickStats(strapi, site.slug),
     warnings,
   };
 }

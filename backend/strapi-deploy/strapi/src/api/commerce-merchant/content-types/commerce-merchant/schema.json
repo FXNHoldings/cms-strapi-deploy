@@ -17,6 +17,12 @@
     "affiliateNetwork": { "type": "string", "maxLength": 120 },
     "affiliateBaseUrl": { "type": "string", "maxLength": 700 },
     "trackingParams": { "type": "json", "description": "Default affiliate/tracking parameters for generated links." },
+    "epc": {
+      "type": "decimal",
+      "min": 0,
+      "description": "Earnings per click for this merchant, in `epcCurrency`. Used only to put an estimate next to a click count — it is your own figure, not the network's, so treat the resulting number as an indicator and never as revenue. Real commissions come from the network's reporting."
+    },
+    "epcCurrency": { "type": "string", "maxLength": 8, "default": "USD" },
     "merchantStatus": {
       "type": "enumeration",
       "enum": ["active", "inactive"],

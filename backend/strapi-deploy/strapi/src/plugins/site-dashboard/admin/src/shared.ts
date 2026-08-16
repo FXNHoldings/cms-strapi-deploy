@@ -26,6 +26,13 @@ export type RecentPost = {
   publishedAt: string | null;
 };
 
+export type ClickStats = {
+  windowDays: number;
+  clicks: number;
+  /** From the merchant's own EPC, so an indicator — never revenue. */
+  estimatedValue: number | null;
+};
+
 export type Site = {
   documentId: string;
   name: string;
@@ -41,8 +48,19 @@ export type Site = {
   thumbnailUrl: string | null;
   isPublished: boolean;
   roles: Record<string, Role>;
+  clicks: ClickStats | null;
   warnings: string[];
   recentPosts?: RecentPost[];
+};
+
+/** Estimated click value. Always rendered with a qualifier — it is not revenue. */
+export const fmtMoney = (value: number | null, currency = 'USD') => {
+  if (value == null) return '—';
+  try {
+    return new Intl.NumberFormat(undefined, { style: 'currency', currency }).format(value);
+  } catch {
+    return `${value.toFixed(2)} ${currency}`;
+  }
 };
 
 /* Posts lead — it is the number anyone opens this page for. The rest follow in

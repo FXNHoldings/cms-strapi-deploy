@@ -4,7 +4,7 @@ import {
 } from '@strapi/design-system';
 import { useFetchClient } from '@strapi/strapi/admin';
 import { Link } from 'react-router-dom';
-import { fmtDate, orderedRoles, type Site } from '../shared';
+import { fmtDate, fmtMoney, orderedRoles, type Site } from '../shared';
 
 /**
  * Every property we publish, one card each.
@@ -63,6 +63,13 @@ const SiteCard = ({ site }: { site: Site }) => {
           <Typography variant="pi" textColor="neutral600">
             No posts role in this site&apos;s content map.
           </Typography>
+        )}
+
+        {site.clicks && (
+          <Flex gap={7} alignItems="flex-start">
+            <Stat label={`clicks · ${site.clicks.windowDays}d`} value={site.clicks.clicks} />
+            <Stat label="est. value" value={fmtMoney(site.clicks.estimatedValue)} />
+          </Flex>
         )}
 
         <Flex direction="column" alignItems="stretch" gap={1}>

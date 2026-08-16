@@ -4,7 +4,7 @@ import {
 } from '@strapi/design-system';
 import { useFetchClient } from '@strapi/strapi/admin';
 import { Link, useParams } from 'react-router-dom';
-import { TOOLS, fmtDate, manageUrl, orderedRoles, type Site } from '../shared';
+import { TOOLS, fmtDate, fmtMoney, manageUrl, orderedRoles, type Site } from '../shared';
 
 /**
  * One property, in detail.
@@ -126,7 +126,21 @@ const SiteDetail = () => {
               <Stat label="published posts" value={posts.published} />
               <Stat label="drafts" value={posts.drafts} />
               <Stat label="last published" value={fmtDate(posts.lastPublishedAt)} />
+              {site.clicks && (
+                <>
+                  <Stat label={`clicks · last ${site.clicks.windowDays}d`} value={site.clicks.clicks} />
+                  <Stat label="estimated value" value={fmtMoney(site.clicks.estimatedValue)} />
+                </>
+              )}
             </Flex>
+            {site.clicks && site.clicks.estimatedValue != null && (
+              <Box paddingTop={2}>
+                <Typography variant="pi" textColor="neutral500">
+                  Estimated from each merchant&apos;s EPC, not from network reporting. Treat it as
+                  an indicator of which sites earn, never as revenue.
+                </Typography>
+              </Box>
+            )}
           </Box>
         )}
 
