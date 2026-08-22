@@ -5,6 +5,7 @@
  *   node scripts/check-offer-liveness.mjs --limit=200
  *   node scripts/check-offer-liveness.mjs --merchant=walmart
  *   node scripts/check-offer-liveness.mjs --write            # apply verdicts
+ *   node scripts/check-offer-liveness.mjs --unchecked        # resume a sweep
  *
  * The site already skips any offer whose status is not "active"
  * (lib/commerce.ts), so retiring one here removes it from the storefront on the
@@ -48,6 +49,10 @@ const CONCURRENCY = Math.max(1, Number(flag('concurrency', 6)));
 const PER_HOST_DELAY_MS = Math.max(0, Number(flag('host-delay', 1500)));
 const TIMEOUT_MS = Math.max(1000, Number(flag('timeout', 12000)));
 const MAX_FAILURES = Math.max(1, Number(flag('max-failures', 3)));
+/* Only offers never link-checked. Makes a 1,934-offer sweep resumable: run it
+   in slices, and each run picks up where the last stopped rather than
+   re-fetching merchants that were already asked. */
+const UNCHECKED_ONLY = args.includes('--unchecked');
 
 const STRAPI_URL = (process.env.STRAPI_INTERNAL_URL || process.env.STRAPI_URL || 'http://127.0.0.1:8888').replace(/\/$/, '');
 const TOKEN = process.env.STRAPI_API_TOKEN || process.env.STRAPI_TOKEN || '';
@@ -83,6 +88,7 @@ async function readOffers() {
     q.append('populate[merchant][fields][0]', 'name');
     q.append('populate[merchant][fields][1]', 'slug');
     if (MERCHANT) q.append('filters[merchant][slug][$eqi]', MERCHANT);
+    if (UNCHECKED_ONLY) q.append('filters[lastLinkCheckAt][$null]', 'true');
 
     const body = await api(`/api/commerce-offers?${q}`);
     const rows = body?.data ?? [];
@@ -134,7 +140,11 @@ function isSoftNotFound(originalUrl, finalUrl) {
  * evidence.
  */
 async function confirmGone(url, first) {
-  await sleep(4000);
+  // 45s, not 4s. Mwave's 410 turned out to be a rate-limit response to being
+  // swept, and a 4-second retry landed inside the very same burst window — so
+  // both attempts agreed, and both were wrong. The pause has to outlast the
+  // throttle, not the request.
+  await sleep(45000);
   try {
     const res = await politeFetch(url);
     if (res.status === 404 || res.status === 410) {
@@ -153,10 +163,33 @@ async function confirmGone(url, first) {
   }
 }
 
+/**
+ * Does this URL point at a search results page rather than a product?
+ *
+ * 650 of 1,934 offers do — a sourcing problem in its own right, but it also
+ * makes them unverifiable here. A search page returns 200 for a query that
+ * matches nothing, so "alive" proves nothing; and both false-positive
+ * retirements so far were search URLs, where a 410 says something about the
+ * search endpoint and nothing whatever about a product.
+ */
+function isSearchUrl(url) {
+  try {
+    const u = new URL(url);
+    if (/\/(search|catalogsearch|find|results)\b/i.test(u.pathname)) return true;
+    return ['q', 'query', 's', 'k', 'keyword', 'search'].some((k) => u.searchParams.has(k));
+  } catch {
+    return false;
+  }
+}
+
 async function checkOne(offer) {
   const url = offer.productUrl;
   if (!url || !/^https?:\/\//i.test(url)) {
     return { verdict: 'error', reason: 'no usable productUrl', code: null };
+  }
+
+  if (isSearchUrl(url)) {
+    return { verdict: 'unverifiable', reason: 'points at a search page, not a product', code: null };
   }
 
   try {
@@ -203,6 +236,13 @@ function decide(offer, result) {
     };
   }
 
+  if (result.verdict === 'unverifiable') {
+    return {
+      patch: { syncError: result.reason, lastLinkCheckAt: now },
+      action: 'unverifiable',
+    };
+  }
+
   if (result.verdict === 'blocked') {
     // Records what happened without touching status or the failure counter.
     return {
@@ -237,7 +277,7 @@ async function main() {
   const offers = await readOffers();
   console.log(`${offers.length} offer(s) to check · concurrency ${CONCURRENCY} · ${PER_HOST_DELAY_MS}ms per host · ${WRITE ? 'WRITING' : 'read-only'}\n`);
 
-  const tally = { ok: 0, revived: 0, retired: 0, 'retired-after-retries': 0, strike: 0, blocked: 0 };
+  const tally = { ok: 0, revived: 0, retired: 0, 'retired-after-retries': 0, strike: 0, blocked: 0, unverifiable: 0 };
   let index = 0;
 
   /* Phase one: check everything, write nothing. Holding the verdicts lets the
@@ -252,6 +292,50 @@ async function main() {
   }
 
   await Promise.all(Array.from({ length: CONCURRENCY }, worker));
+
+  /* Phase one-and-a-half: is the merchant even reachable?
+     BIG W times out on every offer from this server — and on its own homepage
+     too, failing instantly rather than slowly. That is the network or a block,
+     not four dead products, and without this check they would accumulate
+     strikes until the checker retired them. One probe per failing merchant,
+     only when it has failures worth explaining. */
+  const unreachable = new Set();
+  const failingMerchants = new Map();
+  for (const entry of checked) {
+    if (entry.result.verdict !== 'transient' && entry.result.verdict !== 'gone') continue;
+    const key = entry.offer.merchant?.slug ?? entry.offer.merchant?.name ?? 'unknown';
+    if (!failingMerchants.has(key)) failingMerchants.set(key, entry.offer.productUrl);
+  }
+
+  for (const [merchant, sampleUrl] of failingMerchants) {
+    try {
+      const root = new URL(sampleUrl).origin;
+      const res = await fetch(root, {
+        method: 'GET',
+        redirect: 'follow',
+        headers: { 'user-agent': UA },
+        signal: AbortSignal.timeout(TIMEOUT_MS),
+      });
+      if (res.status >= 500) throw new Error(`root returned ${res.status}`);
+    } catch (error) {
+      unreachable.add(merchant);
+      console.log(`  ! ${merchant}: its own homepage is unreachable (${error.message}) — not blaming its products.`);
+    }
+  }
+
+  if (unreachable.size) {
+    for (const entry of checked) {
+      const key = entry.offer.merchant?.slug ?? entry.offer.merchant?.name ?? 'unknown';
+      if (!unreachable.has(key)) continue;
+      if (entry.result.verdict === 'transient' || entry.result.verdict === 'gone') {
+        entry.result = {
+          verdict: 'blocked',
+          reason: 'merchant unreachable from this host — verdict withheld',
+          code: entry.result.code,
+        };
+      }
+    }
+  }
 
   /* Phase two: refuse to believe a merchant died all at once.
      If most of one merchant's checked offers come back gone, the likely
@@ -310,7 +394,7 @@ async function main() {
   console.log(
     `\nalive ${tally.ok} · revived ${tally.revived} · retired ${tally.retired} · ` +
       `retired after retries ${tally['retired-after-retries']} · struck ${tally.strike} · ` +
-      `blocked ${tally.blocked} (unknowable, left alone)`,
+      `blocked ${tally.blocked} · unverifiable ${tally.unverifiable} (search URLs, left alone)`,
   );
   if (!WRITE) console.log('Read-only run. Nothing was changed — pass --write to apply.');
 }
