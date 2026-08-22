@@ -124,6 +124,35 @@ function isSoftNotFound(originalUrl, finalUrl) {
   }
 }
 
+/**
+ * A "gone" verdict is confirmed by asking again.
+ *
+ * Learned the hard way: Mwave returned 410 to the checker, 403 to a browser
+ * user agent, and 202 to both a minute later — for one unchanged URL. Its edge
+ * emits essentially arbitrary codes, and six live offers were retired on the
+ * strength of a single 410. One request is an opinion; two agreeing is
+ * evidence.
+ */
+async function confirmGone(url, first) {
+  await sleep(4000);
+  try {
+    const res = await politeFetch(url);
+    if (res.status === 404 || res.status === 410) {
+      return { verdict: 'gone', reason: `${first.reason}, confirmed on retry`, code: res.status };
+    }
+    if (res.status < 400 && isSoftNotFound(url, res.url)) {
+      return { verdict: 'gone', reason: `${first.reason}, confirmed on retry`, code: res.status };
+    }
+    return {
+      verdict: 'blocked',
+      reason: `${first.reason} then HTTP ${res.status} — merchant is inconsistent, not believed`,
+      code: res.status,
+    };
+  } catch {
+    return { verdict: 'transient', reason: `${first.reason}, retry failed`, code: first.code };
+  }
+}
+
 async function checkOne(offer) {
   const url = offer.productUrl;
   if (!url || !/^https?:\/\//i.test(url)) {
@@ -134,7 +163,7 @@ async function checkOne(offer) {
     const res = await politeFetch(url);
 
     if (res.status === 404 || res.status === 410) {
-      return { verdict: 'gone', reason: `HTTP ${res.status}`, code: res.status };
+      return confirmGone(url, { reason: `HTTP ${res.status}`, code: res.status });
     }
     if (res.status >= 500) {
       return { verdict: 'transient', reason: `HTTP ${res.status}`, code: res.status };
@@ -152,7 +181,7 @@ async function checkOne(offer) {
       return { verdict: 'transient', reason: `HTTP ${res.status}`, code: res.status };
     }
     if (isSoftNotFound(url, res.url)) {
-      return { verdict: 'gone', reason: `redirected to ${new URL(res.url).host}/`, code: res.status };
+      return confirmGone(url, { reason: `redirected to ${new URL(res.url).host}/`, code: res.status });
     }
     return { verdict: 'alive', reason: `HTTP ${res.status}`, code: res.status };
   } catch (error) {
@@ -211,34 +240,72 @@ async function main() {
   const tally = { ok: 0, revived: 0, retired: 0, 'retired-after-retries': 0, strike: 0, blocked: 0 };
   let index = 0;
 
+  /* Phase one: check everything, write nothing. Holding the verdicts lets the
+     merchant guard below see the whole picture before any of it is believed. */
+  const checked = [];
+
   async function worker() {
     while (index < offers.length) {
       const offer = offers[index++];
-      const result = await checkOne(offer);
-      const { patch, action } = decide(offer, result);
-
-      if (action.startsWith('strike')) tally.strike += 1;
-      else tally[action] = (tally[action] ?? 0) + 1;
-
-      if (action !== 'ok') {
-        const who = offer.merchant?.name ?? 'unknown';
-        console.log(`  ${action.padEnd(22)} ${who.padEnd(14)} ${result.reason.padEnd(28)} ${(offer.title ?? '').slice(0, 48)}`);
-      }
-
-      if (WRITE) {
-        try {
-          await api(`/api/commerce-offers/${offer.documentId}`, {
-            method: 'PUT',
-            body: JSON.stringify({ data: patch }),
-          });
-        } catch (error) {
-          console.error(`  ! could not update ${offer.documentId}: ${error.message}`);
-        }
-      }
+      checked.push({ offer, result: await checkOne(offer) });
     }
   }
 
   await Promise.all(Array.from({ length: CONCURRENCY }, worker));
+
+  /* Phase two: refuse to believe a merchant died all at once.
+     If most of one merchant's checked offers come back gone, the likely
+     explanation is the merchant's edge misbehaving — the failure mode that
+     retired six live Mwave offers on a single inconsistent 410 — not that its
+     catalogue vanished between runs. Needs a few offers before it can judge, so
+     a merchant with one dead product is still handled normally. */
+  const byMerchant = new Map();
+  for (const entry of checked) {
+    const key = entry.offer.merchant?.slug ?? entry.offer.merchant?.name ?? 'unknown';
+    if (!byMerchant.has(key)) byMerchant.set(key, []);
+    byMerchant.get(key).push(entry);
+  }
+
+  for (const [merchant, entries] of byMerchant) {
+    const gone = entries.filter((e) => e.result.verdict === 'gone');
+    if (entries.length >= 4 && gone.length / entries.length > 0.5) {
+      console.log(
+        `  ! ${merchant}: ${gone.length}/${entries.length} came back gone — treating as a merchant-side ` +
+          `problem and retiring none of them.`,
+      );
+      for (const entry of gone) {
+        entry.result = {
+          verdict: 'blocked',
+          reason: `${gone.length}/${entries.length} of this merchant looked gone — not believed`,
+          code: entry.result.code,
+        };
+      }
+    }
+  }
+
+  /* Phase three: apply. */
+  for (const { offer, result } of checked) {
+    const { patch, action } = decide(offer, result);
+
+    if (action.startsWith('strike')) tally.strike += 1;
+    else tally[action] = (tally[action] ?? 0) + 1;
+
+    if (action !== 'ok') {
+      const who = offer.merchant?.name ?? 'unknown';
+      console.log(`  ${action.padEnd(22)} ${who.padEnd(14)} ${result.reason.slice(0, 46).padEnd(48)} ${(offer.title ?? '').slice(0, 42)}`);
+    }
+
+    if (WRITE) {
+      try {
+        await api(`/api/commerce-offers/${offer.documentId}`, {
+          method: 'PUT',
+          body: JSON.stringify({ data: patch }),
+        });
+      } catch (error) {
+        console.error(`  ! could not update ${offer.documentId}: ${error.message}`);
+      }
+    }
+  }
 
   console.log(
     `\nalive ${tally.ok} · revived ${tally.revived} · retired ${tally.retired} · ` +
