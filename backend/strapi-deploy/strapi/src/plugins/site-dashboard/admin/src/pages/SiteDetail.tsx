@@ -242,7 +242,7 @@ const SiteDetail = () => {
                         <Typography variant="omega">{tool.label}</Typography>
                         <Typography variant="pi" textColor="neutral600">{tool.blurb}</Typography>
                       </Flex>
-                      <Button variant="tertiary" size="S" tag="a" href={`/admin/plugins/${tool.id}`}>
+                      <Button variant="tertiary" size="S" tag="a" href={`/admin/plugins/${tool.id}?site=${slug}`}>
                         Open
                       </Button>
                     </Flex>

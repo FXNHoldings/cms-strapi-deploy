@@ -29,7 +29,17 @@ const ARTICLE_SCHEMA = {
   additionalProperties: false,
 };
 
-function buildSystemPrompt() {
+/*
+ * The site's own brief, when it has one.
+ *
+ * This used to return the travel line unconditionally, so every site on this
+ * CMS — a smart-home review site included — was written as travel copy. The
+ * brief now comes from commerce-site.aiWriterBrief, and the travel wording is
+ * only the fallback for a site that has not set one.
+ */
+function buildSystemPrompt(brief) {
+  const own = (brief || '').trim();
+  if (own) return own;
   return 'You are a senior travel journalist writing for a travel blog (flights, hotels, destinations, tips).';
 }
 
@@ -39,7 +49,7 @@ function buildUserPrompt(params) {
 
   return [
     `Topic: ${params.topic}`,
-    params.destination ? `Destination: ${params.destination}` : '',
+    params.destination ? `${params.subjectLabel || 'Destination'}: ${params.destination}` : '',
     params.category ? `Category: ${params.category}` : '',
     params.tone ? `Tone: ${params.tone}` : 'Tone: friendly, informative, trustworthy',
     params.keywords && params.keywords.length ? `Keywords to include: ${params.keywords.join(', ')}` : '',
@@ -100,7 +110,7 @@ module.exports = ({ strapi }) => ({
 
     const text = await this.callAI({
       model,
-      system: buildSystemPrompt(),
+      system: buildSystemPrompt(params.brief),
       user: buildUserPrompt(params),
       maxTokens,
     });

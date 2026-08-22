@@ -259,6 +259,43 @@ async function statsForSite(strapi, site) {
 }
 
 /**
+ * Fill in the real publish state for rows fetched as drafts.
+ *
+ * Mirrors resolvePublished() in content-list.js. Kept as its own copy rather
+ * than shared because the two build different row shapes, but the rule is the
+ * same one: a published row existing is what "published" means.
+ */
+async function resolvePublishedFor(strapi, rows) {
+  const byUid = new Map();
+  for (const r of rows) {
+    if (!byUid.has(r.uid)) byUid.set(r.uid, []);
+    byUid.get(r.uid).push(r.documentId);
+  }
+
+  for (const [uid, ids] of byUid) {
+    // A type without draft & publish has no unpublished state to be in.
+    if (strapi.contentTypes[uid]?.options?.draftAndPublish !== true) {
+      for (const r of rows) if (r.uid === uid) r.publishedAt = r.updatedAt;
+      continue;
+    }
+    try {
+      const live = await strapi.documents(uid).findMany({
+        filters: { documentId: { $in: ids } },
+        status: 'published',
+        limit: ids.length,
+      });
+      const stamps = new Map(live.map((d) => [d.documentId, d.publishedAt ?? null]));
+      for (const r of rows) {
+        if (r.uid === uid && stamps.has(r.documentId)) r.publishedAt = stamps.get(r.documentId);
+      }
+    } catch (error) {
+      strapi.log.warn(`[site-dashboard] publish state for ${uid}: ${error.message}`);
+    }
+  }
+  return rows;
+}
+
+/**
  * Most recent content across a role's sources, newest first.
  *
  * Deliberately fetches whole documents rather than naming `fields`: the six
@@ -295,9 +332,20 @@ async function recentDocuments(strapi, sources, limit = 8) {
     }
   }
 
-  return rows
+  const recent = rows
     .sort((a, b) => String(b.updatedAt ?? '').localeCompare(String(a.updatedAt ?? '')))
     .slice(0, limit);
+
+  /*
+   * The rows above are the DRAFT versions, and in Strapi 5 a draft's
+   * publishedAt is null whether or not a published version exists — so every
+   * entry here reported itself as a draft, including the 51 that are live.
+   *
+   * The publish state is the existence of a published row, which has to be
+   * asked for separately. content-list.js already had this fix; the recent
+   * list did not, and showed DRAFT against everything.
+   */
+  return resolvePublishedFor(strapi, recent);
 }
 
 module.exports = ({ strapi }) => ({

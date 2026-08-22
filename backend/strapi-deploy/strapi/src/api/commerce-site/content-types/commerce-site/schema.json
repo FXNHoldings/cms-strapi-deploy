@@ -73,6 +73,10 @@
       "type": "json",
       "description": "Which collections belong to this site, keyed by role, each an array because a role can have more than one source: { \"posts\": [{ \"uid\": \"api::bls-post.bls-post\" }] }. An entry may carry a \"filter\" when a type is shared between sites, as nxtsmart-post is — without it the dashboard counts another site's rows as this one's."
     },
+    "aiWriterBrief": {
+      "type": "text",
+      "description": "The system prompt AI Writer uses for this site — who it is writing as and the rules it must follow. Without one the plugin falls back to a generic brief, which is how every site ended up being written as travel copy. Say the publication, the audience, the market's specifics (voltage, standards, retailers, currency) and anything it must never claim."
+    },
     "siteStatus": {
       "type": "enumeration",
       "enum": [

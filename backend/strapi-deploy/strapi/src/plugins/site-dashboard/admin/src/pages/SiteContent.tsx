@@ -177,7 +177,7 @@ const SiteContent = () => {
           </Box>
           <Flex gap={2}>
             {tools.map((t) => (
-              <Button key={t.id} variant="secondary" size="S" tag="a" href={`/admin/plugins/${t.id}`}>
+              <Button key={t.id} variant="secondary" size="S" tag="a" href={`/admin/plugins/${t.id}?site=${slug}`}>
                 {t.label}
               </Button>
             ))}
@@ -218,7 +218,7 @@ const SiteContent = () => {
                     </Box>
                   )}
                   {tools.map((t) => (
-                    <Box key={t.id} tag="a" href={`/admin/plugins/${t.id}`} display="block" padding={3} hasRadius style={{ textDecoration: 'none' }}>
+                    <Box key={t.id} tag="a" href={`/admin/plugins/${t.id}?site=${slug}`} display="block" padding={3} hasRadius style={{ textDecoration: 'none' }}>
                       <Typography variant="omega" textColor="neutral800">{t.label}</Typography>
                     </Box>
                   ))}

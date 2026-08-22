@@ -15,12 +15,27 @@ import {
 } from '@strapi/design-system';
 import { useFetchClient, useNotification } from '@strapi/strapi/admin';
 
+type SiteOption = {
+  slug: string;
+  name: string;
+  domain: string;
+  niche: string | null;
+  country: string | null;
+  hasBrief: boolean;
+  target: string;
+};
+
 type WriterOptions = {
   provider: 'anthropic';
   configured: boolean;
   defaultModel: string;
   maxTokens: number;
+  sites: SiteOption[];
 };
+
+/* Opened from a site's dashboard as ?site=<slug>, so the page arrives already
+   pointed at the right site rather than defaulting to one. */
+const siteFromUrl = () => new URLSearchParams(window.location.search).get('site') ?? '';
 
 export const App = () => {
   const { get, post } = useFetchClient();
@@ -33,6 +48,7 @@ export const App = () => {
   const [keywords, setKeywords] = useState('');
   const [customInstructions, setCustomInstructions] = useState('');
   const [model, setModel] = useState('');
+  const [site, setSite] = useState(siteFromUrl);
   const [options, setOptions] = useState<WriterOptions | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
@@ -44,6 +60,8 @@ export const App = () => {
         const { data } = await get('/ai-writer/options');
         setOptions(data);
         setModel(data.defaultModel || '');
+        // Only when the URL did not already say which site.
+        setSite((current) => current || (data.sites?.length === 1 ? data.sites[0].slug : ''));
       } catch {
         setOptions(null);
       }
@@ -51,14 +69,34 @@ export const App = () => {
   }, [get]);
 
   const providerConfigured = options?.configured ?? true;
+  const activeSite = options?.sites?.find((s) => s.slug === site) ?? null;
+
+  /*
+   * The optional free-text field was labelled "Destination", which only makes
+   * sense for the travel sites this plugin was written for. The niche recorded
+   * on the site drives the wording instead, and the field is hidden where it
+   * has no meaning rather than asking for a destination on a smart-home site.
+   */
+  const subject = (() => {
+    const niche = (activeSite?.niche ?? '').toLowerCase();
+    if (niche.includes('travel') || niche.includes('flight')) {
+      return { show: true, label: 'Destination', placeholder: 'e.g. Bangkok, Thailand' };
+    }
+    if (niche.includes('smart') || niche.includes('home') || niche.includes('tech')) {
+      return { show: true, label: 'Device or brand', placeholder: 'e.g. Aqara FP2 presence sensor' };
+    }
+    return { show: Boolean(activeSite), label: 'Subject', placeholder: 'Optional — narrows the article' };
+  })();
 
   const run = async () => {
-    if (!topic.trim()) return;
+    if (!topic.trim() || !site) return;
     setLoading(true);
     setError(null);
     setResult(null);
     try {
       const { data } = await post('/ai-writer/generate', {
+        site,
+        subjectLabel: subject.label,
         topic,
         tone,
         length,
@@ -84,12 +122,42 @@ export const App = () => {
         <Typography variant="alpha">AI Writer</Typography>
         <Box paddingTop={2} paddingBottom={6}>
           <Typography variant="omega" textColor="neutral600">
-            Generate SEO-ready travel articles with Claude. A draft Article will be created —
-            review, attach media, pick destinations, then publish.
+            {activeSite
+              ? `Generate an SEO-ready post for ${activeSite.name} with Claude. It is filed as a draft in ${activeSite.target.split('.').pop()} — review it, attach a cover, set the category and author, then publish.`
+              : 'Pick a site to write for. The draft is filed in that site\u2019s own posts collection.'}
           </Typography>
+          {activeSite && !activeSite.hasBrief && (
+            <Box paddingTop={2}>
+              <Alert variant="default" title="No brief set for this site">
+                {`${activeSite.name} has no aiWriterBrief, so Claude falls back to a generic travel brief. Set one on the site in Content Manager to get copy written for this audience.`}
+              </Alert>
+            </Box>
+          )}
         </Box>
 
         <Grid.Root gap={4}>
+          <Grid.Item col={12} s={12} direction="column" alignItems="stretch">
+            <Field.Root name="site" required>
+              <Field.Label>Site</Field.Label>
+              <SingleSelect
+                value={site}
+                onChange={(v: any) => setSite(String(v))}
+                placeholder="Which site is this post for?"
+              >
+                {(options?.sites ?? []).map((s) => (
+                  <SingleSelectOption key={s.slug} value={s.slug}>
+                    {`${s.name} — ${s.domain}`}
+                  </SingleSelectOption>
+                ))}
+              </SingleSelect>
+              <Field.Hint>
+                {activeSite
+                  ? `Drafts are created in ${activeSite.target}`
+                  : 'Required — it decides which collection the draft is filed in'}
+              </Field.Hint>
+            </Field.Root>
+          </Grid.Item>
+
           <Grid.Item col={12} s={12} direction="column" alignItems="stretch">
             <Field.Root name="model">
               <Field.Label>Model</Field.Label>
@@ -116,8 +184,8 @@ export const App = () => {
 
           <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
             <Field.Root name="destination">
-              <Field.Label>Destination (optional)</Field.Label>
-              <TextInput value={destination} onChange={(e: any) => setDestination(e.target.value)} placeholder="e.g. Bangkok, Thailand" />
+              <Field.Label>{`${subject.label} (optional)`}</Field.Label>
+              <TextInput value={destination} onChange={(e: any) => setDestination(e.target.value)} placeholder={subject.placeholder} />
             </Field.Root>
           </Grid.Item>
 
@@ -182,7 +250,7 @@ export const App = () => {
 
         <Box paddingTop={6}>
           <Flex gap={3}>
-            <Button loading={loading} disabled={!topic.trim() || !providerConfigured} onClick={run}>
+            <Button loading={loading} disabled={!topic.trim() || !site || !providerConfigured} onClick={run}>
               Generate article
             </Button>
             <Button
