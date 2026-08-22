@@ -1,6 +1,6 @@
 'use strict';
 
-const { startPoller } = require('./ai-images');
+const { startPoller, stopPoller } = require('./ai-images');
 const { ensureCommerceProductAdminLayout } = require('./bootstrap/commerce-product-admin-layout');
 
 const PUBLIC_BLS_READ_ACTIONS = [
@@ -96,7 +96,17 @@ module.exports = {
     } catch (error) {
       strapi.log.error(`[fxn-cms] Failed to configure commerce product admin layout: ${error.message}`);
     }
-    startPoller(strapi);
+    // One-off scripts load the whole app to reach the Document Service, and the
+    // poller then competes with them for the connection pool — enough to time
+    // the script's own queries out. Nothing about a script run needs it.
+    if (process.env.STRAPI_SKIP_POLLERS === '1') {
+      strapi.log.info('[fxn-cms] STRAPI_SKIP_POLLERS=1 — AI image poller not started.');
+    } else {
+      startPoller(strapi);
+    }
     strapi.log.info('[fxn-cms] Bootstrap complete. AI Writer + Bulk Import plugins loaded.');
+  },
+  destroy() {
+    stopPoller();
   },
 };

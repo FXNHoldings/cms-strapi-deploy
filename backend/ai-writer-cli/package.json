@@ -9,14 +9,16 @@
     "fxn-site-post": "./generate-site-post.js",
     "fxn-nxt-bargains-post": "./generate-nxt-bargains-post.js",
     "fxn-fxnseo-post": "./generate-fxnseo-post.js",
-    "fxn-tool-content": "./generate-fxnseo-tool-content.js"
+    "fxn-tool-content": "./generate-fxnseo-tool-content.js",
+    "fxn-nxtsmart-post": "./generate-nxtsmart-post.js"
   },
   "scripts": {
     "generate": "node generate-originfacts-posts.js",
     "generate:site-post": "node generate-site-post.js",
     "generate:nxt-bargains-post": "node generate-nxt-bargains-post.js",
     "generate:fxnseo-post": "node generate-fxnseo-post.js",
-    "generate:tool-content": "node generate-fxnseo-tool-content.js"
+    "generate:tool-content": "node generate-fxnseo-tool-content.js",
+    "generate:nxtsmart-post": "node generate-nxtsmart-post.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",

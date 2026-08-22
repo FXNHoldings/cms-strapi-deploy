@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "affiliate_clicks",
+  "info": {
+    "singularName": "affiliate-click",
+    "pluralName": "affiliate-clicks",
+    "displayName": "Affiliate · Click",
+    "description": "One row per outbound affiliate click. Written by the sites' /go redirect, never by hand. Deliberately holds nothing that identifies a person: no IP, no user agent, no cookie or session id — country and a referring path are as far as it goes."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "site": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-site.commerce-site",
+      "description": "Which property the click left from. Set by the lifecycle from siteSlug — the redirect knows its own slug but not this row's id."
+    },
+    "siteSlug": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Slug the redirect reported. Kept alongside the relation so a click still says where it came from even if the registry row is later removed."
+    },
+    "clickedAt": {
+      "type": "datetime",
+      "required": true,
+      "description": "When the redirect was served. Set by the redirect, not by Strapi, so a delayed write still records the real moment."
+    },
+    "targetHost": {
+      "type": "string",
+      "maxLength": 180,
+      "description": "Host of the destination, e.g. www.amazon.com. Stored separately from the full URL so per-merchant counts do not require parsing every row."
+    },
+    "targetUrl": {
+      "type": "text",
+      "description": "Full destination the visitor was sent to, after affiliate wrapping."
+    },
+    "merchant": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Merchant name or slug as known at click time. A plain string rather than a relation: the merchant row may be renamed or removed later, and this should still say where the click went."
+    },
+    "network": {
+      "type": "string",
+      "maxLength": 60,
+      "description": "Affiliate network the link was wrapped for — impact, takeads, amazon, or direct."
+    },
+    "offerDocumentId": {
+      "type": "string",
+      "maxLength": 60,
+      "description": "The commerce-offer this click came from, if any. Stored as an id rather than a relation so cleaning up offers never deletes the click history that justifies them."
+    },
+    "productDocumentId": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 2,
+      "description": "Two-letter country from the edge header, if the CDN provided one. Resolved at the edge and never stored alongside the address it came from."
+    },
+    "referrerPath": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "Path on our own site the click came from, query string stripped. Enough to see which article earns, not enough to follow a person around."
+    },
+    "estimatedValue": {
+      "type": "decimal",
+      "description": "Click value at the time, from the merchant's EPC. An estimate by construction — real commissions only ever come from the network's own reporting."
+    },
+    "currency": {
+      "type": "string",
+      "maxLength": 8,
+      "default": "USD"
+    }
+  }
+}

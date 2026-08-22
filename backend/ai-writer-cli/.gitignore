@@ -6,3 +6,15 @@ node_modules
 .import-airline-reviews.progress.json
 airline-review-aliases.json
 tp-reviews-report/
+
+# Resume state for the long enrichment runs. Rewritten constantly, meaningless
+# on another machine, and it was churning the diff on every status check.
+*.progress.json
+
+# Travelpayouts feed data, rebuilt by tp-build-all-facts.mjs. 18MB of derived
+# output — regenerate it rather than carry it in the repo.
+tp-data/
+
+# Editor and ad-hoc backups
+*.bak
+*.bak-*

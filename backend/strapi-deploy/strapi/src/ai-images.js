@@ -41,13 +41,26 @@ async function pollOnce(strapi) {
   }
 }
 
+let pollTimer = null;
+
 function startPoller(strapi) {
   strapi.log.info(`[ai-images] poller started (every ${POLL_INTERVAL_MS}ms)`);
-  setInterval(() => {
+  pollTimer = setInterval(() => {
     pollOnce(strapi).catch((err) => {
       strapi.log.error(`[ai-images poll] ${err && err.message ? err.message : err}`);
     });
   }, POLL_INTERVAL_MS);
+  // Don't let the poller alone hold the process open. The server has plenty of
+  // other handles keeping it alive, but a one-off script has none once its work
+  // is done — without this it waits on a timer that never stops rearming.
+  if (typeof pollTimer.unref === 'function') pollTimer.unref();
+}
+
+function stopPoller() {
+  if (pollTimer) {
+    clearInterval(pollTimer);
+    pollTimer = null;
+  }
 }
 
 async function runImageGeneration(strapi, articleId) {
@@ -240,4 +253,4 @@ function safeMsg(e) {
   return String(e).slice(0, 400);
 }
 
-module.exports = { startPoller };
+module.exports = { startPoller, stopPoller };

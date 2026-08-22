@@ -1,0 +1,482 @@
+# One "category | topic [| destination(s)]" per line. Lines starting with # are ignored.
+# Save this as topics.txt and run:  node generate.js --topics topics.txt
+#
+# Format:
+#   category | topic                      ← 2 fields, destinations auto-detected from title
+#   category | topic | destination        ← 3 fields, destination explicit (highest priority)
+#   category | topic | dest1, dest2       ← multiple destinations, comma-separated
+#
+# Destinations should match the `name` of an existing Destination in Strapi
+# (case-insensitive). Slugs also work. Auto-detect runs first; explicit
+# destinations override.
+#
+# The CLI will look up each category in Strapi (by slug or name), auto-create
+# it if it doesn't exist, attach the article to it, and skip topics whose
+# title (or derived slug) already exists in Strapi.
+ 
+# Imported from sources.xlsx
+Flights | Perth to Phnom Penh Flights: Airlines, Routes and Times | Cambodia, Phnom Penh
+Flights | Perth to Siem Reap Flights: Best Stopover Options | Cambodia, Siem Reap
+Flights | Cheapest Month to Fly from Perth to Sihanoukville | Cambodia, Sihanoukville
+Flights | Perth to Battambang: Flights and Nearest Airports | Cambodia, Battambang
+Flights | Perth to Kampot: Best Airports and Flight Routes | Cambodia, Kampot
+Hotels | Best Hotels in Phnom Penh for First-Time Visitors | Cambodia, Phnom Penh
+Hotels | Where to Stay in Siem Reap Near Angkor Wat | Cambodia, Siem Reap
+Hotels | Best Beach Hotels in Sihanoukville for Every Budget | Cambodia, Sihanoukville
+Hotels | Best Boutique Hotels in Battambang | Cambodia, Battambang
+Hotels | Where to Stay in Kampot: Riverside Hotels and Guesthouses | Cambodia, Kampot
+Travel Tips | Phnom Penh Airport to the City Centre: Transfer Guide | Cambodia, Phnom Penh
+Travel Tips | How Many Days Do You Need in Siem Reap? | Cambodia, Siem Reap
+Travel Tips | Sihanoukville or Kampot: Which Should You Visit? | Cambodia, Sihanoukville, Kampot
+Travel Tips | Best Time to Visit Battambang | Cambodia, Battambang
+Travel Tips | Kampot Travel Guide: Transport, Food and Attractions | Cambodia, Kampot
+Flights | Perth to Denpasar Flights: Airlines, Times and Routes | Indonesia, Denpasar
+Flights | Perth to Jakarta Flights: Direct and One-Stop Options | Indonesia, Jakarta
+Flights | Cheapest Month to Fly from Perth to Yogyakarta | Indonesia, Yogyakarta
+Flights | Perth to Surabaya Flights: Airlines and Stopovers | Indonesia, Surabaya
+Flights | Perth to Bandung: Which Airport Should You Use? | Indonesia, Bandung
+Hotels | Best Hotels in Denpasar for Short Stays and Stopovers | Indonesia, Denpasar
+Hotels | Where to Stay in Jakarta: Best Areas for Visitors | Indonesia, Jakarta
+Hotels | Best Hotels in Yogyakarta Near Malioboro | Indonesia, Yogyakarta
+Hotels | Best Hotels in Surabaya for Business and Leisure | Indonesia, Surabaya
+Hotels | Where to Stay in Bandung for Shopping and Food | Indonesia, Bandung
+Travel Tips | Denpasar Airport to Bali Resorts: Transfer Guide | Indonesia, Denpasar, Bali
+Travel Tips | Jakarta Airport Guide: Terminals, Transport and Hotels | Indonesia, Jakarta
+Travel Tips | Yogyakarta Guide: Borobudur, Prambanan and More | Indonesia, Yogyakarta
+Travel Tips | How Many Days Do You Need in Surabaya? | Indonesia, Surabaya
+Travel Tips | Bandung or Yogyakarta: Which City Is Better? | Indonesia, Bandung, Yogyakarta
+Flights | Perth to Vientiane Flights: Airlines, Routes and Times | Laos, Vientiane
+Flights | Perth to Luang Prabang Flights: Best Stopovers | Laos, Luang Prabang
+Flights | Perth to Vang Vieng: Flights and Nearest Airports | Laos, Vang Vieng
+Flights | Perth to Pakse Flights: Routes and Travel Times | Laos, Pakse
+Flights | Perth to Savannakhet: Flights and Bus Connections | Laos, Savannakhet
+Hotels | Best Hotels in Vientiane Near the Mekong River | Laos, Vientiane
+Hotels | Where to Stay in Luang Prabang for First-Time Visitors | Laos, Luang Prabang
+Hotels | Best Hotels in Vang Vieng With Mountain Views | Laos, Vang Vieng
+Hotels | Best Hotels in Pakse for Exploring Southern Laos | Laos, Pakse
+Hotels | Where to Stay in Savannakhet | Laos, Savannakhet
+Travel Tips | Vientiane Airport to the City Centre: Transfer Guide | Laos, Vientiane
+Travel Tips | How Many Days Do You Need in Luang Prabang? | Laos, Luang Prabang
+Travel Tips | Vang Vieng Guide: Transport, Caves and Viewpoints | Laos, Vang Vieng
+Travel Tips | Pakse or Luang Prabang: Which Should You Visit? | Laos, Pakse, Luang Prabang
+Travel Tips | Savannakhet Travel Guide: What to See and Do | Laos, Savannakhet
+Flights | Perth to Kuala Lumpur Flights: Airlines and Times | Malaysia, Kuala Lumpur
+Flights | Perth to George Town Flights: Best Penang Routes | Malaysia, George Town, Penang
+Flights | Perth to Malacca City: Flights and Nearest Airports | Malaysia, Malacca City
+Flights | Perth to Kota Kinabalu Flights: Routes and Stopovers | Malaysia, Kota Kinabalu
+Flights | Perth to Johor Bahru: Best Airports and Routes | Malaysia, Johor Bahru
+Hotels | Best Hotels in Kuala Lumpur Near Public Transport | Malaysia, Kuala Lumpur
+Hotels | Where to Stay in George Town for Food and Heritage | Malaysia, George Town
+Hotels | Best Hotels in Malacca City Near Jonker Street | Malaysia, Malacca City
+Hotels | Best Hotels in Kota Kinabalu for Island Day Trips | Malaysia, Kota Kinabalu
+Hotels | Where to Stay in Johor Bahru Near Singapore | Malaysia, Johor Bahru
+Travel Tips | Kuala Lumpur Airport to the City Centre: Complete Guide | Malaysia, Kuala Lumpur
+Travel Tips | George Town Guide: Food, Culture and Transport | Malaysia, George Town
+Travel Tips | Malacca City or George Town: Which Is Better? | Malaysia, Malacca City, George Town
+Travel Tips | How Many Days Do You Need in Kota Kinabalu? | Malaysia, Kota Kinabalu
+Travel Tips | Johor Bahru to Singapore: Best Ways to Cross | Malaysia, Johor Bahru, Singapore
+Flights | Perth to Yangon Flights: Airlines, Routes and Times | Myanmar, Yangon
+Flights | Perth to Mandalay Flights: Best Stopover Options | Myanmar, Mandalay
+Flights | Perth to Bagan: Flights and Nearest Airports | Myanmar, Bagan
+Flights | Perth to Naypyidaw Flights: Routes and Stopovers | Myanmar, Naypyidaw
+Flights | Perth to Mawlamyine: Airports and Onward Transport | Myanmar, Mawlamyine
+Hotels | Best Hotels in Yangon Near Downtown | Myanmar, Yangon
+Hotels | Where to Stay in Mandalay for First-Time Visitors | Myanmar, Mandalay
+Hotels | Best Hotels in Bagan Near the Main Temple Areas | Myanmar, Bagan
+Hotels | Best Hotels in Naypyidaw for Short Stays | Myanmar, Naypyidaw
+Hotels | Where to Stay in Mawlamyine Near the Waterfront | Myanmar, Mawlamyine
+Travel Tips | Yangon Airport to the City Centre: Transfer Guide | Myanmar, Yangon
+Travel Tips | How Many Days Do You Need in Mandalay? | Myanmar, Mandalay
+Travel Tips | Bagan Guide: Temples, Transport and Best Areas | Myanmar, Bagan
+Travel Tips | Yangon or Mandalay: Which City Should You Visit? | Myanmar, Yangon, Mandalay
+Travel Tips | Mawlamyine Guide: Attractions, Food and Transport | Myanmar, Mawlamyine
+Flights | Perth to Manila Flights: Airlines, Routes and Times | Philippines, Manila
+Flights | Perth to Cebu City Flights: Direct and One-Stop Routes | Philippines, Cebu City
+Flights | Cheapest Month to Fly from Perth to Davao City | Philippines, Davao City
+Flights | Perth to Puerto Princesa Flights: Best Connections | Philippines, Puerto Princesa
+Flights | Perth to Baguio: Flights and Nearest Airports | Philippines, Baguio
+Hotels | Best Hotels in Manila Near Public Transport | Philippines, Manila
+Hotels | Where to Stay in Cebu City for First-Time Visitors | Philippines, Cebu City
+Hotels | Best Hotels in Davao City for Every Budget | Philippines, Davao City
+Hotels | Best Hotels in Puerto Princesa Near the Airport | Philippines, Puerto Princesa
+Hotels | Where to Stay in Baguio for Cool-Weather Escapes | Philippines, Baguio
+Travel Tips | Manila Airport Terminal Guide and Transfer Options | Philippines, Manila
+Travel Tips | How Many Days Do You Need in Cebu City? | Philippines, Cebu City
+Travel Tips | Davao City Guide: Food, Transport and Attractions | Philippines, Davao City
+Travel Tips | Puerto Princesa Guide: Tours, Transport and Hotels | Philippines, Puerto Princesa
+Travel Tips | Baguio Travel Guide: Weather, Transport and Things to Do | Philippines, Baguio
+Flights | Perth to Hanoi Flights: Airlines, Routes and Travel Times | Vietnam, Hanoi
+Flights | Perth to Ho Chi Minh City Flights: Direct and One-Stop Options | Vietnam, Ho Chi Minh City
+Flights | Cheapest Month to Fly from Perth to Da Nang | Vietnam, Da Nang
+Flights | Perth to Hoi An: Best Airports and Flight Routes | Vietnam, Hoi An
+Flights | Perth to Nha Trang Flights: Airlines and Stopover Options | Vietnam, Nha Trang
+Hotels | Best Hotels in Hanoi for First-Time Visitors | Vietnam, Hanoi
+Hotels | Where to Stay in Ho Chi Minh City: Best Districts | Vietnam, Ho Chi Minh City
+Hotels | Best Beach Hotels in Da Nang for Every Budget | Vietnam, Da Nang
+Hotels | Where to Stay in Hoi An Near the Ancient Town | Vietnam, Hoi An
+Hotels | Best Hotels in Nha Trang Near the Beach | Vietnam, Nha Trang
+Travel Tips | Hanoi Airport to the City Centre: Complete Transfer Guide | Vietnam, Hanoi
+Travel Tips | How Many Days Do You Need in Ho Chi Minh City? | Vietnam, Ho Chi Minh City
+Travel Tips | Da Nang or Hoi An: Which Destination Should You Choose? | Vietnam, Da Nang, Hoi An
+Travel Tips | Hoi An Travel Guide: Transport, Food and Attractions | Vietnam, Hoi An
+Travel Tips | Best Time to Visit Nha Trang | Vietnam, Nha Trang
+Flights | Perth to Tallinn Flights: Airlines, Routes and Travel Times | Estonia, Tallinn
+Flights | Perth to Tartu: Best Airports and Flight Connections | Estonia, Tartu
+Flights | Perth to Pärnu: Nearest Airports and Onward Transport | Estonia, Pärnu
+Flights | Perth to Narva: Best Flight Routes and Nearby Airports | Estonia, Narva
+Flights | Perth to Kuressaare Flights: Connections via Tallinn | Estonia, Kuressaare
+Hotels | Best Hotels in Tallinn Old Town for First-Time Visitors | Estonia, Tallinn
+Hotels | Where to Stay in Tartu Near the City Centre | Estonia, Tartu
+Hotels | Best Spa and Beach Hotels in Pärnu | Estonia, Pärnu
+Hotels | Best Hotels in Narva Near the Castle and River | Estonia, Narva
+Hotels | Where to Stay in Kuressaare for a Saaremaa Holiday | Estonia, Kuressaare
+Travel Tips | Tallinn Airport to the City Centre: Transport Guide | Estonia, Tallinn
+Travel Tips | How Many Days Do You Need in Tartu? | Estonia, Tartu
+Travel Tips | Tallinn or Tartu: Which Estonian City Should You Visit? | Estonia, Tallinn, Tartu
+Travel Tips | Pärnu Travel Guide: Beaches, Spas and Transport | Estonia, Pärnu
+Travel Tips | How to Get to Kuressaare and Explore Saaremaa | Estonia, Kuressaare
+Flights | Perth to Warsaw Flights: Airlines, Routes and Travel Times | Poland, Warsaw
+Flights | Perth to Kraków Flights: Best One-Stop Connections | Poland, Kraków
+Flights | Cheapest Month to Fly from Perth to Gdańsk | Poland, Gdańsk
+Flights | Perth to Wrocław Flights: Airlines and Stopover Options | Poland, Wrocław
+Flights | Perth to Poznań: Best Airports and Flight Routes | Poland, Poznań
+Hotels | Best Hotels in Warsaw Near the Old Town | Poland, Warsaw
+Hotels | Where to Stay in Kraków for First-Time Visitors | Poland, Kraków
+Hotels | Best Hotels in Gdańsk Near the Historic Centre | Poland, Gdańsk
+Hotels | Best Hotels in Wrocław Near Market Square | Poland, Wrocław
+Hotels | Where to Stay in Poznań for Sightseeing and Nightlife | Poland, Poznań
+Travel Tips | Warsaw Airport to the City Centre: Complete Guide | Poland, Warsaw
+Travel Tips | How Many Days Do You Need in Kraków? | Poland, Kraków
+Travel Tips | Warsaw or Kraków: Which Polish City Is Better? | Poland, Warsaw, Kraków
+Travel Tips | Gdańsk Travel Guide: Transport, Food and Attractions | Poland, Gdańsk
+Travel Tips | Best Time to Visit Wrocław | Poland, Wrocław
+Flights | Perth to Paris Flights: Airlines, Routes and Travel Times | France, Paris
+Flights | Perth to Nice Flights: Best One-Stop Connections | France, Nice
+Flights | Cheapest Month to Fly from Perth to Lyon | France, Lyon
+Flights | Perth to Marseille Flights: Airlines and Stopovers | France, Marseille
+Flights | Perth to Bordeaux: Best Airports and Flight Routes | France, Bordeaux
+Hotels | Best Hotels in Paris Near Major Metro Lines | France, Paris
+Hotels | Where to Stay in Nice for Beaches and the Old Town | France, Nice
+Hotels | Best Hotels in Lyon for First-Time Visitors | France, Lyon
+Hotels | Best Hotels in Marseille Near the Old Port | France, Marseille
+Hotels | Where to Stay in Bordeaux for Wine and Sightseeing | France, Bordeaux
+Travel Tips | Which Paris Airport Should You Fly Into? | France, Paris
+Travel Tips | Nice Airport to the City Centre: Transport Guide | France, Nice
+Travel Tips | Lyon or Marseille: Which French City Should You Visit? | France, Lyon, Marseille
+Travel Tips | Bordeaux Travel Guide: Wine, Transport and Attractions | France, Bordeaux
+Travel Tips | How Many Days Do You Need in Paris? | France, Paris
+Flights | Perth to Athens Flights: Airlines, Routes and Travel Times | Greece, Athens
+Flights | Perth to Thessaloniki Flights: Best Stopover Options | Greece, Thessaloniki
+Flights | Cheapest Month to Fly from Perth to Heraklion | Greece, Heraklion
+Flights | Perth to Chania Flights: Airlines and Connections | Greece, Chania
+Flights | Perth to Rhodes Flights: Best Routes and Stopovers | Greece, Rhodes Town
+Hotels | Best Hotels in Athens Near the Acropolis | Greece, Athens
+Hotels | Where to Stay in Thessaloniki for First-Time Visitors | Greece, Thessaloniki
+Hotels | Best Hotels in Heraklion Near the Old Town | Greece, Heraklion
+Hotels | Best Hotels in Chania Near the Venetian Harbour | Greece, Chania
+Hotels | Where to Stay in Rhodes Town Near the Old City | Greece, Rhodes Town
+Travel Tips | Athens Airport to the City Centre: Complete Guide | Greece, Athens
+Travel Tips | How Many Days Do You Need in Thessaloniki? | Greece, Thessaloniki
+Travel Tips | Heraklion or Chania: Which Crete City Is Better? | Greece, Heraklion, Chania
+Travel Tips | Rhodes Town Travel Guide: Beaches, Transport and Sights | Greece, Rhodes Town
+Travel Tips | Athens or Thessaloniki: Which City Should You Visit? | Greece, Athens, Thessaloniki
+Flights | Perth to Rome Flights: Airlines, Routes and Travel Times | Italy, Rome
+Flights | Perth to Milan Flights: Best One-Stop Connections | Italy, Milan
+Flights | Cheapest Month to Fly from Perth to Venice | Italy, Venice
+Flights | Perth to Florence: Best Airports and Flight Routes | Italy, Florence
+Flights | Perth to Naples Flights: Airlines and Stopover Options | Italy, Naples
+Hotels | Best Hotels in Rome Near Major Attractions | Italy, Rome
+Hotels | Where to Stay in Milan for First-Time Visitors | Italy, Milan
+Hotels | Best Hotels in Venice Near the Grand Canal | Italy, Venice
+Hotels | Where to Stay in Florence Near the Historic Centre | Italy, Florence
+Hotels | Best Hotels in Naples for Food, History and Day Trips | Italy, Naples
+Travel Tips | Which Rome Airport Should You Fly Into? | Italy, Rome
+Travel Tips | Milan Airport to the City Centre: Complete Guide | Italy, Milan
+Travel Tips | Rome or Florence: Which Italian City Should You Visit? | Italy, Rome, Florence
+Travel Tips | Venice Travel Guide: Transport, Areas and Attractions | Italy, Venice
+Travel Tips | How Many Days Do You Need in Naples? | Italy, Naples
+Flights | Perth to Monte Carlo: Best Flights via Nice Airport | Monaco, Monte Carlo
+Flights | Perth to Monaco-Ville: Nearest Airport and Transfer Options | Monaco, Monaco-Ville
+Flights | How to Fly from Perth to La Condamine, Monaco | Monaco, La Condamine
+Flights | Perth to Larvotto: Flights, Airports and Ground Transfers | Monaco, Larvotto
+Flights | Perth to Fontvieille: Best Routes via Nice or Genoa | Monaco, Fontvieille
+Hotels | Best Hotels in Monte Carlo for a Luxury City Break | Monaco, Monte Carlo
+Hotels | Where to Stay Near Monaco-Ville and the Prince's Palace | Monaco, Monaco-Ville
+Hotels | Best Hotels Near Port Hercule and La Condamine | Monaco, La Condamine
+Hotels | Best Beach Hotels Near Larvotto | Monaco, Larvotto
+Hotels | Where to Stay in Fontvieille, Monaco | Monaco, Fontvieille
+Travel Tips | Nice Airport to Monte Carlo: Train, Bus and Transfer Guide | Monaco, Monte Carlo
+Travel Tips | Monaco-Ville Travel Guide: Palace, Old Town and Views | Monaco, Monaco-Ville
+Travel Tips | Monte Carlo or La Condamine: Where Should You Stay? | Monaco, Monte Carlo, La Condamine
+Travel Tips | Larvotto Beach Guide: Transport, Facilities and Hotels | Monaco, Larvotto
+Travel Tips | How Many Days Do You Need in Monaco? | Monaco
+Flights | Perth to Zurich Flights: Airlines, Routes and Travel Times | Switzerland, Zurich
+Flights | Perth to Geneva Flights: Best One-Stop Connections | Switzerland, Geneva
+Flights | Perth to Lucerne: Best Airports and Train Connections | Switzerland, Lucerne
+Flights | Perth to Interlaken: Flights, Airports and Rail Options | Switzerland, Interlaken
+Flights | Cheapest Month to Fly from Perth to Basel | Switzerland, Basel
+Hotels | Best Hotels in Zurich Near the Main Train Station | Switzerland, Zurich
+Hotels | Where to Stay in Geneva for First-Time Visitors | Switzerland, Geneva
+Hotels | Best Hotels in Lucerne Near the Lake and Old Town | Switzerland, Lucerne
+Hotels | Where to Stay in Interlaken for Mountain Day Trips | Switzerland, Interlaken
+Hotels | Best Hotels in Basel Near the Historic Centre | Switzerland, Basel
+Travel Tips | Zurich Airport to the City Centre: Complete Guide | Switzerland, Zurich
+Travel Tips | How Many Days Do You Need in Geneva? | Switzerland, Geneva
+Travel Tips | Zurich or Geneva: Which Swiss City Should You Visit? | Switzerland, Zurich, Geneva
+Travel Tips | Lucerne Travel Guide: Transport, Mountains and Attractions | Switzerland, Lucerne
+Travel Tips | Best Time to Visit Interlaken | Switzerland, Interlaken
+Flights | Perth to Stockholm Flights: Airlines, Routes and Travel Times | Sweden, Stockholm
+Flights | Perth to Gothenburg Flights: Best Stopover Options | Sweden, Gothenburg
+Flights | Perth to Malmö: Best Airports and Flight Routes | Sweden, Malmö
+Flights | Perth to Uppsala: Flights via Stockholm and Train Connections | Sweden, Uppsala
+Flights | Perth to Kiruna Flights: Routes for a Swedish Lapland Trip | Sweden, Kiruna
+Hotels | Best Hotels in Stockholm Near Public Transport | Sweden, Stockholm
+Hotels | Where to Stay in Gothenburg for First-Time Visitors | Sweden, Gothenburg
+Hotels | Best Hotels in Malmö Near the Old Town | Sweden, Malmö
+Hotels | Where to Stay in Uppsala Near the City Centre | Sweden, Uppsala
+Hotels | Best Hotels in Kiruna for a Northern Lights Trip | Sweden, Kiruna
+Travel Tips | Which Stockholm Airport Should You Fly Into? | Sweden, Stockholm
+Travel Tips | Gothenburg Airport to the City Centre: Transport Guide | Sweden, Gothenburg
+Travel Tips | Stockholm or Gothenburg: Which City Is Better? | Sweden, Stockholm, Gothenburg
+Travel Tips | Malmö Travel Guide: Transport, Food and Attractions | Sweden, Malmö
+Travel Tips | Best Time to Visit Kiruna for Snow and Northern Lights | Sweden, Kiruna
+Flights | Perth to Madrid Flights: Airlines, Routes and Travel Times | Spain, Madrid
+Flights | Perth to Barcelona Flights: Best One-Stop Connections | Spain, Barcelona
+Flights | Cheapest Month to Fly from Perth to Seville | Spain, Seville
+Flights | Perth to Valencia Flights: Airlines and Stopover Options | Spain, Valencia
+Flights | Perth to Málaga Flights: Best Routes to the Costa del Sol | Spain, Málaga
+Hotels | Best Hotels in Madrid Near Major Attractions | Spain, Madrid
+Hotels | Where to Stay in Barcelona for First-Time Visitors | Spain, Barcelona
+Hotels | Best Hotels in Seville Near the Historic Centre | Spain, Seville
+Hotels | Where to Stay in Valencia for Beaches and Sightseeing | Spain, Valencia
+Hotels | Best Hotels in Málaga Near the Beach and Old Town | Spain, Málaga
+Travel Tips | Madrid Airport to the City Centre: Complete Guide | Spain, Madrid
+Travel Tips | How Many Days Do You Need in Barcelona? | Spain, Barcelona
+Travel Tips | Madrid or Barcelona: Which Spanish City Should You Visit? | Spain, Madrid, Barcelona
+Travel Tips | Seville Travel Guide: Transport, Food and Attractions | Spain, Seville
+Travel Tips | Valencia or Málaga: Which Coastal City Is Better? | Spain, Valencia, Málaga
+Flights | Perth to New York Flights: Airlines, Routes and Times | United States, New York City
+Flights | Perth to Los Angeles Flights: Best Stopover Options | United States, Los Angeles
+Flights | Cheapest Month to Fly from Perth to Honolulu | United States, Honolulu
+Flights | Perth to San Francisco: Best Airports and Routes | United States, San Francisco
+Flights | How Far Ahead to Book Perth to Las Vegas Flights | United States, Las Vegas
+Hotels | Best New York Hotels Near the Subway | United States, New York City
+Hotels | Where to Stay in Los Angeles Without a Car | United States, Los Angeles
+Hotels | Best Waikiki Beach Hotels for Every Budget | United States, Honolulu
+Hotels | Best San Francisco Hotels Near Public Transport | United States, San Francisco
+Hotels | Las Vegas Strip vs Downtown: Where Should You Stay? | United States, Las Vegas
+Travel Tips | Which New York Airport Should You Fly Into? | United States, New York City
+Travel Tips | Los Angeles Airport to the City: Transfer Guide | United States, Los Angeles
+Travel Tips | Honolulu Travel Guide: Beaches, Transport and Food | United States, Honolulu
+Travel Tips | San Francisco or Los Angeles: Which Is Better? | United States, San Francisco, Los Angeles
+Travel Tips | Las Vegas Guide for First-Time Visitors | United States, Las Vegas
+Flights | Perth to Bangkok Flights: Airlines, Routes and Times | Thailand, Bangkok
+Flights | Perth to Phuket Flights: Best Route Options | Thailand, Phuket
+Flights | Cheapest Month to Fly from Perth to Chiang Mai | Thailand, Chiang Mai
+Flights | Perth to Krabi Flights: Airlines and Stopovers | Thailand, Krabi
+Flights | Perth to Pattaya: Best Airports and Flight Routes | Thailand, Pattaya
+Hotels | Best Bangkok Hotels Near BTS and MRT Stations | Thailand, Bangkok
+Hotels | Where to Stay in Phuket for First-Time Visitors | Thailand, Phuket
+Hotels | Best Chiang Mai Hotels Near the Old City | Thailand, Chiang Mai
+Hotels | Best Krabi Hotels Near Beaches and Island Tours | Thailand, Krabi
+Hotels | Where to Stay in Pattaya: Best Areas Compared | Thailand, Pattaya
+Travel Tips | Which Bangkok Airport Should You Fly Into? | Thailand, Bangkok
+Travel Tips | Phuket or Krabi: Which Destination Is Better? | Thailand, Phuket, Krabi
+Travel Tips | How Many Days Do You Need in Chiang Mai? | Thailand, Chiang Mai
+Travel Tips | Bangkok Airport to Pattaya: Transport Guide | Thailand, Pattaya
+Travel Tips | Best Time to Visit Krabi | Thailand, Krabi
+Flights | Perth to Berlin Flights: Airlines, Routes and Times | Germany, Berlin
+Flights | Perth to Munich Flights: Best Stopover Options | Germany, Munich
+Flights | Cheapest Month to Fly from Perth to Frankfurt | Germany, Frankfurt
+Flights | Perth to Hamburg Flights: Airlines and Connections | Germany, Hamburg
+Flights | Perth to Cologne: Best Airports and Flight Routes | Germany, Cologne
+Hotels | Best Berlin Hotels Near Public Transport | Germany, Berlin
+Hotels | Where to Stay in Munich for First-Time Visitors | Germany, Munich
+Hotels | Best Frankfurt Hotels Near the Main Station | Germany, Frankfurt
+Hotels | Best Hamburg Hotels Near the City Centre | Germany, Hamburg
+Hotels | Where to Stay in Cologne Near the Old Town | Germany, Cologne
+Travel Tips | Berlin Airport to the City Centre: Complete Guide | Germany, Berlin
+Travel Tips | How Many Days Do You Need in Munich? | Germany, Munich
+Travel Tips | Berlin or Munich: Which German City Is Better? | Germany, Berlin, Munich
+Travel Tips | Hamburg Travel Guide: Transport, Food and Attractions | Germany, Hamburg
+Travel Tips | Best Time to Visit Cologne | Germany, Cologne
+Flights | Perth to Singapore Flights: Airlines, Routes and Times | Singapore
+Flights | Cheapest Month to Fly from Perth to Singapore | Singapore
+Flights | How Far Ahead to Book Perth to Singapore Flights | Singapore
+Flights | Best Airlines to Fly from Perth to Singapore | Singapore
+Flights | Perth to Singapore: Non-Stop vs One-Stop Flights | Singapore
+Hotels | Best Marina Bay Hotels With Skyline Views | Singapore, Marina Bay
+Hotels | Where to Stay Near Orchard Road for Shopping | Singapore, Orchard Road
+Hotels | Best Sentosa Hotels for Families and Beach Stays | Singapore, Sentosa
+Hotels | Best Hotels in Singapore Chinatown | Singapore, Chinatown
+Hotels | Where to Stay in Bugis Near Food and Transport | Singapore, Bugis
+Travel Tips | Singapore Changi Airport to the City: Complete Guide | Singapore
+Travel Tips | Marina Bay Guide: Attractions, Food and Transport | Singapore, Marina Bay
+Travel Tips | Sentosa or Marina Bay: Where Should You Stay? | Singapore, Sentosa, Marina Bay
+Travel Tips | How Many Days Do You Need in Singapore? | Singapore
+Travel Tips | Singapore Public Transport Guide for First-Time Visitors | Singapore
+Flights | Perth to Hong Kong Flights: Airlines, Routes and Times | Hong Kong
+Flights | Cheapest Month to Fly from Perth to Hong Kong | Hong Kong
+Flights | How Far Ahead to Book Perth to Hong Kong Flights | Hong Kong
+Flights | Perth to Hong Kong: Best Stopover Options | Hong Kong
+Flights | Perth to Hong Kong Flight Time and Distance | Hong Kong
+Hotels | Best Hotels in Central Hong Kong | Hong Kong, Central
+Hotels | Where to Stay in Tsim Sha Tsui for First-Time Visitors | Hong Kong, Tsim Sha Tsui
+Hotels | Best Mong Kok Hotels Near Markets and Transport | Hong Kong, Mong Kok
+Hotels | Best Hotels in Causeway Bay for Shopping | Hong Kong, Causeway Bay
+Hotels | Where to Stay on Lantau Island Near the Airport | Hong Kong, Lantau Island
+Travel Tips | Hong Kong Airport to the City: Complete Guide | Hong Kong
+Travel Tips | Hong Kong Island or Kowloon: Where Should You Stay? | Hong Kong, Hong Kong Island, Kowloon
+Travel Tips | How Many Days Do You Need in Hong Kong? | Hong Kong
+Travel Tips | Lantau Island Guide: Transport and Attractions | Hong Kong, Lantau Island
+Travel Tips | Hong Kong Public Transport Guide for Visitors | Hong Kong
+Flights | Perth to New Delhi Flights: Airlines, Routes and Times | India, New Delhi
+Flights | Perth to Mumbai Flights: Best Stopover Options | India, Mumbai
+Flights | Cheapest Month to Fly from Perth to Bengaluru | India, Bengaluru
+Flights | Perth to Chennai Flights: Airlines and Connections | India, Chennai
+Flights | Perth to Hyderabad Flights: Best Route Options | India, Hyderabad
+Hotels | Best New Delhi Hotels Near Metro Stations | India, New Delhi
+Hotels | Where to Stay in Mumbai for First-Time Visitors | India, Mumbai
+Hotels | Best Bengaluru Hotels for Business and Leisure | India, Bengaluru
+Hotels | Best Chennai Hotels Near the City Centre | India, Chennai
+Hotels | Where to Stay in Hyderabad Near Major Attractions | India, Hyderabad
+Travel Tips | Delhi Airport to the City Centre: Complete Guide | India, New Delhi
+Travel Tips | How Many Days Do You Need in Mumbai? | India, Mumbai
+Travel Tips | Delhi or Mumbai: Which City Should You Visit? | India, New Delhi, Mumbai
+Travel Tips | Bengaluru Travel Guide: Transport, Food and Attractions | India, Bengaluru
+Travel Tips | Best Time to Visit Hyderabad | India, Hyderabad
+
+# ---------------- Australia ----------------
+Destinations | Why Perth Is Australia's Most Isolated Capital City | Australia, Perth
+Destinations | Hobart in 48 Hours: Harbour, Kunanyi and MONA | Australia, Hobart
+Destinations | Cairns or Port Douglas: Which Reef Base Suits You? | Australia, Cairns
+Destinations | Darwin's Dry Season Explained: When to Go and Why | Australia, Darwin
+Destinations | Adelaide's Wine Regions: Barossa vs McLaren Vale | Australia, Adelaide
+Flights | Every Direct Flight From Perth: The Complete List | Australia, Perth
+Flights | Is It Cheaper to Fly From Perth or Adelaide? | Australia, Perth, Adelaide
+Flights | How Long Is the Flight From Perth to Sydney? | Australia, Perth, Sydney
+Flights | Perth to Cairns: Direct or Connect via Brisbane? | Australia, Perth, Cairns
+Flights | Perth to Brisbane Flights: Airlines, Time and Costs | Australia, Perth, Brisbane
+Hotels | Where to Stay in Brisbane: Best Areas by Budget | Australia, Brisbane
+Hotels | Adelaide Hotels Near the Central Market Worth Booking | Australia, Adelaide
+Hotels | Cairns Hotels With Reef Trips Included: What's Worth It | Australia, Cairns
+Hotels | Hobart's Best Waterfront Stays for a Weekend | Australia, Hobart
+Hotels | Darwin Hotels That Handle the Wet Season Well | Australia, Darwin
+Car Rentals | Do You Need a Car in Brisbane? An Honest Answer | Australia, Brisbane
+Car Rentals | Renting a Car in Perth: What It Actually Costs | Australia, Perth
+Car Rentals | One-Way Car Hire Between Sydney and Melbourne | Australia, Sydney, Melbourne
+Car Rentals | Driving From Cairns to Port Douglas: Car Hire Guide | Australia, Cairns
+Car Rentals | Hobart Car Rental: Why Book Earlier Than You Think | Australia, Hobart
+Travel Tips | Which Sydney Airport Terminal Do You Need? T1, T2 or T3 | Australia, Sydney
+Travel Tips | Melbourne: Tullamarine or Avalon? How to Choose | Australia, Melbourne
+Travel Tips | Australia's Time Zones Explained (Including the Weird Ones) | Australia
+Travel Tips | Best Time of Year to Visit Each Australian Capital | Australia
+Travel Tips | Domestic Flying in Australia: Rules You Should Know | Australia
+
+# ---------------- Thailand ----------------
+Destinations | Phuket or Krabi: Choosing Your Andaman Coast Base | Thailand, Phuket, Krabi
+Destinations | Chiang Mai vs Chiang Rai: Which Northern Base? | Thailand, Chiang Mai
+Destinations | Hua Hin vs Pattaya: Thailand's Two Closest Beach Escapes | Thailand, Hua Hin, Pattaya
+Destinations | Koh Samui in the Rainy Season: Is It Worth It? | Thailand, Koh Samui
+Destinations | Why Chiang Mai Became Thailand's Nomad Capital | Thailand, Chiang Mai
+Flights | Can You Fly Direct From Perth to Phuket? | Thailand, Perth, Phuket
+Flights | Which Airlines Fly to Chiang Mai? | Thailand, Chiang Mai
+Flights | Phuket or Bangkok: Which Thai Airport to Fly Into | Thailand, Phuket, Bangkok
+Flights | How Long Is the Flight From Perth to Bangkok? | Thailand, Perth, Bangkok
+Flights | Krabi or Phuket Airport: Which Works Out Cheaper? | Thailand, Krabi, Phuket
+Hotels | Where to Stay in Phuket: Best Beaches by Budget | Thailand, Phuket
+Hotels | Krabi Hotels: Ao Nang, Railay or Krabi Town? | Thailand, Krabi
+Hotels | Chiang Mai Hotels Inside the Old City Worth Booking | Thailand, Chiang Mai
+Hotels | Koh Samui Resorts That Justify the Price | Thailand, Koh Samui
+Hotels | Pattaya Hotels Away From the Party Strip | Thailand, Pattaya
+Car Rentals | Do You Need a Car in Phuket? An Honest Answer | Thailand, Phuket
+Car Rentals | Scooter or Car Hire in Thailand: The Real Tradeoffs | Thailand
+Car Rentals | What Licence Do You Need to Drive in Thailand? | Thailand
+Car Rentals | Renting a Car in Chiang Mai: Mountain Roads and Costs | Thailand, Chiang Mai
+Car Rentals | Driving Phuket to Krabi: What to Expect | Thailand, Phuket, Krabi
+Travel Tips | Suvarnabhumi or Don Mueang: Which Bangkok Airport? | Thailand, Bangkok
+Travel Tips | Island Hopping Thailand: Ferries vs Domestic Flights | Thailand
+Travel Tips | Thailand's Regional Seasons: Where to Go and When | Thailand
+Travel Tips | Thailand Entry Requirements: Where to Check | Thailand
+Travel Tips | Domestic Flying in Thailand: Airlines and Baggage Basics | Thailand
+
+# ---------------- Japan ----------------
+Destinations | Osaka or Kyoto: Which Kansai Base Suits You? | Japan, Osaka, Kyoto
+Destinations | Okinawa vs Mainland Japan: Two Different Countries | Japan, Okinawa
+Destinations | Fukuoka: Japan's Most Underrated Big City | Japan, Fukuoka
+Destinations | Why Sapporo Feels Nothing Like the Rest of Japan | Japan, Sapporo
+Destinations | Nagoya in a Day: Worth the Stop? | Japan, Nagoya
+Flights | Which Airlines Fly From Australia to Japan? | Japan
+Flights | Kansai or Narita: Which Japan Airport to Fly Into | Japan, Osaka, Tokyo
+Flights | How Long Is the Flight From Perth to Osaka? | Japan, Perth, Osaka
+Flights | Which Airlines Fly to Fukuoka? | Japan, Fukuoka
+Flights | Cheapest Months to Fly to Japan From Australia | Japan
+Hotels | Where to Stay in Osaka: Namba, Umeda or Tennoji? | Japan, Osaka
+Hotels | Kyoto Hotels Near the Temples Worth Booking | Japan, Kyoto
+Hotels | Ryokan or Hotel in Japan: What You're Paying For | Japan
+Hotels | Sapporo Hotels for a Snow Season Trip | Japan, Sapporo
+Hotels | Fukuoka Hotels Near Hakata Station | Japan, Fukuoka
+Car Rentals | Japan Rail Pass or Car Hire: Which Costs Less? | Japan
+Car Rentals | Do You Need a Car in Kyoto? Probably Not | Japan, Kyoto
+Car Rentals | Okinawa Car Hire: Why It's Almost Essential | Japan, Okinawa
+Car Rentals | Driving in Japan as an Australian: Permit and Rules | Japan
+Car Rentals | Renting a Car in Hokkaido: Winter Driving Realities | Japan, Sapporo
+Travel Tips | Narita or Haneda: Choosing Your Tokyo Airport | Japan, Tokyo
+Travel Tips | Domestic Flying in Japan vs the Shinkansen | Japan
+Travel Tips | Best Time to Visit Japan: Season by Season | Japan
+Travel Tips | Japan's IC Cards Explained: Suica, ICOCA and the Rest | Japan
+Travel Tips | Cash in Japan: How Much You Actually Need | Japan
+
+# ---------------- China ----------------
+Destinations | Shanghai or Beijing: Which First China Trip? | China, Shanghai, Beijing
+Destinations | Hong Kong and Mainland China: What Travellers Should Know | China, Hong Kong
+Destinations | Guangzhou or Shenzhen: The Pearl River Delta Compared | China, Guangzhou, Shenzhen
+Destinations | Chengdu: Pandas, Hotpot and Sichuan's Capital | China, Chengdu
+Destinations | Xi'an Beyond the Terracotta Army | China, Xi'an
+Flights | Which Airlines Fly From Australia to China? | China
+Flights | Pudong or Hongqiao: Shanghai's Two Airports | China, Shanghai
+Flights | Which Airlines Fly to Shanghai? | China, Shanghai
+Flights | How Long Is the Flight From Perth to Guangzhou? | China, Perth, Guangzhou
+Flights | Flying to China via Hong Kong or Singapore: Compared | China, Hong Kong
+Hotels | Where to Stay in Shanghai: The Bund, Jing'an or Pudong? | China, Shanghai
+Hotels | Booking Hotels in China: What Foreign Travellers Need to Know | China
+Hotels | Beijing Hotels Near the Forbidden City | China, Beijing
+Hotels | Chengdu Hotels for a Panda Base Trip | China, Chengdu
+Hotels | Guangzhou Hotels During Canton Fair Season | China, Guangzhou
+Car Rentals | Can Foreigners Rent a Car in China? | China
+Car Rentals | China's High-Speed Rail vs Domestic Flights | China
+Car Rentals | Getting Around China Without a Car | China
+Car Rentals | Hiring a Car With a Driver in China: How It Works | China
+Car Rentals | Hong Kong Car Hire: Is It Worth It? | China, Hong Kong
+Travel Tips | China Visa and Transit Rules: Where to Check | China
+Travel Tips | Payments in China: Alipay and WeChat for Visitors | China
+Travel Tips | Internet Access in China: What Works for Travellers | China
+Travel Tips | Best Time to Visit China by Region | China
+Travel Tips | Domestic Flying in China: Delays and Baggage | China
+
+# ---------------- South Korea ----------------
+Destinations | Seoul or Busan: Which Korean City Suits You? | South Korea, Seoul, Busan
+Destinations | Why Seoul-Jeju Is the World's Busiest Flight Route | South Korea, Seoul, Jeju
+Destinations | Busan in Three Days: Beaches, Markets and Temples | South Korea, Busan
+Destinations | Jeju Island: Korea's Domestic Holiday Favourite | South Korea, Jeju
+Destinations | Gyeongju: Korea's Open-Air Museum City | South Korea, Gyeongju
+Flights | Which Airlines Fly From Australia to Seoul? | South Korea, Seoul
+Flights | Incheon or Gimpo: Which Seoul Airport? | South Korea, Seoul
+Flights | How Long Is the Flight From Perth to Seoul? | South Korea, Perth, Seoul
+Flights | Which Airlines Fly to Busan? | South Korea, Busan
+Flights | Seoul to Jeju Flights: Carriers, Time and Frequency | South Korea, Seoul, Jeju
+Hotels | Where to Stay in Seoul: Myeongdong, Hongdae or Gangnam? | South Korea, Seoul
+Hotels | Seoul Hotels Near Incheon Airport for Early Flights | South Korea, Seoul
+Hotels | Busan Hotels Near Haeundae Beach | South Korea, Busan
+Hotels | Hanok Stays in Seoul: What to Expect | South Korea, Seoul
+Hotels | Jeju Resorts Worth the Flight | South Korea, Jeju
+Car Rentals | Renting a Car on Jeju: Almost Essential | South Korea, Jeju
+Car Rentals | Do You Need a Car in Seoul? No | South Korea, Seoul
+Car Rentals | Korea's KTX vs Domestic Flights | South Korea
+Car Rentals | Driving in South Korea: Permit and Rules for Australians | South Korea
+Car Rentals | Busan Car Hire for a Southern Coast Road Trip | South Korea, Busan
+Travel Tips | K-ETA and Korea Entry Requirements: Where to Check | South Korea
+Travel Tips | Best Time to Visit South Korea: Season by Season | South Korea
+Travel Tips | Korea on a Budget: What Things Actually Cost | South Korea
+Travel Tips | T-money and Getting Around Korean Cities | South Korea
+Travel Tips | Domestic Flying in Korea: Airlines and Baggage | South Korea

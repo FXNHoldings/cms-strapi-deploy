@@ -213,6 +213,38 @@ OPENROUTER_APP_NAME=FXN AI Writer CLI
 
 I can wire any of these — just ask.
 
+### Dedicated NXTSmart.Homes generator
+
+Use this wrapper when generating posts for the local Next.js site at `/var/www/html/nxtsmart.homes`. It targets the Strapi collections `/api/nxtsmart-posts` and `/api/nxtsmart-categories` by default. When writing a new post, it also fetches recent posts from the same category and asks the AI to add natural internal links where useful.
+
+```bash
+# If run with no flags, prompts for category, topic/count, image generation, and length
+node generate-nxtsmart-post.js
+
+# Brainstorm and generate 5 draft posts for one category
+node generate-nxtsmart-post.js --category smart-home-security --count 5
+
+# Generate one specific draft post
+node generate-nxtsmart-post.js "Best Matter smart plugs for beginners" --category product-reviews
+
+# Generate from a topic file, without images
+node generate-nxtsmart-post.js --topics topics.txt --no-images
+
+# Publish immediately
+node generate-nxtsmart-post.js --category how-to-guides --count 2 --publish
+
+# Preview JSON without writing to Strapi
+node generate-nxtsmart-post.js --dry-run --category smart-home-automation --count 1
+```
+
+Topic files can use:
+
+```text
+smart-home-security | How to choose smart cameras without locking yourself into one ecosystem
+how-to-guides | How to build a Matter-ready smart home from scratch
+product-reviews | Best smart plugs for lamps, fans, and energy tracking
+```
+
 ### Airline review import (Originfacts)
 
 `import-airline-reviews.js` loads an Apify `tripadvisor-reviews-bulk` dump — an

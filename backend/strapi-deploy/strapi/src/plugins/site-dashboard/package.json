@@ -1,0 +1,13 @@
+{
+  "name": "site-dashboard",
+  "version": "1.0.0",
+  "description": "One card per property, with the content counts behind each one",
+  "strapi": {
+    "name": "site-dashboard",
+    "displayName": "Sites",
+    "description": "Every property in one place: what is published, what is still draft, and when it last shipped",
+    "kind": "plugin"
+  },
+  "peerDependencies": { "@strapi/strapi": "^5.0.0" },
+  "main": "./server/index.js"
+}
