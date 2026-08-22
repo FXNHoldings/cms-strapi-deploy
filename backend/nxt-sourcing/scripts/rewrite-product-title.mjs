@@ -2,6 +2,7 @@
 import { spawn } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { anthropicConfigured, anthropicModel, askForJson } from './lib/anthropic-chat.mjs';
 
 const DEFAULT_OPENCLAW_NODE = '/root/.nvm/versions/node/v22.23.1/bin/node';
 const DEFAULT_OPENCLAW_BIN = '/opt/openclaw-runtime/openclaw/openclaw.mjs';
@@ -77,7 +78,7 @@ const COLOR_TERMS = [
 if (!STRAPI_API_TOKEN) fail('STRAPI_API_TOKEN is not set in .env.local.');
 if (!aiProviderConfig()) {
   fail(
-    'No AI provider available. Install OpenClaw at /opt/openclaw-runtime, or set OPENROUTER_API_KEY / OPENAI_API_KEY in .env.local.',
+    'No AI provider available. Install OpenClaw at /opt/openclaw-runtime, or set ANTHROPIC_API_KEY / OPENAI_API_KEY in .env.local.',
   );
 }
 
@@ -285,14 +286,35 @@ async function updateProduct(documentId, data) {
   return response.json();
 }
 
+const TITLE_SYSTEM =
+  'You rewrite ecommerce product titles for NXT.Bargains. Make titles clearer, more professional, and SEO-friendly for an ecommerce store while preserving the original meaning and product type.';
+
+const TITLE_SCHEMA = {
+  type: 'object',
+  properties: { title: { type: 'string' } },
+  required: ['title'],
+  additionalProperties: false,
+};
+
 async function rewriteProductTitle(product) {
   const provider = aiProviderConfig();
   const prompt = titleRewritePrompt(product);
-  const content =
-    provider.type === 'openclaw'
-      ? await invokeOpenClawInfer(prompt, provider.model)
-      : await invokeChatCompletion(provider, prompt);
-  const parsed = parseJsonContent(String(content || ''));
+  const parsed =
+    provider.type === 'anthropic'
+      ? await askForJson({
+          system: TITLE_SYSTEM,
+          prompt,
+          schema: TITLE_SCHEMA,
+          model: provider.model,
+          maxTokens: Number(process.env.PRODUCT_TITLE_REWRITE_MAX_TOKENS || '256'),
+        })
+      : parseJsonContent(
+          String(
+            (provider.type === 'openclaw'
+              ? await invokeOpenClawInfer(prompt, provider.model)
+              : await invokeChatCompletion(provider, prompt)) || '',
+          ),
+        );
   const title = finalizeTitle(cleanTitle(parsed.title), product);
   if (!title) throw new Error('AI response did not include title.');
   return title;
@@ -378,7 +400,7 @@ function openClawAvailable() {
 function aiProviderConfig() {
   const preference = aiProviderPreference();
 
-  if (preference === 'openclaw' || (preference !== 'openrouter' && preference !== 'openai')) {
+  if (preference === 'openclaw' || (preference !== 'anthropic' && preference !== 'openai')) {
     if (openClawAvailable()) {
       return {
         type: 'openclaw',
@@ -389,18 +411,8 @@ function aiProviderConfig() {
     if (preference === 'openclaw') return null;
   }
 
-  if (preference !== 'openai' && process.env.OPENROUTER_API_KEY) {
-    return {
-      type: 'openrouter',
-      url: process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1/chat/completions',
-      model: aiModel(),
-      headers: {
-        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.OPENROUTER_SITE_URL || 'https://search.fxnstudio.com',
-        'X-Title': process.env.OPENROUTER_APP_NAME || 'NXT Commerce Sourcing',
-      },
-    };
+  if (preference !== 'openai' && anthropicConfigured()) {
+    return { type: 'anthropic', model: aiModel() };
   }
 
   if (process.env.OPENAI_API_KEY) {
@@ -435,7 +447,7 @@ function aiModel() {
   const preference = aiProviderPreference();
   const usingOpenClaw =
     preference === 'openclaw' ||
-    (preference !== 'openrouter' && preference !== 'openai' && openClawAvailable());
+    (preference !== 'anthropic' && preference !== 'openai' && openClawAvailable());
 
   if (usingOpenClaw) {
     return process.env.OPENCLAW_MODEL || process.env.PRODUCT_TITLE_REWRITE_MODEL || 'openai/gpt-5.5';
@@ -443,7 +455,7 @@ function aiModel() {
 
   if (process.env.PRODUCT_TITLE_REWRITE_MODEL) return process.env.PRODUCT_TITLE_REWRITE_MODEL;
   if (process.env.PRODUCT_DESCRIPTION_REWRITE_MODEL) return process.env.PRODUCT_DESCRIPTION_REWRITE_MODEL;
-  if (process.env.OPENROUTER_API_KEY) return process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4.6';
+  if (anthropicConfigured()) return anthropicModel('PRODUCT_TITLE_REWRITE_MODEL');
   return process.env.OPENAI_MODEL || 'gpt-4o-mini';
 }
 
@@ -786,8 +798,8 @@ Notes:
 Environment:
   Reads ${APP_DIR}/.env.local.
   Default AI provider: OpenClaw local inference (${DEFAULT_OPENCLAW_BIN}).
-  Override provider with PRODUCT_TITLE_REWRITE_PROVIDER=openclaw|openrouter|openai.
-  Requires STRAPI_API_TOKEN. When not using OpenClaw, set OPENROUTER_API_KEY or OPENAI_API_KEY.
+  Override provider with PRODUCT_TITLE_REWRITE_PROVIDER=openclaw|anthropic|openai.
+  Requires STRAPI_API_TOKEN. When not using OpenClaw, set ANTHROPIC_API_KEY or OPENAI_API_KEY.
   Optional model override: PRODUCT_TITLE_REWRITE_MODEL or OPENCLAW_MODEL.
 `);
 }

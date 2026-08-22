@@ -1,43 +1,36 @@
 'use strict';
 
 const Anthropic = require('@anthropic-ai/sdk');
-const OpenAI = require('openai');
-
-const PROVIDERS = ['openrouter', 'anthropic'];
 
 function cfg(strapi, key, fallback = '') {
   return strapi.config.get(`plugin::ai-writer.${key}`) ?? fallback;
 }
 
-function safeParse(s) {
-  try {
-    return JSON.parse(s);
-  } catch {
-    const m = s.match(/\{[\s\S]*\}/);
-    if (!m) return null;
-    try {
-      return JSON.parse(m[0]);
-    } catch {
-      return null;
-    }
-  }
-}
+/* The shape used to be described in prose here and fished back out with a
+   regex. It is now a schema the API enforces, so this prompt only has to
+   describe the voice. */
+const ARTICLE_SCHEMA = {
+  type: 'object',
+  properties: {
+    title: { type: 'string' },
+    slug: { type: 'string' },
+    excerpt: { type: 'string' },
+    content: { type: 'string' },
+    seoTitle: { type: 'string' },
+    seoDescription: { type: 'string' },
+    seoKeywords: { type: 'string' },
+    tags: { type: 'array', items: { type: 'string' } },
+    readingTimeMinutes: { type: 'integer' },
+  },
+  required: [
+    'title', 'slug', 'excerpt', 'content',
+    'seoTitle', 'seoDescription', 'seoKeywords', 'tags', 'readingTimeMinutes',
+  ],
+  additionalProperties: false,
+};
 
 function buildSystemPrompt() {
-  return `You are a senior travel journalist writing for a travel blog (flights, hotels, destinations, tips).
-Output MUST be strict JSON matching this TypeScript type:
-{
-  "title": string,
-  "slug": string,
-  "excerpt": string,
-  "content": string,
-  "seoTitle": string,
-  "seoDescription": string,
-  "seoKeywords": string,
-  "tags": string[],
-  "readingTimeMinutes": number
-}
-Do not include any text outside the JSON. Do not wrap it in markdown fences.`;
+  return 'You are a senior travel journalist writing for a travel blog (flights, hotels, destinations, tips).';
 }
 
 function buildUserPrompt(params) {
@@ -60,92 +53,64 @@ function buildUserPrompt(params) {
 
 module.exports = ({ strapi }) => ({
   getOptions() {
-    const provider = (cfg(strapi, 'provider', 'openrouter') || 'openrouter').toLowerCase();
-    const anthropicKey = cfg(strapi, 'anthropicApiKey');
-    const openrouterKey = cfg(strapi, 'openrouterApiKey');
-
     return {
-      defaultProvider: PROVIDERS.includes(provider) ? provider : 'openrouter',
-      providers: PROVIDERS.map((id) => ({
-        id,
-        configured: id === 'anthropic' ? Boolean(anthropicKey) : Boolean(openrouterKey),
-        defaultModel:
-          id === 'anthropic'
-            ? cfg(strapi, 'model', 'claude-sonnet-4-5-20250929')
-            : cfg(strapi, 'openrouterModel', 'anthropic/claude-sonnet-4.6'),
-      })),
+      provider: 'anthropic',
+      configured: Boolean(cfg(strapi, 'anthropicApiKey')),
+      defaultModel: cfg(strapi, 'model', 'claude-opus-5'),
       maxTokens: Number(cfg(strapi, 'maxTokens', 4096)) || 4096,
     };
   },
 
-  resolveProvider(requested) {
-    const configured = (cfg(strapi, 'provider', 'openrouter') || 'openrouter').toLowerCase();
-    const provider = (requested || configured).toLowerCase();
-    if (!PROVIDERS.includes(provider)) {
-      throw new Error(`Unsupported AI provider "${provider}". Use openrouter or anthropic.`);
-    }
-    return provider;
-  },
-
-  async callAI({ provider, model, system, user, maxTokens }) {
-    if (provider === 'openrouter') {
-      const apiKey = cfg(strapi, 'openrouterApiKey');
-      if (!apiKey) {
-        throw new Error('OPENROUTER_API_KEY is not configured. Set it in Strapi .env.');
-      }
-      const client = new OpenAI({
-        apiKey,
-        baseURL: cfg(strapi, 'openrouterBaseUrl', 'https://openrouter.ai/api/v1'),
-      });
-      const completion = await client.chat.completions.create({
-        model: model || cfg(strapi, 'openrouterModel', 'anthropic/claude-sonnet-4.6'),
-        messages: [
-          { role: 'system', content: system },
-          { role: 'user', content: user },
-        ],
-        max_tokens: maxTokens,
-        extra_headers: {
-          'HTTP-Referer': cfg(strapi, 'openrouterSiteUrl', 'https://cms.fxnstudio.com'),
-          'X-OpenRouter-Title': cfg(strapi, 'openrouterAppName', 'Strapi AI Writer'),
-        },
-      });
-      return completion.choices?.[0]?.message?.content?.trim() || '';
-    }
-
+  async callAI({ model, system, user, maxTokens }) {
     const apiKey = cfg(strapi, 'anthropicApiKey');
     if (!apiKey) {
-      throw new Error('ANTHROPIC_API_KEY is not configured. Set it in Strapi .env.');
+      throw new Error('ANTHROPIC_API_KEY is not configured. Set it in Strapi .env and restart.');
     }
-    const client = new Anthropic.default({ apiKey });
-    const msg = await client.messages.create({
-      model: model || cfg(strapi, 'model', 'claude-sonnet-4-5-20250929'),
+
+    const client = new Anthropic({ apiKey });
+    const message = await client.messages.create({
+      model: model || cfg(strapi, 'model', 'claude-opus-5'),
       max_tokens: maxTokens,
       system,
       messages: [{ role: 'user', content: user }],
+      output_config: { format: { type: 'json_schema', schema: ARTICLE_SCHEMA } },
     });
-    return msg.content
-      .filter((b) => b.type === 'text')
-      .map((b) => b.text)
-      .join('\n')
+
+    /* A refusal is a 200 with nothing usable in it, so it has to be caught
+       here rather than downstream as "the model returned no content". */
+    if (message.stop_reason === 'refusal') {
+      throw new Error(
+        `Anthropic declined this topic (${message.stop_details?.category ?? 'no category given'}).`,
+      );
+    }
+    if (message.stop_reason === 'max_tokens') {
+      throw new Error(`Article hit the ${maxTokens}-token ceiling and is truncated. Raise AI_WRITER_MAX_TOKENS.`);
+    }
+
+    return message.content
+      .filter((block) => block.type === 'text')
+      .map((block) => block.text)
+      .join('')
       .trim();
   },
 
   async generate(params) {
-    const provider = this.resolveProvider(params.provider);
     const maxTokens = Number(cfg(strapi, 'maxTokens', 4096)) || 4096;
-    const model =
-      params.model ||
-      (provider === 'openrouter'
-        ? cfg(strapi, 'openrouterModel', 'anthropic/claude-sonnet-4.6')
-        : cfg(strapi, 'model', 'claude-sonnet-4-5-20250929'));
+    const model = params.model || cfg(strapi, 'model', 'claude-opus-5');
 
-    const system = buildSystemPrompt();
-    const user = buildUserPrompt(params);
-    const text = await this.callAI({ provider, model, system, user, maxTokens });
-    const parsed = safeParse(text);
-    if (!parsed) {
-      throw new Error('AI returned non-JSON output: ' + text.slice(0, 300));
+    const text = await this.callAI({
+      model,
+      system: buildSystemPrompt(),
+      user: buildUserPrompt(params),
+      maxTokens,
+    });
+
+    let parsed;
+    try {
+      parsed = JSON.parse(text);
+    } catch (error) {
+      throw new Error(`Schema-constrained output did not parse as JSON: ${error.message}`);
     }
-    return { ...parsed, _meta: { provider, model } };
+    return { ...parsed, _meta: { provider: 'anthropic', model } };
   },
 });

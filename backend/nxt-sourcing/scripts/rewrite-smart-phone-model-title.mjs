@@ -377,45 +377,6 @@ function stripSmartPhoneTitleNoise(value) {
     .trim();
 }
 
-function aiProviderConfig() {
-  if (process.env.OPENROUTER_API_KEY) {
-    return {
-      url: process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1/chat/completions',
-      model: aiModel(),
-      headers: {
-        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.OPENROUTER_SITE_URL || 'https://search.fxnstudio.com',
-        'X-Title': process.env.OPENROUTER_APP_NAME || 'NXT Commerce Sourcing',
-      },
-    };
-  }
-
-  if (process.env.OPENAI_API_KEY) {
-    return {
-      url: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1/chat/completions',
-      model: aiModel(),
-      headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    };
-  }
-
-  return null;
-}
-
-function aiProviderName() {
-  return process.env.OPENROUTER_API_KEY ? 'openrouter' : 'openai';
-}
-
-function aiModel() {
-  if (process.env.PRODUCT_TITLE_REWRITE_MODEL) return process.env.PRODUCT_TITLE_REWRITE_MODEL;
-  if (process.env.PRODUCT_DESCRIPTION_REWRITE_MODEL) return process.env.PRODUCT_DESCRIPTION_REWRITE_MODEL;
-  if (process.env.OPENROUTER_API_KEY) return process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4.6';
-  return process.env.OPENAI_MODEL || 'gpt-4o-mini';
-}
-
 function specsForPrompt(specs) {
   if (!isRecord(specs)) return '';
   const rows = [];

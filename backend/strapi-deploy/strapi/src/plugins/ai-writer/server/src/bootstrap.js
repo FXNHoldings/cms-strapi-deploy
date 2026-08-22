@@ -1,10 +1,9 @@
 'use strict';
 
 module.exports = ({ strapi }) => {
-  const provider = strapi.config.get('plugin::ai-writer.provider') || 'openrouter';
-  const model =
-    provider === 'openrouter'
-      ? strapi.config.get('plugin::ai-writer.openrouterModel')
-      : strapi.config.get('plugin::ai-writer.model');
-  strapi.log.info(`[ai-writer] bootstrapped — provider=${provider} model=${model || 'default'}`);
+  const model = strapi.config.get('plugin::ai-writer.model');
+  const configured = Boolean(strapi.config.get('plugin::ai-writer.anthropicApiKey'));
+  strapi.log.info(
+    `[ai-writer] bootstrapped — anthropic model=${model || 'default'} key=${configured ? 'set' : 'MISSING'}`,
+  );
 };
