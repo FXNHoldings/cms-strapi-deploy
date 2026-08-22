@@ -109,6 +109,14 @@ async function runImageGeneration(strapi, articleId) {
     const model = process.env.FAL_IMAGE_MODEL || 'fal-ai/flux/schnell';
     const baseName = slugify(article.title || `article-${articleId}`, { lower: true, strict: true }).slice(0, 50);
 
+    /* Model-dependent input. flux-pro/v1.1-ultra takes aspect_ratio ("16:9")
+       and ignores the image_size presets the flux models use — without this,
+       pointing FAL_IMAGE_MODEL at Ultra silently yields square images. */
+    const sized = (aspect) =>
+      /ultra/.test(model)
+        ? { aspect_ratio: aspect === 'landscape_16_9' ? '16:9' : '4:3', output_format: 'jpeg' }
+        : { image_size: aspect };
+
     const all = [
       { kind: 'cover', prompt: prompts.cover, aspect: 'landscape_16_9' },
       ...prompts.gallery.slice(0, 2).map((p, i) => ({ kind: `gallery-${i + 1}`, prompt: p, aspect: 'landscape_4_3' })),
@@ -116,7 +124,7 @@ async function runImageGeneration(strapi, articleId) {
 
     const results = await Promise.all(all.map(async ({ kind, prompt, aspect }) => {
       const res = await fal.subscribe(model, {
-        input: { prompt, image_size: aspect, num_images: 1, enable_safety_checker: true },
+        input: { prompt, num_images: 1, enable_safety_checker: true, ...sized(aspect) },
         logs: false,
       });
       const url = res && res.data && res.data.images && res.data.images[0] && res.data.images[0].url;

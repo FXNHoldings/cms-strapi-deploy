@@ -37,10 +37,15 @@ services:
       # AI Writer plugin
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
       AI_WRITER_ANTHROPIC_MODEL: ${AI_WRITER_ANTHROPIC_MODEL:-claude-opus-5}
-      AI_WRITER_MAX_TOKENS: ${AI_WRITER_MAX_TOKENS:-4096}
+      # 4096 could not hold a "medium" article: 800-1200 words of markdown plus
+      # the SEO fields and key takeaway overran it, the response came back
+      # truncated, and the run was thrown away after being paid for.
+      AI_WRITER_MAX_TOKENS: ${AI_WRITER_MAX_TOKENS:-16000}
       # Fal.ai for AI image generation (per-article lifecycle hook)
       FAL_KEY: ${FAL_KEY}
-      FAL_IMAGE_MODEL: ${FAL_IMAGE_MODEL:-fal-ai/flux/schnell}
+      # Ultra takes aspect_ratio rather than the image_size presets; both callers
+      # handle that. Schnell stays the fallback only if the var is unset.
+      FAL_IMAGE_MODEL: ${FAL_IMAGE_MODEL:-fal-ai/flux-pro/v1.1-ultra}
     volumes:
       - strapi-uploads:/opt/app/public/uploads
     depends_on:

@@ -20,6 +20,14 @@ const os = require('os');
 const path = require('path');
 const slugify = require('slugify');
 const Anthropic = require('@anthropic-ai/sdk');
+const sharp = require('sharp');
+
+/* The site's covers are all 1536x768. Generators do not offer that ratio — it
+   is 2:1 and the closest Ultra accepts is 16:9 — so the image is rendered wide
+   and then cropped to size here. Doing it at upload time means every cover is
+   the right shape whatever model produced it. */
+const COVER_W = 1536;
+const COVER_H = 768;
 
 function cfg(strapi, key, fallback = '') {
   return strapi.config.get(`plugin::ai-writer.${key}`) ?? fallback;
@@ -32,12 +40,33 @@ const PROMPT_SCHEMA = {
   additionalProperties: false,
 };
 
+/**
+ * fal's image models do not share an input shape.
+ *
+ * flux/schnell and flux-pro/v1.1 take image_size with a named preset
+ * ("landscape_16_9"). flux-pro/v1.1-ultra takes aspect_ratio as a ratio string
+ * ("16:9") and ignores image_size — so simply pointing FAL_IMAGE_MODEL at Ultra
+ * without this would silently produce square covers.
+ */
+function falInput(model, prompt) {
+  const base = { prompt, num_images: 1, enable_safety_checker: true };
+  if (/ultra/.test(model)) return { ...base, aspect_ratio: '16:9', output_format: 'jpeg' };
+  return { ...base, image_size: 'landscape_16_9' };
+}
+
 async function uploadUrlToStrapi(strapi, url, filename) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Could not download the generated image: HTTP ${res.status}`);
-  const buf = Buffer.from(await res.arrayBuffer());
-  const mime = res.headers.get('content-type') || 'image/jpeg';
-  const ext = mime.includes('png') ? 'png' : mime.includes('webp') ? 'webp' : 'jpg';
+  const raw = Buffer.from(await res.arrayBuffer());
+
+  /* Centre-crop rather than squash: Ultra renders 2752x1536, and scaling that
+     to 2:1 would distort every face and product in it. */
+  const buf = await sharp(raw)
+    .resize(COVER_W, COVER_H, { fit: 'cover', position: 'attention' })
+    .jpeg({ quality: 88 })
+    .toBuffer();
+  const mime = 'image/jpeg';
+  const ext = 'jpg';
 
   const tmp = path.join(os.tmpdir(), `${filename}-${Date.now()}.${ext}`);
   fs.writeFileSync(tmp, buf);
@@ -106,10 +135,7 @@ module.exports = ({ strapi }) => ({
       fal.config({ credentials: FAL_KEY });
       const model = process.env.FAL_IMAGE_MODEL || 'fal-ai/flux/schnell';
 
-      const res = await fal.subscribe(model, {
-        input: { prompt, image_size: 'landscape_16_9', num_images: 1, enable_safety_checker: true },
-        logs: false,
-      });
+      const res = await fal.subscribe(model, { input: falInput(model, prompt), logs: false });
       const url = res?.data?.images?.[0]?.url;
       if (!url) return { error: 'The image service returned no image.' };
 
