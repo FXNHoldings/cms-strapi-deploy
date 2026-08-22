@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtsmarthome_authors",
+  "info": {
+    "singularName": "nxtsmarthome-author",
+    "pluralName": "nxtsmarthome-authors",
+    "displayName": "NXTSmartHome.com.au · Author",
+    "description": "Editorial authors for nxtsmarthome.com.au (E-E-A-T attribution)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "role": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "bio": {
+      "type": "text",
+      "maxLength": 2000
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "sameAs": {
+      "type": "json"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxtsmarthome-post.nxtsmarthome-post",
+      "mappedBy": "author"
+    }
+  }
+}

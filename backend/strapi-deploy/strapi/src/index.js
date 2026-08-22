@@ -22,6 +22,8 @@ const PUBLIC_BLS_READ_ACTIONS = [
   'api::nxtsmarthome-post.nxtsmarthome-post.findOne',
   'api::nxtsmarthome-category.nxtsmarthome-category.find',
   'api::nxtsmarthome-category.nxtsmarthome-category.findOne',
+  'api::nxtsmarthome-author.nxtsmarthome-author.find',
+  'api::nxtsmarthome-author.nxtsmarthome-author.findOne',
   'api::commerce-deal.commerce-deal.find',
   'api::commerce-deal.commerce-deal.findOne',
   'api::commerce-brand.commerce-brand.find',
