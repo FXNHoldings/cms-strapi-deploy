@@ -35,6 +35,7 @@
  * server that also hosts the storefronts is how an IP gets blocked.
  */
 import { setTimeout as sleep } from 'node:timers/promises';
+import { isSearchUrl } from './lib/search-url.mjs';
 
 const args = process.argv.slice(2);
 const flag = (n, d = null) => {
@@ -163,24 +164,6 @@ async function confirmGone(url, first) {
   }
 }
 
-/**
- * Does this URL point at a search results page rather than a product?
- *
- * 650 of 1,934 offers do — a sourcing problem in its own right, but it also
- * makes them unverifiable here. A search page returns 200 for a query that
- * matches nothing, so "alive" proves nothing; and both false-positive
- * retirements so far were search URLs, where a 410 says something about the
- * search endpoint and nothing whatever about a product.
- */
-function isSearchUrl(url) {
-  try {
-    const u = new URL(url);
-    if (/\/(search|catalogsearch|find|results)\b/i.test(u.pathname)) return true;
-    return ['q', 'query', 's', 'k', 'keyword', 'search'].some((k) => u.searchParams.has(k));
-  } catch {
-    return false;
-  }
-}
 
 async function checkOne(offer) {
   const url = offer.productUrl;

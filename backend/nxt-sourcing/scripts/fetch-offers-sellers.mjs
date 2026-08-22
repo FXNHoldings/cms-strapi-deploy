@@ -32,6 +32,9 @@ const flag = (n, d = null) => {
 };
 const WRITE = args.includes('--write');
 const THIN_ONLY = args.includes('--thin-only');
+/* Only products with no offers at all. Narrower than --thin-only, which also
+ * picks up single-offer products and quadruples the spend. */
+const NO_OFFERS_ONLY = args.includes('--no-offers-only');
 const CATEGORY = flag('category', null);
 const LIMIT = Number(flag('limit', Infinity));
 const PRIORITY = Number(flag('priority', 1));
@@ -201,7 +204,8 @@ q.append('populate[offers][fields][0]', 'price');
 
 const list = await strapi(`/api/commerce-products?${q}`);
 let products = (list?.data ?? []).filter((p) => p.googleProductId);
-if (THIN_ONLY) products = products.filter((p) => (p.offers ?? []).length < 2);
+if (NO_OFFERS_ONLY) products = products.filter((p) => (p.offers ?? []).length === 0);
+else if (THIN_ONLY) products = products.filter((p) => (p.offers ?? []).length < 2);
 products = products.slice(0, LIMIT);
 
 console.log(`products : ${products.length}`);

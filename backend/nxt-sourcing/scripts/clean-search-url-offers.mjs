@@ -31,6 +31,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { isSearchUrl } from './lib/search-url.mjs';
 
 const ROOT = path.dirname(path.dirname(new URL(import.meta.url).pathname));
 const args = process.argv.slice(2);
@@ -56,17 +57,6 @@ async function api(pathname, init = {}) {
   });
   if (!res.ok && res.status !== 204) throw new Error(`${init.method ?? 'GET'} ${pathname} -> ${res.status}`);
   return res.status === 204 ? null : res.json().catch(() => null);
-}
-
-/** Same test the checker uses, so the two agree on what a search URL is. */
-function isSearchUrl(url) {
-  try {
-    const u = new URL(url);
-    if (/\/(search|catalogsearch|find|results)\b/i.test(u.pathname)) return true;
-    return ['q', 'query', 's', 'k', 'keyword', 'search'].some((k) => u.searchParams.has(k));
-  } catch {
-    return false;
-  }
 }
 
 async function readOffers() {
