@@ -4,7 +4,7 @@ import {
 } from '@strapi/design-system';
 import { useFetchClient } from '@strapi/strapi/admin';
 import { Link, useParams } from 'react-router-dom';
-import { TOOLS, fmtDate, fmtMoney, manageUrl, orderedRoles, type Site } from '../shared';
+import { TOOLS, fmtDate, fmtMoney, orderedRoles, type Site } from '../shared';
 
 /**
  * One property, in detail.
@@ -160,16 +160,21 @@ const SiteDetail = () => {
                           </Typography>
                         </Flex>
                         <Flex gap={2}>
-                          {data.sources.map((source, i) =>
-                            source.error ? (
-                              <Badge key={i} textColor="danger600" backgroundColor="danger100">
-                                {source.error}
-                              </Badge>
-                            ) : manageUrl(source) ? (
-                              <Button key={i} variant="tertiary" size="S" tag="a" href={manageUrl(source) as string}>
-                                {source.filter ? 'manage (filtered)' : 'manage'}
-                              </Button>
-                            ) : null,
+                          {data.sources.some((s) => s.error) &&
+                            data.sources
+                              .filter((s) => s.error)
+                              .map((source, i) => (
+                                <Badge key={i} textColor="danger600" backgroundColor="danger100">
+                                  {source.error}
+                                </Badge>
+                              ))}
+                          {/* One screen per role, merging that role's sources —
+                              which is why this is a single button even when the
+                              role is served by two collections. */}
+                          {data.sources.some((s) => !s.error) && (
+                            <Button variant="secondary" size="S" tag={Link} to={role}>
+                              Open
+                            </Button>
                           )}
                         </Flex>
                       </Flex>

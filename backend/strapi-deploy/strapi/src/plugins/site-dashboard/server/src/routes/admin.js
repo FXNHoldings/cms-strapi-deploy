@@ -17,5 +17,8 @@ module.exports = {
   routes: [
     guarded('GET', '/sites', 'sites.list'),
     guarded('GET', '/sites/:slug', 'sites.detail'),
+    guarded('GET', '/sites/:slug/content/:role', 'content.list'),
+    // The only write this plugin has. Reversible on purpose — see content-list.js.
+    guarded('PUT', '/sites/:slug/content/:role/publish', 'content.publish'),
   ],
 };
