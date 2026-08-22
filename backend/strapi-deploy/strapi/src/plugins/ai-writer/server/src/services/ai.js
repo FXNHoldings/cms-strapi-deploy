@@ -21,10 +21,17 @@ const ARTICLE_SCHEMA = {
     seoKeywords: { type: 'string' },
     tags: { type: 'array', items: { type: 'string' } },
     readingTimeMinutes: { type: 'integer' },
+    /* Rendered as "The short answer" above the article. Two sentences at most:
+       it is a summary box, not an intro paragraph. */
+    keyTakeaway: { type: 'string' },
+    /* Must be one of the slugs offered in the prompt. Validated after
+       generation — a category that does not exist is dropped, not created. */
+    categorySlug: { type: 'string' },
   },
   required: [
     'title', 'slug', 'excerpt', 'content',
     'seoTitle', 'seoDescription', 'seoKeywords', 'tags', 'readingTimeMinutes',
+    'keyTakeaway',
   ],
   additionalProperties: false,
 };
@@ -37,6 +44,16 @@ const ARTICLE_SCHEMA = {
  * brief now comes from commerce-site.aiWriterBrief, and the travel wording is
  * only the fallback for a site that has not set one.
  */
+/* Titles for a category, avoiding what the site has already published. */
+const TITLES_SCHEMA = {
+  type: 'object',
+  properties: {
+    titles: { type: 'array', items: { type: 'string' } },
+  },
+  required: ['titles'],
+  additionalProperties: false,
+};
+
 function buildSystemPrompt(brief) {
   const own = (brief || '').trim();
   if (own) return own;
@@ -56,6 +73,35 @@ function buildUserPrompt(params) {
     params.language ? `Language: ${params.language}` : 'Language: English',
     params.customInstructions ? `Additional instructions:\n${params.customInstructions}` : '',
     `Target length: ${words} words`,
+    '',
+    'Structure: at least four H2 sections written as markdown "## Heading". The',
+    'site builds its "In this guide" contents list from those headings and hides',
+    'it below three, so fewer than four leaves the article without one.',
+    '',
+    'keyTakeaway: one or two sentences answering the title directly. It is shown',
+    'in a box above the article as "The short answer", so it must stand alone.',
+    '',
+    'Hard limits, because these are stored fields and an overlong value is',
+    'truncated: seoTitle 60 characters, seoDescription 160, excerpt 300.',
+    '',
+    params.categories?.length
+      ? [
+          'categorySlug: choose exactly one of these, by slug. Do not invent one:',
+          params.categories.map((c) => `  ${c.slug} — ${c.name}`).join('\n'),
+        ].join('\n')
+      : '',
+    '',
+    params.products?.length
+      ? [
+          'Products: reference real products from the catalogue below by placing a',
+          'marker on its own line, exactly ::product:<slug>:: — the site replaces it',
+          'with a photo, verdict and buy buttons. Place two or three, each in the',
+          'section that genuinely discusses that product. Never place one in a',
+          'section that does not mention it, and never invent a slug: anything not',
+          'on this list is stripped out and the reference is wasted.',
+          params.products.map((p) => `  ${p.slug} — ${p.name}`).join('\n'),
+        ].join('\n')
+      : '',
   ]
     .filter(Boolean)
     .join('\n');
@@ -71,7 +117,7 @@ module.exports = ({ strapi }) => ({
     };
   },
 
-  async callAI({ model, system, user, maxTokens }) {
+  async callAI({ model, system, user, maxTokens, schema }) {
     const apiKey = cfg(strapi, 'anthropicApiKey');
     if (!apiKey) {
       throw new Error('ANTHROPIC_API_KEY is not configured. Set it in Strapi .env and restart.');
@@ -83,7 +129,7 @@ module.exports = ({ strapi }) => ({
       max_tokens: maxTokens,
       system,
       messages: [{ role: 'user', content: user }],
-      output_config: { format: { type: 'json_schema', schema: ARTICLE_SCHEMA } },
+      output_config: { format: { type: 'json_schema', schema: schema || ARTICLE_SCHEMA } },
     });
 
     /* A refusal is a 200 with nothing usable in it, so it has to be caught
@@ -102,6 +148,39 @@ module.exports = ({ strapi }) => ({
       .map((block) => block.text)
       .join('')
       .trim();
+  },
+
+  /**
+   * Article titles for one category.
+   *
+   * The existing titles are passed in and the model is told to avoid them —
+   * without that it reliably proposes the article the site already has, and
+   * the duplicate is only noticed after it has been written and filed.
+   */
+  async titles({ brief, category, count = 5, existing = [], model }) {
+    const maxTokens = Math.min(Number(cfg(strapi, 'maxTokens', 4096)) || 4096, 2048);
+
+    const user = [
+      `Propose ${count} article titles for the "${category}" category of this publication.`,
+      '',
+      'Each must be a distinct article someone would search for, specific enough to',
+      'write without further briefing. No numbering, no colons used as filler, no',
+      'clickbait. Match the publication\'s market and voice as described above.',
+      existing.length
+        ? `\nDo NOT propose anything that overlaps these, which are already published:\n${existing.map((t) => `  ${t}`).join('\n')}`
+        : '',
+    ].filter(Boolean).join('\n');
+
+    const text = await this.callAI({
+      model: model || cfg(strapi, 'model', 'claude-opus-5'),
+      system: buildSystemPrompt(brief),
+      user,
+      maxTokens,
+      schema: TITLES_SCHEMA,
+    });
+
+    const parsed = JSON.parse(text);
+    return Array.isArray(parsed.titles) ? parsed.titles.filter(Boolean).slice(0, count) : [];
   },
 
   async generate(params) {

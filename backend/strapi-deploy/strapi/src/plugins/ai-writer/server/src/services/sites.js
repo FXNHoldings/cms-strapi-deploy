@@ -44,6 +44,47 @@ function targetUid(site) {
   return posts.find((p) => p?.uid)?.uid ?? null;
 }
 
+/**
+ * What the writer is allowed to reference for this site.
+ *
+ * Categories and products are read from the CMS rather than invented. A model
+ * asked to "pick a category" will cheerfully return one that does not exist,
+ * and an invented product slug renders as the literal text ::product:foo:: on
+ * the published page — the marker is only replaced when the slug resolves.
+ */
+async function siteContext(strapi, site) {
+  const map = site?.contentTypes && typeof site.contentTypes === 'object' ? site.contentTypes : {};
+  const catUid = (Array.isArray(map.categories) ? map.categories : map.categories ? [map.categories] : [])
+    .find((c) => c?.uid)?.uid ?? null;
+
+  let categories = [];
+  if (catUid && strapi.contentTypes[catUid]) {
+    const rows = await strapi.documents(catUid).findMany({ status: 'published', limit: 100, sort: 'name:asc' });
+    categories = rows.map((c) => ({ documentId: c.documentId, name: c.name, slug: c.slug })).filter((c) => c.slug);
+  }
+
+  /* Products belonging to this site, newest first. Capped: the list goes into
+     the prompt, and a 168-item catalogue would crowd out the brief. */
+  let products = [];
+  try {
+    const rows = await strapi.documents('api::commerce-product.commerce-product').findMany({
+      // The relation is `site` (manyToOne), not `sites` — a plural guess here
+      // silently returned nothing and the writer was offered no products at all.
+      filters: { site: { domain: site.domain } },
+      status: 'published',
+      limit: 60,
+      sort: 'updatedAt:desc',
+    });
+    products = rows
+      .map((p) => ({ slug: p.slug, name: p.name ?? p.title ?? p.slug }))
+      .filter((p) => p.slug);
+  } catch (error) {
+    strapi.log.warn(`[ai-writer] product list for ${site.domain}: ${error.message}`);
+  }
+
+  return { categories, products, catUid };
+}
+
 async function resolveSite(strapi, slug) {
   if (!slug) return { error: 'No site given. Open AI Writer from a site in the dashboard.' };
 
@@ -81,6 +122,18 @@ function pickWritable(strapi, uid, data) {
       out[key] = value;
       continue;
     }
+
+    /*
+     * Respect the field's own limit. seoDescription is capped at 160 on these
+     * types and the model overshot it, which failed the create and threw away a
+     * finished article. Trimming to fit is better than losing the work, and the
+     * limits exist because the values are meta tags with real display limits.
+     */
+    if (typeof value === 'string' && Number.isFinite(attr.maxLength) && value.length > attr.maxLength) {
+      out[key] = value.slice(0, attr.maxLength).trimEnd();
+      continue;
+    }
+
     out[key] = value;
   }
 
@@ -89,6 +142,7 @@ function pickWritable(strapi, uid, data) {
 
 module.exports = ({ strapi }) => ({
   listSites: () => listSites(strapi),
+  siteContext: (site) => siteContext(strapi, site),
   resolveSite: (slug) => resolveSite(strapi, slug),
   targetUid,
   pickWritable: (uid, data) => pickWritable(strapi, uid, data),
