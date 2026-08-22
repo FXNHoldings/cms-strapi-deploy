@@ -30,6 +30,7 @@ const flag = (n, d = null) => {
   return hit ? hit.split('=').slice(1).join('=') : d;
 };
 const WRITE = args.includes('--write');
+const INCLUDE_PRICED = args.includes('--include-priced');
 const CATEGORY = flag('category', null);
 const LIMIT = Number(flag('limit', 50));
 const PRIORITY = Number(flag('priority', 1));
@@ -101,9 +102,18 @@ async function allProducts() {
 
 if (!DFS_LOGIN || !DFS_PASSWORD) { console.error('DATAFORSEO credentials not set.'); process.exit(1); }
 
+/*
+ * Products that already have offers are skipped by default: the point of this
+ * script was to unblock pricing, and a priced product did not need it.
+ *
+ * --include-priced lifts that. A product can be priced and still have no id --
+ * it was matched by title through the search pipeline rather than by id -- and
+ * without an id it cannot be enriched, because product_info is keyed on it.
+ * That is 13 products in this catalogue, all priced, all with no description.
+ */
 const products = (await allProducts())
   .filter((p) => !p.googleProductId)
-  .filter((p) => (p.offers ?? []).length === 0)
+  .filter((p) => INCLUDE_PRICED || (p.offers ?? []).length === 0)
   .slice(0, LIMIT);
 
 console.log(`products without an id : ${products.length}`);

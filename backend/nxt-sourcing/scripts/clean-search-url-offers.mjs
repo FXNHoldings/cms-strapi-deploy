@@ -31,6 +31,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { isSearchUrl } from './lib/search-url.mjs';
 
 const ROOT = path.dirname(path.dirname(new URL(import.meta.url).pathname));
 const args = process.argv.slice(2);
@@ -41,6 +42,17 @@ const flag = (n, d = null) => {
 
 const DELETE = args.includes('--delete');
 const INCLUDE_ORPHANS = args.includes('--include-orphans');
+
+/*
+ * There is deliberately no --hide-orphans here.
+ *
+ * The obvious implementation — DELETE /api/commerce-products/:id?status=published
+ * — does NOT unpublish. It deletes the whole document, draft included. That was
+ * established the expensive way: one test call destroyed
+ * ring-battery-doorbell-plus and orphaned its six offers. Strapi 5's REST API
+ * has no unpublish verb, so hiding a product means the admin UI's own action,
+ * or a mechanism verified against a throwaway record first.
+ */
 const LIMIT = Number(flag('limit', Infinity));
 
 const STRAPI_URL = (process.env.STRAPI_INTERNAL_URL || process.env.STRAPI_URL || 'http://127.0.0.1:8888').replace(/\/$/, '');
@@ -58,17 +70,6 @@ async function api(pathname, init = {}) {
   return res.status === 204 ? null : res.json().catch(() => null);
 }
 
-/** Same test the checker uses, so the two agree on what a search URL is. */
-function isSearchUrl(url) {
-  try {
-    const u = new URL(url);
-    if (/\/(search|catalogsearch|find|results)\b/i.test(u.pathname)) return true;
-    return ['q', 'query', 's', 'k', 'keyword', 'search'].some((k) => u.searchParams.has(k));
-  } catch {
-    return false;
-  }
-}
-
 async function readOffers() {
   const all = [];
   for (let page = 1; ; page++) {
@@ -83,6 +84,7 @@ async function readOffers() {
     q.append('populate[merchant][fields][0]', 'name');
     q.append('populate[product][fields][0]', 'slug');
     q.append('populate[product][fields][1]', 'name');
+    q.append('populate[product][fields][2]', 'documentId');
 
     const body = await api(`/api/commerce-offers?${q}`);
     const rows = body?.data ?? [];
@@ -111,7 +113,12 @@ async function main() {
 
     const real = list.length - search.length;
     if (real === 0) {
-      orphanProducts.push({ slug, offers: search.length });
+      orphanProducts.push({
+        slug,
+        offers: search.length,
+        documentId: list[0]?.product?.documentId ?? null,
+        name: list[0]?.product?.name ?? null,
+      });
       if (!INCLUDE_ORPHANS) continue;
     }
     doomed.push(...search);
