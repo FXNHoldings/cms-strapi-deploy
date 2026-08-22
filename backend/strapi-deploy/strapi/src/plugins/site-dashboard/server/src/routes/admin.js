@@ -20,6 +20,9 @@ module.exports = {
     guarded('GET', '/sites/:slug/content/:role', 'content.list'),
     // The only write this plugin has. Reversible on purpose — see content-list.js.
     guarded('PUT', '/sites/:slug/content/:role/publish', 'content.publish'),
+    /* Paid: each run bills DataForSEO, so it is a POST a person triggers. */
+    guarded('POST', '/sites/:slug/keywords', 'keywords.start'),
+    guarded('GET', '/sites/:slug/keywords/:runId', 'keywords.result'),
     guarded('GET', '/sites/:slug/commerce', 'commerce.counts'),
     guarded('GET', '/sites/:slug/commerce/:role', 'commerce.list'),
     guarded('PUT', '/sites/:slug/commerce/:role/publish', 'commerce.publish'),

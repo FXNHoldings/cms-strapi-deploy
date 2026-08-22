@@ -10,6 +10,18 @@ module.exports = {
       config: { policies: ['admin::isAuthenticatedAdmin'] },
     },
     {
+      method: 'GET',
+      path: '/context/:site',
+      handler: 'ai.context',
+      config: { policies: ['admin::isAuthenticatedAdmin'] },
+    },
+    {
+      method: 'POST',
+      path: '/titles',
+      handler: 'ai.titles',
+      config: { policies: ['admin::isAuthenticatedAdmin'] },
+    },
+    {
       method: 'POST',
       path: '/generate',
       handler: 'ai.generate',
