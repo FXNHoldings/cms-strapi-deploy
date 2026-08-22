@@ -23,6 +23,8 @@
  * once already, so the default here matches the sites.
  */
 
+import { anthropicConfigured, anthropicModel, askForJson } from './lib/anthropic-chat.mjs';
+
 const args = process.argv.slice(2);
 const flag = (n, d = null) => {
   const hit = args.find((a) => a.startsWith(`--${n}=`));
@@ -43,9 +45,7 @@ const DFS_LOGIN = process.env.DATAFORSEO_LOGIN || '';
 const DFS_PASSWORD = process.env.DATAFORSEO_PASSWORD || '';
 const IDEAS_EP = 'https://api.dataforseo.com/v3/dataforseo_labs/google/keyword_ideas/live';
 
-const OR_KEY = process.env.OPENROUTER_API_KEY || '';
-const OR_MODEL = process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4.6';
-const OR_BASE = (process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1').replace(/\/$/, '');
+const AI_MODEL = anthropicModel('KEYWORD_RESEARCH_MODEL');
 
 const STRAPI_URL = (process.env.STRAPI_INTERNAL_URL || process.env.STRAPI_URL || 'http://127.0.0.1:8888').replace(/\/$/, '');
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN || process.env.STRAPI_TOKEN || '';
@@ -110,59 +110,59 @@ async function fetchIdeas() {
 }
 
 /** INFERRED: relevance to this site, and what to do with each keyword. */
+const ENRICH_SCHEMA = {
+  type: 'object',
+  properties: {
+    keywords: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          keyword: { type: 'string' },
+          relevance: { type: 'integer', description: '0-100, how well it fits this site specifically' },
+          intent: { type: 'string', description: 'what the searcher actually wants, under 12 words' },
+          suggestion: { type: 'string', description: 'what to publish for it, under 20 words' },
+        },
+        required: ['keyword', 'relevance', 'intent', 'suggestion'],
+        additionalProperties: false,
+      },
+    },
+  },
+  required: ['keywords'],
+  additionalProperties: false,
+};
+
 async function enrich(keywords) {
-  if (!OR_KEY) return { error: 'no OPENROUTER_API_KEY set' };
+  if (!anthropicConfigured()) return { error: 'no ANTHROPIC_API_KEY set' };
 
   const prompt = [
     SITE ? `The site is ${SITE}.` : 'The site is a consumer product review and comparison publication.',
     EXTRA ? `Additional context: ${EXTRA}` : '',
     '',
-    'For each keyword below, judge:',
-    '  relevance  0-100, how well it fits this site specifically',
-    '  intent     what the searcher actually wants, under 12 words',
-    '  suggestion what to publish for it, under 20 words',
+    'For each keyword below, judge its relevance to this site, the intent behind',
+    'it, and what to publish for it.',
     '',
     'Do NOT estimate search volume, competition or cost per click. Those are',
     'measured and already known; inventing them would corrupt the data.',
     '',
-    'Reply with JSON only: an array of {keyword, relevance, intent, suggestion}.',
+    'Return one entry per keyword, using the keyword exactly as given.',
     '',
     keywords.map((k) => `- ${k.keyword}`).join('\n'),
   ].join('\n');
 
-  const res = await fetch(`${OR_BASE}/chat/completions`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${OR_KEY}`,
-      'Content-Type': 'application/json',
-      'X-Title': process.env.OPENROUTER_APP_NAME || 'nxt keyword research',
-    },
-    body: JSON.stringify({
-      model: OR_MODEL,
-      messages: [{ role: 'user', content: prompt }],
-      temperature: 0.3,
-    }),
-    signal: AbortSignal.timeout(120000),
-  });
-
-  const json = await res.json();
-
-  /* Say which of these went wrong. An earlier version returned null for a
+  /* Report which of these went wrong. An earlier version returned null for a
      missing key, a refused request and unparseable output alike, and printed
      "no OPENROUTER_API_KEY" for all three — so an out-of-credit account looked
-     like a configuration mistake. */
-  if (json?.error) return { error: `${json.error.code ?? res.status}: ${json.error.message ?? 'request refused'}` };
-  if (!res.ok) return { error: `HTTP ${res.status}` };
-
-  const text = json?.choices?.[0]?.message?.content ?? '';
-  const match = text.match(/\[[\s\S]*\]/);
-  if (!match) return { error: 'model did not return a JSON array' };
-
+     like a configuration mistake. askForJson now raises the real reason. */
   try {
-    const rows = JSON.parse(match[0]);
+    const { keywords: rows } = await askForJson({
+      prompt,
+      schema: ENRICH_SCHEMA,
+      model: AI_MODEL,
+    });
     return { map: new Map(rows.map((r) => [String(r.keyword ?? '').toLowerCase(), r])) };
-  } catch (e) {
-    return { error: `could not parse model output: ${e.message}` };
+  } catch (error) {
+    return { error: error.message };
   }
 }
 

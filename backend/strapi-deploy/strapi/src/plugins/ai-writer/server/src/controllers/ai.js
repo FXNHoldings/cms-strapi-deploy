@@ -23,7 +23,6 @@ module.exports = {
       category: body.category,
       keywords: body.keywords,
       language: body.language,
-      provider: body.provider,
       model: body.model,
       customInstructions: body.customInstructions,
     });

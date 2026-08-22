@@ -16,7 +16,7 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.32.1",
+    "@anthropic-ai/sdk": "^0.120.0",
     "@fal-ai/client": "^1.4.0",
     "@strapi/plugin-cloud": "5.52.1",
     "@strapi/plugin-users-permissions": "5.52.1",
@@ -26,7 +26,6 @@
     "esbuild": "^0.28.0",
     "gray-matter": "^4.0.3",
     "marked": "^15.0.3",
-    "openai": "^6.46.0",
     "pg": "^8.13.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -37,11 +36,11 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "node-addon-api": "^8.5.0",
-    "node-gyp": "^11.0.0",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "node-addon-api": "^8.5.0",
+    "node-gyp": "^11.0.0",
     "typescript": "^5.3.3"
   },
   "engines": {

@@ -2,6 +2,7 @@
 import { spawn } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { anthropicConfigured, anthropicModel, askForJson } from './lib/anthropic-chat.mjs';
 
 const DEFAULT_OPENCLAW_NODE = '/root/.nvm/versions/node/v22.23.1/bin/node';
 const DEFAULT_OPENCLAW_BIN = '/opt/openclaw-runtime/openclaw/openclaw.mjs';
@@ -27,7 +28,7 @@ const AMAZON_DETAILS_ENABLED = args.amazon !== false && args['no-amazon'] !== tr
 if (!STRAPI_API_TOKEN) fail('STRAPI_API_TOKEN is not set in .env.local.');
 if (!aiProviderConfig()) {
   fail(
-    'No AI provider available. Install OpenClaw at /opt/openclaw-runtime, or set OPENROUTER_API_KEY / OPENAI_API_KEY in .env.local.',
+    'No AI provider available. Install OpenClaw at /opt/openclaw-runtime, or set ANTHROPIC_API_KEY / OPENAI_API_KEY in .env.local.',
   );
 }
 
@@ -367,14 +368,40 @@ function rewritePrompt(product, source, specs) {
     .join('\n');
 }
 
+const DESCRIPTION_SYSTEM =
+  'You rewrite ecommerce product listings for NXT.Bargains. Do not add markdown outside the requested fields, citations, unsupported claims, warranties, or facts not supported by the provided source details.';
+
+const DESCRIPTION_SCHEMA = {
+  type: 'object',
+  properties: {
+    title: { type: 'string' },
+    shortDescription: { type: 'string' },
+    description: { type: 'string' },
+    features: { type: 'array', items: { type: 'string' } },
+  },
+  required: ['title', 'shortDescription', 'description', 'features'],
+  additionalProperties: false,
+};
+
 async function rewriteProductDescription(product, source, specs) {
   const provider = aiProviderConfig();
   const prompt = rewritePrompt(product, source, specs);
-  const content =
-    provider.type === 'openclaw'
-      ? await invokeOpenClawInfer(prompt, provider.model)
-      : await invokeChatCompletion(provider, prompt);
-  const parsed = parseJsonContent(String(content || ''));
+  const parsed =
+    provider.type === 'anthropic'
+      ? await askForJson({
+          system: DESCRIPTION_SYSTEM,
+          prompt,
+          schema: DESCRIPTION_SCHEMA,
+          model: provider.model,
+          maxTokens: Number(process.env.PRODUCT_DESCRIPTION_REWRITE_MAX_TOKENS || '4096'),
+        })
+      : parseJsonContent(
+          String(
+            (provider.type === 'openclaw'
+              ? await invokeOpenClawInfer(prompt, provider.model)
+              : await invokeChatCompletion(provider, prompt)) || '',
+          ),
+        );
   const title = cleanText(parsed.title, 140);
   const shortDescription = cleanText(parsed.shortDescription, 360);
   const features = cleanFeatures(parsed.features);
@@ -405,7 +432,7 @@ function openClawAvailable() {
 function aiProviderConfig() {
   const preference = aiProviderPreference();
 
-  if (preference === 'openclaw' || (preference !== 'openrouter' && preference !== 'openai')) {
+  if (preference === 'openclaw' || (preference !== 'anthropic' && preference !== 'openai')) {
     if (openClawAvailable()) {
       return {
         type: 'openclaw',
@@ -416,18 +443,8 @@ function aiProviderConfig() {
     if (preference === 'openclaw') return null;
   }
 
-  if (preference !== 'openai' && process.env.OPENROUTER_API_KEY) {
-    return {
-      type: 'openrouter',
-      url: process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1/chat/completions',
-      model: aiModel(),
-      headers: {
-        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.OPENROUTER_SITE_URL || 'https://search.fxnstudio.com',
-        'X-Title': process.env.OPENROUTER_APP_NAME || 'NXT Commerce Sourcing',
-      },
-    };
+  if (preference !== 'openai' && anthropicConfigured()) {
+    return { type: 'anthropic', model: aiModel() };
   }
 
   if (process.env.OPENAI_API_KEY) {
@@ -462,14 +479,14 @@ function aiModel() {
   const preference = aiProviderPreference();
   const usingOpenClaw =
     preference === 'openclaw' ||
-    (preference !== 'openrouter' && preference !== 'openai' && openClawAvailable());
+    (preference !== 'anthropic' && preference !== 'openai' && openClawAvailable());
 
   if (usingOpenClaw) {
     return process.env.OPENCLAW_MODEL || 'openai/gpt-5.5';
   }
 
   if (process.env.PRODUCT_DESCRIPTION_REWRITE_MODEL) return process.env.PRODUCT_DESCRIPTION_REWRITE_MODEL;
-  if (process.env.OPENROUTER_API_KEY) return process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4.6';
+  if (anthropicConfigured()) return anthropicModel('PRODUCT_DESCRIPTION_REWRITE_MODEL');
   return process.env.OPENAI_MODEL || 'gpt-4o-mini';
 }
 
@@ -851,9 +868,9 @@ Environment:
   Reads ${APP_DIR}/.env.local.
   Default AI provider: OpenClaw local inference (${DEFAULT_OPENCLAW_BIN}).
   Optional overrides:
-    PRODUCT_DESCRIPTION_REWRITE_PROVIDER=openclaw|openrouter|openai
+    PRODUCT_DESCRIPTION_REWRITE_PROVIDER=openclaw|anthropic|openai
     OPENCLAW_NODE, OPENCLAW_BIN, OPENCLAW_MODEL
-    OPENROUTER_API_KEY or OPENAI_API_KEY when not using OpenClaw
+    ANTHROPIC_API_KEY or OPENAI_API_KEY when not using OpenClaw
   Requires STRAPI_API_TOKEN.
   Amazon enrichment uses RAPIDAPI_AMAZON_KEY, RAPIDAPI_PRODUCT_SEARCH_KEY, or RAPIDAPI_KEY.
 `);
