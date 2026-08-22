@@ -42,7 +42,10 @@
     },
     "merchantSku": { "type": "string", "maxLength": 120 },
     "source": { "type": "string", "maxLength": 120, "description": "Manual, Amazon PA API, eBay API, feed name, scraper, etc." },
-    "lastCheckedAt": { "type": "datetime" },
+    "lastCheckedAt": { "type": "datetime", "description": "When the PRICE was last refreshed. Owned by the pricing jobs — do not reuse it for link checks or neither number means anything." },
+    "lastLinkCheckAt": { "type": "datetime", "description": "When the destination URL was last fetched and found alive. Separate from lastCheckedAt because a fresh price and a working link are different facts." },
+    "linkStatusCode": { "type": "integer", "description": "HTTP status the destination last returned. Kept so a run can be reviewed without re-fetching every merchant." },
+    "linkFailures": { "type": "integer", "default": 0, "min": 0, "description": "Consecutive failed link checks. A single timeout is usually the merchant having a moment; an offer is only retired once this passes the checker's threshold." },
     "status": {
       "type": "enumeration",
       "enum": ["active", "expired", "stale", "error"],

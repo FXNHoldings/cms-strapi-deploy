@@ -36,6 +36,9 @@ const WRITE = args.includes('--write');
 const NO_IMAGE = args.includes('--no-image');
 const CATEGORY = flag('category', null);
 const SLUG = flag('slug', null);
+const SLUGS_FILE = flag('slugs-file', null);
+/* Every product this catalogue owns carries this tag; see selectProducts(). */
+const SITE_TAG = flag('site-tag', 'nxt-bargains');
 const LIMIT = Number(flag('limit', Infinity));
 const PRIORITY = Number(flag('priority', 2));
 const LOCATION = Number(flag('location', 2840));
@@ -84,15 +87,52 @@ async function strapi(pathname, init = {}) {
 
 /* --------------------------------------------------------------------- main */
 
-if (!CATEGORY && !SLUG) { console.error('usage: --category=<slug> | --slug=<product> [--write]'); process.exit(1); }
+if (!CATEGORY && !SLUG && !SLUGS_FILE) {
+  console.error('usage: --category=<slug> | --slug=<product> | --slugs-file=<path> [--write]');
+  process.exit(1);
+}
 
-const q = new URLSearchParams({ 'pagination[pageSize]': '200', status: 'published' });
-if (SLUG) q.append('filters[slug][$eq]', SLUG);
-else q.append('filters[categories][slug][$eq]', CATEGORY);
-for (const [i, f] of ['name', 'slug', 'googleProductId', 'description'].entries()) q.append(`fields[${i}]`, f);
-q.append('populate[primaryImage][fields][0]', 'url');
+/*
+ * The selection is paginated and tag-scoped, neither of which it used to be.
+ *
+ * A single pageSize=200 request silently truncated any category larger than
+ * that -- Smart Phones is over it -- so the tail of the category was never
+ * enriched and never reported as missing. And filtering by category alone
+ * crosses sites: commerce-categories is a shared taxonomy, so "Smart Phones"
+ * also matches products belonging to other storefronts. Enriching those would
+ * spend money writing to another site's catalogue.
+ */
+const wanted = SLUGS_FILE
+  ? new Set(fs.readFileSync(SLUGS_FILE, 'utf8').split('\n').map((s) => s.trim()).filter(Boolean))
+  : null;
 
-const list = await strapi(`/api/commerce-products?${q}`);
+async function selectProducts() {
+  const out = [];
+  for (let page = 1; ; page += 1) {
+    const q = new URLSearchParams({
+      'pagination[page]': String(page), 'pagination[pageSize]': '200', status: 'published',
+    });
+    /* The site tag is how a run says "everything for this property". When the
+       caller has instead named products explicitly — one slug, or a file of
+       them — that gate is redundant and actively wrong: the nxtsmarthome
+       catalogue carries category tags rather than a site tag, so with the gate
+       always on, 363 offers stuck on search URLs could never be reached by any
+       invocation. */
+    if (!SLUG && !SLUGS_FILE) q.append('filters[tags][$containsi]', SITE_TAG);
+    if (SLUG) q.append('filters[slug][$eq]', SLUG);
+    if (CATEGORY) q.append('filters[categories][slug][$eq]', CATEGORY);
+    for (const [i, f] of ['name', 'slug', 'googleProductId', 'description'].entries()) q.append(`fields[${i}]`, f);
+    q.append('populate[primaryImage][fields][0]', 'url');
+
+    const res = await strapi(`/api/commerce-products?${q}`);
+    const batch = res?.data ?? [];
+    out.push(...batch);
+    if (page >= (res?.meta?.pagination?.pageCount ?? 1) || !batch.length) break;
+  }
+  return wanted ? out.filter((p) => wanted.has(p.slug)) : out;
+}
+
+const list = { data: await selectProducts() };
 const products = (list?.data ?? []).filter((p) => p.googleProductId).slice(0, LIMIT);
 const skipped = (list?.data ?? []).length - products.length;
 
@@ -269,21 +309,54 @@ for (const f of findings) {
    * because that endpoint has no storefront URL. Now that a real one exists,
    * replace it — an affiliate link can only wrap a genuine product URL.
    */
+  // Fetched once, not once per seller: the list is the same every time round.
+  const offers = f.sellers.some((s) => s.url && s.title)
+    ? (await strapi(`/api/commerce-offers?filters[product][slug][$eq]=${encodeURIComponent(f.slug)}&populate[merchant][fields][0]=name&pagination[pageSize]=50&status=published`))?.data ?? []
+    : [];
+
+  const claimed = new Set();
   for (const s of f.sellers) {
     if (!s.url || !s.title) continue;
-    const offers = await strapi(`/api/commerce-offers?filters[product][slug][$eq]=${encodeURIComponent(f.slug)}&populate[merchant][fields][0]=name&pagination[pageSize]=50&status=published`);
-    for (const o of offers?.data ?? []) {
-      const m = String(o.merchant?.name ?? '').toLowerCase();
-      if (!m || !String(s.title).toLowerCase().includes(m.split(' ')[0])) continue;
+    for (const o of offers) {
+      if (claimed.has(o.documentId)) continue;
+      if (!merchantMatchesSeller(o.merchant?.name, s.title)) continue;
       if (o.productUrl && !o.productUrl.includes('/search') && !o.productUrl.includes('?q=')) continue;
       await strapi(`/api/commerce-offers/${o.documentId}?status=published`, {
         method: 'PUT',
         body: JSON.stringify({ data: { productUrl: s.url, ...(s.regular ? { originalPrice: s.regular } : {}) } }),
       });
+      claimed.add(o.documentId);
       urlsFixed += 1;
       break;
     }
   }
+}
+
+/**
+ * Does this DataForSEO seller correspond to one of our merchants?
+ *
+ * The old test asked whether the seller's title contained the merchant name's
+ * first word. For a domain-style name that "word" is the whole domain —
+ * "mercari.com" — which no seller title ever contains, so all 110 of that
+ * merchant's offers were permanently unfixable. Strip the suffix, compare in
+ * both directions, and only fall back to a first-word match when that word is
+ * long enough to mean something.
+ */
+function merchantMatchesSeller(merchantName, sellerTitle) {
+  const norm = (v) =>
+    String(v ?? '')
+      .toLowerCase()
+      .replace(/\.(com\.au|co\.uk|com|au|net|org)\b/g, '')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+
+  const m = norm(merchantName);
+  const t = norm(sellerTitle);
+  if (!m || !t) return false;
+  if (t.includes(m) || m.includes(t)) return true;
+
+  const first = m.split(' ')[0];
+  return first.length >= 3 && t.includes(first);
 }
 
 console.log(`\nupdated ${updated} products, uploaded ${imaged} feature images, replaced ${urlsFixed} placeholder offer URLs.`);

@@ -231,6 +231,30 @@ const SiteDetail = () => {
             </Grid.Item>
 
             <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
+              <Panel title="Offer health">
+                {site.offers ? (
+                  <Flex direction="column" alignItems="stretch" gap={3}>
+                    <Flex gap={8} alignItems="flex-start">
+                      <Stat label="active" value={site.offers.active} />
+                      <Stat label="broken" value={site.offers.broken} />
+                      <Stat label="stale" value={site.offers.stale} />
+                    </Flex>
+                    <Typography variant="pi" textColor="neutral500">
+                      {site.offers.everChecked === 0
+                        ? `None of these ${site.offers.total} offers has been link-checked yet, so "active" means "never tested", not "known good". Run the Check offer links job.`
+                        : `${site.offers.everChecked} of ${site.offers.total} link-checked.`}
+                    </Typography>
+                  </Flex>
+                ) : (
+                  <Typography variant="pi" textColor="neutral600">
+                    No offers reach this site. Offers are attributed through their product&apos;s
+                    site relation, and most products carry none.
+                  </Typography>
+                )}
+              </Panel>
+            </Grid.Item>
+
+            <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
               <Panel title="Reference">
                 <Flex direction="column" alignItems="stretch" gap={3}>
                   {[
