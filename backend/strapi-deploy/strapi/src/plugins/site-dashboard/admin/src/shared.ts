@@ -33,6 +33,16 @@ export type ClickStats = {
   estimatedValue: number | null;
 };
 
+export type OfferHealth = {
+  total: number;
+  active: number;
+  /** expired + error: destinations that no longer resolve. */
+  broken: number;
+  stale: number;
+  /** How many have ever been link-checked — 0 means the number below is untested. */
+  everChecked: number;
+};
+
 export type Site = {
   documentId: string;
   name: string;
@@ -49,6 +59,7 @@ export type Site = {
   isPublished: boolean;
   roles: Record<string, Role>;
   clicks: ClickStats | null;
+  offers: OfferHealth | null;
   warnings: string[];
   recentPosts?: RecentPost[];
 };

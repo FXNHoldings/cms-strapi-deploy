@@ -65,6 +65,22 @@ const SiteCard = ({ site }: { site: Site }) => {
           </Typography>
         )}
 
+        {site.offers && (
+          <Flex justifyContent="space-between" alignItems="center" gap={2}>
+            <Typography variant="pi" textColor="neutral700">offers</Typography>
+            <Flex gap={2} alignItems="center">
+              <Typography variant="pi" textColor="neutral600">
+                {site.offers.active} active
+                {site.offers.broken > 0 ? ` · ${site.offers.broken} broken` : ''}
+                {site.offers.stale > 0 ? ` · ${site.offers.stale} stale` : ''}
+              </Typography>
+              {site.offers.everChecked === 0 && (
+                <Badge textColor="neutral600" backgroundColor="neutral150">never checked</Badge>
+              )}
+            </Flex>
+          </Flex>
+        )}
+
         {site.clicks && (
           <Flex gap={7} alignItems="flex-start">
             <Stat label={`clicks · ${site.clicks.windowDays}d`} value={site.clicks.clicks} />

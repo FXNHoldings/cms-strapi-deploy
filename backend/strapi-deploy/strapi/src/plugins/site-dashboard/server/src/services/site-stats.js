@@ -114,6 +114,72 @@ async function clickStats(strapi, siteSlug) {
   }
 }
 
+/**
+ * Offer health for a site, or null when it has none to speak of.
+ *
+ * Offers reach a site only through their product's `site` relation, and just
+ * 410 of 1,532 products carry one — so 1,177 of 1,934 offers cannot be
+ * attributed to anywhere. Returning null for a site with no attributed offers
+ * is deliberate: a card reading "0 broken" would claim a clean bill of health
+ * for a site nothing has ever checked.
+ *
+ * Counts distinct offers against the *published* product row. The link table
+ * holds both draft and published versions, and joining naively double-counts
+ * every offer exactly twice.
+ */
+async function offerHealth(strapi, siteSlug) {
+  const knex = strapi.db.connection;
+
+  try {
+    if (!(await knex.schema.hasTable('commerce_offers'))) return null;
+
+    const rows = await knex
+      .select('o.status')
+      .countDistinct({ n: 'o.id' })
+      .from({ o: 'commerce_offers' })
+      .join({ opl: 'commerce_offers_product_lnk' }, 'opl.commerce_offer_id', 'o.id')
+      .join({ p: 'commerce_products' }, function () {
+        this.on('p.id', 'opl.commerce_product_id').andOnNotNull('p.published_at');
+      })
+      .join({ psl: 'commerce_products_site_lnk' }, 'psl.commerce_product_id', 'p.id')
+      .join({ s: 'commerce_sites' }, 's.id', 'psl.commerce_site_id')
+      .where('s.slug', siteSlug)
+      .groupBy('o.status');
+
+    if (!rows.length) return null;
+
+    const byStatus = {};
+    let total = 0;
+    for (const row of rows) {
+      const n = Number(row.n ?? 0);
+      byStatus[row.status ?? 'unknown'] = n;
+      total += n;
+    }
+
+    const [checked] = await knex({ o: 'commerce_offers' })
+      .countDistinct({ n: 'o.id' })
+      .join({ opl: 'commerce_offers_product_lnk' }, 'opl.commerce_offer_id', 'o.id')
+      .join({ p: 'commerce_products' }, function () {
+        this.on('p.id', 'opl.commerce_product_id').andOnNotNull('p.published_at');
+      })
+      .join({ psl: 'commerce_products_site_lnk' }, 'psl.commerce_product_id', 'p.id')
+      .join({ s: 'commerce_sites' }, 's.id', 'psl.commerce_site_id')
+      .where('s.slug', siteSlug)
+      .whereNotNull('o.last_link_check_at');
+
+    return {
+      total,
+      active: byStatus.active ?? 0,
+      broken: (byStatus.expired ?? 0) + (byStatus.error ?? 0),
+      stale: byStatus.stale ?? 0,
+      everChecked: Number(checked?.n ?? 0),
+    };
+  } catch (error) {
+    strapi.log.warn(`[site-dashboard] offer health unavailable for ${siteSlug}: ${error.message}`);
+    return null;
+  }
+}
+
 async function statsForSite(strapi, site) {
   const map = site.contentTypes && typeof site.contentTypes === 'object' ? site.contentTypes : {};
   const roles = {};
@@ -163,6 +229,7 @@ async function statsForSite(strapi, site) {
     isPublished: Boolean(site.publishedAt),
     roles,
     clicks: await clickStats(strapi, site.slug),
+    offers: await offerHealth(strapi, site.slug),
     warnings,
   };
 }
