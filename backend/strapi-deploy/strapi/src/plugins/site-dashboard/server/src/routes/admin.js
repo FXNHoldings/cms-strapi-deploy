@@ -20,5 +20,8 @@ module.exports = {
     guarded('GET', '/sites/:slug/content/:role', 'content.list'),
     // The only write this plugin has. Reversible on purpose — see content-list.js.
     guarded('PUT', '/sites/:slug/content/:role/publish', 'content.publish'),
+    guarded('GET', '/sites/:slug/commerce', 'commerce.counts'),
+    guarded('GET', '/sites/:slug/commerce/:role', 'commerce.list'),
+    guarded('PUT', '/sites/:slug/commerce/:role/publish', 'commerce.publish'),
   ],
 };

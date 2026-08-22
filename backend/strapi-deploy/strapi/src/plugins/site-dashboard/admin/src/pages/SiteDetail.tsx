@@ -218,6 +218,22 @@ const SiteDetail = () => {
             </Grid.Item>
 
             <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
+              <Panel title="Catalogue">
+                <Flex direction="column" alignItems="stretch" gap={2}>
+                  <Typography variant="pi" textColor="neutral600">
+                    Products, and the categories, brands and offers they pull in. Derived from
+                    each product&apos;s site relation rather than a separate list.
+                  </Typography>
+                  <Box paddingTop={2}>
+                    <Button variant="secondary" size="S" tag={Link} to="commerce/products">
+                      Open catalogue
+                    </Button>
+                  </Box>
+                </Flex>
+              </Panel>
+            </Grid.Item>
+
+            <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
               <Panel title="Tools">
                 <Flex direction="column" alignItems="stretch" gap={2}>
                   {TOOLS.map((tool) => (
