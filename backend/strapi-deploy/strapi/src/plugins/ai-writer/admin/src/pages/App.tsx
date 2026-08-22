@@ -37,15 +37,20 @@ type WriterOptions = {
    pointed at the right site rather than defaulting to one. */
 const siteFromUrl = () => new URLSearchParams(window.location.search).get('site') ?? '';
 
+/* Keyword Research hands the topic over, so "Create article" arrives ready to
+   run rather than making the keyword be retyped. The keyword itself is seeded
+   into the keywords field for the same reason. */
+const qs = (key: string) => new URLSearchParams(window.location.search).get(key) ?? '';
+
 export const App = () => {
   const { get, post } = useFetchClient();
   const { toggleNotification } = useNotification();
-  const [topic, setTopic] = useState('');
+  const [topic, setTopic] = useState(() => qs('topic'));
   const [tone, setTone] = useState('friendly');
   const [length, setLength] = useState<'short' | 'medium' | 'long'>('medium');
   const [destination, setDestination] = useState('');
   const [category, setCategory] = useState('');
-  const [keywords, setKeywords] = useState('');
+  const [keywords, setKeywords] = useState(() => qs('keyword'));
   const [customInstructions, setCustomInstructions] = useState('');
   const [model, setModel] = useState('');
   const [site, setSite] = useState(siteFromUrl);

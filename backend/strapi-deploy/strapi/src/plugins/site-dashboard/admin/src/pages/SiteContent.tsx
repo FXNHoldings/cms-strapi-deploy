@@ -45,8 +45,16 @@ type Listing = {
 
 /* Only tools that exist. A rail advertising a Category Builder that has not
    been built is worse than a shorter rail. */
+/* Keyword Research is a page of this dashboard, not a separate plugin, so it
+   does not live under /admin/plugins/<id> like the others. */
+const toolHref = (id: string, slug?: string) =>
+  id === 'keyword-research'
+    ? `/admin/plugins/site-dashboard/${slug}/keywords`
+    : `/admin/plugins/${id}?site=${slug}`;
+
 const TOOLS_FOR: Record<string, { id: string; label: string }[]> = {
   posts: [
+    { id: 'keyword-research', label: 'Keyword Research' },
     { id: 'ai-writer', label: 'Article Writer' },
     { id: 'content-jobs', label: 'Content Jobs' },
   ],
@@ -177,7 +185,7 @@ const SiteContent = () => {
           </Box>
           <Flex gap={2}>
             {tools.map((t) => (
-              <Button key={t.id} variant="secondary" size="S" tag="a" href={`/admin/plugins/${t.id}?site=${slug}`}>
+              <Button key={t.id} variant="secondary" size="S" tag="a" href={toolHref(t.id, slug)}>
                 {t.label}
               </Button>
             ))}
@@ -218,7 +226,7 @@ const SiteContent = () => {
                     </Box>
                   )}
                   {tools.map((t) => (
-                    <Box key={t.id} tag="a" href={`/admin/plugins/${t.id}?site=${slug}`} display="block" padding={3} hasRadius style={{ textDecoration: 'none' }}>
+                    <Box key={t.id} tag="a" href={toolHref(t.id, slug)} display="block" padding={3} hasRadius style={{ textDecoration: 'none' }}>
                       <Typography variant="omega" textColor="neutral800">{t.label}</Typography>
                     </Box>
                   ))}

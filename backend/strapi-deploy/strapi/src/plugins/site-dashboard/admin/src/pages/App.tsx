@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import SiteGrid from './SiteGrid';
 import SiteDetail from './SiteDetail';
 import SiteContent from './SiteContent';
+import SiteKeywords from './SiteKeywords';
 import SiteCommerce from './SiteCommerce';
 
 /**
@@ -18,6 +19,7 @@ const App = () => (
     <Route index element={<SiteGrid />} />
     <Route path=":slug" element={<SiteDetail />} />
     <Route path=":slug/commerce/:role" element={<SiteCommerce />} />
+    <Route path=":slug/keywords" element={<SiteKeywords />} />
     <Route path=":slug/:role" element={<SiteContent />} />
   </Routes>
 );
