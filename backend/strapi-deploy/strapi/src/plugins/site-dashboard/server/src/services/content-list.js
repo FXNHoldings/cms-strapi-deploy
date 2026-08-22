@@ -53,6 +53,33 @@ function searchFilter(strapi, uid, q) {
   return { $or: fields.map((f) => ({ [f]: { $containsi: q } })) };
 }
 
+/**
+ * The public URL of a document on its own site, or null when we cannot build
+ * one we are confident in.
+ *
+ * Each frontend routes posts differently — four of the six use
+ * /{category}/{slug}, originfacts uses /articles/{slug}, fxnseo /blog/{slug} —
+ * so the pattern is recorded per source in the site registry rather than
+ * assumed here. The first version of this screen assumed /{slug} for everyone
+ * and sent every "View" on nxtsmarthome.com.au to a 404.
+ *
+ * Returning null when the pattern needs a category the document has not got is
+ * deliberate: no button beats a button that is known to 404.
+ */
+function urlFor(site, source, doc) {
+  const pattern = source.urlPattern;
+  if (!pattern || !doc.slug || !site.domain) return null;
+
+  let path = pattern.replace('{slug}', doc.slug);
+  if (path.includes('{category}')) {
+    const category =
+      doc.categories?.[0]?.slug ?? doc.category?.slug ?? doc.categoryMeta?.slug ?? null;
+    if (!category) return null;
+    path = path.replace('{category}', category);
+  }
+  return `https://${site.domain}${path.startsWith('/') ? '' : '/'}${path}`;
+}
+
 function rowFrom(uid, doc) {
   return {
     uid,
@@ -61,6 +88,7 @@ function rowFrom(uid, doc) {
     slug: doc.slug ?? null,
     publishedAt: null, // resolved by resolvePublished - see the note there
     updatedAt: doc.updatedAt ?? null,
+    url: null, // filled in by the caller, which knows the site and the source
   };
 }
 
@@ -127,14 +155,25 @@ module.exports = ({ strapi }) => ({
 
       try {
         const docs = strapi.documents(source.uid);
+        // Only ask for the relation when the URL pattern needs it — several of
+        // these types have no `categories` at all and populating blindly throws.
+        const needsCategory = String(source.urlPattern ?? '').includes('{category}');
+        const attrs = strapi.contentTypes[source.uid]?.attributes ?? {};
+        const catField = ['categories', 'category'].find((f) => attrs[f]);
+        const populate = needsCategory && catField ? { populate: { [catField]: true } } : {};
+
         // status:'draft' is every document, published or not — the draft
         // version always exists, so this is the full list, not the unpublished one.
         const [count, page1] = await Promise.all([
           docs.count({ ...base, status: 'draft' }),
-          docs.findMany({ ...base, status: 'draft', sort: 'updatedAt:desc', limit: reach }),
+          docs.findMany({ ...base, ...populate, status: 'draft', sort: 'updatedAt:desc', limit: reach }),
         ]);
         total += count;
-        for (const doc of page1) rows.push(rowFrom(source.uid, doc));
+        for (const doc of page1) {
+          const row = rowFrom(source.uid, doc);
+          row.url = urlFor(resolved.site, source, doc);
+          rows.push(row);
+        }
       } catch (error) {
         strapi.log.warn(`[site-dashboard] list ${source.uid}: ${error.message}`);
       }

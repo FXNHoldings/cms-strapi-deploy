@@ -27,6 +27,10 @@ type Item = {
   slug: string | null;
   publishedAt: string | null;
   updatedAt: string | null;
+  /* Built server-side from the site's URL pattern. Null when no pattern is
+     recorded, or the document has no category the pattern needs — in which
+     case View is hidden rather than pointing at a 404. */
+  url: string | null;
 };
 
 type Listing = {
@@ -304,12 +308,12 @@ const SiteContent = () => {
                             >
                               Edit
                             </Button>
-                            {site?.domain && item.slug && (
+                            {item.url && (
                               <Button
                                 variant="tertiary"
                                 size="S"
                                 tag="a"
-                                href={`https://${site.domain}/${item.slug}`}
+                                href={item.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
