@@ -81,6 +81,20 @@ const SiteCard = ({ site }: { site: Site }) => {
           </Flex>
         )}
 
+        {site.populators && (
+          <Flex justifyContent="space-between" alignItems="center" gap={2}>
+            <Typography variant="pi" textColor="neutral700">populators</Typography>
+            <Flex gap={2} alignItems="center">
+              <Typography variant="pi" textColor="neutral600">
+                {site.populators.enabled} of {site.populators.total} on · {site.populators.queuedTopics} topics queued
+              </Typography>
+              {site.populators.enabled > 0 && site.populators.queuedTopics === 0 && (
+                <Badge textColor="warning600" backgroundColor="warning100">queue empty</Badge>
+              )}
+            </Flex>
+          </Flex>
+        )}
+
         {site.clicks && (
           <Flex gap={7} alignItems="flex-start">
             <Stat label={`clicks · ${site.clicks.windowDays}d`} value={site.clicks.clicks} />

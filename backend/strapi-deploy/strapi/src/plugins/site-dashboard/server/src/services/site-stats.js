@@ -180,6 +180,29 @@ async function offerHealth(strapi, siteSlug) {
   }
 }
 
+/** Standing drip-feed rules for this site, and how many are actually armed. */
+async function populatorStats(strapi, siteSlug) {
+  const knex = strapi.db.connection;
+  try {
+    if (!(await knex.schema.hasTable('content_populators'))) return null;
+    const rows = await knex({ p: 'content_populators' })
+      .join({ l: 'content_populators_site_lnk' }, 'l.content_populator_id', 'p.id')
+      .join({ s: 'commerce_sites' }, 's.id', 'l.commerce_site_id')
+      .where('s.slug', siteSlug)
+      .select('p.enabled', 'p.topic_queue');
+    if (!rows.length) return null;
+    const enabled = rows.filter((r) => r.enabled).length;
+    const queued = rows.reduce((n, r) => {
+      const q = typeof r.topic_queue === 'string' ? JSON.parse(r.topic_queue || '[]') : r.topic_queue;
+      return n + (Array.isArray(q) ? q.length : 0);
+    }, 0);
+    return { total: rows.length, enabled, queuedTopics: queued };
+  } catch (error) {
+    strapi.log.warn(`[site-dashboard] populator stats unavailable for ${siteSlug}: ${error.message}`);
+    return null;
+  }
+}
+
 async function statsForSite(strapi, site) {
   const map = site.contentTypes && typeof site.contentTypes === 'object' ? site.contentTypes : {};
   const roles = {};
@@ -230,6 +253,7 @@ async function statsForSite(strapi, site) {
     roles,
     clicks: await clickStats(strapi, site.slug),
     offers: await offerHealth(strapi, site.slug),
+    populators: await populatorStats(strapi, site.slug),
     warnings,
   };
 }

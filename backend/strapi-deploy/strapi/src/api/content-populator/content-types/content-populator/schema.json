@@ -1,0 +1,92 @@
+{
+  "kind": "collectionType",
+  "collectionName": "content_populators",
+  "info": {
+    "singularName": "content-populator",
+    "pluralName": "content-populators",
+    "displayName": "Content · Populator",
+    "description": "A standing rule that drip-feeds content: which generator to run, for which site, how often, and with what topics. The generators already exist on the job runner — a populator only decides what to call and when."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120,
+      "description": "What this rule is for, in your words — e.g. 'Two smart-home buying guides a week'."
+    },
+    "site": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::commerce-site.commerce-site",
+      "description": "Which property the output belongs to."
+    },
+    "kind": {
+      "type": "enumeration",
+      "enum": ["article", "product"],
+      "default": "article",
+      "required": true
+    },
+    "jobId": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80,
+      "description": "Job on the runner to invoke, e.g. post-nxtsmart. Must match an id in its catalogue — a populator naming a job that does not exist simply never fires."
+    },
+    "jobParams": {
+      "type": "json",
+      "description": "Parameters passed to the job, as the runner expects them: { \"category\": \"security-cameras\", \"count\": 1 }. Topics come from topicQueue instead and are merged in at dispatch."
+    },
+    "topicQueue": {
+      "type": "json",
+      "description": "Topics still to be written, oldest first. Each run takes from the front and the entry is removed, so a run never repeats the last one. When this empties the populator idles rather than inventing topics."
+    },
+    "topicsUsed": {
+      "type": "json",
+      "description": "Topics already consumed. Kept so a queue can be refilled without accidentally re-commissioning something already written."
+    },
+    "cadenceHours": {
+      "type": "integer",
+      "default": 168,
+      "min": 1,
+      "required": true,
+      "description": "Hours between runs. 168 is weekly, 24 daily. The tick treats this as a minimum gap, not a schedule — a missed tick delays a run rather than stacking several up."
+    },
+    "maxPerWeek": {
+      "type": "integer",
+      "default": 3,
+      "min": 0,
+      "required": true,
+      "description": "Hard ceiling on runs in any rolling seven days, enforced by the tick rather than by the cadence. A cadence typo can then cost you a quiet week, not two hundred published posts."
+    },
+    "publishMode": {
+      "type": "enumeration",
+      "enum": ["draft", "publish"],
+      "default": "draft",
+      "required": true,
+      "description": "Drafts by default and deliberately: unattended publishing is how a site fills with content nobody read first."
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": false,
+      "required": true,
+      "description": "Off by default. A populator only starts spending AI credit once someone turns it on."
+    },
+    "lastRunAt": { "type": "datetime" },
+    "lastRunId": {
+      "type": "string",
+      "maxLength": 80,
+      "description": "Run id on the job runner, so a populator's output can be traced back to its log."
+    },
+    "lastRunStatus": { "type": "string", "maxLength": 200 },
+    "runsThisWeek": {
+      "type": "integer",
+      "default": 0,
+      "min": 0,
+      "description": "Runs in the current rolling window, recomputed by the tick from runWindowStart."
+    },
+    "runWindowStart": { "type": "datetime" }
+  }
+}

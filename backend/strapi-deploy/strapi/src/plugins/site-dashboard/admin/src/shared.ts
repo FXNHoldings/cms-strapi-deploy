@@ -43,6 +43,13 @@ export type OfferHealth = {
   everChecked: number;
 };
 
+export type PopulatorStats = {
+  total: number;
+  /** Armed rules. A populator does nothing until someone enables it. */
+  enabled: number;
+  queuedTopics: number;
+};
+
 export type Site = {
   documentId: string;
   name: string;
@@ -60,6 +67,7 @@ export type Site = {
   roles: Record<string, Role>;
   clicks: ClickStats | null;
   offers: OfferHealth | null;
+  populators: PopulatorStats | null;
   warnings: string[];
   recentPosts?: RecentPost[];
 };
