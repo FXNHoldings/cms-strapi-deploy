@@ -18,13 +18,16 @@
 async function linkSite(data, strapi) {
   if (data.site || !data.siteSlug) return;
 
-  const [site] = await strapi.documents('api::commerce-site.commerce-site').findMany({
-    filters: { slug: data.siteSlug },
-    status: 'draft',
-    limit: 1,
+  // Query engine, not the Document Service, and the numeric id rather than the
+  // documentId. This runs as a database lifecycle, below the document layer —
+  // the relation column here is an integer foreign key, and handing it a
+  // documentId aborts the insert's transaction.
+  const site = await strapi.db.query('api::commerce-site.commerce-site').findOne({
+    where: { slug: data.siteSlug },
+    select: ['id'],
   });
 
-  if (site) data.site = site.documentId;
+  if (site?.id) data.site = site.id;
 }
 
 async function stampEstimatedValue(data, strapi) {
