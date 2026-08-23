@@ -21,6 +21,10 @@ node_modules/
 
 # Next.js
 /.next/
+# Unanchored too: the rule above is root-relative, which is why 117 files under
+# backend/nxt-sourcing/.next/ were tracked. Build output anywhere in the tree is
+# noise, and an unreadable diff is how the next defect gets in.
+.next/
 /out/
 next-env.d.ts
 *.tsbuildinfo
