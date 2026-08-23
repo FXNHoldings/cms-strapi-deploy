@@ -27,11 +27,25 @@ const ARTICLE_SCHEMA = {
     /* Must be one of the slugs offered in the prompt. Validated after
        generation — a category that does not exist is dropped, not created. */
     categorySlug: { type: 'string' },
+    /* Rendered as the "Questions Answered" accordion, and as FAQPage structured
+       data. Real questions a reader would ask, not restatements of the headings. */
+    faq: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          question: { type: 'string' },
+          answer: { type: 'string' },
+        },
+        required: ['question', 'answer'],
+        additionalProperties: false,
+      },
+    },
   },
   required: [
     'title', 'slug', 'excerpt', 'content',
     'seoTitle', 'seoDescription', 'seoKeywords', 'tags', 'readingTimeMinutes',
-    'keyTakeaway',
+    'keyTakeaway', 'faq',
   ],
   additionalProperties: false,
 };
@@ -51,6 +65,24 @@ const TITLES_SCHEMA = {
     titles: { type: 'array', items: { type: 'string' } },
   },
   required: ['titles'],
+  additionalProperties: false,
+};
+
+/* Backfill shape: questions only, for an article that already exists. */
+const FAQ_SCHEMA = {
+  type: 'object',
+  properties: {
+    faq: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: { question: { type: 'string' }, answer: { type: 'string' } },
+        required: ['question', 'answer'],
+        additionalProperties: false,
+      },
+    },
+  },
+  required: ['faq'],
   additionalProperties: false,
 };
 
@@ -80,6 +112,12 @@ function buildUserPrompt(params) {
     '',
     'keyTakeaway: one or two sentences answering the title directly. It is shown',
     'in a box above the article as "The short answer", so it must stand alone.',
+    '',
+    'faq: four or five questions a reader would actually type, each answered in',
+    'two or three sentences. They appear as an accordion and as FAQPage',
+    'structured data, so an answer has to make sense on its own, away from the',
+    'article. Do not restate the section headings as questions. Questions must be',
+    'under 300 characters.',
     '',
     'Hard limits, because these are stored fields and an overlong value is',
     'truncated: seoTitle 60 characters, seoDescription 160, excerpt 300.',
@@ -181,6 +219,43 @@ module.exports = ({ strapi }) => ({
 
     const parsed = JSON.parse(text);
     return Array.isArray(parsed.titles) ? parsed.titles.filter(Boolean).slice(0, count) : [];
+  },
+
+  /**
+   * Questions for an article that already exists.
+   *
+   * Given the real article rather than just its title, so the answers agree
+   * with what the piece actually says — a FAQ generated from a headline alone
+   * contradicts the body often enough to be worse than none, and it feeds
+   * FAQPage structured data where a contradiction is a rich-result problem.
+   */
+  async faqFor({ brief, title, excerpt, content, count = 5, model }) {
+    const body = String(content || '').slice(0, 24000);
+    const user = [
+      `Article title: ${title}`,
+      excerpt ? `Summary: ${excerpt}` : '',
+      '',
+      `Write ${count} questions a reader would actually type, each answered in two or`,
+      'three sentences, drawn from and consistent with the article below. Do not',
+      'restate its headings as questions, and do not answer anything the article',
+      'does not support. Questions must be under 300 characters.',
+      '',
+      '--- article ---',
+      body,
+    ].filter(Boolean).join('\n');
+
+    const text = await this.callAI({
+      model: model || cfg(strapi, 'model', 'claude-opus-5'),
+      system: buildSystemPrompt(brief),
+      user,
+      maxTokens: 4000,
+      schema: FAQ_SCHEMA,
+    });
+
+    const parsed = JSON.parse(text);
+    return Array.isArray(parsed.faq)
+      ? parsed.faq.filter((f) => f?.question && f?.answer).slice(0, count)
+      : [];
   },
 
   async generate(params) {

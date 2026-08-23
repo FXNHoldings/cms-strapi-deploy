@@ -195,6 +195,20 @@ module.exports = {
       /* Relations and media are excluded by pickWritable — it cannot know which
          side of a relation a value belongs to — so they are attached here, by
          id, only once verified. */
+      /* Components are excluded by pickWritable along with relations, so the FAQ
+         is attached here. Mapped to the component's own field names — the model
+         returns question/answer, which is what faq.item declares. */
+      if (Array.isArray(draft.faq) && strapi.contentTypes[uid]?.attributes?.faq) {
+        data.faq = draft.faq
+          .filter((f) => f?.question && f?.answer)
+          .slice(0, 6)
+          .map((f, i) => ({
+            question: String(f.question).slice(0, 300),
+            answer: String(f.answer),
+            order: i + 1,
+          }));
+      }
+
       if (category && strapi.contentTypes[uid]?.attributes?.categories) {
         data.categories = [category.documentId];
       }
