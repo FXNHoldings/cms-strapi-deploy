@@ -1,4 +1,4 @@
-# fxn-cms
+# Strapi CMS
 
 Strapi 5 backend behind the FXN network of affiliate, commerce and content
 sites, plus the sourcing, keyword research and AI generation tooling that feeds
