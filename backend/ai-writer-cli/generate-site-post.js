@@ -594,6 +594,7 @@ Return STRICT JSON only with exactly these keys:
 Content requirements:
 - ${contentFormat} only in "content".
 - Use useful ${contentFormat === 'HTML' ? 'h2/h3' : 'H2/H3'} headings.
+- Section headings are level 2; break the longer ones down with level-3 subheadings, at least two sections carrying two or more each. Never go deeper than level 3, and never open with a level-3 heading.
 - Include practical comparisons, tips, caveats, and buying/setup guidance where relevant.
 - Where useful and natural, add internal links to relevant existing posts from the provided internal-link opportunities. Use Markdown links in Markdown content and <a> tags in HTML content. Do not force every link; 2-4 high-relevance links is better than stuffing.
 - When selected NXT.Bargains catalog products are provided, keep the article grounded in those exact products and their product category. Do not invent specs, prices, ratings, or availability.
@@ -606,7 +607,7 @@ Content requirements:
 - For NXT.Bargains Smart Home articles, write at least ${lengthConfig.smartHomeMin} words in "content".
 - For NXT.Bargains Smart Home articles, make the selected smart home product the article's main subject and keep the article focused on setup, compatibility, features, and buyer fit.
 - For NXT.Bargains Smart Home articles, include who should consider it, who should skip it, alternatives to compare, and what to verify before buying.
-- For NXT.Bargains Smart Home articles, use valid HTML with useful <h2>, <h3>, <p>, <ul>, and <li> tags only. Do not include a product snapshot card, summary box, or product image URL; the script inserts those automatically.
+- For NXT.Bargains Smart Home and Best Sellers articles, use valid HTML with useful <h2>, <h3>, <p>, <ul>, and <li> tags only — no <h4> or deeper. Do not include a product snapshot card, summary box, or product image URL; the script inserts those automatically.
 - Keep claims factual and cautious.
 - Do not invent exact prices, ratings, availability, certifications, medical outcomes, or specs.
 - Only mention prices, ratings, ranks, marketplace names, and URLs that appear in the selected product context.

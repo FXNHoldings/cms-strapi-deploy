@@ -136,7 +136,21 @@ export const App = () => {
         const data = await generateOne(title);
         made.push(data);
       } catch (e: any) {
-        failures.push(`${title} — ${e?.response?.data?.error?.message || e.message || 'failed'}`);
+        /*
+         * A network-level failure here does NOT mean nothing was written. The
+         * request is held open while the article is written and the cover
+         * rendered, so a proxy timeout aborts the client while the server
+         * carries on and saves the draft. Retrying then pays for the same
+         * article twice — which is exactly what happened before the CMS vhost
+         * got a timeout long enough to cover a generation.
+         */
+        const server = e?.response?.data?.error?.message;
+        const timedOut = !server && (e?.code === 'ECONNABORTED' || /timeout|network|unknown server error/i.test(e?.message ?? ''));
+        failures.push(
+          `${title} — ${server || e.message || 'failed'}${
+            timedOut ? ' (the draft may still have been created — check Content Manager before retrying)' : ''
+          }`,
+        );
       }
       if (titles.length > 1) setBatch({ done: i + 1, total: titles.length, failures: [...failures] });
     }

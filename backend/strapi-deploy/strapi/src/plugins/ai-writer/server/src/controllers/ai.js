@@ -92,22 +92,33 @@ module.exports = {
 
     const context = await siteSvc.siteContext(site);
 
+    /*
+     * Errors from here are the writer's own — a token ceiling, a refusal, a
+     * missing key — and each says exactly what to do. Letting them escape turns
+     * all of them into "Unknown Server Error" in the admin, which is what a
+     * truncated article looked like from the outside.
+     */
     const svc = strapi.plugin('ai-writer').service('ai');
-    const draft = await svc.generate({
-      categories: context.categories,
-      products: context.products,
-      topic: body.topic,
-      tone: body.tone,
-      length: body.length,
-      destination: body.destination,
-      subjectLabel: body.subjectLabel,
-      category: body.category,
-      keywords: body.keywords,
-      language: body.language,
-      model: body.model,
-      customInstructions: body.customInstructions,
-      brief: site.aiWriterBrief,
-    });
+    let draft;
+    try {
+      draft = await svc.generate({
+        categories: context.categories,
+        products: context.products,
+        topic: body.topic,
+        tone: body.tone,
+        length: body.length,
+        destination: body.destination,
+        subjectLabel: body.subjectLabel,
+        category: body.category,
+        keywords: body.keywords,
+        language: body.language,
+        model: body.model,
+        customInstructions: body.customInstructions,
+        brief: site.aiWriterBrief,
+      });
+    } catch (error) {
+      return ctx.badRequest(error.message || 'Generation failed.');
+    }
 
     if (!draft.slug) {
       draft.slug = slugify(draft.title, { lower: true, strict: true }).slice(0, 60);
@@ -184,6 +195,20 @@ module.exports = {
       /* Relations and media are excluded by pickWritable — it cannot know which
          side of a relation a value belongs to — so they are attached here, by
          id, only once verified. */
+      /* Components are excluded by pickWritable along with relations, so the FAQ
+         is attached here. Mapped to the component's own field names — the model
+         returns question/answer, which is what faq.item declares. */
+      if (Array.isArray(draft.faq) && strapi.contentTypes[uid]?.attributes?.faq) {
+        data.faq = draft.faq
+          .filter((f) => f?.question && f?.answer)
+          .slice(0, 6)
+          .map((f, i) => ({
+            question: String(f.question).slice(0, 300),
+            answer: String(f.answer),
+            order: i + 1,
+          }));
+      }
+
       if (category && strapi.contentTypes[uid]?.attributes?.categories) {
         data.categories = [category.documentId];
       }

@@ -278,6 +278,7 @@ Rules:
 - The "content" field must be valid HTML, not Markdown.
 - Write at least ${argv['min-words']} words in "content".
 - Use useful <h2>, <h3>, <p>, <ul>, and <li> tags.
+- Section headings must be <h2>. Break the longer sections down with <h3> subheadings — at least two <h2> sections carrying two or more <h3> each. Do not use <h4>, <h5> or <h6>, and do not skip a level by opening with an <h3>.
 - Include deal-shopping analysis: why it may be worth checking, what value shoppers might see, who should skip it, what alternatives to compare, and what to verify before buying.
 - Include a dedicated product features section with practical feature-focused analysis based only on provided or safely general product information.
 - Include bullet points in at least two useful sections, such as product features, who should consider it, who should skip it, alternatives to compare, or what to verify before buying.
