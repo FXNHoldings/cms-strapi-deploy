@@ -6,6 +6,7 @@
  *   node scripts/fetch-offers-sellers.mjs --write
  *   node scripts/fetch-offers-sellers.mjs --write --category=smart-phones
  *   node scripts/fetch-offers-sellers.mjs --write --thin-only  # products with <2 offers
+ *   node scripts/fetch-offers-sellers.mjs --write --site=nxtsmarthome.com.au
  *
  * The sourcing pipeline prices a product by searching its *name*, which means
  * every result has to be title-matched — the source of every mismatch fixed in
@@ -36,13 +37,14 @@ const THIN_ONLY = args.includes('--thin-only');
  * picks up single-offer products and quadruples the spend. */
 const NO_OFFERS_ONLY = args.includes('--no-offers-only');
 const CATEGORY = flag('category', null);
+const SITE = flag('site', null);
 const LIMIT = Number(flag('limit', Infinity));
 const PRIORITY = Number(flag('priority', 1));
 const LOCATION = Number(flag('location', 2840));
 const LANGUAGE = flag('language', 'en');
 const CONCURRENCY = Number(flag('concurrency', 8));
 const MIN_PRICE = Number(flag('min-price', 5));
-const OUT = path.join(ROOT, 'reports', `offers-sellers-${CATEGORY ?? 'all'}.json`);
+const OUT = path.join(ROOT, 'reports', `offers-sellers-${SITE ?? CATEGORY ?? 'all'}.json`);
 
 const STRAPI_URL = (process.env.STRAPI_INTERNAL_URL || process.env.STRAPI_URL || 'http://127.0.0.1:8888').replace(/\/$/, '');
 const TOKEN = process.env.STRAPI_API_TOKEN || process.env.STRAPI_TOKEN || '';
@@ -197,7 +199,17 @@ function usableSellers(result) {
 if (!DFS_LOGIN || !DFS_PASSWORD) { console.error('DATAFORSEO credentials not set.'); process.exit(1); }
 
 const q = new URLSearchParams({ 'pagination[pageSize]': '1000', status: 'published' });
-q.append('filters[tags][$containsi]', 'nxt-bargains');
+/*
+ * Which property's catalogue to price.
+ *
+ * This used to be hardcoded to the nxt-bargains tag, so the script could only
+ * ever refresh that one site — pointing it at another property silently
+ * returned nothing. --site filters on the product's own `site` relation, which
+ * is the field that actually says who a product belongs to; the tag filter
+ * remains the default so existing runs and cron entries behave as before.
+ */
+if (SITE) q.append('filters[site][domain][$eq]', SITE);
+else q.append('filters[tags][$containsi]', 'nxt-bargains');
 if (CATEGORY) q.append('filters[categories][slug][$eq]', CATEGORY);
 for (const [i, f] of ['name', 'slug', 'googleProductId'].entries()) q.append(`fields[${i}]`, f);
 q.append('populate[offers][fields][0]', 'price');
