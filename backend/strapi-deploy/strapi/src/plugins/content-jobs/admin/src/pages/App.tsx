@@ -376,10 +376,14 @@ const App = () => {
                       marginTop={2}
                       padding={4}
                       hasRadius
-                      background="neutral900"
-                      style={{ maxHeight: 420, overflowY: 'auto' }}
+                      style={{
+                        maxHeight: 420,
+                        overflowY: 'auto',
+                        backgroundColor: '#181826',
+                        border: '1px solid #32324d',
+                      }}
                     >
-                      <pre style={{ margin: 0, color: '#ffffff', fontSize: 12, lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+                      <pre style={{ margin: 0, color: '#f6f6f9', fontSize: 12, lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
                         {log || 'waiting for output…'}
                       </pre>
                     </Box>

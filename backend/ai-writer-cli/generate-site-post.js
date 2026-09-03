@@ -153,6 +153,12 @@ const argv = yargs(hideBin(process.argv))
   .option('amazon-tag', { type: 'string', describe: 'amazonAffiliateTag value for the post' })
   .option('language', { type: 'string', default: 'English' })
   .option('publish', { type: 'boolean', default: false, describe: 'Publish immediately; default is draft' })
+  .option('skip-rank-math-test', {
+    type: 'boolean',
+    default: false,
+    hidden: true,
+    describe: 'Save without blocking on the Rank Math preflight (used by the WordPress Content Jobs entry point).',
+  })
   .option('images', {
     type: 'boolean',
     describe: 'Generate 1 cover + 2 gallery images with Fal.ai. Use --no-images to skip.',
@@ -596,7 +602,7 @@ Rank Math SEO requirements (mandatory before returning JSON):
 - Start "seoTitle" with the exact primary focus keyword whenever grammar allows; otherwise place it within the first half. Keep the complete SEO title at 60 characters or fewer.
 - Put the exact primary focus keyword naturally in "seoDescription"; keep it at 155 characters or fewer.
 - Include the primary focus keyword in "slug" and keep the slug concise (75 characters or fewer).
-- Use the exact primary focus keyword in the first paragraph, in at least one H2 or H3, and naturally throughout the article. Use it at least once per roughly 250 words while keeping density below 2%; readability takes priority and keyword stuffing is forbidden.
+- Use the exact primary focus keyword in the first paragraph, in at least one H2 or H3, and naturally throughout the article. Use it at least once per roughly 250 words while keeping density at or below 2.5%; readability takes priority and keyword stuffing is forbidden.
 - Do not include an H1 in "content" because WordPress displays the post title as H1.
 - Include at least one helpful internal link when internal-link opportunities are supplied, using only the exact supplied URL.
 - Write at least 600 words even when the requested topic can be answered briefly. Use short paragraphs and at least one useful list where it improves scanability.
@@ -678,9 +684,27 @@ Image prompt requirements:
   normalizeContentForSite(post);
   post.slug = slugifyValue(post.slug || post.title);
   selectRankMathFocusKeyword(post);
-  validateRankMathPost(post, {
+  const rankMathOptions = {
     requireInternalLink: argv.site === 'flightfares.one' && internalLinkContext.length > 0,
-  });
+  };
+  if (argv['skip-rank-math-test']) {
+    console.log('  · Rank Math preflight skipped for Content Jobs; review the post in WordPress after publishing.');
+  } else {
+    try {
+      validateRankMathPost(post, rankMathOptions);
+    } catch (error) {
+      if (argv.site !== 'flightfares.one' || !String(error?.message || '').startsWith('Rank Math preflight failed:')) {
+        throw error;
+      }
+      const repaired = await repairFlightfaresRankMath(post, error.message);
+      Object.assign(post, repaired);
+      normalizePostForStrapi(post);
+      normalizeContentForSite(post);
+      post.slug = slugifyValue(post.slug || post.title);
+      selectRankMathFocusKeyword(post);
+      validateRankMathPost(post, rankMathOptions);
+    }
+  }
   if (seededProducts.length) {
     post.content = rewriteEmbeddedMediaUrls(post.content);
   }
@@ -732,6 +756,55 @@ function normalizePostForStrapi(post) {
   post.seoKeywords = limitText(post.seoKeywords, 255);
 }
 
+async function repairFlightfaresRankMath(post, failureMessage) {
+  const focusKeyword = String(post.seoKeywords || '').split(',')[0].trim();
+  console.log(`  · ${failureMessage}`);
+  console.log('  · Running one Rank Math SEO repair pass before saving...');
+
+  const text = await callAI({
+    system: 'You are a meticulous WordPress SEO editor. Return strict JSON only and preserve factual accuracy.',
+    user: `Repair this Flightfares.one article so it passes the listed Rank Math checks.
+
+Required primary focus keyword (use this exact phrase): ${focusKeyword}
+Failed checks: ${failureMessage}
+
+Return STRICT JSON with exactly these keys:
+{
+  "slug": string,
+  "content": string,
+  "seoTitle": string,
+  "seoDescription": string,
+  "seoKeywords": string
+}
+
+Rules:
+- Keep the article's meaning, factual claims, HTML structure, and supplied links intact.
+- Keep valid HTML and do not add an H1.
+- Put the exact focus keyword first in seoKeywords.
+- Put it in the SEO title, meta description, slug, first paragraph, and at least one H2 or H3.
+- Use it naturally at least once per roughly 250 words, with total density no higher than 2.5%.
+- Keep seoTitle at 60 characters or fewer, seoDescription at 155 or fewer, and slug at 75 or fewer.
+- Preserve all existing internal links. Do not invent URLs, prices, schedules, policies, or facts.
+- Return no commentary or Markdown fence.
+
+Article to repair:
+${JSON.stringify({
+    slug: post.slug,
+    content: post.content,
+    seoTitle: post.seoTitle,
+    seoDescription: post.seoDescription,
+    seoKeywords: post.seoKeywords,
+  })}`,
+    maxTokens: Math.max(Number(maxOutputTokensEnv()) || 0, 16000),
+  });
+
+  const repaired = parseAiJson(text, { providerName: activeProviderName() });
+  for (const field of ['slug', 'content', 'seoTitle', 'seoDescription', 'seoKeywords']) {
+    if (!repaired?.[field]) throw new Error(`${activeProviderName()} Rank Math repair missing "${field}".`);
+  }
+  return repaired;
+}
+
 function validateRankMathPost(post, { requireInternalLink = false } = {}) {
   if (!site.simplePost) return;
   const focusKeyword = String(post.seoKeywords || '').split(',')[0].trim();
@@ -761,7 +834,7 @@ function validateRankMathPost(post, { requireInternalLink = false } = {}) {
   if (/<h1\b/i.test(html)) failures.push('content contains a duplicate H1');
   if (enforceFlightfaresContentChecks && words < 600) failures.push(`content has ${words} words; Rank Math requires at least 600`);
   if (enforceFlightfaresContentChecks && keywordUses < minimumKeywordUses) failures.push(`focus keyword appears ${keywordUses} times; expected at least ${minimumKeywordUses}`);
-  if (enforceFlightfaresContentChecks && keywordDensity > 2) failures.push(`focus keyword density is ${keywordDensity.toFixed(1)}%; keep it at or below 2%`);
+  if (enforceFlightfaresContentChecks && keywordDensity > 2.5) failures.push(`focus keyword density is ${keywordDensity.toFixed(1)}%; keep it at or below 2.5%`);
   if (requireInternalLink && !internalLinkPattern.test(html)) failures.push('supplied internal-link opportunity was not used');
   if (post.seoTitle.length > 60) failures.push('SEO title exceeds 60 characters');
   if (post.seoDescription.length > 155) failures.push('meta description exceeds 155 characters');

@@ -18,4 +18,11 @@ if (site && !allowedSites.has(site)) {
   process.exit(1);
 }
 
+// Content Jobs should generate and save the article even when Rank Math would
+// score it below the desired threshold. Editors run Rank Math in WordPress and
+// make the final SEO adjustments there.
+if (!process.argv.includes('--skip-rank-math-test')) {
+  process.argv.push('--skip-rank-math-test');
+}
+
 import('./generate-site-post.js');
