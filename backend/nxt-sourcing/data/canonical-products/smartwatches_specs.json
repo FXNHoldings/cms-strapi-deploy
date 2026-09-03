@@ -1,5 +1,795 @@
 [
   {
+    "product_slug": "samsung-galaxy-watch-ultra2-64gb",
+    "product_title": "Samsung Galaxy Watch Ultra2 64GB",
+    "clean_model": "Samsung Galaxy Watch Ultra2",
+    "gsmarena_url": "https://www.gsmarena.com/samsung_galaxy_watch_ultra2-14805.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/samsung_galaxy_watch_ultra2-14805.php",
+      "source_title": "Samsung Galaxy Watch Ultra2",
+      "clean_model": "Samsung Galaxy Watch Ultra2",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Samsung"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-watch-ultra2.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2026, July 22"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2026, August 07"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "9.3% 93,470 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "41"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2026, August 07 | 1.52\" 498x498 pixels | 2GB RAM | Snapdragon SW6100 Wear Elite | 800mAh | 10W10W | Android Wear OS 7, One UI Watch 9 | 64GB storage, no card slot | 61.5g, 10.7mm thickness | 9.3% 93,470 hits | 41 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 7, 8, 12, 13, 14, 18, 19, 20, 25, 26, 28, 34, 38, 39, 40, 41, 66, 71"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2026, July 22"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2026, August 07"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "47.4 x 47.1 x 10.7 mm (1.87 x 1.85 x 0.42 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "61.5 g (2.19 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Sapphire crystal front, ceramic/sapphire crystal back, titanium frame (grade 4)"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP68/IP69K dust tight and water resistant (immersible up to 100m/10ATM for 10 min) MIL-STD-810H compliant ECG certified 40m swimproof/diving (EN13319)"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Super AMOLED, 5000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.52 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "498 x 498 pixels (~327 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal glass"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 7, One UI Watch 9"
+            },
+            {
+              "label": "Chipset",
+              "value": "Snapdragon SW6100 Wear Elite (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Penta-core (1x2.1 GHz & 4x 1.95 GHz)"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "64GB 2GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "6.0, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS (L1+L5), GLONASS, GALILEO, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, altimeter, compass, SpO2, temperature (body), temperature (water), BioActive"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Si/C Li-Ion 800 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "10W wireless"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Titanium Gray, Titanium Silver"
+            },
+            {
+              "label": "Models",
+              "value": "SM-L715F, SM-L715U"
+            },
+            {
+              "label": "SAR",
+              "value": "0.44 W/kg (body)"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.42 W/kg (body)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 715.00 / $ 699.99"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "samsung-galaxy-watch9-32gb",
+    "product_title": "Samsung Galaxy Watch9 32GB",
+    "clean_model": "Samsung Galaxy Watch9",
+    "gsmarena_url": "https://www.gsmarena.com/samsung_galaxy_watch9-14813.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/samsung_galaxy_watch9-14813.php",
+      "source_title": "Samsung Galaxy Watch9",
+      "clean_model": "Samsung Galaxy Watch9",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Samsung"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-watch9-.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2026, July 22"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2026, August 07"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "5.8% 70,378 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "28"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2026, August 07 | 1.47\" 480x480 pixels | 2GB RAM | Snapdragon SW6100 Wear Elite | 445mAh | 10W | Android Wear OS 7, One UI Watch 9 | 32GB storage, no card slot | 34g, 8.6mm thickness | 5.8% 70,378 hits | 28 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 7, 8, 12, 13, 14, 18, 19, 20, 25, 26, 28, 34, 38, 39, 40, 41, 66, 71"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2026, July 22"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2026, August 07"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "46 x 43.7 x 8.6 mm (1.81 x 1.72 x 0.34 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "34 g (1.20 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front (Sapphire crystal), aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "MIL-STD-810H compliant* IP68 dust tight and water resistant (immersible up to 50m/5ATM) ECG certified Blood pressure monitor Armor Aluminum 2 *does not guarantee ruggedness or use in extreme conditions"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Super AMOLED, 3000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.47 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "480 x 480 pixels (~327 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 7, One UI Watch 9"
+            },
+            {
+              "label": "Chipset",
+              "value": "Snapdragon SW6100 Wear Elite (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Penta-core (1x2.1 GHz & 4x 1.95 GHz)"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "32GB 2GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "6.0, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS (L1+L5), GLONASS, GALILEO, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, altimeter, compass, SpO2, temperature (skin), BioActive, antioxidant index"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 445 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "10W wireless"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Graphite, Silver, Cream"
+            },
+            {
+              "label": "Models",
+              "value": "SM-L340, SM-L350, SM-L345F, SM-L355F, SM-L345U, SM-L355U"
+            },
+            {
+              "label": "SAR",
+              "value": "1.06 W/kg (body)"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.70 W/kg (body)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 374.89 / $ 379.99"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "google-pixel-watch-5-64gb",
+    "product_title": "Google Pixel Watch 5 64GB",
+    "clean_model": "Google Pixel Watch 5",
+    "gsmarena_url": "https://www.gsmarena.com/google_pixel_watch_5-14860.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/google_pixel_watch_5-14860.php",
+      "source_title": "Google Pixel Watch 5",
+      "clean_model": "Google Pixel Watch 5",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Google"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-watch5-1.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2026, August 12"
+            },
+            {
+              "label": "Released",
+              "value": "Exp. release 2026, August 20"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "3.2% 10,631 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "9"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Exp. release 2026, August 20 | 1.4\" 456x456 pixels | 2GB RAM | Snapdragon W5 Gen 2 | 465mAh | Android Wear OS 7 | 64GB storage, no card slot | 31g or 36.7g, 12.3mm thickness | 3.2% 10,631 hits | 9 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "LTE"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2026, August 12"
+            },
+            {
+              "label": "Status",
+              "value": "Coming soon. Exp. release 2026, August 20"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "45 x 45 x 12.3 mm (1.77 x 1.77 x 0.48 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "31 g or 36.7 g (1.09 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front (Gorilla Glass 5), aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP68 dust tight and water resistant (immersible up to 50m/5ATM) ECG certified"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "LTPO AMOLED, 3000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.4 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "456 x 456 pixels (~320 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Corning Gorilla Glass 5"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 7"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm Snapdragon W5 Gen 2 (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Quad-core (4x1.7 GHz Cortex-A53)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno A702"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "64GB 2GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "eMMC"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "6.0, A2DP"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS (L1+L5), GLONASS, GALILEO (E1+E5a)"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, altimeter, compass, barometer, SpO2, thermometer (skin temperature), skin conductance"
+            },
+            {
+              "label": "Features",
+              "value": "Satellite SOS service (LTE models only) Ultra Wideband (UWB) support"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 465 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "Wired, 50% in 15 min, 80% in 30 min, 100% in 60 min - 45mm model Wired, 50% in 15 min, 80% in 25 min, 100% in 45 min - 41mm model"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Matte Black, Polished Silver, Champagne Gold, Satin Pyrite"
+            },
+            {
+              "label": "Models",
+              "value": "G0F3Y, G1XJ6, G25QD, GFW3R"
+            },
+            {
+              "label": "Price",
+              "value": "€ 419.00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "product_slug": "oneplus-watch-4-32gb",
     "product_title": "OnePlus Watch 4 32GB",
     "clean_model": "OnePlus Watch 4",
@@ -11,11 +801,15 @@
       "source_url": "https://www.gsmarena.com/oneplus_watch_4-14622.php",
       "source_title": "OnePlus Watch 4",
       "clean_model": "OnePlus Watch 4",
-      "extracted_at": "2026-08-13",
+      "extracted_at": "2026-08-14",
       "sections": [
         {
           "section": "Overview",
           "rows": [
+            {
+              "label": "Brand",
+              "value": "OnePlus"
+            },
             {
               "label": "Image URL",
               "value": "https://fdn2.gsmarena.com/vv/bigpic/oppo-watch-4.jpg"
@@ -242,6 +1036,1658 @@
     }
   },
   {
+    "product_slug": "apple-watch-ultra-3-64gb",
+    "product_title": "Apple Watch Ultra 3 64GB",
+    "clean_model": "Apple Watch Ultra 3",
+    "gsmarena_url": "https://www.gsmarena.com/apple_watch_ultra_3-14130.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/apple_watch_ultra_3-14130.php",
+      "source_title": "Apple Watch Ultra 3",
+      "clean_model": "Apple Watch Ultra 3",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Apple"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/apple-watch-ultra3.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, September 09"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, September 19"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "1.8% 248,748 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "45"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, September 19 | 1.98\" 514x422 pixels | Apple S10 | 599mAh | watchOS 26, up to watchOS 26.6 | 64GB storage, no card slot | 61.6g or 61.8g (black), 12mm thickness | 1.8% 248,748 hits | 45 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE / 5G"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100 - International, China, HK"
+            },
+            {
+              "label": "Network",
+              "value": "1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 17, 18, 19, 25, 26, 39, 40, 41, 66 - USA, LATAM, Canada"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 6, 7, 8, 18, 19, 20, 25, 26, 28, 39, 40, 41, 66 - International, China, HK"
+            },
+            {
+              "label": "5G bands",
+              "value": "SA/NSA"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE, 5G"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, September 09"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, September 19"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "49 x 44 x 12 mm (1.93 x 1.73 x 0.47 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "61.6 g or 61.8 g (black) (2.15 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Sapphire crystal front, ceramic/sapphire crystal back, titanium frame (grade 5)"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP6X certified 100m water resistant (22810:2010) 40m swimproof/diving (EN13319) MIL-STD-810H compliant ECG certified (region dependent SW application; HW available on all models)"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Retina LTPO3 OLED, 3000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.98 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "514 x 422 pixels (~326 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal glass"
+            },
+            {
+              "label": "Display",
+              "value": "Wide-angle OLED"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "watchOS 26, up to watchOS 26.6, planned upgrade to watchOS 27"
+            },
+            {
+              "label": "Chipset",
+              "value": "Apple S10"
+            },
+            {
+              "label": "CPU",
+              "value": "Dual-core"
+            },
+            {
+              "label": "GPU",
+              "value": "PowerVR"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "64GB"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes, with dual speakers (86-decibel)"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS (L1+L5), GLONASS, GALILEO, BDS, QZSS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, always-on altimeter (-500m to 9000m), compass, SpO2, VO2max, temperature (body), temperature (water)"
+            },
+            {
+              "label": "Features",
+              "value": "Temperature sensing (0.01˚ accuracy) Depth gauge (±1m accuracy) Ultra Wideband (UWB) support (gen2 chip) Emergency SOS via satellite"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 599 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "Wireless, 0-80% in 45 min"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Natural, Black"
+            },
+            {
+              "label": "Models",
+              "value": "A3281, A3282"
+            },
+            {
+              "label": "SAR",
+              "value": "1.16 W/kg (head)"
+            },
+            {
+              "label": "SAR EU",
+              "value": "1.19 W/kg (head)"
+            },
+            {
+              "label": "Price",
+              "value": "$ 229.99 / € 815.00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "apple-watch-series-11-64gb",
+    "product_title": "Apple Watch Series 11 64GB",
+    "clean_model": "Apple Watch Series 11",
+    "gsmarena_url": "https://www.gsmarena.com/apple_watch_series_11-14131.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/apple_watch_series_11-14131.php",
+      "source_title": "Apple Watch Series 11",
+      "clean_model": "Apple Watch Series 11",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Apple"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/apple-watch11.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, September 09"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, September 19"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "1.8% 222,888 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "23"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, September 19 | 1.96\" 496x416 pixels | Apple S10 | watchOS 26, up to watchOS 26.6 | 64GB storage, no card slot | 34.6g (42mm), 43.1g (46mm), 9.7mm thickness | 1.8% 222,888 hits | 23 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE / 5G"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100 - International, China, HK"
+            },
+            {
+              "label": "Network",
+              "value": "1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 17, 18, 19, 25, 26, 39, 40, 41, 66 - USA, LATAM, Canada"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 6, 7, 8, 18, 19, 20, 25, 26, 28, 39, 40, 41, 66 - International, China, HK"
+            },
+            {
+              "label": "5G bands",
+              "value": "SA/NSA"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE, 5G"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, September 09"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, September 19"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "46 x 39 x 9.7 mm (1.81 x 1.54 x 0.38 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "34.6 g (42mm), 43.1 g (46mm) (1.52 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Sapphire crystal front, ceramic/sapphire crystal back, titanium frame (grade 5)"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP6X certified 50m water resistant ECG certified (region dependent SW application; HW available on all models) Depth gauge to 6m"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Retina LTPO3 OLED, 2000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.96 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "496 x 416 pixels (~330 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal glass"
+            },
+            {
+              "label": "Display",
+              "value": "Wide-angle OLED"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "watchOS 26, up to watchOS 26.6, planned upgrade to watchOS 27"
+            },
+            {
+              "label": "Chipset",
+              "value": "Apple S10"
+            },
+            {
+              "label": "CPU",
+              "value": "Dual-core"
+            },
+            {
+              "label": "GPU",
+              "value": "PowerVR"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "64GB"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS, GLONASS, GALILEO, QZSS, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, always-on altimeter, compass, SpO2, VO2max, temperature (body), temperature (water)"
+            },
+            {
+              "label": "Features",
+              "value": "Temperature sensing (0.01˚ accuracy) Ultra Wideband (UWB) support (gen2 chip) Media playback"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion"
+            },
+            {
+              "label": "Charging",
+              "value": "Wireless, 0-80% in 30 min"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Slate, Gold, Natural"
+            },
+            {
+              "label": "Models",
+              "value": "A3335, A3337, A3452, A3453"
+            },
+            {
+              "label": "SAR",
+              "value": "1.19 W/kg (head)"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.97 W/kg (head)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 760.00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "apple-watch-series-11-aluminum-64gb",
+    "product_title": "Apple Watch Series 11 Aluminum 64GB",
+    "clean_model": "Apple Watch Series 11 Aluminum",
+    "gsmarena_url": "https://www.gsmarena.com/apple_watch_series_11_aluminum-14132.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/apple_watch_series_11_aluminum-14132.php",
+      "source_title": "Apple Watch Series 11 Aluminum",
+      "clean_model": "Apple Watch Series 11 Aluminum",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Apple"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/apple-watch11-alu.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, September 09"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, September 19"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.7% 88,507 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "13"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, September 19 | 1.96\" 496x416 pixels | Apple S10 | watchOS 26, up to watchOS 26.6 | 64GB storage, no card slot | 29.7g (42mm), 36.9g (46mm), 9.7mm thickness | 0.7% 88,507 hits | 13 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE / 5G"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100 - International, China, HK"
+            },
+            {
+              "label": "Network",
+              "value": "1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 17, 18, 19, 25, 26, 39, 40, 41, 66 - USA, LATAM, Canada"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 6, 7, 8, 18, 19, 20, 25, 26, 28, 39, 40, 41, 66 - International, China, HK"
+            },
+            {
+              "label": "5G bands",
+              "value": "SA/NSA"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE, 5G"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, September 09"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, September 19"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "46 x 39 x 9.7 mm (1.81 x 1.54 x 0.38 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "29.7 g (42mm), 36.9 g (46mm) (1.06 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, ceramic/sapphire crystal back, aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP6X certified 50m water resistant ECG certified (region dependent SW application; HW available on all models) Depth gauge to 6m"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Retina LTPO3 OLED, 2000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.96 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "496 x 416 pixels (~330 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Ion-X strengthened glass (2025 gen)"
+            },
+            {
+              "label": "Display",
+              "value": "Wide-angle OLED"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "watchOS 26, up to watchOS 26.6, planned upgrade to watchOS 27"
+            },
+            {
+              "label": "Chipset",
+              "value": "Apple S10"
+            },
+            {
+              "label": "CPU",
+              "value": "Dual-core"
+            },
+            {
+              "label": "GPU",
+              "value": "PowerVR"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "64GB"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS, GLONASS, GALILEO, QZSS, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, always-on altimeter, compass, SpO2, VO2max, temperature (body), temperature (water)"
+            },
+            {
+              "label": "Features",
+              "value": "Temperature sensing (0.01˚ accuracy) Ultra Wideband (UWB) support (gen2 chip) Media playback"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion"
+            },
+            {
+              "label": "Charging",
+              "value": "Wireless, 0-80% in 30 min"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Jet Black, Space Gray, Rose Gold, Silver"
+            },
+            {
+              "label": "Models",
+              "value": "A3333, A3331, A3335, A3337, A3450, A3451, A3452, A3453"
+            },
+            {
+              "label": "SAR",
+              "value": "0.42 W/kg (head)"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.11 W/kg (head)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 359.90"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "apple-watch-se-3-64gb",
+    "product_title": "Apple Watch SE 3 64GB",
+    "clean_model": "Apple Watch SE 3",
+    "gsmarena_url": "https://www.gsmarena.com/apple_watch_se_3-14133.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/apple_watch_se_3-14133.php",
+      "source_title": "Apple Watch SE 3",
+      "clean_model": "Apple Watch SE 3",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Apple"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/apple-watch-se3.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, September 09"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, September 19"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "1.1% 156,925 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "17"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, September 19 | 1.78\" 448x368 pixels | Apple S10 | 5W | watchOS 26, up to watchOS 26.6 | 64GB storage, no card slot | 26.4g or 33g, 10.7mm thickness | 1.1% 156,925 hits | 17 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE / 5G"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100 - International, China, HK"
+            },
+            {
+              "label": "Network",
+              "value": "1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 17, 18, 19, 25, 26, 39, 40, 41, 66 - USA, LATAM, Canada"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 6, 7, 8, 18, 19, 20, 25, 26, 28, 39, 40, 41, 66 - International, China, HK"
+            },
+            {
+              "label": "5G bands",
+              "value": "SA/NSA"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE, 5G"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, September 09"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, September 19"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "44 x 38 x 10.7 mm (1.73 x 1.50 x 0.42 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "26.4 g or 33 g (1.16 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, plastic/sapphire crystal back, aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "50m water resistant"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Retina LTPO OLED, 1000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.78 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "448 x 368 pixels (~326 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Ion-X strengthened glass (2025 gen)"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "watchOS 26, up to watchOS 26.6, planned upgrade to watchOS 27"
+            },
+            {
+              "label": "Chipset",
+              "value": "Apple S10"
+            },
+            {
+              "label": "CPU",
+              "value": "Dual-core"
+            },
+            {
+              "label": "GPU",
+              "value": "PowerVR"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "64GB"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 b/g/n"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS, GLONASS, GALILEO, QZSS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate (2nd gen), barometer, always-on altimeter, compass, temperature (body)"
+            },
+            {
+              "label": "Features",
+              "value": "Media playback"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion"
+            },
+            {
+              "label": "Charging",
+              "value": "Wireless, 80% in 45 min"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Midnight, Starlight"
+            },
+            {
+              "label": "Models",
+              "value": "A3325, A3324, A3328, A3326, A3327, A3329, A3391, A3392"
+            },
+            {
+              "label": "SAR",
+              "value": "1.18 W/kg (head)"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.42 W/kg (head)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 249.00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "samsung-galaxy-watch8-classic-64gb",
+    "product_title": "Samsung Galaxy Watch8 Classic 64GB",
+    "clean_model": "Samsung Galaxy Watch8 Classic",
+    "gsmarena_url": "https://www.gsmarena.com/samsung_galaxy_watch8_classic-13998.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/samsung_galaxy_watch8_classic-13998.php",
+      "source_title": "Samsung Galaxy Watch8 Classic",
+      "clean_model": "Samsung Galaxy Watch8 Classic",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Samsung"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-watch8-classic.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, July 09"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, July 25"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "1.7% 341,076 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "62"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, July 25 | 1.34\" 438x438 pixels | 2GB RAM | Exynos W1000 | 445mAh | 10W | Android Wear OS 6, One UI 8 Watch | 64GB storage, no card slot | 63.5g, 10.6mm thickness | 1.7% 341,076 hits | 62 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 7, 8, 12, 13, 14, 18, 19, 20, 25, 26, 28, 40, 66, 71"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, July 09"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, July 25"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "46.4 x 46 x 10.6 mm (1.83 x 1.81 x 0.42 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "63.5 g (2.26 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front (Sapphire crystal), stainless steel frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "Rotating bezel MIL-STD-810H compliant* IP68 dust tight and water resistant (immersible up to 50m/5ATM) ECG certified Blood pressure monitor *does not guarantee ruggedness or use in extreme conditions"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Super AMOLED, 3000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.34 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "438 x 438 pixels (~327 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 6, One UI 8 Watch"
+            },
+            {
+              "label": "Chipset",
+              "value": "Exynos W1000 (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Penta-core"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali-G68"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "64GB 2GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS (L1+L5), GLONASS, GALILEO, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, altimeter, compass, SpO2, temperature (skin), BioActive, antioxidant index"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 445 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "10W wireless"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Black, White"
+            },
+            {
+              "label": "Models",
+              "value": "SM-L500, SM-L505U"
+            },
+            {
+              "label": "SAR",
+              "value": "1.04 W/kg (head) 0.41 W/kg (body)"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.03 W/kg (head) 0.67 W/kg (body)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 242.09"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "samsung-galaxy-watch8-32gb",
+    "product_title": "Samsung Galaxy Watch8 32GB",
+    "clean_model": "Samsung Galaxy Watch8",
+    "gsmarena_url": "https://www.gsmarena.com/samsung_galaxy_watch8-13997.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/samsung_galaxy_watch8-13997.php",
+      "source_title": "Samsung Galaxy Watch8",
+      "clean_model": "Samsung Galaxy Watch8",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Samsung"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-watch8.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, July 09"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, July 25"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "2.9% 499,580 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "88"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, July 25 | 1.47\" 480x480 pixels | 2GB RAM | Exynos W1000 | 435mAh | 10W | Android Wear OS 6, One UI 8 Watch | 32GB storage, no card slot | 34g (44mm), 30g (40mm), 8.6mm thickness | 2.9% 499,580 hits | 88 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 7, 8, 12, 13, 14, 18, 19, 20, 25, 26, 28, 40, 66, 71"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, July 09"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, July 25"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "46 x 43.7 x 8.6 mm (1.81 x 1.72 x 0.34 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "34 g (44mm), 30 g (40mm) (1.06 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front (Sapphire crystal), aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "MIL-STD-810H compliant* IP68 dust tight and water resistant (immersible up to 50m/5ATM) ECG certified Blood pressure monitor Armor Aluminum 2 *does not guarantee ruggedness or use in extreme conditions"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Super AMOLED, 3000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.47 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "480 x 480 pixels (~327 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 6, One UI 8 Watch"
+            },
+            {
+              "label": "Chipset",
+              "value": "Exynos W1000 (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Penta-core"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali-G68"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "32GB 2GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS (L1+L5), GLONASS, GALILEO, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, altimeter, compass, SpO2, temperature (skin), BioActive, antioxidant index"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 435 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "10W wireless"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Graphite, Silver"
+            },
+            {
+              "label": "Models",
+              "value": "SM-L320, SM-L325, SM-L330, SM-L335, SM-L325U, SM-L335U"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.15 W/kg (head) 0.78 W/kg (body)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 179.99 / $ 329.99"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "product_slug": "oneplus-watch-3-43mm-32gb",
     "product_title": "OnePlus Watch 3 43mm 32GB",
     "clean_model": "OnePlus Watch 3 43mm",
@@ -253,11 +2699,15 @@
       "source_url": "https://www.gsmarena.com/oneplus_watch_3_43mm-13957.php",
       "source_title": "OnePlus Watch 3 43mm",
       "clean_model": "OnePlus Watch 3 43mm",
-      "extracted_at": "2026-08-13",
+      "extracted_at": "2026-08-14",
       "sections": [
         {
           "section": "Overview",
           "rows": [
+            {
+              "label": "Brand",
+              "value": "OnePlus"
+            },
             {
               "label": "Image URL",
               "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-watch3-43mm.jpg"
@@ -491,11 +2941,15 @@
       "source_url": "https://www.gsmarena.com/oneplus_watch_3-13668.php",
       "source_title": "OnePlus Watch 3",
       "clean_model": "OnePlus Watch 3",
-      "extracted_at": "2026-08-13",
+      "extracted_at": "2026-08-14",
       "sections": [
         {
           "section": "Overview",
           "rows": [
+            {
+              "label": "Brand",
+              "value": "OnePlus"
+            },
             {
               "label": "Image URL",
               "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-watch3.jpg"
@@ -745,11 +3199,15 @@
       "source_url": "https://www.gsmarena.com/oneplus_watch_lite-14365.php",
       "source_title": "OnePlus Watch Lite",
       "clean_model": "OnePlus Watch Lite",
-      "extracted_at": "2026-08-13",
+      "extracted_at": "2026-08-14",
       "sections": [
         {
           "section": "Overview",
           "rows": [
+            {
+              "label": "Brand",
+              "value": "OnePlus"
+            },
             {
               "label": "Image URL",
               "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-watch-3-lite.jpg"
@@ -968,6 +3426,824 @@
     }
   },
   {
+    "product_slug": "google-pixel-watch-4-32gb",
+    "product_title": "Google Pixel Watch 4 32GB",
+    "clean_model": "Google Pixel Watch 4",
+    "gsmarena_url": "https://www.gsmarena.com/google_pixel_watch_4-14088.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/google_pixel_watch_4-14088.php",
+      "source_title": "Google Pixel Watch 4",
+      "clean_model": "Google Pixel Watch 4",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Google"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-watch4.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2025, August 20"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2025, October 09"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "1.9% 185,391 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "49"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2025, October 09 | 1.4\" 456x456 pixels | 2GB RAM | Snapdragon W5 Gen 2 | 455mAh | Android Wear OS 6, up to 7.0 | 32GB storage, no card slot | 31g or 36.7g, 12.3mm thickness | 1.9% 185,391 hits | 49 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "LTE"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2025, August 20"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2025, October 09"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "45 x 45 x 12.3 mm (1.77 x 1.77 x 0.48 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "31 g or 36.7 g (1.09 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front (Gorilla Glass 5), aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP68 dust tight and water resistant (immersible up to 50m/5ATM) ECG certified"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "LTPO AMOLED, 3000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.4 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "456 x 456 pixels (~320 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Corning Gorilla Glass 5"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 6, up to 7.0"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm Snapdragon W5 Gen 2 (4 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Quad-core (4x1.7 GHz Cortex-A53)"
+            },
+            {
+              "label": "GPU",
+              "value": "Adreno A702"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "32GB 2GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "eMMC"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "6.0, A2DP"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS (L1+L5), GLONASS, GALILEO (E1+E5a)"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, altimeter, compass, SpO2, thermometer (skin temperature), skin conductance"
+            },
+            {
+              "label": "Features",
+              "value": "Satellite SOS service (LTE models only) Ultra Wideband (UWB) support"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 455 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "Wired, 50% in 15 min, 80% in 30 min, 100% in 60 min - 45mm model Wired, 50% in 15 min, 80% in 25 min, 100% in 45 min - 41mm model"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Matte Black, Polished Silver, Champagne Gold, Satin Moonstone"
+            },
+            {
+              "label": "Price",
+              "value": "€ 317.80"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "apple-watch-series-10-64gb",
+    "product_title": "Apple Watch Series 10 64GB",
+    "clean_model": "Apple Watch Series 10",
+    "gsmarena_url": "https://www.gsmarena.com/apple_watch_series_10-13318.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/apple_watch_series_10-13318.php",
+      "source_title": "Apple Watch Series 10",
+      "clean_model": "Apple Watch Series 10",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Apple"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/apple-watch-series10.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, September 09"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, September 20"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.7% 426,629 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "48"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, September 20 | 1.96\" 496x416 pixels | Apple S10 | 327mAh | watchOS 11, up to watchOS 26.6 | 64GB storage, no card slot | 34.4g (42mm), 41.7g (46mm), 9.7mm thickness | 0.7% 426,629 hits | 48 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100 - International, China, HK"
+            },
+            {
+              "label": "Network",
+              "value": "1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 17, 18, 19, 25, 26, 39, 40, 41, 66 - USA, LATAM, Canada"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 6, 7, 8, 18, 19, 20, 25, 26, 28, 39, 40, 41, 66 - International, China, HK"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, September 09"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, September 20"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "46 x 39 x 9.7 mm (1.81 x 1.54 x 0.38 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "34.4 g (42mm), 41.7 g (46mm) (1.48 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Sapphire crystal front, ceramic/sapphire crystal back, titanium frame (grade 5)"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP6X certified 50m water resistant ECG certified (region dependent SW application; HW available on all models) Depth gauge to 6m"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Retina LTPO3 OLED, 2000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.96 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "496 x 416 pixels (~330 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal glass"
+            },
+            {
+              "label": "Display",
+              "value": "Wide-angle OLED"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "watchOS 11, up to watchOS 26.6, planned upgrade to watchOS 27"
+            },
+            {
+              "label": "Chipset",
+              "value": "Apple S10"
+            },
+            {
+              "label": "CPU",
+              "value": "Dual-core"
+            },
+            {
+              "label": "GPU",
+              "value": "PowerVR"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "64GB"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS, GLONASS, GALILEO, QZSS, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, always-on altimeter, compass, SpO2, VO2max, temperature (body), temperature (water)"
+            },
+            {
+              "label": "Features",
+              "value": "Temperature sensing (0.01˚ accuracy) Ultra Wideband (UWB) support (gen2 chip) Media playback"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 327 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "Wireless, 0-80% in 30 min"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Slate, Gold, Natural"
+            },
+            {
+              "label": "Models",
+              "value": "A3001, A3002, A3003, A3206"
+            },
+            {
+              "label": "SAR",
+              "value": "1.08 W/kg (head)"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.26 W/kg (head) 0.83 W/kg (body)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 304.89"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "apple-watch-series-10-aluminum-64gb",
+    "product_title": "Apple Watch Series 10 Aluminum 64GB",
+    "clean_model": "Apple Watch Series 10 Aluminum",
+    "gsmarena_url": "https://www.gsmarena.com/apple_watch_series_10_aluminum-13319.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/apple_watch_series_10_aluminum-13319.php",
+      "source_title": "Apple Watch Series 10 Aluminum",
+      "clean_model": "Apple Watch Series 10 Aluminum",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Apple"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/apple-watch-series10-alumin.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, September 09"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, September 20"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.3% 191,515 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "30"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, September 20 | 1.96\" 496x416 pixels | Apple S10 | 327mAh | watchOS 11, up to watchOS 26.6 | 64GB storage, no card slot | 29.3g (42mm), 35.3g (46mm), 9.7mm thickness | 0.3% 191,515 hits | 30 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100 - International, China, HK"
+            },
+            {
+              "label": "Network",
+              "value": "1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 17, 18, 19, 25, 26, 39, 40, 41, 66 - USA, LATAM, Canada"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 6, 7, 8, 18, 19, 20, 25, 26, 28, 39, 40, 41, 66 - International, China, HK"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, September 09"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, September 20"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "46 x 39 x 9.7 mm (1.81 x 1.54 x 0.38 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "29.3 g (42mm), 35.3 g (46mm) (1.02 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front, ceramic/sapphire crystal back, aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP6X certified 50m water resistant ECG certified (region dependent SW application; HW available on all models) Depth gauge to 6m"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Retina LTPO3 OLED, 2000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.96 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "496 x 416 pixels (~330 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Ion-X strengthened glass"
+            },
+            {
+              "label": "Display",
+              "value": "Wide-angle OLED"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "watchOS 11, up to watchOS 26.6, planned upgrade to watchOS 27"
+            },
+            {
+              "label": "Chipset",
+              "value": "Apple S10"
+            },
+            {
+              "label": "CPU",
+              "value": "Dual-core"
+            },
+            {
+              "label": "GPU",
+              "value": "PowerVR"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "64GB"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS, GLONASS, GALILEO, QZSS, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, always-on altimeter, compass, SpO2, VO2max, temperature (body), temperature (water)"
+            },
+            {
+              "label": "Features",
+              "value": "Temperature sensing (0.01˚ accuracy) Ultra Wideband (UWB) support (gen2 chip) Media playback"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 327 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "Wireless, 0-80% in 30 min"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Jet Black, Rose Gold, Silver"
+            },
+            {
+              "label": "Models",
+              "value": "A3001, A3002, A3003, A3206, A2997, A2998, A2999, A3000"
+            },
+            {
+              "label": "SAR",
+              "value": "1.08 W/kg (head)"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.26 W/kg (head) 0.83 W/kg (body)"
+            },
+            {
+              "label": "Price",
+              "value": "About 300 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "product_slug": "oneplus-watch-2-esim-32gb",
     "product_title": "OnePlus Watch 2 (eSIM) 32GB",
     "clean_model": "OnePlus Watch 2 (eSIM)",
@@ -979,11 +4255,15 @@
       "source_url": "https://www.gsmarena.com/oneplus_watch_2_(esim)-13181.php",
       "source_title": "OnePlus Watch 2 (eSIM)",
       "clean_model": "OnePlus Watch 2 (eSIM)",
-      "extracted_at": "2026-08-13",
+      "extracted_at": "2026-08-14",
       "sections": [
         {
           "section": "Overview",
           "rows": [
+            {
+              "label": "Brand",
+              "value": "OnePlus"
+            },
             {
               "label": "Image URL",
               "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-watch2-china.jpg"
@@ -1206,6 +4486,268 @@
     }
   },
   {
+    "product_slug": "samsung-galaxy-watch-fe-16gb",
+    "product_title": "Samsung Galaxy Watch FE 16GB",
+    "clean_model": "Samsung Galaxy Watch FE",
+    "gsmarena_url": "https://www.gsmarena.com/samsung_galaxy_watch_fe-13112.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/samsung_galaxy_watch_fe-13112.php",
+      "source_title": "Samsung Galaxy Watch FE",
+      "clean_model": "Samsung Galaxy Watch FE",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Samsung"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-watch-fe-r.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, June 13"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, June 24"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.7% 508,030 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "65"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, June 24 | 1.2\" 396x396 pixels | 1.5GB RAM | Exynos W920 | 247mAh | 5W | Android Wear OS 4, up to 6.0, One UI Watch 8 | 16GB storage, no card slot | 26.6g, 9.8mm thickness | 0.7% 508,030 hits | 65 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "LTE"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, June 13"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, June 24"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "40.4 x 39.3 x 9.8 mm (1.59 x 1.55 x 0.39 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "26.6 g (0.95 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front (sapphire crystal), aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "50m/5ATM water resistant (up to 10 min) IP68 dust tight and water resistant (immersible up to 1.5m for 30 min) MIL-STD-810H compliant* ECG certified Compatible with standard 20mm straps * does not guarantee ruggedness or use in extreme conditions"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Super AMOLED"
+            },
+            {
+              "label": "Size",
+              "value": "1.2 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "396 x 396 pixels (~330 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal glass"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 4, upgradable to 6.0, One UI Watch 8"
+            },
+            {
+              "label": "Chipset",
+              "value": "Exynos W920 (5 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Dual-core 1.18 GHz Cortex-A55"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali-G68"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "16GB 1.5GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.0, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS, GALILEO, GLONASS, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, altimeter, compass, SpO2, temperature (skin)"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 247 mAh battery"
+            },
+            {
+              "label": "Charging",
+              "value": "Wireless"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Black, Pink Gold, Silver"
+            },
+            {
+              "label": "Models",
+              "value": "SM-R861, SM-R866"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.52 W/kg (head) 0.17 W/kg (body)"
+            },
+            {
+              "label": "Price",
+              "value": "About 100 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "product_slug": "oneplus-watch-2r-32gb",
     "product_title": "OnePlus Watch 2R 32GB",
     "clean_model": "OnePlus Watch 2R",
@@ -1217,11 +4759,15 @@
       "source_url": "https://www.gsmarena.com/oneplus_watch_2r-13209.php",
       "source_title": "OnePlus Watch 2R",
       "clean_model": "OnePlus Watch 2R",
-      "extracted_at": "2026-08-13",
+      "extracted_at": "2026-08-14",
       "sections": [
         {
           "section": "Overview",
           "rows": [
+            {
+              "label": "Brand",
+              "value": "OnePlus"
+            },
             {
               "label": "Image URL",
               "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-watch-2r.jpg"
@@ -1464,6 +5010,792 @@
     }
   },
   {
+    "product_slug": "samsung-galaxy-watch-ultra-32gb",
+    "product_title": "Samsung Galaxy Watch Ultra 32GB",
+    "clean_model": "Samsung Galaxy Watch Ultra",
+    "gsmarena_url": "https://www.gsmarena.com/samsung_galaxy_watch_ultra-13127.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/samsung_galaxy_watch_ultra-13127.php",
+      "source_title": "Samsung Galaxy Watch Ultra",
+      "clean_model": "Samsung Galaxy Watch Ultra",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Samsung"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-watch-ultra.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, July 10"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, July 24"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "2.5% 988,909 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "173"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, July 24 | 1.5\" 480x480 pixels | 2GB RAM | Exynos W1000 | 590mAh | 10W | Android Wear OS 5, up to 6.0, One UI Watch 8 | 32GB/64GB storage, no card slot | 60.5g, 12.1mm thickness | 2.5% 988,909 hits | 173 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 7, 8, 12, 13, 14, 18, 19, 20, 25, 26, 28, 40, 66, 71"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, July 10"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, July 24"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "47.4 x 47.4 x 12.1 mm (1.87 x 1.87 x 0.48 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "60.5 g (2.15 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Sapphire crystal front, ceramic/sapphire crystal back, titanium frame (grade 4)"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP68 dust tight and water resistant (immersible up to 100m/10ATM for 10 min) MIL-STD-810H compliant ECG certified"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Super AMOLED"
+            },
+            {
+              "label": "Size",
+              "value": "1.5 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "480 x 480 pixels (~327 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal glass"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 5, upgradable to 6.0, One UI Watch 8"
+            },
+            {
+              "label": "Chipset",
+              "value": "Exynos W1000 (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Penta-core"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali-G68"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "32GB 2GB RAM, 64GB 2GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS (L1+L5), GLONASS, GALILEO, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, altimeter, compass, SpO2, temperature (body), temperature (water), BioActive"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 590 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "10W wireless"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Titanium Sliver, Titanium Gray, Titanium White, Titanium Blue"
+            },
+            {
+              "label": "Models",
+              "value": "SM-L705F, SM-L705N, SM-L705U"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.11 W/kg (head) 0.36 W/kg (body)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 365.90"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "samsung-galaxy-watch-ultra-64gb",
+    "product_title": "Samsung Galaxy Watch Ultra 64GB",
+    "clean_model": "Samsung Galaxy Watch Ultra",
+    "gsmarena_url": "https://www.gsmarena.com/samsung_galaxy_watch_ultra-13127.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/samsung_galaxy_watch_ultra-13127.php",
+      "source_title": "Samsung Galaxy Watch Ultra",
+      "clean_model": "Samsung Galaxy Watch Ultra",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Samsung"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-watch-ultra.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, July 10"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, July 24"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "2.5% 988,909 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "173"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, July 24 | 1.5\" 480x480 pixels | 2GB RAM | Exynos W1000 | 590mAh | 10W | Android Wear OS 5, up to 6.0, One UI Watch 8 | 32GB/64GB storage, no card slot | 60.5g, 12.1mm thickness | 2.5% 988,909 hits | 173 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 7, 8, 12, 13, 14, 18, 19, 20, 25, 26, 28, 40, 66, 71"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, July 10"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, July 24"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "47.4 x 47.4 x 12.1 mm (1.87 x 1.87 x 0.48 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "60.5 g (2.15 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Sapphire crystal front, ceramic/sapphire crystal back, titanium frame (grade 4)"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP68 dust tight and water resistant (immersible up to 100m/10ATM for 10 min) MIL-STD-810H compliant ECG certified"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Super AMOLED"
+            },
+            {
+              "label": "Size",
+              "value": "1.5 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "480 x 480 pixels (~327 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal glass"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 5, upgradable to 6.0, One UI Watch 8"
+            },
+            {
+              "label": "Chipset",
+              "value": "Exynos W1000 (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Penta-core"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali-G68"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "32GB 2GB RAM, 64GB 2GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS (L1+L5), GLONASS, GALILEO, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, altimeter, compass, SpO2, temperature (body), temperature (water), BioActive"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 590 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "10W wireless"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Titanium Sliver, Titanium Gray, Titanium White, Titanium Blue"
+            },
+            {
+              "label": "Models",
+              "value": "SM-L705F, SM-L705N, SM-L705U"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.11 W/kg (head) 0.36 W/kg (body)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 365.90"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "samsung-galaxy-watch7-32gb",
+    "product_title": "Samsung Galaxy Watch7 32GB",
+    "clean_model": "Samsung Galaxy Watch7",
+    "gsmarena_url": "https://www.gsmarena.com/samsung_galaxy_watch7-13128.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/samsung_galaxy_watch7-13128.php",
+      "source_title": "Samsung Galaxy Watch7",
+      "clean_model": "Samsung Galaxy Watch7",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Samsung"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-watch7.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, July 10"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, July 24"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "2.2% 951,587 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "132"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, July 24 | 1.5\" 480x480 pixels | 2GB RAM | Exynos W1000 | 425mAh | 10W | Android Wear OS 5, up to 6.0, One UI Watch 8 | 32GB storage, no card slot | 33.8g (44mm), 28.8g (40mm), 9.7mm thickness | 2.2% 951,587 hits | 132 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "1, 2, 3, 4, 5, 7, 8, 12, 13, 14, 18, 19, 20, 25, 26, 28, 40, 66, 71"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, July 10"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, July 24"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "44.4 x 44.4 x 9.7 mm (1.75 x 1.75 x 0.38 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "33.8 g (44mm), 28.8 g (40mm) (1.02 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front (Sapphire crystal), aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "MIL-STD-810H compliant* IP68 dust tight and water resistant (immersible up to 50m/5ATM) Compatible with standard 20mm straps ECG certified Blood pressure monitor Armor Aluminum 2 *does not guarantee ruggedness or use in extreme conditions"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Super AMOLED, 2000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.5 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "480 x 480 pixels (~327 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Sapphire crystal"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 5, up to 6.0, One UI Watch 8"
+            },
+            {
+              "label": "Chipset",
+              "value": "Exynos W1000 (3 nm)"
+            },
+            {
+              "label": "CPU",
+              "value": "Penta-core"
+            },
+            {
+              "label": "GPU",
+              "value": "Mali-G68"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "32GB 2GB RAM"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP, LE"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS (L1+L5), GLONASS, GALILEO, BDS"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, barometer, altimeter, compass, SpO2, temperature (skin), BioActive"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 425 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "10W wireless"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Cream, Silver, Green"
+            },
+            {
+              "label": "Models",
+              "value": "SM-L310F, SM-L315F"
+            },
+            {
+              "label": "SAR EU",
+              "value": "0.73 W/kg (head) 1.85 W/kg (body)"
+            },
+            {
+              "label": "Price",
+              "value": "€ 159.00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "product_slug": "oneplus-watch-2-32gb",
     "product_title": "OnePlus Watch 2 32GB",
     "clean_model": "OnePlus Watch 2",
@@ -1475,11 +5807,15 @@
       "source_url": "https://www.gsmarena.com/oneplus_watch_2-12843.php",
       "source_title": "OnePlus Watch 2",
       "clean_model": "OnePlus Watch 2",
-      "extracted_at": "2026-08-13",
+      "extracted_at": "2026-08-14",
       "sections": [
         {
           "section": "Overview",
           "rows": [
+            {
+              "label": "Brand",
+              "value": "OnePlus"
+            },
             {
               "label": "Image URL",
               "value": "https://fdn2.gsmarena.com/vv/bigpic/oneplus-watch-2.jpg"
@@ -1711,6 +6047,260 @@
             {
               "label": "Price",
               "value": "About 160 EUR"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "product_slug": "google-pixel-watch-3-32gb",
+    "product_title": "Google Pixel Watch 3 32GB",
+    "clean_model": "Google Pixel Watch 3",
+    "gsmarena_url": "https://www.gsmarena.com/google_pixel_watch_3-13253.php",
+    "status": "matched",
+    "match_confidence": "manual",
+    "specs_json": {
+      "source": "GSMArena",
+      "source_url": "https://www.gsmarena.com/google_pixel_watch_3-13253.php",
+      "source_title": "Google Pixel Watch 3",
+      "clean_model": "Google Pixel Watch 3",
+      "extracted_at": "2026-08-14",
+      "sections": [
+        {
+          "section": "Overview",
+          "rows": [
+            {
+              "label": "Brand",
+              "value": "Google"
+            },
+            {
+              "label": "Image URL",
+              "value": "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-watch3-.jpg"
+            },
+            {
+              "label": "Announced",
+              "value": "2024, August 13"
+            },
+            {
+              "label": "Released",
+              "value": "Released 2024, September 10"
+            },
+            {
+              "label": "Popularity (hits)",
+              "value": "0.9% 279,691 hits"
+            },
+            {
+              "label": "Fans",
+              "value": "62"
+            },
+            {
+              "label": "Image panel summary",
+              "value": "Released 2024, September 10 | 1.4\" 456x456 pixels | 2GB RAM | SW5100 | 420mAh | Android Wear OS 5, up to 7.0 | 32GB storage, no card slot | 37g, 12.3mm thickness | 0.9% 279,691 hits | 62 fans"
+            }
+          ]
+        },
+        {
+          "section": "Network",
+          "rows": [
+            {
+              "label": "Technology",
+              "value": "GSM / HSPA / LTE"
+            },
+            {
+              "label": "2G bands",
+              "value": "GSM 850 / 900 / 1800 / 1900"
+            },
+            {
+              "label": "3G bands",
+              "value": "HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100"
+            },
+            {
+              "label": "4G bands",
+              "value": "LTE"
+            },
+            {
+              "label": "Speed",
+              "value": "HSPA, LTE"
+            }
+          ]
+        },
+        {
+          "section": "Launch",
+          "rows": [
+            {
+              "label": "Announced",
+              "value": "2024, August 13"
+            },
+            {
+              "label": "Status",
+              "value": "Available. Released 2024, September 10"
+            }
+          ]
+        },
+        {
+          "section": "Body",
+          "rows": [
+            {
+              "label": "Dimensions",
+              "value": "45 x 45 x 12.3 mm (1.77 x 1.77 x 0.48 in)"
+            },
+            {
+              "label": "Weight",
+              "value": "37 g (1.31 oz)"
+            },
+            {
+              "label": "Build",
+              "value": "Glass front (Gorilla Glass 5), aluminum frame"
+            },
+            {
+              "label": "SIM",
+              "value": "eSIM"
+            },
+            {
+              "label": "Body",
+              "value": "IP68 dust tight and water resistant (immersible up to 50m/5ATM) ECG certified"
+            }
+          ]
+        },
+        {
+          "section": "Display",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "LTPO AMOLED, 2000 nits (peak)"
+            },
+            {
+              "label": "Size",
+              "value": "1.4 inches"
+            },
+            {
+              "label": "Resolution",
+              "value": "456 x 456 pixels (~320 ppi density)"
+            },
+            {
+              "label": "Protection",
+              "value": "Corning Gorilla Glass 5"
+            }
+          ]
+        },
+        {
+          "section": "Platform",
+          "rows": [
+            {
+              "label": "OS",
+              "value": "Android Wear OS 5, up to 7.0"
+            },
+            {
+              "label": "Chipset",
+              "value": "Qualcomm SW5100"
+            }
+          ]
+        },
+        {
+          "section": "Memory",
+          "rows": [
+            {
+              "label": "Card slot",
+              "value": "No"
+            },
+            {
+              "label": "Internal",
+              "value": "32GB 2GB RAM"
+            },
+            {
+              "label": "Memory",
+              "value": "eMMC"
+            }
+          ]
+        },
+        {
+          "section": "Camera",
+          "rows": [
+            {
+              "label": "Camera",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Sound",
+          "rows": [
+            {
+              "label": "Loudspeaker",
+              "value": "Yes"
+            },
+            {
+              "label": "3.5mm jack",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Comms",
+          "rows": [
+            {
+              "label": "WLAN",
+              "value": "Wi-Fi 802.11 a/b/g/n/ac/6, dual-band"
+            },
+            {
+              "label": "Bluetooth",
+              "value": "5.3, A2DP"
+            },
+            {
+              "label": "Positioning",
+              "value": "GPS, GLONASS, GALILEO"
+            },
+            {
+              "label": "NFC",
+              "value": "Yes"
+            },
+            {
+              "label": "Radio",
+              "value": "No"
+            },
+            {
+              "label": "USB",
+              "value": "No"
+            }
+          ]
+        },
+        {
+          "section": "Features",
+          "rows": [
+            {
+              "label": "Sensors",
+              "value": "Accelerometer, gyro, heart rate, altimeter, compass, SpO2, thermometer (skin temperature), skin conductance"
+            },
+            {
+              "label": "Features",
+              "value": "Ultra Wideband (UWB) support"
+            }
+          ]
+        },
+        {
+          "section": "Battery",
+          "rows": [
+            {
+              "label": "Type",
+              "value": "Li-Ion 420 mAh"
+            },
+            {
+              "label": "Charging",
+              "value": "Wired, 50% in 28 min, 80% in 50 min - 45mm model Wired, 50% in 24 min, 80% in 35 min - 41mm model"
+            }
+          ]
+        },
+        {
+          "section": "Misc",
+          "rows": [
+            {
+              "label": "Colors",
+              "value": "Matte Black, Polished Silver, Champagne Gold, Matte Hazel"
+            },
+            {
+              "label": "Price",
+              "value": "About 170 EUR"
             }
           ]
         }

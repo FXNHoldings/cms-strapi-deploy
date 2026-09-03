@@ -1,0 +1,3508 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart Home Device",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "case",
+    "cover",
+    "skin",
+    "sticker",
+    "decal",
+    "mount",
+    "bracket",
+    "wall plate",
+    "faceplate",
+    "replacement filter",
+    "replacement part",
+    "power adapter",
+    "charger",
+    "charging cable",
+    "usb cable",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model",
+    "manual only"
+  ],
+  "families": [
+    {
+      "brand": "Amazon",
+      "family": "Echo",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Echo (4th Gen) with Built-in Zigbee Hub",
+          "model": "Echo (4th Gen) with Built-in Zigbee Hub",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "echo",
+            "4th",
+            "gen",
+            "built-in",
+            "zigbee",
+            "hub"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Echo (4th Gen) with Built-in Zigbee Hub",
+            "Echo (4th Gen) with Built-in Zigbee Hub smart home",
+            "Amazon Echo (4th Gen) with Built-in Zigbee Hub"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Amazon",
+      "family": "Echo Dot",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Echo Dot (Newest Gen)",
+          "model": "Echo Dot (Newest Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "echo",
+            "dot",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Echo Dot (Newest Gen)",
+            "Echo Dot (Newest Gen) smart home",
+            "Amazon Echo Dot (Newest Gen)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Amazon",
+      "family": "Echo Show",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Echo Show 5, 3rd Gen",
+          "model": "Echo Show 5, 3rd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "show",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo Show 5, 3rd Gen",
+            "Amazon Echo Show 5, 3rd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Echo Show 8 (3rd Gen)",
+          "model": "Echo Show 8 (3rd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "echo",
+            "show",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Echo Show 8 (3rd Gen)",
+            "Echo Show 8 (3rd Gen) smart home",
+            "Amazon Echo Show 8 (3rd Gen)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Echo Show 15",
+          "model": "Echo Show 15",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "echo",
+            "show",
+            "15"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Echo Show 15",
+            "Echo Show 15 smart home",
+            "Amazon Echo Show 15"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Amazon",
+      "family": "Echo Spot",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Echo Spot (2024)",
+          "model": "Echo Spot (2024)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "echo",
+            "spot",
+            "2024"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Echo Spot (2024)",
+            "Echo Spot (2024) smart home",
+            "Amazon Echo Spot (2024)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Amazon",
+      "family": "Smart Plug",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Smart Plug",
+          "model": "Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Smart Plug",
+            "Amazon Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Apple",
+      "family": "HomePod Mini",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple HomePod Mini",
+          "model": "HomePod Mini",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "apple",
+            "homepod",
+            "mini"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Apple HomePod Mini",
+            "Apple HomePod Mini smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Blueair",
+      "family": "Blue Pure",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Blueair Blue Pure 311i Max",
+          "model": "Blue Pure 311i Max",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "blueair",
+            "blue",
+            "pure",
+            "311i",
+            "max"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Blueair Blue Pure 311i Max",
+            "Blueair Blue Pure 311i Max smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Coway",
+      "family": "Airmega 250S",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Coway Airmega 250S Smart Air Purifier",
+          "model": "Airmega 250S Smart Air Purifier",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "coway",
+            "airmega",
+            "250s",
+            "air",
+            "purifier"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Coway Airmega 250S Smart Air Purifier",
+            "Coway Airmega 250S Smart Air Purifier smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Dreame",
+      "family": "X50 Ultra",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Dreame X50 Ultra Robot Vacuum and Mop",
+          "model": "X50 Ultra Robot Vacuum and Mop",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "dreame",
+            "x50",
+            "ultra",
+            "robot",
+            "vacuum",
+            "mop"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Dreame X50 Ultra Robot Vacuum and Mop",
+            "Dreame X50 Ultra Robot Vacuum and Mop smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Dreo",
+      "family": "Pilot Max",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Dreo Pilot Max S Smart Tower Fan",
+          "model": "Pilot Max S Smart Tower Fan",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "dreo",
+            "pilot",
+            "max",
+            "tower",
+            "fan"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Dreo Pilot Max S Smart Tower Fan",
+            "Dreo Pilot Max S Smart Tower Fan smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Dyson",
+      "family": "Purifier Hot+Cool",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Purifier Hot+Cool Formaldehyde HP09",
+          "model": "Purifier Hot+Cool Formaldehyde HP09",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "purifier",
+            "hot+cool",
+            "formaldehyde",
+            "hp09"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Purifier Hot+Cool Formaldehyde HP09",
+            "Purifier Hot+Cool Formaldehyde HP09 smart home",
+            "Dyson Purifier Hot+Cool Formaldehyde HP09"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Dyson Purifier Hot+Cool HP2 De-NOx",
+          "model": "Purifier Hot+Cool HP2 De-NOx",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "dyson",
+            "purifier",
+            "hot+cool",
+            "hp2",
+            "de-nox"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Dyson Purifier Hot+Cool HP2 De-NOx",
+            "Dyson Purifier Hot+Cool HP2 De-NOx smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ecovacs",
+      "family": "Deebot X8",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ecovacs Deebot X8 Pro Omni",
+          "model": "Deebot X8 Pro Omni",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ecovacs",
+            "deebot",
+            "x8",
+            "pro",
+            "omni"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ecovacs Deebot X8 Pro Omni",
+            "Ecovacs Deebot X8 Pro Omni smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eufy",
+      "family": "Robot Vacuum",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Eufy Robot Vacuum Omni S1 Pro",
+          "model": "Robot Vacuum Omni S1 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eufy",
+            "robot",
+            "vacuum",
+            "omni",
+            "s1",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Eufy Robot Vacuum Omni S1 Pro",
+            "Eufy Robot Vacuum Omni S1 Pro smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eve",
+      "family": "Energy Smart",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Eve Energy Smart Plug",
+          "model": "Energy Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eve",
+            "energy",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Eve Energy Smart Plug",
+            "Eve Energy Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "GE Cync",
+      "family": "Full Color",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "GE Cync Full Color Direct Connect Smart Bulb",
+          "model": "Full Color Direct Connect Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ge",
+            "cync",
+            "full",
+            "color",
+            "direct",
+            "connect",
+            "bulb"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "GE Cync Full Color Direct Connect Smart Bulb",
+            "GE Cync Full Color Direct Connect Smart Bulb smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Govee",
+      "family": "Curtain Lights",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Govee Curtain Lights 2",
+          "model": "Curtain Lights 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "govee",
+            "curtain",
+            "lights"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Govee Curtain Lights 2",
+            "Govee Curtain Lights 2 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Govee",
+      "family": "Floor Lamp",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Govee Floor Lamp 2",
+          "model": "Floor Lamp 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "govee",
+            "floor",
+            "lamp"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Govee Floor Lamp 2",
+            "Govee Floor Lamp 2 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Govee",
+      "family": "RGBICW Smart",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Govee RGBICW Smart LED Bulbs",
+          "model": "RGBICW Smart LED Bulbs",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "govee",
+            "rgbicw",
+            "led",
+            "bulbs"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Govee RGBICW Smart LED Bulbs",
+            "Govee RGBICW Smart LED Bulbs smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "iRobot",
+      "family": "Roomba Combo",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "iRobot Roomba Combo j9+",
+          "model": "Roomba Combo j9+",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "irobot",
+            "roomba",
+            "combo",
+            "j9+"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "iRobot Roomba Combo j9+",
+            "iRobot Roomba Combo j9+ smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Levoit",
+      "family": "Core 400S",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Levoit Core 400S Smart Air Purifier",
+          "model": "Core 400S Smart Air Purifier",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "levoit",
+            "core",
+            "400s",
+            "air",
+            "purifier"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Levoit Core 400S Smart Air Purifier",
+            "Levoit Core 400S Smart Air Purifier smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Meater",
+      "family": "2 Plus",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Meater 2 Plus Smart Wireless Meat Thermometer",
+          "model": "2 Plus Smart Wireless Meat Thermometer",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "meater",
+            "wireless",
+            "meat",
+            "thermometer"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Meater 2 Plus Smart Wireless Meat Thermometer",
+            "Meater 2 Plus Smart Wireless Meat Thermometer smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Meross",
+      "family": "MSS315 Matter",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Meross MSS315 Matter Smart Plug",
+          "model": "MSS315 Matter Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "meross",
+            "mss315",
+            "matter",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Meross MSS315 Matter Smart Plug",
+            "Meross MSS315 Matter Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nanoleaf",
+      "family": "Essentials Matter",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Nanoleaf Essentials Matter A19 Smart Bulb",
+          "model": "Essentials Matter A19 Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "nanoleaf",
+            "essentials",
+            "matter",
+            "a19",
+            "bulb"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Nanoleaf Essentials Matter A19 Smart Bulb",
+            "Nanoleaf Essentials Matter A19 Smart Bulb smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nanoleaf",
+      "family": "Shapes Hexagons",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Shapes Hexagons Smarter Kit (9 panels)",
+          "model": "Shapes Hexagons Smarter Kit (9 panels)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "shapes",
+            "hexagons",
+            "smarter",
+            "kit",
+            "panels"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Shapes Hexagons Smarter Kit (9 panels)",
+            "Shapes Hexagons Smarter Kit (9 panels) smart home",
+            "Nanoleaf Shapes Hexagons Smarter Kit (9 panels)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Nanoleaf Shapes Hexagons",
+          "model": "Shapes Hexagons",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "nanoleaf",
+            "shapes",
+            "hexagons"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Nanoleaf Shapes Hexagons",
+            "Nanoleaf Shapes Hexagons smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nest",
+      "family": "Hub",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Nest Hub (2nd Gen)",
+          "model": "Hub (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "nest",
+            "hub",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Nest Hub (2nd Gen)",
+            "Nest Hub (2nd Gen) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nest",
+      "family": "Mini",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Nest Mini (2nd Gen)",
+          "model": "Mini (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "nest",
+            "mini",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Nest Mini (2nd Gen)",
+            "Nest Mini (2nd Gen) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "PETLIBRO",
+      "family": "Granary Smart",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "PETLIBRO Granary Smart Feeder with Camera",
+          "model": "Granary Smart Feeder with Camera",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "petlibro",
+            "granary",
+            "feeder",
+            "camera"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "PETLIBRO Granary Smart Feeder with Camera",
+            "PETLIBRO Granary Smart Feeder with Camera smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Philips Hue",
+      "family": "Go Portable",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Philips Hue Go Portable Table Lamp",
+          "model": "Go Portable Table Lamp",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "go",
+            "portable",
+            "table",
+            "lamp"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Philips Hue Go Portable Table Lamp",
+            "Philips Hue Go Portable Table Lamp smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Philips Hue",
+      "family": "Gradient Lightstrip",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Philips Hue Gradient Lightstrip",
+          "model": "Gradient Lightstrip",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "gradient",
+            "lightstrip"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Philips Hue Gradient Lightstrip",
+            "Philips Hue Gradient Lightstrip smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Philips Hue",
+      "family": "White Ambiance",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Philips Hue White Ambiance A19 Smart Bulb",
+          "model": "White Ambiance A19 Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "white",
+            "ambiance",
+            "a19",
+            "bulb"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Philips Hue White Ambiance A19 Smart Bulb",
+            "Philips Hue White Ambiance A19 Smart Bulb smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Philips Hue",
+      "family": "White and",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "White and Color Ambiance A19 Starter Kit (4 bulbs + Bridge)",
+          "model": "White and Color Ambiance A19 Starter Kit (4 bulbs + Bridge)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "white",
+            "color",
+            "ambiance",
+            "a19",
+            "starter",
+            "kit",
+            "bulbs",
+            "bridge"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "White and Color Ambiance A19 Starter Kit (4 bulbs + Bridge)",
+            "White and Color Ambiance A19 Starter Kit (4 bulbs + Bridge) smart home",
+            "Philips Hue White and Color Ambiance A19 Starter Kit (4 bulbs + Bridge)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Philips Hue White and Color Ambiance A19 Smart Bulb",
+          "model": "White and Color Ambiance A19 Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "white",
+            "color",
+            "ambiance",
+            "a19",
+            "bulb"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Philips Hue White and Color Ambiance A19 Smart Bulb",
+            "Philips Hue White and Color Ambiance A19 Smart Bulb smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Roborock",
+      "family": "Saros 10R",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Roborock Saros 10R Robot Vacuum",
+          "model": "Saros 10R Robot Vacuum",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "roborock",
+            "saros",
+            "10r",
+            "robot",
+            "vacuum"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Roborock Saros 10R Robot Vacuum",
+            "Roborock Saros 10R Robot Vacuum smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Shark",
+      "family": "PowerDetect 2-in-1",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Shark PowerDetect 2-in-1 Robot Vacuum and Mop",
+          "model": "PowerDetect 2-in-1 Robot Vacuum and Mop",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "shark",
+            "powerdetect",
+            "2-in-1",
+            "robot",
+            "vacuum",
+            "mop"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Shark PowerDetect 2-in-1 Robot Vacuum and Mop",
+            "Shark PowerDetect 2-in-1 Robot Vacuum and Mop smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "SwitchBot",
+      "family": "Smart Plug",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "SwitchBot Smart Plug Mini",
+          "model": "Smart Plug Mini",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "switchbot",
+            "plug",
+            "mini"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "SwitchBot Smart Plug Mini",
+            "SwitchBot Smart Plug Mini smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Kasa EP25",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Kasa EP25 Smart Plug",
+          "model": "Kasa EP25 Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "ep25",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa EP25 Smart Plug",
+            "TP-Link Kasa EP25 Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo L535E",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo L535E Matter Smart Bulb",
+          "model": "Tapo L535E Matter Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "l535e",
+            "matter",
+            "bulb"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo L535E Matter Smart Bulb",
+            "TP-Link Tapo L535E Matter Smart Bulb smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo P125M",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo P125M Matter Smart Plug",
+          "model": "Tapo P125M Matter Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "p125m",
+            "matter",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo P125M Matter Smart Plug",
+            "TP-Link Tapo P125M Matter Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "WiZ",
+      "family": "A19 Matter",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "WiZ A19 Matter Smart Bulb",
+          "model": "A19 Matter Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "wiz",
+            "a19",
+            "matter",
+            "bulb"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "WiZ A19 Matter Smart Bulb",
+            "WiZ A19 Matter Smart Bulb smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Body+ Smart",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Body+ Smart Wi-Fi Body Composition Scale",
+          "model": "Body+ Smart Wi-Fi Body Composition Scale",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "body+",
+            "body",
+            "composition",
+            "scale"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Body+ Smart Wi-Fi Body Composition Scale",
+            "Body+ Smart Wi-Fi Body Composition Scale smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Bulb Color",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Bulb Color (4-pack)",
+          "model": "Bulb Color (4-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "bulb",
+            "color",
+            "4-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Bulb Color (4-pack)",
+            "Bulb Color (4-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Classic 300S",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Classic 300S Smart Ultrasonic Humidifier",
+          "model": "Classic 300S Smart Ultrasonic Humidifier",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "classic",
+            "300s",
+            "ultrasonic",
+            "humidifier"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Classic 300S Smart Ultrasonic Humidifier",
+            "Classic 300S Smart Ultrasonic Humidifier smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Color A19",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Color A19 1100-Lumen Smart Bulb",
+          "model": "Color A19 1100-Lumen Smart Bulb",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "color",
+            "a19",
+            "1100-lumen",
+            "bulb"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Color A19 1100-Lumen Smart Bulb",
+            "Color A19 1100-Lumen Smart Bulb smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Element Indoor",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Element Indoor Air Quality Monitor",
+          "model": "Element Indoor Air Quality Monitor",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "element",
+            "indoor",
+            "air",
+            "quality",
+            "monitor"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Element Indoor Air Quality Monitor",
+            "Element Indoor Air Quality Monitor smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Family Hub",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Family Hub Smart Refrigerator (RF29 Series)",
+          "model": "Family Hub Smart Refrigerator (RF29 Series)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "family",
+            "hub",
+            "refrigerator",
+            "rf29",
+            "series"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Family Hub Smart Refrigerator (RF29 Series)",
+            "Family Hub Smart Refrigerator (RF29 Series) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Full Colour",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Full Colour Smart Bulbs (4-pack)",
+          "model": "Full Colour Smart Bulbs (4-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "full",
+            "colour",
+            "bulbs",
+            "4-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Full Colour Smart Bulbs (4-pack)",
+            "Full Colour Smart Bulbs (4-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Ironwood Wi-Fi",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ironwood Wi-Fi Pellet Grill (WiFIRE)",
+          "model": "Ironwood Wi-Fi Pellet Grill (WiFIRE)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "ironwood",
+            "pellet",
+            "grill",
+            "wifire"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ironwood Wi-Fi Pellet Grill (WiFIRE)",
+            "Ironwood Wi-Fi Pellet Grill (WiFIRE) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Matter Smart",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Matter Smart LED Bulb (Multicolour, 4-pack)",
+          "model": "Matter Smart LED Bulb (Multicolour, 4-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "matter",
+            "led",
+            "bulb",
+            "multicolour",
+            "4-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Matter Smart LED Bulb (Multicolour, 4-pack)",
+            "Matter Smart LED Bulb (Multicolour, 4-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Play Light",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Play Light Bar (2-pack)",
+          "model": "Play Light Bar (2-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "play",
+            "light",
+            "bar",
+            "2-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Play Light Bar (2-pack)",
+            "Play Light Bar (2-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Precision Cooker",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Precision Cooker 3.0 (Wi-Fi Sous Vide)",
+          "model": "Precision Cooker 3.0 (Wi-Fi Sous Vide)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "precision",
+            "cooker",
+            "3.0",
+            "sous",
+            "vide"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Precision Cooker 3.0 (Wi-Fi Sous Vide)",
+            "Precision Cooker 3.0 (Wi-Fi Sous Vide) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Pro Plus",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Pro Plus Smart Wi-Fi 6-Quart Pressure Cooker",
+          "model": "Pro Plus Smart Wi-Fi 6-Quart Pressure Cooker",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "pro",
+            "6-quart",
+            "pressure",
+            "cooker"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Pro Plus Smart Wi-Fi 6-Quart Pressure Cooker",
+            "Pro Plus Smart Wi-Fi 6-Quart Pressure Cooker smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "RGBIC LED",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "RGBIC LED Strip Light M1 (Matter)",
+          "model": "RGBIC LED Strip Light M1 (Matter)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "rgbic",
+            "led",
+            "strip",
+            "light",
+            "m1",
+            "matter"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "RGBIC LED Strip Light M1 (Matter)",
+            "RGBIC LED Strip Light M1 (Matter) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Temperature and",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Temperature and Humidity Sensor (Zigbee)",
+          "model": "Temperature and Humidity Sensor (Zigbee)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "temperature",
+            "humidity",
+            "sensor",
+            "zigbee"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Temperature and Humidity Sensor (Zigbee)",
+            "Temperature and Humidity Sensor (Zigbee) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "TV Backlight",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TV Backlight 3 Lite (Camera Sync)",
+          "model": "TV Backlight 3 Lite (Camera Sync)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "tv",
+            "backlight",
+            "lite",
+            "camera",
+            "sync"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TV Backlight 3 Lite (Camera Sync)",
+            "TV Backlight 3 Lite (Camera Sync) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "WashTower with",
+      "category": "Smart Home Device",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "WashTower with ThinQ (Washer + Dryer)",
+          "model": "WashTower with ThinQ (Washer + Dryer)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "washtower",
+            "thinq",
+            "washer",
+            "dryer"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "WashTower with ThinQ (Washer + Dryer)",
+            "WashTower with ThinQ (Washer + Dryer) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    }
+  ]
+}

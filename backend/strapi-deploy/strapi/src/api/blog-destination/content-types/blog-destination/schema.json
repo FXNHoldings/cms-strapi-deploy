@@ -13,7 +13,7 @@
     "slug": { "type": "uid", "targetField": "name", "required": true },
     "baseUrl": { "type": "string", "required": true },
     "webhookUrl": { "type": "string", "required": true },
-    "webhookSecret": { "type": "password" },
+    "webhookSecret": { "type": "string", "private": true },
     "authHeader": { "type": "string" },
     "active": { "type": "boolean", "default": true },
     "autoPostOnPublish": { "type": "boolean", "default": true },

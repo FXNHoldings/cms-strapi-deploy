@@ -15,6 +15,7 @@
 
 const crypto = require('crypto');
 const axios = require('axios');
+const { marked } = require('marked');
 
 module.exports = {
   async afterUpdate(event) {
@@ -55,6 +56,7 @@ async function maybeFireWebhooks(event) {
         slug: article.slug,
         excerpt: article.excerpt,
         content: article.content,
+        contentHtml: marked.parse(article.content || ''),
         coverImage: article.coverImage && article.coverImage.url ? article.coverImage.url : null,
         category: article.category && article.category.name ? article.category.name : null,
         tags: (article.tags || []).map((t) => t.name),

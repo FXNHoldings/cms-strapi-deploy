@@ -1,0 +1,3377 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart Home Security",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "case",
+    "cover",
+    "skin",
+    "sticker",
+    "decal",
+    "mount",
+    "bracket",
+    "wall plate",
+    "faceplate",
+    "replacement filter",
+    "replacement part",
+    "power adapter",
+    "charger",
+    "charging cable",
+    "usb cable",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model",
+    "manual only"
+  ],
+  "families": [
+    {
+      "brand": "Aqara",
+      "family": "Smart Doorbell",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Aqara Smart Doorbell Camera G410",
+          "model": "Smart Doorbell Camera G410",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "aqara",
+            "doorbell",
+            "camera",
+            "g410"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Aqara Smart Doorbell Camera G410",
+            "Aqara Smart Doorbell Camera G410 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Arlo",
+      "family": "Essential Security",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Arlo Essential Security Camera 2K, 2nd Gen",
+          "model": "Essential Security Camera 2K, 2nd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "arlo",
+            "essential",
+            "security",
+            "camera",
+            "2k",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Arlo Essential Security Camera 2K, 2nd Gen",
+            "Arlo Essential Security Camera 2K, 2nd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Arlo",
+      "family": "Pro 5S",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Pro 5S 2K Spotlight Camera (2-pack)",
+          "model": "Pro 5S 2K Spotlight Camera (2-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "pro",
+            "5s",
+            "2k",
+            "spotlight",
+            "camera",
+            "2-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Pro 5S 2K Spotlight Camera (2-pack)",
+            "Pro 5S 2K Spotlight Camera (2-pack) smart home",
+            "Arlo Pro 5S 2K Spotlight Camera (2-pack)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Arlo Pro 5S 2K Security Camera",
+          "model": "Pro 5S 2K Security Camera",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "arlo",
+            "pro",
+            "5s",
+            "2k",
+            "security",
+            "camera"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Arlo Pro 5S 2K Security Camera",
+            "Arlo Pro 5S 2K Security Camera smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Arlo",
+      "family": "Video Doorbell",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Arlo Video Doorbell 2K, 2nd Gen",
+          "model": "Video Doorbell 2K, 2nd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "arlo",
+            "video",
+            "doorbell",
+            "2k",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Arlo Video Doorbell 2K, 2nd Gen",
+            "Arlo Video Doorbell 2K, 2nd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Blink",
+      "family": "Mini 2",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Blink Mini 2",
+          "model": "Mini 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "blink",
+            "mini"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Blink Mini 2",
+            "Blink Mini 2 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Blink",
+      "family": "Outdoor 4",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Blink Outdoor 4 (5-Camera System)",
+          "model": "Outdoor 4 (5-Camera System)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "blink",
+            "outdoor",
+            "5-camera",
+            "system"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Blink Outdoor 4 (5-Camera System)",
+            "Blink Outdoor 4 (5-Camera System) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Blink Outdoor 4",
+          "model": "Outdoor 4",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "blink",
+            "outdoor"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Blink Outdoor 4",
+            "Blink Outdoor 4 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Blink",
+      "family": "Video Doorbell",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Blink Video Doorbell",
+          "model": "Video Doorbell",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "blink",
+            "video",
+            "doorbell"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Blink Video Doorbell",
+            "Blink Video Doorbell smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Blink Video Doorbell System",
+          "model": "Video Doorbell System",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "blink",
+            "video",
+            "doorbell",
+            "system"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Blink Video Doorbell System",
+            "Blink Video Doorbell System smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eufy",
+      "family": "SoloCam S340",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "SoloCam S340 (Dual Lens, Solar, 360 deg)",
+          "model": "SoloCam S340 (Dual Lens, Solar, 360 deg)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "solocam",
+            "s340",
+            "dual",
+            "lens",
+            "solar",
+            "360",
+            "deg"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "SoloCam S340 (Dual Lens, Solar, 360 deg)",
+            "SoloCam S340 (Dual Lens, Solar, 360 deg) smart home",
+            "Eufy SoloCam S340 (Dual Lens, Solar, 360 deg)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Eufy SoloCam S340",
+          "model": "SoloCam S340",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eufy",
+            "solocam",
+            "s340"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Eufy SoloCam S340",
+            "Eufy SoloCam S340 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eufy",
+      "family": "Video Doorbell",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Eufy Video Doorbell E340",
+          "model": "Video Doorbell E340",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eufy",
+            "video",
+            "doorbell",
+            "e340"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Eufy Video Doorbell E340",
+            "Eufy Video Doorbell E340 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Eufy Video Doorbell C31",
+          "model": "Video Doorbell C31",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eufy",
+            "video",
+            "doorbell",
+            "c31"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Eufy Video Doorbell C31",
+            "Eufy Video Doorbell C31 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "EufyCam",
+      "family": "S3 Pro",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "eufyCam S3 Pro (4K, Solar)",
+          "model": "S3 Pro (4K, Solar)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eufycam",
+            "s3",
+            "pro",
+            "4k",
+            "solar"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "eufyCam S3 Pro (4K, Solar)",
+            "eufyCam S3 Pro (4K, Solar) smart home",
+            "EufyCam S3 Pro (4K, Solar)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "EufyCam S3 Pro",
+          "model": "S3 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eufycam",
+            "s3",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "EufyCam S3 Pro",
+            "EufyCam S3 Pro smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Nest Cam",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Nest Cam Indoor, 3rd Gen",
+          "model": "Nest Cam Indoor, 3rd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "nest",
+            "cam",
+            "indoor",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google Nest Cam Indoor, 3rd Gen",
+            "Google Nest Cam Indoor, 3rd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Google Nest Cam Battery",
+          "model": "Nest Cam Battery",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "nest",
+            "cam",
+            "battery"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google Nest Cam Battery",
+            "Google Nest Cam Battery smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Nest Doorbell",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Nest Doorbell Wired, 3rd Gen",
+          "model": "Nest Doorbell Wired, 3rd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "nest",
+            "doorbell",
+            "wired",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google Nest Doorbell Wired, 3rd Gen",
+            "Google Nest Doorbell Wired, 3rd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Google Nest Doorbell Battery",
+          "model": "Nest Doorbell Battery",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "nest",
+            "doorbell",
+            "battery"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google Nest Doorbell Battery",
+            "Google Nest Doorbell Battery smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Level",
+      "family": "Lock+ Connect",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Level Lock+ Connect (Apple Home Key)",
+          "model": "Lock+ Connect (Apple Home Key)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "level",
+            "lock+",
+            "connect",
+            "apple",
+            "home",
+            "key"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Level Lock+ Connect (Apple Home Key)",
+            "Level Lock+ Connect (Apple Home Key) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nest",
+      "family": "Cam",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Nest Cam (Battery, 2nd Gen)",
+          "model": "Cam (Battery, 2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "nest",
+            "cam",
+            "battery",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Nest Cam (Battery, 2nd Gen)",
+            "Nest Cam (Battery, 2nd Gen) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nest",
+      "family": "Doorbell",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Nest Doorbell (Wired, 3rd Gen)",
+          "model": "Doorbell (Wired, 3rd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "nest",
+            "doorbell",
+            "wired",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Nest Doorbell (Wired, 3rd Gen)",
+            "Nest Doorbell (Wired, 3rd Gen) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Alarm 8-Piece",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ring Alarm 8-Piece Kit (2nd Gen)",
+          "model": "Alarm 8-Piece Kit (2nd Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "alarm",
+            "8-piece",
+            "kit",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Alarm 8-Piece Kit (2nd Gen)",
+            "Ring Alarm 8-Piece Kit (2nd Gen) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Alarm Pro",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ring Alarm Pro 8-Piece Kit",
+          "model": "Alarm Pro 8-Piece Kit",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "alarm",
+            "pro",
+            "8-piece",
+            "kit"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Alarm Pro 8-Piece Kit",
+            "Ring Alarm Pro 8-Piece Kit smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Battery Doorbell",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Battery Doorbell Pro",
+          "model": "Battery Doorbell Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "battery",
+            "doorbell",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Battery Doorbell Pro",
+            "Battery Doorbell Pro smart home",
+            "Ring Battery Doorbell Pro"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Ring Battery Doorbell",
+          "model": "Battery Doorbell",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "battery",
+            "doorbell"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Battery Doorbell",
+            "Ring Battery Doorbell smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Ring Battery Doorbell Plus, 2nd Gen",
+          "model": "Battery Doorbell Plus, 2nd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "battery",
+            "doorbell",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Battery Doorbell Plus, 2nd Gen",
+            "Ring Battery Doorbell Plus, 2nd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Ring Battery Doorbell Pro, 2nd Gen",
+          "model": "Battery Doorbell Pro, 2nd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "battery",
+            "doorbell",
+            "pro",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Battery Doorbell Pro, 2nd Gen",
+            "Ring Battery Doorbell Pro, 2nd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Floodlight Cam",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ring Floodlight Cam Wired Pro",
+          "model": "Floodlight Cam Wired Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "ring",
+            "floodlight",
+            "cam",
+            "wired",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Floodlight Cam Wired Pro",
+            "Ring Floodlight Cam Wired Pro smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Indoor Cam",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Indoor Cam (2nd Gen, Plug-In)",
+          "model": "Indoor Cam (2nd Gen, Plug-In)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "indoor",
+            "cam",
+            "2nd",
+            "gen",
+            "plug-in"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Indoor Cam (2nd Gen, Plug-In)",
+            "Indoor Cam (2nd Gen, Plug-In) smart home",
+            "Ring Indoor Cam (2nd Gen, Plug-In)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Ring Indoor Cam, 2nd Gen",
+          "model": "Indoor Cam, 2nd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "indoor",
+            "cam",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Indoor Cam, 2nd Gen",
+            "Ring Indoor Cam, 2nd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Pan-Tilt Indoor",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ring Pan-Tilt Indoor Cam",
+          "model": "Pan-Tilt Indoor Cam",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "pan-tilt",
+            "indoor",
+            "cam"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Pan-Tilt Indoor Cam",
+            "Ring Pan-Tilt Indoor Cam smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Spotlight Cam",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ring Spotlight Cam Plus Battery",
+          "model": "Spotlight Cam Plus Battery",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "spotlight",
+            "cam",
+            "battery"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Spotlight Cam Plus Battery",
+            "Ring Spotlight Cam Plus Battery smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Stick Up",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Stick Up Cam Pro (Battery)",
+          "model": "Stick Up Cam Pro (Battery)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "stick",
+            "up",
+            "cam",
+            "pro",
+            "battery"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Stick Up Cam Pro (Battery)",
+            "Stick Up Cam Pro (Battery) smart home",
+            "Ring Stick Up Cam Pro (Battery)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Ring Stick Up Cam Battery",
+          "model": "Stick Up Cam Battery",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "stick",
+            "up",
+            "cam",
+            "battery"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Stick Up Cam Battery",
+            "Ring Stick Up Cam Battery smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Video Doorbell",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ring Video Doorbell Wired",
+          "model": "Video Doorbell Wired",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "video",
+            "doorbell",
+            "wired"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Video Doorbell Wired",
+            "Ring Video Doorbell Wired smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ring",
+      "family": "Wired Doorbell",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ring Wired Doorbell Pro, 3rd Gen",
+          "model": "Wired Doorbell Pro, 3rd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ring",
+            "wired",
+            "doorbell",
+            "pro",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ring Wired Doorbell Pro, 3rd Gen",
+            "Ring Wired Doorbell Pro, 3rd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Tapo",
+      "family": "C120 Indoor/Outdoor",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Tapo C120 Indoor/Outdoor 2K QHD Camera",
+          "model": "C120 Indoor/Outdoor 2K QHD Camera",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tapo",
+            "c120",
+            "indoor",
+            "outdoor",
+            "2k",
+            "qhd",
+            "camera"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Tapo C120 Indoor/Outdoor 2K QHD Camera",
+            "Tapo C120 Indoor/Outdoor 2K QHD Camera smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo C120",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo C120",
+          "model": "Tapo C120",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "c120"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo C120",
+            "TP-Link Tapo C120 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo C425",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo C425 MagCam",
+          "model": "Tapo C425 MagCam",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "c425",
+            "magcam"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo C425 MagCam",
+            "TP-Link Tapo C425 MagCam smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo C660",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo C660 Kit",
+          "model": "Tapo C660 Kit",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "c660",
+            "kit"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo C660 Kit",
+            "TP-Link Tapo C660 Kit smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Wyze",
+      "family": "Cam v4",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Cam v4 (2.5K AI Security Camera)",
+          "model": "Cam v4 (2.5K AI Security Camera)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "cam",
+            "v4",
+            "2.5k",
+            "ai",
+            "security",
+            "camera"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Cam v4 (2.5K AI Security Camera)",
+            "Cam v4 (2.5K AI Security Camera) smart home",
+            "Wyze Cam v4 (2.5K AI Security Camera)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Wyze Cam v4",
+          "model": "Cam v4",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "wyze",
+            "cam",
+            "v4"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Wyze Cam v4",
+            "Wyze Cam v4 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "4K Wired",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "4K Wired NVR Security System (8-Channel, 4-Camera)",
+          "model": "4K Wired NVR Security System (8-Channel, 4-Camera)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "4k",
+            "wired",
+            "nvr",
+            "security",
+            "system",
+            "8-channel",
+            "4-camera"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "4K Wired NVR Security System (8-Channel, 4-Camera)",
+            "4K Wired NVR Security System (8-Channel, 4-Camera) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Argus 4",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Argus 4 Pro (4K Dual-Lens, Wire-Free)",
+          "model": "Argus 4 Pro (4K Dual-Lens, Wire-Free)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "argus",
+            "pro",
+            "4k",
+            "dual-lens",
+            "wire-free"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Argus 4 Pro (4K Dual-Lens, Wire-Free)",
+            "Argus 4 Pro (4K Dual-Lens, Wire-Free) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Assure Lock",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Assure Lock 2 Touch (Wi-Fi, Fingerprint)",
+          "model": "Assure Lock 2 Touch (Wi-Fi, Fingerprint)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "assure",
+            "lock",
+            "touch",
+            "fingerprint"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Assure Lock 2 Touch (Wi-Fi, Fingerprint)",
+            "Assure Lock 2 Touch (Wi-Fi, Fingerprint) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Cam OG",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Cam OG",
+          "model": "Cam OG",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "cam",
+            "og"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Cam OG",
+            "Cam OG smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Encode Plus",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Encode Plus Smart Wi-Fi Deadbolt (Apple Home Key)",
+          "model": "Encode Plus Smart Wi-Fi Deadbolt (Apple Home Key)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "encode",
+            "deadbolt",
+            "apple",
+            "home",
+            "key"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Encode Plus Smart Wi-Fi Deadbolt (Apple Home Key)",
+            "Encode Plus Smart Wi-Fi Deadbolt (Apple Home Key) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Essential Video",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Essential Video Doorbell (2nd Gen, HD)",
+          "model": "Essential Video Doorbell (2nd Gen, HD)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "essential",
+            "video",
+            "doorbell",
+            "2nd",
+            "gen",
+            "hd"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Essential Video Doorbell (2nd Gen, HD)",
+            "Essential Video Doorbell (2nd Gen, HD) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Halo Select",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Halo Select Wi-Fi Smart Lock with Fingerprint",
+          "model": "Halo Select Wi-Fi Smart Lock with Fingerprint",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "halo",
+            "select",
+            "lock",
+            "fingerprint"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Halo Select Wi-Fi Smart Lock with Fingerprint",
+            "Halo Select Wi-Fi Smart Lock with Fingerprint smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Security Kit",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Security Kit (Smart Security Hub + Sensors)",
+          "model": "Security Kit (Smart Security Hub + Sensors)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "security",
+            "kit",
+            "hub",
+            "sensors"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Security Kit (Smart Security Hub + Sensors)",
+            "Security Kit (Smart Security Hub + Sensors) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Smart Lock",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Smart Lock U100 (Fingerprint, Apple Home Key)",
+          "model": "Smart Lock U100 (Fingerprint, Apple Home Key)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "lock",
+            "u100",
+            "fingerprint",
+            "apple",
+            "home",
+            "key"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Lock U100 (Fingerprint, Apple Home Key)",
+            "Smart Lock U100 (Fingerprint, Apple Home Key) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Smart Smoke",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Smart Smoke + Carbon Monoxide Alarm (Wi-Fi)",
+          "model": "Smart Smoke + Carbon Monoxide Alarm (Wi-Fi)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "smoke",
+            "carbon",
+            "monoxide",
+            "alarm"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Smoke + Carbon Monoxide Alarm (Wi-Fi)",
+            "Smart Smoke + Carbon Monoxide Alarm (Wi-Fi) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "The Essentials",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "The Essentials Home Security System",
+          "model": "The Essentials Home Security System",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "essentials",
+            "home",
+            "security",
+            "system"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "The Essentials Home Security System",
+            "The Essentials Home Security System smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Video Doorbell",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Video Doorbell Wired (latest)",
+          "model": "Video Doorbell Wired (latest)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "video",
+            "doorbell",
+            "wired"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Video Doorbell Wired (latest)",
+            "Video Doorbell Wired (latest) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Video Doorbell E340 (Dual Camera, Local Storage)",
+          "model": "Video Doorbell E340 (Dual Camera, Local Storage)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "video",
+            "doorbell",
+            "e340",
+            "dual",
+            "camera",
+            "local",
+            "storage"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Video Doorbell E340 (Dual Camera, Local Storage)",
+            "Video Doorbell E340 (Dual Camera, Local Storage) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Video Smart",
+      "category": "Smart Home Security",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Video Smart Lock S330 (Lock + 2K Doorbell)",
+          "model": "Video Smart Lock S330 (Lock + 2K Doorbell)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "video",
+            "lock",
+            "s330",
+            "2k",
+            "doorbell"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Video Smart Lock S330 (Lock + 2K Doorbell)",
+            "Video Smart Lock S330 (Lock + 2K Doorbell) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    }
+  ]
+}

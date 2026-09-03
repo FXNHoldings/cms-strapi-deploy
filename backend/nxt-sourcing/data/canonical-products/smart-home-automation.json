@@ -1,0 +1,3494 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart Home Automation",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "case",
+    "cover",
+    "skin",
+    "sticker",
+    "decal",
+    "mount",
+    "bracket",
+    "wall plate",
+    "faceplate",
+    "replacement filter",
+    "replacement part",
+    "power adapter",
+    "charger",
+    "charging cable",
+    "usb cable",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model",
+    "manual only"
+  ],
+  "families": [
+    {
+      "brand": "Amazon",
+      "family": "Smart Plug",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Smart Plug",
+          "model": "Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Smart Plug",
+            "Amazon Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Aqara",
+      "family": "Cube T1",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Aqara Cube T1 Pro",
+          "model": "Cube T1 Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "aqara",
+            "cube",
+            "t1",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Aqara Cube T1 Pro",
+            "Aqara Cube T1 Pro smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Aqara",
+      "family": "Roller Shade",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Roller Shade (Motorised, Matter)",
+          "model": "Roller Shade (Motorised, Matter)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "roller",
+            "shade",
+            "motorised",
+            "matter"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Roller Shade (Motorised, Matter)",
+            "Roller Shade (Motorised, Matter) smart home",
+            "Aqara Roller Shade (Motorised, Matter)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Aqara Roller Shade Driver E1",
+          "model": "Roller Shade Driver E1",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "aqara",
+            "roller",
+            "shade",
+            "driver",
+            "e1"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Aqara Roller Shade Driver E1",
+            "Aqara Roller Shade Driver E1 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Aqara",
+      "family": "Wireless Mini",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Aqara Wireless Mini Switch T1",
+          "model": "Wireless Mini Switch T1",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "aqara",
+            "wireless",
+            "mini",
+            "switch",
+            "t1"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Aqara Wireless Mini Switch T1",
+            "Aqara Wireless Mini Switch T1 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Caseta",
+      "family": "Smart Dimmer",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Caseta Smart Dimmer Switch Starter Kit (P-BDG-PKG1W)",
+          "model": "Smart Dimmer Switch Starter Kit (P-BDG-PKG1W)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "caseta",
+            "dimmer",
+            "switch",
+            "starter",
+            "kit",
+            "p-bdg-pkg1w"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Caseta Smart Dimmer Switch Starter Kit (P-BDG-PKG1W)",
+            "Caseta Smart Dimmer Switch Starter Kit (P-BDG-PKG1W) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Chamberlain myQ",
+      "family": "Smart Garage",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Chamberlain myQ Smart Garage Control",
+          "model": "Smart Garage Control",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "chamberlain",
+            "myq",
+            "garage",
+            "control"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Chamberlain myQ Smart Garage Control",
+            "Chamberlain myQ Smart Garage Control smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Cync",
+      "family": "Smart Switch",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "CYNC Smart Switch, Motion Sensing Dimmer",
+          "model": "Smart Switch, Motion Sensing Dimmer",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "cync",
+            "switch",
+            "motion",
+            "sensing",
+            "dimmer"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "CYNC Smart Switch, Motion Sensing Dimmer",
+            "CYNC Smart Switch, Motion Sensing Dimmer smart home",
+            "Cync Smart Switch, Motion Sensing Dimmer"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eufy",
+      "family": "Robot Vacuum",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Robot Vacuum Omni C20",
+          "model": "Robot Vacuum Omni C20",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "robot",
+            "vacuum",
+            "omni",
+            "c20"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Robot Vacuum Omni C20",
+            "Robot Vacuum Omni C20 smart home",
+            "Eufy Robot Vacuum Omni C20"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eve",
+      "family": "Light Switch",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Eve Light Switch",
+          "model": "Light Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eve",
+            "light",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Eve Light Switch",
+            "Eve Light Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eve",
+      "family": "MotionBlinds Upgrade",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Eve MotionBlinds Upgrade Kit (Thread)",
+          "model": "MotionBlinds Upgrade Kit (Thread)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eve",
+            "motionblinds",
+            "upgrade",
+            "kit",
+            "thread"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Eve MotionBlinds Upgrade Kit (Thread)",
+            "Eve MotionBlinds Upgrade Kit (Thread) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Eve MotionBlinds Upgrade Kit",
+          "model": "MotionBlinds Upgrade Kit",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eve",
+            "motionblinds",
+            "upgrade",
+            "kit"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Eve MotionBlinds Upgrade Kit",
+            "Eve MotionBlinds Upgrade Kit smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Flic",
+      "family": "2 Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Flic 2 Smart Button Starter Kit",
+          "model": "2 Smart Button Starter Kit",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "flic",
+            "button",
+            "starter",
+            "kit"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Flic 2 Smart Button Starter Kit",
+            "Flic 2 Smart Button Starter Kit smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "GE Cync",
+      "family": "No-Neutral Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "GE Cync No-Neutral Smart Switch",
+          "model": "No-Neutral Smart Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ge",
+            "cync",
+            "no-neutral",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "GE Cync No-Neutral Smart Switch",
+            "GE Cync No-Neutral Smart Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "GE Cync",
+      "family": "Smart Dimmer",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "GE Cync Smart Dimmer and Motion Sensor Switch",
+          "model": "Smart Dimmer and Motion Sensor Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ge",
+            "cync",
+            "dimmer",
+            "motion",
+            "sensor",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "GE Cync Smart Dimmer and Motion Sensor Switch",
+            "GE Cync Smart Dimmer and Motion Sensor Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Inovelli",
+      "family": "White Series",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Inovelli White Series Smart Dimmer Switch",
+          "model": "White Series Smart Dimmer Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "inovelli",
+            "white",
+            "series",
+            "dimmer",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Inovelli White Series Smart Dimmer Switch",
+            "Inovelli White Series Smart Dimmer Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Kasa",
+      "family": "Smart Dimmer",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Kasa Smart Dimmer Switch HS220 (2-pack)",
+          "model": "Smart Dimmer Switch HS220 (2-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "kasa",
+            "dimmer",
+            "switch",
+            "hs220",
+            "2-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Kasa Smart Dimmer Switch HS220 (2-pack)",
+            "Kasa Smart Dimmer Switch HS220 (2-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Kasa",
+      "family": "Smart Plug",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Kasa Smart Plug Mini EP25 (4-pack)",
+          "model": "Smart Plug Mini EP25 (4-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "kasa",
+            "plug",
+            "mini",
+            "ep25",
+            "4-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Kasa Smart Plug Mini EP25 (4-pack)",
+            "Kasa Smart Plug Mini EP25 (4-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Leviton",
+      "family": "Decora Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Leviton Decora Smart Wi-Fi Dimmer D26HD",
+          "model": "Decora Smart Wi-Fi Dimmer D26HD",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "leviton",
+            "decora",
+            "dimmer",
+            "d26hd"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Leviton Decora Smart Wi-Fi Dimmer D26HD",
+            "Leviton Decora Smart Wi-Fi Dimmer D26HD smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Leviton Decora Smart Wi-Fi Switch D215S",
+          "model": "Decora Smart Wi-Fi Switch D215S",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "leviton",
+            "decora",
+            "switch",
+            "d215s"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Leviton Decora Smart Wi-Fi Switch D215S",
+            "Leviton Decora Smart Wi-Fi Switch D215S smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Litter-Robot",
+      "family": "4 Automatic",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Litter-Robot 4 Automatic Self-Cleaning Litter Box",
+          "model": "4 Automatic Self-Cleaning Litter Box",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "litter-robot",
+            "automatic",
+            "self-cleaning",
+            "litter",
+            "box"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Litter-Robot 4 Automatic Self-Cleaning Litter Box",
+            "Litter-Robot 4 Automatic Self-Cleaning Litter Box smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Lutron Caséta",
+      "family": "Claro Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Lutron Caséta Claro Smart Switch",
+          "model": "Claro Smart Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "lutron",
+            "cas",
+            "ta",
+            "claro",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Lutron Caséta Claro Smart Switch",
+            "Lutron Caséta Claro Smart Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Lutron Caséta",
+      "family": "Diva Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Lutron Caséta Diva Smart Dimmer Switch",
+          "model": "Diva Smart Dimmer Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "lutron",
+            "cas",
+            "ta",
+            "diva",
+            "dimmer",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Lutron Caséta Diva Smart Dimmer Switch",
+            "Lutron Caséta Diva Smart Dimmer Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Meross",
+      "family": "MSG100 Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Meross MSG100 Smart Garage Door Opener",
+          "model": "MSG100 Smart Garage Door Opener",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "meross",
+            "msg100",
+            "garage",
+            "door",
+            "opener"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Meross MSG100 Smart Garage Door Opener",
+            "Meross MSG100 Smart Garage Door Opener smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nanoleaf",
+      "family": "Sense+ Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Nanoleaf Sense+ Smart Wireless Switch",
+          "model": "Sense+ Smart Wireless Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "nanoleaf",
+            "sense+",
+            "wireless",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Nanoleaf Sense+ Smart Wireless Switch",
+            "Nanoleaf Sense+ Smart Wireless Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Philips Hue",
+      "family": "Smart Dimmer",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Philips Hue Smart Dimmer Switch v2",
+          "model": "Smart Dimmer Switch v2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "dimmer",
+            "switch",
+            "v2"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Philips Hue Smart Dimmer Switch v2",
+            "Philips Hue Smart Dimmer Switch v2 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Philips Hue",
+      "family": "Tap Dial",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Philips Hue Tap Dial Switch",
+          "model": "Tap Dial Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "philips",
+            "hue",
+            "tap",
+            "dial",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Philips Hue Tap Dial Switch",
+            "Philips Hue Tap Dial Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Rachio",
+      "family": "3 Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Rachio 3 Smart Sprinkler Controller (8-Zone)",
+          "model": "3 Smart Sprinkler Controller (8-Zone)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "rachio",
+            "sprinkler",
+            "controller",
+            "8-zone"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Rachio 3 Smart Sprinkler Controller (8-Zone)",
+            "Rachio 3 Smart Sprinkler Controller (8-Zone) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Roomba",
+      "family": "Combo j9+",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Roomba Combo j9+ Self-Emptying Vacuum & Mop",
+          "model": "Combo j9+ Self-Emptying Vacuum & Mop",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "roomba",
+            "combo",
+            "j9+",
+            "self-emptying",
+            "vacuum",
+            "mop"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Roomba Combo j9+ Self-Emptying Vacuum & Mop",
+            "Roomba Combo j9+ Self-Emptying Vacuum & Mop smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "RYSE",
+      "family": "SmartShade",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "RYSE SmartShade",
+          "model": "SmartShade",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ryse",
+            "smartshade"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "RYSE SmartShade",
+            "RYSE SmartShade smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Shark",
+      "family": "PowerDetect 2-in-1",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Shark PowerDetect 2-in-1 Robot Vacuum and Mop",
+          "model": "PowerDetect 2-in-1 Robot Vacuum and Mop",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "shark",
+            "powerdetect",
+            "2-in-1",
+            "robot",
+            "vacuum",
+            "mop"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Shark PowerDetect 2-in-1 Robot Vacuum and Mop",
+            "Shark PowerDetect 2-in-1 Robot Vacuum and Mop smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Shelly",
+      "family": "1PM Gen4",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Shelly 1PM Gen4 Smart Relay",
+          "model": "1PM Gen4 Smart Relay",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "shelly",
+            "1pm",
+            "gen4",
+            "relay"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Shelly 1PM Gen4 Smart Relay",
+            "Shelly 1PM Gen4 Smart Relay smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Shelly",
+      "family": "2PM Gen4",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Shelly 2PM Gen4 Smart Relay",
+          "model": "2PM Gen4 Smart Relay",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "shelly",
+            "2pm",
+            "gen4",
+            "relay"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Shelly 2PM Gen4 Smart Relay",
+            "Shelly 2PM Gen4 Smart Relay smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sonoff",
+      "family": "MINIR4M Matter",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sonoff MINIR4M Matter Smart Switch",
+          "model": "MINIR4M Matter Smart Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "sonoff",
+            "minir4m",
+            "matter",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sonoff MINIR4M Matter Smart Switch",
+            "Sonoff MINIR4M Matter Smart Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sonoff",
+      "family": "ZBMINIR2 Zigbee",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sonoff ZBMINIR2 Zigbee Smart Switch",
+          "model": "ZBMINIR2 Zigbee Smart Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "sonoff",
+            "zbminir2",
+            "zigbee",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sonoff ZBMINIR2 Zigbee Smart Switch",
+            "Sonoff ZBMINIR2 Zigbee Smart Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "SwitchBot",
+      "family": "Blind Tilt",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Blind Tilt Smart Electric Blinds Opener (Solar)",
+          "model": "Blind Tilt Smart Electric Blinds Opener (Solar)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "blind",
+            "tilt",
+            "electric",
+            "blinds",
+            "opener",
+            "solar"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Blind Tilt Smart Electric Blinds Opener (Solar)",
+            "Blind Tilt Smart Electric Blinds Opener (Solar) smart home",
+            "SwitchBot Blind Tilt Smart Electric Blinds Opener (Solar)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "SwitchBot Blind Tilt",
+          "model": "Blind Tilt",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "switchbot",
+            "blind",
+            "tilt"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "SwitchBot Blind Tilt",
+            "SwitchBot Blind Tilt smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "SwitchBot",
+      "family": "Bot",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "SwitchBot Bot (Robot Button Pusher)",
+          "model": "Bot (Robot Button Pusher)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "switchbot",
+            "bot",
+            "robot",
+            "button",
+            "pusher"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "SwitchBot Bot (Robot Button Pusher)",
+            "SwitchBot Bot (Robot Button Pusher) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "SwitchBot Bot",
+          "model": "Bot",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "switchbot",
+            "bot"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "SwitchBot Bot",
+            "SwitchBot Bot smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "SwitchBot",
+      "family": "Curtain 3",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Curtain 3 (Rod/U-Rail)",
+          "model": "Curtain 3 (Rod/U-Rail)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "curtain",
+            "rod",
+            "u-rail"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Curtain 3 (Rod/U-Rail)",
+            "Curtain 3 (Rod/U-Rail) smart home",
+            "SwitchBot Curtain 3 (Rod/U-Rail)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "SwitchBot Curtain 3",
+          "model": "Curtain 3",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "switchbot",
+            "curtain"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "SwitchBot Curtain 3",
+            "SwitchBot Curtain 3 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Tapo",
+      "family": "P125M Matter",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Tapo P125M Matter Smart Plug Mini (4-pack)",
+          "model": "P125M Matter Smart Plug Mini (4-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tapo",
+            "p125m",
+            "matter",
+            "plug",
+            "mini",
+            "4-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Tapo P125M Matter Smart Plug Mini (4-pack)",
+            "Tapo P125M Matter Smart Plug Mini (4-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Kasa KS225",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Kasa KS225 Matter Smart Wi-Fi Dimmer Switch",
+          "model": "Kasa KS225 Matter Smart Wi-Fi Dimmer Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "ks225",
+            "matter",
+            "dimmer",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa KS225 Matter Smart Wi-Fi Dimmer Switch",
+            "TP-Link Kasa KS225 Matter Smart Wi-Fi Dimmer Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Kasa KS240",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Kasa KS240 Smart Ceiling Fan Control and Dimmer",
+          "model": "Kasa KS240 Smart Ceiling Fan Control and Dimmer",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "ks240",
+            "ceiling",
+            "fan",
+            "control",
+            "dimmer"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa KS240 Smart Ceiling Fan Control and Dimmer",
+            "TP-Link Kasa KS240 Smart Ceiling Fan Control and Dimmer smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo S505",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo S505 Matter Smart Wi-Fi Light Switch",
+          "model": "Tapo S505 Matter Smart Wi-Fi Light Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "s505",
+            "matter",
+            "light",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo S505 Matter Smart Wi-Fi Light Switch",
+            "TP-Link Tapo S505 Matter Smart Wi-Fi Light Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo S505D",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo S505D Matter Smart Wi-Fi Dimmer Switch",
+          "model": "Tapo S505D Matter Smart Wi-Fi Dimmer Switch",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "s505d",
+            "matter",
+            "dimmer",
+            "switch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo S505D Matter Smart Wi-Fi Dimmer Switch",
+            "TP-Link Tapo S505D Matter Smart Wi-Fi Dimmer Switch smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Wemo",
+      "family": "Smart Plug",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Wemo Smart Plug with Thread (WSP100)",
+          "model": "Smart Plug with Thread (WSP100)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "wemo",
+            "plug",
+            "thread",
+            "wsp100"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Wemo Smart Plug with Thread (WSP100)",
+            "Wemo Smart Plug with Thread (WSP100) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Door and",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Door and Window Sensor P2 (Matter over Thread)",
+          "model": "Door and Window Sensor P2 (Matter over Thread)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "door",
+            "window",
+            "sensor",
+            "p2",
+            "matter",
+            "over",
+            "thread"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Door and Window Sensor P2 (Matter over Thread)",
+            "Door and Window Sensor P2 (Matter over Thread) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Motion and",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Motion and Light Sensor P2 (Thread/Matter)",
+          "model": "Motion and Light Sensor P2 (Thread/Matter)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "motion",
+            "light",
+            "sensor",
+            "p2",
+            "thread",
+            "matter"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Motion and Light Sensor P2 (Thread/Matter)",
+            "Motion and Light Sensor P2 (Thread/Matter) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "myQ Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "myQ Smart Garage Control (MYQ-G0401)",
+          "model": "myQ Smart Garage Control (MYQ-G0401)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "myq",
+            "garage",
+            "control",
+            "myq-g0401"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "myQ Smart Garage Control (MYQ-G0401)",
+            "myQ Smart Garage Control (MYQ-G0401) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Q7 M5+",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Q7 M5+ Robot Vacuum and Mop (Self-Empty)",
+          "model": "Q7 M5+ Robot Vacuum and Mop (Self-Empty)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "q7",
+            "m5+",
+            "robot",
+            "vacuum",
+            "mop",
+            "self-empty"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Q7 M5+ Robot Vacuum and Mop (Self-Empty)",
+            "Q7 M5+ Robot Vacuum and Mop (Self-Empty) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "S8 MaxV",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "S8 MaxV Ultra",
+          "model": "S8 MaxV Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "s8",
+            "maxv",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "S8 MaxV Ultra",
+            "S8 MaxV Ultra smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Smart Plug",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Smart Plug Wi-Fi Outlet (4-pack)",
+          "model": "Smart Plug Wi-Fi Outlet (4-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "plug",
+            "outlet",
+            "4-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Plug Wi-Fi Outlet (4-pack)",
+            "Smart Plug Wi-Fi Outlet (4-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Smart Wall",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Smart Wall Switch H1 (No Neutral, Single Rocker)",
+          "model": "Smart Wall Switch H1 (No Neutral, Single Rocker)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "wall",
+            "switch",
+            "h1",
+            "no",
+            "neutral",
+            "single",
+            "rocker"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Wall Switch H1 (No Neutral, Single Rocker)",
+            "Smart Wall Switch H1 (No Neutral, Single Rocker) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Smart Wi-Fi",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Smart Wi-Fi Plug Mini MSS110 (4-pack)",
+          "model": "Smart Wi-Fi Plug Mini MSS110 (4-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "plug",
+            "mini",
+            "mss110",
+            "4-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Wi-Fi Plug Mini MSS110 (4-pack)",
+            "Smart Wi-Fi Plug Mini MSS110 (4-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Smart Wi-Fi Garage Door Opener MSG100",
+          "model": "Smart Wi-Fi Garage Door Opener MSG100",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "garage",
+            "door",
+            "opener",
+            "msg100"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Wi-Fi Garage Door Opener MSG100",
+            "Smart Wi-Fi Garage Door Opener MSG100 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "ST8I-WIFI Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "ST8I-WIFI Smart Indoor Irrigation Timer",
+          "model": "ST8I-WIFI Smart Indoor Irrigation Timer",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "st8i-wifi",
+            "indoor",
+            "irrigation",
+            "timer"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "ST8I-WIFI Smart Indoor Irrigation Timer",
+            "ST8I-WIFI Smart Indoor Irrigation Timer smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "ZBMINI Extreme",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "ZBMINI Extreme Zigbee Smart Switch (ZBMINI-L2)",
+          "model": "ZBMINI Extreme Zigbee Smart Switch (ZBMINI-L2)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "zbmini",
+            "extreme",
+            "zigbee",
+            "switch",
+            "zbmini-l2"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "ZBMINI Extreme Zigbee Smart Switch (ZBMINI-L2)",
+            "ZBMINI Extreme Zigbee Smart Switch (ZBMINI-L2) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Zigbee Smart",
+      "category": "Smart Home Automation",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Zigbee Smart Motion Sensor (2-pack)",
+          "model": "Zigbee Smart Motion Sensor (2-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "zigbee",
+            "motion",
+            "sensor",
+            "2-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Zigbee Smart Motion Sensor (2-pack)",
+            "Zigbee Smart Motion Sensor (2-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    }
+  ]
+}

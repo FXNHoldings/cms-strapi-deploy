@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "globalscholar_categories",
+  "info": {
+    "singularName": "globalscholar-category",
+    "pluralName": "globalscholar-categories",
+    "displayName": "GlobalScholar.one · Category",
+    "description": "WordPress categories for GlobalScholar.one"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 80 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "description": { "type": "text" },
+    "legacyWpId": { "type": "integer", "unique": true },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::globalscholar-category.globalscholar-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::globalscholar-category.globalscholar-category",
+      "mappedBy": "parent"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::globalscholar-post.globalscholar-post",
+      "mappedBy": "categories"
+    }
+  }
+}

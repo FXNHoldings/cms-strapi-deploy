@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "flightfares_posts",
+  "info": {
+    "singularName": "flightfares-post",
+    "pluralName": "flightfares-posts",
+    "displayName": "Flightfares.one · Post",
+    "description": "Articles published to the Flightfares.one WordPress site"
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "title": { "type": "string", "required": true, "maxLength": 255 },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "excerpt": { "type": "text", "maxLength": 1000 },
+    "content": { "type": "richtext", "required": true },
+    "coverImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "sourceUrl": { "type": "string", "maxLength": 500 },
+    "legacyWpId": { "type": "integer", "unique": true },
+    "legacyFeaturedImageUrl": { "type": "string" },
+    "seoTitle": { "type": "string", "maxLength": 70 },
+    "seoDescription": { "type": "text", "maxLength": 160 },
+    "seoKeywords": { "type": "string", "maxLength": 255 },
+    "source": {
+      "type": "enumeration",
+      "enum": ["manual", "wp-import", "ai", "csv-import"],
+      "default": "manual"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::flightfares-category.flightfares-category",
+      "inversedBy": "posts"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::flightfares-author.flightfares-author",
+      "inversedBy": "posts"
+    }
+  }
+}

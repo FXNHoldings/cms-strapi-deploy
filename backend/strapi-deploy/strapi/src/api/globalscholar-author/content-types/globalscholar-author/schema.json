@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "globalscholar_authors",
+  "info": {
+    "singularName": "globalscholar-author",
+    "pluralName": "globalscholar-authors",
+    "displayName": "GlobalScholar.one · Author",
+    "description": "Editorial authors for GlobalScholar.one"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "bio": { "type": "text", "maxLength": 2000 },
+    "legacyWpId": { "type": "integer", "unique": true },
+    "avatarUrl": { "type": "string" },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::globalscholar-post.globalscholar-post",
+      "mappedBy": "author"
+    }
+  }
+}

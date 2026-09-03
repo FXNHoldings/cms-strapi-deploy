@@ -12,6 +12,10 @@
  */
 const RUNNER_URL = (process.env.RUNNER_URL || 'http://172.17.0.1:4310').replace(/\/$/, '');
 const RUNNER_TOKEN = process.env.RUNNER_TOKEN || '';
+const CATEGORY_UIDS = {
+  'flightfares.one': 'api::flightfares-category.flightfares-category',
+  'globalscholar.one': 'api::globalscholar-category.globalscholar-category',
+};
 
 async function call(ctx, path, init = {}) {
   try {
@@ -36,6 +40,25 @@ async function call(ctx, path, init = {}) {
 
 module.exports = {
   async catalogue(ctx) { await call(ctx, '/api/jobs'); },
+  async categories(ctx) {
+    const site = String(ctx.query.site || '');
+    const uid = CATEGORY_UIDS[site];
+    if (!uid) {
+      ctx.status = 400;
+      ctx.body = { error: 'Unsupported site.' };
+      return;
+    }
+
+    const rows = await strapi.db.query(uid).findMany({
+      select: ['name', 'slug'],
+      orderBy: { name: 'asc' },
+    });
+    ctx.body = {
+      categories: rows
+        .filter((row) => row?.slug && row?.name)
+        .map((row) => ({ value: row.slug, label: row.name })),
+    };
+  },
   async history(ctx) { await call(ctx, '/api/runs'); },
   async detail(ctx) { await call(ctx, `/api/runs/${ctx.params.id}`); },
   async log(ctx) {

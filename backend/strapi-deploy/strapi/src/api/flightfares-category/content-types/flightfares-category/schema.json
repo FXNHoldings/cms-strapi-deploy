@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "flightfares_categories",
+  "info": {
+    "singularName": "flightfares-category",
+    "pluralName": "flightfares-categories",
+    "displayName": "Flightfares.one · Category",
+    "description": "WordPress categories for Flightfares.one"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 80 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "description": { "type": "text" },
+    "legacyWpId": { "type": "integer", "unique": true },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::flightfares-category.flightfares-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::flightfares-category.flightfares-category",
+      "mappedBy": "parent"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::flightfares-post.flightfares-post",
+      "mappedBy": "categories"
+    }
+  }
+}

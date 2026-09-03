@@ -401,6 +401,80 @@ select {
   margin-top: 11px;
 }
 
+.resultShortDesc {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: var(--muted);
+  display: -webkit-box;
+  font-size: 13px;
+  line-height: 1.45;
+  margin-top: 7px;
+  overflow: hidden;
+}
+
+.resultDetails {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  margin-top: 11px;
+}
+
+.resultDetails summary {
+  color: var(--brand);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 12px;
+  user-select: none;
+}
+
+.resultDetails[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.resultDescription {
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.55;
+  padding: 10px 12px 0;
+  white-space: pre-line;
+}
+
+.resultBullets {
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+  padding: 10px 12px 0 30px;
+}
+
+.specTable {
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin: 10px 12px 12px;
+  width: calc(100% - 24px);
+}
+
+.specTable th,
+.specTable td {
+  border-bottom: 1px solid var(--line);
+  padding: 5px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.specTable tr:last-child th,
+.specTable tr:last-child td {
+  border-bottom: 0;
+}
+
+.specTable th {
+  background: var(--soft);
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+  width: 34%;
+}
+
 .resultFooter {
   align-items: end;
   display: grid;

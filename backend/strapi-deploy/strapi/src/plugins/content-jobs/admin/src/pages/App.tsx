@@ -24,7 +24,7 @@ import { useFetchClient } from '@strapi/strapi/admin';
 
 type Param = {
   name: string; label: string; type: 'text' | 'number' | 'boolean' | 'select' | 'textarea';
-  placeholder?: string; hint?: string; default?: string; required?: boolean; rows?: number;
+  placeholder?: string; hint?: string; default?: string | boolean; required?: boolean; rows?: number;
   options?: { value: string; label: string }[];
 };
 type Job = {
@@ -71,6 +71,8 @@ const App = () => {
   const [log, setLog] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const [categoryOptions, setCategoryOptions] = useState<{ value: string; label: string }[]>([]);
+  const [categoriesLoading, setCategoriesLoading] = useState(false);
   const offsetRef = useRef(0);
   const logRef = useRef<HTMLDivElement>(null);
 
@@ -101,6 +103,35 @@ const App = () => {
     for (const p of job.params) if (p.default !== undefined) seed[p.name] = p.default;
     setValues(seed);
   };
+
+  useEffect(() => {
+    if (selected?.id !== 'post-wordpress-sites') {
+      setCategoryOptions([]);
+      return;
+    }
+
+    const site = String(values.site || '');
+    if (!site) return;
+    let cancelled = false;
+    setCategoriesLoading(true);
+    get(`/content-jobs/categories?site=${encodeURIComponent(site)}`)
+      .then(({ data }) => {
+        if (cancelled) return;
+        const options = data.categories ?? [];
+        setCategoryOptions(options);
+        setValues((current) => {
+          const category = String(current.category || '');
+          return category && !options.some((option: { value: string }) => option.value === category)
+            ? { ...current, category: '' }
+            : current;
+        });
+      })
+      .catch((e: any) => {
+        if (!cancelled) setError(e?.response?.data?.error ?? 'Could not load categories.');
+      })
+      .finally(() => { if (!cancelled) setCategoriesLoading(false); });
+    return () => { cancelled = true; };
+  }, [get, selected?.id, values.site]);
 
   /* Poll the log while a run is active. Polling rather than a socket: runs are
      minutes long, a second of latency is irrelevant, and there is no connection
@@ -260,6 +291,17 @@ const App = () => {
                           >
                             {values[p.name] ? 'On' : 'Off'}
                           </Button>
+                        ) : selected.id === 'post-wordpress-sites' && p.name === 'category' ? (
+                          <SingleSelect
+                            placeholder={categoriesLoading ? 'Loading categories…' : 'Select a category'}
+                            value={String(values[p.name] ?? '')}
+                            onChange={(v: any) => setValues((s) => ({ ...s, [p.name]: v }))}
+                            disabled={categoriesLoading}
+                          >
+                            {categoryOptions.map((o) => (
+                              <SingleSelectOption key={o.value} value={o.value}>{o.label}</SingleSelectOption>
+                            ))}
+                          </SingleSelect>
                         ) : p.type === 'select' ? (
                           <SingleSelect
                             value={String(values[p.name] ?? p.default ?? '')}
@@ -337,7 +379,7 @@ const App = () => {
                       background="neutral900"
                       style={{ maxHeight: 420, overflowY: 'auto' }}
                     >
-                      <pre style={{ margin: 0, color: '#d7dce3', fontSize: 12, lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+                      <pre style={{ margin: 0, color: '#ffffff', fontSize: 12, lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
                         {log || 'waiting for output…'}
                       </pre>
                     </Box>

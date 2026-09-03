@@ -63,6 +63,31 @@ const SITES = [
     contentTypes: {
       posts: [{ uid: 'api::bls-post.bls-post' }],
       categories: [{ uid: 'api::bls-category.bls-category' }],
+      authors: [{ uid: 'api::bls-author.bls-author' }],
+    },
+  },
+  {
+    name: 'Flightfares.one',
+    domain: 'flightfares.one',
+    niche: 'Travel and airfare',
+    currency: 'USD',
+    deployCommand: 'signed webhook to WordPress',
+    contentTypes: {
+      posts: [{ uid: 'api::flightfares-post.flightfares-post' }],
+      categories: [{ uid: 'api::flightfares-category.flightfares-category' }],
+      authors: [{ uid: 'api::flightfares-author.flightfares-author' }],
+    },
+  },
+  {
+    name: 'GlobalScholar.one',
+    domain: 'globalscholar.one',
+    niche: 'Education and scholarships',
+    currency: 'USD',
+    deployCommand: 'signed webhook to WordPress',
+    contentTypes: {
+      posts: [{ uid: 'api::globalscholar-post.globalscholar-post' }],
+      categories: [{ uid: 'api::globalscholar-category.globalscholar-category' }],
+      authors: [{ uid: 'api::globalscholar-author.globalscholar-author' }],
     },
   },
   {

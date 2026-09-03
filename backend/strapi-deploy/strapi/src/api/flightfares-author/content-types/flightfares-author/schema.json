@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "flightfares_authors",
+  "info": {
+    "singularName": "flightfares-author",
+    "pluralName": "flightfares-authors",
+    "displayName": "Flightfares.one · Author",
+    "description": "Editorial authors for Flightfares.one"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 120 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "bio": { "type": "text", "maxLength": 2000 },
+    "legacyWpId": { "type": "integer", "unique": true },
+    "avatarUrl": { "type": "string" },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::flightfares-post.flightfares-post",
+      "mappedBy": "author"
+    }
+  }
+}

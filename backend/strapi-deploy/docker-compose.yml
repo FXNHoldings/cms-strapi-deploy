@@ -7,6 +7,10 @@ services:
       dockerfile: Dockerfile
     container_name: strapi-cms
     restart: unless-stopped
+    # Includes the Flightfares WordPress application credentials used by its
+    # publishing lifecycle. Explicit values below still take precedence.
+    env_file:
+      - ../ai-writer-cli/.env
     environment:
       NODE_ENV: production
       HOST: 0.0.0.0

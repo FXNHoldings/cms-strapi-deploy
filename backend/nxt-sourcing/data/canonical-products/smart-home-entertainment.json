@@ -1,0 +1,3287 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart Home Entertainment",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "case",
+    "cover",
+    "skin",
+    "sticker",
+    "decal",
+    "mount",
+    "bracket",
+    "wall plate",
+    "faceplate",
+    "replacement filter",
+    "replacement part",
+    "power adapter",
+    "charger",
+    "charging cable",
+    "usb cable",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model",
+    "manual only"
+  ],
+  "families": [
+    {
+      "brand": "Amazon",
+      "family": "Echo",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Echo, 4th Gen",
+          "model": "Echo, 4th Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "4th",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo, 4th Gen",
+            "Amazon Echo, 4th Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Amazon",
+      "family": "Echo Dot",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Echo Dot, 5th Gen",
+          "model": "Echo Dot, 5th Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "dot",
+            "5th",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo Dot, 5th Gen",
+            "Amazon Echo Dot, 5th Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Dot Max",
+          "model": "Echo Dot Max",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "dot",
+            "max"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo Dot Max",
+            "Amazon Echo Dot Max smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Amazon",
+      "family": "Echo Show",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Echo Show 5, 3rd Gen",
+          "model": "Echo Show 5, 3rd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "show",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo Show 5, 3rd Gen",
+            "Amazon Echo Show 5, 3rd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Show 8, 4th Gen",
+          "model": "Echo Show 8, 4th Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "show",
+            "4th",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo Show 8, 4th Gen",
+            "Amazon Echo Show 8, 4th Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Show 11",
+          "model": "Echo Show 11",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "show",
+            "11"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo Show 11",
+            "Amazon Echo Show 11 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Show 15, 2nd Gen",
+          "model": "Echo Show 15, 2nd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "show",
+            "15",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo Show 15, 2nd Gen",
+            "Amazon Echo Show 15, 2nd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Show 21",
+          "model": "Echo Show 21",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "show",
+            "21"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo Show 21",
+            "Amazon Echo Show 21 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Amazon",
+      "family": "Echo Spot",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Echo Spot",
+          "model": "Echo Spot",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "spot"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo Spot",
+            "Amazon Echo Spot smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Amazon",
+      "family": "Echo Studio",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Echo Studio (Latest Gen)",
+          "model": "Echo Studio (Latest Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "echo",
+            "studio",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Echo Studio (Latest Gen)",
+            "Echo Studio (Latest Gen) smart home",
+            "Amazon Echo Studio (Latest Gen)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Echo Studio, 2025 Release",
+          "model": "Echo Studio, 2025 Release",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "echo",
+            "studio",
+            "2025",
+            "release"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Echo Studio, 2025 Release",
+            "Amazon Echo Studio, 2025 Release smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Amazon",
+      "family": "Fire TV",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Fire TV Stick 4K Max",
+          "model": "Fire TV Stick 4K Max",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "amazon",
+            "fire",
+            "tv",
+            "stick",
+            "4k",
+            "max"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Fire TV Stick 4K Max",
+            "Amazon Fire TV Stick 4K Max smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Fire TV Stick 4K Select",
+          "model": "Fire TV Stick 4K Select",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "fire",
+            "tv",
+            "stick",
+            "4k",
+            "select"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Fire TV Stick 4K Select",
+            "Fire TV Stick 4K Select smart home",
+            "Amazon Fire TV Stick 4K Select"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Fire TV Omni QLED Series (65-inch)",
+          "model": "Fire TV Omni QLED Series (65-inch)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "fire",
+            "tv",
+            "omni",
+            "qled",
+            "series",
+            "65-inch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Fire TV Omni QLED Series (65-inch)",
+            "Fire TV Omni QLED Series (65-inch) smart home",
+            "Amazon Fire TV Omni QLED Series (65-inch)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Fire TV Stick HD",
+          "model": "Fire TV Stick HD",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "fire",
+            "tv",
+            "stick",
+            "hd"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Fire TV Stick HD",
+            "Amazon Fire TV Stick HD smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Fire TV Stick 4K",
+          "model": "Fire TV Stick 4K",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "fire",
+            "tv",
+            "stick",
+            "4k"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Fire TV Stick 4K",
+            "Amazon Fire TV Stick 4K smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Amazon Fire TV Cube, 3rd Gen",
+          "model": "Fire TV Cube, 3rd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "fire",
+            "tv",
+            "cube",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Fire TV Cube, 3rd Gen",
+            "Amazon Fire TV Cube, 3rd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Apple",
+      "family": "HomePod",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple HomePod, 2nd Gen",
+          "model": "HomePod, 2nd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "apple",
+            "homepod",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Apple HomePod, 2nd Gen",
+            "Apple HomePod, 2nd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Apple",
+      "family": "HomePod Mini",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple HomePod Mini",
+          "model": "HomePod Mini",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "apple",
+            "homepod",
+            "mini"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Apple HomePod Mini",
+            "Apple HomePod Mini smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Apple",
+      "family": "TV 4K",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Apple TV 4K (3rd Gen, 128GB, Wi-Fi + Ethernet)",
+          "model": "TV 4K (3rd Gen, 128GB, Wi-Fi + Ethernet)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "apple",
+            "tv",
+            "4k",
+            "3rd",
+            "gen",
+            "128gb",
+            "ethernet"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Apple TV 4K (3rd Gen, 128GB, Wi-Fi + Ethernet)",
+            "Apple TV 4K (3rd Gen, 128GB, Wi-Fi + Ethernet) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Apple TV 4K, 3rd Gen",
+          "model": "TV 4K, 3rd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "apple",
+            "tv",
+            "4k",
+            "3rd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Apple TV 4K, 3rd Gen",
+            "Apple TV 4K, 3rd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Bose",
+      "family": "Smart Ultra",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Bose Smart Ultra Soundbar",
+          "model": "Smart Ultra Soundbar",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "bose",
+            "ultra",
+            "soundbar"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Bose Smart Ultra Soundbar",
+            "Bose Smart Ultra Soundbar smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Home Speaker",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Home Speaker",
+          "model": "Home Speaker",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "home",
+            "speaker"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google Home Speaker",
+            "Google Home Speaker smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Nest Hub",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Nest Hub, 2nd Gen",
+          "model": "Nest Hub, 2nd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "nest",
+            "hub",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google Nest Hub, 2nd Gen",
+            "Google Nest Hub, 2nd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Google Nest Hub Max",
+          "model": "Nest Hub Max",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "nest",
+            "hub",
+            "max"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google Nest Hub Max",
+            "Google Nest Hub Max smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Nest Mini",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Nest Mini, 2nd Gen",
+          "model": "Nest Mini, 2nd Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "nest",
+            "mini",
+            "2nd",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google Nest Mini, 2nd Gen",
+            "Google Nest Mini, 2nd Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "TV Streamer",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google TV Streamer (4K)",
+          "model": "TV Streamer (4K)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "tv",
+            "streamer",
+            "4k"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google TV Streamer (4K)",
+            "Google TV Streamer (4K) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Google TV Streamer 4K",
+          "model": "TV Streamer 4K",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "tv",
+            "streamer",
+            "4k"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google TV Streamer 4K",
+            "Google TV Streamer 4K smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "JBL",
+      "family": "Authentics 300",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "JBL Authentics 300",
+          "model": "Authentics 300",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "jbl",
+            "authentics",
+            "300"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "JBL Authentics 300",
+            "JBL Authentics 300 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Roku",
+      "family": "Select Series",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Roku Select Series 4K QLED Smart TV (55-inch)",
+          "model": "Select Series 4K QLED Smart TV (55-inch)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "roku",
+            "select",
+            "series",
+            "4k",
+            "qled",
+            "tv",
+            "55-inch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Roku Select Series 4K QLED Smart TV (55-inch)",
+            "Roku Select Series 4K QLED Smart TV (55-inch) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Roku",
+      "family": "Streaming Stick",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Streaming Stick Plus (4K, HDR)",
+          "model": "Streaming Stick Plus (4K, HDR)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "streaming",
+            "stick",
+            "4k",
+            "hdr"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Streaming Stick Plus (4K, HDR)",
+            "Streaming Stick Plus (4K, HDR) smart home",
+            "Roku Streaming Stick Plus (4K, HDR)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Roku Streaming Stick 4K",
+          "model": "Streaming Stick 4K",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "roku",
+            "streaming",
+            "stick",
+            "4k"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Roku Streaming Stick 4K",
+            "Roku Streaming Stick 4K smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Roku",
+      "family": "Ultra",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Roku Ultra (Latest, Wi-Fi 6, Dolby Vision)",
+          "model": "Ultra (Latest, Wi-Fi 6, Dolby Vision)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "roku",
+            "ultra",
+            "dolby",
+            "vision"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Roku Ultra (Latest, Wi-Fi 6, Dolby Vision)",
+            "Roku Ultra (Latest, Wi-Fi 6, Dolby Vision) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sonos",
+      "family": "Arc Ultra",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Arc Ultra Soundbar",
+          "model": "Arc Ultra Soundbar",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "arc",
+            "ultra",
+            "soundbar"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Arc Ultra Soundbar",
+            "Arc Ultra Soundbar smart home",
+            "Sonos Arc Ultra Soundbar"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Sonos Arc Ultra",
+          "model": "Arc Ultra",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "sonos",
+            "arc",
+            "ultra"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sonos Arc Ultra",
+            "Sonos Arc Ultra smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sonos",
+      "family": "Beam",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sonos Beam, Gen 2",
+          "model": "Beam, Gen 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "sonos",
+            "beam",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sonos Beam, Gen 2",
+            "Sonos Beam, Gen 2 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sonos",
+      "family": "Era 100",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Era 100 Smart Speaker",
+          "model": "Era 100 Smart Speaker",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "era",
+            "100",
+            "speaker"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Era 100 Smart Speaker",
+            "Era 100 Smart Speaker smart home",
+            "Sonos Era 100 Smart Speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Sonos Era 100",
+          "model": "Era 100",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "sonos",
+            "era",
+            "100"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sonos Era 100",
+            "Sonos Era 100 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sonos",
+      "family": "Era 300",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Era 300 Spatial Audio Smart Speaker",
+          "model": "Era 300 Spatial Audio Smart Speaker",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "era",
+            "300",
+            "spatial",
+            "audio",
+            "speaker"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Era 300 Spatial Audio Smart Speaker",
+            "Era 300 Spatial Audio Smart Speaker smart home",
+            "Sonos Era 300 Spatial Audio Smart Speaker"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Sonos Era 300",
+          "model": "Era 300",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "sonos",
+            "era",
+            "300"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sonos Era 300",
+            "Sonos Era 300 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sonos",
+      "family": "Move 2",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sonos Move 2",
+          "model": "Move 2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "sonos",
+            "move"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sonos Move 2",
+            "Sonos Move 2 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "5.1 Home",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "5.1 Home Theater Sound Bar SE",
+          "model": "5.1 Home Theater Sound Bar SE",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "5.1",
+            "home",
+            "theater",
+            "sound",
+            "bar",
+            "se"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "5.1 Home Theater Sound Bar SE",
+            "5.1 Home Theater Sound Bar SE smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Bar 1300X",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Bar 1300X 11.1.4 Soundbar with Detachable Speakers",
+          "model": "Bar 1300X 11.1.4 Soundbar with Detachable Speakers",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "bar",
+            "1300x",
+            "11.1.4",
+            "soundbar",
+            "detachable",
+            "speakers"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Bar 1300X 11.1.4 Soundbar with Detachable Speakers",
+            "Bar 1300X 11.1.4 Soundbar with Detachable Speakers smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "BRAVIA 9",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "BRAVIA 9 Mini LED 4K TV (65-inch)",
+          "model": "BRAVIA 9 Mini LED 4K TV (65-inch)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "bravia",
+            "mini",
+            "led",
+            "4k",
+            "tv",
+            "65-inch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "BRAVIA 9 Mini LED 4K TV (65-inch)",
+            "BRAVIA 9 Mini LED 4K TV (65-inch) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "C5 OLED",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "C5 OLED evo 4K Smart TV (65-inch)",
+          "model": "C5 OLED evo 4K Smart TV (65-inch)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "c5",
+            "oled",
+            "evo",
+            "4k",
+            "tv",
+            "65-inch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "C5 OLED evo 4K Smart TV (65-inch)",
+            "C5 OLED evo 4K Smart TV (65-inch) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Capsule 3",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Capsule 3 Laser Portable Projector",
+          "model": "Capsule 3 Laser Portable Projector",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "capsule",
+            "laser",
+            "portable",
+            "projector"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Capsule 3 Laser Portable Projector",
+            "Capsule 3 Laser Portable Projector smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Chromecast with",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Chromecast with Google TV (HD)",
+          "model": "Chromecast with Google TV (HD)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "chromecast",
+            "google",
+            "tv",
+            "hd"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Chromecast with Google TV (HD)",
+            "Chromecast with Google TV (HD) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Horizon Ultra",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Horizon Ultra 4K Long-Throw Projector",
+          "model": "Horizon Ultra 4K Long-Throw Projector",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "horizon",
+            "ultra",
+            "4k",
+            "long-throw",
+            "projector"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Horizon Ultra 4K Long-Throw Projector",
+            "Horizon Ultra 4K Long-Throw Projector smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "HW-Q990 Series",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "HW-Q990 Series 11.1.4ch Dolby Atmos Soundbar",
+          "model": "HW-Q990 Series 11.1.4ch Dolby Atmos Soundbar",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "hw-q990",
+            "series",
+            "11.1.4ch",
+            "dolby",
+            "atmos",
+            "soundbar"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "HW-Q990 Series 11.1.4ch Dolby Atmos Soundbar",
+            "HW-Q990 Series 11.1.4ch Dolby Atmos Soundbar smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "L9 Series",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "L9 Series 4K Trichroma Laser TV (UST)",
+          "model": "L9 Series 4K Trichroma Laser TV (UST)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "l9",
+            "series",
+            "4k",
+            "trichroma",
+            "laser",
+            "tv",
+            "ust"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "L9 Series 4K Trichroma Laser TV (UST)",
+            "L9 Series 4K Trichroma Laser TV (UST) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "QM8 Series",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "QM8 Series Mini-LED QLED 4K TV (65-inch)",
+          "model": "QM8 Series Mini-LED QLED 4K TV (65-inch)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "qm8",
+            "series",
+            "mini-led",
+            "qled",
+            "4k",
+            "tv",
+            "65-inch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "QM8 Series Mini-LED QLED 4K TV (65-inch)",
+            "QM8 Series Mini-LED QLED 4K TV (65-inch) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "S95F QD-OLED",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "S95F QD-OLED 4K Smart TV (65-inch)",
+          "model": "S95F QD-OLED 4K Smart TV (65-inch)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "s95f",
+            "qd-oled",
+            "4k",
+            "tv",
+            "65-inch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "S95F QD-OLED 4K Smart TV (65-inch)",
+            "S95F QD-OLED 4K Smart TV (65-inch) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "SHIELD TV",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "SHIELD TV Pro",
+          "model": "SHIELD TV Pro",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "shield",
+            "tv",
+            "pro"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "SHIELD TV Pro",
+            "SHIELD TV Pro smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Smart Soundbar",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Smart Soundbar (2024, Dolby Atmos)",
+          "model": "Smart Soundbar (2024, Dolby Atmos)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "soundbar",
+            "2024",
+            "dolby",
+            "atmos"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Soundbar (2024, Dolby Atmos)",
+            "Smart Soundbar (2024, Dolby Atmos) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "SR-B40A Dolby",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "SR-B40A Dolby Atmos Soundbar with Wireless Subwoofer",
+          "model": "SR-B40A Dolby Atmos Soundbar with Wireless Subwoofer",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "sr-b40a",
+            "dolby",
+            "atmos",
+            "soundbar",
+            "wireless",
+            "subwoofer"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "SR-B40A Dolby Atmos Soundbar with Wireless Subwoofer",
+            "SR-B40A Dolby Atmos Soundbar with Wireless Subwoofer smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Sub Mini",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sub Mini",
+          "model": "Sub Mini",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "sub",
+            "mini"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sub Mini",
+            "Sub Mini smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "U8 Series",
+      "category": "Smart Home Entertainment",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "U8 Series Mini-LED ULED 4K TV (65-inch)",
+          "model": "U8 Series Mini-LED ULED 4K TV (65-inch)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "u8",
+            "series",
+            "mini-led",
+            "uled",
+            "4k",
+            "tv",
+            "65-inch"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "U8 Series Mini-LED ULED 4K TV (65-inch)",
+            "U8 Series Mini-LED ULED 4K TV (65-inch) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    }
+  ]
+}

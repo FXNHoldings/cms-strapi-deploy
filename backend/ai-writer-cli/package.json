@@ -26,6 +26,7 @@
     "@fal-ai/client": "^1.4.0",
     "@inquirer/prompts": "^7.2.1",
     "dotenv": "^16.4.7",
+    "marked": "^15.0.12",
     "node-html-markdown": "^2.0.0",
     "openai": "^6.45.0",
     "slugify": "^1.6.6",

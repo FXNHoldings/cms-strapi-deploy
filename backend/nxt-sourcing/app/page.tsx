@@ -137,6 +137,20 @@ export default function Page() {
     return Object.keys(item.specifications || {}).length + (item.featureBullets?.length ? 1 : 0);
   }
 
+  function specValueText(value: string | number | boolean | string[]) {
+    if (Array.isArray(value)) return value.join(', ');
+    if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+    return String(value);
+  }
+
+  function hasImportedDetails(item: ProductSearchResult) {
+    return Boolean(
+      item.description ||
+        item.featureBullets?.length ||
+        Object.keys(item.specifications || {}).length,
+    );
+  }
+
   function toggleResult(item: ProductSearchResult) {
     const key = keyFor(item);
     setSelected((current) => {
@@ -410,6 +424,10 @@ export default function Page() {
                         </div>
                       </div>
 
+                      {item.shortDescription && (
+                        <p className="resultShortDesc">{item.shortDescription}</p>
+                      )}
+
                       <div className="resultMeta">
                         <span>{item.merchantName}</span>
                         <span>{item.availability.replace(/_/g, ' ')}</span>
@@ -417,6 +435,38 @@ export default function Page() {
                         <span>{item.confidence}</span>
                         {specCountFor(item) > 0 && <span>{specCountFor(item)} spec fields</span>}
                       </div>
+
+                      {hasImportedDetails(item) && (
+                        <details className="resultDetails">
+                          <summary>
+                            Description &amp; specifications
+                            {Object.keys(item.specifications || {}).length > 0 &&
+                              ` (${Object.keys(item.specifications || {}).length} specs)`}
+                          </summary>
+                          {item.description && (
+                            <p className="resultDescription">{item.description}</p>
+                          )}
+                          {item.featureBullets && item.featureBullets.length > 0 && (
+                            <ul className="resultBullets">
+                              {item.featureBullets.map((bullet, index) => (
+                                <li key={index}>{bullet}</li>
+                              ))}
+                            </ul>
+                          )}
+                          {Object.keys(item.specifications || {}).length > 0 && (
+                            <table className="specTable">
+                              <tbody>
+                                {Object.entries(item.specifications || {}).map(([name, value]) => (
+                                  <tr key={name}>
+                                    <th scope="row">{name}</th>
+                                    <td>{specValueText(value)}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          )}
+                        </details>
+                      )}
 
                       <div className="resultFooter">
                         <div className="identifiers">

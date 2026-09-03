@@ -14,6 +14,7 @@ module.exports = {
   type: 'admin',
   routes: [
     guarded('GET', '/jobs', 'jobs.catalogue'),
+    guarded('GET', '/categories', 'jobs.categories'),
     guarded('GET', '/runs', 'jobs.history'),
     guarded('POST', '/runs', 'jobs.start'),
     guarded('GET', '/runs/:id', 'jobs.detail'),

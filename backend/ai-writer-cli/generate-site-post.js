@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Generate blog posts for the site-specific Strapi collections:
-// nxt.bargains, bestlooking.skin, and nxtsmart.homes.
+// nxt.bargains, bestlooking.skin, nxtsmart.homes, and the WordPress-backed
+// Flightfares.one / GlobalScholar.one collections.
 
 import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
@@ -11,6 +12,7 @@ import path from 'node:path';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import slugify from 'slugify';
+import { marked } from 'marked';
 import { input, select } from '@inquirer/prompts';
 import { PROMPT_STYLES, PROMPT_STYLE_KEYS, EDITORIAL_NOTES_SCHEMA } from './prompt-styles.js';
 import { parseAiJson } from './parse-ai-json.js';
@@ -76,6 +78,34 @@ const SITE_CONFIG = {
     editorialBrief:
       'Write useful smart home content for NXTSmart.Homes. Focus on setup, compatibility, security, automation, device comparisons, reliability, and homeowner-friendly explanations.',
     topicNiche: 'smart home devices, home automation, security, energy, entertainment, integrations',
+  },
+  'flightfares.one': {
+    label: 'Flightfares.one',
+    postEndpoint: '/api/flightfares-posts',
+    categoryEndpoint: '/api/flightfares-categories',
+    adminUid: 'api::flightfares-post.flightfares-post',
+    publicMediaUrl: 'https://flightfares.one',
+    defaultPostType: null,
+    defaultCategories: ['flights', 'destinations', 'planning', 'travel-tips', 'budget-travel'],
+    contentFormat: 'HTML',
+    simplePost: true,
+    editorialBrief:
+      'Write practical airfare and flight-planning content for Flightfares.one. Focus on finding fares, booking timing, airports, routes, airline tradeoffs, fees, and realistic travel planning. Never invent live fares, schedules, availability, or airline policies.',
+    topicNiche: 'airfares, flight booking, airlines, airports, routes, and practical travel planning',
+  },
+  'globalscholar.one': {
+    label: 'GlobalScholar.one',
+    postEndpoint: '/api/globalscholar-posts',
+    categoryEndpoint: '/api/globalscholar-categories',
+    adminUid: 'api::globalscholar-post.globalscholar-post',
+    publicMediaUrl: 'https://globalscholar.one',
+    defaultPostType: null,
+    defaultCategories: ['scholarships', 'study-abroad', 'applications', 'student-finance', 'international-students'],
+    contentFormat: 'HTML',
+    simplePost: true,
+    editorialBrief:
+      'Write careful, actionable education and scholarship content for GlobalScholar.one. Focus on eligibility, application planning, study-abroad decisions, funding, deadlines, and student outcomes. Never invent scholarships, deadlines, award amounts, admission requirements, or visa rules.',
+    topicNiche: 'scholarships, international education, study abroad, applications, and student funding',
   },
 };
 
@@ -350,7 +380,9 @@ async function loadInternalLinkCandidates(category, limit = 8) {
     return (res.data || [])
       .map((post) => ({
         title: String(post.title || "").trim(),
-        url: `${site.publicMediaUrl}/${slug}/${post.slug}`,
+        url: site.simplePost
+          ? `${site.publicMediaUrl}/${post.slug}/`
+          : `${site.publicMediaUrl}/${slug}/${post.slug}`,
       }))
       .filter((post) => post.title && post.url);
   } catch (error) {
@@ -360,7 +392,6 @@ async function loadInternalLinkCandidates(category, limit = 8) {
 }
 
 async function buildInternalLinkContext(category) {
-  if (argv.site !== "nxtsmart.homes") return "";
   const candidates = await loadInternalLinkCandidates(category);
   if (!candidates.length) return "";
   const lines = candidates.map((post, index) => `${index + 1}. ${post.title} - ${post.url}`).join("\\n");
@@ -557,7 +588,21 @@ async function generatePost(topic, category, { dealProduct = null, catalogProduc
   const dealContext = dealProductPromptContext(dealProduct);
   const catalogContext = isSmartHomePost ? '' : catalogProductPromptContext(seededProducts, category);
   const smartHomeContext = isSmartHomePost ? smartHomeProductPromptContext(primaryCatalogProduct) : '';
-  const contentFormat = isSmartHomePost && primaryCatalogProduct ? 'HTML' : 'Markdown';
+  const contentFormat = site.contentFormat || (isSmartHomePost && primaryCatalogProduct ? 'HTML' : 'Markdown');
+  const rankMathRequirements = site.simplePost ? `
+
+Rank Math SEO requirements (mandatory before returning JSON):
+- Choose exactly one primary focus keyword/keyphrase and put it first in "seoKeywords". Put related terms after it, comma-separated.
+- Start "seoTitle" with the exact primary focus keyword whenever grammar allows; otherwise place it within the first half. Keep the complete SEO title at 60 characters or fewer.
+- Put the exact primary focus keyword naturally in "seoDescription"; keep it at 155 characters or fewer.
+- Include the primary focus keyword in "slug" and keep the slug concise (75 characters or fewer).
+- Use the exact primary focus keyword in the first paragraph, in at least one H2 or H3, and naturally throughout the article. Use it at least once per roughly 250 words while keeping density below 2%; readability takes priority and keyword stuffing is forbidden.
+- Do not include an H1 in "content" because WordPress displays the post title as H1.
+- Include at least one helpful internal link when internal-link opportunities are supplied, using only the exact supplied URL.
+- Write at least 600 words even when the requested topic can be answered briefly. Use short paragraphs and at least one useful list where it improves scanability.
+- Make the article title accurate and readable. A number, clear sentiment, or strong action word may be used only when it honestly fits the topic.
+- The cover image prompt must visually match the primary focus keyword. Do not put text or logos in the image.
+` : '';
 
   const styleKey = argv['prompt-style'] || 'default';
   const style = PROMPT_STYLES[styleKey] ?? PROMPT_STYLES.default;
@@ -573,7 +618,7 @@ Tone: ${argv.tone}
 Length: ${wordTarget} words
 Language: ${argv.language}
 SEO keywords: ${argv.keywords || 'choose natural keywords from the topic'}
-${dealContext}${catalogContext}${smartHomeContext}${internalLinkContext}
+${dealContext}${catalogContext}${smartHomeContext}${internalLinkContext}${rankMathRequirements}
 
 Return STRICT JSON only with exactly these keys:
 {
@@ -630,7 +675,12 @@ Image prompt requirements:
   validateDealPost(post, category);
   validateSmartHomePost(post, category);
   normalizePostForStrapi(post);
+  normalizeContentForSite(post);
   post.slug = slugifyValue(post.slug || post.title);
+  selectRankMathFocusKeyword(post);
+  validateRankMathPost(post, {
+    requireInternalLink: argv.site === 'flightfares.one' && internalLinkContext.length > 0,
+  });
   if (seededProducts.length) {
     post.content = rewriteEmbeddedMediaUrls(post.content);
   }
@@ -662,13 +712,82 @@ Image prompt requirements:
   return post;
 }
 
+function normalizeContentForSite(post) {
+  if (site.contentFormat !== 'HTML') return;
+  const source = String(post.content || '').trim();
+  if (!source) return;
+
+  const alreadyHtml = /<\/?(?:p|h[1-6]|ul|ol|li|blockquote|table|figure|img|div|pre|hr)\b[^>]*>/i.test(source);
+  if (!alreadyHtml) {
+    post.content = marked.parse(source, { gfm: true, breaks: false });
+  }
+}
+
 function normalizePostForStrapi(post) {
   post.title = limitText(post.title, 255);
   post.slug = slugifyValue(post.slug || post.title);
   post.excerpt = limitText(post.excerpt, 500);
-  post.seoTitle = limitText(post.seoTitle, 70);
-  post.seoDescription = limitText(post.seoDescription, 160);
+  post.seoTitle = limitText(post.seoTitle, site.simplePost ? 60 : 70);
+  post.seoDescription = limitText(post.seoDescription, site.simplePost ? 155 : 160);
   post.seoKeywords = limitText(post.seoKeywords, 255);
+}
+
+function validateRankMathPost(post, { requireInternalLink = false } = {}) {
+  if (!site.simplePost) return;
+  const focusKeyword = String(post.seoKeywords || '').split(',')[0].trim();
+  if (!focusKeyword) throw new Error(`${activeProviderName()} did not return a primary Rank Math focus keyword.`);
+  const contains = (value) => String(value || '').toLocaleLowerCase().includes(focusKeyword.toLocaleLowerCase());
+  const html = String(post.content || '');
+  const plainContent = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const opening = plainContent.slice(0, Math.max(500, Math.floor(plainContent.length * 0.1)));
+  const headings = [...html.matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi)]
+    .map((match) => match[1].replace(/<[^>]+>/g, ' ')).join(' ');
+  const words = wordCount(plainContent);
+  const escapedKeyword = focusKeyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const keywordUses = (plainContent.match(new RegExp(`\\b${escapedKeyword}\\b`, 'gi')) || []).length;
+  const minimumKeywordUses = Math.max(2, Math.floor(words / 250));
+  const keywordDensity = words ? (keywordUses * focusKeyword.split(/\s+/).length / words) * 100 : 0;
+  const internalLinkPattern = new RegExp(
+    `<a\\b[^>]*href=["']https?:\\/\\/(?:www\\.)?${site.publicMediaUrl.replace(/^https?:\/\/(?:www\.)?/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\/`,
+    'i',
+  );
+  const enforceFlightfaresContentChecks = argv.site === 'flightfares.one';
+  const failures = [];
+  if (!contains(post.seoTitle)) failures.push('focus keyword missing from SEO title');
+  if (!contains(post.seoDescription)) failures.push('focus keyword missing from meta description');
+  if (!contains(post.slug.replace(/-/g, ' '))) failures.push('focus keyword missing from slug');
+  if (!contains(opening)) failures.push('focus keyword missing near the beginning of content');
+  if (!contains(headings)) failures.push('focus keyword missing from H2/H3 headings');
+  if (/<h1\b/i.test(html)) failures.push('content contains a duplicate H1');
+  if (enforceFlightfaresContentChecks && words < 600) failures.push(`content has ${words} words; Rank Math requires at least 600`);
+  if (enforceFlightfaresContentChecks && keywordUses < minimumKeywordUses) failures.push(`focus keyword appears ${keywordUses} times; expected at least ${minimumKeywordUses}`);
+  if (enforceFlightfaresContentChecks && keywordDensity > 2) failures.push(`focus keyword density is ${keywordDensity.toFixed(1)}%; keep it at or below 2%`);
+  if (requireInternalLink && !internalLinkPattern.test(html)) failures.push('supplied internal-link opportunity was not used');
+  if (post.seoTitle.length > 60) failures.push('SEO title exceeds 60 characters');
+  if (post.seoDescription.length > 155) failures.push('meta description exceeds 155 characters');
+  if (post.slug.length > 75) failures.push('slug exceeds 75 characters');
+  if (failures.length) {
+    throw new Error(`Rank Math preflight failed: ${failures.join('; ')}. The article was not saved or published.`);
+  }
+}
+
+function selectRankMathFocusKeyword(post) {
+  if (!site.simplePost) return;
+  const candidates = String(post.seoKeywords || '').split(',').map((value) => value.trim()).filter(Boolean);
+  if (!candidates.length) return;
+  const html = String(post.content || '');
+  const plainContent = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const opening = plainContent.slice(0, Math.max(500, Math.floor(plainContent.length * 0.1)));
+  const headings = [...html.matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi)]
+    .map((match) => match[1].replace(/<[^>]+>/g, ' ')).join(' ');
+  const searchable = [post.seoTitle, post.seoDescription, post.slug.replace(/-/g, ' '), opening, headings]
+    .map((value) => String(value || '').toLocaleLowerCase());
+  const selected = candidates
+    .filter((keyword) => keyword.split(/\s+/).length <= 5)
+    .find((keyword) => searchable.every((value) => value.includes(keyword.toLocaleLowerCase())));
+  if (!selected || selected === candidates[0]) return;
+  post.seoKeywords = [selected, ...candidates.filter((keyword) => keyword !== selected)].join(', ');
+  console.log(`  · Rank Math focus keyword adjusted to an exact on-page phrase: ${selected}`);
 }
 
 function limitText(value, maxLength) {
@@ -696,7 +815,7 @@ async function generateImage(prompt, { aspect = 'landscape_16_9' } = {}) {
   return url;
 }
 
-async function uploadImageToStrapi(imageUrl, filename) {
+async function uploadImageToStrapi(imageUrl, filename, { returnAsset = false } = {}) {
   const res = await fetch(imageUrl);
   if (!res.ok) throw new Error(`Failed to download image ${imageUrl}: ${res.status}`);
 
@@ -721,18 +840,31 @@ async function uploadImageToStrapi(imageUrl, filename) {
   const uploaded = await uploadRes.json();
   const first = Array.isArray(uploaded) ? uploaded[0] : uploaded;
   if (!first?.id) throw new Error('Strapi upload returned no id');
-  return first.id;
+  if (!returnAsset) return first.id;
+  const publicStrapiBase = String(STRAPI_PUBLIC_URL || NEXT_PUBLIC_STRAPI_URL || STRAPI_URL || '').replace(/\/$/, '');
+  return {
+    id: first.id,
+    url: /^https?:\/\//i.test(String(first.url || ''))
+      ? first.url
+      : `${publicStrapiBase}${String(first.url || '').startsWith('/') ? '' : '/'}${first.url || ''}`,
+  };
 }
 
 async function generateAndUploadImages(post) {
   const prompts = post?.imagePrompts;
-  if (!prompts?.cover || !Array.isArray(prompts.gallery) || prompts.gallery.length < 1) {
+  const needsInlineImages = argv.site === 'flightfares.one';
+  if (!prompts?.cover || (needsInlineImages && (!Array.isArray(prompts.gallery) || prompts.gallery.length < 2))
+    || (!site.simplePost && (!Array.isArray(prompts.gallery) || prompts.gallery.length < 1))) {
     console.log(`  (no image prompts returned by ${activeProviderName()} - skipping images)`);
-    return { coverId: null, galleryIds: [] };
+    return { coverId: null, galleryIds: [], galleryAssets: [] };
   }
 
   const baseName = slugifyValue(post.title || 'site-post').slice(0, 50);
-  const galleryPrompts = prompts.gallery.slice(0, 2);
+  // FlightFares embeds both gallery images in its WordPress-compatible body.
+  // Other simple WordPress collections retain their cover-only behaviour.
+  const galleryPrompts = needsInlineImages
+    ? prompts.gallery.slice(0, 2)
+    : site.simplePost ? [] : prompts.gallery.slice(0, 2);
   process.stdout.write(`  generating ${1 + galleryPrompts.length} images with Fal.ai FLUX [${argv['image-model']}]... `);
   const t0 = Date.now();
 
@@ -748,16 +880,39 @@ async function generateAndUploadImages(post) {
   const results = await Promise.all(
     allPrompts.map(async ({ kind, prompt, aspect }) => {
       const url = await generateImage(prompt, { aspect });
-      const id = await uploadImageToStrapi(url, `${baseName}-${kind}`);
-      return { kind, id };
+      const asset = await uploadImageToStrapi(url, `${baseName}-${kind}`, { returnAsset: true });
+      return { kind, prompt, ...asset };
     }),
   );
 
   process.stdout.write(`${((Date.now() - t0) / 1000).toFixed(1)}s\n`);
 
   const coverId = results.find((result) => result.kind === 'cover')?.id ?? null;
-  const galleryIds = results.filter((result) => result.kind !== 'cover').map((result) => result.id);
-  return { coverId, galleryIds };
+  const galleryAssets = results.filter((result) => result.kind !== 'cover');
+  const galleryIds = galleryAssets.map((result) => result.id);
+  return { coverId, galleryIds, galleryAssets };
+}
+
+function insertFlightfaresInlineImages(content, post, galleryAssets = []) {
+  if (argv.site !== 'flightfares.one' || !galleryAssets.length) return content;
+
+  const html = String(content || '');
+  const paragraphEnds = [...html.matchAll(/<\/p\s*>/gi)].map((match) => match.index + match[0].length);
+  if (!paragraphEnds.length) return html;
+
+  const placements = galleryAssets.slice(0, 2).map((asset, index) => {
+    const target = Math.min(
+      paragraphEnds.length - 1,
+      Math.max(0, Math.floor(paragraphEnds.length * ((index + 1) / 3))),
+    );
+    const alt = `${post.title} - travel image ${index + 1}`.slice(0, 180);
+    const figure = `\n<figure class="wp-block-image size-large"><img src="${escapeAttr(asset.url)}" alt="${escapeAttr(alt)}" loading="lazy" decoding="async"></figure>\n`;
+    return { position: paragraphEnds[target], figure };
+  });
+
+  return placements
+    .sort((a, b) => b.position - a.position)
+    .reduce((output, item) => `${output.slice(0, item.position)}${item.figure}${output.slice(item.position)}`, html);
 }
 
 async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl } = {}) {
@@ -774,9 +929,17 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
     source: 'ai',
   };
 
+  // The WordPress-backed post collections intentionally have a smaller schema
+  // than the commerce/editorial collections. Do not send fields Strapi would
+  // reject as unknown attributes.
+  if (site.simplePost) {
+    delete data.postType;
+    delete data.readingTimeMinutes;
+  }
+
   if (categoryId) data.categories = [categoryId];
   if (coverId) data.coverImage = coverId;
-  if (galleryIds?.length) data.gallery = galleryIds;
+  if (galleryIds?.length && !site.simplePost) data.gallery = galleryIds;
   if (sourceUrl) data.sourceUrl = sourceUrl;
   if (argv['amazon-tag']) data.amazonAffiliateTag = argv['amazon-tag'];
   if (argv.publish) data.publishedAt = new Date().toISOString();
@@ -1515,6 +1678,10 @@ async function run() {
   const results = [];
   for (const [index, job] of jobs.entries()) {
     console.log(`[${index + 1}/${jobs.length}] Generating: ${job.topic}`);
+    // Resolve (and, when needed, create) the category before calling the paid
+    // AI provider. A Strapi permission or connectivity failure should stop the
+    // run before generation tokens are spent, not after the article is ready.
+    const categoryId = argv['dry-run'] ? null : await resolveCategoryId(job.category);
     if (job.dealProduct) {
       console.log(`  best-seller seed: ${job.dealProduct.marketplace} #${job.dealProduct.rank ?? '?'} · ${job.dealProduct.title}`);
     }
@@ -1525,7 +1692,6 @@ async function run() {
       dealProduct: job.dealProduct,
       catalogProducts: job.catalogProducts,
     });
-    const categoryId = argv['dry-run'] ? null : await resolveCategoryId(job.category);
 
     if (argv['dry-run']) {
       console.log(JSON.stringify({
@@ -1541,6 +1707,7 @@ async function run() {
 
     let coverId = null;
     let galleryIds = [];
+    let galleryAssets = [];
     if (argv.images) {
       try {
         if (job.catalogProducts?.[0]?.imageUrl) {
@@ -1549,11 +1716,16 @@ async function run() {
             slugifyValue(post.title).slice(0, 60),
           );
         } else {
-          ({ coverId, galleryIds } = await generateAndUploadImages(post));
+          ({ coverId, galleryIds, galleryAssets } = await generateAndUploadImages(post));
         }
       } catch (error) {
         console.log(`  image step failed (${error.message.slice(0, 140)}) - saving post without images`);
       }
+    }
+
+    if (galleryAssets.length) {
+      post.content = insertFlightfaresInlineImages(post.content, post, galleryAssets);
+      console.log(`  embedded ${galleryAssets.length} contextual image(s) in the article body`);
     }
 
     const saved = await postToStrapi(post, {

@@ -1,0 +1,3358 @@
+{
+  "schemaVersion": 1,
+  "category": "Smart Home Energy",
+  "defaultCountry": "US",
+  "defaultCurrency": "USD",
+  "globalExcludeTerms": [
+    "case",
+    "cover",
+    "skin",
+    "sticker",
+    "decal",
+    "mount",
+    "bracket",
+    "wall plate",
+    "faceplate",
+    "replacement filter",
+    "replacement part",
+    "power adapter",
+    "charger",
+    "charging cable",
+    "usb cable",
+    "for parts",
+    "parts only",
+    "dummy",
+    "display model",
+    "manual only"
+  ],
+  "families": [
+    {
+      "brand": "Amazon",
+      "family": "Smart Thermostat",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Amazon Smart Thermostat",
+          "model": "Smart Thermostat",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "amazon",
+            "thermostat"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Amazon Smart Thermostat",
+            "Amazon Smart Thermostat smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "ChargePoint",
+      "family": "Home Flex",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Home Flex Level 2 EV Charger (50A)",
+          "model": "Home Flex Level 2 EV Charger (50A)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "home",
+            "flex",
+            "level",
+            "ev",
+            "charger",
+            "50a"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Home Flex Level 2 EV Charger (50A)",
+            "Home Flex Level 2 EV Charger (50A) smart home",
+            "ChargePoint Home Flex Level 2 EV Charger (50A)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "ChargePoint Home Flex Level 2 EV Charger",
+          "model": "Home Flex Level 2 EV Charger",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "chargepoint",
+            "home",
+            "flex",
+            "level",
+            "ev",
+            "charger"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "ChargePoint Home Flex Level 2 EV Charger",
+            "ChargePoint Home Flex Level 2 EV Charger smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ecobee",
+      "family": "Smart Thermostat",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Ecobee Smart Thermostat Premium",
+          "model": "Smart Thermostat Premium",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "ecobee",
+            "thermostat",
+            "premium"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ecobee Smart Thermostat Premium",
+            "Ecobee Smart Thermostat Premium smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Ecobee Smart Thermostat Enhanced",
+          "model": "Smart Thermostat Enhanced",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "tail-match",
+          "requiredTerms": [
+            "ecobee",
+            "thermostat",
+            "enhanced"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ecobee Smart Thermostat Enhanced",
+            "Ecobee Smart Thermostat Enhanced smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Ecobee Smart Thermostat Essential",
+          "model": "Smart Thermostat Essential",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "ecobee",
+            "thermostat",
+            "essential"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Ecobee Smart Thermostat Essential",
+            "Ecobee Smart Thermostat Essential smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Emerson",
+      "family": "Sensi Touch",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Emerson Sensi Touch 2 Smart Thermostat",
+          "model": "Sensi Touch 2 Smart Thermostat",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "emerson",
+            "sensi",
+            "touch",
+            "thermostat"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Emerson Sensi Touch 2 Smart Thermostat",
+            "Emerson Sensi Touch 2 Smart Thermostat smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Emporia",
+      "family": "Level 2",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Emporia Level 2 EV Charger",
+          "model": "Level 2 EV Charger",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "emporia",
+            "level",
+            "ev",
+            "charger"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Emporia Level 2 EV Charger",
+            "Emporia Level 2 EV Charger smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Emporia",
+      "family": "Smart Plug",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Emporia Smart Plug",
+          "model": "Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "emporia",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Emporia Smart Plug",
+            "Emporia Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Emporia",
+      "family": "Vue 3",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Vue 3 Smart Home Energy Monitor (16 Circuits)",
+          "model": "Vue 3 Smart Home Energy Monitor (16 Circuits)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "vue",
+            "home",
+            "energy",
+            "monitor",
+            "16",
+            "circuits"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Vue 3 Smart Home Energy Monitor (16 Circuits)",
+            "Vue 3 Smart Home Energy Monitor (16 Circuits) smart home",
+            "Emporia Vue 3 Smart Home Energy Monitor (16 Circuits)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Vue 3 Energy Monitor (8 Circuits)",
+          "model": "Vue 3 Energy Monitor (8 Circuits)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "vue",
+            "energy",
+            "monitor",
+            "circuits"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Vue 3 Energy Monitor (8 Circuits)",
+            "Vue 3 Energy Monitor (8 Circuits) smart home",
+            "Emporia Vue 3 Energy Monitor (8 Circuits)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Emporia Vue 3 Home Energy Monitor",
+          "model": "Vue 3 Home Energy Monitor",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "emporia",
+            "vue",
+            "home",
+            "energy",
+            "monitor"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Emporia Vue 3 Home Energy Monitor",
+            "Emporia Vue 3 Home Energy Monitor smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eve",
+      "family": "Energy Smart",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Eve Energy Smart Plug (Matter over Thread)",
+          "model": "Energy Smart Plug (Matter over Thread)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eve",
+            "energy",
+            "plug",
+            "matter",
+            "over",
+            "thread"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Eve Energy Smart Plug (Matter over Thread)",
+            "Eve Energy Smart Plug (Matter over Thread) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Eve Energy Smart Plug",
+          "model": "Energy Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "eve",
+            "energy",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Eve Energy Smart Plug",
+            "Eve Energy Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Nest Learning",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Nest Learning Thermostat, 4th Gen",
+          "model": "Nest Learning Thermostat, 4th Gen",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "nest",
+            "learning",
+            "thermostat",
+            "4th",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google Nest Learning Thermostat, 4th Gen",
+            "Google Nest Learning Thermostat, 4th Gen smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "family": "Nest Thermostat",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Google Nest Thermostat",
+          "model": "Nest Thermostat",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "google",
+            "nest",
+            "thermostat"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Google Nest Thermostat",
+            "Google Nest Thermostat smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Honeywell Home",
+      "family": "T10 Pro",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Honeywell Home T10 Pro Smart Thermostat",
+          "model": "T10 Pro Smart Thermostat",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "honeywell",
+            "home",
+            "t10",
+            "pro",
+            "thermostat"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Honeywell Home T10 Pro Smart Thermostat",
+            "Honeywell Home T10 Pro Smart Thermostat smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Honeywell Home",
+      "family": "T9 Smart",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "T9 Smart Thermostat with Smart Room Sensor",
+          "model": "T9 Smart Thermostat with Smart Room Sensor",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "t9",
+            "thermostat",
+            "room",
+            "sensor"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "T9 Smart Thermostat with Smart Room Sensor",
+            "T9 Smart Thermostat with Smart Room Sensor smart home",
+            "Honeywell Home T9 Smart Thermostat with Smart Room Sensor"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Honeywell Home T9 Smart Thermostat",
+          "model": "T9 Smart Thermostat",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "honeywell",
+            "home",
+            "t9",
+            "thermostat"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Honeywell Home T9 Smart Thermostat",
+            "Honeywell Home T9 Smart Thermostat smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Level",
+      "family": "2 EV",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Level 2 EV Charger (48A, Hardwire/NEMA 14-50)",
+          "model": "2 EV Charger (48A, Hardwire/NEMA 14-50)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "level",
+            "ev",
+            "charger",
+            "48a",
+            "hardwire",
+            "nema",
+            "14-50"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Level 2 EV Charger (48A, Hardwire/NEMA 14-50)",
+            "Level 2 EV Charger (48A, Hardwire/NEMA 14-50) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Meross",
+      "family": "MSS315 Energy-Monitoring",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Meross MSS315 Energy-Monitoring Smart Plug",
+          "model": "MSS315 Energy-Monitoring Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "meross",
+            "mss315",
+            "energy-monitoring",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Meross MSS315 Energy-Monitoring Smart Plug",
+            "Meross MSS315 Energy-Monitoring Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Meross",
+      "family": "Smart Home",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Meross Smart Home Energy Monitor",
+          "model": "Smart Home Energy Monitor",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "meross",
+            "home",
+            "energy",
+            "monitor"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Meross Smart Home Energy Monitor",
+            "Meross Smart Home Energy Monitor smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Mysa",
+      "family": "Smart Thermostat",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Mysa Smart Thermostat for Electric Baseboard Heaters V2",
+          "model": "Smart Thermostat for Electric Baseboard Heaters V2",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "mysa",
+            "thermostat",
+            "electric",
+            "baseboard",
+            "heaters",
+            "v2"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Mysa Smart Thermostat for Electric Baseboard Heaters V2",
+            "Mysa Smart Thermostat for Electric Baseboard Heaters V2 smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nest",
+      "family": "Learning Thermostat",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Nest Learning Thermostat (4th Gen)",
+          "model": "Learning Thermostat (4th Gen)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "nest",
+            "learning",
+            "thermostat",
+            "4th",
+            "gen"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Nest Learning Thermostat (4th Gen)",
+            "Nest Learning Thermostat (4th Gen) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Nest",
+      "family": "Thermostat",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Nest Thermostat (2020, Budget Model)",
+          "model": "Thermostat (2020, Budget Model)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "nest",
+            "thermostat",
+            "2020",
+            "budget",
+            "model"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Nest Thermostat (2020, Budget Model)",
+            "Nest Thermostat (2020, Budget Model) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Orbit B-hyve",
+      "family": "XR Smart",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Orbit B-hyve XR Smart Sprinkler Controller",
+          "model": "XR Smart Sprinkler Controller",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "orbit",
+            "b-hyve",
+            "xr",
+            "sprinkler",
+            "controller"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Orbit B-hyve XR Smart Sprinkler Controller",
+            "Orbit B-hyve XR Smart Sprinkler Controller smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Rachio",
+      "family": "3 Smart",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Rachio 3 Smart Sprinkler Controller",
+          "model": "3 Smart Sprinkler Controller",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "rachio",
+            "sprinkler",
+            "controller"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Rachio 3 Smart Sprinkler Controller",
+            "Rachio 3 Smart Sprinkler Controller smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Refoss",
+      "family": "Smart Home",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Refoss Smart Home Energy Monitor",
+          "model": "Smart Home Energy Monitor",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "refoss",
+            "home",
+            "energy",
+            "monitor"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Refoss Smart Home Energy Monitor",
+            "Refoss Smart Home Energy Monitor smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sense",
+      "family": "Energy Monitor",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sense Energy Monitor",
+          "model": "Energy Monitor",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "sense",
+            "energy",
+            "monitor"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sense Energy Monitor",
+            "Sense Energy Monitor smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sense",
+      "family": "Home Energy",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Home Energy Meter Gen 5 (Z-Wave)",
+          "model": "Home Energy Meter Gen 5 (Z-Wave)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "family-match",
+          "requiredTerms": [
+            "home",
+            "energy",
+            "meter",
+            "gen",
+            "z-wave"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Home Energy Meter Gen 5 (Z-Wave)",
+            "Home Energy Meter Gen 5 (Z-Wave) smart home",
+            "Sense Home Energy Meter Gen 5 (Z-Wave)"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Sense Home Energy Monitor",
+          "model": "Home Energy Monitor",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "sense",
+            "home",
+            "energy",
+            "monitor"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sense Home Energy Monitor",
+            "Sense Home Energy Monitor smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sensi",
+      "family": "Touch 2",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sensi Touch 2 Smart Thermostat",
+          "model": "Touch 2 Smart Thermostat",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "sensi",
+            "touch",
+            "thermostat"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sensi Touch 2 Smart Thermostat",
+            "Sensi Touch 2 Smart Thermostat smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Shelly",
+      "family": "Plus Plug",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Shelly Plus Plug US",
+          "model": "Plus Plug US",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "shelly",
+            "plug",
+            "us"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Shelly Plus Plug US",
+            "Shelly Plus Plug US smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Sonoff",
+      "family": "S31 Smart",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Sonoff S31 Smart Plug with Energy Monitoring",
+          "model": "S31 Smart Plug with Energy Monitoring",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "sonoff",
+            "s31",
+            "plug",
+            "energy",
+            "monitoring"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Sonoff S31 Smart Plug with Energy Monitoring",
+            "Sonoff S31 Smart Plug with Energy Monitoring smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Kasa EP25",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Kasa EP25 Smart Plug",
+          "model": "Kasa EP25 Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "ep25",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa EP25 Smart Plug",
+            "TP-Link Kasa EP25 Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Kasa HS300",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Kasa HS300 Smart Power Strip",
+          "model": "Kasa HS300 Smart Power Strip",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "hs300",
+            "power",
+            "strip"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa HS300 Smart Power Strip",
+            "TP-Link Kasa HS300 Smart Power Strip smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Kasa KP125M",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Kasa KP125M Matter Smart Plug",
+          "model": "Kasa KP125M Matter Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "kasa",
+            "kp125m",
+            "matter",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Kasa KP125M Matter Smart Plug",
+            "TP-Link Kasa KP125M Matter Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo P110M",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo P110M Smart Plug",
+          "model": "Tapo P110M Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "p110m",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo P110M Smart Plug",
+            "TP-Link Tapo P110M Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo P115",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo P115 Smart Plug",
+          "model": "Tapo P115 Smart Plug",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "p115",
+            "plug"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo P115 Smart Plug",
+            "TP-Link Tapo P115 Smart Plug smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "TP-Link",
+      "family": "Tapo P304M",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "TP-Link Tapo P304M Smart Power Strip",
+          "model": "Tapo P304M Smart Power Strip",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "tp-link",
+            "tapo",
+            "p304m",
+            "power",
+            "strip"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "TP-Link Tapo P304M Smart Power Strip",
+            "TP-Link Tapo P304M Smart Power Strip smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Wiser",
+      "family": "Energy Smart",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Wiser Energy Smart Home Monitor",
+          "model": "Energy Smart Home Monitor",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "prefix",
+          "requiredTerms": [
+            "wiser",
+            "energy",
+            "home",
+            "monitor"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Wiser Energy Smart Home Monitor",
+            "Wiser Energy Smart Home Monitor smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "AC200L Portable",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "AC200L Portable Power Station (2kWh)",
+          "model": "AC200L Portable Power Station (2kWh)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "ac200l",
+            "portable",
+            "power",
+            "station",
+            "2kwh"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "AC200L Portable Power Station (2kWh)",
+            "AC200L Portable Power Station (2kWh) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Classic Level",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Classic Level 2 EV Charger (40A)",
+          "model": "Classic Level 2 EV Charger (40A)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "classic",
+            "level",
+            "ev",
+            "charger",
+            "40a"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Classic Level 2 EV Charger (40A)",
+            "Classic Level 2 EV Charger (40A) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "DELTA 2",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "DELTA 2 Max Portable Power Station (2kWh)",
+          "model": "DELTA 2 Max Portable Power Station (2kWh)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "delta",
+            "max",
+            "portable",
+            "power",
+            "station",
+            "2kwh"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "DELTA 2 Max Portable Power Station (2kWh)",
+            "DELTA 2 Max Portable Power Station (2kWh) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "DELTA Pro",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "DELTA Pro 3 Portable Power Station (4kWh)",
+          "model": "DELTA Pro 3 Portable Power Station (4kWh)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "delta",
+            "pro",
+            "portable",
+            "power",
+            "station",
+            "4kwh"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "DELTA Pro 3 Portable Power Station (4kWh)",
+            "DELTA Pro 3 Portable Power Station (4kWh) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "EM16 Smart",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "EM16 Smart Energy Monitor (16 Circuits)",
+          "model": "EM16 Smart Energy Monitor (16 Circuits)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "em16",
+            "energy",
+            "monitor",
+            "16",
+            "circuits"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "EM16 Smart Energy Monitor (16 Circuits)",
+            "EM16 Smart Energy Monitor (16 Circuits) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Explorer 2000",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Explorer 2000 Plus Portable Power Station",
+          "model": "Explorer 2000 Plus Portable Power Station",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "explorer",
+            "2000",
+            "portable",
+            "power",
+            "station"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Explorer 2000 Plus Portable Power Station",
+            "Explorer 2000 Plus Portable Power Station smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "F3800 Portable",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "F3800 Portable Power Station (3.8kWh)",
+          "model": "F3800 Portable Power Station (3.8kWh)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "f3800",
+            "portable",
+            "power",
+            "station",
+            "3.8kwh"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "F3800 Portable Power Station (3.8kWh)",
+            "F3800 Portable Power Station (3.8kWh) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "MaxiCharger AC",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "MaxiCharger AC Elite Home (50A)",
+          "model": "MaxiCharger AC Elite Home (50A)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "maxicharger",
+            "ac",
+            "elite",
+            "home",
+            "50a"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "MaxiCharger AC Elite Home (50A)",
+            "MaxiCharger AC Elite Home (50A) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Pro 3EM",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Pro 3EM 3-Phase Energy Meter (DIN Rail)",
+          "model": "Pro 3EM 3-Phase Energy Meter (DIN Rail)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "pro",
+            "3em",
+            "3-phase",
+            "energy",
+            "meter",
+            "din",
+            "rail"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Pro 3EM 3-Phase Energy Meter (DIN Rail)",
+            "Pro 3EM 3-Phase Energy Meter (DIN Rail) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "ProTerra Hybrid",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "ProTerra Hybrid Electric Heat Pump Water Heater (EcoNet Wi-Fi)",
+          "model": "ProTerra Hybrid Electric Heat Pump Water Heater (EcoNet Wi-Fi)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "proterra",
+            "hybrid",
+            "electric",
+            "heat",
+            "pump",
+            "water",
+            "heater",
+            "econet"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "ProTerra Hybrid Electric Heat Pump Water Heater (EcoNet Wi-Fi)",
+            "ProTerra Hybrid Electric Heat Pump Water Heater (EcoNet Wi-Fi) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Smart Plug",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Smart Plug with Energy Monitoring (4-pack)",
+          "model": "Smart Plug with Energy Monitoring (4-pack)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "plug",
+            "energy",
+            "monitoring",
+            "4-pack"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Plug with Energy Monitoring (4-pack)",
+            "Smart Plug with Energy Monitoring (4-pack) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Smart Power",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Smart Power Strip (Wi-Fi, 3 Outlets + 3 USB)",
+          "model": "Smart Power Strip (Wi-Fi, 3 Outlets + 3 USB)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "power",
+            "strip",
+            "outlets",
+            "usb"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Power Strip (Wi-Fi, 3 Outlets + 3 USB)",
+            "Smart Power Strip (Wi-Fi, 3 Outlets + 3 USB) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Smart Thermostat",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Smart Thermostat for Electric Baseboard Heaters",
+          "model": "Smart Thermostat for Electric Baseboard Heaters",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "thermostat",
+            "electric",
+            "baseboard",
+            "heaters"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Thermostat for Electric Baseboard Heaters",
+            "Smart Thermostat for Electric Baseboard Heaters smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Smart Wi-Fi",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Smart Wi-Fi Plug Slim with Energy Monitoring KP125M",
+          "model": "Smart Wi-Fi Plug Slim with Energy Monitoring KP125M",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "plug",
+            "slim",
+            "energy",
+            "monitoring",
+            "kp125m"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Wi-Fi Plug Slim with Energy Monitoring KP125M",
+            "Smart Wi-Fi Plug Slim with Energy Monitoring KP125M smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        },
+        {
+          "canonicalName": "Smart Wi-Fi Power Strip HS300 (6 Outlets, Per-Outlet Metering)",
+          "model": "Smart Wi-Fi Power Strip HS300 (6 Outlets, Per-Outlet Metering)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "power",
+            "strip",
+            "hs300",
+            "outlets",
+            "per-outlet",
+            "metering"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Smart Wi-Fi Power Strip HS300 (6 Outlets, Per-Outlet Metering)",
+            "Smart Wi-Fi Power Strip HS300 (6 Outlets, Per-Outlet Metering) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "",
+      "family": "Wall Connector",
+      "category": "Smart Home Energy",
+      "sourceStatus": "seed",
+      "variants": [
+        {
+          "canonicalName": "Wall Connector (Gen 3, Universal)",
+          "model": "Wall Connector (Gen 3, Universal)",
+          "identifierStatus": "needs_verification",
+          "identifiers": {},
+          "brandResolution": "unresolved",
+          "requiredTerms": [
+            "wall",
+            "connector",
+            "gen",
+            "universal"
+          ],
+          "excludeTerms": [
+            "case",
+            "cover",
+            "skin",
+            "sticker",
+            "decal",
+            "mount",
+            "bracket",
+            "wall plate",
+            "faceplate",
+            "replacement filter",
+            "replacement part",
+            "power adapter",
+            "charger",
+            "charging cable",
+            "usb cable",
+            "for parts",
+            "parts only",
+            "dummy",
+            "display model",
+            "manual only",
+            "refurbished",
+            "renewed",
+            "used",
+            "open box"
+          ],
+          "searchQueries": [
+            "Wall Connector (Gen 3, Universal)",
+            "Wall Connector (Gen 3, Universal) smart home"
+          ],
+          "variantsToSplitLater": [
+            "color",
+            "packSize",
+            "generation",
+            "region",
+            "connectivity",
+            "mountType"
+          ]
+        }
+      ]
+    }
+  ]
+}

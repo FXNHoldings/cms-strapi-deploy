@@ -69,6 +69,12 @@
       "relation": "manyToMany",
       "target": "api::bls-category.bls-category",
       "inversedBy": "posts"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::bls-author.bls-author",
+      "inversedBy": "posts"
     }
   }
 }
