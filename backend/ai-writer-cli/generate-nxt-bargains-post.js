@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-// Generate NXT.Bargains Best Sellers posts from cached best-seller products.
+// Generate NXT.Bargains articles (Best Sellers, Product Reviews, Comparisons, Smart Home, Guides, etc.) with AI and upload to Strapi.
 
 import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
+import { fal } from '@fal-ai/client';
 import fs from 'node:fs';
 import path from 'node:path';
 import yargs from 'yargs';
@@ -11,33 +12,75 @@ import { hideBin } from 'yargs/helpers';
 import slugify from 'slugify';
 import { input, select } from '@inquirer/prompts';
 import { parseAiJson } from './parse-ai-json.js';
+import { PROMPT_STYLES, PROMPT_STYLE_KEYS, EDITORIAL_NOTES_SCHEMA } from './prompt-styles.js';
+
+const NXT_CATEGORIES = [
+  { slug: 'best-sellers-articles', name: 'Best Sellers' },
+  { slug: 'product-comparisons', name: 'Product Comparisons' },
+  { slug: 'product-reviews', name: 'Product Reviews' },
+  { slug: 'product-roundups', name: 'Product Roundups' },
+  { slug: 'how-to-guides', name: 'How-to Guides' },
+  { slug: 'buying-guides', name: 'Buying Guides' },
+  { slug: 'top-rated-smart-electronics-devices', name: 'Top-Rated Products' },
+  { slug: 'nxt-bargains-informative-articles', name: 'Informative Articles' },
+  { slug: 'smart-home', name: 'Smart Home' },
+];
+
+const LENGTH_PROMPTS = {
+  short: { label: 'Short (~800 - 1,000 words)', minWords: 800, text: 'approx 800–1000 words' },
+  medium: { label: 'Medium (~1,200 - 1,500 words)', minWords: 1200, text: 'approx 1200–1500 words' },
+  long: { label: 'Long (~1,800 - 2,500+ words)', minWords: 1800, text: 'approx 1800–2500 words' },
+};
 
 const argv = yargs(hideBin(process.argv))
-  .usage('Usage: $0 [options]')
+  .usage('Usage: $0 [options] [topic]')
+  .option('category', {
+    alias: 'c',
+    type: 'string',
+    describe: 'NXT.Bargains category slug or name (e.g. best-sellers-articles, smart-home). Prompts when omitted.',
+  })
+  .option('prompt-style', {
+    alias: 'style',
+    type: 'string',
+    choices: PROMPT_STYLE_KEYS,
+    describe: 'Article writing style method. Prompts when omitted.',
+  })
+  .option('length', {
+    alias: 'l',
+    type: 'string',
+    choices: ['short', 'medium', 'long'],
+    describe: 'Article target length (short, medium, long). Prompts when omitted.',
+  })
+  .option('image-type', {
+    alias: 'image',
+    type: 'string',
+    choices: ['product', 'ai', 'none'],
+    describe: 'Featured image source (product, ai, none). Prompts when omitted.',
+  })
+  .option('topic', {
+    alias: 't',
+    type: 'string',
+    describe: 'Article topic or product title.',
+  })
   .option('count', {
     alias: 'n',
     type: 'number',
-    describe: 'How many random Best Sellers posts to generate. Prompts when omitted in an interactive terminal.',
+    describe: 'How many posts to generate. Prompts when omitted.',
   })
   .option('merchant', {
     alias: 'm',
     type: 'string',
     choices: ['all', 'amazon', 'ebay', 'walmart', 'target', 'newegg'],
-    describe: 'Merchant to use. Prompts when omitted in an interactive terminal.',
+    describe: 'Merchant filter for Best Sellers products.',
   })
   .option('min-words', {
     type: 'number',
-    default: 1000,
-    describe: 'Minimum article body word count',
+    describe: 'Minimum article body word count (overrides length selection).',
   })
   .option('publish', {
     type: 'boolean',
     default: false,
     describe: 'Publish immediately; default is draft',
-  })
-  .option('images', {
-    type: 'boolean',
-    describe: 'Upload the selected merchant product image as cover/OG image. Prompts when omitted in an interactive terminal.',
   })
   .option('dry-run', {
     type: 'boolean',
@@ -47,6 +90,9 @@ const argv = yargs(hideBin(process.argv))
   .help()
   .parseSync();
 
+const positionalTopic = argv._[0];
+if (!argv.topic && positionalTopic) argv.topic = String(positionalTopic);
+
 const {
   AI_PROVIDER = 'openai',
   OPENAI_API_KEY,
@@ -55,13 +101,14 @@ const {
   OPENROUTER_API_KEY,
   OPENROUTER_MODEL = '~openai/gpt-latest',
   OPENROUTER_MAX_TOKENS = '16000',
-  OPENROUTER_SITE_URL = 'https://cms.fxnstudio.com',
-  OPENROUTER_APP_NAME = 'FXN AI Writer CLI',
+  OPENROUTER_SITE_URL = 'https://nxt.bargains',
+  OPENROUTER_APP_NAME = 'NXT.Bargains AI Writer CLI',
   ANTHROPIC_API_KEY,
-  CLAUDE_MODEL = 'claude-sonnet-4-5-20250929',
+  CLAUDE_MODEL = 'claude-sonnet-4-6',
   CLAUDE_MAX_TOKENS = '4096',
   STRAPI_URL,
   STRAPI_API_TOKEN,
+  FAL_KEY,
 } = process.env;
 
 const aiProvider = AI_PROVIDER.toLowerCase();
@@ -80,49 +127,105 @@ const openrouterClient = aiProvider === 'openrouter'
   ? new OpenAI({ apiKey: OPENROUTER_API_KEY, baseURL: 'https://openrouter.ai/api/v1' })
   : null;
 
+if (FAL_KEY) fal.config({ credentials: FAL_KEY });
+
 const BEST_SELLERS_DIR = '/var/www/html/nxt.bargains/data';
 const ADMIN_UID = 'api::nxt-post.nxt-post';
-const BEST_SELLERS_CATEGORY = 'best-sellers-articles';
-const BEST_SELLERS_CATEGORY_NAME = 'Best Sellers';
 const MARKETPLACES = [
-  {
-    key: 'newegg',
-    label: 'Newegg',
-    sourcePage: 'https://nxt.bargains/best-sellers/newegg',
-    file: 'best-sellers-newegg.json',
-  },
-  {
-    key: 'amazon',
-    label: 'Amazon',
-    sourcePage: 'https://nxt.bargains/best-sellers/amazon',
-    file: 'best-sellers.json',
-  },
-  {
-    key: 'ebay',
-    label: 'eBay',
-    sourcePage: 'https://nxt.bargains/best-sellers/ebay',
-    file: 'best-sellers-ebay.json',
-  },
-  {
-    key: 'walmart',
-    label: 'Walmart',
-    sourcePage: 'https://nxt.bargains/best-sellers/walmart',
-    file: 'best-sellers-walmart.json',
-  },
-  {
-    key: 'target',
-    label: 'Target',
-    sourcePage: 'https://nxt.bargains/best-sellers/target',
-    file: 'best-sellers-target.json',
-  },
+  { key: 'newegg', label: 'Newegg', sourcePage: 'https://nxt.bargains/best-sellers/newegg', file: 'best-sellers-newegg.json' },
+  { key: 'amazon', label: 'Amazon', sourcePage: 'https://nxt.bargains/best-sellers/amazon', file: 'best-sellers.json' },
+  { key: 'ebay', label: 'eBay', sourcePage: 'https://nxt.bargains/best-sellers/ebay', file: 'best-sellers-ebay.json' },
+  { key: 'walmart', label: 'Walmart', sourcePage: 'https://nxt.bargains/best-sellers/walmart', file: 'best-sellers-walmart.json' },
+  { key: 'target', label: 'Target', sourcePage: 'https://nxt.bargains/best-sellers/target', file: 'best-sellers-target.json' },
 ];
 const PRODUCT_CAROUSEL_LIMIT = 8;
 
 async function promptForMissingOptions() {
+  const isTTY = process.stdin.isTTY && process.stdout.isTTY;
+
+  // 1. Category prompt
+  if (!argv.category) {
+    if (isTTY) {
+      const chosenCategory = await select({
+        message: 'Select NXT.Bargains category:',
+        choices: [
+          ...NXT_CATEGORIES.map((cat) => ({
+            name: `${cat.name} (${cat.slug})`,
+            value: cat.slug,
+          })),
+          { name: 'Custom category (enter slug/name)...', value: 'custom' },
+        ],
+      });
+
+      if (chosenCategory === 'custom') {
+        argv.category = await input({
+          message: 'Enter custom category name or slug:',
+          validate: (val) => (val.trim() ? true : 'Category cannot be empty.'),
+        });
+      } else {
+        argv.category = chosenCategory;
+      }
+    } else {
+      argv.category = 'best-sellers-articles';
+    }
+  }
+
+  // 2. Writing Style prompt
+  if (!argv['prompt-style']) {
+    if (isTTY) {
+      argv['prompt-style'] = await select({
+        message: 'Select article writing style method:',
+        choices: PROMPT_STYLE_KEYS.map((key) => ({
+          name: PROMPT_STYLES[key].label,
+          value: key,
+        })),
+        default: 'default',
+      });
+    } else {
+      argv['prompt-style'] = 'default';
+    }
+  }
+
+  // 3. Length prompt
+  if (!argv.length && !argv['min-words']) {
+    if (isTTY) {
+      argv.length = await select({
+        message: 'Select target article length:',
+        choices: [
+          { name: LENGTH_PROMPTS.short.label, value: 'short' },
+          { name: LENGTH_PROMPTS.medium.label, value: 'medium' },
+          { name: LENGTH_PROMPTS.long.label, value: 'long' },
+        ],
+        default: 'medium',
+      });
+    } else {
+      argv.length = 'medium';
+    }
+  }
+
+  // 4. Featured Image source prompt
+  if (!argv['image-type']) {
+    if (isTTY) {
+      const isBestSellers = argv.category === 'best-sellers-articles';
+      argv['image-type'] = await select({
+        message: 'Select featured cover image source:',
+        choices: [
+          ...(isBestSellers ? [{ name: 'Merchant product image (from best-seller data)', value: 'product' }] : []),
+          { name: 'Generate AI cover image with Fal.ai FLUX', value: 'ai' },
+          { name: 'No cover image (content text only)', value: 'none' },
+        ],
+        default: isBestSellers ? 'product' : 'ai',
+      });
+    } else {
+      argv['image-type'] = argv.category === 'best-sellers-articles' ? 'product' : 'ai';
+    }
+  }
+
+  // 5. Count prompt
   if (argv.count === undefined) {
-    if (process.stdin.isTTY && process.stdout.isTTY) {
+    if (isTTY) {
       const answer = await input({
-        message: 'How many Best Sellers articles should I generate?',
+        message: 'How many articles should I generate?',
         default: '1',
         validate: (value) => {
           const n = Number(value);
@@ -135,36 +238,35 @@ async function promptForMissingOptions() {
     }
   }
 
-  if (argv.merchant) {
-    if (argv.merchant === 'all') argv.merchant = undefined;
-  } else if (process.stdin.isTTY && process.stdout.isTTY) {
-    argv.merchant = await select({
-      message: 'Which merchant should this Best Sellers article use?',
-      choices: [
-        { name: 'Random from all merchants', value: 'all' },
-        ...MARKETPLACES.map((marketplace) => ({
-          name: marketplace.label,
-          value: marketplace.key,
-        })),
-      ],
-    });
-
-    if (argv.merchant === 'all') argv.merchant = undefined;
-  }
-
-  if (argv.images === undefined) {
-    if (process.stdin.isTTY && process.stdout.isTTY) {
-      argv.images = await select({
-        message: 'Upload the selected merchant product image as the cover image?',
-        choices: [
-          { name: 'Yes, use product image', value: true },
-          { name: 'No, article content image only', value: false },
-        ],
+  // 6. Topic prompt (for non-best-sellers or when topic is omitted)
+  if (!argv.topic && argv.category !== 'best-sellers-articles') {
+    if (isTTY) {
+      const topicInput = await input({
+        message: `Enter topic or product title for this ${getCategoryName(argv.category)} article (or press Enter to auto-brainstorm):`,
+        default: '',
       });
-    } else {
-      argv.images = true;
+      if (topicInput.trim()) argv.topic = topicInput.trim();
     }
   }
+}
+
+function getCategoryName(categorySlugOrName) {
+  const match = NXT_CATEGORIES.find((c) => c.slug === categorySlugOrName || c.name.toLowerCase() === String(categorySlugOrName).toLowerCase());
+  if (match) return match.name;
+  return String(categorySlugOrName)
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (l) => l.toUpperCase());
+}
+
+function getEffectiveMinWords() {
+  if (argv['min-words']) return Number(argv['min-words']);
+  const lengthKey = argv.length || 'medium';
+  return LENGTH_PROMPTS[lengthKey]?.minWords ?? 1200;
+}
+
+function getEffectiveLengthText() {
+  const lengthKey = argv.length || 'medium';
+  return LENGTH_PROMPTS[lengthKey]?.text ?? 'approx 1200–1500 words';
 }
 
 async function strapi(pathname, init = {}) {
@@ -183,21 +285,23 @@ async function strapi(pathname, init = {}) {
   return res.json();
 }
 
-async function resolveBestSellersCategoryId() {
-  const bySlug = await strapi(`/api/nxt-categories?filters[slug][$eq]=${BEST_SELLERS_CATEGORY}&pagination[pageSize]=1`);
+async function resolveCategoryId(categorySlugOrName) {
+  const slug = slugifyValue(categorySlugOrName);
+  const bySlug = await strapi(`/api/nxt-categories?filters[slug][$eq]=${encodeURIComponent(slug)}&pagination[pageSize]=1`);
   if (bySlug?.data?.[0]?.id) return bySlug.data[0].id;
 
-  const byName = await strapi(`/api/nxt-categories?filters[name][$eqi]=${encodeURIComponent(BEST_SELLERS_CATEGORY_NAME)}&pagination[pageSize]=1`);
+  const name = getCategoryName(categorySlugOrName);
+  const byName = await strapi(`/api/nxt-categories?filters[name][$eqi]=${encodeURIComponent(name)}&pagination[pageSize]=1`);
   if (byName?.data?.[0]?.id) return byName.data[0].id;
 
   const created = await strapi('/api/nxt-categories', {
     method: 'POST',
-    body: JSON.stringify({ data: { name: BEST_SELLERS_CATEGORY_NAME, slug: BEST_SELLERS_CATEGORY } }),
+    body: JSON.stringify({ data: { name, slug } }),
   });
   return created.data.id;
 }
 
-function loadProducts() {
+function loadBestSellerProducts() {
   const products = [];
   const allowedMerchant = argv.merchant ? String(argv.merchant).toLowerCase() : null;
 
@@ -229,15 +333,13 @@ function loadProducts() {
     }
   }
 
-  if (!products.length) {
-    fatal(`No best-seller products found in ${BEST_SELLERS_DIR}${allowedMerchant ? ` for ${allowedMerchant}` : ''}. Refresh best sellers first.`);
-  }
-
   return products;
 }
 
-function pickRandomProducts(count) {
-  const shuffled = [...loadProducts()];
+function pickRandomBestSellerProducts(count) {
+  const products = loadBestSellerProducts();
+  if (!products.length) return [];
+  const shuffled = [...products];
   for (let index = shuffled.length - 1; index > 0; index -= 1) {
     const swapIndex = Math.floor(Math.random() * (index + 1));
     [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
@@ -245,10 +347,37 @@ function pickRandomProducts(count) {
   return shuffled.slice(0, Math.max(1, Number(count) || 1));
 }
 
-async function generatePost(product) {
-  const prompt = `Write one NXT.Bargains Best Sellers article about this randomly selected best-seller product.
+async function generateFalCoverImage(postTitle, categoryName) {
+  if (!FAL_KEY) {
+    console.warn('  · FAL_KEY is not set in .env; skipping AI image generation');
+    return null;
+  }
 
-Selected product:
+  const prompt = `Professional commercial photography for an article titled "${postTitle}" in category ${categoryName}. Clean modern studio lighting, high resolution, 16:9 widescreen layout, sharp focus, aesthetic tech and shopping composition, 8k resolution.`;
+  console.log(`  · generating AI cover image with Fal.ai FLUX...`);
+  const result = await fal.subscribe('fal-ai/flux/schnell', {
+    input: {
+      prompt,
+      image_size: 'landscape_16_9',
+    },
+    logs: false,
+  });
+
+  const imageUrl = result.data?.images?.[0]?.url;
+  if (!imageUrl) throw new Error('Fal.ai returned no image URL');
+  return imageUrl;
+}
+
+async function generatePost({ categoryName, categorySlug, product = null, topic = null }) {
+  const styleKey = argv['prompt-style'] || 'default';
+  const style = PROMPT_STYLES[styleKey] ?? PROMPT_STYLES.default;
+  const styleBlock = style.instructions ? `\n${style.instructions}\n` : '';
+  const minWords = getEffectiveMinWords();
+  const lengthText = getEffectiveLengthText();
+
+  let subjectContext = '';
+  if (product) {
+    subjectContext = `Selected product for Best Sellers:
 - Product title: ${product.title}
 - Merchant: ${product.marketplace}
 - Best-seller page: ${product.sourcePage}
@@ -257,9 +386,19 @@ Selected product:
 - Rating: ${product.rating ?? 'not listed'}
 - Rating count: ${product.ratingCount ?? 'not listed'}
 - Merchant product URL: ${product.url}
-- Merchant image URL: ${product.image ?? 'not listed'}
+- Merchant image URL: ${product.image ?? 'not listed'}`;
+  } else if (topic) {
+    subjectContext = `Article topic / target subject: ${topic}`;
+  } else {
+    subjectContext = `Brainstorm a compelling, high-intent article topic for the ${categoryName} category on NXT.Bargains.`;
+  }
 
-Return STRICT JSON only:
+  const prompt = `Write an in-depth editorial article for NXT.Bargains in the category "${categoryName}" (${categorySlug}).
+${subjectContext}
+
+${styleBlock}
+
+Return STRICT JSON only matching this schema:
 {
   "title": string,
   "slug": string,
@@ -268,48 +407,52 @@ Return STRICT JSON only:
   "seoTitle": string,
   "seoDescription": string,
   "seoKeywords": string,
-  "readingTimeMinutes": number
+  "readingTimeMinutes": number${style.instructions ? ',\n' + EDITORIAL_NOTES_SCHEMA : ''}
 }
 
 Rules:
-- The article is for the NXT.Bargains category "Best Sellers".
-- Focus on the selected product. Do not turn this into a generic buying guide.
-- The "title" field must exactly match the selected product title above. Do not rewrite, shorten, clean up, or optimize the product title.
-- The "content" field must be valid HTML, not Markdown.
-- Write at least ${argv['min-words']} words in "content".
-- Use useful <h2>, <h3>, <p>, <ul>, and <li> tags.
-- Section headings must be <h2>. Break the longer sections down with <h3> subheadings — at least two <h2> sections carrying two or more <h3> each. Do not use <h4>, <h5> or <h6>, and do not skip a level by opening with an <h3>.
-- Include deal-shopping analysis: why it may be worth checking, what value shoppers might see, who should skip it, what alternatives to compare, and what to verify before buying.
-- Include a dedicated product features section with practical feature-focused analysis based only on provided or safely general product information.
-- Include bullet points in at least two useful sections, such as product features, who should consider it, who should skip it, alternatives to compare, or what to verify before buying.
-- Product feature bullets should explain shopper-relevant benefits or checks, not repeat a raw product/merchant/rank/price/rating recap.
-- Include the merchant name, source best-seller page, price, rating, rank, and merchant URL naturally inside the article body exactly as provided when they are listed.
-- Do not create a "Quick Deal Snapshot", "Deal Snapshot", "Product Snapshot", summary facts box, or opening bullet-list recap section.
-- Do not include the merchant image URL inside "content"; the script inserts the feature image and product card automatically.
-- Do not invent exact specs, prices, ratings, discounts, availability, warranties, certifications, or claims.
-- Keep seoDescription at most 160 characters.
-- Escape every double quote inside JSON string values as \\" (including inch marks like 55\\").
-- Do not include markdown fences.`;
+- The article is for the NXT.Bargains category "${categoryName}".
+${product ? `- The "title" field must exactly match the selected product title "${product.title}". Do not rewrite or shorten the title.` : `- Create a clear, engaging H1 title suitable for ${categoryName}.`}
+- The "content" field must be valid HTML (not Markdown).
+- Target length: ${lengthText}. Write at least ${minWords} words in "content".
+- Use structured HTML headers (<h2> and <h3> only). Break longer sections down with <h3> subheadings. Do not use <h4>, <h5>, or <h6>.
+- Provide real-world buyer insight: key features, pros, cons, budget value, trade-offs, target use cases, and purchasing advice.
+- Include bullet points in at least two sections (e.g. key specs, who it suits best, who should skip it, buying tips).
+- Do not invent exact fake warranty details, certification numbers, or fake quotes.
+- Keep "seoDescription" under 160 characters.
+- Escape all double quotes inside JSON strings as \\".
+- Do not wrap response in markdown code blocks.`;
 
   const text = await callAI({
-    system: 'You are a senior deals editor for an ecommerce shopping site. Return strict JSON only and do not invent current product facts.',
+    system: `You are a senior tech & deals editor for NXT.Bargains (${categoryName} section). Return strict JSON only.`,
     user: prompt,
     maxTokens: Math.max(Number(maxOutputTokensEnv()) || 0, 16000),
   });
+
   const post = parseAiJson(text, { providerName: activeProviderName() });
   validatePost(post);
-  post.title = limitText(product.title, 255);
-  post.slug = slugifyValue(post.title);
+
+  if (product) {
+    post.title = limitText(product.title, 255);
+  } else {
+    post.title = limitText(post.title, 255);
+  }
+  post.slug = slugifyValue(post.slug || post.title);
   post.excerpt = limitText(post.excerpt, 500);
   post.seoTitle = limitText(post.seoTitle, 70);
   post.seoDescription = limitText(post.seoDescription, 160);
   post.seoKeywords = limitText(post.seoKeywords, 255);
-  post.content = buildDealSnapshotIntro(product, sanitizeGeneratedHtml(post.content));
+
+  let htmlBody = sanitizeGeneratedHtml(post.content);
+  if (product) {
+    htmlBody = buildDealSnapshotIntro(product, htmlBody);
+  }
+  post.content = htmlBody;
   post.readingTimeMinutes = Number(post.readingTimeMinutes) || estimateReadingTime(post.content);
 
   const words = wordCount(post.content);
-  if (words < argv['min-words']) {
-    throw new Error(`${activeProviderName()} returned ${words} words; minimum is ${argv['min-words']}. Run again or increase max tokens.`);
+  if (words < minWords) {
+    console.warn(`  · warning: word count is ${words} (min target was ${minWords})`);
   }
 
   return post;
@@ -397,7 +540,7 @@ ${details ? `<ul>${details}</ul>` : ''}
 async function uploadImageToStrapi(imageUrl, filename) {
   if (!imageUrl) return null;
   const res = await fetch(imageUrl);
-  if (!res.ok) throw new Error(`Failed to download merchant image ${imageUrl}: ${res.status}`);
+  if (!res.ok) throw new Error(`Failed to download image ${imageUrl}: ${res.status}`);
 
   const ab = await res.arrayBuffer();
   const contentType = res.headers.get('content-type') || 'image/jpeg';
@@ -434,7 +577,7 @@ async function postToStrapi(post, product, { categoryId, coverId } = {}) {
     seoDescription: post.seoDescription,
     seoKeywords: post.seoKeywords,
     source: 'ai',
-    sourceUrl: product.url,
+    ...(product?.url ? { sourceUrl: product.url } : {}),
   };
 
   if (categoryId) data.categories = [categoryId];
@@ -557,37 +700,63 @@ function fatal(message) {
 async function run() {
   await promptForMissingOptions();
 
-  console.log(`NXT.Bargains Best Sellers generator`);
-  console.log(`AI: ${aiProvider} | Model: ${activeModel()} | merchant: ${argv.merchant || 'all'} | count: ${argv.count} | images: ${argv.images} | dry-run: ${argv['dry-run']} | publish: ${argv.publish}\n`);
+  const categorySlug = argv.category || 'best-sellers-articles';
+  const categoryName = getCategoryName(categorySlug);
+  const count = Math.max(1, Number(argv.count) || 1);
+  const styleKey = argv['prompt-style'] || 'default';
+  const lengthKey = argv.length || 'medium';
+  const imageType = argv['image-type'] || 'ai';
 
-  const products = pickRandomProducts(argv.count);
-  const categoryId = argv['dry-run'] ? null : await resolveBestSellersCategoryId();
+  console.log(`NXT.Bargains Article Generator`);
+  console.log(`Category: ${categoryName} (${categorySlug}) | Style: ${styleKey} | Length: ${lengthKey} (${getEffectiveLengthText()}) | Image: ${imageType}`);
+  console.log(`AI: ${aiProvider} (${activeModel()}) | Count: ${count} | Dry-run: ${argv['dry-run']} | Publish: ${argv.publish}\n`);
+
+  const categoryId = argv['dry-run'] ? null : await resolveCategoryId(categorySlug);
   const results = [];
 
-  for (const [index, product] of products.entries()) {
-    console.log(`[${index + 1}/${products.length}] ${product.marketplace} #${product.rank ?? '?'} · ${product.title}`);
-    const post = await generatePost(product);
+  let bestSellerProducts = [];
+  if (categorySlug === 'best-sellers-articles') {
+    bestSellerProducts = pickRandomBestSellerProducts(count);
+  }
+
+  for (let index = 0; index < count; index += 1) {
+    const product = bestSellerProducts[index] || null;
+    const topic = argv.topic || (product ? product.title : null);
+
+    console.log(`[${index + 1}/${count}] ${product ? `${product.marketplace} #${product.rank ?? '?'} · ` : ''}${topic || `${categoryName} post`}`);
+
+    const post = await generatePost({ categoryName, categorySlug, product, topic });
 
     if (argv['dry-run']) {
-      console.log(JSON.stringify({ product, post }, null, 2));
+      console.log(JSON.stringify({ categorySlug, categoryName, post }, null, 2));
       results.push({ status: 'dry-run', slug: post.slug });
       continue;
     }
 
     let coverId = null;
-    if (argv.images && product.image) {
+    if (imageType === 'product' && product?.image) {
       try {
+        console.log(`  · uploading merchant product image...`);
         coverId = await uploadImageToStrapi(product.image, slugifyValue(post.title).slice(0, 60));
       } catch (error) {
-        console.log(`  image upload failed (${error.message.slice(0, 140)}) - saving post with external image in content only`);
+        console.log(`  · merchant image upload failed (${error.message.slice(0, 140)})`);
+      }
+    } else if (imageType === 'ai') {
+      try {
+        const imageUrl = await generateFalCoverImage(post.title, categoryName);
+        if (imageUrl) {
+          coverId = await uploadImageToStrapi(imageUrl, slugifyValue(post.title).slice(0, 60));
+        }
+      } catch (error) {
+        console.log(`  · AI cover image generation/upload failed (${error.message.slice(0, 140)})`);
       }
     }
 
-    const saved = await postToStrapi(post, product, { categoryId, coverId });
+    const saved = await postToStrapi(post, product || {}, { categoryId, coverId });
     const id = saved?.data?.documentId || saved?.data?.id;
     const adminUrl = `${STRAPI_URL}/admin/content-manager/collection-types/${ADMIN_UID}/${id}`;
-    console.log(`  saved ${argv.publish ? 'published' : 'draft'}: ${post.slug}${coverId ? ` · cover=${coverId}` : ''}`);
-    console.log(`  review: ${adminUrl}\n`);
+    console.log(`  · saved ${argv.publish ? 'published' : 'draft'}: ${post.slug}${coverId ? ` (cover=${coverId})` : ''}`);
+    console.log(`  · review: ${adminUrl}\n`);
     results.push({ status: argv.publish ? 'published' : 'draft', slug: post.slug, id });
   }
 
