@@ -51,6 +51,17 @@ const argv = yargs(hideBin(process.argv))
     choices: ['short', 'medium', 'long'],
     describe: 'Article target length (short, medium, long). Prompts when omitted.',
   })
+  .option('product-source', {
+    alias: 'ps',
+    type: 'string',
+    choices: ['catalog', 'best-sellers', 'auto', 'none'],
+    describe: 'Product source (catalog = https://nxt.bargains/all-products, best-sellers, auto, none). Prompts when omitted.',
+  })
+  .option('product', {
+    alias: 'p',
+    type: 'string',
+    describe: 'Product title, slug, or search term from NXT.Bargains products.',
+  })
   .option('image-type', {
     alias: 'image',
     type: 'string',
@@ -106,7 +117,7 @@ const {
   ANTHROPIC_API_KEY,
   CLAUDE_MODEL = 'claude-sonnet-4-6',
   CLAUDE_MAX_TOKENS = '4096',
-  STRAPI_URL,
+  STRAPI_URL = 'http://127.0.0.1:8888',
   STRAPI_API_TOKEN,
   FAL_KEY,
 } = process.env;
@@ -203,25 +214,90 @@ async function promptForMissingOptions() {
     }
   }
 
-  // 4. Featured Image source prompt
-  if (!argv['image-type']) {
+  // 4. Product Source prompt
+  if (!argv['product-source']) {
     if (isTTY) {
-      const isBestSellers = argv.category === 'best-sellers-articles';
-      argv['image-type'] = await select({
-        message: 'Select featured cover image source:',
+      const defaultSource = argv.category === 'best-sellers-articles' ? 'best-sellers' : 'catalog';
+      argv['product-source'] = await select({
+        message: 'Select product dataset source for article subject & price comparison:',
         choices: [
-          ...(isBestSellers ? [{ name: 'Merchant product image (from best-seller data)', value: 'product' }] : []),
-          { name: 'Generate AI cover image with Fal.ai FLUX', value: 'ai' },
-          { name: 'No cover image (content text only)', value: 'none' },
+          { name: 'NXT.Bargains product catalog (https://nxt.bargains/all-products)', value: 'catalog' },
+          { name: 'Best Sellers marketplace datasets (Amazon, eBay, Walmart, etc.)', value: 'best-sellers' },
+          { name: 'Auto-select best product source', value: 'auto' },
+          { name: 'General topic / No specific product box', value: 'none' },
         ],
-        default: isBestSellers ? 'product' : 'ai',
+        default: defaultSource,
       });
     } else {
-      argv['image-type'] = argv.category === 'best-sellers-articles' ? 'product' : 'ai';
+      argv['product-source'] = argv.category === 'best-sellers-articles' ? 'best-sellers' : 'catalog';
     }
   }
 
-  // 5. Count prompt
+  // 5. Interactive product selection from catalog (if catalog chosen & no specific product passed yet)
+  if (argv['product-source'] === 'catalog' && !argv.product && isTTY) {
+    const catalogProducts = await fetchCatalogProducts({ categorySlug: argv.category, limit: 30 });
+    if (catalogProducts.length > 0) {
+      const selectionMode = await select({
+        message: `Found ${catalogProducts.length} catalog products on https://nxt.bargains/all-products. Select product option:`,
+        choices: [
+          { name: 'Pick from matching catalog products list...', value: 'pick' },
+          { name: 'Search catalog by product keyword / brand...', value: 'search' },
+          { name: 'Auto-select random catalog product(s)', value: 'auto' },
+        ],
+        default: 'pick',
+      });
+
+      if (selectionMode === 'pick') {
+        const chosenSlug = await select({
+          message: 'Select product from catalog:',
+          choices: catalogProducts.map((p) => ({
+            name: `${p.title}${p.brand ? ` — ${p.brand}` : ''}${p.price ? ` (${p.price})` : ''}`,
+            value: p.slug,
+          })),
+        });
+        argv.product = chosenSlug;
+      } else if (selectionMode === 'search') {
+        const searchTerm = await input({
+          message: 'Enter product name, brand, or keyword to search in catalog:',
+          validate: (val) => (val.trim() ? true : 'Search term cannot be empty.'),
+        });
+        const searched = await fetchCatalogProducts({ searchTerm, limit: 20 });
+        if (searched.length > 0) {
+          const chosenSlug = await select({
+            message: `Found ${searched.length} matching products. Select product:`,
+            choices: searched.map((p) => ({
+              name: `${p.title}${p.brand ? ` — ${p.brand}` : ''}${p.price ? ` (${p.price})` : ''}`,
+              value: p.slug,
+            })),
+          });
+          argv.product = chosenSlug;
+        } else {
+          console.log('  · No catalog products matched query; using term as topic.');
+          argv.topic = searchTerm;
+        }
+      }
+    }
+  }
+
+  // 6. Featured Image source prompt
+  if (!argv['image-type']) {
+    if (isTTY) {
+      const canUseProductImg = argv['product-source'] !== 'none';
+      argv['image-type'] = await select({
+        message: 'Select featured cover image source:',
+        choices: [
+          ...(canUseProductImg ? [{ name: 'Catalog / Merchant product image', value: 'product' }] : []),
+          { name: 'Generate AI cover image with Fal.ai FLUX', value: 'ai' },
+          { name: 'No cover image (content text only)', value: 'none' },
+        ],
+        default: canUseProductImg ? 'product' : 'ai',
+      });
+    } else {
+      argv['image-type'] = argv['product-source'] !== 'none' ? 'product' : 'ai';
+    }
+  }
+
+  // 7. Count prompt
   if (argv.count === undefined) {
     if (isTTY) {
       const answer = await input({
@@ -238,11 +314,11 @@ async function promptForMissingOptions() {
     }
   }
 
-  // 6. Topic prompt (for non-best-sellers or when topic is omitted)
-  if (!argv.topic && argv.category !== 'best-sellers-articles') {
+  // 8. Topic prompt (for non-product posts or when topic is omitted)
+  if (!argv.topic && !argv.product && argv['product-source'] === 'none') {
     if (isTTY) {
       const topicInput = await input({
-        message: `Enter topic or product title for this ${getCategoryName(argv.category)} article (or press Enter to auto-brainstorm):`,
+        message: `Enter topic for this ${getCategoryName(argv.category)} article (or press Enter to auto-brainstorm):`,
         default: '',
       });
       if (topicInput.trim()) argv.topic = topicInput.trim();
@@ -270,13 +346,12 @@ function getEffectiveLengthText() {
 }
 
 async function strapi(pathname, init = {}) {
+  const headers = { 'Content-Type': 'application/json', ...(init.headers || {}) };
+  if (STRAPI_API_TOKEN) headers.Authorization = `Bearer ${STRAPI_API_TOKEN}`;
+
   const res = await fetch(`${STRAPI_URL}${pathname}`, {
     ...init,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
-      ...(init.headers || {}),
-    },
+    headers,
   });
   if (!res.ok) {
     const detail = await res.text();
@@ -301,6 +376,57 @@ async function resolveCategoryId(categorySlugOrName) {
   return created.data.id;
 }
 
+async function fetchCatalogProducts(opts = {}) {
+  const { categorySlug = null, searchTerm = null, limit = 50 } = opts;
+
+  let queryParams = `pagination[pageSize]=${limit}&populate=*&sort[0]=updatedAt:desc`;
+  if (searchTerm) {
+    queryParams += `&filters[$or][0][name][$containsi]=${encodeURIComponent(searchTerm)}&filters[$or][1][brand][$containsi]=${encodeURIComponent(searchTerm)}&filters[$or][2][slug][$containsi]=${encodeURIComponent(searchTerm)}`;
+  } else if (categorySlug && categorySlug !== 'best-sellers-articles' && categorySlug !== 'all') {
+    queryParams += `&filters[$or][0][categories][slug][$eqi]=${encodeURIComponent(categorySlug)}&filters[$or][1][category][$containsi]=${encodeURIComponent(getCategoryName(categorySlug))}`;
+  }
+
+  try {
+    const res = await strapi(`/api/commerce-products?${queryParams}`);
+    let items = Array.isArray(res?.data) ? res.data : [];
+
+    // Fallback: if category filter yielded 0 items, fetch general active catalog products
+    if (!items.length && (categorySlug || searchTerm)) {
+      const fallbackRes = await strapi(`/api/commerce-products?pagination[pageSize]=${limit}&populate=*&sort[0]=updatedAt:desc`);
+      items = Array.isArray(fallbackRes?.data) ? fallbackRes.data : [];
+    }
+
+    return items.map((item) => {
+      const offers = Array.isArray(item.offers) ? item.offers : [];
+      const prices = offers.map((o) => Number(o.price)).filter((p) => !isNaN(p) && p > 0);
+      const minPrice = prices.length ? Math.min(...prices) : null;
+      const firstImg = item.imageUrl || item.image || item.featuredImage || (Array.isArray(item.images) ? item.images[0]?.url : null);
+      const categoryName = item.category || item.categories?.[0]?.name || null;
+
+      return {
+        source: 'catalog',
+        id: item.id,
+        documentId: item.documentId,
+        title: item.name || item.title || 'Product',
+        name: item.name,
+        slug: item.slug,
+        brand: item.brand,
+        category: categoryName,
+        description: item.shortDescription || item.description,
+        image: firstImg,
+        url: `https://nxt.bargains/products/${item.slug}`,
+        sourcePage: `https://nxt.bargains/all-products`,
+        offers,
+        minPrice,
+        price: minPrice ? `$${minPrice.toFixed(2)}` : null,
+      };
+    });
+  } catch (error) {
+    console.warn(`  · Could not fetch products from Strapi catalog: ${error.message.slice(0, 100)}`);
+    return [];
+  }
+}
+
 function loadBestSellerProducts() {
   const products = [];
   const allowedMerchant = argv.merchant ? String(argv.merchant).toLowerCase() : null;
@@ -309,42 +435,73 @@ function loadBestSellerProducts() {
     if (allowedMerchant && marketplace.key !== allowedMerchant) continue;
     const filePath = path.join(BEST_SELLERS_DIR, marketplace.file);
     if (!fs.existsSync(filePath)) {
-      console.warn(`  · Missing ${filePath}; skipping ${marketplace.label}`);
       continue;
     }
 
-    const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    const items = Array.isArray(parsed?.items) ? parsed.items : [];
-    for (const item of items) {
-      if (!item?.title || !item?.url) continue;
-      products.push({
-        marketplace: marketplace.label,
-        marketplaceKey: marketplace.key,
-        sourcePage: marketplace.sourcePage,
-        rank: item.rank ?? null,
-        title: String(item.title).trim(),
-        price: item.price ?? null,
-        priceValue: item.priceValue ?? null,
-        image: item.image ?? null,
-        rating: item.rating ?? null,
-        ratingCount: item.ratingCount ?? null,
-        url: item.url,
-      });
+    try {
+      const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      const items = Array.isArray(parsed?.items) ? parsed.items : [];
+      for (const item of items) {
+        if (!item?.title || !item?.url) continue;
+        products.push({
+          source: 'best-sellers',
+          marketplace: marketplace.label,
+          marketplaceKey: marketplace.key,
+          sourcePage: marketplace.sourcePage,
+          rank: item.rank ?? null,
+          title: String(item.title).trim(),
+          price: item.price ?? null,
+          priceValue: item.priceValue ?? null,
+          image: item.image ?? null,
+          rating: item.rating ?? null,
+          ratingCount: item.ratingCount ?? null,
+          url: item.url,
+        });
+      }
+    } catch {
+      // Ignore unparseable JSON files
     }
   }
 
   return products;
 }
 
-function pickRandomBestSellerProducts(count) {
-  const products = loadBestSellerProducts();
-  if (!products.length) return [];
-  const shuffled = [...products];
-  for (let index = shuffled.length - 1; index > 0; index -= 1) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+async function getProductsForGeneration(count = 1) {
+  const source = argv['product-source'] || 'catalog';
+  const targetProductArg = argv.product || null;
+
+  if (source === 'none') return [];
+
+  // If specific product term or slug was passed:
+  if (targetProductArg) {
+    const catalogMatches = await fetchCatalogProducts({ searchTerm: targetProductArg, limit: 10 });
+    const exactCatalog = catalogMatches.find((p) => p.slug === targetProductArg || p.title.toLowerCase() === targetProductArg.toLowerCase());
+    if (exactCatalog) return Array(count).fill(exactCatalog);
+    if (catalogMatches.length > 0) return catalogMatches.slice(0, count);
+
+    // Check best-sellers if not in catalog
+    const allBestSellers = loadBestSellerProducts();
+    const bsMatches = allBestSellers.filter((p) => p.title.toLowerCase().includes(targetProductArg.toLowerCase()));
+    if (bsMatches.length > 0) return bsMatches.slice(0, count);
   }
-  return shuffled.slice(0, Math.max(1, Number(count) || 1));
+
+  // If source is catalog or auto:
+  if (source === 'catalog' || source === 'auto') {
+    const catalogProducts = await fetchCatalogProducts({ categorySlug: argv.category, limit: 100 });
+    if (catalogProducts.length > 0) {
+      const shuffled = [...catalogProducts].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, Math.max(1, count));
+    }
+  }
+
+  // Fallback to best-sellers
+  const bestSellers = loadBestSellerProducts();
+  if (bestSellers.length > 0) {
+    const shuffled = [...bestSellers].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, Math.max(1, count));
+  }
+
+  return [];
 }
 
 async function generateFalCoverImage(postTitle, categoryName) {
@@ -376,7 +533,20 @@ async function generatePost({ categoryName, categorySlug, product = null, topic 
   const lengthText = getEffectiveLengthText();
 
   let subjectContext = '';
-  if (product) {
+  if (product && product.source === 'catalog') {
+    const offerSummary = product.offers?.length
+      ? product.offers.map((o) => `  - ${o.title || o.merchant || 'Retailer'}: $${o.price} (Product URL: ${o.productUrl || o.affiliateUrl || 'N/A'})`).join('\n')
+      : '  - Live price comparison available on NXT.Bargains';
+
+    subjectContext = `Selected catalog product from NXT.Bargains (https://nxt.bargains/all-products):
+- Product Name: ${product.title}
+- Brand: ${product.brand || 'N/A'}
+- Category: ${product.category || categoryName}
+- Product Slug: ${product.slug}
+- NXT.Bargains Page: ${product.url}
+- Description summary: ${(product.description || '').slice(0, 300)}
+- Retailer Offers & Prices:\n${offerSummary}`;
+  } else if (product) {
     subjectContext = `Selected product for Best Sellers:
 - Product title: ${product.title}
 - Merchant: ${product.marketplace}
@@ -412,7 +582,7 @@ Return STRICT JSON only matching this schema:
 
 Rules:
 - The article is for the NXT.Bargains category "${categoryName}".
-${product ? `- The "title" field must exactly match the selected product title "${product.title}". Do not rewrite or shorten the title.` : `- Create a clear, engaging H1 title suitable for ${categoryName}.`}
+${product ? `- The article "title" must be an engaging, SEO-optimized title centered on "${product.title}" (e.g., "${product.title} Review & Deals Guide: Is It Worth It?"). Do not omit the core product name.` : `- Create a clear, engaging H1 title suitable for ${categoryName}.`}
 - The "content" field must be valid HTML (not Markdown).
 - Target length: ${lengthText}. Write at least ${minWords} words in "content".
 - Use structured HTML headers (<h2> and <h3> only). Break longer sections down with <h3> subheadings. Do not use <h4>, <h5>, or <h6>.
@@ -433,7 +603,7 @@ ${product ? `- The "title" field must exactly match the selected product title "
   validatePost(post);
 
   if (product) {
-    post.title = limitText(product.title, 255);
+    post.title = limitText(post.title || product.title, 255);
   } else {
     post.title = limitText(post.title, 255);
   }
@@ -448,25 +618,19 @@ ${product ? `- The "title" field must exactly match the selected product title "
     htmlBody = buildDealSnapshotIntro(product, htmlBody);
   }
   post.content = htmlBody;
-  post.readingTimeMinutes = Number(post.readingTimeMinutes) || estimateReadingTime(post.content);
-
-  const words = wordCount(post.content);
-  if (words < minWords) {
-    console.warn(`  · warning: word count is ${words} (min target was ${minWords})`);
-  }
 
   return post;
 }
 
 function sanitizeGeneratedHtml(html) {
   return String(html || '')
-    .replace(/^```(?:html|json)?/i, '')
+    .replace(/^```html\s*/i, '')
+    .replace(/^```\s*/i, '')
     .replace(/```$/i, '')
     .trim();
 }
 
-function buildDealSnapshotIntro(product, html) {
-  const content = String(html || '').trim();
+function buildDealSnapshotIntro(product, content) {
   const card = buildProductCard(product);
   return `${card}\n${insertProductCarouselInMiddle(content, product)}`;
 }
@@ -486,20 +650,28 @@ function insertProductCarouselInMiddle(html, product) {
 }
 
 function buildProductCarousel(product) {
+  if (product.source === 'catalog') {
+    return `<section class="nxt-product-carousel" data-autoslide="true" aria-label="Explore more products on NXT.Bargains">
+<h3 class="nxt-product-carousel__heading">More products &amp; deals to compare on NXT.Bargains</h3>
+<p class="nxt-product-carousel__meta"><a href="https://nxt.bargains/all-products" target="_blank" rel="noopener">Browse all products &amp; compare deals across stores on NXT.Bargains</a></p>
+</section>`;
+  }
+
   const marketplace = MARKETPLACES.find((item) => item.key === product.marketplaceKey);
   if (!marketplace) return '';
 
   const filePath = path.join(BEST_SELLERS_DIR, marketplace.file);
   if (!fs.existsSync(filePath)) return '';
 
-  const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  const products = (Array.isArray(parsed?.items) ? parsed.items : [])
-    .filter((item) => item?.title && item?.url && item?.image && item.url !== product.url)
-    .slice(0, PRODUCT_CAROUSEL_LIMIT);
+  try {
+    const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const products = (Array.isArray(parsed?.items) ? parsed.items : [])
+      .filter((item) => item?.title && item?.url && item?.image && item.url !== product.url)
+      .slice(0, PRODUCT_CAROUSEL_LIMIT);
 
-  if (!products.length) return '';
+    if (!products.length) return '';
 
-  const cards = products.map((item) => `<a class="nxt-product-carousel__item" href="${escapeAttr(item.url)}" target="_blank" rel="nofollow sponsored noopener">
+    const cards = products.map((item) => `<a class="nxt-product-carousel__item" href="${escapeAttr(item.url)}" target="_blank" rel="nofollow sponsored noopener">
 <span class="nxt-product-carousel__image"><img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.title)}" loading="lazy" /></span>
 <span class="nxt-product-carousel__body">
 <span class="nxt-product-carousel__title">${escapeHtml(item.title)}</span>
@@ -508,16 +680,39 @@ function buildProductCarousel(product) {
 </span>
 </a>`).join('\n');
 
-  return `<section class="nxt-product-carousel" data-autoslide="true" aria-label="More ${escapeAttr(marketplace.label)} products">
+    return `<section class="nxt-product-carousel" data-autoslide="true" aria-label="More ${escapeAttr(marketplace.label)} products">
 <h3 class="nxt-product-carousel__heading">More ${escapeHtml(marketplace.label)} best-seller deals to compare</h3>
 <div class="nxt-product-carousel__track">
 ${cards}
 </div>
 <p class="nxt-product-carousel__meta"><a href="${escapeAttr(marketplace.sourcePage)}" target="_blank" rel="noopener">View more ${escapeHtml(marketplace.label)} best sellers on NXT.Bargains</a></p>
 </section>`;
+  } catch {
+    return '';
+  }
 }
 
 function buildProductCard(product) {
+  if (product.source === 'catalog') {
+    const offerCount = product.offers?.length || 0;
+    const details = [
+      product.brand ? `<li><strong>Brand:</strong> ${escapeHtml(product.brand)}</li>` : '',
+      product.price ? `<li><strong>Current Price:</strong> ${escapeHtml(product.price)}${offerCount > 1 ? ` (compared across ${offerCount} retailers)` : ''}</li>` : '',
+      product.category ? `<li><strong>Category:</strong> ${escapeHtml(product.category)}</li>` : '',
+      `<li><strong>Product Page:</strong> <a href="${escapeAttr(product.url)}" target="_blank" rel="noopener">NXT.Bargains catalog page</a></li>`,
+    ].filter(Boolean).join('\n');
+
+    return `<aside class="nxt-product-card" aria-label="Product price comparison snapshot">
+${product.image ? `<a class="nxt-product-card__image" href="${escapeAttr(product.url)}" target="_blank" rel="noopener"><img src="${escapeAttr(product.image)}" alt="${escapeAttr(product.title)}" loading="lazy" /></a>` : '<div class="nxt-product-card__image" aria-hidden="true"></div>'}
+<div class="nxt-product-card__details">
+<p class="nxt-product-card__eyebrow">NXT.Bargains Deal Snapshot</p>
+<h3>${escapeHtml(product.title)}</h3>
+${details ? `<ul>${details}</ul>` : ''}
+<a class="nxt-product-card__button" href="${escapeAttr(product.url)}" target="_blank" rel="noopener">Compare Prices &amp; Deals on NXT.Bargains</a>
+</div>
+</aside>`;
+  }
+
   const details = [
     `<li><strong>Merchant:</strong> ${escapeHtml(product.marketplace)}</li>`,
     product.price ? `<li><strong>Price:</strong> ${escapeHtml(product.price)}</li>` : '',
@@ -552,7 +747,7 @@ async function uploadImageToStrapi(imageUrl, filename) {
 
   const uploadRes = await fetch(`${STRAPI_URL}/api/upload`, {
     method: 'POST',
-    headers: { Authorization: `Bearer ${STRAPI_API_TOKEN}` },
+    headers: STRAPI_API_TOKEN ? { Authorization: `Bearer ${STRAPI_API_TOKEN}` } : {},
     body: form,
   });
   if (!uploadRes.ok) {
@@ -705,30 +900,28 @@ async function run() {
   const count = Math.max(1, Number(argv.count) || 1);
   const styleKey = argv['prompt-style'] || 'default';
   const lengthKey = argv.length || 'medium';
+  const productSource = argv['product-source'] || 'catalog';
   const imageType = argv['image-type'] || 'ai';
 
   console.log(`NXT.Bargains Article Generator`);
-  console.log(`Category: ${categoryName} (${categorySlug}) | Style: ${styleKey} | Length: ${lengthKey} (${getEffectiveLengthText()}) | Image: ${imageType}`);
-  console.log(`AI: ${aiProvider} (${activeModel()}) | Count: ${count} | Dry-run: ${argv['dry-run']} | Publish: ${argv.publish}\n`);
+  console.log(`Category: ${categoryName} (${categorySlug}) | Style: ${styleKey} | Length: ${lengthKey} (${getEffectiveLengthText()})`);
+  console.log(`Product Source: ${productSource} | Image: ${imageType} | Count: ${count}`);
+  console.log(`AI: ${aiProvider} (${activeModel()}) | Dry-run: ${argv['dry-run']} | Publish: ${argv.publish}\n`);
 
   const categoryId = argv['dry-run'] ? null : await resolveCategoryId(categorySlug);
+  const products = await getProductsForGeneration(count);
   const results = [];
 
-  let bestSellerProducts = [];
-  if (categorySlug === 'best-sellers-articles') {
-    bestSellerProducts = pickRandomBestSellerProducts(count);
-  }
-
   for (let index = 0; index < count; index += 1) {
-    const product = bestSellerProducts[index] || null;
+    const product = products[index] || null;
     const topic = argv.topic || (product ? product.title : null);
 
-    console.log(`[${index + 1}/${count}] ${product ? `${product.marketplace} #${product.rank ?? '?'} · ` : ''}${topic || `${categoryName} post`}`);
+    console.log(`[${index + 1}/${count}] ${product ? `[Product: ${product.title}] ` : ''}${topic || `${categoryName} post`}`);
 
     const post = await generatePost({ categoryName, categorySlug, product, topic });
 
     if (argv['dry-run']) {
-      console.log(JSON.stringify({ categorySlug, categoryName, post }, null, 2));
+      console.log(JSON.stringify({ categorySlug, categoryName, product: product ? { title: product.title, url: product.url, source: product.source } : null, post }, null, 2));
       results.push({ status: 'dry-run', slug: post.slug });
       continue;
     }
@@ -736,10 +929,10 @@ async function run() {
     let coverId = null;
     if (imageType === 'product' && product?.image) {
       try {
-        console.log(`  · uploading merchant product image...`);
+        console.log(`  · uploading product image (${product.image})...`);
         coverId = await uploadImageToStrapi(product.image, slugifyValue(post.title).slice(0, 60));
       } catch (error) {
-        console.log(`  · merchant image upload failed (${error.message.slice(0, 140)})`);
+        console.log(`  · product image upload failed (${error.message.slice(0, 140)})`);
       }
     } else if (imageType === 'ai') {
       try {
