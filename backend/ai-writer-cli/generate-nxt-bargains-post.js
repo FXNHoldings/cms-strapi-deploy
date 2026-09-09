@@ -26,6 +26,28 @@ const NXT_CATEGORIES = [
   { slug: 'smart-home', name: 'Smart Home' },
 ];
 
+const CATEGORY_PRODUCT_MAP = {
+  'smart-home': [
+    'smart-home',
+    'smart-home-automation',
+    'smart-home-devices',
+    'smart-home-security',
+    'smart-home-entertainment',
+    'smart-light-bulbs',
+    'smart-plugs',
+    'smart-cameras',
+    'video-doorbells',
+    'smart-door-locks',
+    'smart-speakers',
+    'robot-vacuums',
+    'raspberry-pi',
+    'hubs-platforms',
+    'climate-comfort',
+    'lighting',
+    'security-cameras',
+  ],
+};
+
 const LENGTH_PROMPTS = {
   short: { label: 'Short (~800 - 1,000 words)', minWords: 800, text: 'approx 800–1000 words' },
   medium: { label: 'Medium (~1,200 - 1,500 words)', minWords: 1200, text: 'approx 1200–1500 words' },
@@ -37,7 +59,12 @@ const argv = yargs(hideBin(process.argv))
   .option('category', {
     alias: 'c',
     type: 'string',
-    describe: 'NXT.Bargains category slug or name (e.g. best-sellers-articles, smart-home). Prompts when omitted.',
+    describe: 'NXT.Bargains article category slug (e.g. best-sellers-articles, smart-home, product-reviews). Prompts when omitted.',
+  })
+  .option('commerce-category', {
+    alias: 'cc',
+    type: 'string',
+    describe: 'Commerce product category slug (e.g. smart-phones, laptops, smart-home, tablets, smartwatches, raspberry-pi).',
   })
   .option('prompt-style', {
     alias: 'style',
@@ -104,6 +131,34 @@ const argv = yargs(hideBin(process.argv))
 const positionalTopic = argv._[0];
 if (!argv.topic && positionalTopic) argv.topic = String(positionalTopic);
 
+function getArgCategory() {
+  return argv.category || argv.c || null;
+}
+function getArgCommerceCategory() {
+  return argv['commerce-category'] || argv.commerceCategory || argv.cc || null;
+}
+function getArgStyle() {
+  return argv['prompt-style'] || argv.promptStyle || argv.style || null;
+}
+function getArgLength() {
+  return argv.length || argv.l || null;
+}
+function getArgProductSource() {
+  return argv['product-source'] || argv.productSource || argv.ps || null;
+}
+function getArgProduct() {
+  return argv.product || argv.p || null;
+}
+function getArgImageType() {
+  return argv['image-type'] || argv.imageType || argv.image || null;
+}
+function getArgDryRun() {
+  return Boolean(argv['dry-run'] || argv.dryRun);
+}
+function getArgPublish() {
+  return Boolean(argv.publish);
+}
+
 const {
   AI_PROVIDER = 'openai',
   OPENAI_API_KEY,
@@ -127,7 +182,7 @@ if (!['openai', 'openrouter', 'anthropic'].includes(aiProvider)) fatal('AI_PROVI
 if (aiProvider === 'openai' && !OPENAI_API_KEY) fatal('OPENAI_API_KEY is not set.');
 if (aiProvider === 'openrouter' && !OPENROUTER_API_KEY) fatal('OPENROUTER_API_KEY is not set.');
 if (aiProvider === 'anthropic' && !ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set.');
-if (!argv['dry-run']) {
+if (!getArgDryRun()) {
   if (!STRAPI_URL) fatal('STRAPI_URL is not set in .env');
   if (!STRAPI_API_TOKEN) fatal('STRAPI_API_TOKEN is not set in .env');
 }
@@ -155,10 +210,10 @@ async function promptForMissingOptions() {
   const isTTY = process.stdin.isTTY && process.stdout.isTTY;
 
   // 1. Category prompt
-  if (!argv.category) {
+  if (!getArgCategory()) {
     if (isTTY) {
       const chosenCategory = await select({
-        message: 'Select NXT.Bargains category:',
+        message: 'Select NXT.Bargains article category:',
         choices: [
           ...NXT_CATEGORIES.map((cat) => ({
             name: `${cat.name} (${cat.slug})`,
@@ -182,7 +237,7 @@ async function promptForMissingOptions() {
   }
 
   // 2. Writing Style prompt
-  if (!argv['prompt-style']) {
+  if (!getArgStyle()) {
     if (isTTY) {
       argv['prompt-style'] = await select({
         message: 'Select article writing style method:',
@@ -198,7 +253,7 @@ async function promptForMissingOptions() {
   }
 
   // 3. Length prompt
-  if (!argv.length && !argv['min-words']) {
+  if (!getArgLength() && !argv['min-words']) {
     if (isTTY) {
       argv.length = await select({
         message: 'Select target article length:',
@@ -215,9 +270,9 @@ async function promptForMissingOptions() {
   }
 
   // 4. Product Source prompt
-  if (!argv['product-source']) {
+  if (!getArgProductSource()) {
     if (isTTY) {
-      const defaultSource = argv.category === 'best-sellers-articles' ? 'best-sellers' : 'catalog';
+      const defaultSource = getArgCategory() === 'best-sellers-articles' ? 'best-sellers' : 'catalog';
       argv['product-source'] = await select({
         message: 'Select product dataset source for article subject & price comparison:',
         choices: [
@@ -229,60 +284,89 @@ async function promptForMissingOptions() {
         default: defaultSource,
       });
     } else {
-      argv['product-source'] = argv.category === 'best-sellers-articles' ? 'best-sellers' : 'catalog';
+      argv['product-source'] = getArgCategory() === 'best-sellers-articles' ? 'best-sellers' : 'catalog';
     }
   }
 
   // 5. Interactive product selection from catalog (if catalog chosen & no specific product passed yet)
-  if (argv['product-source'] === 'catalog' && !argv.product && isTTY) {
-    const catalogProducts = await fetchCatalogProducts({ categorySlug: argv.category, limit: 30 });
-    if (catalogProducts.length > 0) {
-      const selectionMode = await select({
-        message: `Found ${catalogProducts.length} catalog products on https://nxt.bargains/all-products. Select product option:`,
-        choices: [
-          { name: 'Pick from matching catalog products list...', value: 'pick' },
-          { name: 'Search catalog by product keyword / brand...', value: 'search' },
-          { name: 'Auto-select random catalog product(s)', value: 'auto' },
-        ],
-        default: 'pick',
-      });
+  if (getArgProductSource() === 'catalog' && !getArgProduct() && isTTY) {
+    const commerceCategories = await fetchCommerceCategories();
+    const selectionMode = await select({
+      message: 'Select catalog product selection mode:',
+      choices: [
+        ...(commerceCategories.length > 0 ? [{ name: 'Filter catalog products by Product Category (Smartphones, Smart Home, Laptops, etc.)', value: 'by-category' }] : []),
+        { name: 'Pick from current article category products list', value: 'pick' },
+        { name: 'Search catalog by product keyword / brand...', value: 'search' },
+        { name: 'Auto-select random catalog product(s)', value: 'auto' },
+      ],
+      default: commerceCategories.length > 0 ? 'by-category' : 'pick',
+    });
 
-      if (selectionMode === 'pick') {
+    if (selectionMode === 'by-category') {
+      const chosenCommerceCat = await select({
+        message: 'Select Product Category:',
+        choices: [
+          { name: 'All Product Categories', value: 'all' },
+          ...commerceCategories.map((c) => ({
+            name: `${c.name} (${c.slug})`,
+            value: c.slug,
+          })),
+        ],
+      });
+      if (chosenCommerceCat !== 'all') {
+        argv['commerce-category'] = chosenCommerceCat;
+      }
+      const catProducts = await fetchCatalogProducts({ commerceCategory: getArgCommerceCategory(), categorySlug: getArgCategory(), limit: 40 });
+      if (catProducts.length > 0) {
         const chosenSlug = await select({
           message: 'Select product from catalog:',
-          choices: catalogProducts.map((p) => ({
-            name: `${p.title}${p.brand ? ` — ${p.brand}` : ''}${p.price ? ` (${p.price})` : ''}`,
+          choices: catProducts.map((p) => ({
+            name: `[${p.category}] ${p.title}${p.brand ? ` — ${p.brand}` : ''}${p.price ? ` (${p.price})` : ''}`,
             value: p.slug,
           })),
         });
         argv.product = chosenSlug;
-      } else if (selectionMode === 'search') {
-        const searchTerm = await input({
-          message: 'Enter product name, brand, or keyword to search in catalog:',
-          validate: (val) => (val.trim() ? true : 'Search term cannot be empty.'),
+      } else {
+        console.log('  · No products found in selected category; auto-selecting from catalog.');
+      }
+    } else if (selectionMode === 'pick') {
+      const catalogProducts = await fetchCatalogProducts({ commerceCategory: getArgCommerceCategory(), categorySlug: getArgCategory(), limit: 40 });
+      if (catalogProducts.length > 0) {
+        const chosenSlug = await select({
+          message: 'Select product from catalog:',
+          choices: catalogProducts.map((p) => ({
+            name: `[${p.category}] ${p.title}${p.brand ? ` — ${p.brand}` : ''}${p.price ? ` (${p.price})` : ''}`,
+            value: p.slug,
+          })),
         });
-        const searched = await fetchCatalogProducts({ searchTerm, limit: 20 });
-        if (searched.length > 0) {
-          const chosenSlug = await select({
-            message: `Found ${searched.length} matching products. Select product:`,
-            choices: searched.map((p) => ({
-              name: `${p.title}${p.brand ? ` — ${p.brand}` : ''}${p.price ? ` (${p.price})` : ''}`,
-              value: p.slug,
-            })),
-          });
-          argv.product = chosenSlug;
-        } else {
-          console.log('  · No catalog products matched query; using term as topic.');
-          argv.topic = searchTerm;
-        }
+        argv.product = chosenSlug;
+      }
+    } else if (selectionMode === 'search') {
+      const searchTerm = await input({
+        message: 'Enter product name, brand, or keyword to search in catalog:',
+        validate: (val) => (val.trim() ? true : 'Search term cannot be empty.'),
+      });
+      const searched = await fetchCatalogProducts({ searchTerm, limit: 20 });
+      if (searched.length > 0) {
+        const chosenSlug = await select({
+          message: `Found ${searched.length} matching products. Select product:`,
+          choices: searched.map((p) => ({
+            name: `[${p.category}] ${p.title}${p.brand ? ` — ${p.brand}` : ''}${p.price ? ` (${p.price})` : ''}`,
+            value: p.slug,
+          })),
+        });
+        argv.product = chosenSlug;
+      } else {
+        console.log('  · No catalog products matched query; using search term as topic.');
+        argv.topic = searchTerm;
       }
     }
   }
 
   // 6. Featured Image source prompt
-  if (!argv['image-type']) {
+  if (!getArgImageType()) {
     if (isTTY) {
-      const canUseProductImg = argv['product-source'] !== 'none';
+      const canUseProductImg = getArgProductSource() !== 'none';
       argv['image-type'] = await select({
         message: 'Select featured cover image source:',
         choices: [
@@ -293,7 +377,7 @@ async function promptForMissingOptions() {
         default: canUseProductImg ? 'product' : 'ai',
       });
     } else {
-      argv['image-type'] = argv['product-source'] !== 'none' ? 'product' : 'ai';
+      argv['image-type'] = getArgProductSource() !== 'none' ? 'product' : 'ai';
     }
   }
 
@@ -315,10 +399,10 @@ async function promptForMissingOptions() {
   }
 
   // 8. Topic prompt (for non-product posts or when topic is omitted)
-  if (!argv.topic && !argv.product && argv['product-source'] === 'none') {
+  if (!argv.topic && !getArgProduct() && getArgProductSource() === 'none') {
     if (isTTY) {
       const topicInput = await input({
-        message: `Enter topic for this ${getCategoryName(argv.category)} article (or press Enter to auto-brainstorm):`,
+        message: `Enter topic for this ${getCategoryName(getArgCategory())} article (or press Enter to auto-brainstorm):`,
         default: '',
       });
       if (topicInput.trim()) argv.topic = topicInput.trim();
@@ -329,19 +413,19 @@ async function promptForMissingOptions() {
 function getCategoryName(categorySlugOrName) {
   const match = NXT_CATEGORIES.find((c) => c.slug === categorySlugOrName || c.name.toLowerCase() === String(categorySlugOrName).toLowerCase());
   if (match) return match.name;
-  return String(categorySlugOrName)
+  return String(categorySlugOrName || 'General')
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (l) => l.toUpperCase());
 }
 
 function getEffectiveMinWords() {
   if (argv['min-words']) return Number(argv['min-words']);
-  const lengthKey = argv.length || 'medium';
+  const lengthKey = getArgLength() || 'medium';
   return LENGTH_PROMPTS[lengthKey]?.minWords ?? 1200;
 }
 
 function getEffectiveLengthText() {
-  const lengthKey = argv.length || 'medium';
+  const lengthKey = getArgLength() || 'medium';
   return LENGTH_PROMPTS[lengthKey]?.text ?? 'approx 1200–1500 words';
 }
 
@@ -376,22 +460,52 @@ async function resolveCategoryId(categorySlugOrName) {
   return created.data.id;
 }
 
+async function fetchCommerceCategories() {
+  try {
+    const res = await strapi('/api/commerce-categories?pagination[pageSize]=100&sort[0]=name:asc');
+    const items = Array.isArray(res?.data) ? res.data : [];
+    return items.map((c) => ({
+      id: c.id,
+      name: c.name,
+      slug: c.slug,
+    }));
+  } catch {
+    return [];
+  }
+}
+
 async function fetchCatalogProducts(opts = {}) {
-  const { categorySlug = null, searchTerm = null, limit = 50 } = opts;
+  const { categorySlug = null, commerceCategory = null, searchTerm = null, limit = 50 } = opts;
 
   let queryParams = `pagination[pageSize]=${limit}&populate=*&sort[0]=updatedAt:desc`;
+  const filters = [];
+
   if (searchTerm) {
-    queryParams += `&filters[$or][0][name][$containsi]=${encodeURIComponent(searchTerm)}&filters[$or][1][brand][$containsi]=${encodeURIComponent(searchTerm)}&filters[$or][2][slug][$containsi]=${encodeURIComponent(searchTerm)}`;
+    filters.push(`filters[$or][0][name][$containsi]=${encodeURIComponent(searchTerm)}`);
+    filters.push(`filters[$or][1][brand][$containsi]=${encodeURIComponent(searchTerm)}`);
+    filters.push(`filters[$or][2][slug][$containsi]=${encodeURIComponent(searchTerm)}`);
+  } else if (commerceCategory) {
+    filters.push(`filters[$or][0][categories][slug][$eqi]=${encodeURIComponent(commerceCategory)}`);
+    filters.push(`filters[$or][1][categories][name][$eqi]=${encodeURIComponent(commerceCategory)}`);
+    filters.push(`filters[$or][2][category][$eqi]=${encodeURIComponent(commerceCategory)}`);
   } else if (categorySlug && categorySlug !== 'best-sellers-articles' && categorySlug !== 'all') {
-    queryParams += `&filters[$or][0][categories][slug][$eqi]=${encodeURIComponent(categorySlug)}&filters[$or][1][category][$containsi]=${encodeURIComponent(getCategoryName(categorySlug))}`;
+    const related = CATEGORY_PRODUCT_MAP[categorySlug] || [categorySlug];
+    related.forEach((slug, idx) => {
+      filters.push(`filters[$or][${idx}][categories][slug][$eqi]=${encodeURIComponent(slug)}`);
+    });
+    filters.push(`filters[$or][${related.length}][category][$containsi]=${encodeURIComponent(getCategoryName(categorySlug))}`);
+  }
+
+  if (filters.length > 0) {
+    queryParams += `&${filters.join('&')}`;
   }
 
   try {
     const res = await strapi(`/api/commerce-products?${queryParams}`);
     let items = Array.isArray(res?.data) ? res.data : [];
 
-    // Fallback: if category filter yielded 0 items, fetch general active catalog products
-    if (!items.length && (categorySlug || searchTerm)) {
+    // Fallback: if filtering yielded 0 items, fetch general active catalog products
+    if (!items.length && (categorySlug || searchTerm || commerceCategory)) {
       const fallbackRes = await strapi(`/api/commerce-products?pagination[pageSize]=${limit}&populate=*&sort[0]=updatedAt:desc`);
       items = Array.isArray(fallbackRes?.data) ? fallbackRes.data : [];
     }
@@ -401,7 +515,7 @@ async function fetchCatalogProducts(opts = {}) {
       const prices = offers.map((o) => Number(o.price)).filter((p) => !isNaN(p) && p > 0);
       const minPrice = prices.length ? Math.min(...prices) : null;
       const firstImg = item.imageUrl || item.image || item.featuredImage || (Array.isArray(item.images) ? item.images[0]?.url : null);
-      const categoryName = item.category || item.categories?.[0]?.name || null;
+      const categoryName = item.category || item.categories?.[0]?.name || 'General';
 
       return {
         source: 'catalog',
@@ -467,14 +581,14 @@ function loadBestSellerProducts() {
 }
 
 async function getProductsForGeneration(count = 1) {
-  const source = argv['product-source'] || 'catalog';
-  const targetProductArg = argv.product || null;
+  const source = getArgProductSource() || 'catalog';
+  const targetProductArg = getArgProduct() || null;
 
   if (source === 'none') return [];
 
   // If specific product term or slug was passed:
   if (targetProductArg) {
-    const catalogMatches = await fetchCatalogProducts({ searchTerm: targetProductArg, limit: 10 });
+    const catalogMatches = await fetchCatalogProducts({ commerceCategory: getArgCommerceCategory(), searchTerm: targetProductArg, limit: 10 });
     const exactCatalog = catalogMatches.find((p) => p.slug === targetProductArg || p.title.toLowerCase() === targetProductArg.toLowerCase());
     if (exactCatalog) return Array(count).fill(exactCatalog);
     if (catalogMatches.length > 0) return catalogMatches.slice(0, count);
@@ -487,7 +601,7 @@ async function getProductsForGeneration(count = 1) {
 
   // If source is catalog or auto:
   if (source === 'catalog' || source === 'auto') {
-    const catalogProducts = await fetchCatalogProducts({ categorySlug: argv.category, limit: 100 });
+    const catalogProducts = await fetchCatalogProducts({ commerceCategory: getArgCommerceCategory(), categorySlug: getArgCategory(), limit: 100 });
     if (catalogProducts.length > 0) {
       const shuffled = [...catalogProducts].sort(() => 0.5 - Math.random());
       return shuffled.slice(0, Math.max(1, count));
@@ -526,7 +640,7 @@ async function generateFalCoverImage(postTitle, categoryName) {
 }
 
 async function generatePost({ categoryName, categorySlug, product = null, topic = null }) {
-  const styleKey = argv['prompt-style'] || 'default';
+  const styleKey = getArgStyle() || 'default';
   const style = PROMPT_STYLES[styleKey] ?? PROMPT_STYLES.default;
   const styleBlock = style.instructions ? `\n${style.instructions}\n` : '';
   const minWords = getEffectiveMinWords();
@@ -541,7 +655,7 @@ async function generatePost({ categoryName, categorySlug, product = null, topic 
     subjectContext = `Selected catalog product from NXT.Bargains (https://nxt.bargains/all-products):
 - Product Name: ${product.title}
 - Brand: ${product.brand || 'N/A'}
-- Category: ${product.category || categoryName}
+- Product Category: ${product.category || categoryName}
 - Product Slug: ${product.slug}
 - NXT.Bargains Page: ${product.url}
 - Description summary: ${(product.description || '').slice(0, 300)}
@@ -699,13 +813,13 @@ function buildProductCard(product) {
       product.brand ? `<li><strong>Brand:</strong> ${escapeHtml(product.brand)}</li>` : '',
       product.price ? `<li><strong>Current Price:</strong> ${escapeHtml(product.price)}${offerCount > 1 ? ` (compared across ${offerCount} retailers)` : ''}</li>` : '',
       product.category ? `<li><strong>Category:</strong> ${escapeHtml(product.category)}</li>` : '',
-      `<li><strong>Product Page:</strong> <a href="${escapeAttr(product.url)}" target="_blank" rel="noopener">NXT.Bargains catalog page</a></li>`,
+      `<li><strong>Product Page:</strong> <a href="${escapeAttr(product.url)}" target="_blank" rel="noopener">NXT.Bargains product catalog page</a></li>`,
     ].filter(Boolean).join('\n');
 
     return `<aside class="nxt-product-card" aria-label="Product price comparison snapshot">
 ${product.image ? `<a class="nxt-product-card__image" href="${escapeAttr(product.url)}" target="_blank" rel="noopener"><img src="${escapeAttr(product.image)}" alt="${escapeAttr(product.title)}" loading="lazy" /></a>` : '<div class="nxt-product-card__image" aria-hidden="true"></div>'}
 <div class="nxt-product-card__details">
-<p class="nxt-product-card__eyebrow">NXT.Bargains Deal Snapshot</p>
+<p class="nxt-product-card__eyebrow">NXT.Bargains Deal Snapshot — ${escapeHtml(product.category || 'Product')}</p>
 <h3>${escapeHtml(product.title)}</h3>
 ${details ? `<ul>${details}</ul>` : ''}
 <a class="nxt-product-card__button" href="${escapeAttr(product.url)}" target="_blank" rel="noopener">Compare Prices &amp; Deals on NXT.Bargains</a>
@@ -780,7 +894,7 @@ async function postToStrapi(post, product, { categoryId, coverId } = {}) {
     data.coverImage = coverId;
     data.ogImage = coverId;
   }
-  if (argv.publish) data.publishedAt = new Date().toISOString();
+  if (getArgPublish()) data.publishedAt = new Date().toISOString();
 
   return strapi('/api/nxt-posts', {
     method: 'POST',
@@ -895,20 +1009,21 @@ function fatal(message) {
 async function run() {
   await promptForMissingOptions();
 
-  const categorySlug = argv.category || 'best-sellers-articles';
+  const categorySlug = getArgCategory() || 'best-sellers-articles';
   const categoryName = getCategoryName(categorySlug);
   const count = Math.max(1, Number(argv.count) || 1);
-  const styleKey = argv['prompt-style'] || 'default';
-  const lengthKey = argv.length || 'medium';
-  const productSource = argv['product-source'] || 'catalog';
-  const imageType = argv['image-type'] || 'ai';
+  const styleKey = getArgStyle() || 'default';
+  const lengthKey = getArgLength() || 'medium';
+  const productSource = getArgProductSource() || 'catalog';
+  const imageType = getArgImageType() || 'ai';
+  const commerceCategory = getArgCommerceCategory() || null;
 
   console.log(`NXT.Bargains Article Generator`);
-  console.log(`Category: ${categoryName} (${categorySlug}) | Style: ${styleKey} | Length: ${lengthKey} (${getEffectiveLengthText()})`);
-  console.log(`Product Source: ${productSource} | Image: ${imageType} | Count: ${count}`);
-  console.log(`AI: ${aiProvider} (${activeModel()}) | Dry-run: ${argv['dry-run']} | Publish: ${argv.publish}\n`);
+  console.log(`Article Category: ${categoryName} (${categorySlug}) | Style: ${styleKey} | Length: ${lengthKey} (${getEffectiveLengthText()})`);
+  console.log(`Product Source: ${productSource}${commerceCategory ? ` [Filter: ${commerceCategory}]` : ''} | Image: ${imageType} | Count: ${count}`);
+  console.log(`AI: ${aiProvider} (${activeModel()}) | Dry-run: ${getArgDryRun()} | Publish: ${getArgPublish()}\n`);
 
-  const categoryId = argv['dry-run'] ? null : await resolveCategoryId(categorySlug);
+  const categoryId = getArgDryRun() ? null : await resolveCategoryId(categorySlug);
   const products = await getProductsForGeneration(count);
   const results = [];
 
@@ -916,12 +1031,12 @@ async function run() {
     const product = products[index] || null;
     const topic = argv.topic || (product ? product.title : null);
 
-    console.log(`[${index + 1}/${count}] ${product ? `[Product: ${product.title}] ` : ''}${topic || `${categoryName} post`}`);
+    console.log(`[${index + 1}/${count}] ${product ? `[${product.category || 'Product'}: ${product.title}] ` : ''}${topic || `${categoryName} post`}`);
 
     const post = await generatePost({ categoryName, categorySlug, product, topic });
 
-    if (argv['dry-run']) {
-      console.log(JSON.stringify({ categorySlug, categoryName, product: product ? { title: product.title, url: product.url, source: product.source } : null, post }, null, 2));
+    if (getArgDryRun()) {
+      console.log(JSON.stringify({ categorySlug, categoryName, product: product ? { title: product.title, category: product.category, url: product.url, source: product.source } : null, post }, null, 2));
       results.push({ status: 'dry-run', slug: post.slug });
       continue;
     }
@@ -948,9 +1063,9 @@ async function run() {
     const saved = await postToStrapi(post, product || {}, { categoryId, coverId });
     const id = saved?.data?.documentId || saved?.data?.id;
     const adminUrl = `${STRAPI_URL}/admin/content-manager/collection-types/${ADMIN_UID}/${id}`;
-    console.log(`  · saved ${argv.publish ? 'published' : 'draft'}: ${post.slug}${coverId ? ` (cover=${coverId})` : ''}`);
+    console.log(`  · saved ${getArgPublish() ? 'published' : 'draft'}: ${post.slug}${coverId ? ` (cover=${coverId})` : ''}`);
     console.log(`  · review: ${adminUrl}\n`);
-    results.push({ status: argv.publish ? 'published' : 'draft', slug: post.slug, id });
+    results.push({ status: getArgPublish() ? 'published' : 'draft', slug: post.slug, id });
   }
 
   console.log('Done.');
