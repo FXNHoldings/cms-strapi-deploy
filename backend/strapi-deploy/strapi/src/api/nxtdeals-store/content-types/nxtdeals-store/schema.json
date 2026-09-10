@@ -1,0 +1,99 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtdeals_stores",
+  "info": {
+    "singularName": "nxtdeals-store",
+    "pluralName": "nxtdeals-stores",
+    "displayName": "NXT Deals · Store",
+    "description": "Retailers featured on nxt.deals, each with its own landing page (/stores/<slug>)."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "websiteUrl": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "tagline": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "description": {
+      "type": "richtext",
+      "description": "Markdown. What the store sells, shipping/returns notes, how to use its coupons."
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "logoUrl": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 2,
+      "description": "ISO 3166-1 alpha-2, e.g. US, GB, AU."
+    },
+    "affiliateNetwork": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Which programme monetises this store: takeads, amazon-associates, impact, awin, direct…"
+    },
+    "takeadsSupported": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether Takeads lists this merchant. Off means links go out via affiliateUrl or plain."
+    },
+    "commerceMerchantSlug": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Slug of the matching Commerce · Merchant row, so store pages can also list live offers from the shared product pool."
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "storeStatus": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "default": "active",
+      "required": true
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 70
+    },
+    "seoDescription": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "deals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxtdeals-deal.nxtdeals-deal",
+      "mappedBy": "store"
+    }
+  }
+}

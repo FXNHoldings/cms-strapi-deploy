@@ -1,0 +1,155 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtdeals_deals",
+  "info": {
+    "singularName": "nxtdeals-deal",
+    "pluralName": "nxtdeals-deals",
+    "displayName": "NXT Deals · Deal",
+    "description": "Curated deals, price drops and coupon offers published on nxt.deals. Every outbound link is monetised through Takeads unless the network already provides a tracked link."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 220
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "summary": {
+      "type": "text",
+      "maxLength": 420,
+      "description": "One or two sentences shown on the card and as the meta description fallback."
+    },
+    "description": {
+      "type": "richtext",
+      "description": "Markdown. Why this is a deal, what to check before buying, any conditions."
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "imageUrl": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Remote image when nothing is uploaded — used by feed and CSV imports."
+    },
+    "dealUrl": {
+      "type": "text",
+      "required": true,
+      "description": "The merchant destination. Plain URL, never a tracking link — Takeads conversion happens on the site."
+    },
+    "affiliateUrl": {
+      "type": "text",
+      "description": "Only when a network already supplies a tracked link (Impact, Awin…). Takes precedence over Takeads so a click is never double-wrapped."
+    },
+    "couponCode": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "price": {
+      "type": "decimal",
+      "min": 0
+    },
+    "originalPrice": {
+      "type": "decimal",
+      "min": 0
+    },
+    "currency": {
+      "type": "string",
+      "maxLength": 8,
+      "default": "USD"
+    },
+    "discountPercent": {
+      "type": "decimal",
+      "min": 0,
+      "max": 100
+    },
+    "dealType": {
+      "type": "enumeration",
+      "enum": [
+        "price-drop",
+        "coupon",
+        "sale",
+        "clearance",
+        "bundle",
+        "free-shipping",
+        "cashback",
+        "other"
+      ],
+      "default": "price-drop",
+      "required": true
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "startsAt": {
+      "type": "datetime"
+    },
+    "expiresAt": {
+      "type": "datetime"
+    },
+    "verifiedAt": {
+      "type": "datetime",
+      "description": "When an editor or the link checker last confirmed the offer was live."
+    },
+    "dealStatus": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "expired",
+        "scheduled",
+        "hidden"
+      ],
+      "default": "active",
+      "required": true
+    },
+    "source": {
+      "type": "enumeration",
+      "enum": [
+        "manual",
+        "feed",
+        "ai",
+        "csv-import"
+      ],
+      "default": "manual"
+    },
+    "sourceRef": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Feed or import identifier, for idempotent re-imports."
+    },
+    "tags": {
+      "type": "json"
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 70
+    },
+    "seoDescription": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "store": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxtdeals-store.nxtdeals-store",
+      "inversedBy": "deals"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nxtdeals-category.nxtdeals-category",
+      "inversedBy": "deals"
+    }
+  }
+}

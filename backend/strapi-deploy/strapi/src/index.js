@@ -40,6 +40,19 @@ const PUBLIC_BLS_READ_ACTIONS = [
   'api::commerce-product.commerce-product.findOne',
   'api::commerce-site.commerce-site.find',
   'api::commerce-site.commerce-site.findOne',
+  // nxt.deals (installed by nxt.deals/scripts/strapi-install-content-types.mjs)
+  'api::nxtdeals-author.nxtdeals-author.find',
+  'api::nxtdeals-author.nxtdeals-author.findOne',
+  'api::nxtdeals-category.nxtdeals-category.find',
+  'api::nxtdeals-category.nxtdeals-category.findOne',
+  'api::nxtdeals-deal.nxtdeals-deal.find',
+  'api::nxtdeals-deal.nxtdeals-deal.findOne',
+  'api::nxtdeals-faq.nxtdeals-faq.find',
+  'api::nxtdeals-faq.nxtdeals-faq.findOne',
+  'api::nxtdeals-post.nxtdeals-post.find',
+  'api::nxtdeals-post.nxtdeals-post.findOne',
+  'api::nxtdeals-store.nxtdeals-store.find',
+  'api::nxtdeals-store.nxtdeals-store.findOne',
 ];
 
 function documentId() {

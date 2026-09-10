@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtdeals_categories",
+  "info": {
+    "singularName": "nxtdeals-category",
+    "pluralName": "nxtdeals-categories",
+    "displayName": "NXT Deals · Category",
+    "description": "Deal categories for nxt.deals (Electronics, Home, Fashion…). Also bridges to the shared commerce categories."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "string",
+      "maxLength": 40,
+      "description": "Emoji or icon token shown on the category tile."
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "commerceCategorySlugs": {
+      "type": "json",
+      "description": "Slugs of Commerce · Category rows whose products should appear under this category, e.g. [\"smart-phones\", \"tablets\"]."
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxtdeals-category.nxtdeals-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxtdeals-category.nxtdeals-category",
+      "mappedBy": "parent"
+    },
+    "deals": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nxtdeals-deal.nxtdeals-deal",
+      "mappedBy": "categories"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nxtdeals-post.nxtdeals-post",
+      "mappedBy": "categories"
+    }
+  }
+}

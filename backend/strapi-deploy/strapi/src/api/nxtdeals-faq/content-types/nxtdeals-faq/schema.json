@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtdeals_faqs",
+  "info": {
+    "singularName": "nxtdeals-faq",
+    "pluralName": "nxtdeals-faqs",
+    "displayName": "NXT Deals · FAQ",
+    "description": "Questions shown on /faq, grouped by topic. Also emitted as FAQPage structured data."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "question": {
+      "type": "string",
+      "required": true,
+      "maxLength": 300
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "question",
+      "required": true
+    },
+    "answer": {
+      "type": "richtext",
+      "required": true
+    },
+    "faqGroup": {
+      "type": "enumeration",
+      "enum": [
+        "general",
+        "deals-and-coupons",
+        "affiliate-and-privacy",
+        "stores",
+        "account-and-contact"
+      ],
+      "default": "general",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}
