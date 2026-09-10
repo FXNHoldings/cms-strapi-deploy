@@ -72,8 +72,15 @@ async function main() {
 
   try {
     const categoryIds = {};
-    for (const c of json('categories.json')) {
-      categoryIds[c.slug] = await upsert('api::nxtdeals-category.nxtdeals-category', c.slug, strip(c));
+    const cats = json('categories.json');
+    for (const c of cats) {
+      const { parent, ...data } = strip(c);
+      categoryIds[c.slug] = await upsert('api::nxtdeals-category.nxtdeals-category', c.slug, data);
+    }
+    // Second pass: parent links by slug (a child may be listed before its parent).
+    for (const c of cats) {
+      if (!c.parent || !categoryIds[c.parent] || !categoryIds[c.slug] || dryRun) continue;
+      await strapi.documents('api::nxtdeals-category.nxtdeals-category').update({ documentId: categoryIds[c.slug], data: { parent: categoryIds[c.parent] } });
     }
     for (const s of json('stores.json')) await upsert('api::nxtdeals-store.nxtdeals-store', s.slug, strip(s));
     const authorIds = {};
