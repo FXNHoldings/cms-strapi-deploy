@@ -100,7 +100,8 @@ async function main() {
         postType: data.postType || 'buying-guide',
         featured: data.featured === 'true',
         readingTimeMinutes: Math.max(1, Math.round(body.split(/\s+/).length / 220)),
-        seoDescription: data.seoDescription || data.excerpt || null,
+        // seoDescription is capped at 160 in the schema; an excerpt is allowed 500.
+        seoDescription: (data.seoDescription || data.excerpt || '').slice(0, 157).replace(/\s+\S*$/, '') || null,
         source: 'seed',
         ...(authorIds[data.author] ? { author: authorIds[data.author] } : {}),
         ...(cats.length ? { categories: cats } : {}),
