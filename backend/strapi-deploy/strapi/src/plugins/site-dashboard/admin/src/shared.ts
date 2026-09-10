@@ -50,6 +50,31 @@ export type PopulatorStats = {
   queuedTopics: number;
 };
 
+export type TakeadsReportRow = {
+  label: string;
+  clicks: number;
+  actions: number;
+  leads: number;
+  sales: number;
+  paymentSum: number;
+  paymentOpen: number;
+  paymentApproved: number;
+  paymentDeclined: number;
+  currency: string | null;
+};
+
+export type TakeadsReport = {
+  configured: boolean;
+  windowDays: number;
+  dateStart: string;
+  dateEnd: string;
+  totals: TakeadsReportRow;
+  daily: TakeadsReportRow[];
+  campaigns: TakeadsReportRow[];
+  subids: TakeadsReportRow[];
+  errors: string[];
+};
+
 export type Site = {
   documentId: string;
   name: string;

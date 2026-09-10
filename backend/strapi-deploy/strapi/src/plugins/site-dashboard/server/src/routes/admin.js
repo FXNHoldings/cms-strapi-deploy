@@ -23,6 +23,7 @@ module.exports = {
     /* Paid: each run bills DataForSEO, so it is a POST a person triggers. */
     guarded('POST', '/sites/:slug/keywords', 'keywords.start'),
     guarded('GET', '/sites/:slug/keywords/:runId', 'keywords.result'),
+    guarded('GET', '/sites/:slug/takeads', 'takeads.summary'),
     guarded('GET', '/sites/:slug/commerce', 'commerce.counts'),
     guarded('GET', '/sites/:slug/commerce/:role', 'commerce.list'),
     guarded('PUT', '/sites/:slug/commerce/:role/publish', 'commerce.publish'),

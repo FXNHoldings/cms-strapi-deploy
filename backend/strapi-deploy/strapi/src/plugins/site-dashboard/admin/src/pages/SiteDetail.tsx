@@ -4,7 +4,7 @@ import {
 } from '@strapi/design-system';
 import { useFetchClient } from '@strapi/strapi/admin';
 import { Link, useParams } from 'react-router-dom';
-import { TOOLS, fmtDate, fmtMoney, orderedRoles, type Site } from '../shared';
+import { TOOLS, fmtDate, fmtMoney, orderedRoles, type Site, type TakeadsReport, type TakeadsReportRow } from '../shared';
 
 /**
  * One property, in detail.
@@ -31,10 +31,41 @@ const Panel = ({ title, children }: { title: string; children: React.ReactNode }
   </Box>
 );
 
+const SmallStat = ({ label, value }: { label: string; value: string | number }) => (
+  <Box background="neutral100" hasRadius padding={3}>
+    <Typography variant="beta">{value}</Typography>
+    <Box paddingTop={1}>
+      <Typography variant="pi" textColor="neutral600">{label}</Typography>
+    </Box>
+  </Box>
+);
+
+const ReportRows = ({ rows, empty }: { rows: TakeadsReportRow[]; empty: string }) => {
+  if (!rows.length) return <Typography variant="pi" textColor="neutral600">{empty}</Typography>;
+  return (
+    <Flex direction="column" alignItems="stretch" gap={2}>
+      {rows.slice(0, 5).map((row) => (
+        <Flex key={row.label} justifyContent="space-between" alignItems="baseline" gap={3}>
+          <Box style={{ minWidth: 0 }}>
+            <Typography variant="omega" ellipsis>{row.label || 'Unlabelled'}</Typography>
+            <Typography variant="pi" textColor="neutral500">
+              {row.clicks.toLocaleString()} clicks · {(row.actions || row.leads + row.sales).toLocaleString()} actions
+            </Typography>
+          </Box>
+          <Typography variant="omega" fontWeight="bold">
+            {fmtMoney(row.paymentSum || row.paymentApproved || row.paymentOpen, row.currency || undefined)}
+          </Typography>
+        </Flex>
+      ))}
+    </Flex>
+  );
+};
+
 const SiteDetail = () => {
   const { slug } = useParams();
   const { get } = useFetchClient();
   const [site, setSite] = useState<Site | null>(null);
+  const [takeads, setTakeads] = useState<TakeadsReport | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -42,8 +73,14 @@ const SiteDetail = () => {
     (async () => {
       setLoading(true);
       try {
-        const { data } = await get(`/site-dashboard/sites/${slug}`);
+        const [{ data }, takeadsResult] = await Promise.all([
+          get(`/site-dashboard/sites/${slug}`),
+          get(`/site-dashboard/sites/${slug}/takeads?windowDays=30`).catch((e: any) => ({
+            data: { report: null, error: e?.response?.data?.error ?? e?.message ?? 'Could not load Takeads report.' },
+          })),
+        ]);
         setSite(data.site ?? null);
+        setTakeads(takeadsResult.data?.report ?? null);
       } catch (e: any) {
         setError(e?.response?.data?.error ?? e?.message ?? 'Could not load that site.');
       } finally {
@@ -248,6 +285,50 @@ const SiteDetail = () => {
                     </Flex>
                   ))}
                 </Flex>
+              </Panel>
+            </Grid.Item>
+
+            <Grid.Item col={6} s={12} direction="column" alignItems="stretch">
+              <Panel title="Takeads earnings">
+                {takeads ? (
+                  <Flex direction="column" alignItems="stretch" gap={4}>
+                    {takeads.errors.length > 0 && (
+                      <Alert
+                        variant={takeads.configured ? 'warning' : 'default'}
+                        title={takeads.configured ? 'Takeads report needs attention' : 'Takeads reporting is not configured'}
+                      >
+                        {takeads.errors[0]}
+                      </Alert>
+                    )}
+                    <Typography variant="pi" textColor="neutral600">
+                      Last {takeads.windowDays} days · {takeads.dateStart} to {takeads.dateEnd}
+                    </Typography>
+                    <Grid.Root gap={3}>
+                      <Grid.Item col={3} s={6}>
+                        <SmallStat label="clicks" value={takeads.totals.clicks.toLocaleString()} />
+                      </Grid.Item>
+                      <Grid.Item col={3} s={6}>
+                        <SmallStat label="actions" value={(takeads.totals.actions || takeads.totals.leads + takeads.totals.sales).toLocaleString()} />
+                      </Grid.Item>
+                      <Grid.Item col={3} s={6}>
+                        <SmallStat label="open" value={fmtMoney(takeads.totals.paymentOpen, takeads.totals.currency || site.currency || undefined)} />
+                      </Grid.Item>
+                      <Grid.Item col={3} s={6}>
+                        <SmallStat label="approved" value={fmtMoney(takeads.totals.paymentApproved, takeads.totals.currency || site.currency || undefined)} />
+                      </Grid.Item>
+                    </Grid.Root>
+                    <Box paddingTop={2}>
+                      <Typography variant="epsilon">Top campaigns</Typography>
+                    </Box>
+                    <ReportRows rows={takeads.campaigns} empty="No Takeads campaign rows returned for this period." />
+                    <Box paddingTop={2}>
+                      <Typography variant="epsilon">Top SubIDs</Typography>
+                    </Box>
+                    <ReportRows rows={takeads.subids} empty="No SubID rows returned yet. Add SubID tracking to affiliate links for page-level reporting." />
+                  </Flex>
+                ) : (
+                  <Typography variant="pi" textColor="neutral600">Takeads reporting could not be loaded.</Typography>
+                )}
               </Panel>
             </Grid.Item>
 

@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxt_discount_categories",
+  "info": {
+    "singularName": "nxt-discount-category",
+    "pluralName": "nxt-discount-categories",
+    "displayName": "NXT Discount · Category",
+    "description": "Shopping categories for NXT.Discount"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "gradient": {
+      "type": "string"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxt-discount-post.nxt-discount-post",
+      "mappedBy": "category"
+    }
+  }
+}

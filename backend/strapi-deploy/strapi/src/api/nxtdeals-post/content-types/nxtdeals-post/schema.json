@@ -1,0 +1,99 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtdeals_posts",
+  "info": {
+    "singularName": "nxtdeals-post",
+    "pluralName": "nxtdeals-posts",
+    "displayName": "NXT Deals · Guide",
+    "description": "Editorial guides for nxt.deals — buying guides, how-tos and explainers about shopping smarter."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "postType": {
+      "type": "enumeration",
+      "enum": [
+        "buying-guide",
+        "how-to",
+        "explainer",
+        "roundup",
+        "news",
+        "other"
+      ],
+      "default": "buying-guide"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "readingTimeMinutes": {
+      "type": "integer",
+      "default": 5,
+      "min": 1
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 70
+    },
+    "seoDescription": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "seoKeywords": {
+      "type": "string"
+    },
+    "source": {
+      "type": "enumeration",
+      "enum": [
+        "manual",
+        "ai",
+        "csv-import",
+        "seed"
+      ],
+      "default": "manual"
+    },
+    "faqs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.item"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxtdeals-author.nxtdeals-author",
+      "inversedBy": "posts"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nxtdeals-category.nxtdeals-category",
+      "inversedBy": "posts"
+    }
+  }
+}

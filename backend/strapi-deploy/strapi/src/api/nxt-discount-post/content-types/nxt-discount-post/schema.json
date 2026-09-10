@@ -1,0 +1,89 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxt_discount_posts",
+  "info": {
+    "singularName": "nxt-discount-post",
+    "pluralName": "nxt-discount-posts",
+    "displayName": "NXT Discount · Post",
+    "description": "Posts for NXT.Discount — buying guides, product reviews, roundups, and promo code offers"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "keyTakeaways": {
+      "type": "richtext"
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "postType": {
+      "type": "enumeration",
+      "enum": [
+        "product-comparison",
+        "product-review",
+        "product-roundup",
+        "how-to-guide",
+        "informative",
+        "top-rated",
+        "coupon-guide",
+        "other"
+      ],
+      "default": "product-comparison"
+    },
+    "readingTimeMinutes": {
+      "type": "integer",
+      "default": 5
+    },
+    "seoTitle": {
+      "type": "string"
+    },
+    "seoDescription": {
+      "type": "text"
+    },
+    "seoKeywords": {
+      "type": "string"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxt-discount-category.nxt-discount-category",
+      "inversedBy": "posts"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nxt-discount-author.nxt-discount-author",
+      "inversedBy": "posts"
+    }
+  }
+}

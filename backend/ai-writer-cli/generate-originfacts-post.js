@@ -17,6 +17,7 @@
 //        node generate.js --auto-fill            (6 categories × 6 preset topics)
 
 import 'dotenv/config';
+import { parseAiJson } from './parse-ai-json.js';
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
 import { fal } from '@fal-ai/client';
@@ -407,14 +408,29 @@ async function generateArticle(p) {
   // 16K output gives long-form articles (~2000 words) plenty of headroom
   // for the surrounding JSON envelope. 8K previously ran out mid-stream
   // for some longer pieces, producing truncated JSON.
-  const text = await callAI({
-    system: systemPromptArticle(lengthLabel),
-    user: userPromptArticle(p),
-    maxTokens: Math.max(parseInt(maxOutputTokensEnv(), 10) || 0, 16000),
-  });
-  const json = safeParse(text);
+  // The model occasionally returns JSON with a literal newline inside the
+  // "content" string, which JSON.parse rejects. parseAiJson (shared with the
+  // other generators) repairs that and, failing that, recovers the fields one
+  // by one. A second attempt is cheap next to losing the day's slot.
+  let json = null;
+  let text = '';
+  let lastError = null;
+  for (let attempt = 1; attempt <= 2 && !json; attempt++) {
+    text = await callAI({
+      system: systemPromptArticle(lengthLabel),
+      user: userPromptArticle(p),
+      maxTokens: Math.max(parseInt(maxOutputTokensEnv(), 10) || 0, 16000),
+    });
+    try {
+      json = parseAiJson(text, { providerName: activeProviderName() });
+    } catch (e) {
+      lastError = e;
+      json = safeParse(text);
+      if (!json && attempt < 2) process.stdout.write(`(${e.message.slice(0, 60)} — retrying) `);
+    }
+  }
   if (!json) {
-    throw new Error(`${activeProviderName()} returned non-JSON:\n${text.slice(0, 400)}`);
+    throw new Error(`${activeProviderName()} returned non-JSON (${lastError?.message ?? 'unparseable'}):\n${text.slice(0, 400)}`);
   }
   if (!json.slug) json.slug = slugify(json.title || p.topic, { lower: true, strict: true }).slice(0, 60);
 
@@ -686,7 +702,7 @@ async function runOne({ topic, category, destination }) {
       if (existing) {
         const ex = existing.attributes ?? existing;
         console.log(`SKIP (exists id=${existing.id}, slug=${ex.slug})`);
-        return;
+        return 'exists';
       }
     } catch (e) {
       console.log(`(lookup failed: ${e.message.slice(0, 80)}) — proceeding`);
@@ -709,7 +725,7 @@ async function runOne({ topic, category, destination }) {
       if (existing) {
         const ex = existing.attributes ?? existing;
         console.log(`${((Date.now() - t0) / 1000).toFixed(1)}s · SKIP after-generate (generated title clashes with id=${existing.id}, slug=${ex.slug})`);
-        return;
+        return 'exists';
       }
     } catch (e) {
       console.log(`(post-generate lookup failed: ${e.message.slice(0, 80)}) — proceeding`);
@@ -720,7 +736,7 @@ async function runOne({ topic, category, destination }) {
   if (argv['dry-run']) {
     console.log('(dry-run)');
     console.log(JSON.stringify(draft, null, 2));
-    return;
+    return 'dry-run';
   }
 
   let coverId = null, galleryIds = [];
@@ -738,6 +754,31 @@ async function runOne({ topic, category, destination }) {
   const id = created?.data?.id ?? '?';
   const destPart = destinationNames.length ? ` · dest=[${destinationNames.join(', ')}]` : '';
   console.log(`${argv.publish ? 'PUBLISHED' : 'draft'} id=${id}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}${destPart}`);
+  return argv.publish ? 'published' : 'draft';
+}
+
+/**
+ * Comment out a topic line in the --topics file once its article exists, so
+ * the file itself records what has been used. The line becomes
+ *   # done 2026-09-10 (draft) · Hotels | Best Hotels in Rome | Italy, Rome
+ * and the batch parser ignores it from then on. Only the first uncommented
+ * line that matches exactly is touched; the file is rewritten in place after
+ * every article so an interrupted run loses nothing.
+ */
+function markTopicDone(file, line, status) {
+  try {
+    const abs = path.resolve(file);
+    const rows = fs.readFileSync(abs, 'utf8').split('\n');
+    const idx = rows.findIndex((r) => r.trim() === line && !r.trim().startsWith('#'));
+    if (idx === -1) return false;
+    const stamp = new Date().toISOString().slice(0, 10);
+    rows[idx] = `# done ${stamp} (${status}) · ${line}`;
+    fs.writeFileSync(abs, rows.join('\n'));
+    return true;
+  } catch (e) {
+    console.log(`  ⚠ could not mark topic as done in ${file}: ${e.message.slice(0, 100)}`);
+    return false;
+  }
 }
 
 async function runCategoryAuto({ category, count }) {
@@ -780,9 +821,9 @@ async function runBatch(file) {
       const topic = parts[1] || '';
       const destination = parts[2] || null; // comma-separated destination names/slugs
       if (!topic) return null;
-      return { category, topic, destination };
+      return { category, topic, destination, line };
     }
-    return { category: null, topic: line, destination: null };
+    return { category: null, topic: line, destination: null, line };
   }).filter(Boolean);
 
   // Optional category filter (comma-separated list of slugs).
@@ -793,16 +834,30 @@ async function runBatch(file) {
     ? allJobs.filter((j) => j.category && onlyFilter.has(j.category.toLowerCase()))
     : allJobs;
 
-  const jobs = argv.count > 0 ? filteredJobs.slice(0, argv.count) : filteredJobs;
+  // --count N means N articles actually written: a topic that fails or that
+  // already exists does not use up a slot, the batch just moves on to the next
+  // line. A cap on attempts stops a broken key or model from walking the whole
+  // file in one go.
+  const target = argv.count > 0 ? argv.count : filteredJobs.length;
+  const maxAttempts = argv.count > 0 ? argv.count * 3 + 2 : filteredJobs.length;
 
   const filterNote = onlyFilter ? ` (filtered to category ${[...onlyFilter].join(', ')})` : '';
-  const capNote = argv.count > 0 && filteredJobs.length > argv.count ? ` (of ${filteredJobs.length} matching, capped by --count)` : '';
-  console.log(`Batch: ${jobs.length} articles${filterNote}${capNote}\n`);
-  let ok = 0, fail = 0;
-  for (const j of jobs) {
-    try { await runOne(j); ok++; } catch (e) { console.error(`  ✖ ${e.message}`); fail++; }
+  const capNote = argv.count > 0 && filteredJobs.length > argv.count ? ` (from ${filteredJobs.length} matching topics, top to bottom)` : '';
+  console.log(`Batch: ${target} article${target === 1 ? '' : 's'}${filterNote}${capNote}\n`);
+  let ok = 0, fail = 0, marked = 0, existed = 0, attempts = 0;
+  for (const j of filteredJobs) {
+    if (ok >= target || attempts >= maxAttempts) break;
+    attempts++;
+    try {
+      const status = await runOne(j);
+      if (status === 'exists') existed++; else ok++;
+      // Once the article exists in Strapi — just written, or found already
+      // there — comment the topic out of the file so it is never re-run.
+      if (status && status !== 'dry-run' && markTopicDone(file, j.line, status)) marked++;
+    } catch (e) { console.error(`  ✖ ${e.message}`); fail++; }
   }
-  console.log(`\nDone — ${ok} created, ${fail} failed.`);
+  if (ok < target && attempts >= maxAttempts) console.log(`\nStopped after ${attempts} attempts (${fail} failed) — check the errors above before re-running.`);
+  console.log(`\nDone — ${ok} created, ${existed} already existed, ${fail} failed${marked ? `, ${marked} topic line${marked === 1 ? '' : 's'} marked done in ${path.basename(file)}` : ''}.`);
 }
 
 async function runAutoFill() {

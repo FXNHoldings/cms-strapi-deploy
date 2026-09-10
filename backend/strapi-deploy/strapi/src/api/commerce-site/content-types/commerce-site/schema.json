@@ -97,6 +97,13 @@
       "relation": "oneToMany",
       "target": "api::commerce-product.commerce-product",
       "mappedBy": "site"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::commerce-category.commerce-category",
+      "mappedBy": "sites",
+      "description": "The inverse of commerce-category.sites. Supersedes enabledCategories above, which stores the same mapping as a JSON array of slugs: keep the two in step, or migrate enabledCategories onto this relation and drop it."
     }
   }
 }

@@ -39,6 +39,23 @@ const UID = 'api::commerce-site.commerce-site';
  */
 const SITES = [
   {
+    name: 'NXT.Deals',
+    domain: 'nxt.deals',
+    niche: 'Deals, coupons & price comparison',
+    currency: 'USD',
+    repoPath: '/opt/projects/nxt.deals',
+    deployCommand: './deploy.sh',
+    affiliateTags: {"takeads":"nxt-deals"},
+    contentTypes: {
+      posts: [{ uid: 'api::nxtdeals-post.nxtdeals-post' }],
+      categories: [{ uid: 'api::nxtdeals-category.nxtdeals-category' }],
+      authors: [{ uid: 'api::nxtdeals-author.nxtdeals-author' }],
+      deals: [{ uid: 'api::nxtdeals-deal.nxtdeals-deal' }],
+      stores: [{ uid: 'api::nxtdeals-store.nxtdeals-store' }],
+      faqs: [{ uid: 'api::nxtdeals-faq.nxtdeals-faq' }],
+    },
+  },
+  {
     name: 'Originfacts',
     domain: 'originfacts.com',
     niche: 'Travel',

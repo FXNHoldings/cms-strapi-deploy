@@ -4,4 +4,5 @@ module.exports = {
   content: require('./content'),
   commerce: require('./commerce'),
   keywords: require('./keywords'),
+  takeads: require('./takeads'),
 };

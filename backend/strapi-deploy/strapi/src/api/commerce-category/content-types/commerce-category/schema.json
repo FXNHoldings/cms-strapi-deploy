@@ -38,6 +38,13 @@
       "relation": "manyToMany",
       "target": "api::commerce-product.commerce-product",
       "mappedBy": "categories"
+    },
+    "sites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::commerce-site.commerce-site",
+      "inversedBy": "categories",
+      "description": "Which storefronts show this category. Until now nothing on a category said who owned it, so ownership was inferred from the products inside it — which broke as soon as a category was empty, and could not be shown as a column in the admin list. commerce-site.enabledCategories holds the same idea as free-text slugs, editable only from the Site side and silently wrong on a typo; this is the same link as a real relation, editable from either side."
     }
   }
 }

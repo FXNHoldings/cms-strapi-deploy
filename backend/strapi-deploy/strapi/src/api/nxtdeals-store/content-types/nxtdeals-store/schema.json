@@ -1,0 +1,117 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nxtdeals_stores",
+  "info": {
+    "singularName": "nxtdeals-store",
+    "pluralName": "nxtdeals-stores",
+    "displayName": "NXT Deals · Store",
+    "description": "Retailers featured on nxt.deals, each with its own landing page (/stores/<slug>)."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "websiteUrl": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "tagline": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "description": {
+      "type": "richtext",
+      "description": "Markdown. What the store sells, shipping/returns notes, how to use its coupons."
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "logoUrl": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 2,
+      "description": "ISO 3166-1 alpha-2, e.g. US, GB, AU."
+    },
+    "affiliateNetwork": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Which programme monetises this store: takeads, amazon-associates, impact, awin, direct…"
+    },
+    "takeadsSupported": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether Takeads lists this merchant. Off means links go out via affiliateUrl or plain."
+    },
+    "commerceMerchantSlug": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Slug of the matching Commerce · Merchant row, so store pages can also list live offers from the shared product pool."
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "storeStatus": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "default": "active",
+      "required": true
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 70
+    },
+    "seoDescription": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "deals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nxtdeals-deal.nxtdeals-deal",
+      "mappedBy": "store"
+    },
+    "howToSave": {
+      "type": "richtext",
+      "description": "Markdown, 150–300 words. The editorial layer that makes this store page ours: how discounts actually work at this retailer, what stacks with what, when it runs its sales. Feed text alone is duplicate content shared with every other publisher."
+    },
+    "policies": {
+      "type": "json",
+      "description": "Shopper policy table shown on the store page: { \"freeShipping\": \"Orders $35+\", \"returns\": \"30 days\", \"priceMatch\": \"Yes — major online retailers\", \"studentDiscount\": \"No\", \"militaryDiscount\": \"10% in store\", \"policyUrl\": \"https://…\", \"checkedAt\": \"2026-09-10\" }. Every value is a retailer claim an editor checked on the date given; leave a key out rather than guess."
+    },
+    "faqs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.item",
+      "description": "4–6 store-specific questions (\"Does Target accept promo codes?\"). Emitted as FAQPage structured data."
+    },
+    "takeadsMerchantId": {
+      "type": "integer",
+      "description": "Merchant id in the Takeads coupon feed (Takedeals), set by scripts/sync-takedeals.mjs on first match so later runs skip the name lookup."
+    }
+  }
+}
