@@ -67,6 +67,16 @@
       "relation": "manyToMany",
       "target": "api::nxtdeals-post.nxtdeals-post",
       "mappedBy": "categories"
+    },
+    "intro": {
+      "type": "richtext",
+      "description": "Markdown, 150+ words shown under the category heading: what tends to go on sale here, when, and how to judge a good price. Distinct from `description`, which is the one-line meta description."
+    },
+    "faqs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.item",
+      "description": "3–5 category questions, emitted as FAQPage structured data."
     }
   }
 }
