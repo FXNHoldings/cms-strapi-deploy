@@ -42,6 +42,14 @@ const SITE_CONFIG = {
   },
   'bestlooking.skin': {
     label: 'BestLooking.Skin',
+    /*
+     * HTML, not Markdown. bls-post.content is rendered with
+     * dangerouslySetInnerHTML, so Markdown reaches the page as literal "##" and
+     * "**" -- which is what happened to the first published batch. All 120
+     * pre-existing posts are HTML (<p>, <h2>), so this matches the collection
+     * rather than changing it.
+     */
+    contentFormat: 'HTML',
     postEndpoint: '/api/bls-posts',
     categoryEndpoint: '/api/bls-categories',
     adminUid: 'api::bls-post.bls-post',
@@ -874,6 +882,47 @@ function limitText(value, maxLength) {
   return shortened.replace(/\s+(and|or|to|for|with|of|in|on|at|by)$/i, '').trim();
 }
 
+/**
+ * Build image prompts locally when the model did not return them.
+ *
+ * `imagePrompts` is the last field in the requested JSON, so it is the first
+ * thing lost when a response runs long -- and the article still parses and
+ * saves, so the post lands with no cover and nothing fails. Observed on 1 of
+ * the first 2 posts of a 69-post run, which at that rate is roughly ten
+ * coverless articles.
+ *
+ * The title and postType are enough for a decorative editorial image, which is
+ * all a blog cover needs to be, so there is no reason to let a missing field
+ * decide whether a post gets one.
+ */
+function fillMissingImagePrompts(prompts, post) {
+  const title = post?.title || post?.slug || 'skincare';
+  const cover = prompts?.cover
+    || `Editorial skincare photograph illustrating "${title}". Minimal flat lay on a clean neutral surface, soft morning daylight, muted tones, shallow depth of field, no text, no logos, shot on a 50mm lens.`;
+  const gallery = Array.isArray(prompts?.gallery) ? [...prompts.gallery] : [];
+  const fallbackGallery = [
+    `Photorealistic close-up skincare texture related to "${title}", natural daylight, macro detail, soft shadows, no packaging, no text.`,
+    `Bright minimal bathroom shelf scene related to "${title}", plain unlabelled containers in soft focus, diffused daylight, neutral tones, no text, no logos.`,
+  ];
+  while (gallery.length < 2) gallery.push(fallbackGallery[gallery.length] ?? fallbackGallery[0]);
+  if (!prompts?.cover) console.log('  (model returned no image prompts - using generated fallbacks)');
+  return { cover, gallery };
+}
+
+/**
+ * Review posts get imagery that does not depict a specific product.
+ *
+ * A photorealistic shot of a labelled bottle beside a review reads as "we
+ * photographed the thing we tested", and nobody tested anything -- the same
+ * line the other sites draw when they refuse to write a star rating for a
+ * device that was never handled. Decorative textures and ingredient-led stills
+ * carry the page without making that claim.
+ */
+function constrainReviewImagePrompt(prompt, postType) {
+  if (postType !== 'product-review') return prompt;
+  return `${prompt}\n\nImportant: do NOT depict a branded or recognisable product, packaging, bottle with a label, or anything resembling a real retail item. Use abstract texture, raw ingredients, or plain unlabelled glassware on a clean surface instead.`;
+}
+
 async function generateImage(prompt, { aspect = 'landscape_16_9' } = {}) {
   const modelId = FAL_MODEL_IDS[argv['image-model']] || FAL_MODEL_IDS.schnell;
   const result = await fal.subscribe(modelId, {
@@ -926,7 +975,7 @@ async function uploadImageToStrapi(imageUrl, filename, { returnAsset = false } =
 }
 
 async function generateAndUploadImages(post) {
-  const prompts = post?.imagePrompts;
+  const prompts = fillMissingImagePrompts(post?.imagePrompts, post);
   const needsInlineImages = argv.site === 'flightfares.one';
   if (!prompts?.cover || (needsInlineImages && (!Array.isArray(prompts.gallery) || prompts.gallery.length < 2))
     || (!site.simplePost && (!Array.isArray(prompts.gallery) || prompts.gallery.length < 1))) {
@@ -954,7 +1003,7 @@ async function generateAndUploadImages(post) {
 
   const results = await Promise.all(
     allPrompts.map(async ({ kind, prompt, aspect }) => {
-      const url = await generateImage(prompt, { aspect });
+      const url = await generateImage(constrainReviewImagePrompt(prompt, post.postType), { aspect });
       const asset = await uploadImageToStrapi(url, `${baseName}-${kind}`, { returnAsset: true });
       return { kind, prompt, ...asset };
     }),
@@ -996,7 +1045,7 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
     slug: post.slug,
     excerpt: post.excerpt,
     content: post.content,
-    postType: argv['post-type'] || site.defaultPostType,
+    postType: post.postType || argv['post-type'] || site.defaultPostType,
     readingTimeMinutes: post.readingTimeMinutes,
     seoTitle: post.seoTitle,
     seoDescription: post.seoDescription,
@@ -1058,6 +1107,14 @@ async function readTopicFile(file) {
       if (rowSite === argv.site) {
         jobs.push(await enrichJobWithProductSeed({ category, topic: topicParts.join(' | ') }));
       }
+    } else if (parts.length === 4 && !SITE_CONFIG[parts[0]]) {
+      /* "category | title | slug | postType" -- a planned row carrying its
+       * format. Without it every post takes site.defaultPostType, which for
+       * this site is product-review: the first run filed a how-to and two
+       * comparisons under Product Reviews, and the storefront buckets its
+       * article nav by exactly this field. */
+      const [category, title, slug, postType] = parts;
+      jobs.push(await enrichJobWithProductSeed({ category, topic: title, forcedTitle: title, forcedSlug: slug, forcedPostType: postType }));
     } else if (parts.length === 3) {
       /*
        * "category | title | slug" -- a planned row. A content plan fixes both
@@ -1796,9 +1853,10 @@ async function run() {
       catalogProducts: job.catalogProducts,
     });
 
-    // A planned title and slug win over whatever the model returned.
+    // A planned title, slug and format win over whatever the model returned.
     if (job.forcedTitle) post.title = job.forcedTitle;
     if (job.forcedSlug) post.slug = job.forcedSlug;
+    if (job.forcedPostType) post.postType = job.forcedPostType;
 
     if (argv['dry-run']) {
       console.log(JSON.stringify({
