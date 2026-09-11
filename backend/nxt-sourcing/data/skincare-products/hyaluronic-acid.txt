@@ -1,0 +1,53 @@
+# Hyaluronic acid products, by popularity of brand and product.
+#
+# HA-hero products only: the formula is sold on its hyaluronic acid, not merely
+# containing some. Products where HA is a secondary ingredient (The Ordinary
+# Lactic Acid 10% + HA, Alpha Arbutin 2% + HA, Vichy LiftActiv Retinol HA) stay
+# in the category that describes what they actually do -- filing an exfoliant
+# under Hyaluronic Acid misleads whoever is browsing it.
+#
+# Products already in the catalogue under another category were attached to this
+# one directly rather than re-sourced; the pipeline skips a slug it already has,
+# so listing them here would be a no-op.
+La Roche-Posay Hyalu B5 Hyaluronic Acid Serum Pure
+Vichy Mineral 89 Hyaluronic Acid Face Serum
+Neutrogena Hydro Boost Water Gel
+Neutrogena Hydro Boost Hyaluronic Acid Serum
+Paula's Choice Hyaluronic Acid Booster
+Peter Thomas Roth Water Drench Hyaluronic Cloud Serum
+Peter Thomas Roth Water Drench Hyaluronic Cloud Cream
+Kiehl's Ultra Pure High-Potency Serum 1.5% Hyaluronic Acid
+Good Molecules Hyaluronic Acid Serum
+Naturium Hyaluronic Acid Complex Serum
+L'Oreal Paris Revitalift Derm Intensives 1.5% Pure Hyaluronic Acid Serum
+Olay Regenerist Hyaluronic + Peptide 24 Serum
+Olay Regenerist Hyaluronic + Peptide 24 Face Moisturizer
+Eucerin Hyaluron-Filler Day Cream
+Eucerin Hyaluron-Filler Night Cream
+COSRX Hydrium Triple Hyaluronic Cloud Cream
+COSRX Hyaluronic Acid Intensive Cream
+Isntree Hyaluronic Acid Toner Plus
+Isntree Hyaluronic Acid Water Essence
+Hada Labo Gokujyun Premium Hyaluronic Acid Lotion
+Hada Labo Gokujyun Hyaluronic Acid Cleansing Foam
+Laneige Water Bank Blue Hyaluronic Serum
+Laneige Water Bank Blue Hyaluronic Cream
+Medik8 Hydr8 B5 Serum
+Dr. Barbara Sturm Hyaluronic Serum
+Bioderma Hydrabio Serum
+Clinique Moisture Surge 100H Auto-Replenishing Hydrator
+Revolution Skincare Hyaluronic Acid Serum
+The Ordinary Natural Moisturizing Factors + HA
+Byoma Hydrating Serum
+Bubble Water Slide Hydrating Serum
+Elf Holy Hydration Face Cream
+Versed Dew Point Moisturizing Gel-Cream
+First Aid Beauty Ultra Repair Hydrating Serum
+Skinfix Barrier+ Triple Lipid-Peptide Face Cream
+Youth To The People Triple Peptide + Hyaluronic Acid Serum
+Drunk Elephant B-Hydra Intensive Hydration Serum
+Tatcha The Water Cream
+Caudalie Vinosource-Hydra S.O.S. Intense Moisturizing Cream
+Garnier SkinActive Hyaluronic Aloe Gel Moisturizer
+Doctor's Best Hyaluronic Acid with Chondroitin Sulfate
+Neocell Hyaluronic Acid Blueberry Liquid

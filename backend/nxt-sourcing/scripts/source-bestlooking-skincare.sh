@@ -37,6 +37,7 @@ for a in "$@"; do
 done
 
 set -a; . ./.env.local; set +a
+export STRAPI_API_TOKEN="${STRAPI_API_TOKEN_OVERRIDE:-$STRAPI_API_TOKEN}"
 
 # Fail fast on the token rather than after paying for a category's tasks. Every
 # API token 401'd on 11 Sep when the container's API_TOKEN_SALT drifted, and the
@@ -54,7 +55,7 @@ if [ "$code" != "200" ]; then
 fi
 echo "strapi token OK"
 
-CATEGORIES="facial-cleansers facial-serums moisturisers anti-aging toners-and-astringents exfoliators-and-scrubs"
+CATEGORIES="facial-cleansers facial-serums moisturisers anti-aging toners-and-astringents exfoliators-and-scrubs hyaluronic-acid"
 [ -n "$ONLY" ] && CATEGORIES="$ONLY"
 
 mkdir -p reports/bestlooking

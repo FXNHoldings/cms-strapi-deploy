@@ -1026,6 +1026,23 @@ if (!WRITE) { console.log('\nDry run — nothing written. Re-run with --write.')
 
 /* ---------------------------------------------------------------- write --- */
 
+/*
+ * The site row for --tag, where one exists.
+ *
+ * Products must carry the `site` RELATION, not just the tag. The storefronts
+ * filter on site.slug through their scoped access point and fail closed, so a
+ * product created with only a tag is invisible: this pipeline wrote 19
+ * hyaluronic-acid products that never appeared on bestlooking.skin, and the
+ * category looked half-sourced rather than broken.
+ *
+ * A tag matching no site is left null rather than guessed -- `img-pad-50` is an
+ * image-processing marker, not a storefront.
+ */
+const siteRes = await strapi(`/api/commerce-sites?filters[slug][$eq]=${encodeURIComponent(SITE_TAG)}&pagination[pageSize]=1`);
+const SITE_DOC = siteRes?.data?.[0]?.documentId ?? null;
+if (SITE_DOC) console.log(`site: ${SITE_TAG} (${SITE_DOC})`);
+else console.log(`site: no commerce-site matches --tag=${SITE_TAG}; products will carry the tag only`);
+
 const catRes = await strapi(`/api/commerce-categories?filters[slug][$eq]=${CATEGORY}&pagination[pageSize]=1`);
 const category = catRes?.data?.[0];
 if (!category) { console.error(`No commerce-category with slug ${CATEGORY}`); process.exit(1); }
@@ -1074,6 +1091,7 @@ for (const p of products) {
     body: JSON.stringify({ data: {
       name: p.name, slug, brand: p.brand,
       tags: [SITE_TAG],
+      ...(SITE_DOC ? { site: SITE_DOC } : {}),
       rating: p.rating, ratingCount: p.ratingCount,
       imageUrl: p.imageUrl, googleProductId: p.googleProductId,
       gtin: p.gtin,
