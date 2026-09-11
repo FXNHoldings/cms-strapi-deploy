@@ -1889,8 +1889,20 @@ async function run() {
     }
 
     if (galleryAssets.length) {
+      const before = post.content;
       post.content = insertFlightfaresInlineImages(post.content, post, galleryAssets);
-      console.log(`  embedded ${galleryAssets.length} contextual image(s) in the article body`);
+      /*
+       * Only claim the embed when it happened. insertFlightfaresInlineImages
+       * returns early for every site except flightfares.one, but this line used
+       * to print regardless -- so a 68-post run reported "embedded 2 contextual
+       * image(s)" 67 times while placing none, and the posts looked correct in
+       * the log while showing only their cover on the page.
+       */
+      if (post.content !== before) {
+        console.log(`  embedded ${galleryAssets.length} contextual image(s) in the article body`);
+      } else {
+        console.log(`  ${galleryAssets.length} gallery image(s) attached (rendered from the gallery field, not embedded)`);
+      }
     }
 
     const saved = await postToStrapi(post, {
