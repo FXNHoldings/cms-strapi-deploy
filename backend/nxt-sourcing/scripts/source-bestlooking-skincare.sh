@@ -41,7 +41,10 @@ set -a; . ./.env.local; set +a
 # Fail fast on the token rather than after paying for a category's tasks. Every
 # API token 401'd on 11 Sep when the container's API_TOKEN_SALT drifted, and the
 # first run of this wasted a full sweep discovering that at the write step.
-code=$(curl -s -o /dev/null -w '%{http_code}' -m 20 \
+# -g (globoff): curl otherwise reads the [ ] in the query string as a glob
+# range, fails before sending, and reports an empty status -- which reads
+# exactly like an auth failure and sent the first run chasing a valid token.
+code=$(curl -s -g -o /dev/null -w '%{http_code}' -m 20 \
   -H "Authorization: Bearer ${STRAPI_API_TOKEN:-}" \
   "${STRAPI_INTERNAL_URL:-http://127.0.0.1:8888}/api/commerce-categories?pagination[pageSize]=1")
 if [ "$code" != "200" ]; then
@@ -65,9 +68,12 @@ for c in $CATEGORIES; do
     --no-reviews $WRITE 2>&1 | tee "reports/bestlooking/$c-1-source.log" | tail -5
 
   if [ -n "$WRITE" ]; then
-    node scripts/enrich-products-product-info.mjs --category="$c" --write \
+    # Both of these default their site filter to nxt-bargains and AND it with
+    # --category, so without the tag they select nothing and report "products: 0"
+    # -- a silent no-op that looks like a completed pass.
+    node scripts/enrich-products-product-info.mjs --category="$c" --site-tag=bestlooking-skin --write \
       2>&1 | tee "reports/bestlooking/$c-2-enrich.log" | tail -4
-    node scripts/fetch-offers-sellers.mjs --category="$c" --thin-only --write \
+    node scripts/fetch-offers-sellers.mjs --category="$c" --tag=bestlooking-skin --thin-only --write \
       2>&1 | tee "reports/bestlooking/$c-3-sellers.log" | tail -4
   fi
 done
