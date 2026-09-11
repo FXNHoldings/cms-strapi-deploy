@@ -647,6 +647,8 @@ Content requirements:
 - Use useful ${contentFormat === 'HTML' ? 'h2/h3' : 'H2/H3'} headings.
 - Section headings are level 2; break the longer ones down with level-3 subheadings, at least two sections carrying two or more each. Never go deeper than level 3, and never open with a level-3 heading.
 - Include practical comparisons, tips, caveats, and buying/setup guidance where relevant.
+- Open the article with a direct 40-60 word answer to the question in the title, as a plain paragraph before the first heading. This is the passage search engines lift for featured snippets and AI overviews, so it must answer the question outright rather than introduce the topic.
+- Close with a "## Frequently Asked Questions" section carrying 4 to 6 questions, each phrased as a question a reader would actually type, each answered in 40-90 words.
 - Where useful and natural, add internal links to relevant existing posts from the provided internal-link opportunities. Use Markdown links in Markdown content and <a> tags in HTML content. Do not force every link; 2-4 high-relevance links is better than stuffing.
 - When selected NXT.Bargains catalog products are provided, keep the article grounded in those exact products and their product category. Do not invent specs, prices, ratings, or availability.
 - For NXT.Bargains product comparison articles with two selected catalog products, compare those exact products side by side and keep both as the main subjects.
@@ -1017,7 +1019,24 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
   if (argv['amazon-tag']) data.amazonAffiliateTag = argv['amazon-tag'];
   if (argv.publish) data.publishedAt = new Date().toISOString();
 
-  return strapi(site.postEndpoint, {
+  /*
+   * Strapi 5 publishes on create unless told otherwise.
+   *
+   * Under v4, omitting publishedAt meant "draft", which is the assumption this
+   * tool was written on and still prints ("saved draft: <slug>"). Under v5 a
+   * document has separate draft and published versions and a plain POST writes
+   * BOTH, so every run without --publish has been going live while reporting a
+   * draft. Five bestlooking.skin posts reached the public site that way.
+   *
+   * `status=draft` creates the draft version only. There is no unpublish in the
+   * Content API, so the ones already live had to be cleared out of Postgres --
+   * worth avoiding a second time.
+   */
+  const createPath = argv.publish
+    ? site.postEndpoint
+    : `${site.postEndpoint}${site.postEndpoint.includes('?') ? '&' : '?'}status=draft`;
+
+  return strapi(createPath, {
     method: 'POST',
     body: JSON.stringify({ data }),
   });
@@ -1034,11 +1053,22 @@ async function readTopicFile(file) {
     const parts = row.split('|').map((part) => part.trim()).filter(Boolean);
     if (parts.length === 2) {
       jobs.push(await enrichJobWithProductSeed({ category: parts[0], topic: parts[1] }));
-    } else if (parts.length >= 3) {
+    } else if (parts.length >= 3 && SITE_CONFIG[parts[0]]) {
       const [rowSite, category, ...topicParts] = parts;
       if (rowSite === argv.site) {
         jobs.push(await enrichJobWithProductSeed({ category, topic: topicParts.join(' | ') }));
       }
+    } else if (parts.length === 3) {
+      /*
+       * "category | title | slug" -- a planned row. A content plan fixes both
+       * the title and the slug (they are chosen against search data and linked
+       * from the plan doc), so neither is left to the model. Without this the
+       * writer rephrased "Best Sunscreens for Oily Skin in 2026" into its own
+       * title and derived a slug carrying the year, which the plan explicitly
+       * forbids.
+       */
+      const [category, title, slug] = parts;
+      jobs.push(await enrichJobWithProductSeed({ category, topic: title, forcedTitle: title, forcedSlug: slug }));
     } else {
       jobs.push(await enrichJobWithProductSeed({ category: argv.category, topic: row }));
     }
@@ -1765,6 +1795,10 @@ async function run() {
       dealProduct: job.dealProduct,
       catalogProducts: job.catalogProducts,
     });
+
+    // A planned title and slug win over whatever the model returned.
+    if (job.forcedTitle) post.title = job.forcedTitle;
+    if (job.forcedSlug) post.slug = job.forcedSlug;
 
     if (argv['dry-run']) {
       console.log(JSON.stringify({
