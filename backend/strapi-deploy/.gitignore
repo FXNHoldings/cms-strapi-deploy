@@ -13,3 +13,19 @@ backups/*.tar.gz
 # Force-include these despite root .gitignore rules
 !.env.example
 !env.example
+
+# Database dumps. 23 of these were committed, including a 25M one -- production
+# content in GitHub history, and permanent repo bloat. The directory is a bind
+# mount into the postgres container (./backups -> /backups), so pg_dump writes
+# land here by design; they just must not be committed.
+backups/*.sql
+backups/*.sql.gz
+backups/**/*.sql
+backups/**/*.sql.gz
+backups/*.dump
+backups/**/*.dump
+backups/*.pgcustom
+backups/**/*.pgcustom
+backups/*.sql.full
+backups/**/*.sql.full
+!backups/.gitkeep
