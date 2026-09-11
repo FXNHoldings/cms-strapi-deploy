@@ -69,6 +69,30 @@ const CONCURRENCY = Number(flag('concurrency', 8));
  * a phone, but that floor would be nonsense for smart plugs.
  */
 const MIN_PRICE = Number(flag('min-price', 0));
+/*
+ * Drop products carrying no googleProductId. Two reasons, both measured on a
+ * facial-serums sweep: Google's refinement chips ("Fragrance-free Facial
+ * Serums") never carry one, so this removes the junk the title regexes miss;
+ * and fetch-offers-sellers.mjs is keyed on that id, so a product without one
+ * can never be topped up to a usable number of offers. Keeping it would leave
+ * a permanently offer-less page.
+ */
+const REQUIRE_GID = args.includes('--require-gid');
+/*
+ * Minimum offers a product must carry to be written. A comparison page with one
+ * price is not a comparison, so a storefront asking for >= 2 should source more
+ * than it needs and let this gate drop the rest.
+ */
+const MIN_OFFERS = Number(flag('min-offers', 0));
+/*
+ * Require at least one Tier 1/2 retailer offer. Without a real retailer to
+ * anchor against, a product's only prices come from resale marketplaces, where
+ * a listing is as likely to be a sample or a travel size as the product itself
+ * -- a facial-serums sweep priced a $46 Youth To The People serum at $3.99 on
+ * that basis. Two marketplace offers still satisfy --min-offers=2, so the count
+ * gate alone does not catch it.
+ */
+const REQUIRE_ANCHOR = args.includes('--require-anchor');
 const STATE = path.join(ROOT, 'reports', `pipeline-tasks-${CATEGORY ?? 'all'}.json`);
 const OUT = path.join(ROOT, 'reports', `pipeline-${CATEGORY ?? 'all'}.json`);
 
@@ -107,11 +131,16 @@ const CATEGORY_QUERIES = {
   'smart-light-bulbs': 'smart light bulb led wifi',
   'smart-plugs': 'smart plug wifi outlet',
   'raspberry-pi': 'raspberry pi board kit',
-  // Skincare (shared commerce categories owned by bestlooking.skin, sourced for nxt.deals)
+  // Skincare — the six categories bestlooking.skin scopes itself to
+  // (lib/strapi.ts CATEGORY_SLUGS). Shared commerce categories, so these were
+  // first swept for nxt.deals; pass --tag=bestlooking-skin to source for the
+  // skincare storefront instead.
   'anti-aging': 'anti aging face serum retinol cream',
   'facial-serums': 'facial serum vitamin c hyaluronic',
   'moisturisers': 'face moisturizer cream spf',
   'facial-cleansers': 'facial cleanser face wash',
+  'toners-and-astringents': 'face toner astringent witch hazel',
+  'exfoliators-and-scrubs': 'face exfoliator scrub aha bha',
 };
 /* --keyword= overrides the category query, so a category with no entry above
  * can still be swept without editing this file. */
@@ -455,12 +484,52 @@ function isSameProduct(listingTitle, productName) {
 }
 
 /**
+ * Known brands, matched against the listing title longest-first.
+ *
+ * The default `title.split(' ')[0]` works for electronics, where the brand is
+ * almost always the first token ("Samsung Galaxy S24"). Skincare breaks it:
+ * "Plant Therapy" became "Plant", "Timeless Skin Care" became "Timeless", and
+ * "The Ordinary" became "The" — which then fed the storefront's brand filter as
+ * three separate junk brands.
+ *
+ * Longest-first so "Beauty of Joseon" wins over "Beauty", and a title carrying
+ * no known brand still falls back to the first token rather than being dropped.
+ * This list is reference data — real brand names only; nothing here invents a
+ * manufacturer for a product that does not state one.
+ */
+const KNOWN_BRANDS = [
+  'CeraVe', 'The Ordinary', 'La Roche-Posay', 'Neutrogena', 'Olay', "Paula's Choice",
+  'Drunk Elephant', "Kiehl's", 'Clinique', 'Estee Lauder', 'Estée Lauder', 'SkinCeuticals',
+  'Cetaphil', 'Eucerin', 'Aveeno', 'First Aid Beauty', 'Tatcha', 'Sunday Riley',
+  'Glow Recipe', 'Youth To The People', 'Farmacy', 'Origins', 'Murad', 'Dermalogica',
+  'e.l.f.', 'Good Molecules', 'Naturium', 'Versed', 'Byoma', 'Vanicream', 'Differin',
+  'RoC', "L'Oreal", "L'Oréal", 'Garnier', 'Nivea', 'Bioderma', 'Avene', 'Avène',
+  'Vichy', 'Caudalie', 'Belif', 'Laneige', 'COSRX', 'Beauty of Joseon', 'Anua',
+  'SKIN1004', 'Purito', 'Isntree', 'Round Lab', 'Dr. Jart+', 'Innisfree', 'Missha',
+  'Some By Mi', 'Torriden', 'Medicube', 'Mixsoon', 'Klairs', 'Pyunkang Yul',
+  'Peach & Lily', 'Timeless Skin Care', 'Plant Therapy', 'Mario Badescu', 'Thayers',
+  'Bliss', 'Pacifica', 'Burt\'s Bees', 'St. Ives', 'Simple', 'Pond\'s', 'No7',
+  'Skinfix', 'Krave Beauty', 'Biossance', 'Herbivore', 'Summer Fridays', 'Supergoop',
+  'EltaMD', 'Obagi', 'Revision Skincare', 'iS Clinical', 'Medik8', 'Beauty Pie',
+  'Inkey List', 'The Inkey List', 'Hada Labo', 'Shiseido', 'Tula', 'Cocokind',
+  'Bubble Skincare', 'Topicals', 'Starface', 'Hero Cosmetics', 'Rhode', 'Kosas',
+  'Pixi', "Dickinson's", 'Clean and Clear', 'Clean & Clear', 'Banila Co', 'Elemis',
+].sort((a, b) => b.length - a.length);
+
+/** Longest known brand appearing in the title, else the leading token. */
+function brandOf(title) {
+  const t = String(title || '');
+  const hit = KNOWN_BRANDS.find((b) => new RegExp(`(^|\\s)${b.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\s|$)`, 'i').test(t));
+  return hit || t.split(' ')[0] || null;
+}
+
+/**
  * Google mixes its own refinement chips into the results — "Unlocked 5G Samsung
  * smartphones" is a filter link, not something anyone sells. They arrive with a
  * generic adjective as the leading word and a plural category noun at the end.
  */
-const CHIP_TAIL = /\b(smartphones|phones|laptops|tablets|headphones|earbuds|speakers|cameras|doorbells|locks|bulbs|plugs|watches|tvs)\s*$/i;
-const CHIP_HEAD = /^(unlocked|best|top|new|cheap|refurbished|android|smart|wireless|budget)\b/i;
+const CHIP_TAIL = /\b(smartphones|phones|laptops|tablets|headphones|earbuds|speakers|cameras|doorbells|locks|bulbs|plugs|watches|tvs|serums|moisturizers|moisturisers|cleansers|toners|astringents|scrubs|exfoliators|creams|masks|sunscreens|oils|treatments)\s*$/i;
+const CHIP_HEAD = /^(unlocked|best|top|new|cheap|refurbished|android|smart|wireless|budget|anti-aging|antiaging|fragrance-free|hydrating|brightening|organic|natural|vegan|bottle|travel|mini|hypoallergenic|oil-free|non-comedogenic|drugstore|korean)\b/i;
 
 function isRefinementChip(title) {
   const t = String(title || '');
@@ -691,7 +760,7 @@ function toProduct(lead, items) {
   return {
     name: lead.title,
     slug: slugify(lead.title),
-    brand: (lead.title || '').split(' ')[0] || null,
+    brand: brandOf(lead.title),
     // Only what the response actually carries. No default rating, no default count.
     rating: typeof rating === 'number' ? rating : null,
     ratingCount: typeof votes === 'number' ? votes : null,
@@ -751,7 +820,7 @@ if (NAMES.length) {
     p.name = wanted;
     p.slug = slugify(wanted);
     // The brand is in the name we were given; a listing title may not carry it.
-    p.brand = wanted.split(' ')[0];
+    p.brand = brandOf(wanted);
     // A rating only means something if it came from a listing of this product.
     if (best.s < 0.6) { p.rating = null; p.ratingCount = null; }
     products.push(p);
@@ -917,6 +986,25 @@ if (!NO_REVIEWS) {
   }
   console.log(`   ${reviewCount} reviews retrieved\n`);
 }
+
+/* ---- gates ---- */
+
+if (REQUIRE_GID) {
+  const before = products.length;
+  products = products.filter((p) => p.googleProductId);
+  if (before !== products.length) console.log(`   --require-gid: dropped ${before - products.length} of ${before} (no googleProductId)`);
+}
+if (MIN_OFFERS > 0) {
+  const before = products.length;
+  products = products.filter((p) => (p.offers?.length ?? 0) >= MIN_OFFERS);
+  if (before !== products.length) console.log(`   --min-offers=${MIN_OFFERS}: dropped ${before - products.length} of ${before}`);
+}
+if (REQUIRE_ANCHOR) {
+  const before = products.length;
+  products = products.filter((p) => (p.offers ?? []).some((o) => (o.tier ?? 9) <= 2));
+  if (before !== products.length) console.log(`   --require-anchor: dropped ${before - products.length} of ${before} (marketplace-only pricing)`);
+}
+if (!products.length) { console.log('\nNothing left after gates -- nothing written.'); process.exit(0); }
 
 /* ---- report ---- */
 
