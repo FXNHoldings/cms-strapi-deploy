@@ -32,6 +32,10 @@ const flag = (n, d = null) => {
 const WRITE = args.includes('--write');
 const INCLUDE_PRICED = args.includes('--include-priced');
 const CATEGORY = flag('category', null);
+/* Product-pool tag, matching fetch-offers-sellers.mjs. This was hardcoded to
+   nxt-bargains, which silently returned "0 products without an id" for every
+   other property -- the work pool was empty, not already resolved. */
+const TAG = flag('tag', 'nxt-bargains');
 const LIMIT = Number(flag('limit', 50));
 const PRIORITY = Number(flag('priority', 1));
 const LOCATION = Number(flag('location', 2840));
@@ -79,14 +83,14 @@ async function strapi(pathname, init = {}) {
   return res.status === 204 ? null : res.json().catch(() => null);
 }
 
-/** Every published nxt-bargains product, paged. */
+/** Every published product in the selected tag pool, paged. */
 async function allProducts() {
   const out = [];
   for (let page = 1; ; page += 1) {
     const q = new URLSearchParams({
       'pagination[page]': String(page), 'pagination[pageSize]': '200', status: 'published',
     });
-    q.append('filters[tags][$containsi]', 'nxt-bargains');
+    q.append('filters[tags][$containsi]', TAG);
     if (CATEGORY) q.append('filters[categories][slug][$eq]', CATEGORY);
     for (const [i, f] of ['name', 'slug', 'googleProductId'].entries()) q.append(`fields[${i}]`, f);
     q.append('populate[offers][fields][0]', 'price');
