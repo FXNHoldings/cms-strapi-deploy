@@ -110,7 +110,7 @@ const SITE_CONFIG = {
     adminUid: 'api::nxt-discount-post.nxt-discount-post',
     publicMediaUrl: 'https://nxtdiscount.com',
     defaultPostType: 'how-to-guide',
-    defaultCategories: ['software-ai-saas', 'travel-stays', 'fashion-sneakers', 'beauty-skincare', 'coupons'],
+    defaultCategories: ['software-ai-saas', 'travel-stays', 'fashion-sneakers', 'health-beauty', 'coupons'],
     /* nxt-discount-post has a single `category` relation and an `author`, and no
        source / sourceUrl / amazonAffiliateTag attributes. */
     singleCategory: true,
