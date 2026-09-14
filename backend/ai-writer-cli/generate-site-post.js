@@ -114,6 +114,8 @@ const SITE_CONFIG = {
     /* nxt-discount-post has a single `category` relation and an `author`, and no
        source / sourceUrl / amazonAffiliateTag attributes. */
     singleCategory: true,
+    /* Posts live at nxtdiscount.com/all-posts/<slug> (was /guides until 15 Sep 2026). */
+    postPathPrefix: '/all-posts',
     authorEndpoint: '/api/nxt-discount-authors',
     authorSlug: 'nxtdiscount-editorial',
     unsupportedFields: ['source', 'sourceUrl', 'amazonAffiliateTag'],
@@ -410,16 +412,18 @@ async function loadInternalLinkCandidates(category, limit = 8) {
     "sort[0]": "publishedAt:desc",
     "fields[0]": "title",
     "fields[1]": "slug",
-    "filters[categories][slug][$eqi]": slug,
+    [site.singleCategory ? "filters[category][slug][$eqi]" : "filters[categories][slug][$eqi]"]: slug,
   });
   try {
     const res = await strapi(`${site.postEndpoint}?${params.toString()}`);
     return (res.data || [])
       .map((post) => ({
         title: String(post.title || "").trim(),
-        url: site.simplePost
-          ? `${site.publicMediaUrl}/${post.slug}/`
-          : `${site.publicMediaUrl}/${slug}/${post.slug}`,
+        url: site.postPathPrefix
+          ? `${site.publicMediaUrl}${site.postPathPrefix}/${post.slug}`
+          : site.simplePost
+            ? `${site.publicMediaUrl}/${post.slug}/`
+            : `${site.publicMediaUrl}/${slug}/${post.slug}`,
       }))
       .filter((post) => post.title && post.url);
   } catch (error) {
