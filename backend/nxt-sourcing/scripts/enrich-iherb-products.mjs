@@ -44,7 +44,7 @@ function envFrom(file) {
       .filter((l) => l.includes('=') && !l.trim().startsWith('#'))
       .map((l) => [l.slice(0, l.indexOf('=')).trim(), l.slice(l.indexOf('=') + 1).trim()]));
 }
-const env = envFrom('/opt/projects/nxt.discount/.env.local');
+const env = envFrom('/opt/projects/nxtdiscount.com/.env.local');
 const ZEN = process.env.ZENROWS_API_KEY || env.ZENROWS_API_KEY;
 const STRAPI_URL = (process.env.STRAPI_INTERNAL_URL || process.env.STRAPI_URL || 'http://127.0.0.1:8888').replace(/\/$/, '');
 const TOKEN = process.env.STRAPI_API_TOKEN || process.env.STRAPI_TOKEN || '';
