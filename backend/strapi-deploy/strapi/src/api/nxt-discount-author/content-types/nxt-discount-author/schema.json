@@ -4,8 +4,8 @@
   "info": {
     "singularName": "nxt-discount-author",
     "pluralName": "nxt-discount-authors",
-    "displayName": "NXT Discount · Author",
-    "description": "Editorial authors and researchers for NXT.Discount"
+    "displayName": "NXTDiscount · Author",
+    "description": "Editorial authors and researchers for NXTDiscount"
   },
   "options": {
     "draftAndPublish": true

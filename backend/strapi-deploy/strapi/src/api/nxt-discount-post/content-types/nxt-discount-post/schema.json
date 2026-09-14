@@ -4,8 +4,8 @@
   "info": {
     "singularName": "nxt-discount-post",
     "pluralName": "nxt-discount-posts",
-    "displayName": "NXT Discount · Post",
-    "description": "Posts for NXT.Discount — buying guides, product reviews, roundups, and promo code offers"
+    "displayName": "NXTDiscount · Post",
+    "description": "Posts for NXTDiscount — buying guides, product reviews, roundups, and promo code offers"
   },
   "options": {
     "draftAndPublish": true
