@@ -4,8 +4,8 @@
   "info": {
     "singularName": "nxt-discount-category",
     "pluralName": "nxt-discount-categories",
-    "displayName": "NXT Discount · Category",
-    "description": "Shopping categories for NXT.Discount"
+    "displayName": "NXTDiscount · Category",
+    "description": "Shopping categories for NXTDiscount"
   },
   "options": {
     "draftAndPublish": true
