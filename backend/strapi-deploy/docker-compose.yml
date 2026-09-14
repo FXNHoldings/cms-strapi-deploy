@@ -7,6 +7,9 @@ services:
       dockerfile: Dockerfile
     container_name: strapi-cms
     restart: unless-stopped
+    env_file:
+      - path: ./strapi-secrets.env
+        required: true
     environment:
       NODE_ENV: production
       HOST: 0.0.0.0
@@ -23,13 +26,12 @@ services:
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_SSL: "false"
-      # Strapi secrets
-      APP_KEYS: ${APP_KEYS}
-      API_TOKEN_SALT: ${API_TOKEN_SALT}
-      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
-      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
-      JWT_SECRET: ${JWT_SECRET}
-      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      # Strapi secrets (APP_KEYS, API_TOKEN_SALT, ADMIN_JWT_SECRET,
+      # TRANSFER_TOKEN_SALT, JWT_SECRET, ENCRYPTION_KEY) come from
+      # strapi-secrets.env via env_file above, not ${...} interpolation: compose
+      # lets a variable exported in the shell override .env for interpolation,
+      # and on 11 Sep 2026 that silently replaced API_TOKEN_SALT and made every
+      # API token 401. env_file values are passed as written.
       # Public URL
       PUBLIC_URL: https://strapi.fxnstudio.com
       URL: https://strapi.fxnstudio.com
