@@ -8,6 +8,8 @@ import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
 import { fal } from '@fal-ai/client';
 import fs from 'node:fs';
+import os from 'node:os';
+import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
@@ -100,6 +102,27 @@ const SITE_CONFIG = {
     editorialBrief:
       'Write practical airfare and flight-planning content for Flightfares.one. Focus on finding fares, booking timing, airports, routes, airline tradeoffs, fees, and realistic travel planning. Never invent live fares, schedules, availability, or airline policies.',
     topicNiche: 'airfares, flight booking, airlines, airports, routes, and practical travel planning',
+  },
+  'nxtdiscount.com': {
+    label: 'NXTDiscount',
+    postEndpoint: '/api/nxt-discount-posts',
+    categoryEndpoint: '/api/nxt-discount-categories',
+    adminUid: 'api::nxt-discount-post.nxt-discount-post',
+    publicMediaUrl: 'https://nxtdiscount.com',
+    defaultPostType: 'how-to-guide',
+    defaultCategories: ['software-ai-saas', 'travel-stays', 'fashion-sneakers', 'beauty-skincare', 'coupons'],
+    /* nxt-discount-post has a single `category` relation and an `author`, and no
+       source / sourceUrl / amazonAffiliateTag attributes. */
+    singleCategory: true,
+    authorEndpoint: '/api/nxt-discount-authors',
+    authorSlug: 'nxtdiscount-editorial',
+    unsupportedFields: ['source', 'sourceUrl', 'amazonAffiliateTag'],
+    /* Covers are rendered, not photographed: the NXTDiscount guide design (random
+       theme-navy background, title left, product-style render right). No gallery. */
+    coverRenderer: '/opt/projects/nxtdiscount.com/scripts/generate-guide-cover.mjs',
+    editorialBrief:
+      'Write practical savings guides for NXTDiscount, which lists promo codes and discounts read from retailers\' own pages in software and SaaS, travel and stays, fashion, and beauty. Explain how discounts, promo codes, trials, memberships and sales generally work and what to check before relying on one. Never invent promo codes, prices, percentages, end dates, statistics, retailer policies or exclusive deals; do not claim NXTDiscount tests codes at checkout, verifies codes, or has a research team; do not name a person as the author. When a retailer\'s offer is mentioned, tell readers to confirm it on the retailer\'s own site.',
+    topicNiche: 'how promo codes, subscriptions, travel discounts, fashion sales and beauty offers work, and how to save on them',
   },
   'globalscholar.one': {
     label: 'GlobalScholar.one',
@@ -509,7 +532,7 @@ async function promptForMissingOptions() {
     }
   }
 
-  if (argv.images && !argv['dry-run'] && !FAL_KEY) {
+  if (argv.images && !argv['dry-run'] && !FAL_KEY && !site.coverRenderer) {
     fatal('FAL_KEY is not set in .env. Get one at https://fal.ai/dashboard/keys - or pass --no-images to skip image generation.');
   }
 
@@ -974,7 +997,48 @@ async function uploadImageToStrapi(imageUrl, filename, { returnAsset = false } =
   };
 }
 
-async function generateAndUploadImages(post) {
+async function uploadFileToStrapi(filePath, filename) {
+  const form = new FormData();
+  form.append('files', new Blob([fs.readFileSync(filePath)], { type: 'image/jpeg' }), `${filename}.jpg`.slice(0, 120));
+  const uploadRes = await fetch(`${STRAPI_URL}/api/upload`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${STRAPI_API_TOKEN}` },
+    body: form,
+  });
+  if (!uploadRes.ok) {
+    const body = await uploadRes.text().catch(() => '');
+    throw new Error(`Strapi upload ${uploadRes.status}: ${body.slice(0, 300)}`);
+  }
+  const uploaded = await uploadRes.json();
+  const first = Array.isArray(uploaded) ? uploaded[0] : uploaded;
+  if (!first?.id) throw new Error('Strapi upload returned no id');
+  return first.id;
+}
+
+/* Sites with a cover renderer (nxtdiscount.com) get a designed cover instead of Fal.ai images. */
+function renderSiteCover(post, category) {
+  const out = path.join(os.tmpdir(), `${slugifyValue(post.slug || post.title).slice(0, 60)}-cover-${Date.now()}.jpg`);
+  execFileSync(process.execPath, [
+    site.coverRenderer,
+    `--slug=${post.slug}`,
+    `--title=${post.title}`,
+    `--category=${category || ''}`,
+    `--out=${out}`,
+  ], { stdio: ['ignore', 'inherit', 'inherit'], timeout: 120_000 });
+  return out;
+}
+
+async function generateAndUploadImages(post, { category = null } = {}) {
+  if (site.coverRenderer) {
+    process.stdout.write('  rendering cover with the site cover template... ');
+    const file = renderSiteCover(post, category);
+    try {
+      const coverId = await uploadFileToStrapi(file, `${slugifyValue(post.slug || post.title).slice(0, 60)}-cover`);
+      return { coverId, galleryIds: [], galleryAssets: [] };
+    } finally {
+      fs.rmSync(file, { force: true });
+    }
+  }
   const prompts = fillMissingImagePrompts(post?.imagePrompts, post);
   const needsInlineImages = argv.site === 'flightfares.one';
   if (!prompts?.cover || (needsInlineImages && (!Array.isArray(prompts.gallery) || prompts.gallery.length < 2))
@@ -1061,11 +1125,22 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
     delete data.readingTimeMinutes;
   }
 
-  if (categoryId) data.categories = [categoryId];
+  for (const field of site.unsupportedFields || []) delete data[field];
+
+  if (categoryId) {
+    if (site.singleCategory) data.category = categoryId;
+    else data.categories = [categoryId];
+  }
+  if (site.authorEndpoint && site.authorSlug) {
+    const authors = await strapi(`${site.authorEndpoint}?filters[slug][$eq]=${encodeURIComponent(site.authorSlug)}&pagination[pageSize]=1`);
+    const author = authors?.data?.[0];
+    if (author) data.author = author.documentId || author.id;
+    else console.log(`  (author "${site.authorSlug}" not found in ${site.authorEndpoint}; saving without an author)`);
+  }
   if (coverId) data.coverImage = coverId;
   if (galleryIds?.length && !site.simplePost) data.gallery = galleryIds;
-  if (sourceUrl) data.sourceUrl = sourceUrl;
-  if (argv['amazon-tag']) data.amazonAffiliateTag = argv['amazon-tag'];
+  if (sourceUrl && !(site.unsupportedFields || []).includes('sourceUrl')) data.sourceUrl = sourceUrl;
+  if (argv['amazon-tag'] && !(site.unsupportedFields || []).includes('amazonAffiliateTag')) data.amazonAffiliateTag = argv['amazon-tag'];
   if (argv.publish) data.publishedAt = new Date().toISOString();
 
   /*
@@ -1881,7 +1956,7 @@ async function run() {
             slugifyValue(post.title).slice(0, 60),
           );
         } else {
-          ({ coverId, galleryIds, galleryAssets } = await generateAndUploadImages(post));
+          ({ coverId, galleryIds, galleryAssets } = await generateAndUploadImages(post, { category: job.category }));
         }
       } catch (error) {
         console.log(`  image step failed (${error.message.slice(0, 140)}) - saving post without images`);
