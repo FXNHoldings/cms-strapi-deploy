@@ -26,9 +26,12 @@ export async function POST(request: Request) {
           merchantSlugs,
           limit: typeof body.limit === 'number' ? body.limit : undefined,
           siteSlug: typeof body.site === 'string' && body.site.trim() ? body.site.trim() : undefined,
+          strict: body.strict === true,
+          dryRun: body.dryRun === true,
         })
       : await refreshAllProductPrices({ limit: typeof body.limit === 'number' ? body.limit : undefined });
-    // After re-pricing, fire any price alerts that have now hit their target.
+    // After re-pricing, fire any price alerts that have now hit their target (not on a dry run: nothing changed).
+    if (body.dryRun === true) return NextResponse.json({ ok: true, ...result });
     let alerts: Awaited<ReturnType<typeof checkPriceAlerts>> | { error: string } | undefined;
     try {
       alerts = await checkPriceAlerts();

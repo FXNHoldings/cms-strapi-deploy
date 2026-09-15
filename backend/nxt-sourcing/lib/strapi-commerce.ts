@@ -203,12 +203,21 @@ export async function refreshMerchantProductPrices(opts: {
   limit?: number;
   /** Only refresh products of this storefront (commerce-product `site` relation slug), e.g. "bestlooking-skin". */
   siteSlug?: string;
+  /**
+   * Stricter matching for catalogues where a name search returns lookalikes (skincare): the brand and every name
+   * word must appear as whole words, and multipacks, samples, bundles, other variants and implausible price jumps
+   * are rejected. See passesStrictMatch.
+   */
+  strict?: boolean;
+  /** Match and report, but write nothing to Strapi. */
+  dryRun?: boolean;
 }): Promise<{
   processed: number;
   snapshots: number;
   offersUpdated: number;
   skipped: number;
   merchants: string[];
+  preview?: RefreshPreviewRow[];
 }> {
   if (!STRAPI_API_TOKEN) throw new Error('STRAPI_API_TOKEN is not configured.');
 
@@ -230,6 +239,7 @@ export async function refreshMerchantProductPrices(opts: {
   let snapshots = 0;
   let offersUpdated = 0;
   let skipped = 0;
+  const preview: RefreshPreviewRow[] = [];
   const now = new Date().toISOString();
 
   while (processed < limit) {
@@ -244,6 +254,7 @@ export async function refreshMerchantProductPrices(opts: {
       'populate[offers][populate][0]': 'merchant',
       'sort[0]': 'updatedAt:desc',
     });
+    if (opts.strict) params.set('fields[4]', 'specs');
     if (opts.siteSlug) params.set('filters[site][slug][$eq]', opts.siteSlug);
     const res = await fetch(`${STRAPI_URL}/api/commerce-products?${params.toString()}`, {
       headers: strapiHeaders(),
@@ -278,8 +289,23 @@ export async function refreshMerchantProductPrices(opts: {
             sortBy: 'relevance',
           },
         });
-        const matches = matchRefreshResultsToOffers(p, targetOffers, refreshed);
+        const matches = matchRefreshResultsToOffers(p, targetOffers, refreshed, { strict: opts.strict });
+        if (opts.dryRun) {
+          for (const offer of targetOffers) {
+            const merchantSlug = String((offer.merchant as StrapiItem | undefined)?.slug || '');
+            const match = matches.find((m) => m.offer === offer);
+            preview.push({
+              product: productName,
+              merchant: merchantSlug,
+              oldPrice: typeof offer.price === 'number' ? offer.price : null,
+              newPrice: match?.result.price ?? null,
+              resultTitle: match?.result.productName ?? null,
+              resultUrl: match?.result.productUrl ?? null,
+            });
+          }
+        }
         if (!matches.length) { skipped += 1; continue; }
+        if (opts.dryRun) continue;
 
         for (const { offer, merchant, result } of matches) {
           if (result.price === undefined) continue;
@@ -326,13 +352,30 @@ export async function refreshMerchantProductPrices(opts: {
     page += 1;
   }
 
-  return { processed, snapshots, offersUpdated, skipped, merchants: merchants.map((merchant) => merchant.slug) };
+  return {
+    processed,
+    snapshots,
+    offersUpdated,
+    skipped,
+    merchants: merchants.map((merchant) => merchant.slug),
+    ...(opts.dryRun ? { preview } : {}),
+  };
 }
+
+export type RefreshPreviewRow = {
+  product: string;
+  merchant: string;
+  oldPrice: number | null;
+  newPrice: number | null;
+  resultTitle: string | null;
+  resultUrl: string | null;
+};
 
 function matchRefreshResultsToOffers(
   product: StrapiItem,
   offers: StrapiItem[],
   results: ProductSearchResult[],
+  options: { strict?: boolean } = {},
 ) {
   const matches: Array<{ offer: StrapiItem; merchant: StrapiItem; result: ProductSearchResult }> = [];
   const usedResults = new Set<ProductSearchResult>();
@@ -345,6 +388,7 @@ function matchRefreshResultsToOffers(
     const candidates = results
       .filter((result) => result.price !== undefined && !usedResults.has(result))
       .filter((result) => result.merchantSlug === merchantSlug || sameOfferHost(result.productUrl, String(offer.productUrl || offer.affiliateUrl || '')))
+      .filter((result) => !options.strict || passesStrictMatch(product, offer, result))
       .map((result) => ({ result, score: refreshMatchScore(product, offer, result) }))
       .filter((entry) => entry.score >= 6)
       .sort((a, b) => b.score - a.score);
@@ -377,6 +421,97 @@ function refreshMatchScore(product: StrapiItem, offer: StrapiItem, result: Produ
   if (String(offer.condition || '') === result.condition) score += 1;
 
   return score;
+}
+
+/* Words that make a listing something other than one full-size unit of the product. */
+const STRICT_REJECT_WORDS = new Set([
+  'sample', 'samples', 'deluxe', 'mini', 'minis', 'travel', 'trial', 'tester', 'bundle', 'lot', 'lots', 'set', 'sets',
+  'kit', 'pack', 'packs', 'pk', 'refill', 'duo', 'trio', 'pcs', 'pieces', 'empty', 'used', 'damaged', 'unboxed',
+  'wholesale', 'bulk', 'gift', 'combo', 'nwob', 'unsealed', 'opened', 'swatched',
+]);
+/* Formats and product lines that distinguish one product from its sibling; a listing may only carry one the name has. */
+const STRICT_VARIANT_WORDS = new Set([
+  'cream', 'gel', 'foam', 'foaming', 'lotion', 'balm', 'oil', 'serum', 'toner', 'mask', 'scrub', 'stick', 'wipes',
+  'pads', 'spray', 'mist', 'powder', 'bar', 'resist', 'clinical', 'tinted', 'spf', 'night', 'eye', 'body', 'men',
+  'mens', 'baby', 'kids', 'acne', 'retinol', 'vitamin', 'peptide', 'exfoliating', 'brightening', 'fragrance',
+]);
+const STRICT_NAME_STOP = new Set(['the', 'and', 'for', 'with', 'of', 'to', 'by', 'in']);
+
+/**
+ * Strict gate for name-searched price refreshes (used when `strict` is set). A listing passes only if it is new,
+ * names the brand and every word of the product name as whole words, carries no multipack / sample / bundle wording
+ * ("3 x", "2 pack", "without box" included), negates none of the name's words ("non-foaming" for a foaming
+ * cleanser), adds no format or line word the name lacks (cream vs wash, RESIST), and does not move the price outside
+ * 0.4x-2.5x of the stored offer.
+ */
+function passesStrictMatch(product: StrapiItem, offer: StrapiItem, result: ProductSearchResult) {
+  if (result.price === undefined || !(result.price > 0)) return false;
+  if (result.condition !== 'new' && result.condition !== 'unknown') return false;
+
+  const words = (value: string) => strictText(value).split(' ').filter(Boolean);
+  const resultWords = words(result.productName);
+  const resultSet = new Set(resultWords);
+  const resultText = ` ${resultWords.join(' ')} `;
+  const nameWords = words(String(product.name || ''));
+  const nameSet = new Set(nameWords);
+  const brandWords = words(String(product.brand || ''));
+
+  if (brandWords.some((w) => !resultSet.has(w))) return false;
+  if (nameWords.filter((w) => w.length >= 2 && !STRICT_NAME_STOP.has(w)).some((w) => !resultSet.has(w))) return false;
+  if (nameWords.some((w) => resultText.includes(` non ${w} `))) return false;
+  if (resultWords.some((w) => STRICT_REJECT_WORDS.has(w) && !nameSet.has(w))) return false;
+  if (/\b\d+\s*x\b|\bx\s*\d+\b|\b\d+\s*(pk|pack|count|ct)\b|\bpack of\b|\bset of\b|\bwithout box\b|\bno box\b/.test(resultText)) return false;
+  if (resultWords.some((w) => STRICT_VARIANT_WORDS.has(w) && !nameSet.has(w))) return false;
+
+  /* Pack size: when the product's specs state sizes and the listing states one, it must be one of them (within 10%),
+     so a 25 ml travel tube or a 32 oz salon bottle does not price a 150 ml product. */
+  const specSizes = productSpecSizes(product);
+  const listedSizes = sizesInText(result.productName);
+  if (specSizes.length && listedSizes.length && !listedSizes.some((a) => specSizes.some((b) => Math.abs(a - b) / b <= 0.1))) return false;
+  /* No stated size to compare with: a listing under 10 ml is a sample or travel vial, not the product. */
+  if (!specSizes.length && listedSizes.some((size) => size < 10)) return false;
+
+  const oldPrice = typeof offer.price === 'number' ? offer.price : Number(offer.price);
+  if (Number.isFinite(oldPrice) && oldPrice > 0) {
+    const ratio = result.price / oldPrice;
+    if (ratio < 0.4 || ratio > 2.5) return false;
+  }
+  return true;
+}
+
+const SIZE_SPEC_KEYS = /^(size|volume|net volume|net weight|weight|capacity)$/i;
+
+/* Sizes in millilitres from spec values such as "150 ml", "12 oz", "2.5 ounce" (grams count as millilitres). */
+function productSpecSizes(product: StrapiItem) {
+  const specs = product.specs && typeof product.specs === 'object' ? (product.specs as Record<string, unknown>) : {};
+  return Object.entries(specs)
+    .filter(([key, value]) => SIZE_SPEC_KEYS.test(key) && typeof value === 'string')
+    .flatMap(([, value]) => sizesInText(value as string));
+}
+
+function sizesInText(value: string) {
+  const sizes: number[] = [];
+  const re = /(\d*\.?\d+)\s*-?\s*(fl\.?\s*oz|ounces?|oz|ml|millilit(?:er|re)s?|g|grams?|l|lit(?:er|re)s?)\b/gi;
+  for (const m of value.matchAll(re)) {
+    const n = Number(m[1]);
+    const unit = m[2].toLowerCase().replace(/[\s.]/g, '');
+    if (!(n > 0)) continue;
+    if (unit.startsWith('fl') || unit.startsWith('oz') || unit.startsWith('ounce')) sizes.push(n * 29.5735);
+    else if (unit === 'l' || unit.startsWith('lit')) sizes.push(n * 1000);
+    else sizes.push(n);
+  }
+  return sizes;
+}
+
+/* Lowercase words; apostrophes joined ("paula's" -> "paulas"), hyphens split ("oil-free" -> "oil free"). */
+function strictText(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/['\u2019]/g, '')
+    .replace(/[^a-z0-9.]+/g, ' ')
+    .replace(/(^|\s)\.|\.(\s|$)/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function normalizedProductText(value: string) {
