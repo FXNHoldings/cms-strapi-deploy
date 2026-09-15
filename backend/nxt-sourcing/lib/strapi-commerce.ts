@@ -201,6 +201,8 @@ export async function refreshAllProductPrices(opts: { limit?: number } = {}): Pr
 export async function refreshMerchantProductPrices(opts: {
   merchantSlugs: string[];
   limit?: number;
+  /** Only refresh products of this storefront (commerce-product `site` relation slug), e.g. "bestlooking-skin". */
+  siteSlug?: string;
 }): Promise<{
   processed: number;
   snapshots: number;
@@ -242,6 +244,7 @@ export async function refreshMerchantProductPrices(opts: {
       'populate[offers][populate][0]': 'merchant',
       'sort[0]': 'updatedAt:desc',
     });
+    if (opts.siteSlug) params.set('filters[site][slug][$eq]', opts.siteSlug);
     const res = await fetch(`${STRAPI_URL}/api/commerce-products?${params.toString()}`, {
       headers: strapiHeaders(),
       cache: 'no-store',

@@ -25,6 +25,7 @@ export async function POST(request: Request) {
       ? await refreshMerchantProductPrices({
           merchantSlugs,
           limit: typeof body.limit === 'number' ? body.limit : undefined,
+          siteSlug: typeof body.site === 'string' && body.site.trim() ? body.site.trim() : undefined,
         })
       : await refreshAllProductPrices({ limit: typeof body.limit === 'number' ? body.limit : undefined });
     // After re-pricing, fire any price alerts that have now hit their target.
