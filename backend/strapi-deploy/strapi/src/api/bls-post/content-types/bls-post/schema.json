@@ -32,6 +32,7 @@
         "how-to-guide",
         "informative",
         "top-rated",
+        "pillar",
         "other"
       ],
       "default": "product-review"
