@@ -144,6 +144,16 @@ const SITE_CONFIG = {
       ['product-review', 'Review'],
       ['pillar', 'Pillar / complete guide'],
     ],
+    // Real catalogue products are offered to the writer and placed inline as
+    // ::product:<slug>:: markers (rendered as ProductBoxes by the site). Site
+    // rule 8: at least two per article, only products it discusses, only
+    // products with a verdict. See siteProductContext / applySiteProducts.
+    productCatalog: {
+      path: process.env.NXTSMARTHOME_CATALOG || '/opt/projects/nxtsmarthome.com.au/public/data/products.json',
+      min: 2,
+      max: 4,
+      candidates: 8,
+    },
     // nxtsmarthome-post has a showFrom release date; see --publishedAt.
     supportsShowFrom: true,
     editorialBrief:
@@ -734,6 +744,114 @@ Rules:
   return topics.slice(0, count);
 }
 
+/* ---------------------------------------------------------------------------
+ * Site product catalogue (nxtsmarthome.com.au)
+ *
+ * The site renders a line "::product:<slug>::" as an inline ProductBox (photo,
+ * what it suits, buy buttons) from its catalogue, public/data/products.json.
+ * Its editorial rule 8 requires at least two per article, drawn from products
+ * the article genuinely discusses, that have a verdict (bestFor or pros), and
+ * that match the category. So the writer gets a shortlist of real catalogue
+ * products for the topic and places the markers itself, next to the prose that
+ * discusses each; applySiteProducts() then validates what came back.
+ * ------------------------------------------------------------------------- */
+let siteCatalogCache = null;
+
+function loadSiteCatalog() {
+  if (!site.productCatalog) return [];
+  if (siteCatalogCache) return siteCatalogCache;
+  try {
+    const raw = JSON.parse(fs.readFileSync(site.productCatalog.path, 'utf8'));
+    const list = Array.isArray(raw) ? raw : raw.products || [];
+    siteCatalogCache = list.filter((p) => p?.slug && p?.name && (
+      (typeof p.bestFor === 'string' && p.bestFor.trim()) || (Array.isArray(p.pros) && p.pros.length)
+    ));
+  } catch (error) {
+    console.warn(`Product catalogue not readable (${site.productCatalog.path}): ${error.message}`);
+    siteCatalogCache = [];
+  }
+  return siteCatalogCache;
+}
+
+const PRODUCT_STOPWORDS = new Set('a an and are as at australia australian aussie be best buy by can do does for from guide how in into is it its of on or smart home homes that the their this to vs what when where which why will with without you your'.split(' '));
+const productTokens = (text) => String(text || '').toLowerCase().replace(/[^a-z0-9+ ]+/g, ' ').split(/\s+/)
+  .filter((w) => w.length > 2 && !PRODUCT_STOPWORDS.has(w))
+  .map((w) => w.replace(/s$/, ''));
+
+/** Up to `candidates` catalogue products most relevant to the topic. */
+function pickSiteProducts(topic, category) {
+  const catalog = loadSiteCatalog();
+  if (!catalog.length) return [];
+  const want = new Set(productTokens(topic));
+  const hasCategory = catalog.some((p) => p.categoryKey === category);
+  const scored = catalog.map((p) => {
+    const words = new Set(productTokens(`${p.name} ${p.brand} ${p.subCategory} ${p.bestFor}`));
+    let overlap = 0;
+    for (const w of want) if (words.has(w)) overlap += 1;
+    const inCategory = p.categoryKey === category;
+    const reviews = Number(p.reviewCountReal || p.reviewCount || 0);
+    const score = overlap * 3 + (inCategory ? 4 : 0) + Math.log10(reviews + 1);
+    return { p, score, overlap, inCategory };
+  })
+    // Product categories keep to their own products (plus clear topical matches);
+    // topic-only categories (setup-guides, buying-guides) rely on topic overlap.
+    .filter((x) => (hasCategory ? x.inCategory || x.overlap >= 2 : x.overlap >= 1))
+    .sort((a, b) => b.score - a.score);
+  return scored.slice(0, site.productCatalog.candidates).map((x) => x.p);
+}
+
+function siteProductContext(products) {
+  if (!products.length) return '';
+  const { min, max } = site.productCatalog;
+  const lines = products.map((p) => `- ${p.slug} | ${p.brand ? `${p.brand} ` : ''}${p.name} | ${p.subCategory || p.categoryName || ''} | best for: ${String(p.bestFor || '').replace(/\s+/g, ' ').slice(0, 160)}`);
+  return `
+
+Catalogue products (real products sold in Australia, from this site's catalogue):
+${lines.join('\n')}
+
+Product placement (mandatory):
+- Feature between ${min} and ${max} of the products above that genuinely fit this article. Discuss each one in the prose where it is relevant: what it suits and the trade-offs, using only the facts listed above.
+- Immediately after the paragraph or section that discusses a product, put its marker alone on its own line, with a blank line before and after: ::product:<slug>::  (for example ::product:${products[0].slug}::).
+- Use only slugs from the list above, each at most once. Never invent products, slugs, prices, specifications or star ratings, and do not claim anything was tested hands-on.
+- Do not put markers inside lists, tables or headings, and never place them all together at the end.
+`;
+}
+
+/**
+ * Validate the markers the model placed: drop unknown or duplicate slugs, put
+ * each marker on its own paragraph, and add a marker for a shortlisted product
+ * the text names but forgot to box (at the end of the section that first
+ * mentions it). Returns the number of valid markers.
+ */
+function applySiteProducts(post, products) {
+  if (!site.productCatalog || typeof post.content !== 'string') return 0;
+  const allowed = new Map(products.map((p) => [p.slug, p]));
+  const seen = new Set();
+  let content = post.content.replace(/::product:([a-z0-9-]+)::/gi, (m, slug) => {
+    const key = slug.toLowerCase();
+    if (!allowed.has(key) || seen.has(key)) return '';
+    seen.add(key);
+    return `\n\n::product:${key}::\n\n`;
+  });
+
+  // Products named in the text but not boxed: insert after the section that first names them.
+  for (const p of products) {
+    if (seen.size >= site.productCatalog.max) break;
+    if (seen.has(p.slug)) continue;
+    const names = [p.brand ? `${p.brand} ${p.name}` : '', p.name].filter((n) => n && n.length > 4);
+    const idx = names.map((n) => content.toLowerCase().indexOf(n.toLowerCase())).filter((i) => i >= 0).sort((a, b) => a - b)[0];
+    if (idx === undefined) continue;
+    const nextHeading = content.slice(idx).search(/\n#{2,6} /);
+    const at = nextHeading >= 0 ? idx + nextHeading : content.length;
+    content = `${content.slice(0, at).replace(/\s+$/, '')}\n\n::product:${p.slug}::\n\n${content.slice(at).replace(/^\s+/, '')}`;
+    seen.add(p.slug);
+  }
+
+  post.content = content.replace(/\n{3,}/g, '\n\n').trim();
+  post.productSlugs = [...seen];
+  return seen.size;
+}
+
 async function generatePost(topic, category, { dealProduct = null, catalogProducts = null } = {}) {
   const internalLinkContext = await buildInternalLinkContext(category);
   const isDealsPost = isNxtDealsCategory(category);
@@ -748,6 +866,8 @@ async function generatePost(topic, category, { dealProduct = null, catalogProduc
   const dealContext = dealProductPromptContext(dealProduct);
   const catalogContext = isSmartHomePost ? '' : catalogProductPromptContext(seededProducts, category);
   const smartHomeContext = isSmartHomePost ? smartHomeProductPromptContext(primaryCatalogProduct) : '';
+  const siteProducts = site.productCatalog ? pickSiteProducts(topic, category) : [];
+  const siteProductsContext = siteProductContext(siteProducts);
   const contentFormat = site.contentFormat || (isSmartHomePost && primaryCatalogProduct ? 'HTML' : 'Markdown');
   const rankMathRequirements = site.simplePost ? `
 
@@ -778,7 +898,7 @@ Tone: ${argv.tone}
 Length: ${wordTarget} words
 Language: ${argv.language}
 SEO keywords: ${argv.keywords || 'choose natural keywords from the topic'}
-${dealContext}${catalogContext}${smartHomeContext}${internalLinkContext}${rankMathRequirements}
+${dealContext}${catalogContext}${smartHomeContext}${siteProductsContext}${internalLinkContext}${rankMathRequirements}
 
 Return STRICT JSON only with exactly these keys:
 {
@@ -888,6 +1008,15 @@ Image prompt requirements:
     for (const c of list(n.checklist)) console.log(`  check    : ${c}`);
     console.log('');
     delete post.editorialNotes;
+  }
+
+  if (site.productCatalog) {
+    const placed = applySiteProducts(post, siteProducts);
+    const { min } = site.productCatalog;
+    console.log(`  products : ${placed} placed${placed ? ` (${post.productSlugs.join(', ')})` : ''} from ${siteProducts.length} candidates`);
+    // Rule 8 unmet: never let it go live on its own; it is saved as a draft.
+    post.productShortfall = placed < min;
+    if (post.productShortfall) console.log(`  WARNING  : fewer than ${min} product boxes - saving as a DRAFT for review`);
   }
   return post;
 }
@@ -1261,7 +1390,9 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
   if (galleryIds?.length && !site.simplePost) data.gallery = galleryIds;
   if (sourceUrl) data.sourceUrl = sourceUrl;
   if (argv['amazon-tag']) data.amazonAffiliateTag = argv['amazon-tag'];
-  if (argv.publish) data.publishedAt = new Date().toISOString();
+  // A post missing its required product boxes is held back as a draft.
+  const publish = argv.publish && !post.productShortfall;
+  if (publish) data.publishedAt = new Date().toISOString();
   const releaseAt = nextReleaseAt();
   if (releaseAt) {
     data.showFrom = releaseAt;
@@ -1281,7 +1412,7 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
    * Content API, so the ones already live had to be cleared out of Postgres --
    * worth avoiding a second time.
    */
-  const createPath = argv.publish
+  const createPath = publish
     ? site.postEndpoint
     : `${site.postEndpoint}${site.postEndpoint.includes('?') ? '&' : '?'}status=draft`;
 
@@ -2114,9 +2245,10 @@ async function run() {
     const id = saved?.data?.documentId || saved?.data?.id;
     const adminUrl = `${STRAPI_URL}/admin/content-manager/collection-types/${site.adminUid}/${id}`;
     const showFrom = saved?.data?.showFrom;
-    console.log(`  saved ${argv.publish ? 'published' : 'draft'}: ${post.slug}${showFrom ? ` · shows from ${showFrom}` : ''}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}`);
+    const savedPublished = argv.publish && !post.productShortfall;
+    console.log(`  saved ${savedPublished ? 'published' : 'draft'}: ${post.slug}${showFrom ? ` · shows from ${showFrom}` : ''}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}`);
     console.log(`  review: ${adminUrl}\n`);
-    results.push({ topic: job.topic, slug: post.slug, id, status: showFrom ? `scheduled ${showFrom}` : argv.publish ? 'published' : 'draft' });
+    results.push({ topic: job.topic, slug: post.slug, id, status: !savedPublished ? 'draft' : showFrom ? `scheduled ${showFrom}` : 'published' });
   }
 
   console.log('Done.');

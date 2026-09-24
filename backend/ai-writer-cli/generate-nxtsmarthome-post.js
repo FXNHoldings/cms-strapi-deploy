@@ -28,10 +28,18 @@
 // it hidden until then (no timezone = Australia/Perth). --publish-every <hours>
 // staggers a batch.
 //
+// Related products are inserted automatically: the writer gets a shortlist of
+// real products from the site catalogue (public/data/products.json, only ones
+// with a verdict, same category first, then by topic) and places 2-4
+// ::product:<slug>:: markers after the sections that discuss them. The output
+// is checked: unknown or duplicate slugs are removed, and a shortlisted product
+// named without a box gets one. With fewer than 2 boxes the post is saved as a
+// DRAFT even with --publish/--publishedAt (site rule 8). Catalogue path:
+// NXTSMARTHOME_CATALOG to override.
+//
 // Site rules (projects/nxtsmarthome.com.au/CLAUDE.md) still apply after
-// generation: Australian English, no invented prices/specs/ratings, [VERIFY]
-// on legal and safety claims, and at least two ::product:<slug>:: boxes
-// (node scripts/link-products.mjs <slug>) before an article is published.
+// generation: Australian English, no invented prices/specs/ratings, and a
+// [VERIFY] check on legal and safety claims.
 
 const args = process.argv.slice(2);
 const hasSiteFlag = args.some((arg) => arg === "--site" || arg === "-s" || arg.startsWith("--site="));
