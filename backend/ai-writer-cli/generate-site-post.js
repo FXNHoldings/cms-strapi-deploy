@@ -834,6 +834,8 @@ async function preloadSiteCatalog() {
       subCategory: cats[0] || '',
       categoryKeys: hubsFor(cats),
       bestFor: [features, concerns].filter(Boolean).join(' | '),
+      // e.g. "Korean Cosmetics, Kbeauty": lets a Korean-skincare topic find Korean products.
+      theme: [specs.Theme, specs['Country of Origin']].filter(Boolean).join(' '),
       reviewCount: p.ratingCount || 0,
       offers: p.offers || [],
     };
@@ -871,7 +873,7 @@ function pickSiteProducts(topic, category) {
   const inCat = (p) => p.categoryKey === category || (p.categoryKeys || []).includes(category);
   const hasCategory = catalog.some(inCat);
   const scored = catalog.map((p) => {
-    const words = new Set(productTokens(`${p.name} ${p.brand} ${p.subCategory} ${p.bestFor}`));
+    const words = new Set(productTokens(`${p.name} ${p.brand} ${p.subCategory} ${p.bestFor} ${p.theme || ''}`));
     let overlap = 0;
     for (const w of want) if (words.has(w)) overlap += 1;
     const inCategory = inCat(p);
@@ -1796,7 +1798,35 @@ async function readTopicFile(file) {
     }
   }
 
-  return argv.count ? jobs.slice(0, argv.count) : jobs;
+  // Rows already written (draft or published) are skipped, so a daily
+  // "--topics file --count 1" run takes the next unwritten row each time.
+  const existing = await loadExistingPostKeys();
+  const keyOf = (t) => String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const fresh = jobs.filter((job) => {
+    const slug = job.forcedSlug ? slugifyValue(job.forcedSlug) : '';
+    const title = keyOf(job.forcedTitle || job.topic);
+    return !(slug && existing.slugs.has(slug)) && !(title && existing.titles.has(title));
+  });
+  if (fresh.length < jobs.length) console.log(`Topics: ${jobs.length - fresh.length} already in Strapi skipped, ${fresh.length} left`);
+  return argv.count ? fresh.slice(0, argv.count) : fresh;
+}
+
+/** Slugs and normalised titles of every post in this site's collection, draft and published. */
+async function loadExistingPostKeys() {
+  const slugs = new Set();
+  const titles = new Set();
+  const sep = site.postEndpoint.includes('?') ? '&' : '?';
+  for (const status of ['draft', 'published']) {
+    for (let page = 1; page <= 100; page += 1) {
+      const res = await strapi(`${site.postEndpoint}${sep}status=${status}&fields[0]=slug&fields[1]=title&pagination[page]=${page}&pagination[pageSize]=100`);
+      for (const p of res?.data || []) {
+        if (p.slug) slugs.add(p.slug);
+        if (p.title) titles.add(String(p.title).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim());
+      }
+      if (page >= (res?.meta?.pagination?.pageCount || 1)) break;
+    }
+  }
+  return { slugs, titles };
 }
 
 async function buildJobs() {
