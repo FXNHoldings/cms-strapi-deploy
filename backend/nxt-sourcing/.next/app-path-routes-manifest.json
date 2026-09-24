@@ -6,6 +6,6 @@
   "/api/geniuslink/groups/route": "/api/geniuslink/groups",
   "/api/merchants/route": "/api/merchants",
   "/api/search/route": "/api/search",
-  "/api/refresh-prices/route": "/api/refresh-prices",
-  "/page": "/"
+  "/page": "/",
+  "/api/refresh-prices/route": "/api/refresh-prices"
 }

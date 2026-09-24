@@ -21,27 +21,27 @@
 # done 2026-09-10 (draft) · Travel Tips | Yui Rail Monorail: Naha Without a Car | Japan, Okinawa
 # done 2026-09-10 (draft) · Flights | Perth to Kuressaare Flights: Connections via Tallinn | Estonia, Kuressaare
 # done 2026-09-10 (draft) · Travel Tips | Best Time to Visit Krabi | Thailand, Krabi
-Hotels | Where to Stay in Ho Chi Minh City: Best Districts | Vietnam, Ho Chi Minh City
-Flights | Perth to Rhodes Flights: Best Routes and Stopovers | Greece, Rhodes Town
-Destinations | Guangzhou or Shenzhen: The Pearl River Delta Compared | China, Guangzhou, Shenzhen
-Destinations | Best Time to Visit Brisbane: Month by Month Guide | Australia, Brisbane
-Travel Tips | Gero Onsen and the Kiso Valley: Nagoya's Onsen Options | Japan, Nagoya
-Car Rentals | Litchfield National Park Day Trip From Darwin | Australia, Darwin
-Flights | Perth to Interlaken: Flights, Airports and Rail Options | Switzerland, Interlaken
-Travel Tips | Gothenburg Airport to the City Centre: Transport Guide | Sweden, Gothenburg
-Travel Tips | How Many Days Do You Need in Singapore? | Singapore
-Travel Tips | Heraklion or Chania: Which Crete City Is Better? | Greece, Heraklion, Chania
-Destinations | Nagasaki Day Trip From Fukuoka by Shinkansen | Japan, Fukuoka
-Destinations | Leshan Giant Buddha Day Trip From Chengdu | China, Chengdu
-Travel Tips | K-ETA and Korea Entry Requirements: Where to Check | South Korea
-Hotels | Where to Stay in Niseko and Furano for a Ski Trip | Japan, Sapporo
-Travel Tips | Best Time to Visit Kiruna for Snow and Northern Lights | Sweden, Kiruna
-Flights | Perth to Chennai Flights: Airlines and Connections | India, Chennai
-Flights | Perth to Hamburg Flights: Airlines and Connections | Germany, Hamburg
-Travel Tips | Athens Airport to the City Centre: Complete Guide | Greece, Athens
-Travel Tips | Hiroshima to Kyoto and Osaka by Shinkansen: Times and Passes | Japan, Hiroshima, Kyoto, Osaka
-Destinations | Best Time to Visit Barcelona: Sea Temperature, Crowds and Festes | Spain, Barcelona
-Travel Tips | Best Time to Visit Japan: Season by Season | Japan
+# done 2026-09-11 (draft) · Hotels | Where to Stay in Ho Chi Minh City: Best Districts | Vietnam, Ho Chi Minh City
+# done 2026-09-11 (draft) · Flights | Perth to Rhodes Flights: Best Routes and Stopovers | Greece, Rhodes Town
+# done 2026-09-12 (draft) · Destinations | Guangzhou or Shenzhen: The Pearl River Delta Compared | China, Guangzhou, Shenzhen
+# done 2026-09-12 (draft) · Destinations | Best Time to Visit Brisbane: Month by Month Guide | Australia, Brisbane
+# done 2026-09-13 (draft) · Travel Tips | Gero Onsen and the Kiso Valley: Nagoya's Onsen Options | Japan, Nagoya
+# done 2026-09-13 (draft) · Car Rentals | Litchfield National Park Day Trip From Darwin | Australia, Darwin
+# done 2026-09-14 (draft) · Flights | Perth to Interlaken: Flights, Airports and Rail Options | Switzerland, Interlaken
+# done 2026-09-14 (draft) · Travel Tips | Gothenburg Airport to the City Centre: Transport Guide | Sweden, Gothenburg
+# done 2026-09-15 (draft) · Travel Tips | How Many Days Do You Need in Singapore? | Singapore
+# done 2026-09-15 (draft) · Travel Tips | Heraklion or Chania: Which Crete City Is Better? | Greece, Heraklion, Chania
+# done 2026-09-16 (draft) · Destinations | Nagasaki Day Trip From Fukuoka by Shinkansen | Japan, Fukuoka
+# done 2026-09-16 (draft) · Destinations | Leshan Giant Buddha Day Trip From Chengdu | China, Chengdu
+# done 2026-09-17 (draft) · Travel Tips | K-ETA and Korea Entry Requirements: Where to Check | South Korea
+# done 2026-09-17 (draft) · Hotels | Where to Stay in Niseko and Furano for a Ski Trip | Japan, Sapporo
+# done 2026-09-21 (draft) · Travel Tips | Best Time to Visit Kiruna for Snow and Northern Lights | Sweden, Kiruna
+# done 2026-09-21 (draft) · Flights | Perth to Chennai Flights: Airlines and Connections | India, Chennai
+# done 2026-09-22 (draft) · Flights | Perth to Hamburg Flights: Airlines and Connections | Germany, Hamburg
+# done 2026-09-22 (draft) · Travel Tips | Athens Airport to the City Centre: Complete Guide | Greece, Athens
+# done 2026-09-23 (draft) · Travel Tips | Hiroshima to Kyoto and Osaka by Shinkansen: Times and Passes | Japan, Hiroshima, Kyoto, Osaka
+# done 2026-09-23 (draft) · Destinations | Best Time to Visit Barcelona: Sea Temperature, Crowds and Festes | Spain, Barcelona
+# done 2026-09-24 (draft) · Travel Tips | Best Time to Visit Japan: Season by Season | Japan
 Travel Tips | How Many Days Do You Need in Munich? | Germany, Munich
 Flights | Perth to Luang Prabang Flights: Best Stopovers | Laos, Luang Prabang
 Travel Tips | How Many Days Do You Need in Mumbai? | India, Mumbai
