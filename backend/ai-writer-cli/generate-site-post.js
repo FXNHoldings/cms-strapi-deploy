@@ -54,17 +54,31 @@ const SITE_CONFIG = {
     categoryEndpoint: '/api/bls-categories',
     adminUid: 'api::bls-post.bls-post',
     publicMediaUrl: 'https://bestlooking.skin',
-    defaultPostType: 'product-review',
+    defaultPostType: 'informative',
+    // The topic hubs posts are filed under (each has a parent group). The five
+    // old format categories (product-comparisons, ...) were retired on
+    // 15 Sep 2026 and the three *-hubs rows are group parents, not topics.
     defaultCategories: [
-      'skincare-reviews',
-      'product-comparisons',
-      'product-roundups',
-      'how-to-guides',
-      'top-rated',
+      'sunscreen', 'face-masks', 'exfoliants', 'eye-cream', 'cleansers', 'moisturizers', 'serums',
+      'sensitive-skin', 'hyperpigmentation', 'anti-aging', 'acne',
+      'korean-skincare', 'dupes', 'ingredients', 'routines',
+    ],
+    // Only categories under a group parent are offered in the prompt.
+    categoryParentRequired: true,
+    postTypeChoices: [
+      ['informative', 'Informative article'],
+      ['how-to-guide', 'How-to guide'],
+      ['product-review', 'Product review'],
+      ['product-comparison', 'Product comparison'],
+      ['product-roundup', 'Product roundup'],
+      ['top-rated', 'Top-rated list'],
+      ['pillar', 'Pillar / complete guide'],
     ],
     editorialBrief:
       'Write careful skincare content for BestLooking.Skin. Focus on routines, ingredients, comparisons, product reviews, skin types, and practical guidance. Do not make medical claims or promise results.',
     topicNiche: 'skincare, beauty products, routines, ingredients, product reviews',
+    // bls-post has a showFrom release date; see --publishedAt.
+    supportsShowFrom: true,
   },
   'nxtsmart.homes': {
     label: 'NXTSmart.Homes',
@@ -86,6 +100,55 @@ const SITE_CONFIG = {
     editorialBrief:
       'Write useful smart home content for NXTSmart.Homes. Focus on setup, compatibility, security, automation, device comparisons, reliability, and homeowner-friendly explanations.',
     topicNiche: 'smart home devices, home automation, security, energy, entertainment, integrations',
+  },
+  'nxtsmarthome.com.au': {
+    label: 'NXT Smart Home (nxtsmarthome.com.au)',
+    // Markdown: nxtsmarthome-post.content is rendered by the site's markdown
+    // pipeline (lib/content.ts), which also expands ::product:<slug>:: markers.
+    postEndpoint: '/api/nxtsmarthome-posts',
+    categoryEndpoint: '/api/nxtsmarthome-categories',
+    adminUid: 'api::nxtsmarthome-post.nxtsmarthome-post',
+    publicMediaUrl: 'https://nxtsmarthome.com.au',
+    defaultPostType: 'informative',
+    // Category slugs in Strapi are the site's category keys (lib/site.ts).
+    defaultCategories: [
+      'security',
+      'lighting',
+      'energy',
+      'entertainment',
+      'climate',
+      'hubs-and-platforms',
+      'robot-vacuums',
+      'setup-guides',
+      'buying-guides',
+    ],
+    // Names shown in the prompt: the site's labels (lib/site.ts), which are
+    // fuller than the CMS category names.
+    categoryLabels: {
+      security: 'Security & Cameras',
+      lighting: 'Lighting',
+      energy: 'Energy & Solar',
+      entertainment: 'Entertainment & Audio',
+      climate: 'Climate & Comfort',
+      'hubs-and-platforms': 'Hubs & Platforms',
+      'robot-vacuums': 'Robot Vacuums',
+      'setup-guides': 'Setup Guides',
+      'buying-guides': 'Buying Guides',
+    },
+    postTypeChoices: [
+      ['informative', 'Explainer / informative'],
+      ['how-to-guide', 'How-to guide'],
+      ['buying-guide', 'Buying guide'],
+      ['product-comparison', 'Comparison'],
+      ['product-roundup', 'Roundup'],
+      ['product-review', 'Review'],
+      ['pillar', 'Pillar / complete guide'],
+    ],
+    // nxtsmarthome-post has a showFrom release date; see --publishedAt.
+    supportsShowFrom: true,
+    editorialBrief:
+      'Write practical smart home content for Australian homes for NXT Smart Home. Australian English (optimise, colour), AUD, Australian retailers, 240V power, AS/NZS rules, renters and strata where relevant. Never invent prices, specs, test results or ratings, and never imply hands-on testing that did not happen. Do not state electrical, privacy or tenancy law as settled fact; recommend a licensed electrician for fixed wiring.',
+    topicNiche: 'smart home devices for Australian homes: security cameras, lighting, energy and solar, climate, entertainment, hubs and platforms, robot vacuums, setup and buying guides',
   },
   'flightfares.one': {
     label: 'Flightfares.one',
@@ -161,6 +224,18 @@ const argv = yargs(hideBin(process.argv))
   .option('amazon-tag', { type: 'string', describe: 'amazonAffiliateTag value for the post' })
   .option('language', { type: 'string', default: 'English' })
   .option('publish', { type: 'boolean', default: false, describe: 'Publish immediately; default is draft' })
+  .option('publishedAt', {
+    alias: 'published-at',
+    type: 'string',
+    describe:
+      'Release date/time for the article (sites with showFrom: nxtsmarthome.com.au, bestlooking.skin). '
+      + 'The post is saved Published with showFrom = this time and stays hidden on the site until then. '
+      + 'ISO format, e.g. 2026-10-01T09:00; no timezone means Australia/Perth (+08:00). Implies --publish.',
+  })
+  .option('publish-every', {
+    type: 'number',
+    describe: 'With --publishedAt and several articles: hours between each release (e.g. 24 = one a day).',
+  })
   .option('skip-rank-math-test', {
     type: 'boolean',
     default: false,
@@ -495,6 +570,36 @@ async function promptForMissingOptions() {
     }
   }
 
+  if (site.postTypeChoices && !argv['post-type'] && process.stdin.isTTY && process.stdout.isTTY) {
+    argv['post-type'] = await select({
+      message: 'What kind of article?',
+      choices: site.postTypeChoices.map(([value, name]) => ({ name: `${name} (${value})`, value })),
+      default: site.defaultPostType,
+    });
+  }
+
+  // Draft, publish now, or schedule (sites whose post type has showFrom).
+  if (!argv.publish && !argv.publishedAt && !argv['dry-run'] && process.stdin.isTTY && process.stdout.isTTY) {
+    const choices = [
+      { name: 'Save as draft (review in Strapi, publish later)', value: 'draft' },
+      { name: 'Publish now', value: 'now' },
+    ];
+    if (site.supportsShowFrom) choices.push({ name: 'Schedule: publish at a date/time', value: 'schedule' });
+    const mode = await select({ message: 'Publishing:', choices });
+    if (mode === 'now') argv.publish = true;
+    if (mode === 'schedule') {
+      argv.publishedAt = await input({
+        message: 'Release date/time (Perth time), e.g. 2026-10-01 09:00:',
+        validate: (value) => (/^\d{4}-\d{2}-\d{2}/.test(String(value).trim()) ? true : 'Use YYYY-MM-DD or YYYY-MM-DD HH:MM'),
+      });
+      if ((argv.count || 0) > 1 || argv.topics) {
+        const every = await input({ message: 'Hours between releases (0 = all at once):', default: '24' });
+        if (Number(every) > 0) argv['publish-every'] = Number(every);
+      }
+    }
+  }
+  resolveRelease();
+
   if (argv.images === undefined) {
     if (process.stdin.isTTY && process.stdout.isTTY) {
       argv.images = await select({
@@ -528,14 +633,54 @@ async function promptForMissingOptions() {
   }
 }
 
+/**
+ * The site's categories as they are in Strapi, for the prompt: [{ slug, name, group }].
+ * Falls back to the built-in defaultCategories if the CMS cannot be reached.
+ */
+async function loadSiteCategories() {
+  try {
+    const params = new URLSearchParams({
+      'pagination[pageSize]': '100',
+      'fields[0]': 'slug',
+      'fields[1]': 'name',
+      'sort[0]': 'name:asc',
+    });
+    if (site.categoryParentRequired) {
+      params.set('populate[parent][fields][0]', 'slug');
+      params.set('populate[parent][fields][1]', 'name');
+    }
+    const json = await strapi(`${site.categoryEndpoint}?${params}`);
+    const rows = (json?.data || [])
+      .filter((c) => c?.slug)
+      .filter((c) => !site.categoryParentRequired || c.parent?.slug)
+      .map((c) => ({
+        slug: c.slug,
+        name: site.categoryLabels?.[c.slug] || c.name || titleCase(c.slug),
+        group: c.parent?.name || '',
+      }));
+    if (rows.length) {
+      return rows.sort((a, b) => a.group.localeCompare(b.group) || a.name.localeCompare(b.name));
+    }
+  } catch (error) {
+    console.warn(`Could not load ${site.label} categories from Strapi (${error.message}); using the built-in list.`);
+  }
+  return site.defaultCategories.map((slug) => ({
+    slug,
+    name: site.categoryLabels?.[slug] || titleCase(slug),
+    group: '',
+  }));
+}
+
 async function promptForCategory() {
   const customValue = '__custom__';
+  const categories = await loadSiteCategories();
   const picked = await select({
     message: `Which ${site.label} category should this use?`,
+    pageSize: Math.min(categories.length + 1, 20),
     choices: [
-      ...site.defaultCategories.map((category) => ({
-        name: `${titleCase(category)} (${category})`,
-        value: category,
+      ...categories.map((category) => ({
+        name: `${category.group ? `${category.group} › ` : ''}${category.name} (${category.slug})`,
+        value: category.slug,
       })),
       { name: 'Custom category...', value: customValue },
     ],
@@ -1039,6 +1184,55 @@ function insertFlightfaresInlineImages(content, post, galleryAssets = []) {
     .reduce((output, item) => `${output.slice(0, item.position)}${item.figure}${output.slice(item.position)}`, html);
 }
 
+/*
+ * Scheduled release (--publishedAt).
+ *
+ * Strapi's own publishedAt is a system field and timed publishing is a paid
+ * Strapi feature, so the sites that support it read a plain `showFrom`
+ * datetime instead: the post is saved Published, and the site hides it until
+ * showFrom has passed (nxtsmarthome.com.au and bestlooking.skin filter on it in
+ * their Strapi queries). publishDate is set to the same time so the article
+ * shows its release date, not the day it was generated.
+ */
+let releaseBase = null;
+let releaseIndex = 0;
+
+function parseReleaseDate(raw) {
+  const value = String(raw).trim();
+  // No timezone given: the editors are in Perth, so read it as AWST (+08:00).
+  const hasZone = /(Z|[+-]\d{2}:?\d{2})$/i.test(value);
+  const normalised = value.includes('T') || !/\d{2}:\d{2}/.test(value) ? value : value.replace(' ', 'T');
+  const withTime = /T\d{2}:\d{2}/.test(normalised) ? normalised : `${normalised}T00:00`;
+  const date = new Date(hasZone ? withTime : `${withTime}+08:00`);
+  if (Number.isNaN(date.getTime())) fatal(`--publishedAt: cannot read "${raw}" as a date (use e.g. 2026-10-01T09:00)`);
+  return date;
+}
+
+function resolveRelease() {
+  if (!argv.publishedAt) {
+    if (argv['publish-every']) fatal('--publish-every needs --publishedAt');
+    return;
+  }
+  if (!site.supportsShowFrom) {
+    fatal(`--publishedAt is not supported for ${argv.site}: its post type has no showFrom field. Supported: ${Object.keys(SITE_CONFIG).filter((k) => SITE_CONFIG[k].supportsShowFrom).join(', ')}`);
+  }
+  if (argv['publish-every'] !== undefined && !(argv['publish-every'] > 0)) fatal('--publish-every must be a positive number of hours');
+  releaseBase = parseReleaseDate(argv.publishedAt);
+  // A scheduled post must be Published in Strapi; showFrom does the hiding.
+  argv.publish = true;
+  const when = releaseBase.toLocaleString('en-AU', { timeZone: 'Australia/Perth', dateStyle: 'medium', timeStyle: 'short' });
+  console.log(`Release: ${releaseBase.toISOString()} (${when} Perth)${argv['publish-every'] ? `, then every ${argv['publish-every']}h` : ''}${releaseBase < new Date() ? ' - in the past, so visible immediately' : ''}`);
+}
+
+/** Release time for the next saved article, or null when not scheduling. */
+function nextReleaseAt() {
+  if (!releaseBase) return null;
+  const hours = argv['publish-every'] || 0;
+  const at = new Date(releaseBase.getTime() + releaseIndex * hours * 3_600_000);
+  releaseIndex += 1;
+  return at.toISOString();
+}
+
 async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl } = {}) {
   const data = {
     title: post.title,
@@ -1067,6 +1261,11 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
   if (sourceUrl) data.sourceUrl = sourceUrl;
   if (argv['amazon-tag']) data.amazonAffiliateTag = argv['amazon-tag'];
   if (argv.publish) data.publishedAt = new Date().toISOString();
+  const releaseAt = nextReleaseAt();
+  if (releaseAt) {
+    data.showFrom = releaseAt;
+    data.publishDate = releaseAt;
+  }
 
   /*
    * Strapi 5 publishes on create unless told otherwise.
@@ -1913,9 +2112,10 @@ async function run() {
     });
     const id = saved?.data?.documentId || saved?.data?.id;
     const adminUrl = `${STRAPI_URL}/admin/content-manager/collection-types/${site.adminUid}/${id}`;
-    console.log(`  saved ${argv.publish ? 'published' : 'draft'}: ${post.slug}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}`);
+    const showFrom = saved?.data?.showFrom;
+    console.log(`  saved ${argv.publish ? 'published' : 'draft'}: ${post.slug}${showFrom ? ` · shows from ${showFrom}` : ''}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}`);
     console.log(`  review: ${adminUrl}\n`);
-    results.push({ topic: job.topic, slug: post.slug, id, status: argv.publish ? 'published' : 'draft' });
+    results.push({ topic: job.topic, slug: post.slug, id, status: showFrom ? `scheduled ${showFrom}` : argv.publish ? 'published' : 'draft' });
   }
 
   console.log('Done.');

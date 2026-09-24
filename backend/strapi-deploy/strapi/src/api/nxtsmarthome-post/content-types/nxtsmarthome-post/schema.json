@@ -81,6 +81,10 @@
       "type": "datetime",
       "description": "Original publication date from the source article front matter"
     },
+    "showFrom": {
+      "type": "datetime",
+      "description": "Release date. A future showFrom queues the post: it is Published in Strapi but stays invisible on nxtsmarthome.com.au until that time, then appears by itself (within ~5 minutes). Leave empty to publish immediately."
+    },
     "dateModified": {
       "type": "datetime",
       "description": "Last genuine content modification, used for article metadata and schema"

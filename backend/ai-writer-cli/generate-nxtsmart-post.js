@@ -15,6 +15,9 @@
 //   node generate-nxtsmart-post.js --topics topics.txt --no-images
 //   node generate-nxtsmart-post.js --category how-to-guides --count 2 --publish
 //   node generate-nxtsmart-post.js --dry-run --category smart-home-automation --count 1
+//
+// For nxtsmarthome.com.au (the Australian site) use generate-nxtsmarthome-post.js;
+// for bestlooking.skin use generate-bestlooking-post.js.
 
 const args = process.argv.slice(2);
 const hasSiteFlag = args.some((arg) => arg === "--site" || arg === "-s" || arg.startsWith("--site="));
