@@ -153,6 +153,9 @@ const SITE_CONFIG = {
       min: 2,
       max: 4,
       candidates: 8,
+      // "Where to buy" section: live Australian sellers from DataForSEO Google
+      // Shopping (location 2036 = Australia).
+      affiliateOffers: { location: 2036, language: 'en', perProduct: 3 },
     },
     // nxtsmarthome-post has a showFrom release date; see --publishedAt.
     supportsShowFrom: true,
@@ -261,6 +264,11 @@ const argv = yargs(hideBin(process.argv))
     default: 'schnell',
     choices: ['schnell', 'dev', 'pro'],
     describe: 'Fal.ai FLUX variant',
+  })
+  .option('affiliate-links', {
+    type: 'boolean',
+    default: true,
+    describe: 'nxtsmarthome.com.au: append a "Where to buy" list of live Australian retailer links for the featured products (DataForSEO, ~$0.001 per product). --no-affiliate-links to skip.',
   })
   .option('dry-run', { type: 'boolean', default: false, describe: 'Generate JSON only; do not write to Strapi' })
   .help()
@@ -829,7 +837,8 @@ function applySiteProducts(post, products) {
   const seen = new Set();
   let content = post.content.replace(/::product:([a-z0-9-]+)::/gi, (m, slug) => {
     const key = slug.toLowerCase();
-    if (!allowed.has(key) || seen.has(key)) return '';
+    // Unknown, repeated, or beyond the per-article maximum.
+    if (!allowed.has(key) || seen.has(key) || seen.size >= site.productCatalog.max) return '';
     seen.add(key);
     return `\n\n::product:${key}::\n\n`;
   });
@@ -850,6 +859,150 @@ function applySiteProducts(post, products) {
   post.content = content.replace(/\n{3,}/g, '\n\n').trim();
   post.productSlugs = [...seen];
   return seen.size;
+}
+
+
+/* ---------------------------------------------------------------------------
+ * "Where to buy": live affiliate retailer links (DataForSEO)
+ *
+ * For each catalogue product the article features, one DataForSEO Google
+ * Shopping "sellers" task (keyed on the product's googleProductId, so offers
+ * are for that exact product) returns current Australian retailers. The best
+ * few become rel="sponsored" links in a section appended to the post. No
+ * prices are printed (the site deliberately says "Check price at X" because
+ * prices move). Affiliate tagging is done on the site (Geniuslink for Amazon,
+ * Sovrn for the rest). Cost: ~$0.001 per product on the standard queue.
+ *
+ * DataForSEO was chosen over ZenRows: structured seller data for ~$0.001 a
+ * product, where scraping Google Shopping through ZenRows needs premium
+ * JS-rendered requests (~25 credits each) and brittle parsing.
+ * ------------------------------------------------------------------------- */
+const DFS_SELLERS = 'https://api.dataforseo.com/v3/merchant/google/sellers';
+
+function dataforseoAuth() {
+  let login = process.env.DATAFORSEO_LOGIN || '';
+  let password = process.env.DATAFORSEO_PASSWORD || '';
+  if (!password) {
+    // Shared credentials live with the sourcing scripts.
+    const file = process.env.DATAFORSEO_ENV_FILE || path.join(path.dirname(new URL(import.meta.url).pathname), '..', 'nxt-sourcing', '.env.local');
+    try {
+      for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
+        const m = line.match(/^\s*(DATAFORSEO_LOGIN|DATAFORSEO_PASSWORD)\s*=\s*(.*)\s*$/);
+        if (m) {
+          const v = m[2].replace(/^["']|["']$/g, '').trim();
+          if (m[1] === 'DATAFORSEO_LOGIN') login = v; else password = v;
+        }
+      }
+    } catch { /* no file */ }
+  }
+  if (!password) return null;
+  // The password may already be the base64 "login:password" token.
+  if (/^[A-Za-z0-9+/=]+$/.test(password) && password.length > 16) {
+    try {
+      const [l, ...rest] = Buffer.from(password, 'base64').toString('utf8').split(':');
+      if (rest.length && l.includes('@')) return `Basic ${password}`;
+    } catch { /* not base64 */ }
+  }
+  return `Basic ${Buffer.from(`${login}:${password}`).toString('base64')}`;
+}
+
+/** Post sellers tasks for the products, poll until done (max ~6 min). Map(slug -> items). */
+async function fetchSellers(products, { location, language }) {
+  const auth = dataforseoAuth();
+  if (!auth) throw new Error('DataForSEO credentials not found');
+  const res = await fetch(`${DFS_SELLERS}/task_post`, {
+    method: 'POST',
+    headers: { Authorization: auth, 'Content-Type': 'application/json' },
+    // priority 2 = high-priority queue (~$0.002/product, usually under a minute);
+    // on the standard queue a run sat for the full wait with nothing returned.
+    body: JSON.stringify(products.map((p) => ({ product_id: String(p.googleProductId), location_code: location, language_code: language, priority: 2, tag: p.slug }))),
+    signal: AbortSignal.timeout(60_000),
+  });
+  if (!res.ok) throw new Error(`sellers task_post HTTP ${res.status}`);
+  const tasks = (await res.json()).tasks ?? [];
+  const out = new Map();
+  const pending = tasks.filter((t) => t.status_code === 20100 && t.id).map((t) => ({ id: t.id, tag: t.data?.tag }));
+  const started = Date.now();
+  const deadline = started + 3 * 60 * 1000;
+  while (pending.length && Date.now() < deadline) {
+    await new Promise((r) => setTimeout(r, 10_000));
+    process.stdout.write(`  affiliate: waiting for DataForSEO (${pending.length} left, ${Math.round((Date.now() - started) / 1000)}s)   \r`);
+    for (let i = pending.length - 1; i >= 0; i -= 1) {
+      const { id, tag } = pending[i];
+      try {
+        const r = await fetch(`${DFS_SELLERS}/task_get/advanced/${id}`, { headers: { Authorization: auth }, signal: AbortSignal.timeout(60_000) });
+        const t = r.ok ? (await r.json()).tasks?.[0] : null;
+        if (t?.status_code === 20000) { out.set(tag, t.result?.[0]?.items ?? []); pending.splice(i, 1); }
+        // 40601 Task Handed / 40602 Task in Queue: still running, poll again.
+        else if (t && t.status_code !== 40601 && t.status_code !== 40602) { pending.splice(i, 1); }
+      } catch { /* retry next round */ }
+    }
+  }
+  process.stdout.write('\n');
+  if (pending.length) console.log(`  affiliate: ${pending.length} lookup(s) not ready after 3 min - skipped`);
+  return out;
+}
+
+// Retailers readers in Australia recognise, in the order we prefer to list them.
+const AU_RETAILERS = [
+  ['amazon.com.au', 'Amazon AU'], ['jbhifi.com.au', 'JB Hi-Fi'], ['thegoodguys.com.au', 'The Good Guys'],
+  ['harveynorman.com.au', 'Harvey Norman'], ['officeworks.com.au', 'Officeworks'], ['bunnings.com.au', 'Bunnings'],
+  ['bigw.com.au', 'Big W'], ['kogan.com', 'Kogan'], ['ebay.com.au', 'eBay AU'], ['bing-lee.com.au', 'Bing Lee'],
+  ['binglee.com.au', 'Bing Lee'], ['appliancesonline.com.au', 'Appliances Online'], ['myer.com.au', 'Myer'],
+  ['davidjones.com', 'David Jones'], ['mwave.com.au', 'Mwave'], ['scorptec.com.au', 'Scorptec'],
+];
+const CONDITION_BAD = /refurb|renewed|used|pre-owned|second-hand|open box/i;
+
+function auRetailerLinks(items, perProduct) {
+  const links = [];
+  const seen = new Set();
+  for (const it of items) {
+    const url = it?.url;
+    if (!url || !/^https:\/\//.test(url)) continue;
+    let host;
+    try { host = new URL(url).hostname.replace(/^www\./, ''); } catch { continue; }
+    if (CONDITION_BAD.test(String(it.product_condition ?? '')) || CONDITION_BAD.test(String(it.title ?? ''))) continue;
+    const known = AU_RETAILERS.findIndex(([d]) => host === d || host.endsWith(`.${d}`));
+    const isAu = known >= 0 || host.endsWith('.au');
+    if (!isAu) continue; // Australian audience: no overseas storefronts.
+    const name = known >= 0 ? AU_RETAILERS[known][1] : String(it.title || host).split(' - ')[0].trim();
+    if (seen.has(name)) continue;
+    seen.add(name);
+    links.push({ name, url, rank: known >= 0 ? known : 100 });
+  }
+  return links.sort((a, b) => a.rank - b.rank).slice(0, perProduct);
+}
+
+
+/** Append a "Where to buy" section of live retailer links for the featured products. */
+async function appendAffiliateLinks(post, products) {
+  const cfg = site.productCatalog?.affiliateOffers;
+  if (!cfg || argv['affiliate-links'] === false || typeof post.content !== 'string') return 0;
+  const featured = (post.productSlugs || []).map((slug) => products.find((p) => p.slug === slug)).filter((p) => p?.googleProductId);
+  if (!featured.length) return 0;
+  console.log(`  affiliate: looking up Australian retailers for ${featured.length} products (DataForSEO, up to 3 min)`);
+  let sellers;
+  try {
+    sellers = await fetchSellers(featured, cfg);
+  } catch (error) {
+    console.log(`  affiliate: skipped (${error.message})`);
+    return 0;
+  }
+  const rows = featured
+    .map((p) => ({ p, links: auRetailerLinks(sellers.get(p.slug) || [], cfg.perProduct) }))
+    .filter((r) => r.links.length);
+  if (!rows.length) {
+    console.log('  affiliate: no Australian retailers returned');
+    return 0;
+  }
+  const rel = 'sponsored nofollow noopener noreferrer';
+  const items = rows.map(({ p, links }) => `<li><strong>${escapeHtml(p.brand ? `${p.brand} ${p.name}` : p.name)}</strong>: ${
+    links.map((l) => `<a href="${escapeHtml(l.url)}" target="_blank" rel="${rel}">Check price at ${escapeHtml(l.name)}</a>`).join(' · ')
+  }</li>`).join('\n');
+  post.content = `${post.content.trim()}\n\n<h2 id="where-to-buy">Where to buy</h2>\n\n<p>Retailers stocking the products in this guide. Prices and stock change often, so check the retailer before you buy. We may earn a commission from these links at no extra cost to you.</p>\n\n<ul class="where-to-buy">\n${items}\n</ul>\n`;
+  const count = rows.reduce((n, r) => n + r.links.length, 0);
+  console.log(`  affiliate: ${count} retailer links for ${rows.length} products`);
+  return count;
 }
 
 async function generatePost(topic, category, { dealProduct = null, catalogProducts = null } = {}) {
@@ -1017,6 +1170,7 @@ Image prompt requirements:
     // Rule 8 unmet: never let it go live on its own; it is saved as a draft.
     post.productShortfall = placed < min;
     if (post.productShortfall) console.log(`  WARNING  : fewer than ${min} product boxes - saving as a DRAFT for review`);
+    await appendAffiliateLinks(post, siteProducts);
   }
   return post;
 }
