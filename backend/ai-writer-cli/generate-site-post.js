@@ -1017,21 +1017,34 @@ async function appendAffiliateLinks(post, products) {
  */
 function extractFaqToField(post) {
   if (!site.faqToField || typeof post.content !== 'string') return 0;
-  const m = post.content.match(/^##\s+(?:Frequently Asked Questions|FAQs?)\s*$/im);
+  // "## Frequently Asked Questions" / "## FAQs" / "## FAQ" (## or ###).
+  const m = post.content.match(/^#{2,3}\s+(?:Frequently Asked Questions|FAQs?)\b.*$/im);
   if (!m) return 0;
   const start = m.index;
   const after = post.content.slice(start + m[0].length);
   const next = after.search(/^##\s|^<h2[\s>]/im);
   const section = next >= 0 ? after.slice(0, next) : after;
-  const faq = section.split(/^###\s+/m).slice(1).map((part, order) => {
-    const [question, ...rest] = part.split('\n');
-    const answer = rest.join('\n').replace(/\s+/g, ' ').trim();
-    return { question: question.replace(/\*\*/g, '').trim().slice(0, 300), answer, order };
-  }).filter((f) => f.question && f.answer);
-  if (!faq.length) return 0;
-  post.faq = faq;
+  // Questions come either as "### Question" headings or as "**Question**" lines;
+  // everything up to the next question is the answer.
+  const faq = [];
+  let current = null;
+  for (const line of section.split('\n')) {
+    const q = line.match(/^###\s+(.+?)\s*$/) || line.match(/^\s*\*\*(.+?)\*\*\s*$/);
+    if (q) {
+      current = { question: q[1].replace(/\*\*/g, '').trim().slice(0, 300), answer: '' };
+      faq.push(current);
+    } else if (current) {
+      current.answer += ` ${line.trim()}`;
+    }
+  }
+  const items = faq
+    .map((f) => ({ question: f.question, answer: f.answer.replace(/\s+/g, ' ').trim() }))
+    .filter((f) => f.question && f.answer)
+    .map((f, order) => ({ ...f, order }));
+  if (!items.length) return 0;
+  post.faq = items;
   post.content = `${post.content.slice(0, start).trimEnd()}\n\n${next >= 0 ? after.slice(next) : ''}`.trim();
-  return faq.length;
+  return items.length;
 }
 
 async function generatePost(topic, category, { dealProduct = null, catalogProducts = null } = {}) {
