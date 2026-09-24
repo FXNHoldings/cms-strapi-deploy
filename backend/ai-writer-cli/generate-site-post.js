@@ -2414,7 +2414,11 @@ async function run() {
           ({ coverId, galleryIds, galleryAssets } = await generateAndUploadImages(post));
         }
       } catch (error) {
-        console.log(`  image step failed (${error.message.slice(0, 140)}) - saving post without images`);
+        // fal.ai errors say only "Forbidden"; the reason (e.g. "User is locked.
+        // Reason: Exhausted balance") is in error.body.detail.
+        const detail = error?.body?.detail ? `: ${typeof error.body.detail === 'string' ? error.body.detail : JSON.stringify(error.body.detail)}` : '';
+        console.log(`  image step failed (${`${error.message}${detail}`.slice(0, 240)}) - saving post without images`);
+        console.log('  add a cover later with: node add-cover.mjs <slug>');
       }
     }
 
