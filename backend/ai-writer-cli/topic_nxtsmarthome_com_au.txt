@@ -1,0 +1,85 @@
+# nxtsmarthome.com.au — planned topics, 5 per category (45 total).
+#
+# Format (one per line; lines starting with # are ignored):
+#   category | title | slug | postType
+#
+#   category  Strapi nxtsmarthome-category slug: security, lighting, energy,
+#             entertainment, climate, hubs-and-platforms, robot-vacuums,
+#             setup-guides, buying-guides
+#   postType  informative | how-to-guide | buying-guide | product-comparison |
+#             product-roundup | product-review | pillar
+#
+# Run:
+#   node generate-nxtsmarthome-post.js --topics topic_nxtsmarthome_com_au.txt
+#   node generate-nxtsmarthome-post.js --topics topic_nxtsmarthome_com_au.txt --count 5
+#   node generate-nxtsmarthome-post.js --topics topic_nxtsmarthome_com_au.txt \
+#     --publishedAt "2026-10-01 09:00" --publish-every 24        # one a day
+#
+# Titles already in Strapi are skipped, so the file can be re-run safely.
+# Written 24 Sep 2026 against the 48 published posts, avoiding repeats.
+# Before publishing, each article still needs two or more ::product: boxes
+# (node scripts/link-products.mjs <slug> in projects/nxtsmarthome.com.au) and
+# a [VERIFY] check on any legal, electrical or safety claim.
+
+# Security & Cameras
+security | Wired vs Battery Security Cameras for Australian Homes | wired-vs-battery-security-cameras-australia | product-comparison
+security | Smart Locks for Australian Front Doors: What Fits and What Doesn't | smart-locks-australian-front-doors | buying-guide
+security | How to Stop Security Camera Alerts Going Off Every Time a Possum Walks Past | reduce-security-camera-false-alerts | how-to-guide
+security | Security Cameras for Apartments and Strata: What You Can Install | security-cameras-apartments-strata-australia | informative
+security | Solar-Powered Security Cameras: Do They Keep Up Through an Australian Winter? | solar-powered-security-cameras-australian-winter | informative
+
+# Lighting
+lighting | Smart Outdoor and Garden Lighting for Australian Backyards | smart-outdoor-garden-lighting-australia | buying-guide
+lighting | Renter-Friendly LED Strip Lighting Under Kitchen Cabinets | led-strip-lighting-under-kitchen-cabinets | how-to-guide
+lighting | Circadian Lighting at Home: Does Tunable White Actually Help You Sleep? | circadian-tunable-white-lighting-home | informative
+lighting | Smart Motion-Sensor Lighting for Hallways, Stairs and Night-Time Trips | smart-motion-sensor-lighting-hallways | how-to-guide
+lighting | Philips Hue vs LIFX vs Budget Smart Bulbs: Compared for Australian Homes | smart-bulbs-compared-australia | product-comparison
+
+# Energy & Solar
+energy | Smart Energy Monitors for Australian Homes: What They Measure and How They Install | smart-energy-monitors-australia | buying-guide
+energy | How to Shift Appliances to Off-Peak Hours With Smart Plugs and Timers | shift-appliances-off-peak-smart-plugs | how-to-guide
+energy | Home Batteries and Smart Home Integration: What to Check Before You Buy | home-battery-smart-home-integration | buying-guide
+energy | Automating Your Pool Pump and Hot Water for Cheaper Electricity | automate-pool-pump-hot-water-electricity | how-to-guide
+energy | Smart Hot Water and Heat Pumps: Are They Worth It in Australia? | smart-hot-water-heat-pumps-australia | informative
+
+# Entertainment & Audio
+entertainment | Setting Up a Home Theatre in an Australian Living Room Without Running New Cables | home-theatre-setup-without-new-cables | how-to-guide
+entertainment | Soundbars vs Bookshelf Speakers for Australian Apartments | soundbars-vs-bookshelf-speakers-apartments | product-comparison
+entertainment | How to Control Your TV, Foxtel and Soundbar With One Voice Assistant | control-tv-foxtel-soundbar-voice-assistant | how-to-guide
+entertainment | Smart Projectors for Small Australian Homes: What to Check Before You Buy | smart-projectors-small-homes-australia | buying-guide
+entertainment | Screen-Time and Parental Controls on Smart TVs and Streaming Boxes | smart-tv-parental-controls-screen-time | how-to-guide
+
+# Climate & Comfort
+climate | Smart Ceiling Fans vs Air Conditioning: Cutting Summer Cooling Costs | smart-ceiling-fans-vs-air-conditioning | product-comparison
+climate | Automating Blinds and Curtains to Keep the Heat Out in an Australian Summer | automate-blinds-curtains-summer-heat | how-to-guide
+climate | Smart Air Purifiers for Bushfire Smoke Season | smart-air-purifiers-bushfire-smoke | buying-guide
+climate | Room-by-Room Temperature Sensors: Finding the Hot and Cold Spots in Your Home | room-temperature-sensors-hot-cold-spots | how-to-guide
+climate | Smart Dehumidifiers for Damp Australian Homes and Mould Prevention | smart-dehumidifiers-damp-homes-mould | buying-guide
+
+# Hubs & Platforms
+hubs-and-platforms | Home Assistant for Beginners: Is It Worth the Setup Effort? | home-assistant-for-beginners | informative
+hubs-and-platforms | Moving Between Smart Home Platforms Without Starting Again | switch-smart-home-platforms | how-to-guide
+hubs-and-platforms | Do You Still Need a Smart Home Hub Now That Matter Is Here? | do-you-need-smart-home-hub-matter | informative
+hubs-and-platforms | SmartThings in Australia: What Works and What Doesn't | smartthings-australia-guide | informative
+hubs-and-platforms | Sharing Smart Home Control With Family, Guests and Housemates | share-smart-home-control-family-guests | how-to-guide
+
+# Robot Vacuums
+robot-vacuums | Robot Vacuums for Hard Floors vs Carpet in Australian Homes | robot-vacuums-hard-floors-vs-carpet | product-comparison
+robot-vacuums | Robot Mop and Vacuum Combos: Are They Worth It? | robot-mop-vacuum-combos-worth-it | informative
+robot-vacuums | Setting Up No-Go Zones and Room Maps on Your Robot Vacuum | robot-vacuum-no-go-zones-room-maps | how-to-guide
+robot-vacuums | Self-Emptying Robot Vacuum Docks: Bag Costs, Noise and Space | self-emptying-robot-vacuum-docks | informative
+robot-vacuums | Robot Vacuums for Multi-Storey Australian Homes | robot-vacuums-multi-storey-homes | buying-guide
+
+# Setup Guides
+setup-guides | How to Set Up Your First Smart Home Automation Routine | first-smart-home-automation-routine | how-to-guide
+setup-guides | Securing Your Smart Home Network With a Separate Wi-Fi for Smart Devices | secure-smart-home-network-iot-wifi | how-to-guide
+setup-guides | How to Re-Pair Smart Devices After Changing Your NBN Modem | re-pair-smart-devices-new-nbn-modem | how-to-guide
+setup-guides | Mesh Wi-Fi for Smart Homes: Setting It Up for Dozens of Devices | mesh-wifi-setup-smart-home-devices | how-to-guide
+setup-guides | Backing Up and Restoring Your Home Assistant Setup | backup-restore-home-assistant | how-to-guide
+
+# Buying Guides
+buying-guides | Smart Home Gifts for Australians That Are Actually Useful | smart-home-gift-ideas-australia | buying-guide
+buying-guides | Smart Home Gear for Small Apartments and Units | smart-home-gear-small-apartments | buying-guide
+buying-guides | Smart Home Devices for Pet Owners in Australia | smart-home-devices-pet-owners-australia | buying-guide
+buying-guides | Smart Home Subscriptions: What You Keep Paying for After the Box | smart-home-subscriptions-ongoing-costs | informative
+buying-guides | Warranties and Returns for Smart Home Gear Under Australian Consumer Law | smart-home-warranty-australian-consumer-law | informative

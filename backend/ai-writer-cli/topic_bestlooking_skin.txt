@@ -1,0 +1,129 @@
+# bestlooking.skin — planned topics, 5 per topic hub (75 total).
+#
+# Format (one per line; lines starting with # are ignored):
+#   category | title | slug | postType
+#
+#   category  Strapi bls-category slug of a topic hub:
+#             By Product:    sunscreen, face-masks, exfoliants, eye-cream,
+#                            cleansers, moisturizers, serums
+#             By Concern:    sensitive-skin, hyperpigmentation, anti-aging, acne
+#             Cross-cutting: korean-skincare, dupes, ingredients, routines
+#             (Not the retired format categories or the *-hubs group rows.)
+#   postType  informative | how-to-guide | product-review | product-comparison |
+#             product-roundup | top-rated | pillar
+#
+# Run:
+#   node generate-bestlooking-post.js --topics topic_bestlooking_skin.txt
+#   node generate-bestlooking-post.js --topics topic_bestlooking_skin.txt --count 5
+#   node generate-bestlooking-post.js --topics topic_bestlooking_skin.txt \
+#     --publishedAt "2026-10-01 08:00" --publish-every 24        # one a day
+#
+# Titles already in Strapi are skipped, so the file can be re-run safely.
+# Written 24 Sep 2026 against the 201 existing bls-posts, avoiding repeats.
+# No years in titles or slugs. Site rules apply: no medical claims or promised
+# results, brand claims attributed, no invented facts.
+
+# By Product › Sunscreen & SPF
+sunscreen | How Much Sunscreen Should You Actually Use on Your Face? | how-much-sunscreen-face | how-to-guide
+sunscreen | How to Reapply Sunscreen Over Makeup During the Day | reapply-sunscreen-over-makeup | how-to-guide
+sunscreen | Sunscreen for Dark Skin: Finding Formulas With No White Cast | sunscreen-for-dark-skin-no-white-cast | top-rated
+sunscreen | Does Sunscreen Expire? Shelf Life, Storage and When to Replace It | does-sunscreen-expire | informative
+sunscreen | Water-Resistant Sunscreen: What the Label Means and How Long It Lasts | water-resistant-sunscreen-explained | informative
+
+# By Product › Face Masks
+face-masks | How to Use a Face Mask Properly: Prep, Timing and Aftercare | how-to-use-face-mask | how-to-guide
+face-masks | Best Overnight Sleeping Masks for Dehydrated Skin | best-overnight-sleeping-masks | top-rated
+face-masks | Multi-Masking: Using Different Masks on Different Zones | multi-masking-guide | how-to-guide
+face-masks | Enzyme Masks vs Acid Peel Masks: Which Gentle Exfoliating Mask to Choose | enzyme-vs-acid-peel-masks | product-comparison
+face-masks | Are LED Face Masks Worth It? What They Can and Can't Do | are-led-face-masks-worth-it | informative
+
+# By Product › Exfoliants & Toners
+exfoliants | Glycolic Acid vs Lactic Acid: Which AHA Suits Your Skin? | glycolic-vs-lactic-acid | product-comparison
+exfoliants | How to Tell If You're Over-Exfoliating (and How to Recover) | signs-of-over-exfoliation | how-to-guide
+exfoliants | Best Exfoliating Toners for Beginners | best-exfoliating-toners-beginners | top-rated
+exfoliants | Can You Use Retinol and Exfoliating Acids Together? | retinol-and-exfoliating-acids-together | informative
+exfoliants | Hydrating Toners vs Exfoliating Toners: Which One Do You Need? | hydrating-vs-exfoliating-toners | product-comparison
+
+# By Product › Eye Cream
+eye-cream | How to Apply Eye Cream Without Tugging or Causing Milia | how-to-apply-eye-cream | how-to-guide
+eye-cream | Best Eye Creams for Sensitive Eyes | best-eye-creams-sensitive-eyes | top-rated
+eye-cream | Eye Cream vs Eye Serum vs Eye Gel: What's the Difference? | eye-cream-vs-serum-vs-gel | product-comparison
+eye-cream | Caffeine vs Peptide Eye Creams: Which Suits Your Concern? | caffeine-vs-peptide-eye-creams | product-comparison
+eye-cream | Why Eye Cream Can Cause Milia, and How to Avoid It | eye-cream-milia-causes | informative
+
+# By Product › Cleansers
+cleansers | Best Cleansers for Dry, Dehydrated Skin | best-cleansers-dry-skin | top-rated
+cleansers | Gel vs Cream vs Foaming Cleansers: How to Choose | gel-vs-cream-vs-foaming-cleansers | product-comparison
+cleansers | Do You Need a Morning Cleanser, or Is Water Enough? | morning-cleanser-or-water | informative
+cleansers | Cleansing Brushes and Devices: Helpful or Harsh? | cleansing-brushes-helpful-or-harsh | informative
+cleansers | How to Tell If Your Cleanser Is Too Harsh | signs-cleanser-too-harsh | how-to-guide
+
+# By Product › Moisturizers
+moisturizers | Humectants, Emollients and Occlusives: How Moisturizers Actually Work | humectants-emollients-occlusives | informative
+moisturizers | Best Moisturizers for Mature Skin | best-moisturizers-mature-skin | top-rated
+moisturizers | Face Oil vs Moisturizer: Do You Need Both? | face-oil-vs-moisturizer | product-comparison
+moisturizers | Moisturizer With SPF vs Separate Sunscreen: Which Protects Better? | moisturizer-spf-vs-separate-sunscreen | product-comparison
+moisturizers | How to Choose a Moisturizer for Oily Skin That Still Feels Light | moisturizer-for-oily-skin-guide | how-to-guide
+
+# By Product › Serums
+serums | Peptide Serums Explained: What They Do and Who They Suit | peptide-serums-explained | informative
+serums | Best Hydrating Serums Without Fragrance | best-fragrance-free-hydrating-serums | top-rated
+serums | Azelaic Acid Serum: Benefits and How to Add It to Your Routine | azelaic-acid-serum-guide | how-to-guide
+serums | Vitamin C Serum Oxidation: How to Tell If Yours Has Gone Off | vitamin-c-serum-oxidation | informative
+serums | Serums vs Ampoules vs Essences: What's the Difference? | serums-vs-ampoules-vs-essences | product-comparison
+
+# By Concern › Sensitive Skin
+sensitive-skin | How to Introduce New Skincare Products When You Have Sensitive Skin | introduce-new-products-sensitive-skin | how-to-guide
+sensitive-skin | Best Mineral Sunscreens for Sensitive Skin | best-mineral-sunscreens-sensitive-skin | top-rated
+sensitive-skin | Why Does My Skin Sting When I Apply Moisturizer? | skin-stings-when-applying-moisturizer | informative
+sensitive-skin | Centella Asiatica (Cica) for Sensitive Skin: What It Does | centella-asiatica-cica-sensitive-skin | informative
+sensitive-skin | Sensitive Skin vs Sensitised Skin: How to Tell the Difference | sensitive-vs-sensitised-skin | informative
+
+# By Concern › Hyperpigmentation
+hyperpigmentation | Kojic Acid for Dark Spots: How It Works and How to Use It | kojic-acid-dark-spots | how-to-guide
+hyperpigmentation | Hyperpigmentation on Darker Skin Tones: Gentle Ways to Even It Out | hyperpigmentation-darker-skin-tones | informative
+hyperpigmentation | Why Sunscreen Matters Most When You're Fading Dark Spots | sunscreen-and-fading-dark-spots | informative
+hyperpigmentation | Best Brightening Serums for Uneven Skin Tone | best-brightening-serums-uneven-tone | top-rated
+hyperpigmentation | Azelaic Acid vs Tranexamic Acid for Dark Spots | azelaic-vs-tranexamic-acid | product-comparison
+
+# By Concern › Anti-Aging & Wrinkles
+anti-aging | Bakuchiol vs Retinol: Is the Plant Alternative as Good? | bakuchiol-vs-retinol | product-comparison
+anti-aging | Anti-Aging Skincare in Your 40s and 50s: What Changes | anti-aging-skincare-40s-50s | informative
+anti-aging | Best Night Creams for Firmer-Looking Skin | best-night-creams-firmer-skin | top-rated
+anti-aging | Neck and Décolletage Care: The Areas Most Routines Forget | neck-and-decolletage-care | how-to-guide
+anti-aging | Collagen Creams vs Collagen Supplements: What the Evidence Says | collagen-creams-vs-supplements | product-comparison
+
+# By Concern › Acne & Breakouts
+acne | Hormonal Acne: How to Build a Routine Around It | hormonal-acne-skincare-routine | how-to-guide
+acne | Best Pimple Patches for Different Types of Breakouts | best-pimple-patches | top-rated
+acne | Maskne: Why Masks Cause Breakouts and How to Prevent Them | maskne-causes-prevention | informative
+acne | Can Diet Affect Acne? What the Research Actually Says | diet-and-acne-research | informative
+acne | Blackheads vs Sebaceous Filaments: How to Tell Them Apart | blackheads-vs-sebaceous-filaments | informative
+
+# Cross-cutting › Korean Skincare
+korean-skincare | How to Layer a Korean Skincare Routine in the Right Order | korean-skincare-layering-order | how-to-guide
+korean-skincare | Best Korean Serums and Ampoules for Beginners | best-korean-serums-beginners | top-rated
+korean-skincare | Korean Cleansing Oils vs Cleansing Balms Compared | korean-cleansing-oils-vs-balms | product-comparison
+korean-skincare | Glass Skin: What It Means and a Realistic Routine to Get Closer | glass-skin-routine | how-to-guide
+korean-skincare | Rice, Ginseng and Mugwort: Popular Korean Skincare Ingredients Explained | korean-skincare-ingredients-explained | informative
+
+# Cross-cutting › Dupes
+dupes | La Mer Dupes: Cheaper Moisturizers With Similar Ingredients | la-mer-dupes | product-comparison
+dupes | Glow Recipe Dupes: Affordable Alternatives Compared | glow-recipe-dupes | product-comparison
+dupes | Supergoop Unseen Sunscreen Dupes Worth Trying | supergoop-unseen-sunscreen-dupes | product-comparison
+dupes | Summer Fridays Lip Balm Dupes Compared | summer-fridays-lip-balm-dupes | product-comparison
+dupes | How to Read an Ingredient List to Spot a True Dupe | how-to-spot-a-true-dupe | how-to-guide
+
+# Cross-cutting › Ingredients A–Z
+ingredients | Salicylic Acid Explained: Strengths, Uses and Side Effects | salicylic-acid-explained | informative
+ingredients | Vitamin E in Skincare: Benefits and Who Should Avoid It | vitamin-e-in-skincare | informative
+ingredients | Panthenol (Vitamin B5): The Quiet Hydrator in Your Skincare | panthenol-vitamin-b5-skincare | informative
+ingredients | Urea in Skincare: Why It Works for Very Dry Skin | urea-in-skincare | informative
+ingredients | Fragrance in Skincare: When It's a Problem and When It Isn't | fragrance-in-skincare | informative
+
+# Cross-cutting › Skincare Routines
+routines | A Simple Skincare Routine for Men | simple-skincare-routine-men | how-to-guide
+routines | Skincare Routine for Oily Skin: AM and PM Steps | skincare-routine-oily-skin | how-to-guide
+routines | Skincare Routine for Dry Skin: AM and PM Steps | skincare-routine-dry-skin | how-to-guide
+routines | Travel Skincare Routine: What to Pack and How to Adapt | travel-skincare-routine | how-to-guide
+routines | Skin Cycling: What It Is and How to Try It | skin-cycling-guide | how-to-guide

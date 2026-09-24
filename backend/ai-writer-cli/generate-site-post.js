@@ -570,7 +570,8 @@ async function promptForMissingOptions() {
     }
   }
 
-  if (site.postTypeChoices && !argv['post-type'] && process.stdin.isTTY && process.stdout.isTTY) {
+  // Topic files carry their own postType per row, so no prompt for those.
+  if (site.postTypeChoices && !argv['post-type'] && !argv.topics && process.stdin.isTTY && process.stdout.isTTY) {
     argv['post-type'] = await select({
       message: 'What kind of article?',
       choices: site.postTypeChoices.map(([value, name]) => ({ name: `${name} (${value})`, value })),
