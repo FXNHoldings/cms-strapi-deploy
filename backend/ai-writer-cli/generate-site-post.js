@@ -162,6 +162,10 @@ const SITE_CONFIG = {
     faqToField: true,
     // nxtsmarthome-post has a showFrom release date; see --publishedAt.
     supportsShowFrom: true,
+    // Each post is bylined to one of these nxtsmarthome-author slugs, picked at
+    // random. The "NXT Smart Home Editorial" fallback byline is never used.
+    authorEndpoint: '/api/nxtsmarthome-authors',
+    authorSlugs: ['adrian-thompson', 'k-curtis', 'harry-cheng'],
     editorialBrief:
       'Write practical smart home content for Australian homes for NXT Smart Home. Australian English (optimise, colour), AUD, Australian retailers, 240V power, AS/NZS rules, renters and strata where relevant. Never invent prices, specs, test results or ratings, and never imply hands-on testing that did not happen. Do not state electrical, privacy or tenancy law as settled fact; recommend a licensed electrician for fixed wiring.',
     topicNiche: 'smart home devices for Australian homes: security cameras, lighting, energy and solar, climate, entertainment, hubs and platforms, robot vacuums, setup and buying guides',
@@ -1561,6 +1565,20 @@ function nextReleaseAt() {
   return at.toISOString();
 }
 
+let siteAuthorIds;
+async function pickSiteAuthor() {
+  if (!site.authorSlugs?.length) return null;
+  if (!siteAuthorIds) {
+    const filters = site.authorSlugs.map((slug, i) => `filters[slug][$in][${i}]=${encodeURIComponent(slug)}`).join('&');
+    const res = await strapi(`${site.authorEndpoint}?${filters}&fields[0]=slug`);
+    siteAuthorIds = (res?.data || []).map((a) => a.documentId);
+    const missing = site.authorSlugs.filter((slug) => !(res?.data || []).some((a) => a.slug === slug));
+    if (missing.length) console.warn(`  authors not found in Strapi: ${missing.join(', ')}`);
+    if (!siteAuthorIds.length) throw new Error(`none of the authors ${site.authorSlugs.join(', ')} exist at ${site.authorEndpoint}`);
+  }
+  return siteAuthorIds[Math.floor(Math.random() * siteAuthorIds.length)];
+}
+
 async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl } = {}) {
   const data = {
     title: post.title,
@@ -1588,6 +1606,8 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
   if (galleryIds?.length && !site.simplePost) data.gallery = galleryIds;
   if (sourceUrl) data.sourceUrl = sourceUrl;
   if (site.faqToField && post.faq?.length) data.faq = post.faq;
+  const authorId = await pickSiteAuthor();
+  if (authorId) data.author = authorId;
   if (argv['amazon-tag']) data.amazonAffiliateTag = argv['amazon-tag'];
   // A post missing its required product boxes is held back as a draft.
   const publish = argv.publish && !post.productShortfall;
