@@ -79,6 +79,28 @@ const SITE_CONFIG = {
     topicNiche: 'skincare, beauty products, routines, ingredients, product reviews',
     // bls-post has a showFrom release date; see --publishedAt.
     supportsShowFrom: true,
+    // Inline product boxes: ::product:<slug>:: markers for this storefront's
+    // commerce-products (Strapi, site bestlooking-skin, listable only), which
+    // the site renders as boxes (projects/bestlooking.skin/lib/product-boxes.ts).
+    // "Where to buy" comes from the same products' stored retailer offers, so
+    // it costs no API calls. A post with fewer than `min` boxes is still saved
+    // as asked (routines/ingredients topics often have no fitting product).
+    productCatalog: {
+      strapiSite: 'bestlooking-skin',
+      // Topic hub -> commerce category (the site's HUB_TO_COMMERCE).
+      hubMap: {
+        serums: 'facial-serums', moisturizers: 'moisturisers', cleansers: 'facial-cleansers',
+        exfoliants: 'exfoliators-and-scrubs', 'anti-aging': 'anti-aging', 'eye-cream': 'anti-aging',
+        'sensitive-skin': 'moisturisers', acne: 'facial-cleansers', hyperpigmentation: 'facial-serums',
+        sunscreen: 'moisturisers',
+      },
+      catalogueNote: 'real skincare products stocked by this site',
+      min: 2,
+      max: 4,
+      candidates: 8,
+      requireMin: false,
+      offerLinks: { perProduct: 3, exclude: /^(amazon|poshmark|mercari)/i },
+    },
   },
   'nxtsmart.homes': {
     label: 'NXTSmart.Homes',
@@ -162,6 +184,7 @@ const SITE_CONFIG = {
     faqToField: true,
     // nxtsmarthome-post has a showFrom release date; see --publishedAt.
     supportsShowFrom: true,
+    hasPublishDate: true,
     // Each post is bylined to one of these nxtsmarthome-author slugs, picked at
     // random. The "NXT Smart Home Editorial" fallback byline is never used.
     authorEndpoint: '/api/nxtsmarthome-authors',
@@ -772,9 +795,56 @@ Rules:
  * ------------------------------------------------------------------------- */
 let siteCatalogCache = null;
 
+/**
+ * Catalogues kept in Strapi (productCatalog.strapiSite) are fetched once per run
+ * and shaped like the JSON catalogue entries the rest of this code expects.
+ */
+async function preloadSiteCatalog() {
+  const cfg = site.productCatalog;
+  if (!cfg?.strapiSite || siteCatalogCache) return;
+  const list = [];
+  try {
+    for (let page = 1; page <= 20; page += 1) {
+      const q = [
+        `filters[site][slug][$eq]=${encodeURIComponent(cfg.strapiSite)}`,
+        'filters[productStatus][$eq]=active',
+        'fields[0]=slug', 'fields[1]=name', 'fields[2]=brand', 'fields[3]=specs', 'fields[4]=rating', 'fields[5]=ratingCount',
+        'populate[categories][fields][0]=slug',
+        'populate[offers][fields][0]=productUrl', 'populate[offers][fields][1]=price', 'populate[offers][fields][2]=availability',
+        'populate[offers][populate][merchant][fields][0]=name', 'populate[offers][populate][merchant][fields][1]=slug',
+        `pagination[page]=${page}`, 'pagination[pageSize]=100',
+      ].join('&');
+      const res = await strapi(`/api/commerce-products?${q}`);
+      list.push(...(res?.data || []));
+      if (page >= (res?.meta?.pagination?.pageCount || 1)) break;
+    }
+  } catch (error) {
+    console.warn(`Product catalogue not readable (Strapi commerce-products, site ${cfg.strapiSite}): ${error.message}`);
+  }
+  const hubsFor = (catSlugs) => Object.entries(cfg.hubMap || {}).filter(([, c]) => catSlugs.includes(c)).map(([hub]) => hub);
+  siteCatalogCache = list.map((p) => {
+    const specs = p.specs || {};
+    const cats = (p.categories || []).map((c) => c.slug);
+    const features = (Array.isArray(specs.keyFeatures) ? specs.keyFeatures : []).slice(0, 2).join('; ');
+    const concerns = [specs['Skin Concerns'], specs['Skin Type'], specs['Key Ingredient']].filter(Boolean).join('; ');
+    return {
+      slug: p.slug,
+      name: p.name,
+      brand: p.brand || '',
+      subCategory: cats[0] || '',
+      categoryKeys: hubsFor(cats),
+      bestFor: [features, concerns].filter(Boolean).join(' | '),
+      reviewCount: p.ratingCount || 0,
+      offers: p.offers || [],
+    };
+  }).filter((p) => p.slug && p.name && p.bestFor);
+  console.log(`  catalogue: ${siteCatalogCache.length} products (Strapi, ${cfg.strapiSite})`);
+}
+
 function loadSiteCatalog() {
   if (!site.productCatalog) return [];
   if (siteCatalogCache) return siteCatalogCache;
+  if (site.productCatalog.strapiSite) return [];
   try {
     const raw = JSON.parse(fs.readFileSync(site.productCatalog.path, 'utf8'));
     const list = Array.isArray(raw) ? raw : raw.products || [];
@@ -788,7 +858,7 @@ function loadSiteCatalog() {
   return siteCatalogCache;
 }
 
-const PRODUCT_STOPWORDS = new Set('a an and are as at australia australian aussie be best buy by can do does for from guide how in into is it its of on or smart home homes that the their this to vs what when where which why will with without you your'.split(' '));
+const PRODUCT_STOPWORDS = new Set('a an and are as at australia australian aussie be best buy by can do does for from guide how in into is it its of on or smart home homes that the their this to vs what when where which why will with without you your skin skincare face facial product products use using'.split(' '));
 const productTokens = (text) => String(text || '').toLowerCase().replace(/[^a-z0-9+ ]+/g, ' ').split(/\s+/)
   .filter((w) => w.length > 2 && !PRODUCT_STOPWORDS.has(w))
   .map((w) => w.replace(/s$/, ''));
@@ -798,12 +868,13 @@ function pickSiteProducts(topic, category) {
   const catalog = loadSiteCatalog();
   if (!catalog.length) return [];
   const want = new Set(productTokens(topic));
-  const hasCategory = catalog.some((p) => p.categoryKey === category);
+  const inCat = (p) => p.categoryKey === category || (p.categoryKeys || []).includes(category);
+  const hasCategory = catalog.some(inCat);
   const scored = catalog.map((p) => {
     const words = new Set(productTokens(`${p.name} ${p.brand} ${p.subCategory} ${p.bestFor}`));
     let overlap = 0;
     for (const w of want) if (words.has(w)) overlap += 1;
-    const inCategory = p.categoryKey === category;
+    const inCategory = inCat(p);
     const reviews = Number(p.reviewCountReal || p.reviewCount || 0);
     const score = overlap * 3 + (inCategory ? 4 : 0) + Math.log10(reviews + 1);
     return { p, score, overlap, inCategory };
@@ -821,12 +892,12 @@ function siteProductContext(products) {
   const lines = products.map((p) => `- ${p.slug} | ${p.brand ? `${p.brand} ` : ''}${p.name} | ${p.subCategory || p.categoryName || ''} | best for: ${String(p.bestFor || '').replace(/\s+/g, ' ').slice(0, 160)}`);
   return `
 
-Catalogue products (real products sold in Australia, from this site's catalogue):
+Catalogue products (${site.productCatalog.catalogueNote || 'real products sold in Australia'}, from this site's catalogue):
 ${lines.join('\n')}
 
 Product placement (mandatory):
 - Feature between ${min} and ${max} of the products above that genuinely fit this article. Discuss each one in the prose where it is relevant: what it suits and the trade-offs, using only the facts listed above.
-- Immediately after the paragraph or section that discusses a product, put its marker alone on its own line, with a blank line before and after: ::product:<slug>::  (for example ::product:${products[0].slug}::).
+- Immediately after the paragraph or section that discusses a product, put its marker alone on its own line, with a blank line before and after: ::product:<slug>::  (for example ::product:${products[0].slug}::).${site.contentFormat === 'HTML' ? ` In HTML, give the marker its own paragraph: <p>::product:${products[0].slug}::</p>` : ''}
 - Use only slugs from the list above, each at most once. Never invent products, slugs, prices, specifications or star ratings, and do not claim anything was tested hands-on.
 - Do not put markers inside lists, tables or headings, and never place them all together at the end.
 `;
@@ -842,12 +913,14 @@ function applySiteProducts(post, products) {
   if (!site.productCatalog || typeof post.content !== 'string') return 0;
   const allowed = new Map(products.map((p) => [p.slug, p]));
   const seen = new Set();
-  let content = post.content.replace(/::product:([a-z0-9-]+)::/gi, (m, slug) => {
+  const html = site.contentFormat === 'HTML';
+  const marker = (key) => (html ? `\n<p>::product:${key}::</p>\n` : `\n\n::product:${key}::\n\n`);
+  let content = post.content.replace(/(?:<p\b[^>]*>\s*)?::product:([a-z0-9-]+)::(?:\s*<\/p>)?/gi, (m, slug) => {
     const key = slug.toLowerCase();
     // Unknown, repeated, or beyond the per-article maximum.
     if (!allowed.has(key) || seen.has(key) || seen.size >= site.productCatalog.max) return '';
     seen.add(key);
-    return `\n\n::product:${key}::\n\n`;
+    return marker(key);
   });
 
   // Products named in the text but not boxed: insert after the section that first names them.
@@ -857,9 +930,9 @@ function applySiteProducts(post, products) {
     const names = [p.brand ? `${p.brand} ${p.name}` : '', p.name].filter((n) => n && n.length > 4);
     const idx = names.map((n) => content.toLowerCase().indexOf(n.toLowerCase())).filter((i) => i >= 0).sort((a, b) => a - b)[0];
     if (idx === undefined) continue;
-    const nextHeading = content.slice(idx).search(/\n#{2,6} /);
+    const nextHeading = content.slice(idx).search(html ? /<h[2-6][\s>]/i : /\n#{2,6} /);
     const at = nextHeading >= 0 ? idx + nextHeading : content.length;
-    content = `${content.slice(0, at).replace(/\s+$/, '')}\n\n::product:${p.slug}::\n\n${content.slice(at).replace(/^\s+/, '')}`;
+    content = `${content.slice(0, at).replace(/\s+$/, '')}${marker(p.slug)}${content.slice(at).replace(/^\s+/, '')}`;
     seen.add(p.slug);
   }
 
@@ -982,7 +1055,43 @@ function auRetailerLinks(items, perProduct) {
 
 
 /** Append a "Where to buy" section of live retailer links for the featured products. */
+/** Retailer links from a product's stored catalogue offers: in stock, cheapest first, one per merchant. */
+function offerRetailerLinks(product, { perProduct, exclude }) {
+  const seen = new Set();
+  return (product.offers || [])
+    .filter((o) => o?.productUrl && /^https:\/\//.test(o.productUrl) && o.availability !== 'out_of_stock' && o.merchant?.name)
+    .filter((o) => !exclude?.test(o.merchant.slug || o.merchant.name))
+    .sort((a, b) => (a.price ?? Infinity) - (b.price ?? Infinity))
+    .filter((o) => !seen.has(o.merchant.name) && seen.add(o.merchant.name))
+    .slice(0, perProduct)
+    .map((o) => ({ name: o.merchant.name, url: o.productUrl }));
+}
+
+/** Put the "Where to buy" section at the end of the article, above an in-body FAQ section if there is one. */
+function insertWhereToBuy(content, section) {
+  // bestlooking.skin also treats "Common Questions About/On ..." headings as its FAQ (renamed "FAQs").
+  const faq = content.search(/<h[23]\b[^>]*>(?:(?!<\/h[23]>)[\s\S])*(?:FAQ|Frequently\s+Asked|Common\s+Questions\s+(?:about|on)\b)(?:(?!<\/h[23]>)[\s\S])*<\/h[23]>/i);
+  if (faq > 0) return `${content.slice(0, faq).trim()}\n\n${section}\n\n${content.slice(faq)}`;
+  return `${content.trim()}\n\n${section}\n`;
+}
+
 async function appendAffiliateLinks(post, products) {
+  if (site.productCatalog?.offerLinks && argv['affiliate-links'] !== false && typeof post.content === 'string') {
+    const featured = (post.productSlugs || []).map((slug) => products.find((p) => p.slug === slug)).filter(Boolean);
+    const rows = featured.map((p) => ({ p, links: offerRetailerLinks(p, site.productCatalog.offerLinks) })).filter((r) => r.links.length);
+    if (!rows.length) {
+      if (featured.length) console.log('  affiliate: no in-stock retailer offers for the featured products');
+      return 0;
+    }
+    const rel = 'sponsored nofollow noopener noreferrer';
+    const items = rows.map(({ p, links }) => `<li><strong>${escapeHtml(p.name)}</strong>: ${
+      links.map((l) => `<a href="${escapeHtml(l.url)}" target="_blank" rel="${rel}">Check price at ${escapeHtml(l.name)}</a>`).join(' · ')
+    }</li>`).join('\n');
+    post.content = insertWhereToBuy(post.content, `<h2 id="where-to-buy">Where to buy</h2>\n\n<p>Retailers stocking the products in this guide. Prices and stock change often, so check the retailer before you buy. We may earn a commission from these links at no extra cost to you.</p>\n\n<ul class="where-to-buy">\n${items}\n</ul>`);
+    const count = rows.reduce((n, r) => n + r.links.length, 0);
+    console.log(`  affiliate: ${count} retailer links for ${rows.length} products (catalogue offers)`);
+    return count;
+  }
   const cfg = site.productCatalog?.affiliateOffers;
   if (!cfg || argv['affiliate-links'] === false || typeof post.content !== 'string') return 0;
   const featured = (post.productSlugs || []).map((slug) => products.find((p) => p.slug === slug)).filter((p) => p?.googleProductId);
@@ -1065,6 +1174,7 @@ async function generatePost(topic, category, { dealProduct = null, catalogProduc
   const dealContext = dealProductPromptContext(dealProduct);
   const catalogContext = isSmartHomePost ? '' : catalogProductPromptContext(seededProducts, category);
   const smartHomeContext = isSmartHomePost ? smartHomeProductPromptContext(primaryCatalogProduct) : '';
+  if (site.productCatalog) await preloadSiteCatalog();
   const siteProducts = site.productCatalog ? pickSiteProducts(topic, category) : [];
   const siteProductsContext = siteProductContext(siteProducts);
   const contentFormat = site.contentFormat || (isSmartHomePost && primaryCatalogProduct ? 'HTML' : 'Markdown');
@@ -1214,8 +1324,9 @@ Image prompt requirements:
     const { min } = site.productCatalog;
     console.log(`  products : ${placed} placed${placed ? ` (${post.productSlugs.join(', ')})` : ''} from ${siteProducts.length} candidates`);
     // Rule 8 unmet: never let it go live on its own; it is saved as a draft.
-    post.productShortfall = placed < min;
+    post.productShortfall = site.productCatalog.requireMin !== false && placed < min;
     if (post.productShortfall) console.log(`  WARNING  : fewer than ${min} product boxes - saving as a DRAFT for review`);
+    else if (placed < min) console.log(`  note     : fewer than ${min} product boxes (no close catalogue match)`);
     const faqs = extractFaqToField(post);
     if (faqs) console.log(`  faq      : ${faqs} questions moved to the FAQ field`);
     await appendAffiliateLinks(post, siteProducts);
@@ -1225,8 +1336,11 @@ Image prompt requirements:
 
 function normalizeContentForSite(post) {
   if (site.contentFormat !== 'HTML') return;
-  const source = String(post.content || '').trim();
+  // The model sometimes double-escapes line breaks in HTML bodies; a literal
+  // "\n" renders as visible text on the page (bestlooking.skin, 24 Sep 2026).
+  const source = String(post.content || '').replace(/(?:\\r)?\\n/g, '\n').replace(/\\t/g, ' ').trim();
   if (!source) return;
+  post.content = source;
 
   const alreadyHtml = /<\/?(?:p|h[1-6]|ul|ol|li|blockquote|table|figure|img|div|pre|hr)\b[^>]*>/i.test(source);
   if (!alreadyHtml) {
@@ -1615,7 +1729,8 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
   const releaseAt = nextReleaseAt();
   if (releaseAt) {
     data.showFrom = releaseAt;
-    data.publishDate = releaseAt;
+    // Only nxtsmarthome-post has a publishDate field; bls-post rejects it.
+    if (site.hasPublishDate) data.publishDate = releaseAt;
   }
 
   /*
