@@ -157,6 +157,9 @@ const SITE_CONFIG = {
       // Shopping (location 2036 = Australia).
       affiliateOffers: { location: 2036, language: 'en', perProduct: 3 },
     },
+    // The site renders FAQs from the post's faq component (its FAQ design and
+    // FAQPage structured data), not from headings in the body. See extractFaqToField.
+    faqToField: true,
     // nxtsmarthome-post has a showFrom release date; see --publishedAt.
     supportsShowFrom: true,
     editorialBrief:
@@ -1005,6 +1008,32 @@ async function appendAffiliateLinks(post, products) {
   return count;
 }
 
+/**
+ * Move a "## Frequently Asked Questions" / "## FAQs" section (### question +
+ * answer paragraphs) out of the Markdown body into post.faq, the shape of the
+ * faq.item component ({ question, answer, order }). Left in the body, the site
+ * shows it as plain headings instead of its FAQ block, with no FAQPage data.
+ * The section ends at the next "## " heading, an HTML <h2>, or the end.
+ */
+function extractFaqToField(post) {
+  if (!site.faqToField || typeof post.content !== 'string') return 0;
+  const m = post.content.match(/^##\s+(?:Frequently Asked Questions|FAQs?)\s*$/im);
+  if (!m) return 0;
+  const start = m.index;
+  const after = post.content.slice(start + m[0].length);
+  const next = after.search(/^##\s|^<h2[\s>]/im);
+  const section = next >= 0 ? after.slice(0, next) : after;
+  const faq = section.split(/^###\s+/m).slice(1).map((part, order) => {
+    const [question, ...rest] = part.split('\n');
+    const answer = rest.join('\n').replace(/\s+/g, ' ').trim();
+    return { question: question.replace(/\*\*/g, '').trim().slice(0, 300), answer, order };
+  }).filter((f) => f.question && f.answer);
+  if (!faq.length) return 0;
+  post.faq = faq;
+  post.content = `${post.content.slice(0, start).trimEnd()}\n\n${next >= 0 ? after.slice(next) : ''}`.trim();
+  return faq.length;
+}
+
 async function generatePost(topic, category, { dealProduct = null, catalogProducts = null } = {}) {
   const internalLinkContext = await buildInternalLinkContext(category);
   const isDealsPost = isNxtDealsCategory(category);
@@ -1170,6 +1199,8 @@ Image prompt requirements:
     // Rule 8 unmet: never let it go live on its own; it is saved as a draft.
     post.productShortfall = placed < min;
     if (post.productShortfall) console.log(`  WARNING  : fewer than ${min} product boxes - saving as a DRAFT for review`);
+    const faqs = extractFaqToField(post);
+    if (faqs) console.log(`  faq      : ${faqs} questions moved to the FAQ field`);
     await appendAffiliateLinks(post, siteProducts);
   }
   return post;
@@ -1543,6 +1574,7 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
   if (coverId) data.coverImage = coverId;
   if (galleryIds?.length && !site.simplePost) data.gallery = galleryIds;
   if (sourceUrl) data.sourceUrl = sourceUrl;
+  if (site.faqToField && post.faq?.length) data.faq = post.faq;
   if (argv['amazon-tag']) data.amazonAffiliateTag = argv['amazon-tag'];
   // A post missing its required product boxes is held back as a draft.
   const publish = argv.publish && !post.productShortfall;
