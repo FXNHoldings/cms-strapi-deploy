@@ -42,8 +42,16 @@ async function logoMediaId(domain, slug) {
 async function run() {
   const params = new URLSearchParams({ 'populate[logo]': 'true', 'pagination[pageSize]': '200',
     'fields[0]': 'name', 'fields[1]': 'slug', 'fields[2]': 'websiteUrl' });
-  const res = await fetch(`${BASE}/api/commerce-merchants?${params}`, { headers: H });
-  const rows = (await res.json())?.data || [];
+  // Page through every merchant: the pool passed 200 rows long ago, and a single
+  // page silently left everything after the first 200 without a logo.
+  const rows = [];
+  for (let page = 1; page <= 20; page += 1) {
+    params.set('pagination[page]', String(page));
+    const res = await fetch(`${BASE}/api/commerce-merchants?${params}`, { headers: H });
+    const body = await res.json();
+    rows.push(...(body?.data || []));
+    if (page >= (body?.meta?.pagination?.pageCount || 1)) break;
+  }
   let done = 0, skipped = 0, failed = 0;
   for (const r of rows) {
     const a = r.attributes || r;

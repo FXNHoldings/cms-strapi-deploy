@@ -208,7 +208,10 @@ for (const p of products) {
   const specs = {};
   for (const s of it?.specifications ?? []) {
     if (!s?.specification_name || !s?.specification_value) continue;
-    specs[String(s.specification_name).trim()] = String(s.specification_value).trim();
+    // Google leaves word-break hints in spec text ("Pan <wbr>/<wbr> Tilt"); they are
+    // markup, not content, and rendered literally by anything that escapes HTML.
+    const unwbr = (v) => String(v).replace(/<wbr\s*\/?>\s*\/\s*<wbr\s*\/?>/g, '/').replace(/<wbr\s*\/?>/g, '').trim();
+    specs[unwbr(s.specification_name)] = unwbr(s.specification_value);
   }
   const features = Array.isArray(it?.features)
     ? it.features.map((f) => String(f).trim()).filter(Boolean)

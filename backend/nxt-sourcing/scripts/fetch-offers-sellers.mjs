@@ -38,6 +38,9 @@ const THIN_ONLY = args.includes('--thin-only');
 const NO_OFFERS_ONLY = args.includes('--no-offers-only');
 const CATEGORY = flag('category', null);
 const SITE = flag('site', null);
+/* Product-pool tag to select when no --site is given. nxt.bargains by default;
+ * --tag=nxt-deals reprices products sourced for that property. */
+const TAG = flag('tag', 'nxt-bargains');
 const LIMIT = Number(flag('limit', Infinity));
 const PRIORITY = Number(flag('priority', 1));
 const LOCATION = Number(flag('location', 2840));
@@ -79,6 +82,15 @@ const RETAILERS = [
   { name: 'Zoro', tier: 1, domains: ['zoro.com'] },
   { name: 'Crutchfield', tier: 1, domains: ['crutchfield.com'] },
   { name: 'Abt', tier: 1, domains: ['abt.com'] },
+  // Beauty, drugstore and supplement retailers (skincare categories)
+  { name: 'Ulta Beauty', tier: 1, domains: ['ulta.com'] },
+  { name: 'Sephora', tier: 1, domains: ['sephora.com'] },
+  { name: 'CVS', tier: 1, domains: ['cvs.com'] },
+  { name: 'Walgreens', tier: 1, domains: ['walgreens.com'] },
+  { name: 'Dermstore', tier: 1, domains: ['dermstore.com'] },
+  { name: 'Nordstrom', tier: 1, domains: ['nordstrom.com'] },
+  { name: 'SkinStore', tier: 1, domains: ['skinstore.com'] },
+  { name: 'iHerb', tier: 1, domains: ['iherb.com'] },
   { name: 'Apple', tier: 2, domains: ['apple.com'] },
   { name: 'Samsung', tier: 2, domains: ['samsung.com'] },
   { name: 'Google Store', tier: 2, domains: ['store.google.com'] },
@@ -101,6 +113,17 @@ const RETAILERS = [
   { name: 'TP-Link', tier: 2, domains: ['tp-link.com', 'tplink.com'] },
   { name: 'Govee', tier: 2, domains: ['govee.com'] },
   { name: 'Aqara', tier: 2, domains: ['aqara.com'] },
+  { name: "Paula's Choice", tier: 2, domains: ['paulaschoice.com'] },
+  { name: 'Clinique', tier: 2, domains: ['clinique.com'] },
+  { name: 'The Ordinary', tier: 2, domains: ['theordinary.com', 'deciem.com'] },
+  { name: "Kiehl's", tier: 2, domains: ['kiehls.com'] },
+  { name: 'Olay', tier: 2, domains: ['olay.com'] },
+  { name: 'Estée Lauder', tier: 2, domains: ['esteelauder.com'] },
+  { name: 'La Roche-Posay', tier: 2, domains: ['laroche-posay.us'] },
+  { name: 'CeraVe', tier: 2, domains: ['cerave.com'] },
+  { name: 'Neutrogena', tier: 2, domains: ['neutrogena.com'] },
+  { name: 'Murad', tier: 2, domains: ['murad.com'] },
+  { name: 'Drunk Elephant', tier: 2, domains: ['drunkelephant.com'] },
   { name: 'Amazon', tier: 3, domains: ['amazon.com'] },
   { name: 'eBay', tier: 3, domains: ['ebay.com'] },
 ];
@@ -209,7 +232,7 @@ const q = new URLSearchParams({ 'pagination[pageSize]': '1000', status: 'publish
  * remains the default so existing runs and cron entries behave as before.
  */
 if (SITE) q.append('filters[site][domain][$eq]', SITE);
-else q.append('filters[tags][$containsi]', 'nxt-bargains');
+else q.append('filters[tags][$containsi]', TAG);
 if (CATEGORY) q.append('filters[categories][slug][$eq]', CATEGORY);
 for (const [i, f] of ['name', 'slug', 'googleProductId'].entries()) q.append(`fields[${i}]`, f);
 q.append('populate[offers][fields][0]', 'price');

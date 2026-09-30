@@ -77,8 +77,12 @@ const TOKEN = process.env.STRAPI_API_TOKEN || process.env.STRAPI_TOKEN || '';
 const DFS_LOGIN = process.env.DATAFORSEO_LOGIN || '';
 const DFS_PASSWORD = process.env.DATAFORSEO_PASSWORD || '';
 
-/** The tag nxt.bargains filters its product pool by (lib/strapi.ts). */
-const SITE_TAG = 'nxt-bargains';
+/**
+ * The tag the storefront filters its product pool by (each site's lib/strapi.ts).
+ * nxt.bargains is the default; pass --tag=nxt-deals (or any site tag) when
+ * sourcing for another property, so its products never surface on the wrong site.
+ */
+const SITE_TAG = flag('tag', 'nxt-bargains');
 
 const EP = {
   products: 'https://api.dataforseo.com/v3/merchant/google/products',
@@ -103,7 +107,15 @@ const CATEGORY_QUERIES = {
   'smart-light-bulbs': 'smart light bulb led wifi',
   'smart-plugs': 'smart plug wifi outlet',
   'raspberry-pi': 'raspberry pi board kit',
+  // Skincare (shared commerce categories owned by bestlooking.skin, sourced for nxt.deals)
+  'anti-aging': 'anti aging face serum retinol cream',
+  'facial-serums': 'facial serum vitamin c hyaluronic',
+  'moisturisers': 'face moisturizer cream spf',
+  'facial-cleansers': 'facial cleanser face wash',
 };
+/* --keyword= overrides the category query, so a category with no entry above
+ * can still be swept without editing this file. */
+const KEYWORD_OVERRIDE = flag('keyword', null);
 
 /* ------------------------------------------------------- retailer allowlist */
 
@@ -137,6 +149,15 @@ const RETAILERS = [
   { name: 'Sears', tier: 1, patterns: ['sears'], search: 'https://www.sears.com/search=' },
   { name: 'Nebraska Furniture Mart', tier: 1, patterns: ['nebraska furniture', 'nfm'], search: 'https://www.nfm.com/search?q=' },
   { name: 'Zoro', tier: 1, patterns: ['zoro'], search: 'https://www.zoro.com/search?q=' },
+  // Tier 1 — beauty and drugstore retailers (skincare categories)
+  { name: 'Ulta Beauty', tier: 1, patterns: ['ulta'], search: 'https://www.ulta.com/search?search=' },
+  { name: 'Sephora', tier: 1, patterns: ['sephora'], search: 'https://www.sephora.com/search?keyword=' },
+  { name: 'CVS', tier: 1, patterns: ['cvs'], search: 'https://www.cvs.com/search?searchTerm=' },
+  { name: 'Walgreens', tier: 1, patterns: ['walgreens'], search: 'https://www.walgreens.com/search/results.jsp?Ntt=' },
+  { name: 'Dermstore', tier: 1, patterns: ['dermstore'], search: 'https://www.dermstore.com/search?q=' },
+  { name: 'Nordstrom', tier: 1, patterns: ['nordstrom'], search: 'https://www.nordstrom.com/sr?keyword=' },
+  { name: 'SkinStore', tier: 1, patterns: ['skinstore'], search: 'https://www.skinstore.com/search?q=' },
+  { name: 'iHerb', tier: 1, patterns: ['iherb'], search: 'https://www.iherb.com/search?kw=' },
 
   // Tier 2 — brand-direct stores
   { name: 'Apple', tier: 2, patterns: ['apple store', 'apple.com', 'apple'], search: 'https://www.apple.com/us/search/' },
@@ -152,6 +173,18 @@ const RETAILERS = [
   { name: 'LIFX', tier: 2, patterns: ['lifx'], search: 'https://www.lifx.com/search?q=' },
   { name: 'Nanoleaf', tier: 2, patterns: ['nanoleaf'], search: 'https://nanoleaf.me/en-US/search?q=' },
   { name: 'Dreame', tier: 2, patterns: ['dreame'], search: 'https://www.dreametech.com/search?q=' },
+  // Tier 2 — skincare brand stores
+  { name: "Paula's Choice", tier: 2, patterns: ["paula's choice", 'paulas choice', 'paulaschoice'], search: 'https://www.paulaschoice.com/search?q=' },
+  { name: 'Clinique', tier: 2, patterns: ['clinique'], search: 'https://www.clinique.com/search?search=' },
+  { name: 'The Ordinary', tier: 2, patterns: ['the ordinary', 'deciem'], search: 'https://theordinary.com/en-us/search?q=' },
+  { name: "Kiehl's", tier: 2, patterns: ["kiehl's", 'kiehls'], search: 'https://www.kiehls.com/search?q=' },
+  { name: 'Olay', tier: 2, patterns: ['olay'], search: 'https://www.olay.com/search?q=' },
+  { name: 'Estée Lauder', tier: 2, patterns: ['estee lauder', 'estée lauder'], search: 'https://www.esteelauder.com/search?search=' },
+  { name: 'La Roche-Posay', tier: 2, patterns: ['la roche-posay', 'la roche posay'], search: 'https://www.laroche-posay.us/search?q=' },
+  { name: 'CeraVe', tier: 2, patterns: ['cerave'], search: 'https://www.cerave.com/search?q=' },
+  { name: 'Neutrogena', tier: 2, patterns: ['neutrogena'], search: 'https://www.neutrogena.com/search?q=' },
+  { name: 'Murad', tier: 2, patterns: ['murad'], search: 'https://www.murad.com/search?q=' },
+  { name: 'Drunk Elephant', tier: 2, patterns: ['drunk elephant'], search: 'https://www.drunkelephant.com/search?q=' },
 
   // Tier 3 — marketplaces. Sellers fold to the parent.
   { name: 'Amazon', tier: 3, patterns: ['amazon'], search: 'https://www.amazon.com/s?k=' },
@@ -633,7 +666,7 @@ function groupIntoProducts(items) {
 
 if (!CATEGORY) { console.error('usage: --category=<slug> [--limit=10] [--write]'); process.exit(1); }
 if (!DFS_LOGIN || !DFS_PASSWORD) { console.error('DATAFORSEO credentials not set.'); process.exit(1); }
-const KEYWORD = NAMES.length ? null : CATEGORY_QUERIES[CATEGORY];
+const KEYWORD = NAMES.length ? null : (KEYWORD_OVERRIDE || CATEGORY_QUERIES[CATEGORY]);
 if (!NAMES.length && !KEYWORD) { console.error(`No category query for "${CATEGORY}". Known: ${Object.keys(CATEGORY_QUERIES).join(', ')}`); process.exit(1); }
 
 fs.mkdirSync(path.dirname(STATE), { recursive: true });
