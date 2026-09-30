@@ -94,6 +94,24 @@
       "relation": "oneToMany",
       "target": "api::nxtdeals-deal.nxtdeals-deal",
       "mappedBy": "store"
+    },
+    "howToSave": {
+      "type": "richtext",
+      "description": "Markdown, 150–300 words. The editorial layer that makes this store page ours: how discounts actually work at this retailer, what stacks with what, when it runs its sales. Feed text alone is duplicate content shared with every other publisher."
+    },
+    "policies": {
+      "type": "json",
+      "description": "Shopper policy table shown on the store page: { \"freeShipping\": \"Orders $35+\", \"returns\": \"30 days\", \"priceMatch\": \"Yes — major online retailers\", \"studentDiscount\": \"No\", \"militaryDiscount\": \"10% in store\", \"policyUrl\": \"https://…\", \"checkedAt\": \"2026-09-10\" }. Every value is a retailer claim an editor checked on the date given; leave a key out rather than guess."
+    },
+    "faqs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.item",
+      "description": "4–6 store-specific questions (\"Does Target accept promo codes?\"). Emitted as FAQPage structured data."
+    },
+    "takeadsMerchantId": {
+      "type": "integer",
+      "description": "Merchant id in the Takeads coupon feed (Takedeals), set by scripts/sync-takedeals.mjs on first match so later runs skip the name lookup."
     }
   }
 }
