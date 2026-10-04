@@ -18,6 +18,15 @@
 
 import 'dotenv/config';
 import { parseAiJson } from './parse-ai-json.js';
+import {
+  ORIGINFACTS_RULES,
+  TITLE_MAX,
+  META_DESCRIPTION_MAX,
+  checkOriginfactsContent,
+  normaliseUrl,
+  researchJson,
+  titleMatcher,
+} from './originfacts-content-rules.js';
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
 import { fal } from '@fal-ai/client';
@@ -46,6 +55,8 @@ const argv = yargs(hideBin(process.argv))
   .option('interactive', { alias: 'i', type: 'boolean', default: false, describe: 'Force interactive prompt even if flags are set' })
   .option('images', { type: 'boolean', default: true, describe: 'Generate 1 cover + 2 gallery images with Fal.ai (use --no-images to disable)' })
   .option('image-model', { type: 'string', default: 'schnell', choices: ['schnell', 'dev', 'pro'], describe: 'Fal.ai FLUX variant' })
+  .option('research', { type: 'boolean', default: true, describe: 'Research facts with Claude web search before writing (Anthropic only; use --no-research to skip)' })
+  .option('max-searches', { type: 'number', default: 6, describe: 'Web searches per article when researching' })
   .option('dry-run', { type: 'boolean', default: false })
   .help()
   .parseSync();
@@ -276,20 +287,26 @@ async function strapi(pathname, init = {}) {
 /* ---------- AI prompts ---------- */
 
 function systemPromptArticle(lengthLabel) {
-  return `You are a senior travel journalist writing for a travel blog (flights, hotels, destinations, tips).
+  return `You are a travel editor writing for Originfacts, a travel guide site (flights, hotels, destinations, tips).
+
+${ORIGINFACTS_RULES}
 
 # Output format
 Output MUST be strict JSON matching this TypeScript type:
 {
-  "title": string,          // 50-70 chars, SEO-optimised
-  "slug": string,           // kebab-case ASCII, <60 chars
-  "excerpt": string,        // 140-180 chars, plain text, hook the reader
-  "content": string,        // Markdown body, ${lengthLabel} words, with H2/H3 headings, bullet lists, and a strong closing CTA
-  "seoTitle": string,       // <= 65 chars
-  "seoDescription": string, // <= 158 chars
+  "title": string,          // at most ${TITLE_MAX} chars, specific, no year
+  "slug": string,           // kebab-case ASCII, <60 chars, no year
+  "excerpt": string,        // 140-180 chars, plain text, says what the article covers
+  "content": string,        // Markdown body, ${lengthLabel} words, H2/H3 headings and bullet lists. No H1, no "Sources" section, no closing summary.
+  "seoTitle": string,       // at most ${TITLE_MAX} chars, no year
+  "seoDescription": string, // at most ${META_DESCRIPTION_MAX} chars
   "seoKeywords": string,    // comma-separated, 5-10 terms
   "tags": string[],         // 4-8 lowercase tags
   "readingTimeMinutes": number,
+  "tldr": string,           // 40-60 words: the direct answer to the article's question, shown in a summary box
+  "keyFacts": { "label": string, "value": string }[], // 3-6 quick facts from the article, each confirmed by your research
+  "faqs": { "q": string, "a": string }[],             // 3-5 questions readers search for, answered in 30-60 words each, consistent with the article
+  "sources": string[],      // URLs of the pages your facts came from (only pages you actually found)
   "imagePrompts": {
     "cover": string,        // Photographic prompt for the HERO image. 16:9 landscape, photorealistic, specific location/subject, time of day, lighting, camera lens hint. No close-up faces, no logos, no brand names. 30-60 words.
     "gallery": string[]     // EXACTLY 2 supporting photographic prompts covering different subjects/angles from the article. Same style rules. Each 30-60 words.
@@ -298,42 +315,24 @@ Output MUST be strict JSON matching this TypeScript type:
 Do not include any text outside the JSON. Do not wrap it in markdown fences.
 
 # Voice
-Write like Wirecutter, The Points Guy, or a sharp blog post — not a brochure.
-- First-person where it helps ("I booked…", "we found…"). Contractions OK.
-- Opinions stated plainly; say what's worth it and what isn't.
-- Concrete over abstract. Evidence over vibes. One vivid specific beats three adjectives.
+Write like a sharp, well-informed guide, not a brochure and not a diary.
+- Third person or direct address ("you"). Never first person about trips, bookings or tests.
+- State plainly what is worth it and what is not, and why, from facts you can support.
+- Concrete over abstract. One specific (a named station, operator, month or distance) beats three adjectives.
 
-# Banned phrases (never use ANY of these — they are AI tells and brochure clichés)
-nestled · hidden gem · bustling · a stone's throw (from) · picture-perfect · must-see · must-visit · world-class · charming · quaint · vibrant · breathtaking · stunning · magical · unique · diverse · plethora · myriad · a variety of · truly · simply · whether you're · rest assured · look no further · immerse yourself · embark on · a journey · gateway to · tapestry · cornucopia · haven · jewel · treasure · oasis
+# Banned openings and closings
+- Never open with "Picture this…", "Imagine…", "Welcome to…", "In a world where…", "When it comes to…", "Whether you're a seasoned traveler…", "Have you ever wondered…".
+- No closing summary ("In conclusion…", "To sum up…", "At the end of the day…", "has something for everyone"), no sentence starting with "So,", no generic "book your trip today" call to action.
 
-# Banned opening patterns (never start a paragraph or article with these)
-- "Picture this…" / "Imagine…" / "Welcome to…"
-- "In a world where…" / "When it comes to…"
-- "Whether you're a seasoned traveler or…"
-- "Have you ever wondered…"
-
-# Banned closing patterns
-- "In conclusion…" / "To sum up…" / "At the end of the day…"
-- "Whether you're [X] or [Y], [place] has something for everyone."
-- Any sentence starting with "So,".
-- Generic "book your trip today" CTAs — give a concrete next step instead (e.g. "Set a Google Flights price alert for LAX→HND, flexible ±3 days, for the last week of September.").
-
-# Concreteness rules
-Every H2 section must include AT LEAST ONE of these:
-- An exact price in USD (e.g. "$185/night", "$412 round-trip from JFK").
-- A named neighborhood, street, station, or terminal (e.g. "Shibuya's Dogenzaka slope", "Terminal 3 at Heathrow").
-- A brand, chain, operator, or airline name (e.g. "Marriott Bonvoy", "Scoot", "Klook").
-- A specific month or date range when something applies (e.g. "mid-October through early November", "before March 15 for Golden Week rates").
-- A measured distance or time (e.g. "a 12-minute walk from Shinjuku station", "under 6 hours door-to-door from SFO").
-
-Prefer specific nouns to generic ones: "the limestone cliffs of Phi Phi Leh" beats "scenic beaches"; "the Hakone Ropeway" beats "public transit".
+# Concreteness
+Every H2 section must include at least one confirmed specific: a named neighbourhood, street, station or terminal; an operator, airline or chain; a month or season when something applies; or a distance or travel time. Prices are not allowed (see the rules); describe what drives cost instead.
 
 # Structure
-- Lead with a 1-2 sentence hook that makes one concrete promise (e.g. "How to get business-class Tokyo flights for under $2,000, reliably, from both coasts.").
-- H2s that are scannable and search-friendly. H3s for sub-points.
-- Bullet lists for anything comparative, numeric, or sequential.
-- One honest caveat or tradeoff per 400-500 words. Readers trust writers who admit tradeoffs.
-- End with a concrete, actionable next step — not a wrap-up paragraph.
+- Open with one or two sentences that answer the topic's question directly.
+- Search-friendly, scannable H2s; H3s for sub-points.
+- Bullet lists for anything comparative, numeric or sequential; at least one or two sections use them.
+- One honest caveat or trade-off per 400-500 words.
+- End with the most useful practical next step, not a wrap-up paragraph.
 
 # Image prompts
 Vivid, concrete, free of logos/brand names/copyrighted characters. Specific place + time of day + lighting + lens hint.`;
@@ -349,7 +348,10 @@ function userPromptArticle(p) {
     p.keywords ? `Keywords to weave in: ${p.keywords}` : '',
     p.language ? `Language: ${p.language}` : '',
     `Target length: ${words} words`,
-    `Facts: Content must be grounded in real, verifiable facts about the topic — named places, operators, airlines, concrete prices, distances, dates, and widely-known figures. Do not invent or fabricate specifics. If you are unsure of a precise number or detail, omit it rather than make one up; generalise ("typically under $100/night" instead of inventing "$83.40") when exact figures aren't reliably known.`,
+    p.research
+      ? `Research: use web search to confirm the named places, operators, routes, schedules, distances and seasonal facts you include, before writing. Leave out anything you cannot confirm. List the pages you relied on in "sources".`
+      : `Facts: no web search is available for this article, so include only well-established facts you are certain of, and leave "sources" empty.`,
+    `Rules reminder: no prices, no first-person experience, nothing about future openings or closures, no year in the title.`,
     `Bullet points: At least 1-2 sections of the article MUST include bullet lists (e.g. comparisons, step-by-step instructions, pros/cons, options, or checklists). Do not rely on prose alone.`,
   ].filter(Boolean).join('\n');
 }
@@ -357,7 +359,7 @@ function userPromptArticle(p) {
 function systemPromptTitles() {
   return `You are a senior travel editor. You produce fresh, SEO-optimised article title ideas for a travel blog.
 Output MUST be strict JSON of the form: { "titles": string[] }.
-Each title: 50-70 chars, specific, actionable, and clickable (numbers, years, concrete places allowed).
+Each title: 40-${TITLE_MAX} characters, specific and actionable, naming a concrete place, route or problem. No year, no "!!", and none of "tested", "honest", "ultimate", "verified".
 Titles must be DISTINCT from each other — no near-duplicates, no same angle twice.
 Do not include any text outside the JSON. Do not wrap it in markdown fences.`;
 }
@@ -370,7 +372,6 @@ function userPromptTitles({ category, count, tone, language, keywords, destinati
     `Language: ${language}`,
     destination ? `Destination focus: ${destination}` : '',
     keywords ? `Keywords to consider: ${keywords}` : '',
-    `Year context: 2026.`,
     `Return exactly ${count} titles, no fewer, no more.`,
   ].filter(Boolean).join('\n');
 }
@@ -415,7 +416,28 @@ async function generateArticle(p) {
   let json = null;
   let text = '';
   let lastError = null;
+  let searchedUrls = null;
   for (let attempt = 1; attempt <= 2 && !json; attempt++) {
+    if (p.research) {
+      // Researched path: server-side web search, schema-constrained JSON.
+      try {
+        const out = await researchJson({
+          apiKey: ANTHROPIC_API_KEY,
+          model: CLAUDE_MODEL,
+          system: systemPromptArticle(lengthLabel),
+          prompt: userPromptArticle(p),
+          schema: ARTICLE_SCHEMA,
+          maxSearches: argv['max-searches'],
+          maxTokens: Math.max(parseInt(maxOutputTokensEnv(), 10) || 0, 16000),
+        });
+        json = out.json;
+        searchedUrls = out.searchedUrls;
+      } catch (e) {
+        lastError = e;
+        if (attempt < 2) process.stdout.write(`(${e.message.slice(0, 60)} — retrying) `);
+      }
+      continue;
+    }
     text = await callAI({
       system: systemPromptArticle(lengthLabel),
       user: userPromptArticle(p),
@@ -438,12 +460,70 @@ async function generateArticle(p) {
   // imperfect, and Strapi schema validation rejects over-length fields.
   // Hard-cap the SEO and excerpt fields a few chars under the schema limit.
   const truncate = (s, max) => (s && s.length > max ? s.slice(0, max - 1).trimEnd() + '…' : s);
-  json.seoTitle = truncate(json.seoTitle, 65);
-  json.seoDescription = truncate(json.seoDescription, 160);
+  json.seoTitle = truncate(json.seoTitle, TITLE_MAX);
+  json.seoDescription = truncate(json.seoDescription, META_DESCRIPTION_MAX);
   json.excerpt = truncate(json.excerpt, 300);
   if (json.slug) json.slug = json.slug.slice(0, 60);
 
+  // Sources: keep only pages the research actually returned, and list them at
+  // the end of the article. Without research there are none to list.
+  const found = (json.sources ?? []).filter((u) => searchedUrls?.has(normaliseUrl(u)));
+  json.sources = [...new Map(found.map((u) => [normaliseUrl(u), u])).values()].slice(0, 6);
+  json.searchedUrls = searchedUrls;
+  json.faqs = (json.faqs ?? []).filter((f) => f?.q && f?.a);
+  json.keyFacts = (json.keyFacts ?? []).filter((k) => k?.label && k?.value);
+
   return json;
+}
+
+/** Shape the researched article must take (structured output). */
+const ARTICLE_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['title', 'slug', 'excerpt', 'content', 'seoTitle', 'seoDescription', 'seoKeywords', 'tags', 'readingTimeMinutes', 'tldr', 'keyFacts', 'faqs', 'sources', 'imagePrompts'],
+  properties: {
+    title: { type: 'string' },
+    slug: { type: 'string' },
+    excerpt: { type: 'string' },
+    content: { type: 'string' },
+    seoTitle: { type: 'string' },
+    seoDescription: { type: 'string' },
+    seoKeywords: { type: 'string' },
+    tags: { type: 'array', items: { type: 'string' } },
+    readingTimeMinutes: { type: 'number' },
+    tldr: { type: 'string' },
+    keyFacts: {
+      type: 'array',
+      items: { type: 'object', additionalProperties: false, required: ['label', 'value'], properties: { label: { type: 'string' }, value: { type: 'string' } } },
+    },
+    faqs: {
+      type: 'array',
+      items: { type: 'object', additionalProperties: false, required: ['q', 'a'], properties: { q: { type: 'string' }, a: { type: 'string' } } },
+    },
+    sources: { type: 'array', items: { type: 'string' } },
+    imagePrompts: {
+      type: 'object',
+      additionalProperties: false,
+      required: ['cover', 'gallery'],
+      properties: { cover: { type: 'string' }, gallery: { type: 'array', items: { type: 'string' } } },
+    },
+  },
+};
+
+/** Audit-rule check on a generated article; empty list means it may be published. */
+function articleIssues(draft) {
+  const body = [draft.content, draft.excerpt, draft.tldr, ...(draft.faqs ?? []).map((f) => `${f.q} ${f.a}`), ...(draft.keyFacts ?? []).map((k) => `${k.label}: ${k.value}`)].join('\n\n');
+  return checkOriginfactsContent(
+    { title: draft.title, seoTitle: draft.seoTitle, seoDescription: draft.seoDescription, body },
+    { allowedUrls: draft.searchedUrls ?? null },
+  );
+}
+
+/** Markdown list of the article's sources, appended to the body. */
+function sourcesSection(sources) {
+  if (!sources?.length) return '';
+  const label = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } };
+  return `\n\n## Sources\n\n${sources.map((u) => `- [${label(u)}](${u})`).join('\n')}\n`;
 }
 
 async function callAI({ system, user, maxTokens }) {
@@ -590,6 +670,9 @@ async function postToStrapi(draft, opts) {
     readingTimeMinutes: draft.readingTimeMinutes,
     source: 'ai',
   };
+  if (draft.tldr) data.tldr = draft.tldr.slice(0, 600);
+  if (draft.keyFacts?.length) data.keyFacts = draft.keyFacts;
+  if (draft.faqs?.length) data.faqs = draft.faqs;
   if (opts.categoryId) data.category = opts.categoryId;
   if (opts.destinationIds?.length) data.destinations = opts.destinationIds;
   if (opts.coverId) data.coverImage = opts.coverId;
@@ -684,6 +767,7 @@ async function runOne({ topic, category, destination }) {
     category: category || argv.category,
     keywords: argv.keywords,
     language: argv.language,
+    research: argv.research && aiProvider === 'anthropic',
   };
 
   const label = (category || argv.category || 'uncategorised').padEnd(18);
@@ -706,6 +790,18 @@ async function runOne({ topic, category, destination }) {
       }
     } catch (e) {
       console.log(`(lookup failed: ${e.message.slice(0, 80)}) — proceeding`);
+    }
+  }
+
+  // Near-duplicate of an existing article? Skip before paying for research.
+  if (!argv['dry-run']) {
+    const same = await titleSimilarity();
+    const twin = (await existingArticleTitles()).find((t) => same(t, topic));
+    if (twin) {
+      // Not marked done: the topic line is flagged for an editor instead.
+      console.log(`SKIP looks like a near-duplicate of "${twin}" — flagged for review`);
+      lastDuplicateOf = twin;
+      return 'duplicate';
     }
   }
 
@@ -733,6 +829,20 @@ async function runOne({ topic, category, destination }) {
   }
   process.stdout.write(`${((Date.now() - t0) / 1000).toFixed(1)}s · `);
 
+  // Audit rules: anything that fails is saved as a draft, never published, with
+  // the problems listed so an editor can fix them. That includes a title the
+  // model rewrote into a near-copy of an existing article (the duplicate
+  // car-rental pair the September audit hid); the paid draft is kept.
+  const issues = articleIssues(draft);
+  if (!argv['dry-run']) {
+    const same = await titleSimilarity();
+    const twin = (await existingArticleTitles()).find((t) => same(t, draft.title));
+    if (twin) issues.push(`title looks like a near-duplicate of "${twin}"`);
+  }
+  const publish = argv.publish && issues.length === 0;
+  if (issues.length) console.log(`\n  ⚠ ${issues.length} rule issue(s)${argv.publish ? ' — saving as draft, not publishing' : ''}:\n    - ${issues.join('\n    - ')}`);
+  draft.content = `${draft.content.trim()}${sourcesSection(draft.sources)}`;
+
   if (argv['dry-run']) {
     console.log('(dry-run)');
     console.log(JSON.stringify(draft, null, 2));
@@ -750,11 +860,36 @@ async function runOne({ topic, category, destination }) {
 
   const categoryId = await resolveCategoryId(category || argv.category);
   const { ids: destinationIds, names: destinationNames } = await detectDestinations(topic, effectiveDestination);
-  const created = await postToStrapi(draft, { categoryId, destinationIds, coverId, galleryIds, publish: argv.publish });
+  const created = await postToStrapi(draft, { categoryId, destinationIds, coverId, galleryIds, publish });
+  titleCache?.push(draft.title);
   const id = created?.data?.id ?? '?';
   const destPart = destinationNames.length ? ` · dest=[${destinationNames.join(', ')}]` : '';
-  console.log(`${argv.publish ? 'PUBLISHED' : 'draft'} id=${id}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}${destPart}`);
-  return argv.publish ? 'published' : 'draft';
+  console.log(`${publish ? 'PUBLISHED' : 'draft'} id=${id}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}${destPart}`);
+  return publish ? 'published' : 'draft';
+}
+
+let titleCache = null;
+let lastDuplicateOf = null;
+/** Title near-duplicate test weighted over every known title and queued topic. */
+async function titleSimilarity() {
+  const corpus = [...(await existingArticleTitles())];
+  if (argv.topics && fs.existsSync(argv.topics)) {
+    corpus.push(...fs.readFileSync(argv.topics, 'utf8').split('\n').map((l) => l.split('|')[1]?.trim()).filter(Boolean));
+  }
+  const places = (await loadDestinationIndex()).flatMap((d) => d.variants);
+  return titleMatcher(corpus, places);
+}
+/** Titles of every article already in Strapi (drafts included), fetched once per run. */
+async function existingArticleTitles() {
+  if (titleCache) return titleCache;
+  titleCache = [];
+  for (let page = 1; page <= 50; page++) {
+    const res = await strapi(`/api/articles?status=draft&fields[0]=title&pagination[page]=${page}&pagination[pageSize]=100`).catch(() => null);
+    const rows = res?.data ?? [];
+    titleCache.push(...rows.map((r) => (r.attributes ?? r).title).filter(Boolean));
+    if (rows.length < 100) break;
+  }
+  return titleCache;
 }
 
 /**
@@ -772,7 +907,9 @@ function markTopicDone(file, line, status) {
     const idx = rows.findIndex((r) => r.trim() === line && !r.trim().startsWith('#'));
     if (idx === -1) return false;
     const stamp = new Date().toISOString().slice(0, 10);
-    rows[idx] = `# done ${stamp} (${status}) · ${line}`;
+    rows[idx] = status === 'duplicate'
+      ? `# review ${stamp} (near-duplicate of "${lastDuplicateOf}") · ${line}`
+      : `# done ${stamp} (${status}) · ${line}`;
     fs.writeFileSync(abs, rows.join('\n'));
     return true;
   } catch (e) {
@@ -850,7 +987,7 @@ async function runBatch(file) {
     attempts++;
     try {
       const status = await runOne(j);
-      if (status === 'exists') existed++; else ok++;
+      if (status === 'exists' || status === 'duplicate') existed++; else ok++;
       // Once the article exists in Strapi — just written, or found already
       // there — comment the topic out of the file so it is never re-run.
       if (status && status !== 'dry-run' && markTopicDone(file, j.line, status)) marked++;
