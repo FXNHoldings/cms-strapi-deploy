@@ -16,6 +16,10 @@ import { marked } from 'marked';
 import { input, select } from '@inquirer/prompts';
 import { PROMPT_STYLES, PROMPT_STYLE_KEYS, EDITORIAL_NOTES_SCHEMA } from './prompt-styles.js';
 import { parseAiJson } from './parse-ai-json.js';
+import * as nxtsmarthomeRules from './nxtsmarthome-content-rules.js';
+// researchJson is the shared Claude + web search helper; it lives with the
+// originfacts rules, which introduced it.
+import { researchJson } from './originfacts-content-rules.js';
 
 const SITE_CONFIG = {
   'nxt.bargains': {
@@ -163,7 +167,7 @@ const SITE_CONFIG = {
       ['buying-guide', 'Buying guide'],
       ['product-comparison', 'Comparison'],
       ['product-roundup', 'Roundup'],
-      ['product-review', 'Review'],
+      // No 'product-review': nothing has been tested hands-on (CLAUDE.md rule 5, audit C10).
       ['pillar', 'Pillar / complete guide'],
     ],
     // Real catalogue products are offered to the writer and placed inline as
@@ -189,6 +193,11 @@ const SITE_CONFIG = {
     // random. The "NXT Smart Home Editorial" fallback byline is never used.
     authorEndpoint: '/api/nxtsmarthome-authors',
     authorSlugs: ['adrian-thompson', 'k-curtis', 'harry-cheng'],
+    // October 2026 SEO audit rules: research with web search, canonical internal
+    // links, a rules check that keeps failing articles as drafts, near-duplicate
+    // topics skipped, batches released a day apart. nxtsmarthome-content-rules.js.
+    contentRules: 'nxtsmarthome',
+    minReleaseGapHours: 24,
     editorialBrief:
       'Write practical smart home content for Australian homes for NXT Smart Home. Australian English (optimise, colour), AUD, Australian retailers, 240V power, AS/NZS rules, renters and strata where relevant. Never invent prices, specs, test results or ratings, and never imply hands-on testing that did not happen. Do not state electrical, privacy or tenancy law as settled fact; recommend a licensed electrician for fixed wiring.',
     topicNiche: 'smart home devices for Australian homes: security cameras, lighting, energy and solar, climate, entertainment, hubs and platforms, robot vacuums, setup and buying guides',
@@ -300,6 +309,16 @@ const argv = yargs(hideBin(process.argv))
     default: true,
     describe: 'nxtsmarthome.com.au: append a "Where to buy" list of live Australian retailer links for the featured products (DataForSEO, ~$0.001 per product). --no-affiliate-links to skip.',
   })
+  .option('research', {
+    type: 'boolean',
+    default: true,
+    describe: 'nxtsmarthome.com.au: research the topic with Claude web search first, so facts and source links come from search results. --no-research to skip (the article is then held as a draft).',
+  })
+  .option('allow-duplicate', {
+    type: 'boolean',
+    default: false,
+    describe: 'nxtsmarthome.com.au: write a topic even when it closely matches an existing article (normally skipped; audit C3).',
+  })
   .option('dry-run', { type: 'boolean', default: false, describe: 'Generate JSON only; do not write to Strapi' })
   .help()
   .parseSync();
@@ -318,6 +337,9 @@ const {
   OPENROUTER_SITE_URL = 'https://cms.fxnstudio.com',
   OPENROUTER_APP_NAME = 'FXN AI Writer CLI',
   ANTHROPIC_API_KEY,
+  GEMINI_API_KEY,
+  GEMINI_MODEL = 'gemini-3.8-flash',
+  GEMINI_MAX_OUTPUT_TOKENS = '32000',
   CLAUDE_MODEL = 'claude-sonnet-4-5-20250929',
   CLAUDE_MAX_TOKENS = '4096',
   STRAPI_URL,
@@ -328,7 +350,8 @@ const {
 } = process.env;
 
 const aiProvider = AI_PROVIDER.toLowerCase();
-if (!['openai', 'openrouter', 'anthropic'].includes(aiProvider)) fatal('AI_PROVIDER must be "openai", "openrouter", or "anthropic".');
+if (!['openai', 'openrouter', 'anthropic', 'gemini'].includes(aiProvider)) fatal('AI_PROVIDER must be "openai", "openrouter", "anthropic" or "gemini".');
+if (aiProvider === 'gemini' && !GEMINI_API_KEY) fatal('GEMINI_API_KEY is not set.');
 if (aiProvider === 'openai' && !OPENAI_API_KEY) fatal('OPENAI_API_KEY is not set.');
 if (aiProvider === 'openrouter' && !OPENROUTER_API_KEY) fatal('OPENROUTER_API_KEY is not set.');
 if (aiProvider === 'anthropic' && !ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set.');
@@ -528,10 +551,57 @@ async function loadInternalLinkCandidates(category, limit = 8) {
   }
 }
 
-async function buildInternalLinkContext(category) {
-  const candidates = await loadInternalLinkCandidates(category);
+/*
+ * Every published article on a contentRules site, with its category: used for
+ * relevant internal links and the near-duplicate topic check. Loaded once.
+ */
+let siteArticles = null;
+async function loadSiteArticles() {
+  if (siteArticles) return siteArticles;
+  siteArticles = [];
+  if (argv["dry-run"] && !STRAPI_API_TOKEN) return siteArticles;
+  const sep = site.postEndpoint.includes("?") ? "&" : "?";
+  for (const status of ["published", "draft"]) {
+    for (let page = 1; page <= 50; page += 1) {
+      const res = await strapi(`${site.postEndpoint}${sep}status=${status}&fields[0]=title&fields[1]=slug&populate[categories][fields][0]=slug&pagination[page]=${page}&pagination[pageSize]=100`);
+      for (const p of res?.data || []) {
+        if (!p.slug || siteArticles.some((a) => a.slug === p.slug)) continue;
+        siteArticles.push({ title: String(p.title || "").trim(), slug: p.slug, category: p.categories?.[0]?.slug || "", published: status === "published" });
+      }
+      if (page >= (res?.meta?.pagination?.pageCount || 1)) break;
+    }
+  }
+  return siteArticles;
+}
+
+/*
+ * Internal-link candidates for a contentRules site (audit S1): the published
+ * articles most related to the topic across the whole site, not just the
+ * newest in the category, with canonical URLs (category URL slug, trailing
+ * slash). The old list linked /security/<slug>, which 308-redirects.
+ */
+async function relevantInternalLinks(topic, category, limit = 10) {
+  const words = (t) => new Set(String(t).toLowerCase().match(/[a-z0-9]+/g)?.filter((w) => w.length > 3 && !PRODUCT_STOPWORDS.has(w)) ?? []);
+  const want = words(topic);
+  return (await loadSiteArticles())
+    .filter((a) => a.published && a.title)
+    .map((a) => {
+      let score = a.category === category ? 1 : 0;
+      for (const w of words(a.title)) if (want.has(w)) score += 2;
+      return { ...a, score };
+    })
+    .filter((a) => a.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((a) => ({ title: a.title, url: nxtsmarthomeRules.articleUrl(a.category, a.slug) }));
+}
+
+async function buildInternalLinkContext(category, topic = "") {
+  const candidates = site.contentRules
+    ? await relevantInternalLinks(topic, category)
+    : await loadInternalLinkCandidates(category);
   if (!candidates.length) return "";
-  const lines = candidates.map((post, index) => `${index + 1}. ${post.title} - ${post.url}`).join("\\n");
+  const lines = candidates.map((post, index) => `${index + 1}. ${post.title} - ${post.url}`).join("\n");
   return `\n\nInternal-link opportunities from existing ${site.label} posts in this category:\n${lines}\n\nInternal linking requirements:\n- Add 2-4 links only where they help the reader continue the same topic.\n- Use the exact URLs above.\n- Use descriptive anchor text, not "click here".\n- Do not link to the new article itself.\n`;
 }
 
@@ -1181,7 +1251,14 @@ function extractFaqToField(post) {
 }
 
 async function generatePost(topic, category, { dealProduct = null, catalogProducts = null } = {}) {
-  const internalLinkContext = await buildInternalLinkContext(category);
+  const internalLinkContext = await buildInternalLinkContext(category, topic);
+  const rules = site.contentRules === 'nxtsmarthome' ? nxtsmarthomeRules : null;
+  let research = null;
+  let researchContext = '';
+  if (rules && argv.research) {
+    research = await researchTopic(topic, category);
+    if (research) researchContext = rules.researchNotes(research.json);
+  }
   const isDealsPost = isNxtDealsCategory(category);
   const isSmartHomePost = isNxtSmartHomeCategory(category);
   const seededProducts = Array.isArray(catalogProducts) ? catalogProducts.filter(Boolean) : [];
@@ -1218,7 +1295,7 @@ Rank Math SEO requirements (mandatory before returning JSON):
   const styleBlock = style.instructions ? `\n${style.instructions}\n` : '';
 
   const prompt = `${site.editorialBrief}
-${styleBlock}
+${styleBlock}${rules ? `\n${rules.NXTSMARTHOME_RULES}\n` : ''}
 Write one complete blog post.
 
 Topic: ${topic}
@@ -1227,7 +1304,7 @@ Tone: ${argv.tone}
 Length: ${wordTarget} words
 Language: ${argv.language}
 SEO keywords: ${argv.keywords || 'choose natural keywords from the topic'}
-${dealContext}${catalogContext}${smartHomeContext}${siteProductsContext}${internalLinkContext}${rankMathRequirements}
+${dealContext}${catalogContext}${smartHomeContext}${siteProductsContext}${researchContext}${internalLinkContext}${rankMathRequirements}
 
 Return STRICT JSON only with exactly these keys:
 {
@@ -1349,9 +1426,109 @@ Image prompt requirements:
     else if (placed < min) console.log(`  note     : fewer than ${min} product boxes (no close catalogue match)`);
     const faqs = extractFaqToField(post);
     if (faqs) console.log(`  faq      : ${faqs} questions moved to the FAQ field`);
+    // Before "Where to buy" is appended: that section is generated, not
+    // written, so the rules check and its repair leave it alone.
+    if (rules) await enforceContentRules(post, rules, research);
     await appendAffiliateLinks(post, siteProducts);
+  } else if (rules) {
+    await enforceContentRules(post, rules, research);
   }
   return post;
+}
+
+/** Web search on the topic before writing (nxtsmarthome-content-rules.js): Gemini + Google Search, or Claude. */
+async function researchTopic(topic, category) {
+  if (aiProvider === 'gemini') {
+    const label = site.categoryLabels?.[category] || category;
+    try {
+      const result = await nxtsmarthomeRules.researchWithGemini({
+        apiKey: GEMINI_API_KEY,
+        model: GEMINI_MODEL,
+        prompt: nxtsmarthomeRules.researchPrompt(topic, label),
+      });
+      console.log(`  research : Google Search via Gemini, ${result.json.facts.length} notes, ${result.searchedUrls.size} source URLs`);
+      if (!result.searchedUrls.size) throw new Error('no search results');
+      return result;
+    } catch (error) {
+      console.log(`  research : failed (${error.message.slice(0, 160)}) - the article will be held as a draft`);
+      return null;
+    }
+  }
+  if (!ANTHROPIC_API_KEY) {
+    console.log('  research : skipped (no ANTHROPIC_API_KEY) - the article will be held as a draft');
+    return null;
+  }
+  const label = site.categoryLabels?.[category] || category;
+  try {
+    const result = await researchJson({
+      apiKey: ANTHROPIC_API_KEY,
+      model: CLAUDE_MODEL,
+      system: 'You research facts for an Australian smart-home site. Use web search. Report only what the pages you found state, each with its URL. Never construct URLs.',
+      prompt: nxtsmarthomeRules.researchPrompt(topic, label),
+      schema: nxtsmarthomeRules.RESEARCH_SCHEMA,
+      maxSearches: 6,
+    });
+    for (const f of [...(result.json.facts || []), ...(result.json.officialSources || [])]) {
+      if (f.url) result.searchedUrls.add(nxtsmarthomeRules.normaliseUrl(f.url));
+    }
+    console.log(`  research : ${result.json.facts?.length || 0} facts, ${result.json.officialSources?.length || 0} official sources, ${result.searchedUrls.size} URLs`);
+    return result;
+  } catch (error) {
+    console.log(`  research : failed (${error.message.slice(0, 160)}) - the article will be held as a draft`);
+    return null;
+  }
+}
+
+/*
+ * The audit rules, after everything else has shaped the article: canonical
+ * internal links, then the check. Problems get one repair round from the
+ * model; whatever is left keeps the article a draft (post.rulesIssues).
+ */
+async function enforceContentRules(post, rules, research) {
+  const allowedUrls = research?.searchedUrls ?? null;
+  post.content = rules.canonicaliseInternalLinks(post.content);
+  const unlink = async () => {
+    if (!allowedUrls) return;
+    const live = await rules.verifyLiveUrls(post.content, allowedUrls);
+    if (live.length) console.log(`  links    : ${live.length} cited URL(s) not in the research but live (HTTP 200), kept`);
+    const { text, dropped } = rules.unlinkUnsourced(post.content, allowedUrls);
+    post.content = text;
+    if (dropped.length) console.log(`  links    : unlinked ${dropped.length} URL(s) neither in the research nor live (${[...new Set(dropped)].slice(0, 4).join(', ')}${dropped.length > 4 ? ', ...' : ''})`);
+  };
+  await unlink();
+  post.postType = post.postType || argv['post-type'] || site.defaultPostType;
+  let issues = rules.checkNxtsmarthomeContent(post, { allowedUrls });
+  if (issues.length) {
+    console.log(`  rules    : ${issues.length} problem(s), asking for one repair`);
+    for (const issue of issues) console.log(`    - ${issue}`);
+    try {
+      const text = await callAI({
+        system: 'You are a senior editor. Return strict JSON only.',
+        user: `${rules.NXTSMARTHOME_RULES}\n\nThis article breaks the rules above:\n${issues.map((i) => `- ${i}`).join('\n')}\n\nFix every problem without adding facts that are not already in it${research ? ' or in the research notes below' : ''}. External links may only use the exact source URLs listed in the research notes. Keep every ::product:<slug>:: marker line and every existing link to nxtsmarthome.com.au. Return STRICT JSON with exactly the keys "title", "seoTitle", "seoDescription", "content".${research ? rules.researchNotes(research.json) : ''}\n\nArticle:\n${JSON.stringify({ title: post.title, seoTitle: post.seoTitle, seoDescription: post.seoDescription, content: post.content })}`,
+        maxTokens: Math.max(Number(maxOutputTokensEnv()) || 0, 16000),
+      });
+      const fixed = parseAiJson(text, { providerName: activeProviderName() });
+      for (const key of ['title', 'seoTitle', 'seoDescription', 'content']) if (fixed?.[key]) post[key] = fixed[key];
+      normalizePostForStrapi(post);
+      post.content = rules.canonicaliseInternalLinks(post.content);
+      await unlink();
+      issues = rules.checkNxtsmarthomeContent(post, { allowedUrls });
+    } catch (error) {
+      console.log(`  rules    : repair failed (${error.message.slice(0, 120)})`);
+    }
+  }
+  if (site.productCatalog && site.productCatalog.requireMin !== false) {
+    const boxes = new Set(String(post.content).match(/::product:[a-z0-9-]+::/g) ?? []).size;
+    if (boxes < site.productCatalog.min) issues.push(`${boxes} product boxes after the rules repair (min ${site.productCatalog.min}, site rule 8)`);
+  }
+  if (!research) issues.push('not researched (--no-research or research failed): facts unverified');
+  post.rulesIssues = issues;
+  if (issues.length) {
+    console.log(`  WARNING  : ${issues.length} rule problem(s) left - saving as a DRAFT for review`);
+    for (const issue of issues) console.log(`    - ${issue}`);
+  } else {
+    console.log('  rules    : all checks passed');
+  }
 }
 
 function normalizeContentForSite(post) {
@@ -1744,9 +1921,9 @@ async function postToStrapi(post, { categoryId, coverId, galleryIds, sourceUrl }
   if (authorId) data.author = authorId;
   if (argv['amazon-tag']) data.amazonAffiliateTag = argv['amazon-tag'];
   // A post missing its required product boxes is held back as a draft.
-  const publish = argv.publish && !post.productShortfall;
+  const publish = argv.publish && !post.productShortfall && !post.rulesIssues?.length;
   if (publish) data.publishedAt = new Date().toISOString();
-  const releaseAt = nextReleaseAt();
+  const releaseAt = publish ? nextReleaseAt() : null;
   if (releaseAt) {
     data.showFrom = releaseAt;
     // Only nxtsmarthome-post has a publishDate field; bls-post rejects it.
@@ -2491,6 +2668,20 @@ Best Sellers article requirements:
 }
 
 async function callAI({ system, user, maxTokens }) {
+  if (aiProvider === 'gemini') {
+    // Every prompt here asks for strict JSON, so ask Gemini for a JSON response.
+    const json = await nxtsmarthomeRules.geminiGenerate({
+      apiKey: GEMINI_API_KEY,
+      model: GEMINI_MODEL,
+      body: {
+        systemInstruction: { parts: [{ text: system }] },
+        contents: [{ role: 'user', parts: [{ text: user }] }],
+        generationConfig: { responseMimeType: 'application/json', maxOutputTokens: maxTokens },
+      },
+    });
+    return nxtsmarthomeRules.geminiText(json).trim();
+  }
+
   if (aiProvider === 'openai') {
     const response = await openaiClient.responses.create({
       model: OPENAI_MODEL,
@@ -2602,7 +2793,25 @@ async function run() {
   console.log(`${site.label} site-post generator`);
   console.log(`AI: ${aiProvider} | Model: ${activeModel()} | length: ${articleLengthLabel()} | dry-run: ${argv['dry-run']} | publish: ${argv.publish} | images: ${argv.images}\n`);
 
-  const jobs = await buildJobs();
+  let jobs = await buildJobs();
+  if (site.contentRules && !argv['allow-duplicate']) {
+    // Audit C3: a topic that closely matches an existing article splits one
+    // search intent across two URLs. Skip it, and say which article it matches.
+    const titles = (await loadSiteArticles()).map((a) => a.title);
+    jobs = jobs.filter((job) => {
+      const match = nxtsmarthomeRules.nearDuplicateOf(job.forcedTitle || job.topic, titles);
+      if (match) console.log(`Skipped "${job.forcedTitle || job.topic}": too close to the existing "${match}" (--allow-duplicate to write it anyway)`);
+      return !match;
+    });
+  }
+  if (site.minReleaseGapHours && argv.publish && jobs.length > 1) {
+    // Audit C2/#19: batches went live seconds apart. Release them a day apart.
+    if (!releaseBase) {
+      releaseBase = new Date();
+      if (site.supportsShowFrom) console.log(`Release: ${jobs.length} articles, ${site.minReleaseGapHours}h apart from now (showFrom)`);
+    }
+    if (!(argv['publish-every'] >= site.minReleaseGapHours)) argv['publish-every'] = site.minReleaseGapHours;
+  }
   console.log(`Queue: ${jobs.length} post(s)\n`);
 
   const results = [];
@@ -2697,7 +2906,7 @@ async function run() {
     keys.titles.add(titleKey(post.title));
     const adminUrl = `${STRAPI_URL}/admin/content-manager/collection-types/${site.adminUid}/${id}`;
     const showFrom = saved?.data?.showFrom;
-    const savedPublished = argv.publish && !post.productShortfall;
+    const savedPublished = argv.publish && !post.productShortfall && !post.rulesIssues?.length;
     console.log(`  saved ${savedPublished ? 'published' : 'draft'}: ${post.slug}${showFrom ? ` · shows from ${showFrom}` : ''}${coverId ? ` · cover=${coverId}` : ''}${galleryIds.length ? ` · gallery=[${galleryIds.join(',')}]` : ''}`);
     console.log(`  review: ${adminUrl}\n`);
     results.push({ topic: job.topic, slug: post.slug, id, status: !savedPublished ? 'draft' : showFrom ? `scheduled ${showFrom}` : 'published' });
@@ -2712,18 +2921,21 @@ async function run() {
 function activeModel() {
   if (aiProvider === 'openai') return OPENAI_MODEL;
   if (aiProvider === 'openrouter') return OPENROUTER_MODEL;
+  if (aiProvider === 'gemini') return GEMINI_MODEL;
   return CLAUDE_MODEL;
 }
 
 function activeProviderName() {
   if (aiProvider === 'openai') return 'OpenAI';
   if (aiProvider === 'openrouter') return 'OpenRouter';
+  if (aiProvider === 'gemini') return 'Gemini';
   return 'Claude';
 }
 
 function maxOutputTokensEnv() {
   if (aiProvider === 'openai') return OPENAI_MAX_OUTPUT_TOKENS;
   if (aiProvider === 'openrouter') return OPENROUTER_MAX_TOKENS;
+  if (aiProvider === 'gemini') return GEMINI_MAX_OUTPUT_TOKENS;
   return CLAUDE_MAX_TOKENS;
 }
 

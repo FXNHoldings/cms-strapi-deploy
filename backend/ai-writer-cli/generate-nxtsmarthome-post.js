@@ -41,6 +41,12 @@
 // generation: Australian English, no invented prices/specs/ratings, and a
 // [VERIFY] check on legal and safety claims.
 
+// Gemini by default for this site (owner's request, Oct 2026). dotenv never
+// overrides a variable that is already set, so AI_PROVIDER from the shell
+// still wins (AI_PROVIDER=anthropic node generate-nxtsmarthome-post.js ...);
+// set here, it also wins over the shared .env, which other sites rely on.
+if (!process.env.AI_PROVIDER) process.env.AI_PROVIDER = "gemini";
+
 const args = process.argv.slice(2);
 const hasSiteFlag = args.some((arg) => arg === "--site" || arg === "-s" || arg.startsWith("--site="));
 
