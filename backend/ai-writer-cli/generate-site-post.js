@@ -337,6 +337,9 @@ const {
   OPENROUTER_SITE_URL = 'https://cms.fxnstudio.com',
   OPENROUTER_APP_NAME = 'FXN AI Writer CLI',
   ANTHROPIC_API_KEY,
+  GEMINI_API_KEY,
+  GEMINI_MODEL = 'gemini-3.8-flash',
+  GEMINI_MAX_OUTPUT_TOKENS = '32000',
   CLAUDE_MODEL = 'claude-sonnet-4-5-20250929',
   CLAUDE_MAX_TOKENS = '4096',
   STRAPI_URL,
@@ -347,7 +350,8 @@ const {
 } = process.env;
 
 const aiProvider = AI_PROVIDER.toLowerCase();
-if (!['openai', 'openrouter', 'anthropic'].includes(aiProvider)) fatal('AI_PROVIDER must be "openai", "openrouter", or "anthropic".');
+if (!['openai', 'openrouter', 'anthropic', 'gemini'].includes(aiProvider)) fatal('AI_PROVIDER must be "openai", "openrouter", "anthropic" or "gemini".');
+if (aiProvider === 'gemini' && !GEMINI_API_KEY) fatal('GEMINI_API_KEY is not set.');
 if (aiProvider === 'openai' && !OPENAI_API_KEY) fatal('OPENAI_API_KEY is not set.');
 if (aiProvider === 'openrouter' && !OPENROUTER_API_KEY) fatal('OPENROUTER_API_KEY is not set.');
 if (aiProvider === 'anthropic' && !ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set.');
@@ -1414,8 +1418,24 @@ Image prompt requirements:
   return post;
 }
 
-/** Claude web search on the topic before writing (nxtsmarthome-content-rules.js). */
+/** Web search on the topic before writing (nxtsmarthome-content-rules.js): Gemini + Google Search, or Claude. */
 async function researchTopic(topic, category) {
+  if (aiProvider === 'gemini') {
+    const label = site.categoryLabels?.[category] || category;
+    try {
+      const result = await nxtsmarthomeRules.researchWithGemini({
+        apiKey: GEMINI_API_KEY,
+        model: GEMINI_MODEL,
+        prompt: nxtsmarthomeRules.researchPrompt(topic, label),
+      });
+      console.log(`  research : Google Search via Gemini, ${result.json.facts.length} notes, ${result.searchedUrls.size} source URLs`);
+      if (!result.searchedUrls.size) throw new Error('no search results');
+      return result;
+    } catch (error) {
+      console.log(`  research : failed (${error.message.slice(0, 160)}) - the article will be held as a draft`);
+      return null;
+    }
+  }
   if (!ANTHROPIC_API_KEY) {
     console.log('  research : skipped (no ANTHROPIC_API_KEY) - the article will be held as a draft');
     return null;
@@ -1449,6 +1469,15 @@ async function researchTopic(topic, category) {
 async function enforceContentRules(post, rules, research) {
   const allowedUrls = research?.searchedUrls ?? null;
   post.content = rules.canonicaliseInternalLinks(post.content);
+  const unlink = async () => {
+    if (!allowedUrls) return;
+    const live = await rules.verifyLiveUrls(post.content, allowedUrls);
+    if (live.length) console.log(`  links    : ${live.length} cited URL(s) not in the research but live (HTTP 200), kept`);
+    const { text, dropped } = rules.unlinkUnsourced(post.content, allowedUrls);
+    post.content = text;
+    if (dropped.length) console.log(`  links    : unlinked ${dropped.length} URL(s) neither in the research nor live (${[...new Set(dropped)].slice(0, 4).join(', ')}${dropped.length > 4 ? ', ...' : ''})`);
+  };
+  await unlink();
   post.postType = post.postType || argv['post-type'] || site.defaultPostType;
   let issues = rules.checkNxtsmarthomeContent(post, { allowedUrls });
   if (issues.length) {
@@ -1457,13 +1486,14 @@ async function enforceContentRules(post, rules, research) {
     try {
       const text = await callAI({
         system: 'You are a senior editor. Return strict JSON only.',
-        user: `${rules.NXTSMARTHOME_RULES}\n\nThis article breaks the rules above:\n${issues.map((i) => `- ${i}`).join('\n')}\n\nFix every problem without adding facts or URLs that are not already in it${research ? ' or in the research notes below' : ''}. Keep every ::product:<slug>:: marker line and every existing link to nxtsmarthome.com.au. Return STRICT JSON with exactly the keys "title", "seoTitle", "seoDescription", "content".${research ? rules.researchNotes(research.json) : ''}\n\nArticle:\n${JSON.stringify({ title: post.title, seoTitle: post.seoTitle, seoDescription: post.seoDescription, content: post.content })}`,
+        user: `${rules.NXTSMARTHOME_RULES}\n\nThis article breaks the rules above:\n${issues.map((i) => `- ${i}`).join('\n')}\n\nFix every problem without adding facts that are not already in it${research ? ' or in the research notes below' : ''}. External links may only use the exact source URLs listed in the research notes. Keep every ::product:<slug>:: marker line and every existing link to nxtsmarthome.com.au. Return STRICT JSON with exactly the keys "title", "seoTitle", "seoDescription", "content".${research ? rules.researchNotes(research.json) : ''}\n\nArticle:\n${JSON.stringify({ title: post.title, seoTitle: post.seoTitle, seoDescription: post.seoDescription, content: post.content })}`,
         maxTokens: Math.max(Number(maxOutputTokensEnv()) || 0, 16000),
       });
       const fixed = parseAiJson(text, { providerName: activeProviderName() });
       for (const key of ['title', 'seoTitle', 'seoDescription', 'content']) if (fixed?.[key]) post[key] = fixed[key];
       normalizePostForStrapi(post);
       post.content = rules.canonicaliseInternalLinks(post.content);
+      await unlink();
       issues = rules.checkNxtsmarthomeContent(post, { allowedUrls });
     } catch (error) {
       console.log(`  rules    : repair failed (${error.message.slice(0, 120)})`);
@@ -2563,6 +2593,20 @@ Best Sellers article requirements:
 }
 
 async function callAI({ system, user, maxTokens }) {
+  if (aiProvider === 'gemini') {
+    // Every prompt here asks for strict JSON, so ask Gemini for a JSON response.
+    const json = await nxtsmarthomeRules.geminiGenerate({
+      apiKey: GEMINI_API_KEY,
+      model: GEMINI_MODEL,
+      body: {
+        systemInstruction: { parts: [{ text: system }] },
+        contents: [{ role: 'user', parts: [{ text: user }] }],
+        generationConfig: { responseMimeType: 'application/json', maxOutputTokens: maxTokens },
+      },
+    });
+    return nxtsmarthomeRules.geminiText(json).trim();
+  }
+
   if (aiProvider === 'openai') {
     const response = await openaiClient.responses.create({
       model: OPENAI_MODEL,
@@ -2793,18 +2837,21 @@ async function run() {
 function activeModel() {
   if (aiProvider === 'openai') return OPENAI_MODEL;
   if (aiProvider === 'openrouter') return OPENROUTER_MODEL;
+  if (aiProvider === 'gemini') return GEMINI_MODEL;
   return CLAUDE_MODEL;
 }
 
 function activeProviderName() {
   if (aiProvider === 'openai') return 'OpenAI';
   if (aiProvider === 'openrouter') return 'OpenRouter';
+  if (aiProvider === 'gemini') return 'Gemini';
   return 'Claude';
 }
 
 function maxOutputTokensEnv() {
   if (aiProvider === 'openai') return OPENAI_MAX_OUTPUT_TOKENS;
   if (aiProvider === 'openrouter') return OPENROUTER_MAX_TOKENS;
+  if (aiProvider === 'gemini') return GEMINI_MAX_OUTPUT_TOKENS;
   return CLAUDE_MAX_TOKENS;
 }
 

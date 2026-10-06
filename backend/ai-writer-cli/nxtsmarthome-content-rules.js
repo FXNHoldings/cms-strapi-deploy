@@ -99,6 +99,11 @@ Structure
 - Comparison, buying-guide and roundup articles include a Markdown comparison
   table, using only figures the research notes confirm; leave a cell as "Not
   stated" rather than guess.
+- Product boxes: place a catalogue product only where the article genuinely
+  discusses that kind of product. Never add a sentence or section just to
+  mention one (a security camera in a smoke-alarm article is an ad, not
+  content, CLAUDE.md rule 3). Placing none is better than placing one that
+  does not belong; the editor then finds a product or holds the article.
 - Link 2-4 related NXT Smart Home articles from the internal-link list, with
   descriptive anchor text, where they genuinely help. Use the URLs exactly.
 - End with "## Sources": the official and manufacturer pages from the research
@@ -154,9 +159,9 @@ export const RESEARCH_SCHEMA = {
 };
 
 export function researchNotes(research) {
-  const facts = (research?.facts ?? []).map((f) => `- ${f.fact} (${f.url})`).join('\n');
+  const facts = (research?.facts ?? []).map((f) => (f.url ? `- ${f.fact} (${f.url})` : `- ${f.fact}`)).join('\n');
   const official = (research?.officialSources ?? []).map((s) => `- ${s.name}: ${s.url}`).join('\n');
-  return `\n\nResearch notes (web search, ${new Date().toISOString().slice(0, 10)}). The only specific facts and external URLs you may use:\n${facts || '- (none confirmed)'}\n\nOfficial sources:\n${official || '- (none found)'}\n`;
+  return `\n\nResearch notes (web search, ${new Date().toISOString().slice(0, 10)}). The only specific facts you may use:\n${facts || '- (none confirmed)'}\n\nSource pages found (the ONLY external URLs you may link, copied exactly, character for character; never shorten one to its homepage or guess a path):\n${official || '- (none found)'}\n`;
 }
 
 /** Canonical URL of an article: category URL slug, trailing slash. */
@@ -181,6 +186,76 @@ export function internalLinks(markdown) {
   const out = new Set();
   for (const m of String(markdown).matchAll(/\]\((https?:\/\/(?:www\.)?nxtsmarthome\.com\.au\/[a-z0-9-]+\/[a-z0-9-]+\/)\)/g)) out.add(m[1]);
   return [...out];
+}
+
+/**
+ * A URL the research returned, or the homepage of a site it returned (the
+ * model links "https://www.energysafe.vic.gov.au" for a regulator it found a
+ * deep page of). Deep paths must match exactly: those are the ones that get
+ * invented.
+ */
+export function isAllowedUrl(url, allowedUrls) {
+  const n = normaliseUrl(url);
+  if (allowedUrls.has(n)) return true;
+  let u;
+  try {
+    u = new URL(url);
+  } catch {
+    return false;
+  }
+  if (u.pathname.replace(/\/+$/, '') !== '' || u.search) return false;
+  const host = u.hostname.replace(/^www\./, '').toLowerCase();
+  for (const a of allowedUrls) {
+    try {
+      if (new URL(a).hostname.replace(/^www\./, '') === host) return true;
+    } catch {}
+  }
+  return false;
+}
+
+/*
+ * Adds to allowedUrls every external link in the text that the research did
+ * not list but that loads (HTTP 200 after redirects). Gemini's grounding data
+ * lists only some of the pages it read, and the model links real official
+ * pages it found (a state tenancy authority's smoke-alarm page); invented URLs
+ * almost always 404. A site that refuses the check (403) stays unlinked.
+ */
+export async function verifyLiveUrls(markdown, allowedUrls, { timeoutMs = 10000 } = {}) {
+  const urls = [...new Set(String(markdown).match(/https?:\/\/[^\s)\]"'>]+/g) ?? [])]
+    .filter((u) => !/^https?:\/\/(?:www\.)?nxtsmarthome\.com\.au\//i.test(u) && !isAllowedUrl(u, allowedUrls));
+  const live = [];
+  await Promise.all(urls.map(async (url) => {
+    try {
+      const res = await fetch(url, {
+        redirect: 'follow',
+        signal: AbortSignal.timeout(timeoutMs),
+        headers: { 'user-agent': 'Mozilla/5.0 (compatible; NXTSmartHome-linkcheck/1.0)' },
+      });
+      if (res.ok) {
+        allowedUrls.add(normaliseUrl(url));
+        live.push(url);
+      }
+    } catch {}
+  }));
+  return live;
+}
+
+/** Turns links to URLs the research did not return into plain text (anchor kept). */
+export function unlinkUnsourced(markdown, allowedUrls) {
+  const dropped = [];
+  const text = String(markdown).replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, anchor, url) => {
+    if (/^https?:\/\/(?:www\.)?nxtsmarthome\.com\.au\//i.test(url) || isAllowedUrl(url, allowedUrls)) return m;
+    dropped.push(url);
+    return anchor;
+  });
+  // A Sources list item left with no link is no longer a source.
+  return { text: text.replace(/^\s*[-*]\s+[^\[\n]*$\n?/gm, (line) => (/^\s*[-*]\s+\S/.test(line) && inSources(text, line) ? '' : line)), dropped };
+}
+
+function inSources(text, line) {
+  const at = text.indexOf(line);
+  const sources = text.search(/^##\s+Sources\s*$/im);
+  return sources >= 0 && at > sources;
 }
 
 export function normaliseUrl(url) {
@@ -268,7 +343,7 @@ export function checkNxtsmarthomeContent(post, { allowedUrls = null } = {}) {
   if (allowedUrls) {
     for (const url of body.match(/https?:\/\/[^\s)\]"'>]+/g) ?? []) {
       if (/^https?:\/\/(?:www\.)?nxtsmarthome\.com\.au\//i.test(url)) continue;
-      if (!allowedUrls.has(normaliseUrl(url))) issues.push(`URL not from research: ${url}`);
+      if (!isAllowedUrl(url, allowedUrls)) issues.push(`URL not from research: ${url}`);
     }
   }
 
@@ -335,4 +410,72 @@ const STOP = new Set(('a an and are as at be best by can do does for from guide 
 function titleWords(s) {
   const w = String(s).toLowerCase().replace(/\b20\d\d\b/g, '').match(/[a-z0-9]+/g) ?? [];
   return new Set(w.filter((x) => x.length > 1 && !STOP.has(x)).map((x) => (x.length > 3 && x.endsWith('s') && !x.endsWith('ss') ? x.slice(0, -1) : x)));
+}
+
+/*
+ * Gemini, for running the writer on a Gemini key (owner's request, Oct 2026;
+ * an exception to /opt/CLAUDE.md's Anthropic-only rule, kept to this writer).
+ */
+export async function geminiGenerate({ apiKey, model, body }) {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+      body: JSON.stringify(body),
+    });
+    if (res.status === 429 || res.status >= 500) {
+      await new Promise((r) => setTimeout(r, 5000 * 2 ** attempt));
+      continue;
+    }
+    const json = await res.json();
+    if (!res.ok) throw new Error(`Gemini ${res.status}: ${JSON.stringify(json).slice(0, 300)}`);
+    return json;
+  }
+  throw new Error('Gemini: gave up after repeated 429/5xx');
+}
+
+export function geminiText(json) {
+  return (json.candidates?.[0]?.content?.parts ?? []).map((p) => p.text ?? '').join('');
+}
+
+/*
+ * Research with Google Search grounding. A short research-only prompt: given a
+ * long brief, Gemini often skips the search and answers from memory (seen on
+ * the product notes, 6 Oct 2026). Up to three tries until it actually
+ * searched. Returns the same shape as researchJson(): { json: { facts,
+ * officialSources }, searchedUrls }, with the grounding sources resolved from
+ * Google's redirect links to the real pages.
+ */
+export async function researchWithGemini({ apiKey, model, prompt }) {
+  let notes = '';
+  let urls = [];
+  for (let attempt = 0; attempt < 3 && !urls.length; attempt++) {
+    const json = await geminiGenerate({
+      apiKey,
+      model,
+      body: {
+        contents: [{ role: 'user', parts: [{ text: `${prompt}\n\nList each confirmed fact as a bullet point naming the site it came from.` }] }],
+        tools: [{ google_search: {} }],
+      },
+    });
+    notes = geminiText(json);
+    urls = await groundingUrls(json);
+  }
+  const facts = notes.split('\n').map((l) => l.replace(/^\s*(?:[-*•]|\d+\.)\s*/, '').trim()).filter((l) => l.length > 15).map((fact) => ({ fact, url: '' }));
+  const officialSources = urls.map((url) => ({ name: new URL(url).hostname.replace(/^www\./, ''), url }));
+  return { json: { facts, officialSources }, searchedUrls: new Set(urls.map(normaliseUrl)) };
+}
+
+async function groundingUrls(json) {
+  const out = [];
+  for (const c of (json.candidates?.[0]?.groundingMetadata?.groundingChunks ?? []).slice(0, 15)) {
+    const uri = c.web?.uri;
+    if (!uri) continue;
+    let real = uri;
+    try {
+      real = (await fetch(uri, { redirect: 'manual' })).headers.get('location') || uri;
+    } catch {}
+    if (!/vertexaisearch|grounding-api-redirect/.test(real) && !out.includes(real)) out.push(real);
+  }
+  return out;
 }
