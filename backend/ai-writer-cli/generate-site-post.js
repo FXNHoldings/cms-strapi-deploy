@@ -754,12 +754,21 @@ async function brainstormTopics(category, count) {
     return jobs.map((job) => job.topic);
   }
 
-  const prompt = `Brainstorm ${count} strong blog article titles for ${site.label}.
+  // Without the site's existing titles the model happily re-proposes an article
+  // that is already live, and Strapi only rejects it (duplicate slug) after
+  // the whole post has been generated.
+  const existing = await loadExistingPostKeys();
+  const existingBlock = existing.titleList.length
+    ? `\nAlready on the site -- do not repeat or closely rephrase any of these:\n${existing.titleList.slice(-300).map((t) => `- ${t}`).join('\n')}\n`
+    : '';
+  const ask = count + 3;
+
+  const prompt = `Brainstorm ${ask} strong blog article titles for ${site.label}.
 
 Site niche: ${site.topicNiche}
 Category: ${category}
 Language: ${argv.language}
-
+${existingBlock}
 Return STRICT JSON only:
 {
   "topics": ["title one", "title two"]
@@ -767,6 +776,7 @@ Return STRICT JSON only:
 
 Rules:
 - Make each topic specific and useful.
+- Each topic must cover an angle not already covered by an existing title.
 - Avoid years unless the topic genuinely needs one.
 - Avoid duplicate wording.
 - Do not include fake prices, fake discounts, or unsupported claims.`;
@@ -779,7 +789,15 @@ Rules:
   const parsed = parseAiJson(result, { providerName: activeProviderName() });
   const topics = Array.isArray(parsed?.topics) ? parsed.topics : [];
   if (!topics.length) throw new Error(`${activeProviderName()} did not return any topics.`);
-  return topics.slice(0, count);
+  const fresh = [];
+  for (const t of topics) {
+    const clash = existing.titles.has(titleKey(t)) || existing.slugs.has(slugifyValue(t))
+      || isNearDuplicateTitle(t, [...existing.titleList, ...fresh]);
+    if (clash) console.log(`Topics: dropped "${t}" (already covered in Strapi)`);
+    else fresh.push(t);
+  }
+  if (!fresh.length) throw new Error('Every brainstormed topic is already in Strapi; run again or pass a topic.');
+  return fresh.slice(0, count);
 }
 
 /* ---------------------------------------------------------------------------
@@ -1801,32 +1819,89 @@ async function readTopicFile(file) {
   // Rows already written (draft or published) are skipped, so a daily
   // "--topics file --count 1" run takes the next unwritten row each time.
   const existing = await loadExistingPostKeys();
-  const keyOf = (t) => String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const fresh = jobs.filter((job) => {
     const slug = job.forcedSlug ? slugifyValue(job.forcedSlug) : '';
-    const title = keyOf(job.forcedTitle || job.topic);
+    const title = titleKey(job.forcedTitle || job.topic);
     return !(slug && existing.slugs.has(slug)) && !(title && existing.titles.has(title));
   });
   if (fresh.length < jobs.length) console.log(`Topics: ${jobs.length - fresh.length} already in Strapi skipped, ${fresh.length} left`);
   return argv.count ? fresh.slice(0, argv.count) : fresh;
 }
 
-/** Slugs and normalised titles of every post in this site's collection, draft and published. */
+/**
+ * Slugs and normalised titles of every post in this site's collection, draft
+ * and published, plus the raw titles for the brainstorm prompt. Loaded once per
+ * run; the save loop adds each new slug so a batch cannot collide with itself.
+ */
+let existingPostKeys = null;
 async function loadExistingPostKeys() {
+  if (existingPostKeys) return existingPostKeys;
   const slugs = new Set();
   const titles = new Set();
+  const titleList = [];
   const sep = site.postEndpoint.includes('?') ? '&' : '?';
   for (const status of ['draft', 'published']) {
     for (let page = 1; page <= 100; page += 1) {
       const res = await strapi(`${site.postEndpoint}${sep}status=${status}&fields[0]=slug&fields[1]=title&pagination[page]=${page}&pagination[pageSize]=100`);
       for (const p of res?.data || []) {
         if (p.slug) slugs.add(p.slug);
-        if (p.title) titles.add(String(p.title).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim());
+        const key = titleKey(p.title);
+        if (key && !titles.has(key)) {
+          titles.add(key);
+          titleList.push(String(p.title).trim());
+        }
       }
       if (page >= (res?.meta?.pagination?.pageCount || 1)) break;
     }
   }
-  return { slugs, titles };
+  existingPostKeys = { slugs, titles, titleList };
+  return existingPostKeys;
+}
+
+function titleKey(title) {
+  return String(title || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+/*
+ * Near-duplicate test for brainstormed titles. An exact-title check misses
+ * rephrases: "... Cut Your Aussie Power Bill Without Solar" and "... Cut Your
+ * Australian Power Bill" went live two hours apart on 24 Sep 2026. Compares
+ * the meaningful words (filler and country words dropped, simple plurals
+ * folded); most of the shorter title's words also in the other = same article.
+ */
+const TITLE_FILLER = new Set(('a an and are as at be best by can do does for from guide how i in is it its '
+  + 'of on or should the to vs what when which who why will with without you your aussie australia '
+  + 'australian australians au home homes').split(' '));
+
+function titleWords(title) {
+  return new Set(titleKey(title).split(' ')
+    .filter((w) => w && !TITLE_FILLER.has(w))
+    .map((w) => (w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w)));
+}
+
+function isNearDuplicateTitle(title, existingTitles) {
+  const words = titleWords(title);
+  if (words.size < 2) return false;
+  return existingTitles.some((other) => {
+    const o = titleWords(other);
+    if (o.size < 2) return false;
+    let shared = 0;
+    for (const w of words) if (o.has(w)) shared += 1;
+    return shared / Math.min(words.size, o.size) >= 0.8;
+  });
+}
+
+/**
+ * A slug not yet used in this site's collection. Strapi rejects a duplicate
+ * slug only at the final save -- after the article, affiliate lookups and
+ * images are paid for -- so a clash is resolved here with a -2, -3 suffix.
+ */
+async function uniquePostSlug(slug) {
+  const { slugs } = await loadExistingPostKeys();
+  if (!slugs.has(slug)) return slug;
+  let n = 2;
+  while (slugs.has(`${slug}-${n}`)) n += 1;
+  return `${slug}-${n}`;
 }
 
 async function buildJobs() {
@@ -2565,6 +2640,12 @@ async function run() {
       continue;
     }
 
+    const freeSlug = await uniquePostSlug(post.slug);
+    if (freeSlug !== post.slug) {
+      console.log(`  slug     : ${post.slug} is already in Strapi, saving as ${freeSlug}`);
+      post.slug = freeSlug;
+    }
+
     let coverId = null;
     let galleryIds = [];
     let galleryAssets = [];
@@ -2611,6 +2692,9 @@ async function run() {
       sourceUrl: job.catalogProducts?.[0]?.productUrl || job.dealProduct?.url || null,
     });
     const id = saved?.data?.documentId || saved?.data?.id;
+    const keys = await loadExistingPostKeys();
+    keys.slugs.add(post.slug);
+    keys.titles.add(titleKey(post.title));
     const adminUrl = `${STRAPI_URL}/admin/content-manager/collection-types/${site.adminUid}/${id}`;
     const showFrom = saved?.data?.showFrom;
     const savedPublished = argv.publish && !post.productShortfall;

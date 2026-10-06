@@ -27,43 +27,44 @@
 # Order shuffled 24 Sep 2026: interleaved by category, so every run of 9
 # consecutive topics covers all 9 categories (security runs out 2 rounds early).
 
-lighting | Do Circadian Smart Lights Improve Sleep? Tunable White Explained | circadian-smart-lighting-sleep | informative
-entertainment | Home Cinema Automation: Dim the Lights When the Movie Starts | home-cinema-lighting-automation | how-to-guide
+# energy | Standby Power: Which Appliances Cost the Most to Leave On? | standby-power-costs-appliances-australia | informative
+# climate | Best Smart Fans in Australia for Summer (2026) | best-smart-fans-australia | buying-guide
+# climate | Indoor Air Quality Monitors: What CO2 and PM2.5 Readings Mean | indoor-air-quality-monitor-co2-pm25 | informative
+# climate | Ducted Air Con Zoning: Can You Make It Smart? | smart-ducted-air-con-zoning | informative
+# setup-guides | Smart Home Automation for Beginners: Your First 5 Routines | smart-home-automation-routines-beginners | how-to-guide
+# setup-guides | How to Name Smart Devices So Voice Commands Actually Work | name-smart-devices-voice-commands | how-to-guide
+# setup-guides | How to Factory Reset Common Smart Home Devices | factory-reset-smart-home-devices | how-to-guide
+# robot-vacuums | Are Self-Emptying Robot Vacuums Worth It? Bags, Noise and Cost | self-emptying-robot-vacuum-worth-it | informative
+# robot-vacuums | Roborock vs Ecovacs vs Dreame in Australia (2026) | roborock-vs-ecovacs-vs-dreame-australia | product-comparison
+# robot-vacuums | Why Does My Robot Vacuum Keep Getting Stuck? 9 Fixes | robot-vacuum-keeps-getting-stuck | how-to-guide
+# lighting | Do Circadian Smart Lights Improve Sleep? Tunable White Explained | circadian-smart-lighting-sleep | informative
+# lighting | Smart Lighting Scene Ideas for Every Room in the House | smart-lighting-scene-ideas | informative
+# lighting | Smart Lighting for Kids' Rooms: Night Lights and Wake-Up Routines | smart-lighting-kids-rooms | how-to-guide
+# entertainment | Home Cinema Automation: Dim the Lights When the Movie Starts | home-cinema-lighting-automation | how-to-guide
+# entertainment | Echo Show vs Google Nest Hub: Which Smart Display Is Better? | echo-show-vs-nest-hub | product-comparison
+# entertainment | Wireless Home Theatre Setup Guide for Australian Living Rooms | wireless-home-theatre-setup-australia | how-to-guide
+# entertainment | Smart TV Parental Controls: Setup Guide for Every Major Brand | smart-tv-parental-controls-setup | how-to-guidee
 security | Reolink vs Eufy: Which Security Camera Brand Is Better? | reolink-vs-eufy-security-cameras | product-comparison
 buying-guides | Best Smart Home Devices for a Home Office | smart-home-devices-home-office | buying-guide
-energy | Standby Power: Which Appliances Cost the Most to Leave On? | standby-power-costs-appliances-australia | informative
-climate | Best Smart Fans in Australia for Summer (2026) | best-smart-fans-australia | buying-guide
-setup-guides | Smart Home Automation for Beginners: Your First 5 Routines | smart-home-automation-routines-beginners | how-to-guide
 robot-vacuums | Stick Vacuum vs Robot Vacuum: Which Do You Actually Need? | stick-vacuum-vs-robot-vacuum | product-comparison
 hubs-and-platforms | What Is a Thread Border Router (and Do You Already Own One)? | what-is-thread-border-router | informative
 security | How to Stop Parcel Theft With Smart Doorbells and Lockers | stop-parcel-theft-smart-doorbell | how-to-guide
 setup-guides | How to Set Up a Separate Wi-Fi Network for Smart Devices | separate-wifi-network-smart-devices | how-to-guide
 energy | Best Smart Energy Monitors in Australia (2026): Buying Guide | smart-energy-monitors-australia | buying-guide
 lighting | Best Smart Light Switches in Australia (Neutral vs No-Neutral) | best-smart-light-switches-australia | buying-guide
-robot-vacuums | Are Self-Emptying Robot Vacuums Worth It? Bags, Noise and Cost | self-emptying-robot-vacuum-worth-it | informative
 entertainment | How to Connect Bluetooth Headphones to Your Smart TV | connect-bluetooth-headphones-smart-tv | how-to-guide
 buying-guides | Best Smart Home Devices for Students and Share Houses | smart-home-devices-students-share-houses | buying-guide
-climate | Indoor Air Quality Monitors: What CO2 and PM2.5 Readings Mean | indoor-air-quality-monitor-co2-pm25 | informative
 hubs-and-platforms | Aqara Hub M3 vs Philips Hue Bridge vs SmartThings Station | aqara-m3-vs-hue-bridge-vs-smartthings-station | product-comparison
-robot-vacuums | Roborock vs Ecovacs vs Dreame in Australia (2026) | roborock-vs-ecovacs-vs-dreame-australia | product-comparison
 buying-guides | Best Smart Home Devices Under $50 in Australia | smart-home-devices-under-50-australia | buying-guide
 hubs-and-platforms | How to Switch Smart Home Platforms Without Starting Over | switch-smart-home-platforms | how-to-guide
-entertainment | Echo Show vs Google Nest Hub: Which Smart Display Is Better? | echo-show-vs-nest-hub | product-comparison
 energy | Amber Electric and Your Smart Home: Automating Wholesale Prices | amber-electric-smart-home-automation | how-to-guide
-lighting | Smart Lighting Scene Ideas for Every Room in the House | smart-lighting-scene-ideas | informative
-climate | Ducted Air Con Zoning: Can You Make It Smart? | smart-ducted-air-con-zoning | informative
 security | Smart Door and Window Sensors: How to Set Up Entry Alerts | door-window-sensors-entry-alerts | how-to-guide
-setup-guides | How to Name Smart Devices So Voice Commands Actually Work | name-smart-devices-voice-commands | how-to-guide
 hubs-and-platforms | Samsung SmartThings in Australia: Setup, Devices and Limits | samsung-smartthings-australia | informative
 buying-guides | Best Smart Home Gift Ideas in Australia (2026 Gift Guide) | smart-home-gift-ideas-australia | buying-guide
 energy | Home Battery Rebate 2026: Choosing a Smart-Home-Ready Battery | home-battery-rebate-smart-home-ready | buying-guide
 security | DIY vs Monitored Alarm Systems in Australia: Which to Choose? | diy-vs-monitored-alarm-systems-australia | product-comparison
-entertainment | Smart TV Parental Controls: Setup Guide for Every Major Brand | smart-tv-parental-controls-setup | how-to-guide
 climate | How to Automate Your Air Con With Geofencing | automate-air-con-geofencing | how-to-guide
-lighting | Smart Lighting for Kids' Rooms: Night Lights and Wake-Up Routines | smart-lighting-kids-rooms | how-to-guide
-robot-vacuums | Why Does My Robot Vacuum Keep Getting Stuck? 9 Fixes | robot-vacuum-keeps-getting-stuck | how-to-guide
 setup-guides | How to Connect Smart Devices to 2.4GHz Wi-Fi on a Dual-Band Router | connect-smart-devices-2-4ghz-wifi | how-to-guide
-entertainment | Wireless Home Theatre Setup Guide for Australian Living Rooms | wireless-home-theatre-setup-australia | how-to-guide
 security | Security Camera Storage: Cloud vs Local vs NVR Explained | security-camera-storage-cloud-vs-local | informative
 buying-guides | Smart Home Technology and NDIS Funding: What Can Be Covered? | ndis-smart-home-technology-funding | informative
 hubs-and-platforms | Tuya and Smart Life Devices: Can You Control Them Locally? | tuya-smart-life-local-control | informative
@@ -157,6 +158,5 @@ robot-vacuums | Best Robot Vacuums for Pet Hair in Australia (2026) | best-robot
 buying-guides | Best Smart Home Devices for Families With Kids | smart-home-devices-families-kids | buying-guide
 lighting | Philips Hue vs LIFX vs Budget Smart Bulbs in Australia (2026) | philips-hue-vs-lifx-vs-budget-smart-bulbs-australia | product-comparison
 entertainment | Best Smart TVs for Streaming and Gaming in Australia (2026) | best-smart-tvs-australia | buying-guide
-setup-guides | How to Factory Reset Common Smart Home Devices | factory-reset-smart-home-devices | how-to-guide
 energy | Best Smart EV Chargers in Australia (2026): Solar-Aware Picks | smart-ev-chargers-solar-australia | buying-guide
 climate | Smart Electric Blankets and Bed Warmers: Are They Worth It? | smart-electric-blankets-worth-it | informative
