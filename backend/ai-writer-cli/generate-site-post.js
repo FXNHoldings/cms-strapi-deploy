@@ -960,7 +960,9 @@ function pickSiteProducts(topic, category) {
   const want = new Set(productTokens(topic));
   const inCat = (p) => p.categoryKey === category || (p.categoryKeys || []).includes(category);
   const hasCategory = catalog.some(inCat);
-  const scored = catalog.map((p) => {
+  // nxtsmarthome: never offer a product sold for another market (audit #26).
+  const offered = site.contentRules === 'nxtsmarthome' ? catalog.filter((p) => !nxtsmarthomeRules.isNonAuVariant(p)) : catalog;
+  const scored = offered.map((p) => {
     const words = new Set(productTokens(`${p.name} ${p.brand} ${p.subCategory} ${p.bestFor} ${p.theme || ''}`));
     let overlap = 0;
     for (const w of want) if (words.has(w)) overlap += 1;
@@ -1253,6 +1255,9 @@ function extractFaqToField(post) {
 async function generatePost(topic, category, { dealProduct = null, catalogProducts = null } = {}) {
   const internalLinkContext = await buildInternalLinkContext(category, topic);
   const rules = site.contentRules === 'nxtsmarthome' ? nxtsmarthomeRules : null;
+  // The post type decides the shortlist and table rules, so settle it before
+  // writing: a "Best X" topic is a roundup unless one was asked for.
+  const plannedType = argv['post-type'] || (rules && rules.isBestOfTopic(topic) ? 'product-roundup' : site.defaultPostType);
   let research = null;
   let researchContext = '';
   if (rules && argv.research) {
@@ -1299,7 +1304,7 @@ ${styleBlock}${rules ? `\n${rules.NXTSMARTHOME_RULES}\n` : ''}
 Write one complete blog post.
 
 Topic: ${topic}
-Category: ${category || 'General'}
+Category: ${category || 'General'}${rules ? `\nPost type: ${plannedType}` : ''}
 Tone: ${argv.tone}
 Length: ${wordTarget} words
 Language: ${argv.language}
@@ -1428,9 +1433,13 @@ Image prompt requirements:
     if (faqs) console.log(`  faq      : ${faqs} questions moved to the FAQ field`);
     // Before "Where to buy" is appended: that section is generated, not
     // written, so the rules check and its repair leave it alone.
-    if (rules) await enforceContentRules(post, rules, research);
+    if (rules) {
+      post.postType = post.postType || plannedType;
+      await enforceContentRules(post, rules, research);
+    }
     await appendAffiliateLinks(post, siteProducts);
   } else if (rules) {
+    post.postType = post.postType || plannedType;
     await enforceContentRules(post, rules, research);
   }
   return post;

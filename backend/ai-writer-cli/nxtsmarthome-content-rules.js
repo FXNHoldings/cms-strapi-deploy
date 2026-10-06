@@ -104,6 +104,11 @@ Structure
   mention one (a security camera in a smoke-alarm article is an ad, not
   content, CLAUDE.md rule 3). Placing none is better than placing one that
   does not belong; the editor then finds a product or holds the article.
+- "Best X", buying-guide, roundup and comparison articles: name the shortlist
+  early. Within the first third of the article, a short "Our shortlist" style
+  section (an H2) gives each catalogue product a one-line who-it-suits, with its
+  product box, before the long explanation. That is what ranks for "best X
+  australia" (audit SXO P1/P2).
 - Link 2-4 related NXT Smart Home articles from the internal-link list, with
   descriptive anchor text, where they genuinely help. Use the URLs exactly.
 - End with "## Sources": the official and manufacturer pages from the research
@@ -332,6 +337,12 @@ export function checkNxtsmarthomeContent(post, { allowedUrls = null } = {}) {
   if (links.length < INTERNAL_LINKS_MIN) issues.push(`${links.length} internal article links (want ${INTERNAL_LINKS_MIN}-4)`);
   if (/\]\(\/(?:security|energy|entertainment|climate)\//.test(body)) issues.push('internal link uses a category key path (redirects)');
 
+  // SXO P1/P2: the product shortlist comes early, not after the explainer.
+  if (['product-comparison', 'buying-guide', 'product-roundup'].includes(post.postType || '')) {
+    const first = body.search(/::product:[a-z0-9-]+::/);
+    if (first >= 0 && first > body.length / 3) issues.push(`first product box is ${Math.round((first / body.length) * 100)}% of the way down (want the shortlist in the first third)`);
+  }
+
   // GEO-6: comparison table for comparison-type articles.
   const type = post.postType || '';
   if (['product-comparison', 'buying-guide', 'product-roundup'].includes(type) && !/^\s*\|.*\|\s*$/m.test(body)) {
@@ -478,4 +489,19 @@ async function groundingUrls(json) {
     if (!/vertexaisearch|grounding-api-redirect/.test(real) && !out.includes(real)) out.push(real);
   }
   return out;
+}
+
+/*
+ * Catalogue products sold for another market: "Aqara Smart Light Switch H1 EU
+ * (No Neutral)" was recommended for Australian walls (audit C6/#26). A product
+ * named for the EU, US or UK market is not offered to the writer.
+ */
+const NON_AU_VARIANT = /\b(?:EU|US|UK)\b(?![- ]?(?:compatible|version available))|\b(?:EU|US|UK)[- ]plug\b|\bEuropean version\b|\bUS version\b/;
+export function isNonAuVariant(product) {
+  return NON_AU_VARIANT.test(`${product?.name || ''} ${product?.slug ? product.slug.replace(/-/g, ' ').replace(/\b(eu|us|uk)\b/g, (m) => m.toUpperCase()) : ''}`);
+}
+
+/** A "best X" topic is a roundup, whatever post type it was queued with. */
+export function isBestOfTopic(topic) {
+  return /^\s*(?:the\s+)?(?:\d+\s+)?best\b/i.test(String(topic));
 }
