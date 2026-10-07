@@ -226,8 +226,9 @@ export function isAllowedUrl(url, allowedUrls) {
  * almost always 404. A site that refuses the check (403) stays unlinked.
  */
 export async function verifyLiveUrls(markdown, allowedUrls, { timeoutMs = 10000 } = {}) {
-  const urls = [...new Set(String(markdown).match(/https?:\/\/[^\s)\]"'>]+/g) ?? [])]
-    .filter((u) => !/^https?:\/\/(?:www\.)?nxtsmarthome\.com\.au\//i.test(u) && !isAllowedUrl(u, allowedUrls));
+  const urls = [...new Set(String(markdown).replace(/`[^`\n]*`/g, ' ').match(/https?:\/\/[^\s)\]"'>`]+/g) ?? [])]
+    .filter((u) => !/^https?:\/\/(?:www\.)?nxtsmarthome\.com\.au\//i.test(u) && !isAllowedUrl(u, allowedUrls))
+    .filter((u) => !/^https?:\/\/(?:[^/]*\.local\b|localhost\b|\[|(?:10|127|192\.168)\.)/i.test(u));
   const live = [];
   await Promise.all(urls.map(async (url) => {
     try {
@@ -352,7 +353,11 @@ export function checkNxtsmarthomeContent(post, { allowedUrls = null } = {}) {
   // Sources and URL provenance.
   if (!/^##\s+Sources\s*$/im.test(body)) issues.push('no "## Sources" section');
   if (allowedUrls) {
-    for (const url of body.match(/https?:\/\/[^\s)\]"'>]+/g) ?? []) {
+    // Local addresses a reader types during setup (homeassistant.local:8123,
+    // 192.168.x.x, a [placeholder]) are instructions, not cited sources.
+    const cited = body.replace(/`[^`\n]*`/g, ' ');
+    for (const url of cited.match(/https?:\/\/[^\s)\]"'>`]+/g) ?? []) {
+      if (/^https?:\/\/(?:[^/]*\.local\b|localhost\b|\[|(?:10|127|192\.168|172\.(?:1[6-9]|2\d|3[01]))\.)/i.test(url)) continue;
       if (/^https?:\/\/(?:www\.)?nxtsmarthome\.com\.au\//i.test(url)) continue;
       if (!isAllowedUrl(url, allowedUrls)) issues.push(`URL not from research: ${url}`);
     }
