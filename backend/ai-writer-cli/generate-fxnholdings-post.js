@@ -52,12 +52,15 @@
 // writer may state those facts as well as the site's own, links only to those
 // official pages, and the post ends with an "Official sources (checked <date>)"
 // list and a not-legal-or-tax-advice line. No official source found = no post.
-// Needs GEMINI_API_KEY even when writing with Anthropic.
+// Uses Gemini (GEMINI_API_KEY), or OpenRouter web search with --provider openrouter.
 //
 // Provider: --provider anthropic (default; ANTHROPIC_API_KEY, model --model, else
-// FXNHOLDINGS_MODEL, else claude-opus-5; no temperature, current models reject it)
-// or --provider gemini (GEMINI_API_KEY, model --model, else GEMINI_MODEL, else
-// gemini-3.8-flash). The Gemini helpers below are self-contained, so this file
+// FXNHOLDINGS_MODEL, else claude-opus-5; no temperature, current models reject it),
+// --provider gemini (GEMINI_API_KEY, model --model, else GEMINI_MODEL, else
+// gemini-3.8-flash) or --provider openrouter (OPENROUTER_API_KEY, model --model,
+// else OPENROUTER_MODEL, else anthropic/claude-opus-5.5; any id from
+// https://openrouter.ai/models). With openrouter, --research uses OpenRouter's web
+// search instead of Gemini, so it needs no Gemini key. The Gemini helpers below are self-contained, so this file
 // needs nothing beyond what main already ships.
 
 import 'dotenv/config';
@@ -86,7 +89,7 @@ const argv = yargs(hideBin(process.argv))
   .option('words', { type: 'number', default: 1500, describe: 'Target length in words; under 80% fails the checks' })
   .option('images', { type: 'number', default: 2, describe: 'Images inside the post (at least 2)' })
   .option('image', { type: 'boolean', default: true, describe: 'Generate the featured and in-post images with fal.ai (--no-image to skip)' })
-  .option('provider', { type: 'string', choices: ['anthropic', 'gemini'], default: process.env.FXNHOLDINGS_PROVIDER || 'anthropic', describe: 'AI provider' })
+  .option('provider', { type: 'string', choices: ['anthropic', 'gemini', 'openrouter'], default: process.env.FXNHOLDINGS_PROVIDER || 'anthropic', describe: 'AI provider' })
   .option('model', { type: 'string', describe: 'Model id (default per provider)' })
   .option('title', { type: 'string', describe: 'Approved title to use exactly (max 45 chars); the topic defaults to it' })
   .option('research', { type: 'boolean', default: false, describe: 'Research official sources first (legal, tax, set-up guides)' })
@@ -96,11 +99,15 @@ const argv = yargs(hideBin(process.argv))
 
 const fatal = (msg) => { console.error(`error: ${msg}`); process.exit(1); };
 const GEMINI = argv.provider === 'gemini';
-if ((GEMINI || argv.research) && !process.env.GEMINI_API_KEY) fatal('GEMINI_API_KEY is not set in .env');
-if (!GEMINI && !process.env.ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set in .env');
+const OPENROUTER = argv.provider === 'openrouter';
+if ((GEMINI || (argv.research && !OPENROUTER)) && !process.env.GEMINI_API_KEY) fatal('GEMINI_API_KEY is not set in .env');
+if (OPENROUTER && !process.env.OPENROUTER_API_KEY) fatal('OPENROUTER_API_KEY is not set in .env');
+if (argv.provider === 'anthropic' && !process.env.ANTHROPIC_API_KEY) fatal('ANTHROPIC_API_KEY is not set in .env');
 if (!fs.existsSync(POSTS_DIR)) fatal(`${POSTS_DIR} not found (set FXNHOLDINGS_DIR)`);
-const MODEL = argv.model || (GEMINI ? process.env.GEMINI_MODEL || 'gemini-3.8-flash' : process.env.FXNHOLDINGS_MODEL || 'claude-opus-5');
-const anthropic = GEMINI ? null : new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const MODEL = argv.model || (GEMINI ? process.env.GEMINI_MODEL || 'gemini-3.8-flash'
+  : OPENROUTER ? process.env.OPENROUTER_MODEL || 'anthropic/claude-opus-5.5'
+  : process.env.FXNHOLDINGS_MODEL || 'claude-opus-5');
+const anthropic = argv.provider === 'anthropic' ? new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }) : null;
 
 // ---------------------------------------------------------------- site data
 
@@ -186,6 +193,17 @@ async function groundingUrls(json) {
   return out;
 }
 
+// Research through OpenRouter's web search plugin with the --model in use.
+async function researchWithOpenRouter({ prompt }) {
+  let notes = '';
+  let urls = [];
+  for (let attempt = 0; attempt < 3 && !urls.length; attempt++) {
+    ({ text: notes, urls } = await openrouter({ user: `${prompt}\n\nList each confirmed fact as a bullet point naming the site it came from.`, maxTokens: 6000, web: true }));
+  }
+  const facts = notes.split('\n').map((l) => l.replace(/^\s*(?:[-*•]|\d+\.)\s*/, '').trim()).filter((l) => l.length > 15).map((fact) => ({ fact }));
+  return { json: { facts, officialSources: urls.map((url) => ({ url })) } };
+}
+
 // Research with Google Search grounding; up to three tries until Gemini actually searched.
 async function researchWithGemini({ apiKey, model, prompt }) {
   let notes = '';
@@ -207,6 +225,7 @@ async function researchWithGemini({ apiKey, model, prompt }) {
 }
 
 async function callAI(system, user, maxTokens = 8000) {
+  if (OPENROUTER) return (await openrouter({ system, user, maxTokens: Math.max(maxTokens, 16000) })).text;
   if (GEMINI) {
     const json = await geminiGenerate({
       apiKey: process.env.GEMINI_API_KEY,
@@ -271,6 +290,38 @@ Return {"title": "...", "description": "...", "summary": "...", "body": "...", "
   return parseAiJson(await callAI(SYSTEM, user), { providerName: argv.provider });
 }
 
+// OpenRouter (OpenAI-compatible chat API). web: true adds OpenRouter's web search plugin
+// and returns the cited URLs from the response annotations.
+async function openrouter({ system, user, maxTokens, web = false }) {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://fxnholdings.com',
+        'X-Title': 'FXN Holdings post writer',
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        max_tokens: maxTokens,
+        messages: [...(system ? [{ role: 'system', content: system }] : []), { role: 'user', content: user }],
+        ...(web ? { plugins: [{ id: 'web', max_results: 10 }] } : {}),
+      }),
+    });
+    if (res.status === 429 || res.status >= 500) {
+      await new Promise((r) => setTimeout(r, 5000 * 2 ** attempt));
+      continue;
+    }
+    const json = await res.json();
+    if (!res.ok || json.error) throw new Error(`OpenRouter ${res.status}: ${JSON.stringify(json.error || json).slice(0, 300)}`);
+    const msg = json.choices?.[0]?.message || {};
+    const urls = (msg.annotations || []).filter((a) => a.type === 'url_citation').map((a) => a.url_citation?.url).filter(Boolean);
+    return { text: String(msg.content || '').trim(), urls: [...new Set(urls)] };
+  }
+  throw new Error('OpenRouter: gave up after repeated 429/5xx');
+}
+
 // --research: official-source facts for guides about the outside world.
 // Records about individuals (disqualifications, officers) are never cited
 const PERSONAL = /insolvencydirect|\/officers?\/|disqual/i;
@@ -285,7 +336,8 @@ function sourceLabel(url) {
 
 async function research(topic, category) {
   const today = new Date().toLocaleDateString('en-AU', { timeZone: 'Australia/Perth', day: 'numeric', month: 'long', year: 'numeric' });
-  const { json } = await researchWithGemini({
+  const research = OPENROUTER ? researchWithOpenRouter : researchWithGemini;
+  const { json } = await research({
     apiKey: process.env.GEMINI_API_KEY,
     model: process.env.GEMINI_MODEL || 'gemini-3.8-flash',
     prompt: `Research this topic for a practical guide for business owners, many based outside the country concerned: "${topic}" (${category.name}).
@@ -440,7 +492,7 @@ async function main() {
     console.log(`\nwriting: ${topic} (${category.name}, ${MODEL})`);
     let rctx = ctx;
     if (argv.research) {
-      console.log('  researching official sources (Gemini + Google Search) ...');
+      console.log(`  researching official sources (${OPENROUTER ? `OpenRouter web search, ${MODEL}` : 'Gemini + Google Search'}) ...`);
       const r = await research(topic, category);
       if (!r.sources.length || !r.facts.length) { console.log('  skipped: no official sources found'); continue; }
       console.log(`  ${r.facts.length} facts from ${r.sources.length} official source(s): ${r.sources.map((x) => x.name).join(', ')}`);
